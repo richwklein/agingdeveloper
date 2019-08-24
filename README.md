@@ -1,7 +1,7 @@
 # Aging Developer
 This is the personal site of Richard Klein. It is a static site built using [gatsby](https://www.gatsbyjs.org/) and deployed via [netlify](https://www.netlify.com/). You can find a live version of it at [agingdeveloper.com](https://agingdeveloper.com/)
 
-This site started from just the basic [hello world starter](https://www.gatsbyjs.org/docs/gatsby-starters/) and is being developed from there. [Wireframe mockups](./mocks) are available for the planned page layouts.
+This site started from just the basic [hello world starter](https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-hello-world/) and is being developed from there. [Wireframe mockups](./mocks) are available for the planned page layouts.
 
 ### TODO
 * Explain where the blog content lives vs the code
