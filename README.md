@@ -39,7 +39,7 @@ npm install
 gatsby develop
 ```
 
-5 **Open the source code and start editing**
+5. **Open the source code and start editing**
 
 Gatsby will start a hot-reloading development environment accessible by default at `http://localhost:8000`.
 
