@@ -29,13 +29,13 @@ npm install -g gatsby-cli
 3. **Install dependencies**
 
 ```cli
+cd agingdeveloper/
 npm install
 ```
 
 4. **Start development server**
 
 ```cli
-cd agingdeveloper/
 gatsby develop
 ```
 
