@@ -16,12 +16,16 @@ This is the personal site of Richard Klein. It is a static site built using [gat
     ** Home
     ** Post
 * Components
-    ** Header
+    ** Titlebar
     ** Sidebar
+    ** Site Navigation
     ** Logo
     ** Layout
-    ** Helmet
-    ** Social links
+    ** Headers
+    ** Social Navigation
+    ** Post Metadata
+    ** Tag Cloud
+    ** Footer
 * Make mobile reactive
 * Set up licensing and attribution
 * Add canonical urls
@@ -29,7 +33,7 @@ This is the personal site of Richard Klein. It is a static site built using [gat
 * Analytics
 * robots.txt
 * favicon.ico
-* social metadata
+* Social metadata
 
 
 ## Start local development
