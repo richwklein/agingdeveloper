@@ -16,7 +16,6 @@ This is the personal site of Richard Klein. It is a static site built using [gat
     ** Home
     ** Post
 * Components
-    ** Titlebar
     ** Sidebar
     ** Site Navigation
     ** Logo
@@ -33,7 +32,7 @@ This is the personal site of Richard Klein. It is a static site built using [gat
 * Analytics
 * robots.txt
 * favicon.ico
-* Social metadata
+* Unit tests
 
 
 ## Start local development
