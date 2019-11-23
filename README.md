@@ -8,7 +8,6 @@ This is the personal site of Richard Klein. It is a static site built using [gat
 * set up code owners
 * Add a make file
 * Merge in the pre-commit hook
-* Fix eslint and jshint errors
 * Explain where the blog content lives vs the code
 * Github templates
 * Pages
@@ -22,6 +21,7 @@ This is the personal site of Richard Klein. It is a static site built using [gat
     ** Logo
     ** Layout
     ** Helmet
+    ** Social links
 * Make mobile reactive
 * Set up licensing and attribution
 * Add canonical urls
