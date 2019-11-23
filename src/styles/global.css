@@ -1,0 +1,13 @@
+html {
+    font-size: 1em;
+}
+
+body {
+    background-color: #F2F2F2;
+    color: #000000;
+}
+
+#sidebar-wrapper {
+    background-color: #FFFFFF;
+    border-right: 1px solid #E5E5E5;
+}

@@ -1,0 +1,29 @@
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+#sidebar-wrapper {
+    position: fixed;
+    top: 0; /* Stay at the top */
+    left: 0;
+    height: 100%;
+    width: 400px;
+    z-index: 1;
+    overflow-x: hidden;
+}
+
+#content-wrapper {
+    margin-left: 400px;
+    max-width: 1520px;
+    padding: 2rem;
+}
