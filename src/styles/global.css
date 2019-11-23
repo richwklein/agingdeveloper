@@ -7,7 +7,24 @@ body {
     color: #000000;
 }
 
+h1 {
+    color: #14213D;
+}
+
 #sidebar-wrapper {
     background-color: #FFFFFF;
     border-right: 1px solid #E5E5E5;
+}
+
+.title-bar {
+    padding: .5rem;
+    margin: 0 0 2rem 0;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .06);
+}
+.title-bar > h1 {
+    vertical-align: baseline;
+    text-transform: capitalize;
+    margin: .5rem;
 }
