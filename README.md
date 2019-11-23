@@ -6,8 +6,10 @@ This is the personal site of Richard Klein. It is a static site built using [gat
 
 ### TODO
 * set up code owners
-* Fix eslint and jshint errors
+* Add a make file
+* Merge in the pre-commit hook
 * Explain where the blog content lives vs the code
+* Github templates
 * Pages
     ** About
     ** Category / Tag
@@ -19,6 +21,7 @@ This is the personal site of Richard Klein. It is a static site built using [gat
     ** Logo
     ** Layout
     ** Helmet
+    ** Social links
 * Make mobile reactive
 * Set up licensing and attribution
 * Add canonical urls
@@ -50,6 +53,7 @@ npm install -g gatsby-cli
 ```cli
 cd agingdeveloper/
 npm install
+npm install -g prettier
 ```
 
 4. **Start development server**
