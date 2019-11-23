@@ -2,14 +2,32 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9fff03eb-d9c8-48d1-887d-11aea21246cd/deploy-status)](https://app.netlify.com/sites/agingdeveloper/deploys)
 
-This is the personal site of Richard Klein. It is a static site built using [gatsby](https://www.gatsbyjs.org/) and deployed via [netlify](https://www.netlify.com/). You can find a live version of it at [agingdeveloper.com](https://agingdeveloper.com/) The site started from just the basic [hello world starter](https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-hello-world/) and is being developed from there. [Wireframe mockups](./mocks) are available for the planned page layouts.
+This is the personal site of Richard Klein. It is a static site built using [gatsby](https://www.gatsbyjs.org/) and deployed via [netlify](https://www.netlify.com/). You can find a live version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site is built from just the basic [hello world starter](https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-hello-world/) and being expanded upon from there. [Mockups](./mocks) are available for the planned page layouts.
 
 ### TODO
+* set up code owners
+* Fix eslint and jshint errors
 * Explain where the blog content lives vs the code
-* Make sidebar mobile reactive
+* Pages
+    ** About
+    ** Category / Tag
+    ** Home
+    ** Post
+* Components
+    ** Header
+    ** Sidebar
+    ** Logo
+    ** Layout
+    ** Helmet
+* Make mobile reactive
 * Set up licensing and attribution
 * Add canonical urls
 * Figure out typography
+* Analytics
+* robots.txt
+* favicon.ico
+* social metadata
+
 
 ## Start local development
 Most javascript developers will likely already have the tools installed, but here is a quick rundown of setting things up just in case you do not. I'm using brew here since I develop on a Mac. Windows developers will have to use other package
