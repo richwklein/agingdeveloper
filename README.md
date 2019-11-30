@@ -35,7 +35,7 @@ What is need to get the  basic skelton of the site up and running.
     * Post Metadata
     * Tag Cloud
     * Footer
-    ** [Creative Commons License](https://creativecommons.org/choose/#metadata)
+    * [Creative Commons License](https://creativecommons.org/choose/#metadata)
 * Make mobile reactive
 * Set up licensing and attribution
 * Add canonical urls
