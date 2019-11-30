@@ -2,12 +2,19 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9fff03eb-d9c8-48d1-887d-11aea21246cd/deploy-status)](https://app.netlify.com/sites/agingdeveloper/deploys)
 
-This is the personal site of Richard Klein. It is a static site built using [gatsby](https://www.gatsbyjs.org/) and deployed via [netlify](https://www.netlify.com/). You can find a live version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site is built from just the basic [hello world starter](https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-hello-world/) and being expanded upon from there. [Mockups](./mocks) are available for the planned page layouts.
+This is the personal site of Richard Klein. It is a static site built using [gatsby](https://www.gatsbyjs.org/) and deployed via [netlify](https://www.netlify.com/). You can find a live version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site uses [Gatsby](https://gatsbyjs.org) and is built from just the basic [hello world starter](https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-hello-world/) and being expanded upon from there. [Mockups](./mocks) are available for the planned page layouts.
 
-### TODO
+## What’s In This Document
+- [To Do](#-to-do)
+- [License](#-license)
+- [Start local development](#-start-local-development)
+
+## To Do
+
+What is need to get the  basic skelton of the site up and running.
+
 * Add a make file
 * Merge in the pre-commit hook
-* Remove package-lock.json
 * Explain where the blog content lives vs the code
 * Github templates
 * Pages
@@ -25,6 +32,7 @@ This is the personal site of Richard Klein. It is a static site built using [gat
     ** Post Metadata
     ** Tag Cloud
     ** Footer
+    ** [Creative Commons License](https://creativecommons.org/choose/#metadata)
 * Make mobile reactive
 * Set up licensing and attribution
 * Add canonical urls
@@ -34,6 +42,10 @@ This is the personal site of Richard Klein. It is a static site built using [gat
 * favicon.ico
 * Unit tests
 
+## License
+- This site uses [Gatsby](https://gatsbyjs.org) which is [MIT](https://github.com/gatsbyjs/gatsby/blob/master/LICENSE) licensed.
+- The site code itself is also [MIT](/src/LICENSE) licensed.
+- Content hosted on the site is [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) licensed unless otherwise noted.
 
 ## Start local development
 Most javascript developers will likely already have the tools installed, but here is a quick rundown of setting things up just in case you do not. I'm using brew here since I develop on a Mac. Windows developers will have to use other package
