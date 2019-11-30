@@ -1,14 +1,17 @@
+
+- [Aging Developer](#aging-developer)
+  - [To Do](#to-do)
+  - [License](#license)
+  - [Start local development](#start-local-development)
+  - [Create a production build.](#create-a-production-build)
+  - [Serve the production build locally.](#serve-the-production-build-locally)
+  
 # Aging Developer
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9fff03eb-d9c8-48d1-887d-11aea21246cd/deploy-status)](https://app.netlify.com/sites/agingdeveloper/deploys)
 
 This is the personal site of Richard Klein. It is a static site built using [gatsby](https://www.gatsbyjs.org/) and deployed via [netlify](https://www.netlify.com/). You can find a live version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site uses [Gatsby](https://gatsbyjs.org) and is built from just the basic [hello world starter](https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-hello-world/) and being expanded upon from there. [Mockups](/mocks) are available for the planned page layouts.
-
-## What’s In This Document
-- [To Do](#-to-do)
-- [License](#-license)
-- [Start local development](#-start-local-development)
-
+  
 ## To Do
 
 What is need to get the  basic skelton of the site up and running.
@@ -18,20 +21,20 @@ What is need to get the  basic skelton of the site up and running.
 * Explain where the blog content lives vs the code
 * Github templates
 * Pages
-    ** About
-    ** Category / Tag
-    ** Home
-    ** Post
+    * About
+    * Category / Tag
+    * Home
+    * Post
 * Components
-    ** Sidebar
-    ** Site Navigation
-    ** Logo
-    ** Layout
-    ** Headers
-    ** Social Navigation
-    ** Post Metadata
-    ** Tag Cloud
-    ** Footer
+    * Sidebar
+    * Site Navigation
+    * Logo
+    * Layout
+    * Headers
+    * Social Navigation
+    * Post Metadata
+    * Tag Cloud
+    * Footer
     ** [Creative Commons License](https://creativecommons.org/choose/#metadata)
 * Make mobile reactive
 * Set up licensing and attribution
