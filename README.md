@@ -44,7 +44,7 @@ What is need to get the  basic skelton of the site up and running.
 
 ## License
 - This site uses [Gatsby](https://gatsbyjs.org) which is [MIT](https://github.com/gatsbyjs/gatsby/blob/master/LICENSE) licensed.
-- The site code itself is also [MIT](/src/LICENSE) licensed.
+- The site code itself is also [MIT](/LICENSE) licensed.
 - Content hosted on the site is [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) licensed unless otherwise noted.
 
 ## Start local development
