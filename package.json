@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "gatsby": "^2.13.31",
-    "gatsby-cli": "^2.8.14",
     "gatsby-plugin-robots-txt": "^1.5.0",
     "gatsby-plugin-sitemap": "^2.2.22",
     "react": "^16.8.6",
@@ -24,6 +23,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-config-react-app": "^5.0.2",
     "eslint-plugin-react": "^7.16.0",
+    "gatsby-cli": "^2.8.16",
     "prettier": "1.19.1"
   },
   "repository": {
