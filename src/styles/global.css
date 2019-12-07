@@ -23,8 +23,35 @@ h1 {
     background-color: #FFFFFF;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .06);
 }
-.title-bar > h1 {
+.title-bar h1 {
     vertical-align: baseline;
     text-transform: capitalize;
     margin: .5rem;
+}
+
+.site-nav {
+    list-style-type: none;
+    margin: 1.5rem 0 0 0;
+    padding: 0;
+}
+
+.site-nav-item a {
+    font-size: 1.4em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #14213D;
+    display: block;
+    width: 100%;
+    padding: .5rem .75rem;
+    border: 1px solid transparent;
+}
+
+.site-nav-item a.active {
+    border-top: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.site-nav-item a:hover {
+    color: #14213D;
+    background-color: #FCA311;
 }
