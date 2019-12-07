@@ -27,7 +27,10 @@ module.exports = {
         sitemap: siteUrl + "/sitemap.xml",
         resolveEnv: () => process.env.NODE_ENV,
         env: {
-          development: {
+          "branch-deploy": {
+            policy: [{ userAgent: "*", disallow: ["/"] }]
+          },
+          "deploy-preview": {
             policy: [{ userAgent: "*", disallow: ["/"] }]
           },
           production: {
