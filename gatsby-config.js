@@ -3,18 +3,13 @@
  *
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
-const {
-  NODE_ENV,
-  URL: NETLIFY_SITE_URL = "https://agingdeveloper.com",
-  DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
-  CONTEXT: NETLIFY_ENV = NODE_ENV
-} = process.env;
-const isNetlifyProduction = NETLIFY_ENV === "production";
-const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
+
+const netlifySiteUrl = "https://agingdeveloper.com";
+const netlifyEnv = process.env.NODE_ENV;
 
 module.exports = {
   siteMetadata: {
-    siteUrl,
+    siteUrl: netlifySiteUrl,
     siteTitle: "The Aging Developer",
     social: {
       facebook: "https://www.facebook.com/richwklein",
@@ -29,11 +24,11 @@ module.exports = {
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
-        resolveEnv: () => NETLIFY_ENV,
+        resolveEnv: () => netlifyEnv,
         env: {
           production: {
-            host: siteUrl,
-            sitemap: siteUrl + "/sitemap.xml",
+            host: netlifySiteUrl,
+            sitemap: netlifySiteUrl + "/sitemap.xml",
             policy: [{ userAgent: "*" }]
           },
           "branch-deploy": {
@@ -52,7 +47,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl
+        siteUrl: netlifySiteUrl
       }
     }
   ]
