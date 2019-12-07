@@ -1,14 +1,16 @@
 import React from "react";
 import Meta from "../meta";
-import Logo from "../components/logo";
+import SiteLogo from "../components/siteLogo";
 import Titlebar from "../components/titlebar";
+import SiteNavigation from "../components/siteNavigation";
 
 const Index = () => {
   const { siteTitle } = Meta();
   return (
     <div id="site-wrapper">
       <div id="sidebar-wrapper">
-        <Logo />
+        <SiteLogo />
+        <SiteNavigation />
       </div>
       <div id="content-wrapper">
         <Titlebar heading={siteTitle} />
