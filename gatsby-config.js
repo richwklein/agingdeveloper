@@ -6,6 +6,8 @@
 
 const {
   NODE_ENV,
+  ANALYTICS_TRACKING_ID,
+  ADS_TRACKING_ID,
   URL: NETLIFY_SITE_URL = "https://agingdeveloper.com",
   DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
   CONTEXT: NETLIFY_ENV = NODE_ENV
@@ -13,6 +15,8 @@ const {
 
 const isNetlifyProduction = NETLIFY_ENV === "production";
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
+const analyticsTrackingId = ANALYTICS_TRACKING_ID || null;
+const adsTrackingId = ADS_TRACKING_ID || null;
 
 module.exports = {
   siteMetadata: {
@@ -49,6 +53,18 @@ module.exports = {
             host: null
           }
         }
+      }
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: analyticsTrackingId
+      }
+    },
+    {
+      resolve: `gatsby-plugin-google-adsense`,
+      options: {
+        googleAdClientId: adsTrackingId
       }
     },
     {
