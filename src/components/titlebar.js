@@ -1,9 +1,9 @@
 import React from "react";
 
-const Titlebar = ({ heading }) => {
+const Titlebar = ({ title }) => {
   return (
-    <header className="title-bar">
-      <h1>{heading}</h1>
+    <header id="title-bar">
+      <h1>{title}</h1>
     </header>
   );
 };
