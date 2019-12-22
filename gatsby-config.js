@@ -12,8 +12,8 @@ const {
   CONTEXT: NETLIFY_ENV = NODE_ENV
 } = process.env;
 
-const isNetlifyProduction = NETLIFY_ENV === "production";
-const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
+const siteUrl =
+  NETLIFY_ENV === "production" ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
 const analyticsTrackingId = ANALYTICS_TRACKING_ID || null;
 
 module.exports = {
@@ -30,6 +30,8 @@ module.exports = {
   },
   plugins: [
     "gatsby-plugin-sitemap",
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
@@ -54,16 +56,23 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: "gatsby-plugin-google-analytics",
       options: {
         trackingId: analyticsTrackingId,
         respectDNT: true
       }
     },
     {
-      resolve: `gatsby-plugin-canonical-urls`,
+      resolve: "gatsby-plugin-canonical-urls",
       options: {
         siteUrl: siteUrl
+      }
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "images",
+        path: `${__dirname}/content/images`
       }
     }
   ]

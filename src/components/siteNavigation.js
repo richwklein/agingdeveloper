@@ -4,7 +4,7 @@ import { Link } from "gatsby";
 const SiteNavigation = () => {
   return (
     <nav>
-      <ol className="site-nav">
+      <ol id="site-nav">
         <SiteNavigationItem path="/" name="Home" />
         <SiteNavigationItem path="/about" name="About" />
         <SiteNavigationItem path="/contact" name="Contact" />
@@ -16,7 +16,7 @@ const SiteNavigation = () => {
 const SiteNavigationItem = ({ path, name }) => {
   return (
     <li className="site-nav-item">
-      <Link to={path} activeClassName="active" partiallyActive={true}>
+      <Link to={path} activeClassName="active">
         {name}
       </Link>
     </li>

@@ -1,12 +1,30 @@
 import React from "react";
 import Meta from "../meta";
-import image from "../images/logo-399x275.jpg";
+import { useStaticQuery, graphql } from "gatsby";
+import Img from "gatsby-image";
 
 const SiteLogo = () => {
   const { siteTitle } = Meta();
+  const data = useStaticQuery(graphql`
+    query {
+      file(relativePath: { eq: "wizard-logo.jpg" }) {
+        childImageSharp {
+          fixed(width: 400, height: 300, cropFocus: CENTER) {
+            ...GatsbyImageSharpFixed
+          }
+        }
+      }
+    }
+  `);
+
   return (
     <a href="/" title={siteTitle} className="site-logo">
-      <img src={image} alt={siteTitle} width="399" height="275" />
+      <Img
+        fixed={data.file.childImageSharp.fixed}
+        title={siteTitle}
+        alt={siteTitle}
+        loading="eager"
+      />
     </a>
   );
 };

@@ -1,6 +1,7 @@
 buildDir := public
 modulesDir :=node_modules
 cacheDir :=.cache
+lockFile :=package-lock.json
 
 .DEFAULT_GOAL := help
 
@@ -18,6 +19,8 @@ uninstall: clean ## Uninstall npm dependencies
 	rm -rdf $(cacheDir)
 	@echo "Uninstalling npm dependencies."
 	rm -rdf $(modulesDir)
+	@echo "Removing package lock file."
+	rm -f package-lock.json
 
 build: ## Create a production build
 	@echo "Creating production build."
