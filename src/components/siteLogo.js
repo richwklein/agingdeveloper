@@ -9,8 +9,8 @@ const SiteLogo = () => {
     query {
       file(relativePath: { eq: "wizard-logo.jpg" }) {
         childImageSharp {
-          fixed(width: 400, height: 300, cropFocus: CENTER) {
-            ...GatsbyImageSharpFixed
+          fluid(maxWidth: 399, maxHeight: 315, cropFocus: CENTER) {
+            ...GatsbyImageSharpFluid
           }
         }
       }
@@ -20,7 +20,7 @@ const SiteLogo = () => {
   return (
     <a href="/" title={siteTitle} className="site-logo">
       <Img
-        fixed={data.file.childImageSharp.fixed}
+        fluid={data.file.childImageSharp.fluid}
         title={siteTitle}
         alt={siteTitle}
         loading="eager"
