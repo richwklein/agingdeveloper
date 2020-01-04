@@ -1,3 +1,7 @@
+/**
+ * GENERAL
+ */
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -5,20 +9,19 @@
 }
 html {
     height: 100%;
-    font-size: 1em;
 }
 
 body {
     min-height: 100%;
     background-color: #f2f2f2;
-    color: #000;
-    font-size: 16px;
+    color: #333;
+    font-size: 14px;
     /* TODO font-family */
     line-height: 125%;
 }
 
 h1 {
-    color: #14213d;
+    color: #010c2a;
     margin-top: 0px;
     margin-bottom: 15px;
     font-size: 35px;
@@ -92,7 +95,7 @@ img {
 blockquote {
     margin-bottom: 10px;
     padding: 10px 20px;
-    border-left: 5px solid #e5e5e5;
+    border-left: 5px solid #e2e2e2;
     font-size: 16px;
     line-height: 135%;
 }
@@ -108,63 +111,42 @@ figcaption {
     text-align: center;
 }
 
-.button {
-    display: inline-block;
-    padding: 11px 20px;
-    border-radius: 3px;
-    background-color:#888;
-    transition: background-color 200ms ease, color 200ms ease;
-    color: #fff;
-    font-size: 18px;
-    line-height: 20px;
-    text-align: center;
-    text-decoration: none;
-    border: 0;
-    cursor: pointer;
-}
-
-.button:hover {
-    color: #fff;
-    background-color: #333;
-}
-
-/*
-.button-primary {
-    TODO
-}
-*/
+/**
+ * SIDEBAR
+ */
 
 #sidebar-wrapper {
     position: fixed;
     top: 0; /* Stay at the top */
     left: 0;
     height: 100%;
-    width: 400px;
+    width: 320px;
     z-index: 1;
     overflow-x: hidden;
     background-color: #fff;
-    border-right: 1px solid #e5e5e5;
+    border-right: 1px solid #e2e2e2;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .04);
 }
 
-#content-wrapper {
-    margin-left: 400px;
-    max-width: 1200px;
-    min-height: 100%;
-    padding: 25px 50px 0 50px;
+#sidebar-logo {
+    width: 230px;
+    height: 230px;
+    margin: 15px auto;
+    overflow:hidden;
+    border: 1px solid #e2e2e2;
+    border-radius: 50%;
 }
 
-#site-nav {
-    list-style-type: none;
-    margin: 1.5rem 0 0 0;
-    padding: 0;
+a:hover .sidebar-logo-image {
+    opacity: 0.8;
 }
 
-.site-nav-item a {
+.sidebar-nav-item {
     font-size: 16px;
     font-weight: 400;
     text-decoration: none;
     text-transform: uppercase;
-    color: #14213d;
+    color: #010c2a;
     transition: background-color 50ms ease, color 50ms ease;
     display: block;
     width: 100%;
@@ -172,22 +154,30 @@ figcaption {
     border: 1px solid transparent;
 }
 
-.site-nav-item a.active {
+.sidebar-nav-item.active {
+    font-size: 18px;
     font-weight: 700;
 }
 
-.site-nav-item a:hover {
-    color: #fff;
-    background-color: #888;
+.sidebar-nav-item:hover {
+    color: #0e3756;
+    background-color: #e2e2e2;
 }
 
+#content-wrapper {
+    margin-left: 320px;
+    max-width: 1200px;
+    padding: 15px 25px 0 25px;
+}
+
+/**
+ * CONTENT
+ */
+ 
 #title-bar {
     width: 100%;
-    padding: 5px 10px;
-    margin: 0 0 25px 0;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, .06);
+    padding: 5px 0;
+    margin: 0 0 15px 0;
 }
 
 #title-bar h1 {
@@ -199,15 +189,14 @@ figcaption {
 .content-card {
     width:100%;
     border-radius: 5px;
-    margin: 0 0 25px 0;
+    margin: 0 0 15px 0;
     background-color: #fff;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, .06);
 }
 
 .card-image {
     display: block;
     border-radius: 5px 5px 0 0;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e2e2e2;
     transition: opacity 200ms ease;
 }
 
@@ -220,8 +209,35 @@ a:hover .card-image {
 }
 
 h1.card-lead {
-    font-size: 30px;
-    line-height: 37px;
-    color: #14213d;
+    font-size: 24px;
+    line-height: 30px;
+    color: #010c2a;
     background-color: inherit;
 }
+
+
+.button {
+    display: inline-block;
+    padding: 11px 20px;
+    border-radius: 3px;
+    background-color:#64c9d1;
+    transition: background-color 200ms ease, color 200ms ease;
+    color: #fff;
+    font-size: 18px;
+    line-height: 20px;
+    text-align: center;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.button:hover {
+    color: #fff;
+    background-color: #0e3756;
+}
+
+/*
+.button-primary {
+    TODO
+}
+*/
