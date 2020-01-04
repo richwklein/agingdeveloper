@@ -1,17 +1,17 @@
 import React from "react";
-import SiteLogo from "../components/siteLogo";
-import Titlebar from "../components/titlebar";
-import SiteNavigation from "../components/siteNavigation";
+import SidebarLogo from "./sidebarLogo";
+import ContentTitle from "./contentTitle";
+import SidebarNavigation from "./sidebarNavigation";
 
 const SiteLayout = ({ title, children }) => {
   return (
     <div id="site-wrapper">
       <div id="sidebar-wrapper">
-        <SiteLogo />
-        <SiteNavigation />
+        <SidebarLogo />
+        <SidebarNavigation />
       </div>
       <div id="content-wrapper">
-        <Titlebar title={title} />
+        <ContentTitle title={title} />
         {children}
       </div>
     </div>

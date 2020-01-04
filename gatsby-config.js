@@ -32,6 +32,7 @@ module.exports = {
     "gatsby-plugin-sitemap",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    "gatsby-transformer-remark",
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
@@ -73,6 +74,13 @@ module.exports = {
       options: {
         name: "images",
         path: `${__dirname}/content/images`
+      }
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "articles",
+        path: `${__dirname}/content/articles`
       }
     }
   ]
