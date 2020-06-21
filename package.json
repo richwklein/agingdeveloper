@@ -4,11 +4,11 @@
   "description": "The personal site of Richard Klein",
   "version": "0.1.0",
   "scripts": {
-    "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
-    "develop": "gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx}",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
+    "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true npx gatsby build --log-pages",
+    "develop": "npx gatsby develop",
+    "format": "npx prettier --write src/**/*.{js,jsx}",
+    "start": "npx run develop",
+    "serve": "npx gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
   "dependencies": {
