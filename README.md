@@ -13,14 +13,14 @@ This is the personal site of Richard Klein. It is a static site built using [gat
 
 ## License
 - This site uses [Gatsby](https://gatsbyjs.org) which is [MIT](https://github.com/gatsbyjs/gatsby/blob/master/LICENSE) licensed.
-- The site code itself is also [MIT](/LICENSE) licensed.
+- The site code itself is [MIT](/LICENSE) licensed and based on the [Sky Lite theme](https://github.com/vim-labs/gatsby-theme-sky-lite).
 - Content hosted on the site is [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) licensed unless otherwise noted.
 
 ## Start local development
 Most javascript developers will likely already have the tools installed, but here is a quick rundown of setting things up just in case you do not. I'm using brew here since I develop on a Mac. Windows developers will have to use other package
 managers.
 
-1. **Install node and npm**
+1. **Install node and npm**π
 
 ```cli
 brew install node
