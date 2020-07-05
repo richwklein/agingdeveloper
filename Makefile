@@ -12,6 +12,7 @@ help:
 install: ## Install npm dependencies
 	@echo "Installing Node dependencies."
 	@npm install
+	@npm install -g gatsby-cli
 	@npm install -g prettier
 
 uninstall: clean ## Uninstall npm dependencies

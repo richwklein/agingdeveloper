@@ -25,7 +25,6 @@ managers.
 
 ```cli
 brew install node
-npm install -g gatsby-cli
 ```
 
 2. **Install dependencies**
@@ -35,7 +34,9 @@ cd agingdeveloper/
 make install
 ```
 
-3. **Start the development server**
+This will install local npm dependencies. It will also install 2 packages globally. "prettier" and "gatsby-cli".
+
+1. **Start the development server**
 
 ```cli
 make develop
