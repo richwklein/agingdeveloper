@@ -24,7 +24,7 @@ uninstall: clean ## Uninstall npm dependencies
 
 build: ## Create a production build
 	@echo "Creating production build."
-	@npx gatsby build
+	@npm run build
 
 clean: ## Remove the build directory
 	@echo "Removing $(buildDir) directory."
@@ -32,15 +32,19 @@ clean: ## Remove the build directory
 
 develop: ## Start the development server
 	@echo "Starting the development server."
-	@npx gatsby develop
+	@npm run develop
 
 serve: ## Serve the production build
 ifneq ($(wildcard $(buildDir)),)
 	@echo "Serving production build."
-	@npx gatsby serve
+	@npm run serve
 else
 	@echo "Could not find build directory. Run 'make build' first."
 endif
+
+format: ## Format the source code
+	@echo "Formating source code."
+	@npm run format 
 
 check: ## Run tests to check build
 	@echo "Running tests."

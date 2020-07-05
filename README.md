@@ -34,7 +34,7 @@ cd agingdeveloper/
 make install
 ```
 
-This will install local npm dependencies. It will also install 2 packages globally. "prettier" and "gatsby-cli".
+This will install local npm dependencies. It will install the "prettier" package globally.
 
 1. **Start the development server**
 
