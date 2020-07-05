@@ -25,3 +25,4 @@ node_modules/
 # Build directories
 .cache
 public
+package-lock.json
