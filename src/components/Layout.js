@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
-import Appbar from "./Appbar";
-import Drawer from "./Drawer";
-import Footer from "./Footer";
+import Appbar from "../components/Appbar";
+import Drawer from "../components/Drawer";
+import Footer from "../components/Footer";
 
 export default ({ elevateAppBar = true, children }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
