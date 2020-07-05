@@ -25,6 +25,7 @@ managers.
 
 ```cli
 brew install node
+npm install -g gatsby-cli
 ```
 
 2. **Install dependencies**
