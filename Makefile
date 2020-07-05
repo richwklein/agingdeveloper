@@ -22,7 +22,7 @@ uninstall: clean ## Uninstall npm dependencies
 	@echo "Removing package lock file."
 	rm -f package-lock.json
 
-build: ## Create a production build
+production: ## Create a production build
 	@echo "Creating production build."
 	@npx gatsby build
 
