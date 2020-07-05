@@ -1,19 +1,14 @@
-import React, { useState } from "react";
-import { CssBaseline } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/styles";
-import theme from "../styles/theme";
+import React, { useState, Fragment } from "react";
 import Appbar from "./Appbar";
-import Drawer from "../components/Drawer";
-import Footer from "../components/Footer";
-import "../styles/layout.css";
+import Drawer from "./Drawer";
+import Footer from "./Footer";
 
 export default ({ elevateAppBar = true, children }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const handleToggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <Fragment>
       <Appbar
         onToggleDrawer={handleToggleDrawer}
         elevation={Number(elevateAppBar)}
@@ -21,6 +16,6 @@ export default ({ elevateAppBar = true, children }) => {
       {children}
       <Footer />
       <Drawer open={isDrawerOpen} onClose={handleToggleDrawer} />
-    </ThemeProvider>
+    </Fragment>
   );
 };
