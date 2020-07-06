@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from "react";
 import Appbar from "./Appbar";
 import Drawer from "./Drawer";
+import Footer from "./Footer";
 
 export default ({ elevateAppBar = true, children }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -13,6 +14,7 @@ export default ({ elevateAppBar = true, children }) => {
         elevation={Number(elevateAppBar)}
       />
       {children}
+      <Footer></Footer>
       <Drawer open={isDrawerOpen} onClose={handleToggleDrawer} />
     </Fragment>
   );
