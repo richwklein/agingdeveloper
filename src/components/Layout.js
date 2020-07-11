@@ -1,21 +1,24 @@
-import React, { useState, Fragment } from "react";
-import Appbar from "./Appbar";
-import Drawer from "./Drawer";
-import Footer from "./Footer";
+import React, { Fragment, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
-export default ({ elevateAppBar = true, children }) => {
+import TopBar from "./TopBar";
+import BottomBar from "./BottomBar";
+import NavDrawer from "./NavDrawer";
+
+export default ({ elevateAppBar = true, showLogoImage = true, children }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const handleToggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
   return (
     <Fragment>
-      <Appbar
+      <TopBar
         onToggleDrawer={handleToggleDrawer}
         elevation={Number(elevateAppBar)}
+        showLogoImage={showLogoImage}
       />
       {children}
-      <Footer></Footer>
-      <Drawer open={isDrawerOpen} onClose={handleToggleDrawer} />
+      <BottomBar />
+      <NavDrawer open={isDrawerOpen} onClose={handleToggleDrawer} />
     </Fragment>
   );
 };

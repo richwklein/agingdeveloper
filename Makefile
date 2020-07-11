@@ -1,6 +1,4 @@
-buildDir := public
 modulesDir :=node_modules
-cacheDir :=.cache
 lockFile :=package-lock.json
 
 .DEFAULT_GOAL := help
@@ -15,20 +13,18 @@ install: ## Install npm dependencies
 	@npm install -g prettier
 
 uninstall: clean ## Uninstall npm dependencies
-	@echo "Removing $(cacheDir) directory."
-	rm -rdf $(cacheDir)
 	@echo "Uninstalling npm dependencies."
-	rm -rdf $(modulesDir)
+	@rm -rdf $(modulesDir)
 	@echo "Removing package lock file."
-	rm -f package-lock.json
+	@rm -f package-lock.json
 
 build: ## Create a production build
 	@echo "Creating production build."
 	@npm run build
 
 clean: ## Remove the build directory
-	@echo "Removing $(buildDir) directory."
-	rm -rdf $(buildDir)
+	@echo "Removing build directories."
+	@npm run clean
 
 develop: ## Start the development server
 	@echo "Starting the development server."

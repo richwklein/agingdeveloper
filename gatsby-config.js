@@ -32,6 +32,12 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
+      },
+    },
+    {
       resolve: "gatsby-plugin-react-helmet-canonical-urls",
       options: {
         siteUrl: siteUrl,
@@ -58,6 +64,20 @@ module.exports = {
             host: null,
           },
         },
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "images",
+        path: `${__dirname}/content/images`,
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "posts",
+        path: `${__dirname}/content/posts`,
       },
     },
     "gatsby-transformer-sharp",
