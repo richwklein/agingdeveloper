@@ -12,9 +12,8 @@ This is the personal site of Richard Klein. It is a static site built using [gat
     - [Serve the production build locally.](#serve-the-production-build-locally)
 
 ## License
-- This site uses [Gatsby](https://gatsbyjs.org) which is [MIT](https://github.com/gatsbyjs/gatsby/blob/master/LICENSE) licensed.
-- This site is based on the [Sky Lite theme](https://github.com/vim-labs/gatsby-theme-sky-lite). which is [MIT](https://github.com/vim-labs/gatsby-theme-sky-lite/blob/master/LICENSE) licensed.
-- The site code itself is [MIT](/LICENSE) licensed.
+- The site code is [MIT](/LICENSE) licensed 
+- The libraries the site is based upon are MIT licensed where feasible.
 - Content hosted on the site is [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) licensed unless otherwise noted.
 
 ## Start local development
