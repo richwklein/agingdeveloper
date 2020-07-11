@@ -3,7 +3,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9fff03eb-d9c8-48d1-887d-11aea21246cd/deploy-status)](https://app.netlify.com/sites/agingdeveloper/deploys)
 
-This is the personal site of Richard Klein. It is a static site built using [gatsby](https://www.gatsbyjs.org/) and [material-ui](https://material-ui.com). It is deployed via [netlify](https://www.netlify.com/). You can find a live version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site uses [Gatsby](https://gatsbyjs.org) and is built based on the [Sky Lite theme](https://github.com/vim-labs/gatsby-theme-sky-lite) then expanded upon from there. See the [github issues](https://github.com/richwklein/agingdeveloper/issues) to track development progress.
+This is the personal site of Richard Klein. It is a static site built using [gatsby](https://www.gatsbyjs.org/) and [material-ui](https://material-ui.com). It is deployed via [netlify](https://www.netlify.com/). You can find a live version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site is built based on the [Sky Lite theme](https://github.com/vim-labs/gatsby-theme-sky-lite) and expanded upon from there. See the [github issues](https://github.com/richwklein/agingdeveloper/issues) to track development progress.
 
 ## What's in This Document
   - [License](#license)
