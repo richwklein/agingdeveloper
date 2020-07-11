@@ -3,85 +3,83 @@
  *
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
-
 const {
-  NODE_ENV,
   ANALYTICS_TRACKING_ID,
-  URL: NETLIFY_SITE_URL = "https://agingdeveloper.com",
-  DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
-  CONTEXT: NETLIFY_ENV = NODE_ENV
+  URL: SITE_URL = "https://agingdeveloper.com",
+  DEPLOY_PRIME_URL: DEPLOY_URL = SITE_URL,
+  CONTEXT: DEPLOY_CONTEXT = "deploy-preview",
 } = process.env;
 
-const siteUrl =
-  NETLIFY_ENV === "production" ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
-const analyticsTrackingId = ANALYTICS_TRACKING_ID || null;
+const siteUrl = DEPLOY_CONTEXT === "production" ? SITE_URL : DEPLOY_URL;
+const analyticsTrackingId = ANALYTICS_TRACKING_ID || "";
 
 module.exports = {
   siteMetadata: {
     siteUrl: siteUrl,
     siteTitle: "The Aging Developer",
-    social: {
-      facebook: "https://www.facebook.com/richwklein",
-      twitter: "https://twitter.com/richwklein",
-      instagram: "https://www.instagram.com/richwklein/",
-      linkedin: "https://www.linkedin.com/in/richwklein/",
-      github: "http://github.com/richwklein/"
-    }
   },
   plugins: [
-    "gatsby-plugin-sitemap",
+    "gatsby-plugin-material-ui",
+    "gatsby-plugin-react-helmet",
     "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
-    "gatsby-transformer-remark",
-    {
-      resolve: "gatsby-plugin-robots-txt",
-      options: {
-        resolveEnv: () => NETLIFY_ENV,
-        host: siteUrl,
-        sitemap: siteUrl + "/sitemap.xml",
-        env: {
-          production: {
-            policy: [{ userAgent: "*" }]
-          },
-          "branch-deploy": {
-            policy: [{ userAgent: "*", disallow: ["/"] }],
-            sitemap: null,
-            host: null
-          },
-          "deploy-preview": {
-            policy: [{ userAgent: "*", disallow: ["/"] }],
-            sitemap: null,
-            host: null
-          }
-        }
-      }
-    },
+    "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
         trackingId: analyticsTrackingId,
-        respectDNT: true
-      }
+        anonymize: true,
+        respectDNT: true,
+      },
     },
     {
-      resolve: "gatsby-plugin-canonical-urls",
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        siteUrl: siteUrl
-      }
+        extensions: [`.mdx`, `.md`],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-react-helmet-canonical-urls",
+      options: {
+        siteUrl: siteUrl,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        resolveEnv: () => DEPLOY_CONTEXT,
+        host: siteUrl,
+        sitemap: siteUrl + "/sitemap.xml",
+        env: {
+          production: {
+            policy: [{ userAgent: "*", allow: ["/"] }],
+          },
+          "branch-deploy": {
+            policy: [{ userAgent: "*", disallow: ["/"] }],
+            sitemap: null,
+            host: null,
+          },
+          "deploy-preview": {
+            policy: [{ userAgent: "*", disallow: ["/"] }],
+            sitemap: null,
+            host: null,
+          },
+        },
+      },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "images",
-        path: `${__dirname}/content/images`
-      }
+        path: `${__dirname}/content/images`,
+      },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "articles",
-        path: `${__dirname}/content/articles`
-      }
-    }
-  ]
+        name: "posts",
+        path: `${__dirname}/content/posts`,
+      },
+    },
+    "gatsby-transformer-sharp",
+  ],
 };

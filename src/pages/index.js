@@ -1,17 +1,16 @@
 import React from "react";
-import Meta from "../meta";
-import SiteLayout from "../components/siteLayout";
-import Card from "../components/card";
+import Layout from "../components/Layout";
+import { Box } from "@material-ui/core";
+import { useHasScroll } from "has-scroll-hook";
 
-const Index = () => {
-  const { siteTitle } = Meta();
+export default () => {
+  const hasScroll = useHasScroll();
+
   return (
-    <SiteLayout title={siteTitle}>
-      <Card>
-        <p>Hello World!</p>
-      </Card>
-    </SiteLayout>
+    <Layout elevateAppBar={hasScroll} showLogoImage={false}>
+      <Box display="flex" flexDirection="column">
+        <Box flexGrow={1} marginX="auto" width="100%" maxWidth={1280}></Box>
+      </Box>
+    </Layout>
   );
 };
-
-export default Index;

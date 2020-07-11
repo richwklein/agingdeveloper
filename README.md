@@ -3,7 +3,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9fff03eb-d9c8-48d1-887d-11aea21246cd/deploy-status)](https://app.netlify.com/sites/agingdeveloper/deploys)
 
-This is the personal site of Richard Klein. It is a static site built using [gatsby](https://www.gatsbyjs.org/) and deployed via [netlify](https://www.netlify.com/). You can find a live version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site uses [Gatsby](https://gatsbyjs.org) and is built from just the basic [hello world starter](https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-hello-world/) and expanded upon from there. [Mockups](/mocks) are available for the planned page layouts. See the [github issues](https://github.com/richwklein/agingdeveloper/issues) to track development progress.
+This is the personal site of Richard Klein. It is a static site built using [gatsby](https://www.gatsbyjs.org/) and [material-ui](https://material-ui.com). It is deployed via [netlify](https://www.netlify.com/). You can find a live version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site is built based on the [Sky Lite theme](https://github.com/vim-labs/gatsby-theme-sky-lite) and expanded upon from there. See the [github issues](https://github.com/richwklein/agingdeveloper/issues) to track development progress.
 
 ## What's in This Document
   - [License](#license)
@@ -12,8 +12,8 @@ This is the personal site of Richard Klein. It is a static site built using [gat
     - [Serve the production build locally.](#serve-the-production-build-locally)
 
 ## License
-- This site uses [Gatsby](https://gatsbyjs.org) which is [MIT](https://github.com/gatsbyjs/gatsby/blob/master/LICENSE) licensed.
-- The site code itself is also [MIT](/LICENSE) licensed.
+- The site code is [MIT](/LICENSE) licensed 
+- The libraries the site is based upon are MIT licensed where feasible.
 - Content hosted on the site is [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) licensed unless otherwise noted.
 
 ## Start local development
@@ -33,7 +33,9 @@ cd agingdeveloper/
 make install
 ```
 
-3. **Start the development server**
+This will install local npm dependencies. It will install the "prettier" package globally.
+
+1. **Start the development server**
 
 ```cli
 make develop
