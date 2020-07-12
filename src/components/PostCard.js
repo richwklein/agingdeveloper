@@ -17,7 +17,7 @@ import { LaunchIcon, ShareIcon } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  card: {
     maxWidth: 345,
   },
 }));
@@ -28,20 +28,15 @@ export default React.memo(function PostCard({
   postDate,
   excerpt,
   url,
-  author,
 }) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.card}>
       <CardHeader
-        avatar={
-          <Avatar aria-label="author" className={classes.avatar}>
-            {author}
-          </Avatar>
-        }
         title={title}
         subheader={postDate}
+        className={classes.header}
       />
       <CardMedia>
         <Img fluid={featuredImage.childImageSharp.fluid} />
