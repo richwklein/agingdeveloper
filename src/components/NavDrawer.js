@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Drawer, IconButton, Toolbar } from "@material-ui/core";
+import { Box, Drawer, Divider, IconButton, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Menu } from "@material-ui/icons";
 
@@ -40,6 +40,7 @@ export default ({ open, onClose }) => {
           <Menu />
         </IconButton>
       </Toolbar>
+      <Divider />
     </Drawer>
   );
 };

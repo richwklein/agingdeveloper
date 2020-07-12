@@ -14,9 +14,6 @@ import { Menu } from "@material-ui/icons";
 import Img from "gatsby-image";
 
 const useStyles = makeStyles((theme) => ({
-  appbar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
   toolbox: {
     color: theme.palette.primary.contrastText,
     backgroundColor: theme.palette.primary.light,

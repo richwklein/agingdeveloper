@@ -39,10 +39,6 @@ else
 	@echo "Could not find build directory. Run 'make build' first."
 endif
 
-format: ## Format the source code
-	@echo "Formating source code."
-	@npm run format 
-
 check: ## Run tests to check build
 	@echo "Running tests."
 	@npm run test

@@ -17,6 +17,9 @@ module.exports = {
   siteMetadata: {
     siteUrl: siteUrl,
     siteTitle: "The Aging Developer",
+    description:
+      "A site focused on growing old in the software development community.",
+    image: "wizard-logo.jpg",
   },
   plugins: [
     "gatsby-plugin-material-ui",
@@ -32,9 +35,19 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-mdx`,
+      resolve: "gatsby-plugin-mdx",
       options: {
-        extensions: [`.mdx`, `.md`],
+        extensions: [".mdx", ".md"],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-prefetch-google-fonts",
+      options: {
+        fonts: [
+          { family: "Roboto" },
+          { family: "Merriweather" },
+          { family: "Work Sans" },
+        ],
       },
     },
     {
