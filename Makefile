@@ -1,3 +1,4 @@
+buildDir :=public
 modulesDir :=node_modules
 lockFile :=package-lock.json
 
