@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-
+import { CssBaseline } from "@material-ui/core";
 import TopBar from "./TopBar";
 import BottomBar from "./BottomBar";
 import NavDrawer from "./NavDrawer";
+import "../styles/layout.css";
 
 export default ({ elevateAppBar = true, showLogoImage = true, children }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -11,6 +11,7 @@ export default ({ elevateAppBar = true, showLogoImage = true, children }) => {
 
   return (
     <Fragment>
+      <CssBaseline />
       <TopBar
         onToggleDrawer={handleToggleDrawer}
         elevation={Number(elevateAppBar)}
