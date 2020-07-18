@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Drawer, Divider, IconButton, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Menu } from "@material-ui/icons";
+import { Close } from "@material-ui/icons";
 
 const drawerWidth = 320;
 
@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+  },
+  spacer: {
+    flexGrow: 1,
   },
 }));
 
@@ -37,7 +40,7 @@ export default ({ open, onClose }) => {
           onClick={onClose}
           title="Close Menu"
         >
-          <Menu />
+          <Close />
         </IconButton>
       </Toolbar>
       <Divider />
