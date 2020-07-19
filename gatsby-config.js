@@ -19,7 +19,6 @@ module.exports = {
     siteTitle: "The Aging Developer",
     description:
       "A site focused on growing old in the software development community.",
-    image: "wizard-logo.jpg",
   },
   plugins: [
     "gatsby-plugin-material-ui",
@@ -82,15 +81,7 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "images",
-        path: `${__dirname}/content/images`,
-      },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "posts",
-        path: `${__dirname}/content/posts`,
+        path: `${__dirname}/content`,
       },
     },
     "gatsby-transformer-sharp",
