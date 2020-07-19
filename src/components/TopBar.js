@@ -41,7 +41,7 @@ export default ({
           siteTitle
         }
       }
-      file(relativePath: { eq: "wizard-logo.jpg" }) {
+      file(relativePath: { eq: "images/avatars/wizard.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 128, maxHeight: 128, cropFocus: CENTER) {
             ...GatsbyImageSharpFluid_withWebp
