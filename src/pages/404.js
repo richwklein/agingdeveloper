@@ -5,5 +5,5 @@ import { useHasScroll } from "has-scroll-hook";
 export default () => {
   const hasScroll = useHasScroll();
 
-  return <Layout elevateAppBar={hasScroll} showLogoImage={true}></Layout>;
+  return <Layout hasScroll={hasScroll} showLogoImage={true}></Layout>;
 };

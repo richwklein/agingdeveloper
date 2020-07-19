@@ -30,10 +30,12 @@ const useStyles = makeStyles((theme) => ({
 export default ({
   onToggleDrawer,
   isDrawerOpen,
-  elevation = 1,
+  hasScroll = false,
   showLogoImage = true,
 }) => {
   const classes = useStyles();
+  const elevation = Number(hasScroll);
+
   const data = useStaticQuery(graphql`
     query {
       site {
@@ -52,8 +54,8 @@ export default ({
   `);
 
   return (
-    <AppBar position="sticky" elevation={elevation} className={classes.appbar}>
-      <Toolbar className={classes.toolbar}>
+    <AppBar position="sticky" elevation={elevation}>
+      <Toolbar className={classes.toolbar} id="top-bar">
         <Box display="flex" flexGrow={1}>
           <Typography variant="h6">
             <ButtonBase component={Link} to="/" className={classes.title}>

@@ -19,6 +19,7 @@ module.exports = {
     siteTitle: "The Aging Developer",
     description:
       "A site focused on growing old in the software development community.",
+    repository: "https://github.com/richwklein/agingdeveloper",
   },
   plugins: [
     "gatsby-plugin-material-ui",

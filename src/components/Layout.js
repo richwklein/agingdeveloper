@@ -5,7 +5,7 @@ import BottomBar from "./BottomBar";
 import NavDrawer from "./NavDrawer";
 import "../styles/layout.css";
 
-export default ({ elevateAppBar = true, showLogoImage = true, children }) => {
+export default ({ hasScroll = false, showLogoImage = true, children }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const handleToggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
@@ -14,11 +14,11 @@ export default ({ elevateAppBar = true, showLogoImage = true, children }) => {
       <CssBaseline />
       <TopBar
         onToggleDrawer={handleToggleDrawer}
-        elevation={Number(elevateAppBar)}
+        hasScroll={hasScroll}
         showLogoImage={showLogoImage}
       />
       {children}
-      <BottomBar />
+      <BottomBar hasScroll={hasScroll} />
       <NavDrawer open={isDrawerOpen} onClose={handleToggleDrawer} />
     </Fragment>
   );
