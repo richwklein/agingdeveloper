@@ -2,7 +2,6 @@ import React from "react";
 import Img from "gatsby-image";
 import { Link } from "gatsby";
 import {
-  Avatar,
   Card,
   CardActions,
   CardContent,
@@ -12,20 +11,20 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import { LaunchIcon, ShareIcon } from "@material-ui/icons";
+import { Launch } from "@material-ui/icons";
 
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    maxWidth: 345,
+    maxWidth: 320,
   },
 }));
 
-export default React.memo(function PostCard({
-  featuredImage,
+export default React.memo(function ArticleCard({
+  image,
   title,
-  postDate,
+  date,
   excerpt,
   url,
 }) {
@@ -33,13 +32,9 @@ export default React.memo(function PostCard({
 
   return (
     <Card className={classes.card}>
-      <CardHeader
-        title={title}
-        subheader={postDate}
-        className={classes.header}
-      />
+      <CardHeader title={title} subheader={date} className={classes.header} />
       <CardMedia>
-        <Img fluid={featuredImage.childImageSharp.fluid} />
+        <Img fluid={image.childImageSharp.fluid} />
       </CardMedia>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -48,10 +43,7 @@ export default React.memo(function PostCard({
       </CardContent>
       <CardActions>
         <IconButton aria-label="read" component={Link} to={url}>
-          <LaunchIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+          <Launch />
         </IconButton>
       </CardActions>
     </Card>
