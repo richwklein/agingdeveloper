@@ -73,13 +73,13 @@ export default ({ open, onClose }) => {
       </Toolbar>
       <Divider />
       <NavList>
-        <NavItem label="Authors" to="/authors/">
+        <NavItem label="Authors" to="/author/">
           <People />
         </NavItem>
-        <NavItem label="Categories" to="/categories/">
+        <NavItem label="Categories" to="/category/">
           <Folder />
         </NavItem>
-        <NavItem label="Tags" to="/tags/">
+        <NavItem label="Tags" to="/tag/">
           <LocalOffer />
         </NavItem>
         <NavItem label="Archive" to="/archive/">

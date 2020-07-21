@@ -4,7 +4,7 @@ const path = require(`path`);
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const articleTemplate = path.resolve(`src/templates/article.js`);
-  const articlePathPrefix = "/articles";
+  const articlePathPrefix = "/archive";
 
   const result = await graphql(`
     {
@@ -14,7 +14,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         edges {
           node {
             frontmatter {
-              slug
+              url
             }
           }
         }
@@ -33,7 +33,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   return pages.map(({ node }, index) => {
     // Use a permalink based on the frontmatter slug in each markdown file header.
-    const permalink = node.frontmatter.slug;
+    reporter.info(node.frontmatter.slug);
+    const permalink = node.frontmatter.url;
 
     // The path to the previous page.
     const previousPath =
