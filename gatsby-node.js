@@ -32,8 +32,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const pages = result.data.allMdx.edges;
 
   return pages.map(({ node }, index) => {
-    // Use a permalink based on the frontmatter slug in each markdown file header.
-    reporter.info(node.frontmatter.slug);
+    // Use a permalink based on the frontmatter url in each markdown file header.
     const permalink = node.frontmatter.url;
 
     // The path to the previous page.
