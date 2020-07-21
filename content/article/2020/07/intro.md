@@ -18,4 +18,4 @@ At the same time I also started to realize that I have a unique perspective. A l
 
 This site will not be soley dedicated to this "Aging Developer" perspective, but it will color everything that I do with it. [The Aging Developer](/) is a vehicle for me to re-engage and actively participate more. It also provides a way for me to go back and learn the latest trends in front-end development.
 
-**Fair warning** The site is an active development and a learning location. It will be broken and have missing features for large portions of the time.
+<Alert severity="warning">**Fair warning**: The site is an active development and a learning location. It will be broken and have missing features for large portions of the time.</Alert>
