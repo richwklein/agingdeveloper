@@ -1,5 +1,5 @@
 ---
-url: "2020/07/21/reemerging"
+url: "2020/07/21/intro"
 title: "Introduction and Rebuilding"
 author: richwklein
 image: ../../../image/fons-heijnsbroek-v4c2gKPjPMs-unsplash.jpg
@@ -16,6 +16,6 @@ About a year ago I started to feel nostalgic for the level of engagement I had d
 
 At the same time I also started to realize I have a unique perspective. A lot of software development careers shift to a management focus as you ascend the career track. I was an engineering manager for a while, but I took a step back and decided that I wanted to stay focused on development & engineering. My real passion was building software and not managing people. So I changed career paths and went back to engineering. This means I'm now a mid forty year old software engineer in an industry that is well known for [skewing towards youth](https://www.google.com/search?q=ageism+software+engineering&oq=ageism+software+engineering). This was an avenue I could explore and share my own personal experiences on. 
 
-This site will not be soley dedicated to this "Aging Developer" perspective, but it will be colored what I do with it. [The Aging Developer](/) is a vehicle for me to re-engage and actively participate more with the general public. It also provides a way for me to go back and learn the latest trends are in front-end development.
+This site will not be soley dedicated to this "Aging Developer" perspective, but it will color what I do with it. [The Aging Developer](/) is a vehicle for me to re-engage and actively participate more with the general public. It also provides a way for me to go back and learn the latest trends are in front-end development.
 
 **Fair warning** The site is an active development and a learning location. It will be broken and have missing features for large portions of the time.
