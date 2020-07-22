@@ -23,7 +23,9 @@ export default React.memo(function ArticleCard({
   return (
     <Card variant="outlined">
       <CardMedia>
-        <Img fluid={image.childImageSharp.fluid} />
+        <Link to={url}>
+          <Img fluid={image.childImageSharp.fluid} />
+        </Link>
       </CardMedia>
       <CardHeader title={title} subheader={date} />
       <CardContent>
