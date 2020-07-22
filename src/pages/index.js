@@ -30,7 +30,7 @@ const Banner = ({ image, title, description }) => {
     <Box className={classes.banner}>
       <Box marginX="auto" width="100%" maxWidth={1280}>
         <Grid container spacing={1}>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <Avatar
               component={Img}
               fluid={image}
@@ -38,7 +38,7 @@ const Banner = ({ image, title, description }) => {
               className={classes.avatar}
             />
           </Grid>
-          <Grid item xs={12} sm={9}>
+          <Grid item xs={12} sm={10}>
             <Typography variant="h3" className={classes.bannerTitle}>
               {title}
             </Typography>
