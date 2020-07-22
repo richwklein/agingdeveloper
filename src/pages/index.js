@@ -123,7 +123,7 @@ export const pageQuery = graphql`
           frontmatter {
             url
             title
-            date(formatString: "MM/DD/YYYY")
+            date(formatString: "MMMM Do, YYYY")
             tags
             category
             image {
