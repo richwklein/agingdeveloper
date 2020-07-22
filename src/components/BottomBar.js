@@ -60,7 +60,7 @@ export default ({ hasScroll = false }) => {
     query {
       site {
         siteMetadata {
-          siteTitle
+          title
           repository
         }
       }

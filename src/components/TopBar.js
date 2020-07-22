@@ -40,7 +40,7 @@ export default ({
     query {
       site {
         siteMetadata {
-          siteTitle
+          title
         }
       }
       file(relativePath: { eq: "image/avatar/wizard.jpg" }) {
@@ -67,7 +67,7 @@ export default ({
                   className={classes.avatar}
                 />
               )}
-              {data.site.siteMetadata.siteTitle}
+              {data.site.siteMetadata.title}
             </ButtonBase>
           </Typography>
         </Box>
