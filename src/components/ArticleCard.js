@@ -13,14 +13,6 @@ import {
 
 import { Launch } from "@material-ui/icons";
 
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-  card: {
-    maxWidth: 320,
-  },
-}));
-
 export default React.memo(function ArticleCard({
   image,
   title,
@@ -28,14 +20,12 @@ export default React.memo(function ArticleCard({
   excerpt,
   url,
 }) {
-  const classes = useStyles();
-
   return (
-    <Card className={classes.card}>
-      <CardHeader title={title} subheader={date} className={classes.header} />
+    <Card variant="outlined">
       <CardMedia>
         <Img fluid={image.childImageSharp.fluid} />
       </CardMedia>
+      <CardHeader title={title} subheader={date} />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {excerpt}
