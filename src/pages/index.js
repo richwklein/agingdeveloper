@@ -4,7 +4,6 @@ import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
 import { Avatar, Box, Button, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHasScroll } from "has-scroll-hook";
 import Img from "gatsby-image";
 import ArticleCard from "../components/ArticleCard";
 
@@ -80,10 +79,8 @@ const Articles = ({ articles }) => {
 };
 
 export default ({ data }) => {
-  const hasScroll = useHasScroll();
-
   return (
-    <Layout hasScroll={hasScroll} showLogoImage={false}>
+    <Layout showLogoImage={false}>
       <Banner
         image={data.file.childImageSharp.fluid}
         title={data.site.siteMetadata.title}

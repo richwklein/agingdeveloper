@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default ({ hasScroll = false }) => {
+export default () => {
   const classes = useStyles();
   const data = useStaticQuery(graphql`
     query {
