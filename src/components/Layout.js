@@ -1,12 +1,13 @@
 import React, { Fragment, useState } from "react";
+import { Link } from "gatsby";
 import { CssBaseline, Fab, Zoom } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { KeyboardArrowUp } from "@material-ui/icons";
+import { useHasScroll } from "has-scroll-hook";
 import TopBar from "./TopBar";
 import BottomBar from "./BottomBar";
 import NavDrawer from "./NavDrawer";
 import "../styles/layout.css";
-import { Link } from "gatsby";
 
 const useStyles = makeStyles((theme) => ({
   topButton: {
@@ -44,7 +45,8 @@ const ScrollTop = ({ hasScroll }) => {
   );
 };
 
-export default ({ hasScroll = false, showLogoImage = true, children }) => {
+export default ({ showLogoImage = true, children }) => {
+  const hasScroll = useHasScroll();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const handleToggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
@@ -58,7 +60,7 @@ export default ({ hasScroll = false, showLogoImage = true, children }) => {
       />
       <Link id="scroll-top" />
       {children}
-      <BottomBar hasScroll={hasScroll} />
+      <BottomBar />
       <ScrollTop hasScroll={hasScroll} />
       <NavDrawer open={isDrawerOpen} onClose={handleToggleDrawer} />
     </Fragment>
