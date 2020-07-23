@@ -55,7 +55,7 @@ export default ({
 
   return (
     <AppBar position="sticky" elevation={elevation}>
-      <Toolbar className={classes.toolbar} id="top-bar">
+      <Toolbar className={classes.toolbar}>
         <Box display="flex" flexGrow={1}>
           <Typography variant="h6">
             <ButtonBase component={Link} to="/" className={classes.title}>

@@ -31,7 +31,7 @@ const ScrollTop = ({ hasScroll }) => {
 
   const handleClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
-      "#top-bar"
+      "#scroll-top"
     );
 
     if (anchor) {

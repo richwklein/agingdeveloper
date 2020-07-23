@@ -11,7 +11,7 @@ import ArticleCard from "../components/ArticleCard";
 const useStyles = makeStyles((theme) => ({
   banner: {
     color: theme.palette.grey.A400,
-    backgroundColor: theme.palette.grey[200],
+    backgroundColor: theme.palette.grey[300],
     padding: theme.spacing(2),
   },
   bannerTitle: {
