@@ -1,8 +1,8 @@
 import React from "react";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 
 import Layout from "../components/Layout";
-import { Avatar, Box, Button, Grid, Typography } from "@material-ui/core";
+import { Avatar, Box, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHasScroll } from "has-scroll-hook";
 import Img from "gatsby-image";
