@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/styles";
 import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 
 import Layout from "../components/Layout";
-import { useHasScroll } from "has-scroll-hook";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
 const useStyles = makeStyles(() => ({
@@ -66,7 +65,6 @@ const ArticleTags = ({ tags }) => {
 };
 
 export default ({ data, pageContext }) => {
-  const hasScroll = useHasScroll();
   const classes = useStyles();
 
   const {
@@ -76,7 +74,7 @@ export default ({ data, pageContext }) => {
   const { previousPath, nextPath } = pageContext;
 
   return (
-    <Layout hasScroll={hasScroll} showLogoImage={true}>
+    <Layout showLogoImage={true}>
       <Box padding={2} flexGrow={1} marginX="auto" width="100%" maxWidth={1280}>
         <Box marginBottom={1}>
           <ArticleTitle title={title} />

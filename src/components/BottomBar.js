@@ -1,8 +1,7 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import { Box, Container, Fab, Typography, Zoom } from "@material-ui/core";
+import { Box, Container, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { KeyboardArrowUp } from "@material-ui/icons";
 import ExternalLink from "./ExternalLink";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,35 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ScrollTop = ({ hasScroll }) => {
-  const classes = useStyles();
-
-  const handleClick = (event) => {
-    const anchor = (event.target.ownerDocument || document).querySelector(
-      "#scroll-top"
-    );
-
-    if (anchor) {
-      anchor.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  };
-
-  return (
-    <Zoom in={hasScroll}>
-      <div
-        onClick={handleClick}
-        role="presentation"
-        className={classes.topButton}
-      >
-        <Fab size="small" color="primary" aria-label="scroll back to top">
-          <KeyboardArrowUp />
-        </Fab>
-      </div>
-    </Zoom>
-  );
-};
-
-export default ({ hasScroll = false }) => {
+export default () => {
   const classes = useStyles();
   const data = useStaticQuery(graphql`
     query {
@@ -87,7 +58,6 @@ export default ({ hasScroll = false }) => {
           </Box>
         </Box>
       </Container>
-      <ScrollTop hasScroll={hasScroll} />
     </Box>
   );
 };
