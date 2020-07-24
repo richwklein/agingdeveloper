@@ -8,7 +8,6 @@ import TopBar from "./TopBar";
 import BottomBar from "./BottomBar";
 import NavDrawer from "./NavDrawer";
 import "../styles/layout.css";
-import { Link } from "gatsby";
 
 const useStyles = makeStyles((theme) => ({
   topButton: {

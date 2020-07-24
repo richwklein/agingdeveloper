@@ -11,14 +11,14 @@ const useStyles = makeStyles((theme) => ({
   banner: {
     color: theme.palette.grey.A400,
     backgroundColor: theme.palette.grey[300],
-    padding: theme.spacing(2),
+    padding: theme.spacing(3),
   },
   bannerTitle: {
     marginBottom: theme.spacing(1),
   },
   avatar: {
-    width: 128,
-    height: 128,
+    width: 156,
+    height: 156,
   },
 }));
 
@@ -41,7 +41,7 @@ const Banner = ({ image, title, description }) => {
             <Typography variant="h3" className={classes.bannerTitle}>
               {title}
             </Typography>
-            <Typography variant="h5">{description}</Typography>
+            <Typography variant="h6">{description}</Typography>
           </Grid>
         </Grid>
       </Box>
@@ -105,7 +105,7 @@ export const pageQuery = graphql`
     }
     file(relativePath: { eq: "image/avatar/wizard.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 256, maxHeight: 256, cropFocus: CENTER) {
+        fluid(maxWidth: 156, maxHeight: 156, cropFocus: CENTER) {
           ...GatsbyImageSharpFluid_withWebp
         }
       }
