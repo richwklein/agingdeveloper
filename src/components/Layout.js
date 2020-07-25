@@ -58,7 +58,7 @@ export default ({ showLogoImage = true, children }) => {
         hasScroll={hasScroll}
         showLogoImage={showLogoImage}
       />
-      <Link id="scroll-top" />
+      <Link id="scroll-top" to="/" />
       {children}
       <BottomBar />
       <ScrollTop hasScroll={hasScroll} />

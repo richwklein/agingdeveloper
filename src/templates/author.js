@@ -81,7 +81,7 @@ export default ({ data, pageContext }) => {
               />
             </Grid>
             <Grid item sm={12} md={10}>
-              <Typography variant="h3" className={classes.bannerTitle}>
+              <Typography variant="h4" className={classes.bannerTitle}>
                 {name}
               </Typography>
               <Typography variant="h6" className={classes.bannerSubTitle}>
