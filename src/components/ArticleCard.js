@@ -13,13 +13,7 @@ import {
 
 import { Launch } from "@material-ui/icons";
 
-export default React.memo(function ArticleCard({
-  image,
-  title,
-  date,
-  excerpt,
-  url,
-}) {
+const ArticleCard = ({ image, title, date, excerpt, url }) => {
   return (
     <Card variant="outlined">
       <CardMedia>
@@ -40,4 +34,6 @@ export default React.memo(function ArticleCard({
       </CardActions>
     </Card>
   );
-});
+};
+
+export default ArticleCard;

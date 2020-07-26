@@ -17,16 +17,16 @@ export default createMuiTheme({
   },
   palette: {
     primary: {
-      light: "#406183",
-      main: "#0e3756",
-      dark: "#00112d",
+      light: "#62727b",
+      main: "#37474f",
+      dark: "#102027",
       contrastText: "#ffffff",
     },
     secondary: {
-      light: "#484848",
-      main: "#212121",
-      dark: "#000000",
-      contrastText: "#ffffff",
+      light: "#bef67a",
+      main: "#8bc34a",
+      dark: "#5a9216",
+      contrastText: "#000000",
     },
   },
 });

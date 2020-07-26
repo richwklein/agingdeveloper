@@ -64,7 +64,7 @@ const ArticleTags = ({ tags }) => {
   );
 };
 
-export default ({ data, pageContext }) => {
+const ArticlePage = ({ data, pageContext }) => {
   const classes = useStyles();
 
   const {
@@ -75,41 +75,39 @@ export default ({ data, pageContext }) => {
 
   return (
     <Layout showLogoImage={true}>
-      <Box padding={2} flexGrow={1} marginX="auto" width="100%" maxWidth={1280}>
-        <Box marginBottom={1}>
-          <ArticleTitle title={title} />
-          <ArticleTags tags={tags} />
-        </Box>
-        <Img fluid={image.childImageSharp.fluid} style={{ borderRadius: 6 }} />
-        <article className={classes.article}>
-          <MDXRenderer>{body}</MDXRenderer>
-        </article>
-        <Box display="flex">
-          <Box flexGrow={1}>
-            {previousPath && (
-              <Button
-                component={Link}
-                to={previousPath}
-                variant="outlined"
-                color="secondary"
-              >
-                <ChevronLeft size={8} />
-                <Box marginLeft={0.5}>Previous</Box>
-              </Button>
-            )}
-          </Box>
-          {nextPath && (
+      <Box marginBottom={1}>
+        <ArticleTitle title={title} />
+        <ArticleTags tags={tags} />
+      </Box>
+      <Img fluid={image.childImageSharp.fluid} style={{ borderRadius: 6 }} />
+      <article className={classes.article}>
+        <MDXRenderer>{body}</MDXRenderer>
+      </article>
+      <Box display="flex">
+        <Box flexGrow={1}>
+          {previousPath && (
             <Button
               component={Link}
-              to={nextPath}
+              to={previousPath}
               variant="outlined"
               color="secondary"
             >
-              <Box marginRight={0.5}>Next</Box>
-              <ChevronRight size={8} />
+              <ChevronLeft size={8} />
+              <Box marginLeft={0.5}>Previous</Box>
             </Button>
           )}
         </Box>
+        {nextPath && (
+          <Button
+            component={Link}
+            to={nextPath}
+            variant="outlined"
+            color="secondary"
+          >
+            <Box marginRight={0.5}>Next</Box>
+            <ChevronRight size={8} />
+          </Button>
+        )}
       </Box>
     </Layout>
   );
@@ -136,3 +134,5 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export default ArticlePage;
