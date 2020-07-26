@@ -17,11 +17,11 @@ import { Close, Folder, LocalOffer, People, Storage } from "@material-ui/icons";
 const drawerWidth = 320;
 
 const useStyles = makeStyles((theme) => ({
-  drawer: {
+  navDrawer: {
     width: drawerWidth,
     flexShrink: 0,
   },
-  drawerPaper: {
+  navDrawerPaper: {
     width: drawerWidth,
   },
   spacer: {
@@ -46,17 +46,17 @@ const NavItem = ({ label, to, children }) => {
   );
 };
 
-export default ({ open, onClose }) => {
+const NavDrawer = ({ open, onClose }) => {
   const classes = useStyles();
 
   return (
     <Drawer
       open={open}
       onClose={onClose}
-      className={classes.drawer}
+      className={classes.navDrawer}
       anchor="right"
       classes={{
-        paper: classes.drawerPaper,
+        paper: classes.navDrawerPaper,
       }}
     >
       <Toolbar>
@@ -89,3 +89,5 @@ export default ({ open, onClose }) => {
     </Drawer>
   );
 };
+
+export default NavDrawer;

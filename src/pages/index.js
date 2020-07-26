@@ -1,55 +1,11 @@
 import React from "react";
-import { graphql, Link } from "gatsby";
-
-import Layout from "../components/Layout";
-import { Avatar, Box, Button, Grid, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import Img from "gatsby-image";
+import { graphql } from "gatsby";
+import { Grid } from "@material-ui/core";
 import ArticleCard from "../components/ArticleCard";
+import Banner from "../components/Banner";
+import Layout from "../components/Layout";
 
-const useStyles = makeStyles((theme) => ({
-  banner: {
-    color: theme.palette.grey.A400,
-    backgroundColor: theme.palette.grey[200],
-    padding: theme.spacing(2),
-  },
-  bannerTitle: {
-    marginBottom: theme.spacing(1),
-  },
-  avatar: {
-    width: 128,
-    height: 128,
-  },
-}));
-
-const Banner = ({ image, title, description }) => {
-  const classes = useStyles();
-
-  return (
-    <Box className={classes.banner}>
-      <Box marginX="auto" width="100%" maxWidth={1280}>
-        <Grid container spacing={1}>
-          <Grid item xs={2}>
-            <Avatar
-              component={Img}
-              fluid={image}
-              loading="eager"
-              className={classes.avatar}
-            />
-          </Grid>
-          <Grid item xs={12} sm={10}>
-            <Typography variant="h3" className={classes.bannerTitle}>
-              {title}
-            </Typography>
-            <Typography variant="h5">{description}</Typography>
-          </Grid>
-        </Grid>
-      </Box>
-    </Box>
-  );
-};
-
-const Articles = ({ articles }) => {
+const ArticleGrid = ({ articles }) => {
   const articlePathPrefix = "/archive";
 
   return (
@@ -78,19 +34,18 @@ const Articles = ({ articles }) => {
   );
 };
 
-export default ({ data }) => {
+const IndexBanner = ({ avatar, title, subtitle }) => {
+  return <Banner avatar={avatar} title={title} subtitle={subtitle} />;
+};
+
+const IndexPage = ({ data }) => {
+  const avatar = data.file.childImageSharp.fluid;
+  const { title, description: subtitle } = data.site.siteMetadata;
+  const banner = IndexBanner({ avatar, title, subtitle });
+
   return (
-    <Layout showLogoImage={false}>
-      <Banner
-        image={data.file.childImageSharp.fluid}
-        title={data.site.siteMetadata.title}
-        description={data.site.siteMetadata.description}
-      />
-      <Box flexGrow={1} marginX="auto" width="100%" maxWidth={1280}>
-        <Box padding={2}>
-          <Articles articles={data.allMdx.edges} />
-        </Box>
-      </Box>
+    <Layout showLogoImage={false} banner={banner}>
+      <ArticleGrid articles={data.allMdx.edges} />
     </Layout>
   );
 };
@@ -136,3 +91,5 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export default IndexPage;
