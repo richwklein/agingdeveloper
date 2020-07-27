@@ -11,7 +11,6 @@ help:
 install: ## Install npm dependencies
 	@echo "Installing Node dependencies."
 	@npm install
-	@npm install -g prettier
 
 uninstall: clean ## Uninstall npm dependencies
 	@echo "Uninstalling npm dependencies."
@@ -47,3 +46,6 @@ format: ## Format source code
 	@echo "Formating source code."
 	@npm run format
 
+lint: ## Lint source code
+	@echo "Linting source code."
+	@npm run lint

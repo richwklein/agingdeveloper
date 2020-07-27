@@ -35,14 +35,14 @@ const ArticleGrid = ({ articles }) => {
   );
 };
 
-const IndexBanner = ({ avatar, title, subtitle }) => {
+const indexBanner = ({ avatar, title, subtitle }) => {
   return <Banner avatar={avatar} title={title} subtitle={subtitle} />;
 };
 
 const IndexPage = ({ data }) => {
   const avatar = data.file.childImageSharp.fluid;
   const { title, description: subtitle } = data.site.siteMetadata;
-  const banner = IndexBanner({ avatar, title, subtitle });
+  const banner = indexBanner({ avatar, title, subtitle });
 
   return (
     <Layout showLogoImage={false} banner={banner}>
