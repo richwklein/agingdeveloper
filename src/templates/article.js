@@ -1,19 +1,19 @@
-import React, { Fragment } from "react";
-import { graphql, Link } from "gatsby";
+import React, {Fragment} from "react";
+import {graphql, Link} from "gatsby";
 import Img from "gatsby-image";
-import { Box, Button, Chip, Divider, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import { ChevronLeft, ChevronRight } from "@material-ui/icons";
+import {Box, Button, Chip, Divider, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/styles";
+import {ChevronLeft, ChevronRight} from "@material-ui/icons";
 
 import Layout from "../components/Layout";
-import { MDXRenderer } from "gatsby-plugin-mdx";
-import { Helmet } from "react-helmet";
+import {MDXRenderer} from "gatsby-plugin-mdx";
+import {Helmet} from "react-helmet";
 
 const useStyles = makeStyles(() => ({
   article: {
-    lineHeight: 1.6,
-    fontFamily: "Merriweather, sans-serif, serif",
-    fontSize: "1.1rem",
+    "lineHeight": 1.6,
+    "fontFamily": "Merriweather, sans-serif, serif",
+    "fontSize": "1.1rem",
     "& blockquote": {
       borderLeft: "3px solid #303032",
       marginLeft: -16,
@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ArticleTitle = ({ title }) => {
+const ArticleTitle = ({title}) => {
   const classes = useStyles();
 
   return (
@@ -47,7 +47,7 @@ const ArticleTitle = ({ title }) => {
   );
 };
 
-const ArticleTags = ({ tags }) => {
+const ArticleTags = ({tags}) => {
   const classes = useStyles();
 
   return (
@@ -69,14 +69,14 @@ const ArticleTags = ({ tags }) => {
   );
 };
 
-const ArticlePage = ({ data, pageContext }) => {
+const ArticlePage = ({data, pageContext}) => {
   const classes = useStyles();
 
   const {
-    frontmatter: { image, title, tags },
+    frontmatter: {image, title, tags},
     body,
   } = data.mdx;
-  const { previousPath, nextPath } = pageContext;
+  const {previousPath, nextPath} = pageContext;
 
   return (
     <Layout showLogoImage={true}>
@@ -89,7 +89,7 @@ const ArticlePage = ({ data, pageContext }) => {
       </Box>
       <Img
         fluid={image.childImageSharp.fluid}
-        style={{ borderRadius: 6 }}
+        style={{borderRadius: 6}}
         className={classes.articleImage}
       />
       <article className={classes.article}>

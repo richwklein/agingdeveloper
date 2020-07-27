@@ -1,14 +1,14 @@
 import React from "react";
-import { Box, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {Box, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 import ExternalLink from "./ExternalLink";
 import InnerBox from "./InnerBox";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    color: theme.palette.primary.contrastText,
-    backgroundColor: theme.palette.primary.main,
-    padding: theme.spacing(2),
+    "color": theme.palette.primary.contrastText,
+    "backgroundColor": theme.palette.primary.main,
+    "padding": theme.spacing(2),
 
     "& a": {
       color: theme.palette.primary.contrastText,
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BottomBar = ({ copyright, repository }) => {
+const BottomBar = ({copyright, repository}) => {
   const classes = useStyles();
 
   return (
