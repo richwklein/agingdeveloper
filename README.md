@@ -33,7 +33,8 @@ cd agingdeveloper/
 make install
 ```
 
-This will install local npm dependencies. It will install the "prettier" package globally.
+This will install local npm dependencies. It should also install a "pre-commit" git hook that will
+format the source code and run tests.
 
 1. **Start the development server**
 
