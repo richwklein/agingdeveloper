@@ -43,7 +43,8 @@
     "eslint-config-react-app": "^5.2.1",
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.8",
-    "gatsby-cli": "^2.12.58"
+    "gatsby-cli": "^2.12.58",
+    "husky": "^4.2.5"
   },
   "repository": {
     "type": "git",
@@ -51,5 +52,10 @@
   },
   "bugs": {
     "url": "https://github.com/richwklein/agingdeveloper"
-  }
+  },
+    "husky": {
+      "hooks": {
+        "pre-commit": "npm run format && npm run test"
+      }
+    }
 }
