@@ -1,22 +1,22 @@
-import React from 'react';
-import {Box, Typography} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
-import ExternalLink from './ExternalLink';
-import InnerBox from './InnerBox';
+import React from "react";
+import {Box, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import ExternalLink from "./ExternalLink";
+import InnerBox from "./InnerBox";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    'color': theme.palette.primary.contrastText,
-    'backgroundColor': theme.palette.primary.main,
-    'padding': theme.spacing(2),
+    "color": theme.palette.primary.contrastText,
+    "backgroundColor": theme.palette.primary.main,
+    "padding": theme.spacing(2),
 
-    '& a': {
+    "& a": {
       color: theme.palette.primary.contrastText,
-      textDecoration: 'none',
-      fontSize: '.9rem',
+      textDecoration: "none",
+      fontSize: ".9rem",
     },
-    '& a:hover': {
-      textDecoration: 'underline',
+    "& a:hover": {
+      textDecoration: "underline",
     },
   },
 }));
@@ -30,7 +30,7 @@ const BottomBar = ({copyright, repository}) => {
         <Box>
           <Box textAlign="center" marginTop={1}>
             <Typography variant="caption">
-              &copy; {new Date().getFullYear()}{' '}
+              &copy; {new Date().getFullYear()}{" "}
               <ExternalLink to={repository}>&nbsp;{copyright}</ExternalLink>
             </Typography>
           </Box>

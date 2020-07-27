@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link} from 'gatsby';
+import React from "react";
+import {Link} from "gatsby";
 import {
   AppBar,
   Avatar,
@@ -8,10 +8,10 @@ import {
   IconButton,
   Toolbar,
   Typography,
-} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
-import {Menu} from '@material-ui/icons';
-import Img from 'gatsby-image';
+} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import {Menu} from "@material-ui/icons";
+import Img from "gatsby-image";
 
 const useStyles = makeStyles((theme) => ({
   header: {

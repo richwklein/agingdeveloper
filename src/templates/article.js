@@ -1,24 +1,24 @@
-import React, {Fragment} from 'react';
-import {graphql, Link} from 'gatsby';
-import Img from 'gatsby-image';
-import {Box, Button, Chip, Divider, Typography} from '@material-ui/core';
-import {makeStyles} from '@material-ui/styles';
-import {ChevronLeft, ChevronRight} from '@material-ui/icons';
+import React, {Fragment} from "react";
+import {graphql, Link} from "gatsby";
+import Img from "gatsby-image";
+import {Box, Button, Chip, Divider, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/styles";
+import {ChevronLeft, ChevronRight} from "@material-ui/icons";
 
-import Layout from '../components/Layout';
-import {MDXRenderer} from 'gatsby-plugin-mdx';
-import {Helmet} from 'react-helmet';
+import Layout from "../components/Layout";
+import {MDXRenderer} from "gatsby-plugin-mdx";
+import {Helmet} from "react-helmet";
 
 const useStyles = makeStyles(() => ({
   article: {
-    'lineHeight': 1.6,
-    'fontFamily': 'Merriweather, sans-serif, serif',
-    'fontSize': '1.1rem',
-    '& blockquote': {
-      borderLeft: '3px solid #303032',
+    "lineHeight": 1.6,
+    "fontFamily": "Merriweather, sans-serif, serif",
+    "fontSize": "1.1rem",
+    "& blockquote": {
+      borderLeft: "3px solid #303032",
       marginLeft: -16,
       paddingLeft: 13,
-      fontStyle: 'italic',
+      fontStyle: "italic",
     },
   },
   articleImage: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
   },
   title: {
     fontFamily:
-      'Work Sans, -apple-system, BlinkMacSystemFont, Roboto, sans-serif',
+      "Work Sans, -apple-system, BlinkMacSystemFont, Roboto, sans-serif",
   },
   chip: {
     marginRight: 4,

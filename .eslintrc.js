@@ -3,13 +3,14 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: ['google', 'react-app'],
+  extends: ["google", "react-app"],
   globals: {
     __PATH_PREFIX__: true,
   },
-  plugins: ['react', 'react-hooks'],
+  plugins: ["react", "react-hooks"],
   rules: {
-    'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
-    'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
+    "quotes": [1, "double", "avoid-escape"],
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
   },
 };

@@ -1,18 +1,18 @@
-import React, {Fragment, useState} from 'react';
-import {graphql, useStaticQuery, Link} from 'gatsby';
-import {CssBaseline, Fab, Zoom} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
-import {KeyboardArrowUp} from '@material-ui/icons';
-import {useHasScroll} from 'has-scroll-hook';
-import TopBar from './TopBar';
-import BottomBar from './BottomBar';
-import InnerBox from './InnerBox';
-import NavDrawer from './NavDrawer';
-import '../styles/layout.css';
+import React, {Fragment, useState} from "react";
+import {graphql, useStaticQuery, Link} from "gatsby";
+import {CssBaseline, Fab, Zoom} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import {KeyboardArrowUp} from "@material-ui/icons";
+import {useHasScroll} from "has-scroll-hook";
+import TopBar from "./TopBar";
+import BottomBar from "./BottomBar";
+import InnerBox from "./InnerBox";
+import NavDrawer from "./NavDrawer";
+import "../styles/layout.css";
 
 const useStyles = makeStyles((theme) => ({
   topButton: {
-    position: 'fixed',
+    position: "fixed",
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
@@ -23,11 +23,11 @@ const ScrollTop = ({hasScroll}) => {
 
   const handleClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
-        '#scroll-top',
+        "#scroll-top",
     );
 
     if (anchor) {
-      anchor.scrollIntoView({behavior: 'smooth', block: 'center'});
+      anchor.scrollIntoView({behavior: "smooth", block: "center"});
     }
   };
 

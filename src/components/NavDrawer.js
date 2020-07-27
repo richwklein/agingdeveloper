@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link} from 'gatsby';
+import React from "react";
+import {Link} from "gatsby";
 import {
   Box,
   Drawer,
@@ -10,9 +10,9 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
-import {Close, Folder, LocalOffer, People, Storage} from '@material-ui/icons';
+} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import {Close, Folder, LocalOffer, People, Storage} from "@material-ui/icons";
 
 const drawerWidth = 320;
 

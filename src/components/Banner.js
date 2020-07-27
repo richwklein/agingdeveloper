@@ -1,9 +1,9 @@
-import React from 'react';
-import clsx from 'clsx';
-import {Avatar, Box, Typography} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
-import Img from 'gatsby-image';
-import InnerBox from './InnerBox';
+import React from "react";
+import clsx from "clsx";
+import {Avatar, Box, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import Img from "gatsby-image";
+import InnerBox from "./InnerBox";
 
 const useStyles = makeStyles((theme) => ({
   banner: {

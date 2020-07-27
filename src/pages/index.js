@@ -1,13 +1,13 @@
-import React from 'react';
-import {graphql} from 'gatsby';
-import {Grid} from '@material-ui/core';
-import ArticleCard from '../components/ArticleCard';
-import Banner from '../components/Banner';
-import Layout from '../components/Layout';
-import {Helmet} from 'react-helmet';
+import React from "react";
+import {graphql} from "gatsby";
+import {Grid} from "@material-ui/core";
+import ArticleCard from "../components/ArticleCard";
+import Banner from "../components/Banner";
+import Layout from "../components/Layout";
+import {Helmet} from "react-helmet";
 
 const ArticleGrid = ({articles}) => {
-  const articlePathPrefix = '/archive';
+  const articlePathPrefix = "/archive";
 
   return (
     <Grid container spacing={3}>
