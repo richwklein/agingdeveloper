@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     marginRight: theme.spacing(1),
+    borderWidth: 1,
+    borderColor: theme.palette.secondary.light,
+    borderStyle: "solid",
   },
 }));
 

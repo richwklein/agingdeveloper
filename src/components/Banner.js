@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     width: 128,
     height: 128,
     marginRight: theme.spacing(2),
+    borderWidth: 1,
+    borderColor: theme.palette.secondary.light,
+    borderStyle: "solid",
   },
   avatarLarger: {
     width: 256,
