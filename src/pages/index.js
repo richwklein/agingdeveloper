@@ -47,7 +47,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout showLogoImage={false} banner={banner}>
       <Helmet>
-        <time>{title}</time>
+        <title>{title}</title>
       </Helmet>
       <ArticleGrid articles={data.allMdx.edges} />
     </Layout>
