@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 
 import Layout from "../components/Layout";
 import { MDXRenderer } from "gatsby-plugin-mdx";
+import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles(() => ({
   article: {
@@ -19,6 +20,10 @@ const useStyles = makeStyles(() => ({
       paddingLeft: 13,
       fontStyle: "italic",
     },
+  },
+  articleImage: {
+    width: 1280,
+    height: 720,
   },
   title: {
     fontFamily:
@@ -75,35 +80,32 @@ const ArticlePage = ({ data, pageContext }) => {
 
   return (
     <Layout showLogoImage={true}>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <Box marginBottom={1}>
         <ArticleTitle title={title} />
         <ArticleTags tags={tags} />
       </Box>
-      <Img fluid={image.childImageSharp.fluid} style={{ borderRadius: 6 }} />
+      <Img
+        fluid={image.childImageSharp.fluid}
+        style={{ borderRadius: 6 }}
+        className={classes.articleImage}
+      />
       <article className={classes.article}>
         <MDXRenderer>{body}</MDXRenderer>
       </article>
       <Box display="flex">
         <Box flexGrow={1}>
           {previousPath && (
-            <Button
-              component={Link}
-              to={previousPath}
-              variant="outlined"
-              color="secondary"
-            >
+            <Button component={Link} to={previousPath} color="secondary">
               <ChevronLeft size={8} />
               <Box marginLeft={0.5}>Previous</Box>
             </Button>
           )}
         </Box>
         {nextPath && (
-          <Button
-            component={Link}
-            to={nextPath}
-            variant="outlined"
-            color="secondary"
-          >
+          <Button component={Link} to={nextPath} color="secondary">
             <Box marginRight={0.5}>Next</Box>
             <ChevronRight size={8} />
           </Button>
@@ -125,7 +127,7 @@ export const pageQuery = graphql`
         category
         image {
           childImageSharp {
-            fluid(maxWidth: 1280, maxHeight: 800, cropFocus: CENTER) {
+            fluid(maxWidth: 1280, maxHeight: 720, cropFocus: CENTER) {
               ...GatsbyImageSharpFluid
             }
           }

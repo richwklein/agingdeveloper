@@ -25,6 +25,8 @@ module.exports = {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sharp",
     "gatsby-plugin-sitemap",
+    "gatsby-remark-images",
+    "gatsby-transformer-sharp",
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
@@ -37,6 +39,15 @@ module.exports = {
       resolve: "gatsby-plugin-mdx",
       options: {
         extensions: [".mdx", ".md"],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: "gatsby-remark-images",
+            options: {
+              maxWidth: 1280,
+              maxHeight: 720,
+            },
+          },
+        ],
       },
     },
     {
@@ -84,6 +95,5 @@ module.exports = {
         path: `${__dirname}/content`,
       },
     },
-    "gatsby-transformer-sharp",
   ],
 };
