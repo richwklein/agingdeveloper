@@ -1,6 +1,6 @@
-import React from "react";
-import Img from "gatsby-image";
-import { Link } from "gatsby";
+import React from 'react';
+import Img from 'gatsby-image';
+import {Link} from 'gatsby';
 import {
   Card,
   CardActions,
@@ -9,10 +9,10 @@ import {
   CardMedia,
   IconButton,
   Typography,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+} from '@material-ui/core';
+import {makeStyles} from '@material-ui/styles';
 
-import { Launch } from "@material-ui/icons";
+import {Launch} from '@material-ui/icons';
 
 const useStyles = makeStyles(() => ({
   card: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ArticleCard = ({ image, title, date, excerpt, url }) => {
+const ArticleCard = ({image, title, date, excerpt, url}) => {
   const classes = useStyles();
 
   return (

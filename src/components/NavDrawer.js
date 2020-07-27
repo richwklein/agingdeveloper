@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "gatsby";
+import React from 'react';
+import {Link} from 'gatsby';
 import {
   Box,
   Drawer,
@@ -10,9 +10,9 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { Close, Folder, LocalOffer, People, Storage } from "@material-ui/icons";
+} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
+import {Close, Folder, LocalOffer, People, Storage} from '@material-ui/icons';
 
 const drawerWidth = 320;
 
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavList = ({ children }) => {
+const NavList = ({children}) => {
   return (
     <List component="nav" aria-label="main navigation">
       {children}
@@ -37,7 +37,7 @@ const NavList = ({ children }) => {
   );
 };
 
-const NavItem = ({ label, to, children }) => {
+const NavItem = ({label, to, children}) => {
   return (
     <ListItem button component={Link} to={to}>
       <ListItemIcon>{children}</ListItemIcon>
@@ -46,7 +46,7 @@ const NavItem = ({ label, to, children }) => {
   );
 };
 
-const NavDrawer = ({ open, onClose }) => {
+const NavDrawer = ({open, onClose}) => {
   const classes = useStyles();
 
   return (
