@@ -4,6 +4,7 @@ import { Grid } from "@material-ui/core";
 import ArticleCard from "../components/ArticleCard";
 import Banner from "../components/Banner";
 import Layout from "../components/Layout";
+import { Helmet } from "react-helmet";
 
 const ArticleGrid = ({ articles }) => {
   const articlePathPrefix = "/archive";
@@ -45,6 +46,9 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout showLogoImage={false} banner={banner}>
+      <Helmet>
+        <time>{title}</time>
+      </Helmet>
       <ArticleGrid articles={data.allMdx.edges} />
     </Layout>
   );
@@ -60,7 +64,7 @@ export const pageQuery = graphql`
     }
     file(relativePath: { eq: "image/avatar/wizard.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 256, maxHeight: 256, cropFocus: CENTER) {
+        fluid(cropFocus: CENTER) {
           ...GatsbyImageSharpFluid_withWebp
         }
       }
@@ -80,7 +84,7 @@ export const pageQuery = graphql`
             category
             image {
               childImageSharp {
-                fluid(maxWidth: 640, cropFocus: CENTER) {
+                fluid(cropFocus: CENTER) {
                   ...GatsbyImageSharpFluid
                 }
               }

@@ -28,6 +28,7 @@
     "gatsby-plugin-robots-txt": "^1.5.1",
     "gatsby-plugin-sharp": "^2.6.17",
     "gatsby-plugin-sitemap": "^2.4.10",
+    "gatsby-remark-images": "^3.3.21",
     "gatsby-source-filesystem": "^2.3.18",
     "gatsby-transformer-json": "^2.4.11",
     "gatsby-transformer-sharp": "^2.5.10",

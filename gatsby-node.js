@@ -39,13 +39,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const previousPath =
       index === pages.length - 1
         ? null
-        : `${articlePathPrefix}/${pages[index + 1].node.frontmatter.slug}`;
+        : `${articlePathPrefix}/${pages[index + 1].node.frontmatter.url}`;
 
     // The path to the next page.
     const nextPath =
       index === 0
         ? null
-        : `${articlePathPrefix}/${pages[index - 1].node.frontmatter.id}`;
+        : `${articlePathPrefix}/${pages[index - 1].node.frontmatter.url}`;
 
     return createPage({
       path: `${articlePathPrefix}/${permalink}`,
