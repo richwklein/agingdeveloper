@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from "react";
-import {graphql, useStaticQuery, Link} from "gatsby";
+import { graphql, useStaticQuery, Link} from "gatsby";
 import {CssBaseline, Fab, Zoom} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {KeyboardArrowUp} from "@material-ui/icons";
