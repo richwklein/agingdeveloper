@@ -54,9 +54,9 @@ module.exports = {
       resolve: "gatsby-plugin-prefetch-google-fonts",
       options: {
         fonts: [
-          { family: "Roboto" },
-          { family: "Merriweather" },
-          { family: "Work Sans" },
+          {family: "Roboto"},
+          {family: "Merriweather"},
+          {family: "Work Sans"},
         ],
       },
     },
@@ -73,16 +73,16 @@ module.exports = {
         host: siteUrl,
         sitemap: siteUrl + "/sitemap.xml",
         env: {
-          production: {
-            policy: [{ userAgent: "*", allow: ["/"] }],
+          "production": {
+            policy: [{userAgent: "*", allow: ["/"]}],
           },
           "branch-deploy": {
-            policy: [{ userAgent: "*", disallow: ["/"] }],
+            policy: [{userAgent: "*", disallow: ["/"]}],
             sitemap: null,
             host: null,
           },
           "deploy-preview": {
-            policy: [{ userAgent: "*", disallow: ["/"] }],
+            policy: [{userAgent: "*", disallow: ["/"]}],
             sitemap: null,
             host: null,
           },
