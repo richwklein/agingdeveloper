@@ -14,7 +14,7 @@ version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site is 
   - [Start local development](#start-local-development)
     - [Create a production build.](#create-a-production-build)
     - [Serve the production build locally.](#serve-the-production-build-locally)
-  - [vscode settings](#vscode-settings)
+  - [VSCode settings](#vscode-settings)
   
 ## License
 - The site code is [MIT](/LICENSE) licensed 
