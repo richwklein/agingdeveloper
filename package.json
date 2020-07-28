@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "scripts": {
     "build": "gatsby build",
+    "build:ci": "npm run format && npm run test && npm run build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
     "format": "eslint --fix 'src/**/*.{js,jsx}'",
