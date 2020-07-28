@@ -11,11 +11,12 @@ version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site is 
 
 ## What's in This Document
   - [License](#license)
+  - [Content vs Source Code](#content-vs-source-code)
   - [Start local development](#start-local-development)
     - [Create a production build.](#create-a-production-build)
     - [Serve the production build locally.](#serve-the-production-build-locally)
   - [VSCode settings](#vscode-settings)
-  
+
 ## License
 - The site code is [MIT](/LICENSE) licensed 
 - The libraries the site is based upon are MIT licensed where feasible.
@@ -23,7 +24,15 @@ version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site is 
 - [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) 
   licensed unless otherwise noted.
 
+## Content vs Source Code
+
+Both the source code for the site and the content that is hosted on the site are
+stored in this repository. With the exception of some top level files the majority
+of the source code is located in the `src` folder. The content hosted on the site
+is located in the `content` folder.
+
 ## Start local development
+
 Most javascript developers will likely already have the tools installed, but here is a quick rundown of setting things 
 up just in case you do not. I'm using brew here since I develop on a Mac. Windows developers will have to use other 
 package managers.
@@ -84,7 +93,8 @@ This will make sure source code is formatted, run tests, then create a build.
 ## VSCode Settings
 
 VSCode is the main editor that is used on this site. ESLint is used for linting and formatting. 
-These settings enable a good workflow where lint issues are automatically corrected on save.
+These settings are included in the `.vscode` folder in the root of the project.
+They should be used for a good workflow where lint issues are automatically corrected on save.
 
 ```json
 {
