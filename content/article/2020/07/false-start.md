@@ -3,7 +3,7 @@ url: "2020/07/26/false-start"
 title: "Workflow, Tech Stack, and False Starts"
 author: richwklein
 image: ../../../image/braden-collum-9HI8UJMSdZA-unsplash.jpg
-tags: [tech, gatsby, bluehost, netlify, misstep, false start]
+tags: [tech, gatsby, gatsbyjs, react, material-ui, bluehost, netlify, misstep, false start]
 category: site
 date: "2020-07-26"
 ---
