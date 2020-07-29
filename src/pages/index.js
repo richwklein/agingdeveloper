@@ -4,7 +4,7 @@ import {Grid} from "@material-ui/core";
 import ArticleCard from "../components/ArticleCard";
 import Banner from "../components/Banner";
 import Layout from "../components/Layout";
-import {Helmet} from "react-helmet";
+import SEO from "../components/SEO";
 
 const ArticleGrid = ({articles}) => {
   const articlePathPrefix = "/archive";
@@ -41,14 +41,17 @@ const indexBanner = ({avatar, title, subtitle}) => {
 
 const IndexPage = ({data}) => {
   const avatar = data.file.childImageSharp.fluid;
-  const {title, description: subtitle} = data.site.siteMetadata;
+  const {title, description: subtitle, siteUrl} = data.site.siteMetadata;
   const banner = indexBanner({avatar, title, subtitle});
 
   return (
     <Layout showLogoImage={false} banner={banner}>
-      <Helmet>
-        <title>{title}</title>
-      </Helmet>
+      <SEO
+        title={title}
+        description={subtitle}
+        image={`${siteUrl}${avatar.src}`}
+        url={`${siteUrl}/`}
+        siteName={title} />
       <ArticleGrid articles={data.allMdx.edges} />
     </Layout>
   );
@@ -58,6 +61,7 @@ export const pageQuery = graphql`
   query {
     site {
       siteMetadata {
+        siteUrl
         title
         description
       }

@@ -7,7 +7,7 @@ import {ChevronLeft, ChevronRight} from "@material-ui/icons";
 
 import Layout from "../components/Layout";
 import {MDXRenderer} from "gatsby-plugin-mdx";
-import {Helmet} from "react-helmet";
+import SEO from "../components/SEO";
 
 const useStyles = makeStyles(() => ({
   article: {
@@ -70,19 +70,26 @@ const ArticleTags = ({tags}) => {
 };
 
 const ArticlePage = ({data, pageContext}) => {
+  const pathPrefix = "archive";
   const classes = useStyles();
 
   const {
-    frontmatter: {image, title, tags},
+    frontmatter: {image, title, tags, url},
     body,
   } = data.mdx;
+  const {title: siteName, siteUrl} = data.site.siteMetadata;
   const {previousPath, nextPath} = pageContext;
 
   return (
     <Layout showLogoImage={true}>
-      <Helmet>
-        <title>{title}</title>
-      </Helmet>
+      <SEO
+        title={title}
+        description={title}
+        image={`${siteUrl}${image.childImageSharp.fluid.src}`}
+        url={`${siteUrl}/${pathPrefix}/${url}`}
+        siteName={siteName}
+        keywords={tags}
+        isArticle={true} />
       <Box marginBottom={1}>
         <ArticleTitle title={title} />
         <ArticleTags tags={tags} />
@@ -117,6 +124,12 @@ const ArticlePage = ({data, pageContext}) => {
 
 export const pageQuery = graphql`
   query($permalink: String!) {
+    site {
+      siteMetadata {
+        siteUrl
+        title
+      }
+    }
     mdx(frontmatter: { url: { eq: $permalink } }) {
       body
       frontmatter {
