@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.contrastText,
     backgroundColor: theme.palette.primary.light,
     padding: theme.spacing(2),
-    marginBottom: theme.spacing(2),
   },
   bannerText: {
     marginBottom: theme.spacing(1),
@@ -18,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     width: 128,
     height: 128,
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
     borderWidth: 1,
     borderColor: theme.palette.secondary.light,
     borderStyle: "solid",
@@ -26,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
   avatarLarger: {
     width: 256,
     height: 256,
+    marginRight: theme.spacing(1),
+    borderWidth: 1,
+    borderColor: theme.palette.secondary.light,
+    borderStyle: "solid",
   },
 }));
 

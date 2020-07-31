@@ -22,8 +22,8 @@ const useStyles = makeStyles(() => ({
     },
   },
   articleImage: {
-    width: 1280,
-    height: 720,
+    maxWidth: 1264,
+    maxHeight: 711,
   },
   title: {
     fontFamily:
@@ -140,7 +140,7 @@ export const pageQuery = graphql`
         category
         image {
           childImageSharp {
-            fluid(maxWidth: 1280, maxHeight: 720, cropFocus: CENTER) {
+            fluid(maxWidth: 1264, maxHeight: 711, cropFocus: CENTER) {
               ...GatsbyImageSharpFluid
             }
           }

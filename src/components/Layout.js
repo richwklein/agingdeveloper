@@ -82,7 +82,7 @@ const Layout = ({showLogoImage = true, banner, children}) => {
         showAvatar={showLogoImage}
       />
       {banner}
-      <InnerBox flexGrow={1} paddingTop={2} paddingBottom={2}>
+      <InnerBox flexGrow={1} padding={2}>
         {children}
       </InnerBox>
       <BottomBar copyright={title} repository={repository} />

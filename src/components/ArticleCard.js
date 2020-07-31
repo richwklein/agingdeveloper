@@ -19,8 +19,8 @@ const useStyles = makeStyles(() => ({
     maxWidth: 625,
   },
   cardImage: {
-    width: 625,
-    height: 352,
+    maxWidth: 610,
+    maxHeight: 343,
   },
 }));
 
