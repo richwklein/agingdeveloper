@@ -1,5 +1,5 @@
 ---
-url: "2020/07/26/false-start"
+url: "/article/2020/07/26/false-start"
 title: "Workflow, Tech Stack, and False Starts"
 author: richwklein
 image: ../../../image/braden-collum-9HI8UJMSdZA-unsplash.jpg

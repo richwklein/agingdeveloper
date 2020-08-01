@@ -70,7 +70,7 @@ const ArticleTags = ({tags}) => {
 };
 
 const ArticlePage = ({data, pageContext}) => {
-  const pathPrefix = "archive";
+  const pathPrefix = "article";
   const classes = useStyles();
 
   const {
