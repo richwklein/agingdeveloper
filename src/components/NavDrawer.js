@@ -73,6 +73,9 @@ const NavDrawer = ({open, onClose}) => {
       </Toolbar>
       <Divider />
       <NavList>
+        <NavItem label="Articles" to="/article/">
+          <Storage />
+        </NavItem>
         <NavItem label="Authors" to="/author/">
           <People />
         </NavItem>
@@ -81,9 +84,6 @@ const NavDrawer = ({open, onClose}) => {
         </NavItem>
         <NavItem label="Tags" to="/tag/">
           <LocalOffer />
-        </NavItem>
-        <NavItem label="Archive" to="/archive/">
-          <Storage />
         </NavItem>
       </NavList>
     </Drawer>

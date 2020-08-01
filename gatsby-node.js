@@ -4,7 +4,7 @@ const path = require("path");
 exports.createPages = async ({actions, graphql, reporter}) => {
   const {createPage} = actions;
   const articleTemplate = path.resolve("src/templates/article.js");
-  const articlePathPrefix = "/archive";
+  const articlePathPrefix = "/article";
 
   const result = await graphql(`
     {

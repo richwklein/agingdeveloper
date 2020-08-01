@@ -1,13 +1,15 @@
 import React from "react";
-import {graphql} from "gatsby";
-import {Grid} from "@material-ui/core";
+import {graphql, Link} from "gatsby";
+import {Box, Button, Grid} from "@material-ui/core";
+import {Storage} from "@material-ui/icons";
+
 import ArticleCard from "../components/ArticleCard";
 import Banner from "../components/Banner";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 
 const ArticleGrid = ({articles}) => {
-  const articlePathPrefix = "/archive";
+  const articlePathPrefix = "/article";
 
   return (
     <Grid container spacing={3}>
@@ -53,6 +55,21 @@ const IndexPage = ({data}) => {
         url={`${siteUrl}/`}
         siteName={title} />
       <ArticleGrid articles={data.allMdx.edges} />
+      <Box
+        display="flex"
+        alignItems="center"
+        marginTop={2}
+        justifyContent="flex-end">
+        <Button
+          variant="contained"
+          color="secondary"
+          component={Link}
+          to={"/article/"}
+          startIcon={<Storage />}
+        >
+          View All
+        </Button>
+      </Box>
     </Layout>
   );
 };

@@ -16,7 +16,15 @@ import {Launch} from "@material-ui/icons";
 
 const useStyles = makeStyles(() => ({
   card: {
-    maxWidth: 625,
+    "maxWidth": 625,
+
+    "& a": {
+      color: "inherit",
+      textDecoration: "none",
+    },
+    "& a:hover": {
+      textDecoration: "none",
+    },
   },
   cardImage: {
     maxWidth: 610,
@@ -37,7 +45,9 @@ const ArticleCard = ({image, title, date, excerpt, url}) => {
           />
         </Link>
       </CardMedia>
-      <CardHeader title={title} subheader={date} />
+      <Link to={url}>
+        <CardHeader title={title} subheader={date} />
+      </Link>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {excerpt}
