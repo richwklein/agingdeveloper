@@ -3,13 +3,34 @@ import {graphql, Link} from "gatsby";
 import Img from "gatsby-image";
 import {Disqus, CommentCount} from "gatsby-plugin-disqus";
 import {MDXRenderer} from "gatsby-plugin-mdx";
-import {Box, Button, Chip, Grid, Typography} from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Chip,
+  Grid,
+  Typography,
+  Breadcrumbs,
+} from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
-import {ChevronLeft, ChevronRight, LocalOffer} from "@material-ui/icons";
+import {
+  ChevronLeft,
+  ChevronRight,
+  LocalOffer} from "@material-ui/icons";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 
 const useStyles = makeStyles((theme) => ({
+  breadcrumbs: {
+    marginTop: -theme.spacing(1),
+    marginBottom: theme.spacing(3),
+    color: theme.palette.grey[600],
+  },
+  breadcrumbLink: {
+    color: "inherit",
+    textDecoration: "none",
+    display: "flex",
+    align: "center",
+  },
   article: {
     "lineHeight": 1.6,
     "fontFamily": "Merriweather, sans-serif, serif",
@@ -26,15 +47,18 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: 711,
   },
   titleBox: {
-    marginBottom: theme.spacing(1),
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginBottom: theme.spacing(2),
   },
   title: {
     fontFamily:
       "Work Sans, -apple-system, BlinkMacSystemFont, Roboto, sans-serif",
   },
   chip: {
-    "padding": theme.spacing(0.5),
-    "marginRight": theme.spacing(1.5),
+    "padding": theme.spacing(1),
+    "marginRight": theme.spacing(2),
   },
   controlBox: {
     paddingBottom: theme.spacing(2),
@@ -45,22 +69,48 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const ArtitleBreadcrumb = ({url}) => {
+  const classes = useStyles();
+  const prefix = "/article/";
+  const path = url.replace(prefix, "");
+  const pathParts = path.split("/");
+
+  return (
+    <Breadcrumbs separator="›" aria-label="breadcrumb"
+      className={classes.breadcrumbs} >
+      <Link to="/" className={classes.breadcrumbLink}>
+        Home
+      </Link>
+      <Link to="/article" className={classes.breadcrumbLink}>
+        Articles
+      </Link>
+      {pathParts.map((part, index) => {
+        return (
+          <Link
+            to={`${prefix}` + pathParts.slice(0, index + 1).join("/")}
+            key={index}
+            className={classes.breadcrumbLink} >
+            {part.toLowerCase()}
+          </Link>
+        );
+      })}
+    </Breadcrumbs>
+  );
+};
+
 const ArticleTitle = ({title, disqusConfig}) => {
   const classes = useStyles();
 
   return (
     <Grid
       container
-      direction="row"
-      justify="flex-end"
-      alignItems="center"
       className={classes.titleBox} >
       <Grid item xs={12} sm={11}>
         <Typography variant="h4" className={classes.title}>
           {title}
         </Typography>
       </Grid>
-      <Grid tiem xs={1}>
+      <Grid item xs={1}>
         <CommentCount
           config={disqusConfig}
           className={classes.commentCount}
@@ -111,8 +161,8 @@ const ArticlePage = ({data, pageContext}) => {
   const {previousPath, nextPath} = pageContext;
   const disqusConfig = {
     url: `${siteUrl}/${url}`,
-    identifier: {url},
-    title: {title},
+    identifier: url,
+    title: title,
   };
 
   return (
@@ -125,6 +175,7 @@ const ArticlePage = ({data, pageContext}) => {
         siteName={siteName}
         keywords={tags}
         isArticle={true} />
+      <ArtitleBreadcrumb url={url} />
       <ArticleTitle title={title} disqusConfig={disqusConfig} />
       <Img
         fluid={image.childImageSharp.fluid}
