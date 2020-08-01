@@ -28,6 +28,12 @@ module.exports = {
     "gatsby-remark-images",
     "gatsby-transformer-sharp",
     {
+      resolve: "gatsby-plugin-disqus",
+      options: {
+        shortname: "agingdeveloper",
+      },
+    },
+    {
       resolve: "gatsby-plugin-google-analytics",
       options: {
         trackingId: analyticsTrackingId,
