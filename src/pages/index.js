@@ -9,8 +9,6 @@ import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 
 const ArticleGrid = ({articles}) => {
-  const articlePathPrefix = "/article";
-
   return (
     <Grid container spacing={3}>
       {articles.map(
@@ -27,7 +25,7 @@ const ArticleGrid = ({articles}) => {
                   title={title}
                   date={date}
                   excerpt={excerpt}
-                  url={`${articlePathPrefix}/${url}`}
+                  url={url}
                 />
               </Grid>
             );

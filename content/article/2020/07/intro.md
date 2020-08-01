@@ -1,5 +1,5 @@
 ---
-url: "2020/07/21/intro"
+url: "/article/2020/07/21/intro"
 title: "Introduction and Return"
 author: richwklein
 image: ../../../image/fons-heijnsbroek-v4c2gKPjPMs-unsplash.jpg

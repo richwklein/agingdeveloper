@@ -4,7 +4,6 @@ const path = require("path");
 exports.createPages = async ({actions, graphql, reporter}) => {
   const {createPage} = actions;
   const articleTemplate = path.resolve("src/templates/article.js");
-  const articlePathPrefix = "/article";
 
   const result = await graphql(`
     {
@@ -39,16 +38,16 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     const previousPath =
       index === pages.length - 1 ?
         null :
-        `${articlePathPrefix}/${pages[index + 1].node.frontmatter.url}`;
+        `${pages[index + 1].node.frontmatter.url}`;
 
     // The path to the next page.
     const nextPath =
       index === 0 ?
         null :
-        `${articlePathPrefix}/${pages[index - 1].node.frontmatter.url}`;
+        `${pages[index - 1].node.frontmatter.url}`;
 
     return createPage({
-      path: `${articlePathPrefix}/${permalink}`,
+      path: `${permalink}`,
       component: articleTemplate,
       context: {
         permalink,
