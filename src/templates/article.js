@@ -72,8 +72,7 @@ const useStyles = makeStyles((theme) => ({
 const ArtitleBreadcrumb = ({slug}) => {
   const classes = useStyles();
   const prefix = "/article/";
-  const path = slug.replace(prefix, "");
-  const pathParts = path.split("/");
+  const pathParts = slug.split("/").slice(1);
 
   return (
     <Breadcrumbs separator="›" aria-label="breadcrumb"
@@ -81,7 +80,7 @@ const ArtitleBreadcrumb = ({slug}) => {
       <Link to="/" className={classes.breadcrumbLink}>
         Home
       </Link>
-      <Link to="/article/" className={classes.breadcrumbLink}>
+      <Link to="/article" className={classes.breadcrumbLink}>
         Articles
       </Link>
       {pathParts.map((part, index) => {

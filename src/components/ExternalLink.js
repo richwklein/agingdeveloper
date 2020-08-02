@@ -1,14 +1,21 @@
 import React from "react";
+import {Link} from "@material-ui/core";
 import {OutboundLink} from "gatsby-plugin-google-analytics";
+
+const ForwardOutboundLink = React.forwardRef((props, ref) => (
+  <OutboundLink {...props} />
+));
 
 const ExternalLink = ({to, children}) => {
   return (
-    <OutboundLink
+    <Link
+      component={ForwardOutboundLink}
       href={to}
       target="_blank"
-      rel="noopener noreferrer nofollow">
+      rel="noopener noreferrer nofollow"
+    >
       {children}
-    </OutboundLink>
+    </Link>
   );
 };
 
