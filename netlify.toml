@@ -1,6 +1,6 @@
 [build]
   base = "/"
-  publish = "build-output/"
+  publish = "public/"
   command = "npm run build:ci"
   environment = {NODE_VERSION = "10.16.0", RUBY_VERSION="2.6.2"}
 
