@@ -22,7 +22,7 @@ I first started putting things together by coding all my own React components fr
 
 There are some other interesting bits that make this site tick and are worth mentioning. I'm using [Let's Encrypt](https://letsencrypt.org/) to get a *free* SSL cert. Almost of the images I'm using on here are from [Unsplash](https://unsplash.com/) which provides *free* to use photos for anyone.
 
-In my [previous post](./intro.md) I mentioned that it was about a year ago that I started to want to re-engage in the online community. It didn't take a year to go from the idea germinating until it was something that was visible to share. I am a passionate developer, but I went for long stretches without putting any effort toward this as you can tell by the code frequency graph.
+In my [previous post](/article/2020/07/21/intro) I mentioned that it was about a year ago that I started to want to re-engage in the online community. It didn't take a year to go from the idea germinating until it was something that was visible to share. I am a passionate developer, but I went for long stretches without putting any effort toward this as you can tell by the code frequency graph.
 
 ![Code Frequency](../../image/../../image/agingdeveloper-codfrequency-july-2020.png)
 
