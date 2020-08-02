@@ -62,7 +62,7 @@ const IndexPage = ({data}) => {
           variant="contained"
           color="secondary"
           component={Link}
-          to={"/article/"}
+          to={"/article"}
           startIcon={<Storage />}
         >
           View All

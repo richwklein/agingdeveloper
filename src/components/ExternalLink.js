@@ -12,7 +12,7 @@ const ExternalLink = ({to, children}) => {
       component={ForwardOutboundLink}
       href={to}
       target="_blank"
-      rel="noopener noreferrer"
+      rel="noopener noreferrer nofollow"
     >
       {children}
     </Link>
