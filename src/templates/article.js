@@ -189,14 +189,20 @@ const ArticlePage = ({data, pageContext}) => {
         <Box flexGrow={1}>
 
           {previousPath && (
-            <Button component={Link} to={`/${pathPrefix}/${previousPath}`} color="secondary">
+            <Button 
+              component={Link} 
+              to={`/${pathPrefix}/${previousPath}`} 
+              color="secondary">
               <ChevronLeft size={8} />
               <Box marginLeft={0.5}>Previous</Box>
             </Button>
           )}
         </Box>
         {nextPath && (
-          <Button component={Link} to={`/${pathPrefix}/${nextPath}`} color="secondary">
+          <Button 
+            component={Link} 
+            to={`/${pathPrefix}/${nextPath}`} 
+            color="secondary">
             <Box marginRight={0.5}>Next</Box>
             <ChevronRight size={8} />
           </Button>
