@@ -149,7 +149,7 @@ const ArticleTags = ({tags}) => {
 };
 
 const ArticlePage = ({data, pageContext}) => {
-  const pathPrefix = "article";
+  const pathPrefix = "/article";
   const classes = useStyles();
 
   const {
@@ -170,7 +170,7 @@ const ArticlePage = ({data, pageContext}) => {
         title={title}
         description={title}
         image={`${siteUrl}${image.childImageSharp.fluid.src}`}
-        url={`${siteUrl}/${pathPrefix}/${slug}`}
+        url={`${siteUrl}${pathPrefix}${slug}`}
         siteName={siteName}
         keywords={tags}
         isArticle={true} />
@@ -191,7 +191,7 @@ const ArticlePage = ({data, pageContext}) => {
           {previousPath && (
             <Button 
               component={Link} 
-              to={`/${pathPrefix}/${previousPath}`} 
+              to={`${pathPrefix}${previousPath}`} 
               color="secondary">
               <ChevronLeft size={8} />
               <Box marginLeft={0.5}>Previous</Box>
@@ -201,7 +201,7 @@ const ArticlePage = ({data, pageContext}) => {
         {nextPath && (
           <Button 
             component={Link} 
-            to={`/${pathPrefix}/${nextPath}`} 
+            to={`${pathPrefix}${nextPath}`} 
             color="secondary">
             <Box marginRight={0.5}>Next</Box>
             <ChevronRight size={8} />
