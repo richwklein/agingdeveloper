@@ -69,10 +69,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ArtitleBreadcrumb = ({url}) => {
+const ArtitleBreadcrumb = ({slug}) => {
   const classes = useStyles();
   const prefix = "/article/";
-  const path = url.replace(prefix, "");
+  const path = slug.replace(prefix, "");
   const pathParts = path.split("/");
 
   return (
@@ -81,7 +81,7 @@ const ArtitleBreadcrumb = ({url}) => {
       <Link to="/" className={classes.breadcrumbLink}>
         Home
       </Link>
-      <Link to="/article" className={classes.breadcrumbLink}>
+      <Link to="/article/" className={classes.breadcrumbLink}>
         Articles
       </Link>
       {pathParts.map((part, index) => {
@@ -154,14 +154,14 @@ const ArticlePage = ({data, pageContext}) => {
   const classes = useStyles();
 
   const {
-    frontmatter: {image, title, tags, url},
+    frontmatter: {image, title, tags, slug},
     body,
   } = data.mdx;
   const {title: siteName, siteUrl} = data.site.siteMetadata;
   const {previousPath, nextPath} = pageContext;
   const disqusConfig = {
-    url: `${siteUrl}/${url}`,
-    identifier: url,
+    url: `${siteUrl}/${slug}`,
+    identifier: slug,
     title: title,
   };
 
@@ -171,11 +171,11 @@ const ArticlePage = ({data, pageContext}) => {
         title={title}
         description={title}
         image={`${siteUrl}${image.childImageSharp.fluid.src}`}
-        url={`${siteUrl}/${pathPrefix}/${url}`}
+        url={`${siteUrl}/${pathPrefix}/${slug}`}
         siteName={siteName}
         keywords={tags}
         isArticle={true} />
-      <ArtitleBreadcrumb url={url} />
+      <ArtitleBreadcrumb slug={slug} />
       <ArticleTitle title={title} disqusConfig={disqusConfig} />
       <Img
         fluid={image.childImageSharp.fluid}
@@ -209,17 +209,17 @@ const ArticlePage = ({data, pageContext}) => {
 };
 
 export const pageQuery = graphql`
-  query($permalink: String!) {
+  query($currentPath: String!) {
     site {
       siteMetadata {
         siteUrl
         title
       }
     }
-    mdx(frontmatter: { url: { eq: $permalink } }) {
+    mdx(frontmatter: { slug: { eq: $currentPath } }) {
       body
       frontmatter {
-        url
+        slug
         title
         date
         tags

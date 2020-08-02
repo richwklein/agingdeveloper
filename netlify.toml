@@ -1,0 +1,11 @@
+[build]
+  base = "/"
+  publish = "public/"
+  command = "npm run build:ci"
+  environment = {NODE_VERSION = "10.16.0", RUBY_VERSION="2.6.2"}
+
+
+[[redirects]]
+  from = "/archive/*"
+  to = "/article/:splat"
+  status = 302
