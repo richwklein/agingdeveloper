@@ -81,7 +81,7 @@ const ArtitleBreadcrumb = ({slug}) => {
       <Link to="/" className={classes.breadcrumbLink}>
         Home
       </Link>
-      <Link to="/article" className={classes.breadcrumbLink}>
+      <Link to="/article/" className={classes.breadcrumbLink}>
         Articles
       </Link>
       {pathParts.map((part, index) => {
