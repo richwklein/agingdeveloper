@@ -73,13 +73,13 @@ const NavDrawer = ({open, onClose}) => {
       </Toolbar>
       <Divider />
       <NavList>
-        <NavItem label="Articles" to="/article">
+        <NavItem label="Articles" to="/article/">
           <Storage />
         </NavItem>
-        <NavItem label="Categories" to="/category">
+        <NavItem label="Categories" to="/category/">
           <Folder />
         </NavItem>
-        <NavItem label="Tags" to="/tag">
+        <NavItem label="Tags" to="/tag/">
           <LocalOffer />
         </NavItem>
         <NavItem label="Authors" to="/author">

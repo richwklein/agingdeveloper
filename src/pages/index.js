@@ -15,17 +15,17 @@ const ArticleGrid = ({articles}) => {
           ({
             node: {
               excerpt,
-              frontmatter: {image, title, date, url},
+              frontmatter: {image, title, date, slug},
             },
           }) => {
             return (
-              <Grid item xs={12} sm={6} key={url}>
+              <Grid item xs={12} sm={6} key={slug}>
                 <ArticleCard
                   image={image}
                   title={title}
                   date={date}
                   excerpt={excerpt}
-                  url={url}
+                  slug={slug}
                 />
               </Grid>
             );
@@ -96,7 +96,7 @@ export const pageQuery = graphql`
         node {
           excerpt
           frontmatter {
-            url
+            slug
             title
             date(formatString: "MMMM Do, YYYY")
             tags
