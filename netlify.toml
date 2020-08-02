@@ -6,6 +6,6 @@
 
 
 [[redirects]]
-  from = "/archive*"
-  to = "/article:splat"
+  from = "/archive/*"
+  to = "/article/:splat"
   status = 302
