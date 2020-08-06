@@ -1,7 +1,7 @@
 import React from "react";
 import {graphql, Link} from "gatsby";
 import {Box, Button, Grid} from "@material-ui/core";
-import {Storage} from "@material-ui/icons";
+import {List as ListIcon} from "@material-ui/icons";
 
 import ArticleCard from "../components/ArticleCard";
 import Banner from "../components/Banner";
@@ -63,7 +63,7 @@ const IndexPage = ({data}) => {
           color="secondary"
           component={Link}
           to={"/article"}
-          startIcon={<Storage />}
+          startIcon={<ListIcon />}
         >
           View All
         </Button>

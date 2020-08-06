@@ -1,29 +1,29 @@
 import React from "react";
 import {graphql, Link} from "gatsby";
 import Img from "gatsby-image";
-import {Disqus, CommentCount} from "gatsby-plugin-disqus";
+import {Disqus} from "gatsby-plugin-disqus";
 import {MDXRenderer} from "gatsby-plugin-mdx";
 import {
   Box,
   Button,
   Chip,
-  Grid,
   Typography,
   Breadcrumbs,
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
 import {
   ChevronLeft,
-  ChevronRight,
-  LocalOffer} from "@material-ui/icons";
+  ChevronRight} from "@material-ui/icons";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
+import kebabCase from "lodash/kebabCase";
 
 const useStyles = makeStyles((theme) => ({
   breadcrumbs: {
     marginTop: -theme.spacing(1),
-    marginBottom: theme.spacing(3),
+    marginBottom: theme.spacing(2),
     color: theme.palette.grey[600],
+    font: "small",
   },
   breadcrumbLink: {
     color: "inherit",
@@ -47,9 +47,6 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: 711,
   },
   titleBox: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
     marginBottom: theme.spacing(2),
   },
   title: {
@@ -57,8 +54,8 @@ const useStyles = makeStyles((theme) => ({
       "Work Sans, -apple-system, BlinkMacSystemFont, Roboto, sans-serif",
   },
   chip: {
-    "padding": theme.spacing(1),
-    "marginRight": theme.spacing(2),
+    "padding": theme.spacing(0.5),
+    "marginRight": theme.spacing(1),
   },
   controlBox: {
     paddingBottom: theme.spacing(2),
@@ -75,7 +72,7 @@ const ArtitleBreadcrumb = ({slug}) => {
   const pathParts = slug.split("/").slice(1);
 
   return (
-    <Breadcrumbs separator="›" aria-label="breadcrumb"
+    <Breadcrumbs separator="/" aria-label="breadcrumb"
       className={classes.breadcrumbs} >
       <Link to="/" className={classes.breadcrumbLink}>
         Home
@@ -97,25 +94,15 @@ const ArtitleBreadcrumb = ({slug}) => {
   );
 };
 
-const ArticleTitle = ({title, disqusConfig}) => {
+const ArticleTitle = ({title}) => {
   const classes = useStyles();
 
   return (
-    <Grid
-      container
-      className={classes.titleBox} >
-      <Grid item xs={12} sm={11}>
-        <Typography variant="h4" className={classes.title}>
-          {title}
-        </Typography>
-      </Grid>
-      <Grid item xs={1}>
-        <CommentCount
-          config={disqusConfig}
-          className={classes.commentCount}
-          placeholder={"..."} />
-      </Grid>
-    </Grid>
+    <header className={classes.titleBox}>
+      <Typography variant="h4" className={classes.title}>
+        {title}
+      </Typography>
+    </header>
   );
 };
 
@@ -124,15 +111,11 @@ const ArticleTags = ({tags}) => {
 
   return (
     <Box
-      display="flex"
-      alignItems="center"
-      flexWrap="wrap"
       marginTop={1}
       marginBottom={1}>
       {tags.map((tag) => {
         return (
           <Chip
-            icon={<LocalOffer />}
             className={classes.chip}
             label={tag}
             key={tag}
@@ -140,7 +123,7 @@ const ArticleTags = ({tags}) => {
             clickable
             variant="outlined"
             component={Link}
-            to={`/tag/${tag}`}
+            to={`/tag/${kebabCase(tag)}`}
           />
         );
       })}
@@ -148,7 +131,7 @@ const ArticleTags = ({tags}) => {
   );
 };
 
-const ArticlePage = ({data, pageContext}) => {
+const ArticleTemplate = ({data, pageContext}) => {
   const pathPrefix = "/article";
   const classes = useStyles();
 
@@ -175,46 +158,48 @@ const ArticlePage = ({data, pageContext}) => {
         keywords={tags}
         isArticle={true} />
       <ArtitleBreadcrumb slug={slug} />
-      <ArticleTitle title={title} disqusConfig={disqusConfig} />
-      <Img
-        fluid={image.childImageSharp.fluid}
-        style={{borderRadius: 6}}
-        className={classes.articleImage}
-      />
-      <ArticleTags tags={tags} />
       <article className={classes.article}>
+        <ArticleTitle title={title} disqusConfig={disqusConfig} />
+        <Img
+          fluid={image.childImageSharp.fluid}
+          style={{borderRadius: 6}}
+          className={classes.articleImage}
+        />
+        <ArticleTags tags={tags} />
         <MDXRenderer>{body}</MDXRenderer>
       </article>
-      <Box display="flex" className={classes.controlBox}>
-        <Box flexGrow={1}>
+      <aside>
+        <Box display="flex" className={classes.controlBox}>
+          <Box flexGrow={1}>
 
-          {previousPath && (
-            <Button 
-              component={Link} 
-              to={`${pathPrefix}${previousPath}`} 
+            {previousPath && (
+              <Button
+                component={Link}
+                to={`${pathPrefix}${previousPath}`}
+                color="secondary">
+                <ChevronLeft size={8} />
+                <Box marginLeft={0.5}>Previous</Box>
+              </Button>
+            )}
+          </Box>
+          {nextPath && (
+            <Button
+              component={Link}
+              to={`${pathPrefix}${nextPath}`}
               color="secondary">
-              <ChevronLeft size={8} />
-              <Box marginLeft={0.5}>Previous</Box>
+              <Box marginRight={0.5}>Next</Box>
+              <ChevronRight size={8} />
             </Button>
           )}
         </Box>
-        {nextPath && (
-          <Button 
-            component={Link} 
-            to={`${pathPrefix}${nextPath}`} 
-            color="secondary">
-            <Box marginRight={0.5}>Next</Box>
-            <ChevronRight size={8} />
-          </Button>
-        )}
-      </Box>
-      <Disqus config={disqusConfig} />
+        <Disqus config={disqusConfig} />
+      </aside>
     </Layout>
   );
 };
 
 export const pageQuery = graphql`
-  query($currentPath: String!) {
+  query($currentPath: String) {
     site {
       siteMetadata {
         siteUrl
@@ -241,4 +226,4 @@ export const pageQuery = graphql`
   }
 `;
 
-export default ArticlePage;
+export default ArticleTemplate;

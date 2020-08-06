@@ -12,7 +12,13 @@ import {
   Toolbar,
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import {Close, Folder, LocalOffer, People, Storage} from "@material-ui/icons";
+import {
+  Close,
+  Folder,
+  List as ListIcon,
+  LocalOffer,
+  Person,
+} from "@material-ui/icons";
 
 const drawerWidth = 320;
 
@@ -74,7 +80,7 @@ const NavDrawer = ({open, onClose}) => {
       <Divider />
       <NavList>
         <NavItem label="Articles" to="/article">
-          <Storage />
+          <ListIcon />
         </NavItem>
         <NavItem label="Categories" to="/category">
           <Folder />
@@ -83,7 +89,7 @@ const NavDrawer = ({open, onClose}) => {
           <LocalOffer />
         </NavItem>
         <NavItem label="Authors" to="/author">
-          <People />
+          <Person />
         </NavItem>
       </NavList>
     </Drawer>
