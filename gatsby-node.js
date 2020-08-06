@@ -1,14 +1,17 @@
 const path = require("path");
+const lodash = require("lodash");
 
 // Create pages based on graph data and templates
 exports.createPages = async ({actions, graphql, reporter}) => {
   const {createPage} = actions;
   const articleTemplate = path.resolve("src/templates/article.js");
   const articlePathPrefix = "/article";
+  const tagTemplate = path.resolve("src/templates/tag.js");
+  const tagPathPrefix = "/tag";
 
   const result = await graphql(`
     {
-      allMdx(
+      articles: allMdx(
         sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
       ) {
         edges {
@@ -17,6 +20,11 @@ exports.createPages = async ({actions, graphql, reporter}) => {
               slug
             }
           }
+        }
+      }
+      tags: allMdx {
+        group(field: frontmatter___tags) {
+          fieldValue
         }
       }
     }
@@ -28,24 +36,24 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     return;
   }
 
-  // Iterate through the query results to create individual pages.
-  const pages = result.data.allMdx.edges;
+  // Iterate through the article query to create individual pages.
+  const articles = result.data.articles.edges;
 
-  return pages.map(({node}, index) => {
+  articles.map(({node}, index) => {
     // Use a permalink based on the frontmatter url in each markdown file header.
     const currentPath = node.frontmatter.slug;
 
     // The path to the previous page.
     const previousPath =
-      index === pages.length - 1 ?
+      index === articles.length - 1 ?
         null :
-        `${pages[index + 1].node.frontmatter.slug}`;
+        `${articles[index + 1].node.frontmatter.slug}`;
 
     // The path to the next page.
     const nextPath =
       index === 0 ?
         null :
-        `${pages[index - 1].node.frontmatter.slug}`;
+        `${articles[index - 1].node.frontmatter.slug}`;
 
 
     return createPage({
@@ -55,6 +63,17 @@ exports.createPages = async ({actions, graphql, reporter}) => {
         currentPath,
         previousPath,
         nextPath,
+      },
+    });
+  });
+
+  const tags = result.data.tags.group;
+  tags.map((tag, index) => {
+    return createPage({
+      path: `${tagPathPrefix}/${lodash.kebabCase(tag.fieldValue)}`,
+      component: tagTemplate,
+      context: {
+        tag: tag.fieldValue,
       },
     });
   });
