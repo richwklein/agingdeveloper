@@ -1,6 +1,6 @@
 import React from "react";
 import {graphql, Link} from "gatsby";
-import {Badge, Button, Grid, Typography} from "@material-ui/core";
+import {Badge, Breadcrumbs, Button, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
 import Layout from "../components/Layout";
@@ -37,6 +37,22 @@ const useStyles = makeStyles((theme) => ({
     transform: "none",
   },
 }));
+
+const TagBreadcrumb = () => {
+  const classes = useStyles();
+
+  return (
+    <Breadcrumbs separator="/" aria-label="breadcrumb"
+      className={classes.breadcrumbs} >
+      <Link to="/" className={classes.breadcrumbLink}>
+      Home
+      </Link>
+      <Link to="/tag" className={classes.breadcrumbLink}>
+      Tags
+      </Link>
+    </Breadcrumbs>
+  );
+};
 
 const TagTitle = () => {
   const classes = useStyles();
@@ -89,6 +105,7 @@ const TagPage = ({data}) => {
   return (
     <Layout showLogoImage={true}>
       <TagHelmet siteTitle={data.site.siteMetadata.title} />
+      <TagBreadcrumb />
       <TagTitle />
       <TagGrid tags={tags} />
     </Layout>

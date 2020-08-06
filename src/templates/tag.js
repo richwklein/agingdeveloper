@@ -6,8 +6,10 @@ import {
   Breadcrumbs,
   GridList,
   GridListTile,
+  Typography,
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
+import {LocalOffer} from "@material-ui/icons";
 import Layout from "../components/Layout";
 import kebabCase from "lodash/kebabCase";
 import ArticleCard from "../components/ArticleCard";
@@ -25,7 +27,29 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     align: "center",
   },
+  titleBox: {
+    marginBottom: theme.spacing(2),
+  },
+  title: {
+    fontFamily:
+      "Work Sans, -apple-system, BlinkMacSystemFont, Roboto, sans-serif",
+  },
+  titleIcon: {
+    marginRight: theme.spacing(1),
+  },
 }));
+
+const TagTitle = ({tag}) => {
+  const classes = useStyles();
+
+  return (
+    <header className={classes.titleBox}>
+      <Typography variant="h4" className={classes.title}>
+        <LocalOffer className={classes.titleIcon} />{tag}
+      </Typography>
+    </header>
+  );
+};
 
 const TagHelmet = ({tag, siteTitle}) => {
   return (<Helmet title={`${tag} | ${siteTitle}`} />);
@@ -49,6 +73,7 @@ const TagBreadcrumb = ({tag}) => {
     </Breadcrumbs>
   );
 };
+
 const ArticleGridList = ({articles}) => {
   return (
     <GridList cellHeight={570} cols={2} spacing={24}>
@@ -83,6 +108,7 @@ const TagTemplate = ({data, pageContext}) => {
     <Layout showLogoImage={true}>
       <TagHelmet tag={tag} siteTitle={data.site.siteMetadata.title} />
       <TagBreadcrumb tag={tag} />
+      <TagTitle tag={tag} />
       <ArticleGridList articles={data.allMdx.edges} />
     </Layout>
   );
