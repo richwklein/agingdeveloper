@@ -117,7 +117,7 @@ const ArticleTags = ({tags}) => {
         return (
           <Chip
             className={classes.chip}
-            label={tag}
+            label={tag.toUpperCase()}
             key={tag}
             color="primary"
             clickable

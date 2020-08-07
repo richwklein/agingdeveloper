@@ -34,9 +34,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily:
       "Work Sans, -apple-system, BlinkMacSystemFont, Roboto, sans-serif",
   },
-  titleIcon: {
-    marginRight: theme.spacing(1),
-  },
 }));
 
 const TagTitle = ({tag}) => {
@@ -45,14 +42,14 @@ const TagTitle = ({tag}) => {
   return (
     <header className={classes.titleBox}>
       <Typography variant="h4" className={classes.title}>
-        <LocalOffer className={classes.titleIcon} />{tag}
+        {tag.toUpperCase()}
       </Typography>
     </header>
   );
 };
 
 const TagHelmet = ({tag, siteTitle}) => {
-  return (<Helmet title={`${tag} | ${siteTitle}`} />);
+  return (<Helmet title={`${tag.toUpperCase()} | ${siteTitle}`} />);
 };
 
 const TagBreadcrumb = ({tag}) => {
@@ -68,7 +65,7 @@ const TagBreadcrumb = ({tag}) => {
       Tags
       </Link>
       <Link to={`/tag/${kebabCase(tag)}`} className={classes.breadcrumbLink}>
-        {tag}
+        {tag.toUpperCase()}
       </Link>
     </Breadcrumbs>
   );
