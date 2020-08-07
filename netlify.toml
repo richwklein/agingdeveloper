@@ -9,3 +9,6 @@
   from = "/archive/*"
   to = "/article/:splat"
   status = 302
+
+  [[plugins]]
+  package = "netlify-plugin-submit-sitemap"
