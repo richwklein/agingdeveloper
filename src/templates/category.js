@@ -19,17 +19,30 @@ const capitalize = (category) => {
 
 const useStyles = makeStyles((theme) => ({
   breadcrumbs: {
-    marginTop: -theme.spacing(1),
-    marginBottom: theme.spacing(2),
-    color: theme.palette.grey[600],
-    font: "small",
+    "marginTop": -theme.spacing(1),
+    "marginBottom": theme.spacing(2),
+    "color": theme.palette.text.secondary,
+    "fontFamily": theme.typography.caption.fontFamily,
+    "fontSize": theme.typography.caption.fontSize,
+    "fontWeight": theme.typography.caption.fontWeight,
+    "lineHeight": theme.typography.caption.lineHeight,
+
+    "& a": {
+      color: "inherit",
+      textDecoration: "none",
+    },
+
+    "& a:hover": {
+      textDecoration: "underline",
+    },
+
+    "& a.disabled": {
+      color: theme.palette.text.disabled,
+      textDecoration: "none",
+      cursor: "default",
+    },
   },
-  breadcrumbLink: {
-    color: "inherit",
-    textDecoration: "none",
-    display: "flex",
-    align: "center",
-  },
+
   titleBox: {
     marginBottom: theme.spacing(2),
   },
@@ -61,15 +74,15 @@ const CategoryBreadcrumb = ({category}) => {
   return (
     <Breadcrumbs separator="/" aria-label="breadcrumb"
       className={classes.breadcrumbs} >
-      <Link to="/" className={classes.breadcrumbLink}>
+      <Link to="/">
       Home
       </Link>
-      <Link to="/category" className={classes.breadcrumbLink}>
+      <Link to="/category">
       Categories
       </Link>
       <Link
         to={`/category/${kebabCase(category)}`}
-        className={classes.breadcrumbLink}>
+        className="disabled" disabled>
         {capitalize(category)}
       </Link>
     </Breadcrumbs>

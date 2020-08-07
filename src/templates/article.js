@@ -15,23 +15,37 @@ import {
   ChevronLeft,
   ChevronRight,
   Folder,
-  LocalOffer} from "@material-ui/icons";
+  LocalOffer,
+  ModeComment} from "@material-ui/icons";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import kebabCase from "lodash/kebabCase";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   breadcrumbs: {
-    marginTop: -theme.spacing(1),
-    marginBottom: theme.spacing(2),
-    color: theme.palette.grey[600],
-    font: "small",
-  },
-  breadcrumbLink: {
-    color: "inherit",
-    textDecoration: "none",
-    display: "flex",
-    align: "center",
+    "marginTop": -theme.spacing(1),
+    "marginBottom": theme.spacing(2),
+    "color": theme.palette.text.secondary,
+    "fontFamily": theme.typography.caption.fontFamily,
+    "fontSize": theme.typography.caption.fontSize,
+    "fontWeight": theme.typography.caption.fontWeight,
+    "lineHeight": theme.typography.caption.lineHeight,
+
+    "& a": {
+      color: "inherit",
+      textDecoration: "none",
+    },
+
+    "& a:hover": {
+      textDecoration: "underline",
+    },
+
+    "& a.disabled": {
+      color: theme.palette.text.disabled,
+      textDecoration: "none",
+      cursor: "default",
+    },
   },
   article: {
     "lineHeight": 1.6,
@@ -68,30 +82,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ArtitleBreadcrumb = ({slug}) => {
+const ArtitleBreadcrumb = ({date, title, slug}) => {
   const classes = useStyles();
-  const prefix = "/article/";
-  const pathParts = slug.split("/").slice(1);
+  const momentDate = moment(date);
+  const yearPath = "/article/" + momentDate.year();
+  const monthPath = yearPath + "/" + momentDate.format("MM");
+  const dayPath = monthPath + "/" + momentDate.format("DD");
 
   return (
     <Breadcrumbs separator="/" aria-label="breadcrumb"
       className={classes.breadcrumbs} >
-      <Link to="/" className={classes.breadcrumbLink}>
+      <Link to="/">
         Home
       </Link>
-      <Link to="/article" className={classes.breadcrumbLink}>
+      <Link to="/article">
         Articles
       </Link>
-      {pathParts.map((part, index) => {
-        return (
-          <Link
-            to={`${prefix}` + pathParts.slice(0, index + 1).join("/")}
-            key={index}
-            className={classes.breadcrumbLink} >
-            {part.toLowerCase()}
-          </Link>
-        );
-      })}
+      <Link to={yearPath}>
+        {momentDate.format("YYYY")}
+      </Link>
+      <Link to={monthPath} >
+        {momentDate.format("MMMM")}
+      </Link>
+      <Link to={dayPath} >
+        {momentDate.format("DD")}
+      </Link>
+      <Link to={`/article${slug}`} className="disabled" disabled>
+        {title}
+      </Link>
     </Breadcrumbs>
   );
 };
@@ -152,7 +170,7 @@ const ArticleTemplate = ({data, pageContext}) => {
   const classes = useStyles();
 
   const {
-    frontmatter: {image, title, category, tags, slug},
+    frontmatter: {image, title, date, category, tags, slug},
     body,
   } = data.mdx;
   const {title: siteName, siteUrl} = data.site.siteMetadata;
@@ -173,7 +191,7 @@ const ArticleTemplate = ({data, pageContext}) => {
         siteName={siteName}
         keywords={tags}
         isArticle={true} />
-      <ArtitleBreadcrumb slug={slug} />
+      <ArtitleBreadcrumb date={date} title={title} slug={slug} />
       <article className={classes.article}>
         <ArticleTitle title={title} disqusConfig={disqusConfig} />
         <Img
