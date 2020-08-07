@@ -11,54 +11,36 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.light,
     padding: theme.spacing(2),
   },
-  bannerText: {
-    marginBottom: theme.spacing(1),
-  },
   avatar: {
-    width: 128,
-    height: 128,
+    width: 34,
+    height: 34,
     marginLeft: 16, // aligns icon with content padding
     marginRight: theme.spacing(1),
     borderWidth: 2,
-    borderColor: theme.palette.secondary.light,
-    borderStyle: "solid",
-  },
-  avatarLarger: {
-    width: 256,
-    height: 256,
-    marginRight: theme.spacing(1),
-    borderWidth: 1,
-    borderColor: theme.palette.secondary.light,
+    color: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.main,
+    borderColor: theme.palette.grey["50"],
     borderStyle: "solid",
   },
 }));
 
-const Banner = ({avatar, title, subtitle, children, largeAvatar = false}) => {
+const IconBanner = ({icon, title}) => {
   const classes = useStyles();
 
   return (
     <Box className={classes.banner}>
       <InnerBox display="flex" alignItems="center">
-        <Avatar
-          component={Img}
-          fluid={avatar}
-          loading="eager"
-          className={clsx(classes.avatar, {
-            [classes.avatarLarger]: largeAvatar,
-          })}
-        />
+        <Avatar className={classes.avatar} >
+          {icon}
+        </Avatar>
         <Box width="100%">
           <Typography variant="h4" className={classes.bannerText}>
             {title}
           </Typography>
-          <Typography variant="h6" className={classes.bannerText}>
-            {subtitle}
-          </Typography>
-          {children}
         </Box>
       </InnerBox>
     </Box>
   );
 };
 
-export default Banner;
+export default IconBanner;

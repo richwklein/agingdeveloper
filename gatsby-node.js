@@ -8,6 +8,8 @@ exports.createPages = async ({actions, graphql, reporter}) => {
   const articlePathPrefix = "/article";
   const tagTemplate = path.resolve("src/templates/tag.js");
   const tagPathPrefix = "/tag";
+  const categoryTemplate = path.resolve("src/templates/category.js");
+  const categoryPathPrefix = "/category";
 
   const result = await graphql(`
     {
@@ -24,6 +26,11 @@ exports.createPages = async ({actions, graphql, reporter}) => {
       }
       tags: allMdx {
         group(field: frontmatter___tags) {
+          fieldValue
+        }
+      }
+      categories: allMdx {
+        group(field: frontmatter___category) {
           fieldValue
         }
       }
@@ -67,6 +74,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     });
   });
 
+  // Iterate tags to create tag pages
   const tags = result.data.tags.group;
   tags.map((tag, index) => {
     return createPage({
@@ -74,6 +82,18 @@ exports.createPages = async ({actions, graphql, reporter}) => {
       component: tagTemplate,
       context: {
         tag: tag.fieldValue,
+      },
+    });
+  });
+
+  // Iterate categories to create category pages
+  const categories = result.data.categories.group;
+  categories.map((category, index) => {
+    return createPage({
+      path: `${categoryPathPrefix}/${lodash.kebabCase(category.fieldValue)}`,
+      component: categoryTemplate,
+      context: {
+        category: category.fieldValue,
       },
     });
   });

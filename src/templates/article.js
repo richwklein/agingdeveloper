@@ -13,7 +13,9 @@ import {
 import {makeStyles} from "@material-ui/styles";
 import {
   ChevronLeft,
-  ChevronRight} from "@material-ui/icons";
+  ChevronRight,
+  Folder,
+  LocalOffer} from "@material-ui/icons";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import kebabCase from "lodash/kebabCase";
@@ -106,23 +108,37 @@ const ArticleTitle = ({title}) => {
   );
 };
 
-const ArticleTags = ({tags}) => {
+const ArticleTags = ({category, tags}) => {
   const classes = useStyles();
 
   return (
     <Box
       marginTop={1}
       marginBottom={1}>
+      <Chip
+        className={classes.chip}
+        icon={<Folder />}
+        label={category.toUpperCase()}
+        key={category}
+        clickable
+        variant="outlined"
+        color="primary"
+        component={Link}
+        size="small"
+
+        to={`/category/${kebabCase(category)}`} />
       {tags.map((tag) => {
         return (
           <Chip
             className={classes.chip}
+            icon={<LocalOffer />}
             label={tag.toUpperCase()}
             key={tag}
-            color="primary"
             clickable
             variant="outlined"
+            color="primary"
             component={Link}
+            size="small"
             to={`/tag/${kebabCase(tag)}`}
           />
         );
@@ -136,7 +152,7 @@ const ArticleTemplate = ({data, pageContext}) => {
   const classes = useStyles();
 
   const {
-    frontmatter: {image, title, tags, slug},
+    frontmatter: {image, title, category, tags, slug},
     body,
   } = data.mdx;
   const {title: siteName, siteUrl} = data.site.siteMetadata;
@@ -165,7 +181,7 @@ const ArticleTemplate = ({data, pageContext}) => {
           style={{borderRadius: 6}}
           className={classes.articleImage}
         />
-        <ArticleTags tags={tags} />
+        <ArticleTags category={category} tags={tags} />
         <MDXRenderer>{body}</MDXRenderer>
       </article>
       <aside>
