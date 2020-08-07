@@ -13,8 +13,8 @@ import Layout from "../components/Layout";
 import kebabCase from "lodash/kebabCase";
 import ArticleCard from "../components/ArticleCard";
 
-const capitalize = (tag) => {
-  return tag.charAt(0).toUpperCase() + tag.slice(1);
+const capitalize = (category) => {
+  return category.charAt(0).toUpperCase() + category.slice(1);
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -39,23 +39,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TagTitle = ({tag}) => {
+const CategoryTitle = ({category}) => {
   const classes = useStyles();
 
   return (
     <header className={classes.titleBox}>
       <Typography variant="h4" className={classes.title}>
-        {capitalize(tag)}
+        {capitalize(category)}
       </Typography>
     </header>
   );
 };
 
-const TagHelmet = ({tag, siteTitle}) => {
-  return (<Helmet title={`${capitalize(tag)} | ${siteTitle}`} />);
+const CategoryHelmet = ({category, siteTitle}) => {
+  return (<Helmet title={`${capitalize(category)} | ${siteTitle}`} />);
 };
 
-const TagBreadcrumb = ({tag}) => {
+const CategoryBreadcrumb = ({category}) => {
   const classes = useStyles();
 
   return (
@@ -64,11 +64,13 @@ const TagBreadcrumb = ({tag}) => {
       <Link to="/" className={classes.breadcrumbLink}>
       Home
       </Link>
-      <Link to="/tag" className={classes.breadcrumbLink}>
-      Tags
+      <Link to="/category" className={classes.breadcrumbLink}>
+      Categories
       </Link>
-      <Link to={`/tag/${kebabCase(tag)}`} className={classes.breadcrumbLink}>
-        {capitalize(tag)}
+      <Link
+        to={`/category/${kebabCase(category)}`}
+        className={classes.breadcrumbLink}>
+        {capitalize(category)}
       </Link>
     </Breadcrumbs>
   );
@@ -101,23 +103,25 @@ const ArticleGridList = ({articles}) => {
   );
 };
 
-const TagTemplate = ({data, pageContext}) => {
-  const tag = pageContext.tag;
+const CategoryTemplate = ({data, pageContext}) => {
+  const category = pageContext.category;
 
   return (
     <Layout showLogoImage={true}>
-      <TagHelmet tag={tag} siteTitle={data.site.siteMetadata.title} />
-      <TagBreadcrumb tag={tag} />
-      <TagTitle tag={tag} />
+      <CategoryHelmet
+        category={category}
+        siteTitle={data.site.siteMetadata.title} />
+      <CategoryBreadcrumb category={category} />
+      <CategoryTitle category={category} />
       <ArticleGridList articles={data.allMdx.edges} />
     </Layout>
   );
 };
 
-export default TagTemplate;
+export default CategoryTemplate;
 
 export const pageQuery = graphql`
-  query($tag: String) {
+  query($category: String) {
     site {
       siteMetadata {
         siteUrl
@@ -126,7 +130,7 @@ export const pageQuery = graphql`
     }
     allMdx(
       sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: { frontmatter: { category: { eq: $category } } }
     ) {
       totalCount
       edges {

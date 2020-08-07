@@ -5,7 +5,7 @@ import {makeStyles} from "@material-ui/core/styles";
 
 import Layout from "../components/Layout";
 import {Helmet} from "react-helmet";
-import {LocalOffer} from "@material-ui/icons";
+import {Folder} from "@material-ui/icons";
 import kebabCase from "lodash/kebabCase";
 import IconBanner from "../components/IconBanner";
 
@@ -17,31 +17,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TagHelmet = ({siteTitle}) => {
-  return (<Helmet title={`Tags | ${siteTitle}`} />);
+const CategoryHelmet = ({siteTitle}) => {
+  return (<Helmet title={`Categories | ${siteTitle}`} />);
 };
 
-const TagGrid = ({tags}) => {
+const CategoryGrid = ({categories}) => {
   const classes=useStyles();
 
   return (
     <Grid container spacing={3}>
-      {tags.map((tag) => {
+      {categories.map((category) => {
         return (
-          <Grid item lg={2} md={3} sm={6} xs={12} key={tag.fieldValue}>
+          <Grid item lg={2} md={3} sm={6} xs={12} key={category.fieldValue}>
             <Button
               color="primary"
               variant="contained"
               fullWidth
               component={Link}
-              to={`/tag/${kebabCase(tag.fieldValue)}`}
+              to={`/category/${kebabCase(category.fieldValue)}`}
               endIcon={<Badge
-                badgeContent={tag.totalCount}
+                badgeContent={category.totalCount}
                 color="secondary"
                 max={999}
                 overlap="rectangle"
                 classes={{anchorOriginTopRightRectangle: classes.badge}} />}>
-              {tag.fieldValue}
+              {category.fieldValue}
             </Button>
           </Grid>
         );
@@ -50,18 +50,18 @@ const TagGrid = ({tags}) => {
   );
 };
 
-const tagBanner = () => {
-  return <IconBanner icon={<LocalOffer />} title="Tags" />;
+const categoryBanner = () => {
+  return <IconBanner icon={<Folder />} title="Categories" />;
 };
 
-const TagPage = ({data}) => {
-  const {group: tags} = data.allMdx;
-  const banner = tagBanner();
+const CategoryPage = ({data}) => {
+  const {group: categories} = data.allMdx;
+  const banner = categoryBanner();
 
   return (
     <Layout showLogoImage={true} banner={banner}>
-      <TagHelmet siteTitle={data.site.siteMetadata.title} />
-      <TagGrid tags={tags} />
+      <CategoryHelmet siteTitle={data.site.siteMetadata.title} />
+      <CategoryGrid categories={categories} />
     </Layout>
   );
 };
@@ -76,7 +76,7 @@ export const pageQuery = graphql`
       }
     }
     allMdx {
-      group(field: frontmatter___tags) {
+      group(field: frontmatter___category) {
         fieldValue
         totalCount
       }
@@ -84,4 +84,4 @@ export const pageQuery = graphql`
   }
 `;
 
-export default TagPage;
+export default CategoryPage;
