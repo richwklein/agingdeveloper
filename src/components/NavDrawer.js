@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {Link} from "gatsby";
 import {
   Box,
@@ -10,6 +10,7 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
+  useMediaQuery,
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {
@@ -19,6 +20,7 @@ import {
   LocalOffer,
   Person,
 } from "@material-ui/icons";
+import SearchBox from "./SearchBox";
 
 const drawerWidth = 320;
 
@@ -54,6 +56,7 @@ const NavItem = ({label, to, children}) => {
 
 const NavDrawer = ({open, onClose}) => {
   const classes = useStyles();
+  const isXs = useMediaQuery((theme) => theme.breakpoints.down("xs"));
 
   return (
     <Drawer
@@ -92,6 +95,12 @@ const NavDrawer = ({open, onClose}) => {
           <Person />
         </NavItem>
       </NavList>
+      {isXs && (
+        <Fragment>
+          <Divider />
+          <SearchBox />
+        </Fragment>
+      )}
     </Drawer>
   );
 };

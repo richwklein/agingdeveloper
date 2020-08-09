@@ -8,10 +8,12 @@ import {
   IconButton,
   Toolbar,
   Typography,
+  useMediaQuery,
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {Menu} from "@material-ui/icons";
 import Img from "gatsby-image";
+import SearchBox from "./SearchBox";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -40,6 +42,7 @@ const TopBar = ({
 }) => {
   const classes = useStyles();
   const elevation = Number(hasScroll);
+  const isXs = useMediaQuery((theme) => theme.breakpoints.down("xs"));
 
   return (
     <AppBar position="sticky" elevation={elevation} className={classes.header}>
@@ -59,6 +62,7 @@ const TopBar = ({
             </ButtonBase>
           </Typography>
         </Box>
+        {!isXs && <SearchBox expanding />}
         <IconButton
           color="inherit"
           aria-label="open drawer"

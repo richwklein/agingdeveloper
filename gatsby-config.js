@@ -42,6 +42,33 @@ module.exports = {
       },
     },
     {
+      resolve: "gatsby-plugin-flexsearch",
+      options: {
+        languages: ["en"],
+        type: "mdx",
+        fields: [
+          {
+            name: "title",
+            indexed: true,
+            resolver: "frontmatter.title",
+            attributes: {
+              encode: "balance",
+              tokenize: "strict",
+              threshold: 6,
+              depth: 3,
+            },
+            store: true,
+          },
+          {
+            name: "url",
+            indexed: false,
+            resolver: "frontmatter.slug",
+            store: true,
+          },
+        ],
+      },
+    },
+    {
       resolve: "gatsby-plugin-mdx",
       options: {
         extensions: [".mdx", ".md"],
