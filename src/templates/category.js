@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "underline",
     },
 
-    "& a.disabled": {
+    "& a[disabled]": {
       color: theme.palette.text.disabled,
       textDecoration: "none",
       cursor: "default",
@@ -81,8 +81,7 @@ const CategoryBreadcrumb = ({category}) => {
       Categories
       </Link>
       <Link
-        to={`/category/${kebabCase(category)}`}
-        className="disabled" disabled>
+        to={`/category/${kebabCase(category)}`} disabled>
         {capitalize(category)}
       </Link>
     </Breadcrumbs>
