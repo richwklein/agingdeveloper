@@ -12,7 +12,7 @@
     "lint": "eslint . --ext .js,.jsx",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "test": "jest"
   },
   "dependencies": {
     "@material-ui/core": "^4.6.1",
@@ -41,12 +41,17 @@
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
+    "babel-jest": "^26.2.2",
+    "babel-preset-gatsby": "^0.5.5",
     "eslint": "^7.5.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-react-app": "^5.2.1",
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.8",
-    "gatsby-cli": "^2.12.58"
+    "gatsby-cli": "^2.12.58",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.2.2",
+    "react-test-renderer": "^16.13.1"
   },
   "repository": {
     "type": "git",
