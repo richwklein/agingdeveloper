@@ -15,8 +15,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Folder,
-  LocalOffer,
-  ModeComment} from "@material-ui/icons";
+  LocalOffer} from "@material-ui/icons";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import kebabCase from "lodash/kebabCase";
@@ -41,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "underline",
     },
 
-    "& a.disabled": {
+    "& a[disabled]": {
       color: theme.palette.text.disabled,
       textDecoration: "none",
       cursor: "default",
@@ -107,7 +106,7 @@ const ArtitleBreadcrumb = ({date, title, slug}) => {
       <Link to={dayPath} >
         {momentDate.format("DD")}
       </Link>
-      <Link to={`/article${slug}`} className="disabled" disabled>
+      <Link to={`/article${slug}`} disabled>
         {title}
       </Link>
     </Breadcrumbs>
