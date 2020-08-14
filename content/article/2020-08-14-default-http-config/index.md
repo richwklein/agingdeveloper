@@ -75,5 +75,5 @@ return builder.build()
 
 #### Other Best Practices
 A few other best practices that helps keep your service resilient include: 
-using circuit-breaks and retry to help prevent cascading failures. Also using 
+using circuit breakers and retry to help prevent cascading failures. Also using 
 executor services for bulk heading and fault isolation.
