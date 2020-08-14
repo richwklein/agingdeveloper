@@ -53,9 +53,10 @@ return builder.build()
 
 #### Request Timeout
 A lot of clients by default use the timeout set by the OS. This is true
-for clients in both Java and Go. This is another possible way to cause 
-cascading failures. Again, the best advice is to configure the client with 
-something other than the default.
+for clients in both [Java](https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/client/config/RequestConfig.html#getConnectTimeout()) 
+and Go. This is another possible way to cause cascading failures. Again, 
+the best advice is to configure the client with something other than the 
+default.
 
 ```java
 RequestConfig requestConfig = RequestConfig.custom()
@@ -74,6 +75,6 @@ return builder.build()
 ```
 
 #### Other Best Practices
-A few other best practices that helps keep your service resilient include: 
+A few other best practices that help keep your service resilient include: 
 using circuit breakers and retry to help prevent cascading failures. Also using 
 executor services for bulk heading and fault isolation.
