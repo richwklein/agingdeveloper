@@ -36,14 +36,17 @@ Because of this popular http clients try and reuse the same connection if they
 are going to the same route. The [OkHttp](https://square.github.io/okhttp/) 
 library keeps only a single connection. The Apache 
 [HttpClient](https://hc.apache.org/httpcomponents-client-ga/index.html) defaults 
-to two. For Http/2 this is fine because there can be multiple requests over a
-single connection at a time. 
+to two. The default Go [http package](https://golang.org/pkg/net/http/) also 
+defaults to two. 
 
-Http/1.1 can only have a single request over the connection at a time. This 
-can creates a Head-of-line **(HOL)** blocking issue if you have to make multiple
-concurrent requests to the same dependency. The result of which may cause your
-service to back up and cause a cascading failure. A way to mitigated this is 
-by increasing the maximum connections per route.
+This is fine when you are communicating over HTTP/2 because that protocol 
+allows there to be multiple requests over a single connection at a time. 
+
+Http/1.1 however, can only have a single request over the connection at a time. 
+This can create a Head-of-line **(HOL)** blocking issue if you have to make 
+multiple concurrent requests to the same dependency. The result of which may 
+cause your services requests to back up and cause a cascading failure. The most 
+basic way to mitigated this is by increasing the maximum connections per route.
 
 ```java
 HttpClientBuilder builder = HttpClients.custom()
@@ -55,8 +58,9 @@ return builder.build()
 A lot of clients by default use the timeout set by the OS. This is true
 for clients in both [Java](https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/client/config/RequestConfig.html#getConnectTimeout()) 
 and Go. This is another possible way to cause cascading failures. The best 
-advice is to configure the client with something other than the default. I
-would do this globally, but you can also set these on a per request basis.
+advice is to configure your client with something other than the default. The
+example below dies this globally for the client, but you can also set these on 
+a per request basis.
 
 ```java
 RequestConfig requestConfig = RequestConfig.custom()
@@ -76,7 +80,7 @@ return builder.build()
 
 #### Other Best Practices
 By following the practices above, you can help keep your service healthy. A 
-few other best practices that I'm not going to go into, but can help keep your 
+few other best practices that I'm not going to go into, but can keep your 
 service resilient include: using circuit breakers to prevent cascading failures,
 using retry designs for those temporary intermittent failures, and using 
 thread pools or executor services for bulk heading and fault isolation.
