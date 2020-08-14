@@ -11,9 +11,9 @@ date: "2020-08-14"
 An alternatively headline might be: *know how your service communicates with 
 it's dependencies*. Ideally, a microservice could work in isolation without
 having to communicate with any other service or dependency. This is not likely
-the case and HTTP is most common way that I've seen these services 
+the case and HTTP is the most common way that I've seen these services 
 communicating. I've witnessed several problems that have been caused by 
-default configurations being used by these HTTP clients. In this article I 
+default configurations being used by these clients. In this article I 
 will explore a couple of these issues and how you can remediate them.
 
 #### Java DNS Caching
@@ -36,16 +36,16 @@ Because of this popular http clients try and reuse the same connection if they
 are going to the same route. The [OkHttp](https://square.github.io/okhttp/) 
 library keeps only a single connection. The Apache 
 [HttpClient](https://hc.apache.org/httpcomponents-client-ga/index.html) defaults 
-to two. The default Go [http package](https://golang.org/pkg/net/http/) also 
-defaults to two. 
+to two. The Go [http package](https://golang.org/pkg/net/http/) also defaults 
+to two. 
 
 This is fine when you are communicating over HTTP/2 because that protocol 
-allows there to be multiple requests over a single connection at a time. 
+allows for multiple concurrent requests over a single connection. 
 
 Http/1.1 however, can only have a single request over the connection at a time. 
 This can create a Head-of-line **(HOL)** blocking issue if you have to make 
 multiple concurrent requests to the same dependency. The result of which may 
-cause your services requests to back up and cause a cascading failure. The most 
+cause your service's requests to back up and cause a cascading failure. The most 
 basic way to mitigated this is by increasing the maximum connections per route.
 
 ```java
@@ -56,11 +56,10 @@ return builder.build()
 
 #### Request Timeout
 A lot of clients by default use the timeout set by the OS. This is true
-for clients in both [Java](https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/client/config/RequestConfig.html#getConnectTimeout()) 
-and Go. This is another possible way to cause cascading failures. The best 
-advice is to configure your client with something other than the default. The
-example below dies this globally for the client, but you can also set these on 
-a per request basis.
+for clients in both Java and Go. This is another possible way to cause 
+cascading failures. The best advice is to configure your client with something other 
+than the default. The example below does this globally for the client, but you can 
+also set these on a per request basis.
 
 ```java
 RequestConfig requestConfig = RequestConfig.custom()
