@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
   header: {
     backgroundColor: theme.palette.primary.dark,
     color: theme.palette.primary.contrastText,
-    padding: theme.spacing(1),
   },
   title: {
     flexGrow: 1,
