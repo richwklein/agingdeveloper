@@ -2,81 +2,28 @@
 import React from "react";
 import {Helmet} from "react-helmet";
 import {graphql} from "gatsby";
-import {
-  GridList,
-  GridListTile,
-  Typography,
-} from "@material-ui/core";
-import {makeStyles} from "@material-ui/styles";
+import {Folder} from "@material-ui/icons";
+import ArticleGridList from "../components/ArticleGridList";
+import IconBanner from "../components/IconBanner";
 import Layout from "../components/Layout";
-import ArticleCard from "../components/ArticleCard";
 
 const capitalize = (category) => {
   return category.charAt(0).toUpperCase() + category.slice(1);
-};
-
-const useStyles = makeStyles((theme) => ({
-  titleBox: {
-    marginBottom: theme.spacing(2),
-  },
-  title: {
-    fontFamily:
-      "Work Sans, -apple-system, BlinkMacSystemFont, Roboto, sans-serif",
-  },
-}));
-
-const CategoryTitle = ({category}) => {
-  const classes = useStyles();
-
-  return (
-    <header className={classes.titleBox}>
-      <Typography variant="h4" className={classes.title}>
-        {capitalize(category)}
-      </Typography>
-    </header>
-  );
 };
 
 const CategoryHelmet = ({category, siteTitle}) => {
   return (<Helmet title={`${capitalize(category)} | ${siteTitle}`} />);
 };
 
-const ArticleGridList = ({articles}) => {
-  return (
-    <GridList cellHeight={570} cols={2} spacing={24}>
-      {articles.map(
-          ({
-            node: {
-              excerpt,
-              frontmatter: {image, title, date, slug},
-            },
-          }) => {
-            return (
-              <GridListTile cols={1} key={slug}>
-                <ArticleCard
-                  image={image}
-                  title={title}
-                  date={date}
-                  excerpt={excerpt}
-                  slug={slug}
-                />
-              </GridListTile>
-            );
-          },
-      )}
-    </GridList>
-  );
-};
-
 const CategoryTemplate = ({data, pageContext}) => {
   const category = pageContext.category;
+  const banner = <IconBanner icon={<Folder />} title={capitalize(category)} />;
 
   return (
-    <Layout showLogoImage={true}>
+    <Layout showLogoImage={true} banner={banner}>
       <CategoryHelmet
         category={category}
         siteTitle={data.site.siteMetadata.title} />
-      <CategoryTitle category={category} />
       <ArticleGridList articles={data.allMdx.edges} />
     </Layout>
   );

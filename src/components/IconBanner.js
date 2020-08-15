@@ -31,7 +31,7 @@ const IconBanner = ({icon, title}) => {
         <Avatar className={classes.avatar} >
           {icon}
         </Avatar>
-        <Box width="100%">
+        <Box width="100%" component="header">
           <Typography variant="h4" className={classes.bannerText}>
             {title}
           </Typography>

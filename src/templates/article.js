@@ -7,7 +7,6 @@ import {
   Box,
   Button,
   Chip,
-  Typography,
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
 import {
@@ -18,6 +17,7 @@ import {
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import kebabCase from "lodash/kebabCase";
+import TitleBanner from "../components/TitleBanner";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -36,13 +36,6 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1264,
     maxHeight: 711,
   },
-  titleBox: {
-    marginBottom: theme.spacing(2),
-  },
-  title: {
-    fontFamily:
-      "Work Sans, -apple-system, BlinkMacSystemFont, Roboto, sans-serif",
-  },
   chip: {
     "padding": theme.spacing(0.5),
     "marginRight": theme.spacing(1),
@@ -55,18 +48,6 @@ const useStyles = makeStyles((theme) => ({
     borderBottomColor: theme.palette.secondary.main,
   },
 }));
-
-const ArticleTitle = ({title}) => {
-  const classes = useStyles();
-
-  return (
-    <header className={classes.titleBox}>
-      <Typography variant="h4" className={classes.title}>
-        {title}
-      </Typography>
-    </header>
-  );
-};
 
 const ArticleTags = ({category, tags}) => {
   const classes = useStyles();
@@ -112,11 +93,13 @@ const ArticleTemplate = ({data, pageContext}) => {
   const classes = useStyles();
 
   const {
-    frontmatter: {image, title, date, category, tags, slug},
+    frontmatter: {image, title, category, tags, slug},
     body,
   } = data.mdx;
   const {title: siteName, siteUrl} = data.site.siteMetadata;
   const {previousPath, nextPath} = pageContext;
+  const banner = <TitleBanner title={title} />;
+
   const disqusConfig = {
     url: `${siteUrl}/${slug}`,
     identifier: slug,
@@ -124,7 +107,7 @@ const ArticleTemplate = ({data, pageContext}) => {
   };
 
   return (
-    <Layout showLogoImage={true}>
+    <Layout showLogoImage={true} banner={banner} >
       <SEO
         title={title}
         description={title}
@@ -134,7 +117,6 @@ const ArticleTemplate = ({data, pageContext}) => {
         keywords={tags}
         isArticle={true} />
       <article className={classes.article}>
-        <ArticleTitle title={title} disqusConfig={disqusConfig} />
         <Img
           fluid={image.childImageSharp.fluid}
           style={{borderRadius: 6}}
@@ -186,7 +168,6 @@ export const pageQuery = graphql`
       frontmatter {
         slug
         title
-        date
         tags
         category
         image {
