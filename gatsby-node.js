@@ -64,7 +64,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
 
 
     return createPage({
-      path: `${articlePathPrefix}${currentPath}`,
+      path: `${articlePathPrefix}/${currentPath}`,
       component: articleTemplate,
       context: {
         currentPath,

@@ -1,130 +1,29 @@
 
 import React from "react";
 import {Helmet} from "react-helmet";
-import {graphql, Link} from "gatsby";
-import {
-  Breadcrumbs,
-  GridList,
-  GridListTile,
-  Typography,
-} from "@material-ui/core";
-import {makeStyles} from "@material-ui/styles";
+import {graphql} from "gatsby";
+import {Folder} from "@material-ui/icons";
+import ArticleGridList from "../components/ArticleGridList";
+import IconBanner from "../components/IconBanner";
 import Layout from "../components/Layout";
-import kebabCase from "lodash/kebabCase";
-import ArticleCard from "../components/ArticleCard";
 
 const capitalize = (category) => {
   return category.charAt(0).toUpperCase() + category.slice(1);
-};
-
-const useStyles = makeStyles((theme) => ({
-  breadcrumbs: {
-    "marginTop": -theme.spacing(1),
-    "marginBottom": theme.spacing(2),
-    "color": theme.palette.text.secondary,
-    "fontFamily": theme.typography.caption.fontFamily,
-    "fontSize": theme.typography.caption.fontSize,
-    "fontWeight": theme.typography.caption.fontWeight,
-    "lineHeight": theme.typography.caption.lineHeight,
-
-    "& a": {
-      color: "inherit",
-      textDecoration: "none",
-    },
-
-    "& a:hover": {
-      textDecoration: "underline",
-    },
-
-    "& a[disabled]": {
-      color: theme.palette.text.disabled,
-      textDecoration: "none",
-      cursor: "default",
-    },
-  },
-
-  titleBox: {
-    marginBottom: theme.spacing(2),
-  },
-  title: {
-    fontFamily:
-      "Work Sans, -apple-system, BlinkMacSystemFont, Roboto, sans-serif",
-  },
-}));
-
-const CategoryTitle = ({category}) => {
-  const classes = useStyles();
-
-  return (
-    <header className={classes.titleBox}>
-      <Typography variant="h4" className={classes.title}>
-        {capitalize(category)}
-      </Typography>
-    </header>
-  );
 };
 
 const CategoryHelmet = ({category, siteTitle}) => {
   return (<Helmet title={`${capitalize(category)} | ${siteTitle}`} />);
 };
 
-const CategoryBreadcrumb = ({category}) => {
-  const classes = useStyles();
-
-  return (
-    <Breadcrumbs separator="/" aria-label="breadcrumb"
-      className={classes.breadcrumbs} >
-      <Link to="/">
-      Home
-      </Link>
-      <Link to="/category">
-      Categories
-      </Link>
-      <Link
-        to={`/category/${kebabCase(category)}`} disabled>
-        {capitalize(category)}
-      </Link>
-    </Breadcrumbs>
-  );
-};
-
-const ArticleGridList = ({articles}) => {
-  return (
-    <GridList cellHeight={570} cols={2} spacing={24}>
-      {articles.map(
-          ({
-            node: {
-              excerpt,
-              frontmatter: {image, title, date, slug},
-            },
-          }) => {
-            return (
-              <GridListTile cols={1} key={slug}>
-                <ArticleCard
-                  image={image}
-                  title={title}
-                  date={date}
-                  excerpt={excerpt}
-                  slug={slug}
-                />
-              </GridListTile>
-            );
-          },
-      )}
-    </GridList>
-  );
-};
-
 const CategoryTemplate = ({data, pageContext}) => {
   const category = pageContext.category;
+  const banner = <IconBanner icon={<Folder />} title={capitalize(category)} />;
 
   return (
-    <Layout showLogoImage={true}>
+    <Layout showLogoImage={true} banner={banner}>
       <CategoryHelmet
         category={category}
         siteTitle={data.site.siteMetadata.title} />
-      <CategoryBreadcrumb category={category} />
-      <CategoryTitle category={category} />
       <ArticleGridList articles={data.allMdx.edges} />
     </Layout>
   );

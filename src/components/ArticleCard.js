@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
 
 const ArticleCard = ({image, title, date, excerpt, slug}) => {
   const classes = useStyles();
-  const url = "/article" + slug;
+  const url = "/article/" + slug;
 
   return (
     <Card variant="outlined" className={classes.card}>

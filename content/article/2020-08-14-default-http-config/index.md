@@ -1,5 +1,5 @@
 ---
-slug: "/2020/08/14/default-http-config"
+slug: "2020-08-14-default-http-config"
 title: "Default HTTP Config Considered Dangerous"
 author: richwklein
 image: israel-palacio-ImcUkZ72oUs-unsplash.jpg

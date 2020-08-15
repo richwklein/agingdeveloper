@@ -1,48 +1,17 @@
 import React from "react";
 import {graphql, Link} from "gatsby";
-import {Box, Button, Grid} from "@material-ui/core";
+import {Box, Button} from "@material-ui/core";
 import {List as ListIcon} from "@material-ui/icons";
-
-import ArticleCard from "../components/ArticleCard";
+import ArticleGridList from "../components/ArticleGridList";
 import Banner from "../components/Banner";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 
-const ArticleGrid = ({articles}) => {
-  return (
-    <Grid container spacing={3}>
-      {articles.map(
-          ({
-            node: {
-              excerpt,
-              frontmatter: {image, title, date, slug},
-            },
-          }) => {
-            return (
-              <Grid item xs={12} sm={6} key={slug}>
-                <ArticleCard
-                  image={image}
-                  title={title}
-                  date={date}
-                  excerpt={excerpt}
-                  slug={slug}
-                />
-              </Grid>
-            );
-          },
-      )}
-    </Grid>
-  );
-};
-
-const indexBanner = ({avatar, title, subtitle}) => {
-  return <Banner avatar={avatar} title={title} subtitle={subtitle} />;
-};
 
 const IndexPage = ({data}) => {
   const avatar = data.file.childImageSharp.fluid;
   const {title, description: subtitle, siteUrl} = data.site.siteMetadata;
-  const banner = indexBanner({avatar, title, subtitle});
+  const banner = <Banner avatar={avatar} title={title} subtitle={subtitle} />;
 
   return (
     <Layout showLogoImage={false} banner={banner}>
@@ -52,7 +21,7 @@ const IndexPage = ({data}) => {
         image={`${siteUrl}${avatar.src}`}
         url={`${siteUrl}/`}
         siteName={title} />
-      <ArticleGrid articles={data.allMdx.edges} />
+      <ArticleGridList articles={data.allMdx.edges} />
       <Box
         display="flex"
         alignItems="center"
