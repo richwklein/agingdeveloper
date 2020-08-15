@@ -1,16 +1,14 @@
 
 import React from "react";
 import {Helmet} from "react-helmet";
-import {graphql, Link} from "gatsby";
+import {graphql} from "gatsby";
 import {
-  Breadcrumbs,
   GridList,
   GridListTile,
   Typography,
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
 import Layout from "../components/Layout";
-import kebabCase from "lodash/kebabCase";
 import ArticleCard from "../components/ArticleCard";
 
 const capitalize = (tag) => {
@@ -18,31 +16,6 @@ const capitalize = (tag) => {
 };
 
 const useStyles = makeStyles((theme) => ({
-  breadcrumbs: {
-    "marginTop": -theme.spacing(1),
-    "marginBottom": theme.spacing(2),
-    "color": theme.palette.text.secondary,
-    "fontFamily": theme.typography.caption.fontFamily,
-    "fontSize": theme.typography.caption.fontSize,
-    "fontWeight": theme.typography.caption.fontWeight,
-    "lineHeight": theme.typography.caption.lineHeight,
-
-    "& a": {
-      color: "inherit",
-      textDecoration: "none",
-    },
-
-    "& a:hover": {
-      textDecoration: "underline",
-    },
-
-    "& a[disabled]": {
-      color: theme.palette.text.disabled,
-      textDecoration: "none",
-      cursor: "default",
-    },
-  },
-
   titleBox: {
     marginBottom: theme.spacing(2),
   },
@@ -66,25 +39,6 @@ const TagTitle = ({tag}) => {
 
 const TagHelmet = ({tag, siteTitle}) => {
   return (<Helmet title={`${capitalize(tag)} | ${siteTitle}`} />);
-};
-
-const TagBreadcrumb = ({tag}) => {
-  const classes = useStyles();
-
-  return (
-    <Breadcrumbs separator="/" aria-label="breadcrumb"
-      className={classes.breadcrumbs} >
-      <Link to="/">
-      Home
-      </Link>
-      <Link to="/tag">
-      Tags
-      </Link>
-      <Link to={`/tag/${kebabCase(tag)}`} disabled>
-        {capitalize(tag)}
-      </Link>
-    </Breadcrumbs>
-  );
 };
 
 const ArticleGridList = ({articles}) => {
@@ -120,7 +74,6 @@ const TagTemplate = ({data, pageContext}) => {
   return (
     <Layout showLogoImage={true}>
       <TagHelmet tag={tag} siteTitle={data.site.siteMetadata.title} />
-      <TagBreadcrumb tag={tag} />
       <TagTitle tag={tag} />
       <ArticleGridList articles={data.allMdx.edges} />
     </Layout>

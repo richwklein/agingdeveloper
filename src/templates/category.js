@@ -1,16 +1,14 @@
 
 import React from "react";
 import {Helmet} from "react-helmet";
-import {graphql, Link} from "gatsby";
+import {graphql} from "gatsby";
 import {
-  Breadcrumbs,
   GridList,
   GridListTile,
   Typography,
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
 import Layout from "../components/Layout";
-import kebabCase from "lodash/kebabCase";
 import ArticleCard from "../components/ArticleCard";
 
 const capitalize = (category) => {
@@ -18,31 +16,6 @@ const capitalize = (category) => {
 };
 
 const useStyles = makeStyles((theme) => ({
-  breadcrumbs: {
-    "marginTop": -theme.spacing(1),
-    "marginBottom": theme.spacing(2),
-    "color": theme.palette.text.secondary,
-    "fontFamily": theme.typography.caption.fontFamily,
-    "fontSize": theme.typography.caption.fontSize,
-    "fontWeight": theme.typography.caption.fontWeight,
-    "lineHeight": theme.typography.caption.lineHeight,
-
-    "& a": {
-      color: "inherit",
-      textDecoration: "none",
-    },
-
-    "& a:hover": {
-      textDecoration: "underline",
-    },
-
-    "& a[disabled]": {
-      color: theme.palette.text.disabled,
-      textDecoration: "none",
-      cursor: "default",
-    },
-  },
-
   titleBox: {
     marginBottom: theme.spacing(2),
   },
@@ -66,26 +39,6 @@ const CategoryTitle = ({category}) => {
 
 const CategoryHelmet = ({category, siteTitle}) => {
   return (<Helmet title={`${capitalize(category)} | ${siteTitle}`} />);
-};
-
-const CategoryBreadcrumb = ({category}) => {
-  const classes = useStyles();
-
-  return (
-    <Breadcrumbs separator="/" aria-label="breadcrumb"
-      className={classes.breadcrumbs} >
-      <Link to="/">
-      Home
-      </Link>
-      <Link to="/category">
-      Categories
-      </Link>
-      <Link
-        to={`/category/${kebabCase(category)}`} disabled>
-        {capitalize(category)}
-      </Link>
-    </Breadcrumbs>
-  );
 };
 
 const ArticleGridList = ({articles}) => {
@@ -123,7 +76,6 @@ const CategoryTemplate = ({data, pageContext}) => {
       <CategoryHelmet
         category={category}
         siteTitle={data.site.siteMetadata.title} />
-      <CategoryBreadcrumb category={category} />
       <CategoryTitle category={category} />
       <ArticleGridList articles={data.allMdx.edges} />
     </Layout>

@@ -1,5 +1,5 @@
 ---
-slug: "/2020/08/08/custom-domain"
+slug: "2020-08-08-custom-domain"
 title: "Setting up a Custom Domain With Netlify"
 author: richwklein
 image: taylor-vick-M5tzZtFCOfs-unsplash.jpg
