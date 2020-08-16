@@ -3,7 +3,7 @@ import React from "react";
 import {Helmet} from "react-helmet";
 import {graphql} from "gatsby";
 import {Folder} from "@material-ui/icons";
-import ArticleGridList from "../components/ArticleGridList";
+import ArticleGrid from "../components/ArticleGrid";
 import IconBanner from "../components/IconBanner";
 import Layout from "../components/Layout";
 
@@ -24,7 +24,7 @@ const CategoryTemplate = ({data, pageContext}) => {
       <CategoryHelmet
         category={category}
         siteTitle={data.site.siteMetadata.title} />
-      <ArticleGridList articles={data.allMdx.edges} />
+      <ArticleGrid articles={data.allMdx.edges} />
     </Layout>
   );
 };

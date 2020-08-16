@@ -1,14 +1,13 @@
 import React from "react";
 
 import {
-  GridList,
-  GridListTile,
+  Grid,
 } from "@material-ui/core";
-import ArticleCard from "../components/ArticleCard";
+import ArticleCard from "./ArticleCard";
 
-const ArticleGridList = ({articles}) => {
+const ArticleGrid = ({articles}) => {
   return (
-    <GridList cellHeight={570} cols={2} spacing={24}>
+    <Grid container spacing={3}>
       {articles.map(
           ({
             node: {
@@ -17,7 +16,7 @@ const ArticleGridList = ({articles}) => {
             },
           }) => {
             return (
-              <GridListTile cols={1} key={slug}>
+              <Grid item sm={12} md={6} key={slug}>
                 <ArticleCard
                   image={image}
                   title={title}
@@ -25,12 +24,12 @@ const ArticleGridList = ({articles}) => {
                   excerpt={excerpt}
                   slug={slug}
                 />
-              </GridListTile>
+              </Grid>
             );
           },
       )}
-    </GridList>
+    </Grid>
   );
 };
 
-export default ArticleGridList;
+export default ArticleGrid;
