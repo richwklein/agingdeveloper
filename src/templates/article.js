@@ -18,6 +18,7 @@ import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import kebabCase from "lodash/kebabCase";
 import TitleBanner from "../components/TitleBanner";
+import NewBadge from "../components/NewBadge";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -93,7 +94,7 @@ const ArticleTemplate = ({data, pageContext}) => {
   const classes = useStyles();
 
   const {
-    frontmatter: {image, title, category, tags, slug},
+    frontmatter: {image, title, date, category, tags, slug},
     body,
   } = data.mdx;
   const {title: siteName, siteUrl} = data.site.siteMetadata;
@@ -116,15 +117,17 @@ const ArticleTemplate = ({data, pageContext}) => {
         siteName={siteName}
         keywords={tags}
         isArticle={true} />
-      <article className={classes.article}>
-        <Img
-          fluid={image.childImageSharp.fluid}
-          style={{borderRadius: 6}}
-          className={classes.articleImage}
-        />
-        <ArticleTags category={category} tags={tags} />
-        <MDXRenderer>{body}</MDXRenderer>
-      </article>
+      <NewBadge fromDate={date}>
+        <article className={classes.article}>
+          <Img
+            fluid={image.childImageSharp.fluid}
+            style={{borderRadius: 6}}
+            className={classes.articleImage}
+          />
+          <ArticleTags category={category} tags={tags} />
+          <MDXRenderer>{body}</MDXRenderer>
+        </article>
+      </NewBadge>
       <aside>
         <Box display="flex" className={classes.controlBox}>
           <Box flexGrow={1}>
@@ -151,6 +154,7 @@ const ArticleTemplate = ({data, pageContext}) => {
         </Box>
         <Disqus config={disqusConfig} />
       </aside>
+
     </Layout>
   );
 };
@@ -168,6 +172,7 @@ export const pageQuery = graphql`
       frontmatter {
         slug
         title
+        date
         tags
         category
         image {
