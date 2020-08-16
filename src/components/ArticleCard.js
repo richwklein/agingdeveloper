@@ -13,6 +13,8 @@ import {
 import {makeStyles} from "@material-ui/styles";
 
 import {Launch} from "@material-ui/icons";
+import NewBadge from "./NewBadge";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -57,29 +59,32 @@ const ArticleCard = ({image, title, date, excerpt, slug}) => {
   const url = "/article/" + slug;
 
   return (
-    <Card classes={{root: classes.card}} variant="outlined">
-      <CardMedia>
+    <NewBadge fromDate={date}>
+      <Card classes={{root: classes.card}} variant="outlined">
+        <CardMedia>
+          <Link to={url}>
+            <Img
+              fluid={image.childImageSharp.fluid}
+              className={classes.cardImage}
+            />
+          </Link>
+        </CardMedia>
         <Link to={url}>
-          <Img
-            fluid={image.childImageSharp.fluid}
-            className={classes.cardImage}
-          />
+          <CardHeader title={title}
+            subheader={moment(date).format("MMMM Do, YYYY")} />
         </Link>
-      </CardMedia>
-      <Link to={url}>
-        <CardHeader title={title} subheader={date} />
-      </Link>
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {excerpt}
-        </Typography>
-      </CardContent>
-      <CardActions classes={{root: classes.cardActions}} >
-        <IconButton aria-label="read" component={Link} to={url}>
-          <Launch />
-        </IconButton>
-      </CardActions>
-    </Card>
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {excerpt}
+          </Typography>
+        </CardContent>
+        <CardActions classes={{root: classes.cardActions}} >
+          <IconButton aria-label="read" component={Link} to={url}>
+            <Launch />
+          </IconButton>
+        </CardActions>
+      </Card>
+    </NewBadge>
   );
 };
 
