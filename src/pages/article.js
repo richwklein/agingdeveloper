@@ -1,48 +1,37 @@
-
 import React from "react";
-import {Helmet} from "react-helmet";
 import {graphql} from "gatsby";
-import {LocalOffer} from "@material-ui/icons";
+import {Helmet} from "react-helmet";
+import {List as ListIcon} from "@material-ui/icons";
 import ArticleGrid from "../components/ArticleGrid";
 import IconBanner from "../components/IconBanner";
 import Layout from "../components/Layout";
 
-const capitalize = (tag) => {
-  return tag.charAt(0).toUpperCase() + tag.slice(1);
+const ArticleHelmet = ({siteTitle}) => {
+  return (<Helmet title={`Articles | ${siteTitle}`} />);
 };
 
-const TagHelmet = ({tag, siteTitle}) => {
-  return (<Helmet title={`${capitalize(tag)} | ${siteTitle}`} />);
-};
-
-
-const TagTemplate = ({data, pageContext}) => {
-  const tag = pageContext.tag;
-  const banner = <IconBanner icon={<LocalOffer />} title={capitalize(tag)} />;
+const ArticlePage = ({data}) => {
+  const banner = <IconBanner icon={<ListIcon />} title="Articles" />;
 
   return (
     <Layout showLogoImage={true} banner={banner}>
-      <TagHelmet tag={tag} siteTitle={data.site.siteMetadata.title} />
+      <ArticleHelmet siteTitle={data.site.siteMetadata.title} />
       <ArticleGrid articles={data.allMdx.edges} />
+
     </Layout>
   );
 };
 
-export default TagTemplate;
-
 export const pageQuery = graphql`
-  query($tag: String) {
+  query {
     site {
       siteMetadata {
-        siteUrl
         title
       }
     }
     allMdx(
       sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
-      totalCount
       edges {
         node {
           excerpt
@@ -65,3 +54,5 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export default ArticlePage;

@@ -2,7 +2,7 @@ import React from "react";
 import {graphql, Link} from "gatsby";
 import {Box, Button} from "@material-ui/core";
 import {List as ListIcon} from "@material-ui/icons";
-import ArticleGridList from "../components/ArticleGridList";
+import ArticleGrid from "../components/ArticleGrid";
 import Banner from "../components/Banner";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
@@ -21,7 +21,7 @@ const IndexPage = ({data}) => {
         image={`${siteUrl}${avatar.src}`}
         url={`${siteUrl}/`}
         siteName={title} />
-      <ArticleGridList articles={data.allMdx.edges} />
+      <ArticleGrid articles={data.allMdx.edges} />
       <Box
         display="flex"
         alignItems="center"
