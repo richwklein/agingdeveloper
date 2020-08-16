@@ -32,9 +32,11 @@
     "gatsby-plugin-sharp": "^2.6.17",
     "gatsby-plugin-sitemap": "^2.4.10",
     "gatsby-remark-images": "^3.3.21",
+    "gatsby-remark-prismjs": "^3.5.10",
     "gatsby-source-filesystem": "^2.3.18",
     "gatsby-transformer-sharp": "^2.5.10",
     "has-scroll-hook": "^1.0.3",
+    "prismjs": "^1.21.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0"
