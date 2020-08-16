@@ -53,6 +53,14 @@ module.exports = {
               maxHeight: 720,
             },
           },
+          {
+            resolve: "gatsby-remark-prismjs",
+            options: {
+              classPrefix: "language-",
+              showLineNumbers: false,
+              noInlineHighlight: false,
+            },
+          },
         ],
       },
     },
