@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   bannerText: {
-    marginLeft: 16, // aligns with content padding
+    marginLeft: theme.spacing(3), // aligns with content padding
   },
 }));
 

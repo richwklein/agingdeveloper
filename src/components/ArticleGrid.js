@@ -7,7 +7,7 @@ import ArticleCard from "./ArticleCard";
 
 const ArticleGrid = ({articles}) => {
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={2}>
       {articles.map(
           ({
             node: {

@@ -18,11 +18,11 @@ import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    "maxWidth": 611,
-    "height": 564,
+    "maxWidth": 608,
+    "height": 565,
     [theme.breakpoints.down("sm")]: {
-      maxWidth: 881,
-      height: 734,
+      maxWidth: 880,
+      height: "auto",
     },
 
     "& a": {
@@ -35,21 +35,12 @@ const useStyles = makeStyles((theme) => ({
   },
 
   cardImage: {
-    maxWidth: 611,
-    height: 343,
+    maxWidth: 608,
+    maxHeight: 342,
     [theme.breakpoints.down("sm")]: {
-      maxWidth: 881,
-      height: 518,
+      maxWidth: 880,
+      maxHeight: 495,
     },
-  },
-
-  cardActions: {
-    display: "flex",
-    padding: theme.spacing(1),
-    alignItems: "center",
-    position: "sticky",
-    bottom: 0,
-    left: 0,
   },
 
 }));
@@ -78,7 +69,7 @@ const ArticleCard = ({image, title, date, excerpt, slug}) => {
             {excerpt}
           </Typography>
         </CardContent>
-        <CardActions classes={{root: classes.cardActions}} >
+        <CardActions>
           <IconButton aria-label="read" component={Link} to={url}>
             <Launch />
           </IconButton>

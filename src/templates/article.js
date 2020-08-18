@@ -34,8 +34,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   articleImage: {
-    maxWidth: 1264,
-    maxHeight: 711,
+    maxWidth: 1232,
+    maxHeight: 693,
+    borderRadius: 6,
   },
   chip: {
     "padding": theme.spacing(0.5),
@@ -121,7 +122,6 @@ const ArticleTemplate = ({data, pageContext}) => {
         <article className={classes.article}>
           <Img
             fluid={image.childImageSharp.fluid}
-            style={{borderRadius: 6}}
             className={classes.articleImage}
           />
           <ArticleTags category={category} tags={tags} />
@@ -177,7 +177,7 @@ export const pageQuery = graphql`
         category
         image {
           childImageSharp {
-            fluid(maxWidth: 1264, maxHeight: 711, cropFocus: CENTER) {
+            fluid(maxWidth: 1232, maxHeight: 693, cropFocus: CENTER) {
               ...GatsbyImageSharpFluid
             }
           }
