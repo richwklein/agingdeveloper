@@ -1,11 +1,18 @@
 ---
-slug: "2020-08-14-default-http-config"
-title: "Default HTTP Config Considered Dangerous"
+slug: 2020-08-14-default-http-config
+title: Default HTTP Config Considered Dangerous
 author: richwklein
 image: israel-palacio-ImcUkZ72oUs-unsplash.jpg
-tags: [dns, http, microservice, dependency, config, defaults, java]
+tags:
+  - dns
+  - http
+  - microservice
+  - dependency
+  - config
+  - defaults
+  - java
 category: microservices
-date: "2020-08-14"
+date: '2020-08-14'
 ---
 
 An alternatively headline might be: *know how your service communicates with 

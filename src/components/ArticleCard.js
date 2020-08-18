@@ -18,7 +18,7 @@ import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    "maxWidth": 608,
+    "maxWidth": 598,
     "height": 565,
     [theme.breakpoints.down("sm")]: {
       maxWidth: 880,
@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   cardImage: {
-    maxWidth: 608,
-    maxHeight: 342,
+    maxWidth: 598,
+    maxHeight: 336,
     [theme.breakpoints.down("sm")]: {
       maxWidth: 880,
       maxHeight: 495,

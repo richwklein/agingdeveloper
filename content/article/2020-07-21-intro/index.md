@@ -1,11 +1,17 @@
 ---
-slug: "2020-07-21-intro"
-title: "Introduction and Return"
+slug: 2020-07-21-intro
+title: Introduction and Return
 author: richwklein
 image: fons-heijnsbroek-v4c2gKPjPMs-unsplash.jpg
-tags: [intro, build, engage, emerge, participation, public]
+tags:
+  - intro
+  - build
+  - engage
+  - emerge
+  - participation
+  - public
 category: site
-date: "2020-07-21"
+date: '2020-07-21'
 ---
 
 Throughout my 20s I was an active participant online. I followed and worked on 
