@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     width: 34,
     height: 34,
-    marginLeft: 16, // aligns icon with content padding
+    marginLeft: theme.spacing(3), // aligns icon with content padding
     marginRight: theme.spacing(1),
     borderWidth: 2,
     color: theme.palette.primary.main,

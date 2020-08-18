@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     width: 128,
     height: 128,
-    marginLeft: 16, // aligns icon with content padding
+    marginLeft: theme.spacing(3), // aligns icon with content padding
     marginRight: theme.spacing(1),
     borderWidth: 2,
     borderColor: theme.palette.secondary.light,
@@ -28,7 +28,7 @@ const Banner = ({avatar, title, subtitle}) => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.banner}>
+    <Box className={classes.banner} component="header">
       <InnerBox display="flex" alignItems="center">
         <Avatar
           component={Img}
@@ -36,7 +36,7 @@ const Banner = ({avatar, title, subtitle}) => {
           loading="eager"
           className={classes.avatar}
         />
-        <Box width="100%" component="header">
+        <Box width="100%">
           <Typography variant="h4" className={classes.bannerText}>
             {title}
           </Typography>
