@@ -1,11 +1,15 @@
 ---
-slug: "2020-08-08-custom-domain"
-title: "Setting up a Custom Domain With Netlify"
+slug: 2020-08-08-custom-domain
+title: Setting up a Custom Domain With Netlify
 author: richwklein
 image: taylor-vick-M5tzZtFCOfs-unsplash.jpg
-tags: [dns, domain, netlify, bluehost]
+tags:
+  - dns
+  - domain
+  - netlify
+  - bluehost
 category: site
-date: "2020-08-08"
+date: '2020-08-08'
 ---
 
 [Netlify](https://www.netlify.com) is a great service. It gets my workflow and I can't heap

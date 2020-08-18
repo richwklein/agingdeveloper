@@ -1,11 +1,20 @@
 ---
-slug: "2020-07-26-false-start"
-title: "Workflow, Tech Stack, and False Starts"
+slug: 2020-07-26-false-start
+title: 'Workflow, Tech Stack, and False Starts'
 author: richwklein
 image: braden-collum-9HI8UJMSdZA-unsplash.jpg
-tags: [tech, gatsby, gatsbyjs, react, material-ui, bluehost, netlify, misstep, false start]
+tags:
+  - tech
+  - gatsby
+  - gatsbyjs
+  - react
+  - material-ui
+  - bluehost
+  - netlify
+  - misstep
+  - false start
 category: site
-date: "2020-07-26"
+date: '2020-07-26'
 ---
 
 I only had two hard requirements when I started this site up. At work we have an 
