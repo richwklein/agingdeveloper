@@ -1,95 +1,41 @@
 import React from "react";
-import { graphql } from "gatsby";
-
+import {graphql, Link} from "gatsby";
+import {Box, Button} from "@material-ui/core";
+import {List as ListIcon} from "@material-ui/icons";
+import ArticleGrid from "../components/ArticleGrid";
+import Banner from "../components/Banner";
 import Layout from "../components/Layout";
-import { Avatar, Box, Grid, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import Img from "gatsby-image";
-import ArticleCard from "../components/ArticleCard";
+import SEO from "../components/SEO";
 
-const useStyles = makeStyles((theme) => ({
-  banner: {
-    color: theme.palette.grey.A400,
-    backgroundColor: theme.palette.grey[300],
-    padding: theme.spacing(3),
-  },
-  bannerTitle: {
-    marginBottom: theme.spacing(1),
-  },
-  avatar: {
-    width: 156,
-    height: 156,
-  },
-}));
 
-const Banner = ({ image, title, description }) => {
-  const classes = useStyles();
+const IndexPage = ({data}) => {
+  const avatar = data.file.childImageSharp.fluid;
+  const {title, description: subtitle, siteUrl} = data.site.siteMetadata;
+  const banner = <Banner avatar={avatar} title={title} subtitle={subtitle} />;
 
   return (
-    <Box className={classes.banner}>
-      <Box marginX="auto" width="100%" maxWidth={1280}>
-        <Grid container spacing={1}>
-          <Grid item xs={2}>
-            <Avatar
-              component={Img}
-              fluid={image}
-              loading="eager"
-              className={classes.avatar}
-            />
-          </Grid>
-          <Grid item xs={12} sm={10}>
-            <Typography variant="h3" className={classes.bannerTitle}>
-              {title}
-            </Typography>
-            <Typography variant="h6">{description}</Typography>
-          </Grid>
-        </Grid>
-      </Box>
-    </Box>
-  );
-};
-
-const Articles = ({ articles }) => {
-  const articlePathPrefix = "/archive";
-
-  return (
-    <Grid container spacing={3}>
-      {articles.map(
-        ({
-          node: {
-            excerpt,
-            frontmatter: { image, title, date, url },
-          },
-        }) => {
-          return (
-            <Grid item xs={12} sm={6} key={url}>
-              <ArticleCard
-                image={image}
-                title={title}
-                date={date}
-                excerpt={excerpt}
-                url={`${articlePathPrefix}/${url}`}
-              />
-            </Grid>
-          );
-        }
-      )}
-    </Grid>
-  );
-};
-
-export default ({ data }) => {
-  return (
-    <Layout showLogoImage={false}>
-      <Banner
-        image={data.file.childImageSharp.fluid}
-        title={data.site.siteMetadata.title}
-        description={data.site.siteMetadata.description}
-      />
-      <Box flexGrow={1} marginX="auto" width="100%" maxWidth={1280}>
-        <Box padding={2}>
-          <Articles articles={data.allMdx.edges} />
-        </Box>
+    <Layout showLogoImage={false} banner={banner}>
+      <SEO
+        title={title}
+        description={subtitle}
+        image={`${siteUrl}${avatar.src}`}
+        url={`${siteUrl}/`}
+        siteName={title} />
+      <ArticleGrid articles={data.allMdx.edges} />
+      <Box
+        display="flex"
+        alignItems="center"
+        marginTop={2}
+        justifyContent="flex-end">
+        <Button
+          variant="contained"
+          color="secondary"
+          component={Link}
+          to={"/article"}
+          startIcon={<ListIcon />}
+        >
+          View All
+        </Button>
       </Box>
     </Layout>
   );
@@ -99,14 +45,15 @@ export const pageQuery = graphql`
   query {
     site {
       siteMetadata {
+        siteUrl
         title
         description
       }
     }
     file(relativePath: { eq: "image/avatar/wizard.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 156, maxHeight: 156, cropFocus: CENTER) {
-          ...GatsbyImageSharpFluid_withWebp
+        fluid(maxWidth: 1232, maxHeight: 693, cropFocus: CENTER) {
+              ...GatsbyImageSharpFluid
         }
       }
     }
@@ -118,14 +65,14 @@ export const pageQuery = graphql`
         node {
           excerpt
           frontmatter {
-            url
+            slug
             title
-            date(formatString: "MMMM Do, YYYY")
+            date
             tags
             category
             image {
               childImageSharp {
-                fluid(maxWidth: 640, cropFocus: CENTER) {
+                fluid(cropFocus: CENTER) {
                   ...GatsbyImageSharpFluid
                 }
               }
@@ -136,3 +83,5 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export default IndexPage;

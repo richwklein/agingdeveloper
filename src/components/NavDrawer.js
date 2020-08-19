@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "gatsby";
+import {Link} from "gatsby";
 import {
   Box,
   Drawer,
@@ -11,17 +11,24 @@ import {
   ListItemText,
   Toolbar,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { Close, Folder, LocalOffer, People, Storage } from "@material-ui/icons";
+import {makeStyles} from "@material-ui/core/styles";
+import {
+  Close,
+  Folder,
+  Home,
+  List as ListIcon,
+  LocalOffer,
+  Person,
+} from "@material-ui/icons";
 
 const drawerWidth = 320;
 
 const useStyles = makeStyles((theme) => ({
-  drawer: {
+  navDrawer: {
     width: drawerWidth,
     flexShrink: 0,
   },
-  drawerPaper: {
+  navDrawerPaper: {
     width: drawerWidth,
   },
   spacer: {
@@ -29,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavList = ({ children }) => {
+const NavList = ({children}) => {
   return (
     <List component="nav" aria-label="main navigation">
       {children}
@@ -37,7 +44,7 @@ const NavList = ({ children }) => {
   );
 };
 
-const NavItem = ({ label, to, children }) => {
+const NavItem = ({label, to, children}) => {
   return (
     <ListItem button component={Link} to={to}>
       <ListItemIcon>{children}</ListItemIcon>
@@ -46,17 +53,17 @@ const NavItem = ({ label, to, children }) => {
   );
 };
 
-export default ({ open, onClose }) => {
+const NavDrawer = ({open, onClose}) => {
   const classes = useStyles();
 
   return (
     <Drawer
       open={open}
       onClose={onClose}
-      className={classes.drawer}
+      className={classes.navDrawer}
       anchor="right"
       classes={{
-        paper: classes.drawerPaper,
+        paper: classes.navDrawerPaper,
       }}
     >
       <Toolbar>
@@ -73,19 +80,24 @@ export default ({ open, onClose }) => {
       </Toolbar>
       <Divider />
       <NavList>
-        <NavItem label="Authors" to="/author/">
-          <People />
+        <NavItem label="Home" to="/">
+          <Home />
         </NavItem>
-        <NavItem label="Categories" to="/category/">
-          <Folder />
+        <NavItem label="Articles" to="/article">
+          <ListIcon />
         </NavItem>
-        <NavItem label="Tags" to="/tag/">
+        <NavItem label="Tags" to="/tag">
           <LocalOffer />
         </NavItem>
-        <NavItem label="Archive" to="/archive/">
-          <Storage />
+        <NavItem label="Categories" to="/category">
+          <Folder />
+        </NavItem>
+        <NavItem label="Authors" to="/author">
+          <Person />
         </NavItem>
       </NavList>
     </Drawer>
   );
 };
+
+export default NavDrawer;

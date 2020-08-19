@@ -21,13 +21,22 @@ module.exports = {
     repository: "https://github.com/richwklein/agingdeveloper",
   },
   mapping: {
-    "Mdx.frontmatter.author": `AuthorYaml`,
+    "Mdx.frontmatter.author": "AuthorYaml",
   },
   plugins: [
     "gatsby-plugin-material-ui",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sharp",
     "gatsby-plugin-sitemap",
+    "gatsby-remark-images",
+    "gatsby-transformer-sharp",
+    "gatsby-transformer-yaml",
+    {
+      resolve: "gatsby-plugin-disqus",
+      options: {
+        shortname: "agingdeveloper",
+      },
+    },
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
@@ -40,15 +49,32 @@ module.exports = {
       resolve: "gatsby-plugin-mdx",
       options: {
         extensions: [".mdx", ".md"],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: "gatsby-remark-images",
+            options: {
+              maxWidth: 1280,
+              maxHeight: 720,
+            },
+          },
+          {
+            resolve: "gatsby-remark-prismjs",
+            options: {
+              classPrefix: "language-",
+              showLineNumbers: false,
+              noInlineHighlight: false,
+            },
+          },
+        ],
       },
     },
     {
       resolve: "gatsby-plugin-prefetch-google-fonts",
       options: {
         fonts: [
-          { family: "Roboto" },
-          { family: "Merriweather" },
-          { family: "Work Sans" },
+          {family: "Roboto"},
+          {family: "Merriweather"},
+          {family: "Work Sans"},
         ],
       },
     },
@@ -65,16 +91,16 @@ module.exports = {
         host: siteUrl,
         sitemap: siteUrl + "/sitemap.xml",
         env: {
-          production: {
-            policy: [{ userAgent: "*", allow: ["/"] }],
+          "production": {
+            policy: [{userAgent: "*", allow: ["/"]}],
           },
           "branch-deploy": {
-            policy: [{ userAgent: "*", disallow: ["/"] }],
+            policy: [{userAgent: "*", disallow: ["/"]}],
             sitemap: null,
             host: null,
           },
           "deploy-preview": {
-            policy: [{ userAgent: "*", disallow: ["/"] }],
+            policy: [{userAgent: "*", disallow: ["/"]}],
             sitemap: null,
             host: null,
           },
@@ -87,7 +113,5 @@ module.exports = {
         path: `${__dirname}/content`,
       },
     },
-    "gatsby-transformer-sharp",
-    "gatsby-transformer-yaml",
   ],
 };

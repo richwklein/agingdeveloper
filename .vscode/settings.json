@@ -1,0 +1,41 @@
+{
+  "jshint.enable": false,
+  "editor.tabCompletion": "on",
+  "editor.rulers": [80, 100, 120],
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+  },
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "frontMatter.taxonomy.tags": [
+    "bluehost",
+    "build",
+    "config",
+    "defaults",
+    "dependency",
+    "dns",
+    "domain",
+    "emerge",
+    "engage",
+    "false start",
+    "gatsby",
+    "gatsbyjs",
+    "http",
+    "intro",
+    "java",
+    "material-ui",
+    "microservice",
+    "misstep",
+    "netlify",
+    "participation",
+    "public",
+    "react",
+    "tech"
+  ],
+  "frontMatter.taxonomy.categories": [
+    "microservices",
+    "site"
+  ],
+  "frontMatter.taxonomy.dateFormat": "yyyy-MM-dd",
+}

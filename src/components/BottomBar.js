@@ -1,16 +1,17 @@
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
-import { Box, Container, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {Box, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 import ExternalLink from "./ExternalLink";
+import InnerBox from "./InnerBox";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    color: theme.palette.secondary.contrastText,
-    backgroundColor: theme.palette.secondary.main,
+    "color": theme.palette.primary.contrastText,
+    "backgroundColor": theme.palette.primary.main,
+    "padding": theme.spacing(2),
 
     "& a": {
-      color: theme.palette.secondary.contrastText,
+      color: theme.palette.primary.contrastText,
       textDecoration: "none",
       fontSize: ".9rem",
     },
@@ -18,36 +19,19 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "underline",
     },
   },
-  topButton: {
-    position: "fixed",
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
 }));
 
-export default () => {
+const BottomBar = ({copyright, repository}) => {
   const classes = useStyles();
-  const data = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-          repository
-        }
-      }
-    }
-  `);
 
   return (
     <Box component="footer" className={classes.footer}>
-      <Container maxWidth="md">
-        <Box padding={4}>
+      <InnerBox>
+        <Box>
           <Box textAlign="center" marginTop={1}>
             <Typography variant="caption">
               &copy; {new Date().getFullYear()}{" "}
-              <ExternalLink to={data.site.siteMetadata.repository}>
-                &nbsp;{data.site.siteMetadata.siteTitle}
-              </ExternalLink>
+              <ExternalLink to={repository}>&nbsp;{copyright}</ExternalLink>
             </Typography>
           </Box>
           <Box textAlign="center">
@@ -57,7 +41,9 @@ export default () => {
             <ExternalLink to="https://app.netlify.com">Netlify</ExternalLink>
           </Box>
         </Box>
-      </Container>
+      </InnerBox>
     </Box>
   );
 };
+
+export default BottomBar;

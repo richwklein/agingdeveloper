@@ -1,5 +1,5 @@
 import React from "react";
-import { useStaticQuery, graphql, Link } from "gatsby";
+import {Link} from "gatsby";
 import {
   AppBar,
   Avatar,
@@ -9,14 +9,14 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { Menu } from "@material-ui/icons";
+import {makeStyles} from "@material-ui/core/styles";
+import {Menu} from "@material-ui/icons";
 import Img from "gatsby-image";
 
 const useStyles = makeStyles((theme) => ({
-  toolbox: {
+  header: {
+    backgroundColor: theme.palette.primary.dark,
     color: theme.palette.primary.contrastText,
-    backgroundColor: theme.palette.primary.light,
   },
   title: {
     flexGrow: 1,
@@ -24,50 +24,37 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     marginRight: theme.spacing(1),
+    borderWidth: 1,
+    borderColor: theme.palette.secondary.light,
+    borderStyle: "solid",
   },
 }));
 
-export default ({
+const TopBar = ({
+  title,
+  avatar,
   onToggleDrawer,
-  isDrawerOpen,
-  hasScroll = false,
-  showLogoImage = true,
+  hasScroll,
+  showAvatar = false,
 }) => {
   const classes = useStyles();
   const elevation = Number(hasScroll);
 
-  const data = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-      file(relativePath: { eq: "image/avatar/wizard.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 128, maxHeight: 128, cropFocus: CENTER) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-    }
-  `);
-
   return (
-    <AppBar position="sticky" elevation={elevation}>
-      <Toolbar className={classes.toolbar}>
+    <AppBar position="sticky" elevation={elevation} className={classes.header}>
+      <Toolbar>
         <Box display="flex" flexGrow={1}>
           <Typography variant="h6">
             <ButtonBase component={Link} to="/" className={classes.title}>
-              {showLogoImage && (
+              {showAvatar && (
                 <Avatar
                   component={Img}
-                  fluid={data.file.childImageSharp.fluid}
+                  fluid={avatar}
                   loading="eager"
                   className={classes.avatar}
                 />
               )}
-              {data.site.siteMetadata.title}
+              {title}
             </ButtonBase>
           </Typography>
         </Box>
@@ -84,3 +71,5 @@ export default ({
     </AppBar>
   );
 };
+
+export default TopBar;

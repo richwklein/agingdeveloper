@@ -5,9 +5,11 @@
   "version": "0.1.0",
   "scripts": {
     "build": "gatsby build",
+    "build:ci": "npm run format && npm run test && npm run build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
-    "format": "prettier --write 'src/**/*.{js,jsx}'",
+    "format": "eslint --fix 'src/**/*.{js,jsx}'",
+    "lint": "eslint . --ext .js,.jsx",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
@@ -19,6 +21,7 @@
     "@mdx-js/react": "^1.5.1",
     "gatsby": "^2.23.20",
     "gatsby-image": "^2.4.12",
+    "gatsby-plugin-disqus": "^1.2.0",
     "gatsby-plugin-google-analytics": "^2.3.10",
     "gatsby-plugin-material-ui": "^2.1.6",
     "gatsby-plugin-mdx": "^1.2.22",
@@ -28,21 +31,25 @@
     "gatsby-plugin-robots-txt": "^1.5.1",
     "gatsby-plugin-sharp": "^2.6.17",
     "gatsby-plugin-sitemap": "^2.4.10",
+    "gatsby-remark-images": "^3.3.21",
+    "gatsby-remark-prismjs": "^3.5.10",
     "gatsby-source-filesystem": "^2.3.18",
     "gatsby-transformer-sharp": "^2.5.10",
     "gatsby-transformer-yaml": "^2.4.10",
     "has-scroll-hook": "^1.0.3",
+    "moment": "^2.27.0",
+    "prismjs": "^1.21.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
-    "eslint": "^7.3.1",
+    "eslint": "^7.5.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-react-app": "^5.2.1",
     "eslint-plugin-react": "^7.20.3",
-    "gatsby-cli": "^2.12.58",
-    "prettier": "^2.0.5"
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "gatsby-cli": "^2.12.58"
   },
   "repository": {
     "type": "git",

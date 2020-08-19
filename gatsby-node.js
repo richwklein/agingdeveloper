@@ -1,7 +1,9 @@
-const path = require(`path`);
+const path = require("path");
+const lodash = require("lodash");
 
-exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions;
+// Create pages based on graph data and templates
+exports.createPages = async ({actions, graphql, reporter}) => {
+  const {createPage} = actions;
 
   const result = await graphql(`
     {
@@ -11,11 +13,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         edges {
           node {
             frontmatter {
-              url
+              slug
             }
           }
         }
       }
+
       authors: allAuthorYaml(sort: { fields: name, order: DESC }) {
         edges {
           node {
@@ -23,43 +26,65 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         }
       }
+
+      tags: allMdx {
+        group(field: frontmatter___tags) {
+          fieldValue
+        }
+      }
+
+      categories: allMdx {
+        group(field: frontmatter___category) {
+          fieldValue
+        }
+      }
     }
   `);
 
   if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    reporter.panicOnBuild("Error while running GraphQL query.");
     return;
   }
 
+  // Iterate through the article query to create individual pages.
   createArticlePages(createPage, result.data.articles.edges);
-  createAuthorPages(createPage, result.data.authors.edges);
+
+
+  // Iterate tags to create tag pages
+  createTagPages(createPage, result.data.tags.group);
+
+
+  // Iterate categories to create category pages
+  createCategoryPages(createPage, result.data.categories.group);
 };
 
-const createArticlePages = (createPage, articles) => {
-  const template = path.resolve(`src/templates/article.js`);
-  const pathPrefix = "/archive";
 
-  articles.map(({ node }, index) => {
+const createArticlePages = (createPage, articles) => {
+  const template = path.resolve("src/templates/article.js");
+  const prefix = "/article";
+
+  articles.map(({node}, index) => {
     // Use a permalink based on the frontmatter url in each markdown file header.
-    const permalink = node.frontmatter.url;
+    const currentPath = node.frontmatter.slug;
 
     // The path to the previous page.
     const previousPath =
-      index === articles.length - 1
-        ? null
-        : `${pathPrefix}/${articles[index + 1].node.frontmatter.slug}`;
+      index === articles.length - 1 ?
+        null :
+        `${articles[index + 1].node.frontmatter.slug}`;
 
     // The path to the next page.
     const nextPath =
-      index === 0
-        ? null
-        : `${pathPrefix}/${articles[index - 1].node.frontmatter.id}`;
+      index === 0 ?
+        null :
+        `${articles[index - 1].node.frontmatter.slug}`;
+
 
     return createPage({
-      path: `${pathPrefix}/${permalink}`,
+      path: `${prefix}/${currentPath}`,
       component: template,
       context: {
-        permalink,
+        currentPath,
         previousPath,
         nextPath,
       },
@@ -67,18 +92,31 @@ const createArticlePages = (createPage, articles) => {
   });
 };
 
-const createAuthorPages = (createPage, authors) => {
-  const template = path.resolve(`src/templates/author.js`);
-  const pathPrefix = "/author";
+const createTagPages = (createPage, tags) => {
+  const template = path.resolve("src/templates/tag.js");
+  const prefix = "/tag";
 
-  authors.map(({ node }, index) => {
-    const permalink = node.id;
-
+  tags.map((tag, index) => {
     return createPage({
-      path: `${pathPrefix}/${permalink}`,
+      path: `${prefix}/${lodash.kebabCase(tag.fieldValue)}`,
       component: template,
       context: {
-        permalink,
+        tag: tag.fieldValue,
+      },
+    });
+  });
+};
+
+const createCategoryPages = (createPage, categories) => {
+  const template = path.resolve("src/templates/category.js");
+  const prefix = "/category";
+
+  categories.map((category, index) => {
+    return createPage({
+      path: `${prefix}/${lodash.kebabCase(category.fieldValue)}`,
+      component: template,
+      context: {
+        category: category.fieldValue,
       },
     });
   });

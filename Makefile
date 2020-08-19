@@ -11,7 +11,6 @@ help:
 install: ## Install npm dependencies
 	@echo "Installing Node dependencies."
 	@npm install
-	@npm install -g prettier
 
 uninstall: clean ## Uninstall npm dependencies
 	@echo "Uninstalling npm dependencies."
@@ -23,6 +22,10 @@ build: ## Create a production build
 	@echo "Creating production build."
 	@npm run build
 
+build-ci: ## Create a ci build
+	@echo "Creating a CI build"
+	@npm run build:ci
+	
 clean: ## Remove the build directory
 	@echo "Removing build directories."
 	@npm run clean
@@ -47,3 +50,6 @@ format: ## Format source code
 	@echo "Formating source code."
 	@npm run format
 
+lint: ## Lint source code
+	@echo "Linting source code."
+	@npm run lint
