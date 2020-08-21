@@ -42,7 +42,6 @@ export const pageQuery = graphql`
       sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
       filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
-      totalCount
       edges {
         node {
           excerpt
@@ -54,7 +53,7 @@ export const pageQuery = graphql`
             category
             image {
               childImageSharp {
-                fluid(cropFocus: CENTER) {
+                fluid(maxWidth: 1232, maxHeight: 693, cropFocus: CENTER) {
                   ...GatsbyImageSharpFluid
                 }
               }

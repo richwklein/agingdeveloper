@@ -53,7 +53,7 @@ export const pageQuery = graphql`
     file(relativePath: { eq: "image/avatar/wizard.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 1232, maxHeight: 693, cropFocus: CENTER) {
-              ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid
         }
       }
     }
@@ -72,7 +72,7 @@ export const pageQuery = graphql`
             category
             image {
               childImageSharp {
-                fluid(cropFocus: CENTER) {
+                fluid(maxWidth: 1232, maxHeight: 693, cropFocus: CENTER) {
                   ...GatsbyImageSharpFluid
                 }
               }

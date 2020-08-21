@@ -17,14 +17,14 @@ const useStyles = makeStyles((theme) => ({
     width: 128,
     height: 128,
     marginLeft: theme.spacing(3), // aligns icon with content padding
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(2),
     borderWidth: 2,
     borderColor: theme.palette.secondary.light,
     borderStyle: "solid",
   },
 }));
 
-const Banner = ({avatar, title, subtitle}) => {
+const Banner = ({avatar, title, subtitle, children}) => {
   const classes = useStyles();
 
   return (
@@ -43,6 +43,7 @@ const Banner = ({avatar, title, subtitle}) => {
           <Typography variant="h6" className={classes.bannerText}>
             {subtitle}
           </Typography>
+          {children}
         </Box>
       </InnerBox>
     </Box>

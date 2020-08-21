@@ -14,11 +14,8 @@ const useStyles = makeStyles((theme) => ({
     height: 34,
     marginLeft: theme.spacing(3), // aligns icon with content padding
     marginRight: theme.spacing(1),
-    borderWidth: 2,
-    color: theme.palette.primary.main,
-    backgroundColor: theme.palette.secondary.main,
-    borderColor: theme.palette.grey["50"],
-    borderStyle: "solid",
+    color: theme.palette.primary.light,
+    backgroundColor: theme.palette.grey[100],
   },
 }));
 
