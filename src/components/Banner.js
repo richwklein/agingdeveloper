@@ -6,12 +6,16 @@ import InnerBox from "./InnerBox";
 
 const useStyles = makeStyles((theme) => ({
   banner: {
-    color: theme.palette.primary.contrastText,
-    backgroundColor: theme.palette.primary.light,
-    padding: theme.spacing(2),
+    "color": theme.palette.primary.contrastText,
+    "backgroundColor": theme.palette.primary.light,
+    "padding": theme.spacing(2),
   },
-  bannerText: {
-    marginBottom: theme.spacing(1),
+  bannerTitle: {
+    marginBottom: theme.spacing(0.5),
+  },
+  bannerSubtitle: {
+    fontSize: "1rem",
+    lineHeight: "1.4",
   },
   avatar: {
     width: 128,
@@ -37,10 +41,10 @@ const Banner = ({avatar, title, subtitle, children}) => {
           className={classes.avatar}
         />
         <Box width="100%">
-          <Typography variant="h4" className={classes.bannerText}>
+          <Typography variant="h4" className={classes.bannerTitle}>
             {title}
           </Typography>
-          <Typography variant="h6" className={classes.bannerText}>
+          <Typography variant="h6" className={classes.bannerSubtitle}>
             {subtitle}
           </Typography>
           {children}

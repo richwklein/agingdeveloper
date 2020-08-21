@@ -6,18 +6,14 @@ const ForwardOutboundLink = React.forwardRef((props, ref) => (
   <OutboundLink {...props} />
 ));
 
-const ExternalLink = ({to, children, title=null}) => {
-  return (
-    <Link
-      component={ForwardOutboundLink}
-      href={to}
-      target="_blank"
-      rel="noopener noreferrer nofollow"
-      title={title}
-    >
-      {children}
-    </Link>
-  );
-};
+const ExternalLink = React.forwardRef((props, ref) => (
+  <Link
+    component={ForwardOutboundLink}
+    href={props.to}
+    target="_blank"
+    rel="noopener noreferrer nofollow"
+    ref={ref}
+    {...props} />
+));
 
 export default ExternalLink;

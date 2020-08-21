@@ -56,8 +56,10 @@ exports.createPages = async ({actions, graphql, reporter}) => {
 
   // Iterate categories to create category pages
   createCategoryPages(createPage, result.data.categories.group);
-};
 
+  // Iterate authors to create author pages
+  createAuthorPages(createPage, result.data.authors.edges);
+};
 
 const createArticlePages = (createPage, articles) => {
   const template = path.resolve("src/templates/article.js");
@@ -117,6 +119,23 @@ const createCategoryPages = (createPage, categories) => {
       component: template,
       context: {
         category: category.fieldValue,
+      },
+    });
+  });
+};
+
+const createAuthorPages = (createPage, authors) => {
+  const template = path.resolve("src/templates/author.js");
+  const prefix = "/author";
+
+  authors.map(({node}, index) => {
+    const currentPath = node.id;
+
+    return createPage({
+      path: `${prefix}/${currentPath}`,
+      component: template,
+      context: {
+        currentPath: currentPath,
       },
     });
   });

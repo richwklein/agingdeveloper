@@ -1,15 +1,9 @@
 import React from "react";
-import { graphql } from "gatsby";
+import {graphql} from "gatsby";
 import {
-  Avatar,
   Box,
-  ButtonGroup,
-  Grid,
   IconButton,
-  Tooltip,
-  Typography,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Twitter,
   Facebook,
@@ -17,111 +11,93 @@ import {
   Instagram,
   LinkedIn,
 } from "@material-ui/icons";
+import {makeStyles} from "@material-ui/styles";
+
+import Banner from "../components/Banner";
 import Layout from "../components/Layout";
 import ExternalLink from "../components/ExternalLink";
-import Img from "gatsby-image";
+import ArticleGrid from "../components/ArticleGrid";
 
 const useStyles = makeStyles((theme) => ({
-  banner: {
-    color: theme.palette.grey.A400,
-    backgroundColor: theme.palette.grey[300],
-    padding: theme.spacing(3),
-  },
-  bannerTitle: {
-    marginBottom: theme.spacing(1),
-  },
-  bannerSubTitle: {
-    marginBottom: theme.spacing(1),
-  },
-  avatar: {
-    width: 156,
-    height: 156,
+  socialBar: {
+    "display": "flex",
+    "& a": {
+      "color": theme.palette.primary.contrastText,
+      "padding": 4,
+    },
   },
 }));
 
-const SocialButton = ({ title, to, children }) => {
-  const classes = useStyles();
-
+const SocialButton = ({title, to, children}) => {
   return (
-    <Tooltip title={title}>
-      <IconButton
-        component={ExternalLink}
-        to={to}
-        className={classes.socialButton}
-      >
-        {children}
-      </IconButton>
-    </Tooltip>
+    <IconButton
+      component={ExternalLink}
+      to={to}
+      title={title}
+    >
+      {children}
+    </IconButton>
   );
 };
 
-export default ({ data, pageContext }) => {
+const SocialBar = ({author}) => {
   const classes = useStyles();
-
-  const { bio, name, image } = data.authorYaml;
   const {
     twitter,
     facebook,
     github,
     linkedIn,
     instagram,
-  } = data.authorYaml.social;
+  } = author.social;
 
   return (
-    <Layout showLogoImage={true}>
-      <Box className={classes.banner}>
-        <Box marginX="auto" width="100%" maxWidth={1280}>
-          <Grid container spacing={1}>
-            <Grid item sm={12} md={2}>
-              <Avatar
-                component={Img}
-                fluid={image.childImageSharp.fluid}
-                loading="eager"
-                className={classes.avatar}
-              />
-            </Grid>
-            <Grid item sm={12} md={10}>
-              <Typography variant="h4" className={classes.bannerTitle}>
-                {name}
-              </Typography>
-              <Typography variant="h6" className={classes.bannerSubTitle}>
-                {bio}
-              </Typography>
-              <ButtonGroup orientation="horizontal">
-                <SocialButton title="Github" to={github}>
-                  <GitHub />
-                </SocialButton>
-                <SocialButton title="Twitter" to={twitter}>
-                  <Twitter />
-                </SocialButton>
-                <SocialButton title="Facebook" to={facebook}>
-                  <Facebook />
-                </SocialButton>
-                <SocialButton title="LinkedIn" to={linkedIn}>
-                  <LinkedIn />
-                </SocialButton>
-                <SocialButton title="Instagram" to={instagram}>
-                  <Instagram />
-                </SocialButton>
-              </ButtonGroup>
-            </Grid>
-          </Grid>
-        </Box>
-      </Box>
-      <Box
-        padding={2}
-        flexGrow={1}
-        marginX="auto"
-        width="100%"
-        maxWidth={1280}
-      ></Box>
+    <Box className={classes.socialBar}>
+      <SocialButton title="Github" to={github}>
+        <GitHub />
+      </SocialButton>
+      <SocialButton title="Twitter" to={twitter}>
+        <Twitter />
+      </SocialButton>
+      <SocialButton title="Facebook" to={facebook}>
+        <Facebook />
+      </SocialButton>
+      <SocialButton title="LinkedIn" to={linkedIn}>
+        <LinkedIn />
+      </SocialButton>
+      <SocialButton title="Instagram" to={instagram}>
+        <Instagram />
+      </SocialButton>
+    </Box>);
+};
+
+const AuthorBanner = ({author}) => {
+  const {bio, name, image} = author;
+
+
+  return (
+    <Banner title={name} subtitle={bio} avatar={image.childImageSharp.fluid}>
+      <SocialBar author={author} />
+    </Banner>);
+};
+
+export default ({data, pageContext}) => {
+  const banner = <AuthorBanner author={data.authorYaml} />;
+  return (
+    <Layout showLogoImage={true} banner={banner}>
+      <ArticleGrid articles={data.allMdx.edges} />
     </Layout>
   );
 };
 
 export const pageQuery = graphql`
-  query($permalink: String!) {
-    authorYaml(id: { eq: $permalink }) {
+  query($currentPath: String) {
+    site {
+      siteMetadata {
+        siteUrl
+        title
+      }
+    }
+    authorYaml(id: {eq: $currentPath}) {
       bio
       name
       social {
@@ -133,8 +109,32 @@ export const pageQuery = graphql`
       }
       image {
         childImageSharp {
-          fluid(maxHeight: 156, maxWidth: 156, cropFocus: CENTER) {
+          fluid(maxHeight: 128, maxWidth: 128, cropFocus: NORTH) {
             ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+    allMdx(
+      sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
+      filter: {frontmatter: {author: {id: {eq: $currentPath}}}}
+    ) {
+      edges {
+        node {
+          excerpt
+          frontmatter {
+            slug
+            title
+            date
+            tags
+            category
+            image {
+              childImageSharp {
+                fluid(maxWidth: 1232, maxHeight: 693, cropFocus: CENTER) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
         }
       }
