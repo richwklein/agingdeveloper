@@ -9,7 +9,7 @@ const daysOld = (fromDate) => {
   return moment().diff(fromDate, "days");
 };
 
-const NewBadge = ({fromDate, children, youngerThan=14}) => {
+const NewBadge = ({fromDate, children, youngerThan=10}) => {
   const hideBadge = daysOld(fromDate) > youngerThan;
 
   return (
