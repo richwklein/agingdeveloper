@@ -73,13 +73,6 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "underline",
     },
   },
-  infoTags: {
-    "display": "flex",
-    "alignItems": "center",
-    "& a": {
-      marginRight: theme.spacing(0.5),
-    },
-  },
   infoLine: {
     display: "flex",
     alignItems: "center",
@@ -88,6 +81,15 @@ const useStyles = makeStyles((theme) => ({
   infoAvatar: {
     width: 64,
     height: 64,
+  },
+
+  tagsBox: {
+    "display": "flex",
+    "alignItems": "center",
+    "margin": theme.spacing(1, 0),
+    "& a": {
+      marginRight: theme.spacing(0.5),
+    },
   },
 
   controlBox: {
@@ -112,7 +114,7 @@ const ArticleTitle = ({title}) => {
   );
 };
 
-const ArticleInfo = ({author, date, category, tags, timeToRead}) => {
+const ArticleInfo = ({author, date, timeToRead}) => {
   const classes = useStyles();
   const readTemplate = `${timeToRead} min read`;
   const {id, name, image} = author;
@@ -141,27 +143,34 @@ const ArticleInfo = ({author, date, category, tags, timeToRead}) => {
           </Typography>
         </Box>
       </Box>
-      <Box className={classes.infoTags}>
-        <Button
-          startIcon={<Folder />}
-          key={category}
-          component={Link}
-          to={`/category/${kebabCase(category)}`} >
-          {category}
-        </Button>
-        {tags.map((tag) => {
-          return (
-            <Button
-              startIcon={<LocalOffer />}
-              key={tag}
-              component={Link}
-              to={`/tag/${kebabCase(tag)}`} >
-              {tag}
-            </Button>
-          );
-        })}
-      </Box>
     </Fragment>
+  );
+};
+
+const ArticleTags = ({category, tags}) => {
+  const classes = useStyles();
+
+  return (
+    <Box className={classes.tagsBox}>
+      <Button
+        startIcon={<Folder />}
+        key={category}
+        component={Link}
+        to={`/category/${kebabCase(category)}`} >
+        {category}
+      </Button>
+      {tags.map((tag) => {
+        return (
+          <Button
+            startIcon={<LocalOffer />}
+            key={tag}
+            component={Link}
+            to={`/tag/${kebabCase(tag)}`} >
+            {tag}
+          </Button>
+        );
+      })}
+    </Box>
   );
 };
 
@@ -231,8 +240,8 @@ const ArticleTemplate = ({data, pageContext}) => {
           />
           <Box className={classes.articleContent} component="article">
             <ArticleTitle title={title} />
-            <ArticleInfo author={author} category={category} tags={tags}
-              date={date} timeToRead={timeToRead} />
+            <ArticleInfo author={author} date={date} timeToRead={timeToRead} />
+            <ArticleTags category={category} tags={tags} />
             <MDXRenderer>{body}</MDXRenderer>
           </Box>
         </Paper>
