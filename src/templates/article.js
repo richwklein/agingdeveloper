@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {graphql, Link} from "gatsby";
 import Img from "gatsby-image";
 import {Disqus} from "gatsby-plugin-disqus";
@@ -120,30 +120,28 @@ const ArticleInfo = ({author, date, timeToRead}) => {
   const {id, name, image} = author;
 
   return (
-    <Fragment>
-      <Box className={classes.infoBox}>
-        <Link to={`/author/${id}`} title={name}>
-          <Avatar
-            component={Img}
-            fluid={image.childImageSharp.fluid}
-            size="large"
-            loading="eager"
-            className={classes.infoAvatar} />
-        </Link>
-        <Box className={classes.infoData}>
-          <Typography variant="body2" component="div">
-            <Box className={classes.infoLine}>
-              <Event />&nbsp;<time pubdate="pubdate" dateTime={date}>
-                {moment(date).format("MMMM Do, YYYY")}
-              </time>
-            </Box>
-            <Box className={classes.infoLine}>
-              <AccessTime />&nbsp;{readTemplate}
-            </Box>
-          </Typography>
-        </Box>
+    <Box className={classes.infoBox}>
+      <Link to={`/author/${id}`} title={name}>
+        <Avatar
+          component={Img}
+          fluid={image.childImageSharp.fluid}
+          size="large"
+          loading="eager"
+          className={classes.infoAvatar} />
+      </Link>
+      <Box className={classes.infoData}>
+        <Typography variant="body2" component="div">
+          <Box className={classes.infoLine}>
+            <Event />&nbsp;<time pubdate="pubdate" dateTime={date}>
+              {moment(date).format("MMMM Do, YYYY")}
+            </time>
+          </Box>
+          <Box className={classes.infoLine}>
+            <AccessTime />&nbsp;{readTemplate}
+          </Box>
+        </Typography>
       </Box>
-    </Fragment>
+    </Box>
   );
 };
 
