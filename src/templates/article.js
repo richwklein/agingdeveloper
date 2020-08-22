@@ -16,13 +16,12 @@ import {
   ChevronLeft,
   ChevronRight,
   Event,
-  Folder,
-  LocalOffer} from "@material-ui/icons";
+} from "@material-ui/icons";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
-import kebabCase from "lodash/kebabCase";
 import NewBadge from "../components/NewBadge";
 import moment from "moment";
+import TagsBox from "../components/TagBar";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -43,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   articleTitle: {
-    padding: theme.spacing(2, 0),
+    padding: theme.spacing(1, 0),
   },
   articleImage: {
     maxWidth: 1232,
@@ -82,16 +81,6 @@ const useStyles = makeStyles((theme) => ({
     width: 64,
     height: 64,
   },
-
-  tagsBox: {
-    "display": "flex",
-    "alignItems": "center",
-    "margin": theme.spacing(1, 0),
-    "& a": {
-      marginRight: theme.spacing(0.5),
-    },
-  },
-
   controlBox: {
     display: "flex",
     paddingBottom: theme.spacing(2),
@@ -141,33 +130,6 @@ const ArticleInfo = ({author, date, timeToRead}) => {
           </Box>
         </Typography>
       </Box>
-    </Box>
-  );
-};
-
-const ArticleTags = ({category, tags}) => {
-  const classes = useStyles();
-
-  return (
-    <Box className={classes.tagsBox}>
-      <Button
-        startIcon={<Folder />}
-        key={category}
-        component={Link}
-        to={`/category/${kebabCase(category)}`} >
-        {category}
-      </Button>
-      {tags.map((tag) => {
-        return (
-          <Button
-            startIcon={<LocalOffer />}
-            key={tag}
-            component={Link}
-            to={`/tag/${kebabCase(tag)}`} >
-            {tag}
-          </Button>
-        );
-      })}
     </Box>
   );
 };
@@ -239,8 +201,8 @@ const ArticleTemplate = ({data, pageContext}) => {
           <Box className={classes.articleContent} component="article">
             <ArticleTitle title={title} />
             <ArticleInfo author={author} date={date} timeToRead={timeToRead} />
-            <ArticleTags category={category} tags={tags} />
             <MDXRenderer>{body}</MDXRenderer>
+            <TagsBox category={category} tags={tags} />
           </Box>
         </Paper>
       </NewBadge>
