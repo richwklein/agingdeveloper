@@ -6,9 +6,9 @@ import InnerBox from "./InnerBox";
 
 const useStyles = makeStyles((theme) => ({
   banner: {
-    "color": theme.palette.primary.contrastText,
-    "backgroundColor": theme.palette.primary.light,
-    "padding": theme.spacing(2),
+    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.primary.light,
+    padding: theme.spacing(2),
   },
   bannerTitle: {
     marginBottom: theme.spacing(0.5),
