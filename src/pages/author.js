@@ -30,7 +30,8 @@ const AuthorButton = ({author}) => {
   const url = "/author/" + id;
   return (
     <Button component={Link} to={url}
-      variant="outlined"
+      color="primary"
+      variant="contained"
       fullWidth
       startIcon={<Avatar
         component={Img}

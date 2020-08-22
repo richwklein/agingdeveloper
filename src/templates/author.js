@@ -1,7 +1,7 @@
 import React from "react";
 import {graphql} from "gatsby";
 import {
-  Box,
+  ButtonGroup,
   IconButton,
 } from "@material-ui/core";
 import {
@@ -21,6 +21,7 @@ import ArticleGrid from "../components/ArticleGrid";
 const useStyles = makeStyles((theme) => ({
   socialBar: {
     "display": "flex",
+    "marginTop": theme.spacing(0.5),
     "& a": {
       "color": theme.palette.primary.contrastText,
       "padding": 4,
@@ -51,7 +52,7 @@ const SocialBar = ({author}) => {
   } = author.social;
 
   return (
-    <Box className={classes.socialBar}>
+    <ButtonGroup className={classes.socialBar}>
       <SocialButton title="Github" to={github}>
         <GitHub />
       </SocialButton>
@@ -67,7 +68,7 @@ const SocialBar = ({author}) => {
       <SocialButton title="Instagram" to={instagram}>
         <Instagram />
       </SocialButton>
-    </Box>);
+    </ButtonGroup>);
 };
 
 const AuthorBanner = ({author}) => {
