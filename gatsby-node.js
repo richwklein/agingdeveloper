@@ -4,12 +4,6 @@ const lodash = require("lodash");
 // Create pages based on graph data and templates
 exports.createPages = async ({actions, graphql, reporter}) => {
   const {createPage} = actions;
-  const articleTemplate = path.resolve("src/templates/article.js");
-  const articlePathPrefix = "/article";
-  const tagTemplate = path.resolve("src/templates/tag.js");
-  const tagPathPrefix = "/tag";
-  const categoryTemplate = path.resolve("src/templates/category.js");
-  const categoryPathPrefix = "/category";
 
   const result = await graphql(`
     {
@@ -24,11 +18,21 @@ exports.createPages = async ({actions, graphql, reporter}) => {
           }
         }
       }
+
+      authors: allAuthorYaml(sort: { fields: name, order: DESC }) {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+
       tags: allMdx {
         group(field: frontmatter___tags) {
           fieldValue
         }
       }
+
       categories: allMdx {
         group(field: frontmatter___category) {
           fieldValue
@@ -37,14 +41,29 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     }
   `);
 
-  // Report any errors if they occurred.
   if (result.errors) {
     reporter.panicOnBuild("Error while running GraphQL query.");
     return;
   }
 
   // Iterate through the article query to create individual pages.
-  const articles = result.data.articles.edges;
+  createArticlePages(createPage, result.data.articles.edges);
+
+
+  // Iterate tags to create tag pages
+  createTagPages(createPage, result.data.tags.group);
+
+
+  // Iterate categories to create category pages
+  createCategoryPages(createPage, result.data.categories.group);
+
+  // Iterate authors to create author pages
+  createAuthorPages(createPage, result.data.authors.edges);
+};
+
+const createArticlePages = (createPage, articles) => {
+  const template = path.resolve("src/templates/article.js");
+  const prefix = "/article";
 
   articles.map(({node}, index) => {
     // Use a permalink based on the frontmatter url in each markdown file header.
@@ -64,8 +83,8 @@ exports.createPages = async ({actions, graphql, reporter}) => {
 
 
     return createPage({
-      path: `${articlePathPrefix}/${currentPath}`,
-      component: articleTemplate,
+      path: `${prefix}/${currentPath}`,
+      component: template,
       context: {
         currentPath,
         previousPath,
@@ -73,27 +92,50 @@ exports.createPages = async ({actions, graphql, reporter}) => {
       },
     });
   });
+};
 
-  // Iterate tags to create tag pages
-  const tags = result.data.tags.group;
+const createTagPages = (createPage, tags) => {
+  const template = path.resolve("src/templates/tag.js");
+  const prefix = "/tag";
+
   tags.map((tag, index) => {
     return createPage({
-      path: `${tagPathPrefix}/${lodash.kebabCase(tag.fieldValue)}`,
-      component: tagTemplate,
+      path: `${prefix}/${lodash.kebabCase(tag.fieldValue)}`,
+      component: template,
       context: {
         tag: tag.fieldValue,
       },
     });
   });
+};
 
-  // Iterate categories to create category pages
-  const categories = result.data.categories.group;
+const createCategoryPages = (createPage, categories) => {
+  const template = path.resolve("src/templates/category.js");
+  const prefix = "/category";
+
   categories.map((category, index) => {
     return createPage({
-      path: `${categoryPathPrefix}/${lodash.kebabCase(category.fieldValue)}`,
-      component: categoryTemplate,
+      path: `${prefix}/${lodash.kebabCase(category.fieldValue)}`,
+      component: template,
       context: {
         category: category.fieldValue,
+      },
+    });
+  });
+};
+
+const createAuthorPages = (createPage, authors) => {
+  const template = path.resolve("src/templates/author.js");
+  const prefix = "/author";
+
+  authors.map(({node}, index) => {
+    const currentPath = node.id;
+
+    return createPage({
+      path: `${prefix}/${currentPath}`,
+      component: template,
+      context: {
+        currentPath: currentPath,
       },
     });
   });

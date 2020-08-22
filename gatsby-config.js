@@ -20,6 +20,9 @@ module.exports = {
     description: "A site for growing old in the software development community",
     repository: "https://github.com/richwklein/agingdeveloper",
   },
+  mapping: {
+    "Mdx.frontmatter.author": "AuthorYaml",
+  },
   plugins: [
     "gatsby-plugin-material-ui",
     "gatsby-plugin-react-helmet",
@@ -27,6 +30,7 @@ module.exports = {
     "gatsby-plugin-sitemap",
     "gatsby-remark-images",
     "gatsby-transformer-sharp",
+    "gatsby-transformer-yaml",
     {
       resolve: "gatsby-plugin-disqus",
       options: {

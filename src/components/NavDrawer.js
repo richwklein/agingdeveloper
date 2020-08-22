@@ -15,7 +15,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import {
   Close,
   Folder,
-  Home,
   List as ListIcon,
   LocalOffer,
   Person,
@@ -80,9 +79,6 @@ const NavDrawer = ({open, onClose}) => {
       </Toolbar>
       <Divider />
       <NavList>
-        <NavItem label="Home" to="/">
-          <Home />
-        </NavItem>
         <NavItem label="Articles" to="/article">
           <ListIcon />
         </NavItem>
