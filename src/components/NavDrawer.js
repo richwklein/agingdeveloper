@@ -43,10 +43,10 @@ const NavList = ({children}) => {
   );
 };
 
-const NavItem = ({label, to, children}) => {
+const NavItem = ({label, to, icon}) => {
   return (
     <ListItem button component={Link} to={to}>
-      <ListItemIcon>{children}</ListItemIcon>
+      <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText primary={label} />
     </ListItem>
   );
@@ -79,18 +79,10 @@ const NavDrawer = ({open, onClose}) => {
       </Toolbar>
       <Divider />
       <NavList>
-        <NavItem label="Articles" to="/article">
-          <ListIcon />
-        </NavItem>
-        <NavItem label="Tags" to="/tag">
-          <LocalOffer />
-        </NavItem>
-        <NavItem label="Categories" to="/category">
-          <Folder />
-        </NavItem>
-        <NavItem label="Authors" to="/author">
-          <Person />
-        </NavItem>
+        <NavItem label="Articles" to="/article" icon={<ListIcon />} />
+        <NavItem label="Tags" to="/tag" icon={<LocalOffer />} />
+        <NavItem label="Categories" to="/category" icon={ <Folder /> } />
+        <NavItem label="Authors" to="/author" icon={<Person />} />
       </NavList>
     </Drawer>
   );
