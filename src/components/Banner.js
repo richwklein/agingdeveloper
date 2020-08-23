@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from "clsx";
 import {Avatar, Box, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import Img from "gatsby-image";
@@ -11,47 +10,41 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.light,
     padding: theme.spacing(2),
   },
-  bannerText: {
-    marginBottom: theme.spacing(1),
+  bannerTitle: {
+    marginBottom: theme.spacing(0.5),
+  },
+  bannerSubtitle: {
+    fontSize: "1rem",
+    lineHeight: "1.4",
   },
   avatar: {
     width: 128,
     height: 128,
-    marginLeft: 16, // aligns icon with content padding
-    marginRight: theme.spacing(1),
+    marginLeft: theme.spacing(3), // aligns icon with content padding
+    marginRight: theme.spacing(2),
     borderWidth: 2,
-    borderColor: theme.palette.secondary.light,
-    borderStyle: "solid",
-  },
-  avatarLarger: {
-    width: 256,
-    height: 256,
-    marginRight: theme.spacing(1),
-    borderWidth: 1,
     borderColor: theme.palette.secondary.light,
     borderStyle: "solid",
   },
 }));
 
-const Banner = ({avatar, title, subtitle, children, largeAvatar = false}) => {
+const Banner = ({avatar, title, subtitle, children}) => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.banner}>
+    <Box className={classes.banner} component="header">
       <InnerBox display="flex" alignItems="center">
         <Avatar
           component={Img}
           fluid={avatar}
           loading="eager"
-          className={clsx(classes.avatar, {
-            [classes.avatarLarger]: largeAvatar,
-          })}
+          className={classes.avatar}
         />
         <Box width="100%">
-          <Typography variant="h4" className={classes.bannerText}>
+          <Typography variant="h4" className={classes.bannerTitle}>
             {title}
           </Typography>
-          <Typography variant="h6" className={classes.bannerText}>
+          <Typography variant="h6" className={classes.bannerSubtitle}>
             {subtitle}
           </Typography>
           {children}

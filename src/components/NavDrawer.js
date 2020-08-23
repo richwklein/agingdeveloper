@@ -85,11 +85,11 @@ const NavDrawer = ({open, onClose}) => {
         <NavItem label="Articles" to="/article">
           <ListIcon />
         </NavItem>
-        <NavItem label="Categories" to="/category">
-          <Folder />
-        </NavItem>
         <NavItem label="Tags" to="/tag">
           <LocalOffer />
+        </NavItem>
+        <NavItem label="Categories" to="/category">
+          <Folder />
         </NavItem>
         <NavItem label="Authors" to="/author">
           <Person />

@@ -1,47 +1,36 @@
-
 import React from "react";
-import {Helmet} from "react-helmet";
 import {graphql} from "gatsby";
-import {Folder} from "@material-ui/icons";
+import {Helmet} from "react-helmet";
+import {List as ListIcon} from "@material-ui/icons";
 import ArticleGrid from "../components/ArticleGrid";
 import IconBanner from "../components/IconBanner";
 import Layout from "../components/Layout";
 
-const capitalize = (category) => {
-  return category.charAt(0).toUpperCase() + category.slice(1);
+const ArticleHelmet = ({siteTitle}) => {
+  return (<Helmet title={`Articles | ${siteTitle}`} />);
 };
 
-const CategoryHelmet = ({category, siteTitle}) => {
-  return (<Helmet title={`${capitalize(category)} | ${siteTitle}`} />);
-};
-
-const CategoryTemplate = ({data, pageContext}) => {
-  const category = pageContext.category;
-  const banner = <IconBanner icon={<Folder />} title={capitalize(category)} />;
+const ArticlePage = ({data}) => {
+  const banner = <IconBanner icon={<ListIcon />} title="Articles" />;
 
   return (
     <Layout showLogoImage={true} banner={banner}>
-      <CategoryHelmet
-        category={category}
-        siteTitle={data.site.siteMetadata.title} />
+      <ArticleHelmet siteTitle={data.site.siteMetadata.title} />
       <ArticleGrid articles={data.allMdx.edges} />
+
     </Layout>
   );
 };
 
-export default CategoryTemplate;
-
 export const pageQuery = graphql`
-  query($category: String) {
+  query {
     site {
       siteMetadata {
-        siteUrl
         title
       }
     }
     allMdx(
       sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
-      filter: { frontmatter: { category: { eq: $category } } }
     ) {
       edges {
         node {
@@ -65,3 +54,5 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export default ArticlePage;

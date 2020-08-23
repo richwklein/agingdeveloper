@@ -1,48 +1,17 @@
 import React from "react";
 import {graphql, Link} from "gatsby";
-import {Box, Button, Grid} from "@material-ui/core";
+import {Box, Button} from "@material-ui/core";
 import {List as ListIcon} from "@material-ui/icons";
-
-import ArticleCard from "../components/ArticleCard";
+import ArticleGrid from "../components/ArticleGrid";
 import Banner from "../components/Banner";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 
-const ArticleGrid = ({articles}) => {
-  return (
-    <Grid container spacing={3}>
-      {articles.map(
-          ({
-            node: {
-              excerpt,
-              frontmatter: {image, title, date, slug},
-            },
-          }) => {
-            return (
-              <Grid item xs={12} sm={6} key={slug}>
-                <ArticleCard
-                  image={image}
-                  title={title}
-                  date={date}
-                  excerpt={excerpt}
-                  slug={slug}
-                />
-              </Grid>
-            );
-          },
-      )}
-    </Grid>
-  );
-};
-
-const indexBanner = ({avatar, title, subtitle}) => {
-  return <Banner avatar={avatar} title={title} subtitle={subtitle} />;
-};
 
 const IndexPage = ({data}) => {
   const avatar = data.file.childImageSharp.fluid;
   const {title, description: subtitle, siteUrl} = data.site.siteMetadata;
-  const banner = indexBanner({avatar, title, subtitle});
+  const banner = <Banner avatar={avatar} title={title} subtitle={subtitle} />;
 
   return (
     <Layout showLogoImage={false} banner={banner}>
@@ -83,8 +52,8 @@ export const pageQuery = graphql`
     }
     file(relativePath: { eq: "image/avatar/wizard.jpg" }) {
       childImageSharp {
-        fluid(cropFocus: CENTER) {
-          ...GatsbyImageSharpFluid_withWebp
+        fluid(maxWidth: 1232, maxHeight: 693, cropFocus: CENTER) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
@@ -98,12 +67,12 @@ export const pageQuery = graphql`
           frontmatter {
             slug
             title
-            date(formatString: "MMMM Do, YYYY")
+            date
             tags
             category
             image {
               childImageSharp {
-                fluid(cropFocus: CENTER) {
+                fluid(maxWidth: 1232, maxHeight: 693, cropFocus: CENTER) {
                   ...GatsbyImageSharpFluid
                 }
               }

@@ -15,3 +15,7 @@ body,
 #gatsby-focus-wrapper {
   flex-grow: 1;
 }
+
+pre[class*="language-"] {
+  border-radius: 6px;
+}

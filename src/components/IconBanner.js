@@ -1,8 +1,6 @@
 import React from "react";
-import clsx from "clsx";
 import {Avatar, Box, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import Img from "gatsby-image";
 import InnerBox from "./InnerBox";
 
 const useStyles = makeStyles((theme) => ({
@@ -14,13 +12,10 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     width: 34,
     height: 34,
-    marginLeft: 16, // aligns icon with content padding
+    marginLeft: theme.spacing(3), // aligns icon with content padding
     marginRight: theme.spacing(1),
-    borderWidth: 2,
-    color: theme.palette.primary.main,
-    backgroundColor: theme.palette.secondary.main,
-    borderColor: theme.palette.grey["50"],
-    borderStyle: "solid",
+    color: theme.palette.primary.light,
+    backgroundColor: theme.palette.grey[100],
   },
 }));
 
@@ -33,7 +28,7 @@ const IconBanner = ({icon, title}) => {
         <Avatar className={classes.avatar} >
           {icon}
         </Avatar>
-        <Box width="100%">
+        <Box width="100%" component="header">
           <Typography variant="h4" className={classes.bannerText}>
             {title}
           </Typography>
