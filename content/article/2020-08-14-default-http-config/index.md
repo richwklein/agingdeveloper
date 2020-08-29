@@ -1,6 +1,7 @@
 ---
 slug: 2020-08-14-default-http-config
 title: Default HTTP Config Considered Dangerous
+description: 'Gotchas using http clients with default configuration'
 author: richwklein
 image: israel-palacio-ImcUkZ72oUs-unsplash.jpg
 tags:
