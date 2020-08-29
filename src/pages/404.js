@@ -76,6 +76,7 @@ const Page404 = ({data}) => {
   );
 };
 
+/* eslint-disable max-len */
 export const pageQuery = graphql`
   query {
     site {
