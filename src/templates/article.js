@@ -173,7 +173,16 @@ const ArticleTemplate = ({data, pageContext}) => {
   const classes = useStyles();
 
   const {
-    frontmatter: {author, image, title, date, category, tags, slug},
+    frontmatter: {
+      author,
+      image,
+      title,
+      description,
+      date,
+      category,
+      tags,
+      slug,
+    },
     body,
     timeToRead,
   } = data.mdx;
@@ -190,7 +199,7 @@ const ArticleTemplate = ({data, pageContext}) => {
     <Layout showLogoImage={true}>
       <SEO
         title={title}
-        description={title}
+        description={description}
         image={`${siteUrl}${image.childImageSharp.fluid.src}`}
         url={`${siteUrl}${pathPrefix}${slug}`}
         siteName={siteName}
@@ -233,6 +242,7 @@ export const pageQuery = graphql`
       frontmatter {
         slug
         title
+        description
         date
         tags
         category

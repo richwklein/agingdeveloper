@@ -1,6 +1,7 @@
 ---
 slug: 2020-08-22-guest-authors
 title: Support for Guest Authors
+description: 'How I implemented authors and how you can become a guest author'
 author: richwklein
 image: aaron-burden-y02jEX_B0O0-unsplash.jpg
 tags:

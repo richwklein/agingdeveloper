@@ -1,6 +1,7 @@
 ---
 slug: 2020-07-21-intro
 title: Introduction and Return
+description: 'Why I created this site and started to re-engage'
 author: richwklein
 image: fons-heijnsbroek-v4c2gKPjPMs-unsplash.jpg
 tags:
