@@ -1,7 +1,7 @@
 ---
 slug: 2020-07-26-false-start
 title: 'Workflow, Tech Stack, and False Starts'
-description: 'A breakdown of how I got started and the stack that I'm using.'
+description: "A breakdown of how I got started and the stack that I'm using"
 author: richwklein
 image: braden-collum-9HI8UJMSdZA-unsplash.jpg
 tags:
