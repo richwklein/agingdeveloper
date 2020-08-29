@@ -72,14 +72,18 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "underline",
     },
   },
-  infoLine: {
+  infoLine1: {
     display: "flex",
     alignItems: "center",
     marginBottom: theme.spacing(0.5),
   },
+  infoLine2: {
+    display: "flex",
+    alignItems: "center",
+  },
   infoAvatar: {
-    width: 64,
-    height: 64,
+    width: 52,
+    height: 52,
   },
   controlBox: {
     display: "flex",
@@ -120,12 +124,12 @@ const ArticleInfo = ({author, date, timeToRead}) => {
       </Link>
       <Box className={classes.infoData}>
         <Typography variant="body2" component="div">
-          <Box className={classes.infoLine}>
+          <Box className={classes.infoLine1}>
             <Event />&nbsp;<time pubdate="pubdate" dateTime={date}>
               {moment(date).format("MMMM Do, YYYY")}
             </time>
           </Box>
-          <Box className={classes.infoLine}>
+          <Box className={classes.infoLine2}>
             <AccessTime />&nbsp;{readTemplate}
           </Box>
         </Typography>
@@ -237,7 +241,7 @@ export const pageQuery = graphql`
           name
           image {
             childImageSharp {
-              fluid(maxWidth: 64, maxHeight: 64, cropFocus: NORTH) {
+              fluid(maxWidth: 52, maxHeight: 52, cropFocus: NORTH) {
                 ...GatsbyImageSharpFluid
               }
             }
