@@ -17,7 +17,7 @@ module.exports = {
   siteMetadata: {
     siteUrl: siteUrl,
     title: "The Aging Developer",
-    description: "A site for growing old in the software development community",
+    description: "for growing old in the software development community",
     repository: "https://github.com/richwklein/agingdeveloper",
   },
   mapping: {
