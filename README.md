@@ -39,13 +39,13 @@ package managers.
 
 1. **Install node and npm**
 
-```cli
+```shell
 brew install node
 ```
 
 2. **Install dependencies**
 
-```cli
+```shell
 cd agingdeveloper/
 make install
 ```
@@ -54,7 +54,7 @@ This will install local npm dependencies.
 
 1. **Start the development server**
 
-```cli
+```shell
 make develop
 ```
 

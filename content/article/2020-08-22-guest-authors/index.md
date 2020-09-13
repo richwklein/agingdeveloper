@@ -121,7 +121,7 @@ plugin and transforms it into something more useful. I used the `gatsby-transfor
 plugin to transform the author file content into a node in the graph with the
 appropriate attributes from the  YAML data.
 
-```cli
+```shell
 npm install --save gatsby-transformer-yaml
 ```
 
