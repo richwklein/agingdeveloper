@@ -66,7 +66,7 @@ companies that now has career tracks that stays technical.
 
 I was one of those engineers that had ended up on a management path without really 
 giving it a lot of thought. Some internal restructuring and a new manager gave 
-me the spaced I needed to reevaluate what I wanted for my career. That led me 
+me the space I needed to reevaluate what I wanted for my career. That led me 
 back to a technical focused path. I did not mind managing people and I really 
 liked the relationships, especially being able to be a mentor to the people that 
 reported to me. I just always enjoyed the code more.  
@@ -95,7 +95,7 @@ public and network with other.
 
 It is open source so that if others feel like they could contribute to the 
 discussion; they are free to do so with little hindrence. It can also be a 
-platform where you, as a developer, can be seen and heard. Althought, I don't
+platform where you, as a developer, can be seen and heard. Although, I don't
 have a large audience yet ;)
 
 The Aging Developer can be a place for others going through the same sorts of 
