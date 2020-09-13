@@ -190,7 +190,7 @@ const ArticleTemplate = ({data, pageContext}) => {
   const {previousPath, nextPath} = pageContext;
 
   const disqusConfig = {
-    url: `${siteUrl}/${slug}`,
+    url: `${siteUrl}${pathPrefix}${slug}`,
     identifier: slug,
     title: title,
   };
