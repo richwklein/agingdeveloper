@@ -99,7 +99,7 @@ platform where you, as a developer, can be seen and heard. Although, I don't
 have a large audience yet ;)
 
 The Aging Developer can be a place for others going through the same sorts of 
-worries and feeling to realize they aren't along. That others share the same 
+worries and feeling to realize they aren't alone. That others share the same 
 fears and hopefully the act of sharing can diminish those fears.
 
 That is why "The Aging Developer".
