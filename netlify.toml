@@ -7,6 +7,9 @@
 [[plugins]]
   package = "netlify-plugin-gatsby-cache"
 
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+
 [[redirects]]
   from = "/archive/*"
   to = "/article/:splat"
@@ -32,5 +35,3 @@
   to = "/article/2020-07-21-intro"
   status = 302
 
-[[plugins]]
-  package = "netlify-plugin-submit-sitemap"
