@@ -46,22 +46,16 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     return;
   }
 
-  // Iterate through the article query to create individual pages.
-  createArticlePages(createPage, result.data.articles.edges);
-
-
-  // Iterate tags to create tag pages
-  createTagPages(createPage, result.data.tags.group);
-
-
-  // Iterate categories to create category pages
-  createCategoryPages(createPage, result.data.categories.group);
-
-  // Iterate authors to create author pages
-  createAuthorPages(createPage, result.data.authors.edges);
+  // Iterate through our various graghql queries in parallel creating pages
+  return Promise.all([
+    createArticlePages(createPage, result.data.articles.edges),
+    createTagPages(createPage, result.data.tags.group),
+    createCategoryPages(createPage, result.data.categories.group),
+    createAuthorPages(createPage, result.data.authors.edges),
+  ]);
 };
 
-const createArticlePages = (createPage, articles) => {
+const createArticlePages = async (createPage, articles) => {
   const template = path.resolve("src/templates/article.js");
   const prefix = "/article";
 
@@ -94,7 +88,7 @@ const createArticlePages = (createPage, articles) => {
   });
 };
 
-const createTagPages = (createPage, tags) => {
+const createTagPages = async (createPage, tags) => {
   const template = path.resolve("src/templates/tag.js");
   const prefix = "/tag";
 
@@ -109,7 +103,7 @@ const createTagPages = (createPage, tags) => {
   });
 };
 
-const createCategoryPages = (createPage, categories) => {
+const createCategoryPages = async (createPage, categories) => {
   const template = path.resolve("src/templates/category.js");
   const prefix = "/category";
 
@@ -124,7 +118,7 @@ const createCategoryPages = (createPage, categories) => {
   });
 };
 
-const createAuthorPages = (createPage, authors) => {
+const createAuthorPages = async (createPage, authors) => {
   const template = path.resolve("src/templates/author.js");
   const prefix = "/author";
 
