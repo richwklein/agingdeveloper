@@ -28,6 +28,7 @@
     "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
     "gatsby-plugin-react-helmet": "^3.3.9",
     "gatsby-plugin-react-helmet-canonical-urls": "^1.4.0",
+    "gatsby-plugin-remove-fingerprints": "0.0.2",
     "gatsby-plugin-robots-txt": "^1.5.1",
     "gatsby-plugin-sharp": "^2.6.17",
     "gatsby-plugin-sitemap": "^2.4.10",

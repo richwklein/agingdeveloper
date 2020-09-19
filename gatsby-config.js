@@ -26,6 +26,7 @@ module.exports = {
   plugins: [
     "gatsby-plugin-material-ui",
     "gatsby-plugin-react-helmet",
+    "gatsby-plugin-remove-fingerprints",
     "gatsby-plugin-sharp",
     "gatsby-plugin-sitemap",
     "gatsby-remark-images",
