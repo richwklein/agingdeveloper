@@ -4,14 +4,14 @@
   "description": "The personal site of Richard Klein",
   "version": "0.1.0",
   "scripts": {
-    "build": "gatsby build",
+    "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build",
     "build:ci": "npm run format && npm run test && npm run build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
     "format": "eslint --fix 'src/**/*.{js,jsx}'",
     "lint": "eslint . --ext .js,.jsx",
     "start": "npm run develop",
-    "serve": "gatsby serve",
+    "serve": "npx gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
     "gatsby-plugin-react-helmet": "^3.3.9",
     "gatsby-plugin-react-helmet-canonical-urls": "^1.4.0",
+    "gatsby-plugin-remove-fingerprints": "0.0.2",
     "gatsby-plugin-robots-txt": "^1.5.1",
     "gatsby-plugin-sharp": "^2.6.17",
     "gatsby-plugin-sitemap": "^2.4.10",

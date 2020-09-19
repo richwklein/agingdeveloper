@@ -46,26 +46,20 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     return;
   }
 
-  // Iterate through the article query to create individual pages.
-  createArticlePages(createPage, result.data.articles.edges);
-
-
-  // Iterate tags to create tag pages
-  createTagPages(createPage, result.data.tags.group);
-
-
-  // Iterate categories to create category pages
-  createCategoryPages(createPage, result.data.categories.group);
-
-  // Iterate authors to create author pages
-  createAuthorPages(createPage, result.data.authors.edges);
+  // Iterate through our various graghql queries in parallel creating pages
+  return Promise.all([
+    createArticlePages(createPage, result.data.articles.edges),
+    createTagPages(createPage, result.data.tags.group),
+    createCategoryPages(createPage, result.data.categories.group),
+    createAuthorPages(createPage, result.data.authors.edges),
+  ]);
 };
 
-const createArticlePages = (createPage, articles) => {
+const createArticlePages = async (createPage, articles) => {
   const template = path.resolve("src/templates/article.js");
   const prefix = "/article";
 
-  articles.map(({node}, index) => {
+  Promise.all(articles.map( async ({node}, index) => {
     // Use a permalink based on the frontmatter url in each markdown file header.
     const currentPath = node.frontmatter.slug;
 
@@ -91,14 +85,14 @@ const createArticlePages = (createPage, articles) => {
         nextPath,
       },
     });
-  });
+  }));
 };
 
-const createTagPages = (createPage, tags) => {
+const createTagPages = async (createPage, tags) => {
   const template = path.resolve("src/templates/tag.js");
   const prefix = "/tag";
 
-  tags.map((tag, index) => {
+  Promise.all(tags.map( async (tag, index) => {
     return createPage({
       path: `${prefix}/${lodash.kebabCase(tag.fieldValue)}`,
       component: template,
@@ -106,14 +100,14 @@ const createTagPages = (createPage, tags) => {
         tag: tag.fieldValue,
       },
     });
-  });
+  }));
 };
 
-const createCategoryPages = (createPage, categories) => {
+const createCategoryPages = async (createPage, categories) => {
   const template = path.resolve("src/templates/category.js");
   const prefix = "/category";
 
-  categories.map((category, index) => {
+  Promise.all(categories.map( async (category, index) => {
     return createPage({
       path: `${prefix}/${lodash.kebabCase(category.fieldValue)}`,
       component: template,
@@ -121,14 +115,14 @@ const createCategoryPages = (createPage, categories) => {
         category: category.fieldValue,
       },
     });
-  });
+  }));
 };
 
-const createAuthorPages = (createPage, authors) => {
+const createAuthorPages = async (createPage, authors) => {
   const template = path.resolve("src/templates/author.js");
   const prefix = "/author";
 
-  authors.map(({node}, index) => {
+  Promise.all(authors.map( async ({node}, index) => {
     const currentPath = node.id;
 
     return createPage({
@@ -138,5 +132,5 @@ const createAuthorPages = (createPage, authors) => {
         currentPath: currentPath,
       },
     });
-  });
+  }));
 };

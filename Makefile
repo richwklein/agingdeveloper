@@ -42,6 +42,7 @@ else
 	@echo "Could not find build directory. Run 'make build' first."
 endif
 
+
 check: ## Run tests to check build
 	@echo "Running tests."
 	@npm run test

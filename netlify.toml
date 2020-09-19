@@ -1,9 +1,14 @@
 [build]
   base = "/"
-  publish = "public/"
+  publish = "public"
   command = "npm run build:ci"
   environment = {NODE_VERSION = "10.16.0", RUBY_VERSION="2.6.2"}
 
+[[plugins]]
+  package = "netlify-plugin-gatsby-cache"
+
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
 
 [[redirects]]
   from = "/archive/*"
@@ -30,5 +35,3 @@
   to = "/article/2020-07-21-intro"
   status = 302
 
-[[plugins]]
-  package = "netlify-plugin-submit-sitemap"
