@@ -1,0 +1,21 @@
+html {
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+html,
+body,
+#___gatsby,
+#gatsby-focus-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+body,
+#___gatsby,
+#gatsby-focus-wrapper {
+  flex-grow: 1;
+}
+
+pre[class*="language-"] {
+  border-radius: 6px;
+}

@@ -1,6 +1,5 @@
-buildDir := public
+buildDir :=public
 modulesDir :=node_modules
-cacheDir :=.cache
 lockFile :=package-lock.json
 
 .DEFAULT_GOAL := help
@@ -12,23 +11,24 @@ help:
 install: ## Install npm dependencies
 	@echo "Installing Node dependencies."
 	@npm install
-	@npm install -g prettier
 
 uninstall: clean ## Uninstall npm dependencies
-	@echo "Removing $(cacheDir) directory."
-	rm -rdf $(cacheDir)
 	@echo "Uninstalling npm dependencies."
-	rm -rdf $(modulesDir)
+	@rm -rdf $(modulesDir)
 	@echo "Removing package lock file."
-	rm -f package-lock.json
+	@rm -f package-lock.json
 
 build: ## Create a production build
 	@echo "Creating production build."
 	@npm run build
 
+build-ci: ## Create a ci build
+	@echo "Creating a CI build"
+	@npm run build:ci
+	
 clean: ## Remove the build directory
-	@echo "Removing $(buildDir) directory."
-	rm -rdf $(buildDir)
+	@echo "Removing build directories."
+	@npm run clean
 
 develop: ## Start the development server
 	@echo "Starting the development server."
@@ -42,12 +42,15 @@ else
 	@echo "Could not find build directory. Run 'make build' first."
 endif
 
-format: ## Format the code
-	@echo "Formatting code."
-	@npm run format
-
 
 check: ## Run tests to check build
 	@echo "Running tests."
 	@npm run test
 
+format: ## Format source code
+	@echo "Formating source code."
+	@npm run format
+
+lint: ## Lint source code
+	@echo "Linting source code."
+	@npm run lint

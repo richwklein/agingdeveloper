@@ -1,0 +1,34 @@
+[build]
+  base = "/"
+  publish = "public/"
+  command = "npm run build:ci"
+  environment = {NODE_VERSION = "10.16.0", RUBY_VERSION="2.6.2"}
+
+
+[[redirects]]
+  from = "/archive/*"
+  to = "/article/:splat"
+  status = 302
+
+[[redirects]]
+  from = "/article/2020/08/14/default-http-config"
+  to = "/article/2020-08-14-default-http-config"
+  status = 302
+
+[[redirects]]
+  from = "/article/2020/08/08/custom-domain"
+  to = "/article/2020-08-08-custom-domain"
+  status = 302
+
+[[redirects]]
+  from = "/article/2020/07/26/false-start"
+  to = "/article/2020-07-26-false-start"
+  status = 302
+
+[[redirects]]
+  from = "/article/2020/07/21/intro"
+  to = "/article/2020-07-21-intro"
+  status = 302
+
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"

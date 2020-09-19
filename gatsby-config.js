@@ -3,85 +3,115 @@
  *
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
-
 const {
-  NODE_ENV,
   ANALYTICS_TRACKING_ID,
-  URL: NETLIFY_SITE_URL = "https://agingdeveloper.com",
-  DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
-  CONTEXT: NETLIFY_ENV = NODE_ENV
+  URL: SITE_URL = "https://agingdeveloper.com",
+  DEPLOY_PRIME_URL: DEPLOY_URL = SITE_URL,
+  CONTEXT: DEPLOY_CONTEXT = "deploy-preview",
 } = process.env;
 
-const siteUrl =
-  NETLIFY_ENV === "production" ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
-const analyticsTrackingId = ANALYTICS_TRACKING_ID || null;
+const siteUrl = DEPLOY_CONTEXT === "production" ? SITE_URL : DEPLOY_URL;
+const analyticsTrackingId = ANALYTICS_TRACKING_ID || "";
 
 module.exports = {
   siteMetadata: {
     siteUrl: siteUrl,
-    siteTitle: "The Aging Developer",
-    social: {
-      facebook: "https://www.facebook.com/richwklein",
-      twitter: "https://twitter.com/richwklein",
-      instagram: "https://www.instagram.com/richwklein/",
-      linkedin: "https://www.linkedin.com/in/richwklein/",
-      github: "http://github.com/richwklein/"
-    }
+    title: "The Aging Developer",
+    description: "for growing old in the software development community",
+    repository: "https://github.com/richwklein/agingdeveloper",
+  },
+  mapping: {
+    "Mdx.frontmatter.author": "AuthorYaml",
   },
   plugins: [
-    "gatsby-plugin-sitemap",
+    "gatsby-plugin-material-ui",
+    "gatsby-plugin-react-helmet",
     "gatsby-plugin-sharp",
+    "gatsby-plugin-sitemap",
+    "gatsby-remark-images",
     "gatsby-transformer-sharp",
-    "gatsby-transformer-remark",
+    "gatsby-transformer-yaml",
     {
-      resolve: "gatsby-plugin-robots-txt",
+      resolve: "gatsby-plugin-disqus",
       options: {
-        resolveEnv: () => NETLIFY_ENV,
-        host: siteUrl,
-        sitemap: siteUrl + "/sitemap.xml",
-        env: {
-          production: {
-            policy: [{ userAgent: "*" }]
-          },
-          "branch-deploy": {
-            policy: [{ userAgent: "*", disallow: ["/"] }],
-            sitemap: null,
-            host: null
-          },
-          "deploy-preview": {
-            policy: [{ userAgent: "*", disallow: ["/"] }],
-            sitemap: null,
-            host: null
-          }
-        }
-      }
+        shortname: "agingdeveloper",
+      },
     },
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
         trackingId: analyticsTrackingId,
-        respectDNT: true
-      }
+        anonymize: true,
+        respectDNT: true,
+      },
     },
     {
-      resolve: "gatsby-plugin-canonical-urls",
+      resolve: "gatsby-plugin-mdx",
       options: {
-        siteUrl: siteUrl
-      }
+        extensions: [".mdx", ".md"],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: "gatsby-remark-images",
+            options: {
+              maxWidth: 1280,
+              maxHeight: 720,
+            },
+          },
+          {
+            resolve: "gatsby-remark-prismjs",
+            options: {
+              classPrefix: "language-",
+              showLineNumbers: false,
+              noInlineHighlight: false,
+            },
+          },
+        ],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-prefetch-google-fonts",
+      options: {
+        fonts: [
+          {family: "Roboto"},
+          {family: "Merriweather"},
+          {family: "Work Sans"},
+        ],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-react-helmet-canonical-urls",
+      options: {
+        siteUrl: siteUrl,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        resolveEnv: () => DEPLOY_CONTEXT,
+        host: siteUrl,
+        sitemap: siteUrl + "/sitemap.xml",
+        env: {
+          "production": {
+            policy: [{userAgent: "*", allow: ["/"]}],
+          },
+          "branch-deploy": {
+            policy: [{userAgent: "*", disallow: ["/"]}],
+            sitemap: null,
+            host: null,
+          },
+          "deploy-preview": {
+            policy: [{userAgent: "*", disallow: ["/"]}],
+            sitemap: null,
+            host: null,
+          },
+        },
+      },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "images",
-        path: `${__dirname}/content/images`
-      }
+        path: `${__dirname}/content`,
+      },
     },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "articles",
-        path: `${__dirname}/content/articles`
-      }
-    }
-  ]
+  ],
 };
