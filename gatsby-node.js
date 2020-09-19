@@ -59,7 +59,7 @@ const createArticlePages = async (createPage, articles) => {
   const template = path.resolve("src/templates/article.js");
   const prefix = "/article";
 
-  articles.map(({node}, index) => {
+  Promise.all(articles.map( async ({node}, index) => {
     // Use a permalink based on the frontmatter url in each markdown file header.
     const currentPath = node.frontmatter.slug;
 
@@ -85,14 +85,14 @@ const createArticlePages = async (createPage, articles) => {
         nextPath,
       },
     });
-  });
+  }));
 };
 
 const createTagPages = async (createPage, tags) => {
   const template = path.resolve("src/templates/tag.js");
   const prefix = "/tag";
 
-  tags.map((tag, index) => {
+  Promise.all(tags.map( async (tag, index) => {
     return createPage({
       path: `${prefix}/${lodash.kebabCase(tag.fieldValue)}`,
       component: template,
@@ -100,14 +100,14 @@ const createTagPages = async (createPage, tags) => {
         tag: tag.fieldValue,
       },
     });
-  });
+  }));
 };
 
 const createCategoryPages = async (createPage, categories) => {
   const template = path.resolve("src/templates/category.js");
   const prefix = "/category";
 
-  categories.map((category, index) => {
+  Promise.all(categories.map( async (category, index) => {
     return createPage({
       path: `${prefix}/${lodash.kebabCase(category.fieldValue)}`,
       component: template,
@@ -115,14 +115,14 @@ const createCategoryPages = async (createPage, categories) => {
         category: category.fieldValue,
       },
     });
-  });
+  }));
 };
 
 const createAuthorPages = async (createPage, authors) => {
   const template = path.resolve("src/templates/author.js");
   const prefix = "/author";
 
-  authors.map(({node}, index) => {
+  Promise.all(authors.map( async ({node}, index) => {
     const currentPath = node.id;
 
     return createPage({
@@ -132,5 +132,5 @@ const createAuthorPages = async (createPage, authors) => {
         currentPath: currentPath,
       },
     });
-  });
+  }));
 };
