@@ -1,5 +1,7 @@
 const path = require("path");
 const lodash = require("lodash");
+const Feed = require("feed").Feed;
+const fs = require("fs");
 
 // Create pages based on graph data and templates
 exports.createPages = async ({actions, graphql, reporter}) => {
@@ -42,6 +44,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
   `);
 
   if (result.errors) {
+    reporter.error(result.errors);
     reporter.panicOnBuild("Error while running GraphQL query.");
     return;
   }
@@ -99,8 +102,8 @@ const createTagPages = async (createPage, tags) => {
       context: {
         tag: tag.fieldValue,
       },
-    });
-  }));
+    }));
+  });
 };
 
 const createCategoryPages = async (createPage, categories) => {
@@ -133,4 +136,110 @@ const createAuthorPages = async (createPage, authors) => {
       },
     });
   }));
+};
+
+exports.onPostBuild = async ({graphql, reporter}) => {
+  const publicPath = "./public";
+  const feedOptions = {
+    "rss": {
+      func: "rss2",
+      path: "/rss.xml",
+    },
+    "atom": {
+      func: "atom1",
+      path: "/atom.xml",
+    },
+    "json": {
+      func: "json1",
+      path: "/feed.json",
+    },
+  };
+
+  const result = await graphql(`
+    {
+      site {
+        siteMetadata {
+          siteUrl
+          title
+          description
+          category
+        }
+      }
+      file(relativePath: { eq: "image/avatar/wizard.jpg" }) {
+        childImageSharp {
+          fluid(maxWidth: 1232, maxHeight: 693, cropFocus: CENTER) {
+            src
+          }
+        }
+      }
+      allAuthorYaml(sort: { fields: name, order: DESC }) {
+        edges {
+          node {
+            id
+            name
+            email
+          }
+        }
+      }
+    }
+  `);
+
+  if (result.errors) {
+    reporter.error(result.errors);
+    reporter.panicOnBuild("Error while running GraphQL query.");
+    return;
+  }
+
+  const metadata = result.data.site.siteMetadata;
+  const image = result.data.file.childImageSharp.fluid.src;
+  const authors = result.data.allAuthorYaml.edges;
+
+  const feedLinks = {};
+  for (const [key, option] of Object.entries(feedOptions)) {
+    feedLinks[key] = `${metadata.siteUrl}${option.path}`;
+  }
+
+  const feed = new Feed({
+    title: metadata.title,
+    description: metadata.description,
+    id: metadata.siteUrl,
+    link: metadata.siteUrl,
+    language: "en",
+    image: `${metadata.siteUrl}${image}`,
+    favicon: `${metadata.siteUrl}/favicon.ico`,
+    feedLinks: feedLinks,
+  });
+
+  feed.addCategory(metadata.category);
+  authors.map(({node: {id, name, email}}) => {
+    return feed.addContributor({
+      name: name,
+      email: email,
+      link: `${metadata.siteUrl}/author/${id}`,
+    });
+  });
+
+  // TODO add items
+
+  const options = Object.values(feedOptions);
+  await Promise.all(
+      options.map(async (option) => {
+        const outputPath = path.join(publicPath, option.path);
+
+        return new Promise((resolve, reject) => {
+          fs.writeFile(
+              outputPath,
+              feed[option.func].call(),
+              {encoding: "utf8"},
+              (err) => {
+                if (err) {
+                  reject(err);
+                }
+                reporter.success(`Wrote ${option.path}`);
+                resolve();
+              },
+          );
+        });
+      }),
+  );
 };

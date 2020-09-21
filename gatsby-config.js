@@ -19,6 +19,7 @@ module.exports = {
     title: "The Aging Developer",
     description: "for growing old in the software development community",
     repository: "https://github.com/richwklein/agingdeveloper",
+    category: "Development",
   },
   mapping: {
     "Mdx.frontmatter.author": "AuthorYaml",

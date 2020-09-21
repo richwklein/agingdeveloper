@@ -6,6 +6,7 @@ import ArticleGrid from "../components/ArticleGrid";
 import Banner from "../components/Banner";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
+import FeedLinks from "../components/FeedLinks";
 
 
 const IndexPage = ({data}) => {
@@ -15,6 +16,7 @@ const IndexPage = ({data}) => {
 
   return (
     <Layout showLogoImage={false} banner={banner}>
+      <FeedLinks siteName={title} siteUrl={siteUrl} />
       <SEO
         title={title}
         description={subtitle}
