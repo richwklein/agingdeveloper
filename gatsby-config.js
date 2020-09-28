@@ -19,13 +19,12 @@ module.exports = {
     title: "The Aging Developer",
     description: "for growing old in the software development community",
     repository: "https://github.com/richwklein/agingdeveloper",
-    category: "Development",
+    category: "Technology",
   },
   mapping: {
     "Mdx.frontmatter.author": "AuthorYaml",
   },
   plugins: [
-    "gatsby-plugin-material-ui",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-remove-fingerprints",
     "gatsby-plugin-sharp",
@@ -45,6 +44,14 @@ module.exports = {
         trackingId: analyticsTrackingId,
         anonymize: true,
         respectDNT: true,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-material-ui",
+      options: {
+        stylesProvider: {
+          injectFirst: true,
+        },
       },
     },
     {
