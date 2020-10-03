@@ -86,8 +86,7 @@ starts out at $50 and regularly is on sale for less.
 
 ## Making a change
 
-[Others](https://www.androidhire.com/samsung-spamming-galaxy-devices-note-10-ads/)
-are taking [notice](https://www.androidpolice.com/2020/07/04/ads-are-taking-over-samsungs-galaxy-smartphones-and-im-fed-up/) 
+Others are taking [notice](https://www.androidpolice.com/2020/07/04/ads-are-taking-over-samsungs-galaxy-smartphones-and-im-fed-up/) 
 of the way Samsung is treating it's customers and are not happy about it either. 
 Their [TV](https://www.flatpanelshd.com/news.php?subaction=showfull&id=1583755244) 
 customers are being treated in much the same way.
