@@ -88,7 +88,7 @@ export const pageQuery = graphql`
     file(relativePath: { eq: "image/randy-laybourne-Ens_NuuHVO4-unsplash.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 1232, maxHeight: 693, cropFocus: CENTER) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
