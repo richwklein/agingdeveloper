@@ -13,8 +13,8 @@ import "../styles/layout.css";
 const useStyles = makeStyles((theme) => ({
   topButton: {
     position: "fixed",
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
+    bottom: theme.spacing(2.5),
+    right: theme.spacing(3),
   },
 }));
 
@@ -85,7 +85,7 @@ const Layout = ({showLogoImage = true, banner, children}) => {
       <InnerBox flexGrow={1} padding={3}>
         {children}
       </InnerBox>
-      <BottomBar copyright={title} repository={repository} />
+      <BottomBar title={title} repository={repository} />
       <ScrollTop hasScroll={hasScroll} />
       <NavDrawer open={isDrawerOpen} onClose={handleToggleDrawer} />
     </Fragment>

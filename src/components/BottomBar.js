@@ -1,8 +1,8 @@
 import React from "react";
-import {Box, Typography} from "@material-ui/core";
+import {Box, Grid, IconButton, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import ExternalLink from "./ExternalLink";
-import InnerBox from "./InnerBox";
+import {RssFeed} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -21,17 +21,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BottomBar = ({copyright, repository}) => {
+const BottomBar = ({title, repository}) => {
   const classes = useStyles();
 
   return (
-    <Box component="footer" className={classes.footer}>
-      <InnerBox>
+    <Grid container component="footer" className={classes.footer}>
+      <Grid item sm={12} md={4}>
+        <IconButton component={ExternalLink}
+          title={`${title} RSS`}
+          to={"/rss.xml"}>
+          <RssFeed color="secondary" />
+        </IconButton>
+      </Grid>
+      <Grid item sm={12} md={4}>
         <Box>
-          <Box textAlign="center" marginTop={1}>
+          <Box textAlign="center">
             <Typography variant="caption">
               &copy; {new Date().getFullYear()}{" "}
-              <ExternalLink to={repository}>&nbsp;{copyright}</ExternalLink>
+              <ExternalLink to={repository}>&nbsp;{title}</ExternalLink>
             </Typography>
           </Box>
           <Box textAlign="center">
@@ -41,8 +48,9 @@ const BottomBar = ({copyright, repository}) => {
             <ExternalLink to="https://app.netlify.com">Netlify</ExternalLink>
           </Box>
         </Box>
-      </InnerBox>
-    </Box>
+      </Grid>
+      <Grid item sm={12} md={4}></Grid>
+    </Grid>
   );
 };
 
