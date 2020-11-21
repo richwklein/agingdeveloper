@@ -81,7 +81,7 @@ const AuthorBanner = ({author}) => {
     </Banner>);
 };
 
-export default ({data, pageContext}) => {
+const AuthorTemplate = ({data, pageContext}) => {
   const banner = <AuthorBanner author={data.authorYaml} />;
   return (
     <Layout showLogoImage={true} banner={banner}>
@@ -142,3 +142,5 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export default AuthorTemplate;
