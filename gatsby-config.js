@@ -11,7 +11,7 @@ const {
 } = process.env;
 
 const siteUrl = DEPLOY_CONTEXT === "production" ? SITE_URL : DEPLOY_URL;
-const analyticsTrackingId = ANALYTICS_TRACKING_ID || "";
+const analyticsTrackingId = ANALYTICS_TRACKING_ID || "INVALID";
 
 module.exports = {
   siteMetadata: {
@@ -79,13 +79,11 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-prefetch-google-fonts",
+      resolve: "gatsby-plugin-web-font-loader",
       options: {
-        fonts: [
-          {family: "Roboto"},
-          {family: "Merriweather"},
-          {family: "Work Sans"},
-        ],
+        google: {
+          families: ["Roboto", "Merriweather", "Work Sans"],
+        },
       },
     },
     {
