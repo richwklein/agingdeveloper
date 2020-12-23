@@ -11,7 +11,7 @@ tags:
   - covid
   - virtual
 category: technology
-date: '2020-11-22'
+date: '2020-12-23'
 ---
 
 I was recently listening to a [Twenty Thousand Hertz](https://www.20k.org) podcast.
