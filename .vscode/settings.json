@@ -9,11 +9,19 @@
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
   "frontMatter.taxonomy.tags": [
+    "authentication",
+    "authn",
+    "authorization",
+    "authz",
     "bluehost",
     "build",
+    "casbin",
+    "choir",
     "config",
+    "covid",
     "defaults",
     "dependency",
+    "distributed",
     "dns",
     "domain",
     "emerge",
@@ -25,20 +33,31 @@
     "http",
     "intro",
     "java",
+    "jwt",
     "material-ui",
     "microservice",
     "misstep",
+    "music",
     "name",
     "netlify",
+    "oauth",
+    "opa",
     "participation",
+    "podcast",
+    "policy",
     "public",
     "react",
     "reason",
-    "tech"
+    "tech",
+    "virtual"
   ],
   "frontMatter.taxonomy.categories": [
     "microservices",
     "site"
   ],
   "frontMatter.taxonomy.dateFormat": "yyyy-MM-dd",
+  "cSpell.words": [
+    "microservice",
+    "microservices"
+  ],
 }
