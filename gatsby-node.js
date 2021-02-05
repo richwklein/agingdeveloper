@@ -190,6 +190,7 @@ exports.onPostBuild = async ({graphql, reporter}) => {
       ) {
         edges {
           node {
+            html
             frontmatter {
               slug
               title
@@ -267,6 +268,7 @@ exports.onPostBuild = async ({graphql, reporter}) => {
       description: description,
       date: asDate,
       published: asDate,
+      content: node.html,
       author: {
         name: author.name,
         email: author.email,
