@@ -12,14 +12,18 @@ const {
 
 const siteUrl = DEPLOY_CONTEXT === "production" ? SITE_URL : DEPLOY_URL;
 const analyticsTrackingId = ANALYTICS_TRACKING_ID || "INVALID";
+const title = "The Aging Developer";
+const description = "for growing old in the software development community";
+const category = "Technology";
+const lang = "en-US";
 
 module.exports = {
   siteMetadata: {
     siteUrl: siteUrl,
-    title: "The Aging Developer",
-    description: "for growing old in the software development community",
+    title: title,
+    description: description,
     repository: "https://github.com/richwklein/agingdeveloper",
-    category: "Technology",
+    category: category,
   },
   mapping: {
     "Mdx.frontmatter.author": "AuthorYaml",
@@ -44,6 +48,22 @@ module.exports = {
         trackingId: analyticsTrackingId,
         anonymize: true,
         respectDNT: true,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        name: title,
+        short_name: title,
+        description: description,
+        categories: [category],
+        start_url: "/",
+        background_color: "#fff",
+        theme_color: "#37474f",
+        display: "browser",
+        lang: lang,
+        icon: "content/image/favicon.jpg",
+        cache_busting_mode: "none",
       },
     },
     {
@@ -76,6 +96,14 @@ module.exports = {
             },
           },
         ],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-offline",
+      options: {
+        workboxConfig: {
+          globPatterns: ["**/icons/*"],
+        },
       },
     },
     {
