@@ -26,14 +26,14 @@ const ButtonGrid = ({group, pathPrefix}) => {
               variant="contained"
               fullWidth
               component={Link}
-              to={`${pathPrefix}/${kebabCase(item.fieldValue)}`}
+              to={`${pathPrefix}/${kebabCase(item.value)}`}
               endIcon={<Badge
                 badgeContent={item.totalCount}
                 color="secondary"
                 max={999}
                 overlap="rectangle"
                 classes={{anchorOriginTopRightRectangle: classes.badge}} />}>
-              {item.fieldValue}
+              {item.value}
             </Button>
           </Grid>
         );
