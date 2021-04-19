@@ -10,6 +10,11 @@
 [[plugins]]
   package = "netlify-plugin-submit-sitemap"
 
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Permissions-Policy = "interest-cohort=()"
+
 [[redirects]]
   from = "/archive/*"
   to = "/article/:splat"
