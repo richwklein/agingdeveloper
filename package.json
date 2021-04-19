@@ -28,7 +28,7 @@
     "gatsby-plugin-material-ui": "^2.1.6",
     "gatsby-plugin-mdx": "^1.10.0",
     "gatsby-plugin-offline": "^3.10.0",
-    "gatsby-plugin-react-helmet": "^3.5.0",
+    "gatsby-plugin-react-helmet": "^4.3.0",
     "gatsby-plugin-react-helmet-canonical-urls": "^1.4.0",
     "gatsby-plugin-remove-fingerprints": "0.0.2",
     "gatsby-plugin-robots-txt": "^1.5.1",
