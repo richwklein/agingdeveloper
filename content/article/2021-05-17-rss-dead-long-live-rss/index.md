@@ -27,7 +27,7 @@ head of the site to allow the [auto-discovery](https://www.rssboard.org/rss-auto
 The &quot;feeds&quot; could then be used for various purposes one of which is that they were often aggregated in a news 
 aggregator/reader.
 
-RSS was at it's height in popularity during the early Web 2.0 days prior to walled gardens such as facebook taking over.
+RSS was at it's height in popularity during the early Web 2.0 days prior to walled gardens such as Facebook taking over.
 During this time the Chrome & Firefox browsers built in support for these feeds. Google, Digg, and Mac had very popular 
 feed readers. It was all the rage.
 
