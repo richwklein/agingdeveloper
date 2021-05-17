@@ -22,7 +22,7 @@ lastmod: '2021-05-17'
 
 ## What is RSS?
 RSS, RDF Site Summary, Really Simple Syndication, Rich Site Syndication, etc... is a computer readable file format 
-that websites publish to notify systems that there has been an update to the site. A link element was placed in the 
+that websites publish to notify systems that there has been an update to the site. A link element is placed in the 
 head of the site to allow the [auto-discovery](https://www.rssboard.org/rss-autodiscovery) of these files. 
 The &quot;feeds&quot; could then be used for various purposes one of which is that they were often aggregated in a news 
 aggregator/reader.
