@@ -2,7 +2,7 @@
   base = "/"
   publish = "public"
   command = "npm run build:ci"
-  environment = {NODE_VERSION = "14.15.3", RUBY_VERSION="2.6.2"}
+  environment = {NODE_VERSION = "14.15.3", NPM_VERSION = "7.5.2", RUBY_VERSION="2.6.2"}
 
 [[plugins]]
   package = "netlify-plugin-gatsby-cache"
