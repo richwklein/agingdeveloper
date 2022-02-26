@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "scripts": {
     "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build",
-    "build:ci": "npm install --legacy-peer-deps && npm run format && npm run test && npm run build",
+    "build:ci": "npm run format && npm run test && npm run build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
     "format": "eslint --fix 'src/**/*.{js,jsx}'",
