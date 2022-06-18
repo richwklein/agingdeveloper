@@ -51,7 +51,7 @@ shelf solutions for authentication that can be integrated fairly easily.
 
 An access control model is the method used in authorization systems to determine
 who or what should be granted or denied access to a resource. When talking about 
-the "who or what" , I will refer to them as a *principal*. Regardless of the 
+the "who or what", I will refer to them as a *principal*. Regardless of the 
 system that is being used for authorization one of these five 
 &quot;Access Control&quot; models will likely be used. I have the most experience 
 with discretionary and role based access control and those will be used as 
@@ -135,7 +135,8 @@ on an authorization system these parts should be kept in mind.
 <dt>Administration Point</dt>
 <dd>
   The <em>Administration Point</em> is the place where the policies for an
-  access control method are authored and/or managed. 
+  access control method are authored and/or managed. This may also be the point
+  where the information to make a decision is managed. 
 </dd>
 </dl>
 
@@ -146,7 +147,7 @@ off these parts.
 
 ![XACML Diagram](xacml-axiomatic-diagram.png)
 
-If any of the above authorizatoin points is not co-located it is important that 
+If any of the above authorization points is not co-located it is important that 
 the communication between them is secured. It is also critical that if the 
 communication fails between the points that the enforcement fails in the way 
 that is most important to your application. In a lot of applications this would 
@@ -155,7 +156,7 @@ mean to *deny* access by default.
 ##  Authorization System Patterns
 
 When doing authorization in microservices there are a few approaches that emerge.
-It's worth spending a little bit of time on each approach as since they have 
+It's worth spending a little bit of time on each approach since they have 
 various pros and cons. It also allows us to examine where each part of the 
 authorization system is implemented. 
 
@@ -163,7 +164,8 @@ authorization system is implemented.
 
 In the local authorization pattern the individual resource services are 
 responsible for developing their own authentication and authorization of a 
-principal and make all authorization decisions. 
+principal. The resource service is responsible for making all it's authorization 
+decisions. 
 
 #### Pros:
 
@@ -179,8 +181,8 @@ principal and make all authorization decisions.
 ### Centralized Authorization 
 
 In the centralized authorization pattern then the resource services hands off
-all responsibility for authorization to a centralized service. The decision
-is made at the centralized service and returned.
+all responsibility for authentication and authorization to a centralized service. 
+The access control decision is made at the centralized service and returned.
 
 #### Pros
 
@@ -214,7 +216,7 @@ maintained at a central service.
 **Local Decision / Centralized Policy** systems have been a growing trend in
 recent years. These types of authorization systems have a meta-model that is 
 used to describe what access control mechanisms are in use by your resource 
-services (policies). Information can they be applied against the meta-model 
+services (policies). Information can then be applied against the meta-model 
 to make an authorization decision.  
 
 I believe these policy systems will be the most common pattern for doing 
@@ -227,5 +229,5 @@ do authorization using some policy based authorization systems:
 [Casbin](https://casbin.org/) and [Open Policy Agent](https://www.openpolicyagent.org/).
 
 I'll demonstrate what it looks like to model some of the various forms of 
-access control and how you might gather information that needs to be supplied
-to the authz system so that it can produce an authorization decision.
+access control and how you might gather the information that needs to be supplied
+to the authz system so that it can produce an access control decision.
