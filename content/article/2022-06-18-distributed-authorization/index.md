@@ -1,6 +1,6 @@
 ---
-slug: 2020-11-22-distributed-authorization
-title: Authorization in Distributed Systems - Part I
+slug: 2022-06-18-distributed-authorization
+title: Authorization in Distributed Systems
 description: Ideas on how authorization can be done in distributed systems.
 author: richwklein
 image: parsoa-khorsand-Dd6n63H9szw-unsplash.jpg
@@ -9,16 +9,11 @@ tags:
   - authentication
   - authz
   - authn
-  - java
   - microservice
   - distributed
-  - casbin
-  - opa
   - policy
-  - oauth
-  - jwt
 category: microservices
-date: "2020-11-22"
+date: "2022-06-18"
 ---
 
 Authorization, the granting or denying of access to a resource, is something
@@ -31,8 +26,8 @@ having dependencies on other services and the performance implications that may
 have.
 
 I have spent large portions of my career on authorization related development
-and it is something that I can put a spotlight on here. This article explores
-the some of the basics of authorization, what it means, and a few ways to do
+and it is something that I can put a spotlight on here. This article explores 
+some of the basics of authorization, what it means, and a few ways to do
 authorization in microservice environments. Subsequent articles will follow-up
 with some more concrete examples using different libraries and frameworks.
 
@@ -55,12 +50,12 @@ shelf solutions for authentication that can be integrated fairly easily.
 ## Common Access Control Models
 
 An access control model is the method used in authorization systems to determine
-who or what should be granted or denied access to a resource. Regardless of the 
+who or what should be granted or denied access to a resource. When talking about 
+the "who or what" , I will refer to them as a *principal*. Regardless of the 
 system that is being used for authorization one of these five 
 &quot;Access Control&quot; models will likely be used. I have the most experience 
 with discretionary and role based access control and those will be used as 
-examples in the follow-up articles.
-
+examples in the follow-up articles. 
 ### Mandatory Access Control
 
 <abbr title="Mandatory Access Control">MAC</abbr> is a static access control method.
@@ -72,15 +67,18 @@ an example of a MAC implementation.
 ### Discretionary Access Control
 
 When using the <abbr title="Discretinary Access Control">DAC</abbr> method the
-owner of the resource decides who can access it. An <abbr title="Access Control List">ACL</abbr>
+**owner** of the resource decides who can access it. An <abbr title="Access Control List">ACL</abbr>
 controls who has access to the resource and the data owner sets the permissions.
-The permissions identity what actions the user can perform on the resource.
+The permissions identify what actions the principal can perform on the resource.
+The file system is a classic example of a DAC. The permissions in that case are 
+"read", "write", and "execute".
 
 ### Role Based Access Control
 
 When using <abbr title="Role Based Access Control">RBAC</abbr> access is determined
-based on the role a user is given. The role may be a job position, group membership,
-or security level. The role is granted or denied access to the resource.
+based on the role a principal is given. The role may be a job position, 
+group membership, or security level. The role is granted or denied access to the 
+resource.
 
 ### Rule-Based Access Control
 
@@ -109,26 +107,35 @@ on an authorization system these parts should be kept in mind.
 <dt>Enforcement Point</dt>
 <dd>
   The <em>Enforcement Point</em> is the spot in your software where you are going
-  to enforce an authorization decision. This may be in the client when deciding to
-  show or hide elements. It would also likely be on the server and the control or 
-  service layer. 
+  to enforce an authorization decision. In a client server application there 
+  would likely be two enforcement points. In the client when deciding to
+  show or hide elements based on an authorization decision. For example disabling
+  a create button if a user doesn't have permission to create an object. The
+  other point would be on the server, usually at the control or service layer.
+  You must always double check authorization at the service layer as someone
+  could simply craft the request without actually using the UI elements. 
 </dd>
 <dt>Decision Point</dt>
 <dd>
   The <em>Decision Point</em> is the spot where the decision is made to grant
   access to a resource. This may be the same place as enforcement or it could
-  be somewhere completely different.
+  be somewhere completely different. The decision point is responsible for
+  gathering all the information required to make an authorization decision, 
+  making that decision, and returning the results to the enforcement point so 
+  that the decision can be enforced.
 </dd>
 <dt>Information Point</dt>
 <dd>
   The <em>Information Point</em> is where all the information that is needed to
   make an authorization decision are gathered. It can be co-located with other 
-  points in the authorization process or it can be separate.
+  points in the authorization process or it can be separate. In a MAC control
+  system the information needed would be the access level of the resource being 
+  accessed and the level of the principal doing the action.
 </dd>
 <dt>Administration Point</dt>
 <dd>
-  The <em>Administration Point</em> is the place where the policy is authored
-  and/or managed that authorization decisions are based on. 
+  The <em>Administration Point</em> is the place where the policies for an
+  access control method are authored and/or managed. 
 </dd>
 </dl>
 
@@ -139,6 +146,12 @@ off these parts.
 
 ![XACML Diagram](xacml-axiomatic-diagram.png)
 
+If any of the above authorizatoin points is not co-located it is important that 
+the communication between them is secured. It is also critical that if the 
+communication fails between the points that the enforcement fails in the way 
+that is most important to your application. In a lot of applications this would 
+mean to *deny* access by default.
+
 ##  Authorization System Patterns
 
 When doing authorization in microservices there are a few approaches that emerge.
@@ -148,7 +161,71 @@ authorization system is implemented.
 
 ### Local Authorization
 
+In the local authorization pattern the individual resource services are 
+responsible for developing their own authentication and authorization of a 
+principal and make all authorization decisions. 
+
+#### Pros:
+
+* Each service can implement the authorization mechanisms best suited for that service.
+* There is no communication overhead or dependency on other services.
+
+#### Cons:
+
+* It's hard to understand why a principal has access to one resource and not another.
+* Each team needs to know and understand the access controls for the system.
+* Changing the access control system globally becomes extremely difficult.
+
 ### Centralized Authorization 
 
-### Local Enforcement / Centralized Policies
+In the centralized authorization pattern then the resource services hands off
+all responsibility for authorization to a centralized service. The decision
+is made at the centralized service and returned.
 
+#### Pros
+
+* There is less duplicate code.
+* It's easier to determine why a principal was given access to a resource.
+* It's easier to make global changes to those mechanisms.
+
+#### Cons
+
+* There is an extra network request involved in accessing a resource.
+* Resource services are dependent on another service.
+
+### Local Decision / Centralized Policy
+
+This is a hybrid approach that combines the strengths of the previous two 
+patterns. In this pattern the decision to allow access to a resource is made at 
+the resource service, yet the access control mechanisms are defined and 
+maintained at a central service.
+
+#### Pros
+
+* There is no network request when making decisions.
+* There is less duplicate code.
+* It's easier to determine why a principal was given access to a resource.
+* It's easier to make global changes to those mechanisms.
+
+#### Cons
+
+* All information for authorization needs to be present at the resource service.
+
+**Local Decision / Centralized Policy** systems have been a growing trend in
+recent years. These types of authorization systems have a meta-model that is 
+used to describe what access control mechanisms are in use by your resource 
+services (policies). Information can they be applied against the meta-model 
+to make an authorization decision.  
+
+I believe these policy systems will be the most common pattern for doing 
+authorization in microservices moving forward.
+
+## Follow Up
+
+In my next article in this series I am going to explore what it looks like to 
+do authorization using some policy based authorization systems: 
+[Casbin](https://casbin.org/) and [Open Policy Agent](https://www.openpolicyagent.org/).
+
+I'll demonstrate what it looks like to model some of the various forms of 
+access control and how you might gather information that needs to be supplied
+to the authz system so that it can produce an authorization decision.
