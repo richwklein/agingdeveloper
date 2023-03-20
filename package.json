@@ -35,8 +35,8 @@
     "gatsby-plugin-sharp": "^2.14.1",
     "gatsby-plugin-sitemap": "^2.7.0",
     "gatsby-plugin-web-font-loader": "^1.0.4",
-    "gatsby-remark-images": "^3.6.0",
-    "gatsby-remark-prismjs": "^3.8.0",
+    "gatsby-remark-images": "^7.7.0",
+    "gatsby-remark-prismjs": "^7.7.0",
     "gatsby-source-filesystem": "^2.6.0",
     "gatsby-transformer-sharp": "^2.7.0",
     "gatsby-transformer-yaml": "^2.6.0",
@@ -50,7 +50,7 @@
   "devDependencies": {
     "eslint": "^8.36.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-config-react-app": "^6.0.0",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "gatsby-cli": "^2.14.0"
