@@ -38,7 +38,7 @@
     "gatsby-remark-images": "^7.7.0",
     "gatsby-remark-prismjs": "^7.7.0",
     "gatsby-source-filesystem": "^2.6.0",
-    "gatsby-transformer-sharp": "^2.7.0",
+    "gatsby-transformer-sharp": "^5.9.0",
     "gatsby-transformer-yaml": "^2.6.0",
     "has-scroll-hook": "^1.0.3",
     "moment": "^2.29.1",
