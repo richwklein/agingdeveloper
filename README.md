@@ -1,4 +1,3 @@
-
 # Aging Developer
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9fff03eb-d9c8-48d1-887d-11aea21246cd/deploy-status)](https://app.netlify.com/sites/agingdeveloper/deploys)
@@ -37,74 +36,25 @@ Most javascript developers will likely already have the tools installed, but her
 up just in case you do not. I'm using brew here since I develop on a Mac. Windows developers will have to use other 
 package managers.
 
-1. **Install node and npm**
+1. **Install dev tools**
+
+I use *asdf* to install dev tools. Use the [getting started](https://asdf-vm.com/guide/getting-started.html) page to make sure
+it is installed and set up correctly.
+
+Once you have asdf installed you can use that to install node & npm. These are setup as being the global versions, but with asdf
+you could just use the version locally.
 
 ```shell
-brew install node
+asdf plugin add nodejs
+asdf install nodejs 18.9.1
+asdf global nodejs 18.9.1
 ```
 
 2. **Install dependencies**
 
 ```shell
 cd agingdeveloper/
-make install
+npm install
 ```
 
 This will install local npm dependencies.
-
-1. **Start the development server**
-
-```shell
-make develop
-```
-
-5. **Open the source code and start editing**
-
-Gatsby will start a hot-reloading development environment accessible by default at `http://localhost:8000`.
-
-> You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data.
-
-Try editing the JavaScript pages in src/pages. Saved changes will live reload in the browser.
-
-## Create a build.
-
-```cli
-make build
-```
-
-Gatsby will perform an optimized production build for your site, generating static HTML and per-route JavaScript code bundles.
-
-## Serve the build locally.
-
-```cli
-make serve
-```
-
-Gatsby starts a local HTML server for testing your built site. Remember to build your site using gatsby build before using this command.
-
-## Create a CI build
-
-```cli
-make build-ci
-```
-
-This will make sure source code is formatted, run tests, then create a build.
-
-## VSCode Settings
-
-VSCode is the main editor that is used on this site. ESLint is used for linting and formatting. 
-These settings are included in the `.vscode` folder in the root of the project.
-They should be used for a good workflow where lint issues are automatically corrected on save.
-
-```json
-{
-    "editor.tabCompletion": "on",
-    "editor.rulers": [80, 100, 120],
-    "editor.tabSize": 2,
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "eslint.format.enable": true,
-    "eslint.lintTask.enable": true,
-}
-```

@@ -1,19 +1,7 @@
-import {createMuiTheme} from "@material-ui/core/styles";
+import { createTheme } from '@mui/material/styles';
 
-export default createMuiTheme({
+const theme = createTheme({
   typography: {
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
   },
   palette: {
     primary: {
@@ -30,3 +18,5 @@ export default createMuiTheme({
     },
   },
 });
+
+export default theme;
