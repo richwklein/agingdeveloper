@@ -15,11 +15,6 @@ describe("ExternalLink tests", () => {
 
   test("That it renders correctly.", () => {
     const {getByTestId} = renderComponent();
-    const link = getByTestId("external-link");
-    expect(link).toHaveTextContent("Test Content");
-    expect(link.getAttribute("href")).toBe("https://example.com");
-    expect(link.getAttribute("target")).toBe("_blank");
-    expect(link.getAttribute("rel")).toBe("noopener noreferrer");
-    expect(link).toHaveClass("MuiLink-root");
+    expect(getByTestId("external-link")).toMatchSnapshot();
   });
 });
