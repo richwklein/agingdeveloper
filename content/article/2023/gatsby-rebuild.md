@@ -45,3 +45,12 @@ from JSS to [Emotion](https://emotion.sh/docs/introduction) for
 the default styling. This meant a whole new syntax when wanting to override the theme.
 
 - testing
+
+The first time creating this site, I didn't bother creating unit tests. It was a personal project 
+being built in my spare time. It didn't feel worthwhile to create them. This time around, I've started adding
+unit tests of at least the components. I figure these will give me a little assurance that dependency version
+bumps have some automated testing on them. 
+
+Part of the hesitancy with creating tests before was around all the scaffolding needed to stand up basic unit
+tests. That is still a complaint. I needed to install 7 dev packages, 4 configuration files, and two mock
+files just to get some very basic testing going.
