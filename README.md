@@ -58,3 +58,21 @@ npm install
 ```
 
 This will install local npm dependencies.
+
+## VSCode Settings
+
+VSCode is the main editor that is used on this site. ESLint is used for linting and formatting. 
+These settings are included in the `.vscode` folder in the root of the project.
+They should be used for a good workflow where lint issues are automatically corrected on save.
+
+```json
+{
+    "editor.tabCompletion": "on",
+    "editor.rulers": [80, 100, 120],
+    "editor.tabSize": 2,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+}
