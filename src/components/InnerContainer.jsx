@@ -2,10 +2,10 @@ import React from "react";
 import {Container} from "@mui/material";
 import PropTypes from "prop-types";
 
-const InnerContainer = ({children, props}) => {
+const InnerContainer = (props) => {
   return (
     <Container maxWidth="lg" {...props}>
-      {children}
+      {props.children}
     </Container>
   );
 };

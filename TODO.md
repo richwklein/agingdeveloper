@@ -4,3 +4,9 @@
 - setup typography in theme
 - Add analytics (include the outbound links)
 - Fix warning on testing internal link component
+- Add documentation around testing
+    https://www.gatsbyjs.com/docs/how-to/testing/unit-testing/
+    https://danielabaron.me/blog/gatsby-unit-testing/
+    https://jestjs.io/docs/snapshot-testing
+- Figure out frontmatter
+- Add RSS feed link to footer
