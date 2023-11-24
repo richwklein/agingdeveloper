@@ -22,6 +22,7 @@ module.exports = {
     "quotes": [1, "double", "avoid-escape"],
     "max-len": [
       "error", {
+        "code": 100,
         "ignoreComments": true,
         "ignoreTrailingComments": true,
         "ignoreStrings": true,

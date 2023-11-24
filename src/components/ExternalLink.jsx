@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 const ExternalLink = React.forwardRef(function Link(props, ref) {
   return (
     <MuiLink
+      data-link="external"
       href={props.to}
       target="_blank"
       rel="noopener noreferrer"

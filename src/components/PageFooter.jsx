@@ -40,6 +40,7 @@ const PageFooter = ({title, repository}) => {
       component="footer"
       sx={{
         "padding": 2,
+        "marginTop": 4,
       }}>
       <Grid item sm={12} md={4}></Grid>
       <Grid item sm={12} md={4}>

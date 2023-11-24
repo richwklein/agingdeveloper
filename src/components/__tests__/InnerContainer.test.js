@@ -7,20 +7,19 @@ describe("InnerContainer", () => {
 
   const renderComponent = () => {
     return render(
-        <InnerContainer
-          data-testid="inner-container">
+        <InnerContainer>
           <Fragment>Test Content</Fragment>
         </InnerContainer>,
     );
   };
 
   test("that it renders correctly.", () => {
-    const {getByTestId} = renderComponent();
-    expect(getByTestId("inner-container")).toMatchSnapshot();
+    const {container} = renderComponent("https://example.com");
+    expect(container.firstChild).toMatchSnapshot();
   });
 
-  test("that it has a maxWidth of large", () => {
-    const {getByTestId} = renderComponent();
-    expect(getByTestId("inner-container")).toHaveClass("MuiContainer-maxWidthLg");
+  test("that it has a maxWidth of large.", () => {
+    const {container} = renderComponent("https://example.com");
+    expect(container.firstChild).toHaveClass("MuiContainer-maxWidthLg");
   });
 });

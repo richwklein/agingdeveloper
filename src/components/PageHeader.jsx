@@ -4,21 +4,23 @@ import PropTypes from "prop-types";
 
 import InnerContainer from "./InnerContainer";
 
-const TopBar = ({title, tagline}) => {
+const PageHeader = ({title, tagline}) => {
   return (
     <AppBar
       position="sticky"
       sx={{
-        "color": "primary.contrastText",
-        "backgroundColor": "primary.dark",
-        "padding": 2,
-      }}>
+        color: "primary.contrastText",
+        backgroundColor: "primary.dark",
+        padding: 2,
+        marginBottom: 4,
+      }}
+    >
       <InnerContainer display="flex" alignItems="center">
         <Box width="100%">
-          <Typography variant="h4" sx={{"marginBottom": 0.5}}>
+          <Typography variant="h4" sx={{marginBottom: 0.5}}>
             {title}
           </Typography>
-          <Typography variant="h6" sx={{"fontSize": "1rem", "lineHeight": 1.4}}>
+          <Typography variant="h6" sx={{fontSize: "1rem", lineHeight: 1.4}}>
             {tagline}
           </Typography>
         </Box>
@@ -27,8 +29,8 @@ const TopBar = ({title, tagline}) => {
   );
 };
 
-TopBar.propTypes = {
+PageHeader.propTypes = {
   title: PropTypes.string.isRequired,
   tagline: PropTypes.string.isRequired,
 };
-export default TopBar;
+export default PageHeader;

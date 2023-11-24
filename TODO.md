@@ -9,4 +9,8 @@
     https://danielabaron.me/blog/gatsby-unit-testing/
     https://jestjs.io/docs/snapshot-testing
 - Figure out frontmatter
+    - fields to use
+    - frontmatter validation 
+    - linking to authors
 - Add RSS feed link to footer
+- Figure out full height body

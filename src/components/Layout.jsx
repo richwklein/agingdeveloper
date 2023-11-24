@@ -2,20 +2,24 @@ import * as React from "react";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import CssBaseline from "@mui/material/CssBaseline";
 import PropTypes from "prop-types";
-import TopBar from "./TopBar";
+import PageHeader from "./PageHeader";
 import theme from "../styles/theme";
+import PageFooter from "./PageFooter";
+import InnerContainer from "./InnerContainer";
 
-const Layout = ({children, props}) => {
+function Layout({children, props}) {
   return (
     <ThemeProvider {...props} theme={theme}>
       <CssBaseline />
-      <TopBar
+      <PageHeader
         title="The Aging Developer"
-        tagline="for growing old in the software development community" />
-      {children}
+        tagline="for growing old in the software development community"
+      />
+      <InnerContainer flexGrow={1}>{children}</InnerContainer>
+      <PageFooter title="The Aging Developer" repository="https://github.com/richwklein/agingdeveloper" />
     </ThemeProvider>
   );
-};
+}
 
 Layout.propTypes = {
   children: PropTypes.element.isRequired,
