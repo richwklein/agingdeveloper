@@ -1,12 +1,12 @@
 import React from "react";
 import {cleanup, render} from "@testing-library/react";
-import ArticleByLine from "../ArticleByLine";
+import ByLine from "../ByLine";
 
-describe("ArticleByLine", () => {
+describe("ByLine", () => {
   afterEach(cleanup);
 
   const renderComponent = () => render(
-      <ArticleByLine
+      <ByLine
         authorName="Georgia Smith"
         authorSlug="georgia-smith"
         publishedDate="November 1st, 2023" />,

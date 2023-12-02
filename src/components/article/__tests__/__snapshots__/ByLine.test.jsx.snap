@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ArticleByLine that it renders correctly. 1`] = `
+exports[`ByLine that it renders correctly. 1`] = `
 <div
   class="MuiBox-root css-0"
 >

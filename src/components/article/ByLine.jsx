@@ -1,9 +1,9 @@
 import React from "react";
 import {Box, Typography} from "@mui/material";
-import InternalLink from "../components/InternalLink";
+import InternalLink from "../common/InternalLink";
 import PropTypes from "prop-types";
 
-const ArticleByLine = ({authorName, authorSlug, publishedDate}) => {
+const ByLine = ({authorName, authorSlug, publishedDate}) => {
   return (
     <Box>
       <Typography variant="subtitle2"
@@ -34,10 +34,10 @@ const ArticleByLine = ({authorName, authorSlug, publishedDate}) => {
   );
 };
 
-ArticleByLine.propTypes = {
+ByLine.propTypes = {
   authorName: PropTypes.string.isRequired,
   authorSlug: PropTypes.string.isRequired,
   publishedDate: PropTypes.string.isRequired,
 };
 
-export default ArticleByLine;
+export default ByLine;

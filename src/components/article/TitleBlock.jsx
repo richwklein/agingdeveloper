@@ -2,7 +2,7 @@ import React from "react";
 import {Box, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 
-const ArticleTitleBlock = ({title, description}) => {
+const TitleBlock = ({title, description}) => {
   return (
     <Box
       sx={{
@@ -14,9 +14,9 @@ const ArticleTitleBlock = ({title, description}) => {
     </Box>
   );
 };
-ArticleTitleBlock.propTypes = {
+TitleBlock.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 };
 
-export default ArticleTitleBlock;
+export default TitleBlock;

@@ -1,17 +1,14 @@
 import React from "react";
 import {cleanup, render} from "@testing-library/react";
-import ArticleTitleBlock from "../ArticleTitleBlock";
+import TitleBlock from "../TitleBlock";
 
-describe("ExternalLink", () => {
+describe("TitleBlock", () => {
   afterEach(cleanup);
 
-  const title = "Tesing Gatsby with Jest";
-  const description = "You can test with Jest with the best of them.";
-
   const renderComponent = () => render(
-      <ArticleTitleBlock
-        title={title}
-        description={description} />,
+      <TitleBlock
+        title= "Tesing Gatsby with Jest"
+        description="You can test with Jest with the best of them." />,
   );
 
   test("that it renders correctly.", () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import InternalLink from "../components/InternalLink";
+import InternalLink from "../components/common/InternalLink";
 
 const IndexPage = () => {
   return (
