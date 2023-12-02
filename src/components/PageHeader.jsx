@@ -8,6 +8,7 @@ const PageHeader = ({title, tagline}) => {
   return (
     <AppBar
       position="sticky"
+      component="header"
       sx={{
         color: "primary.contrastText",
         backgroundColor: "primary.dark",
@@ -33,4 +34,5 @@ PageHeader.propTypes = {
   title: PropTypes.string.isRequired,
   tagline: PropTypes.string.isRequired,
 };
+
 export default PageHeader;

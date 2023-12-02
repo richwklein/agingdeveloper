@@ -5,21 +5,19 @@ import InnerContainer from "../InnerContainer";
 describe("InnerContainer", () => {
   afterEach(cleanup);
 
-  const renderComponent = () => {
-    return render(
-        <InnerContainer>
-          <Fragment>Test Content</Fragment>
-        </InnerContainer>,
-    );
-  };
+  const renderComponent = () => render(
+      <InnerContainer>
+        <Fragment>Test Content</Fragment>
+      </InnerContainer>,
+  );
 
   test("that it renders correctly.", () => {
-    const {container} = renderComponent("https://example.com");
+    const {container} = renderComponent();
     expect(container.firstChild).toMatchSnapshot();
   });
 
   test("that it has a maxWidth of large.", () => {
-    const {container} = renderComponent("https://example.com");
+    const {container} = renderComponent();
     expect(container.firstChild).toHaveClass("MuiContainer-maxWidthLg");
   });
 });

@@ -1,18 +1,16 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {cleanup, render} from "@testing-library/react";
 import InternalLink from "../InternalLink";
 
 describe("InternalLink", () => {
   afterEach(cleanup);
 
-  const renderComponent = () => {
-    return render(
-        <InternalLink
-          to="https://example.com">
-          <Fragment>Test Content</Fragment>
-        </InternalLink>,
-    );
-  };
+  const renderComponent = () => render(
+      <InternalLink
+        to="https://example.com">
+        Test Content
+      </InternalLink>,
+  );
 
   test("that it renders correctly.", () => {
     const {container} = renderComponent();

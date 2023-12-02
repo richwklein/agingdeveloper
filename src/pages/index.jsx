@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import InternalLink from "../components/InternalLink";
 
 const IndexPage = () => {
@@ -11,4 +11,9 @@ const IndexPage = () => {
 };
 
 export default IndexPage;
-export const Head = () => <title>Home Page</title>;
+
+export const Head = () => {
+  return <title>Home Page</title>;
+};
+
+

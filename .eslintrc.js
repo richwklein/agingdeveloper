@@ -1,21 +1,30 @@
 module.exports = {
+  "parser": "babel-eslint",
+  "settings": {
+    "react": {
+      "version": "detect",
+    },
+  },
   "env": {
-    "browser": true,
-    "es2021": true,
+    "jest": true,
+    "node": true,
   },
   "globals": {
+    graphql: true,
     __PATH_PREFIX__: true,
+    __TRAILING_SLASH__: true,
   },
   "extends": [
+    "eslint:recommended",
     "plugin:react/recommended",
     "google",
   ],
   "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true,
     },
-    "ecmaVersion": 12,
-    "sourceType": "module",
   },
   "plugins": ["react", "react-hooks"],
   "rules": {

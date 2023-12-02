@@ -1,6 +1,6 @@
-const path = require("path");
+import {resolve as pathResolve} from "path";
 
-exports.createPages = ({graphql, actions}) => {
+export const createPages = ({graphql, actions}) => {
   // A Gatsby function which will be used to create the post pages from GraphQL data and a template.
   const {createPage} = actions;
 
@@ -24,7 +24,7 @@ exports.createPages = ({graphql, actions}) => {
         }
       }
     `).then((result) => {
-      const template = path.resolve("src/templates/article.jsx");
+      const template = pathResolve("src/templates/article.jsx");
       const prefix = "/article";
 
       result.data.allMdx.edges.forEach(({node}) => {
@@ -43,4 +43,26 @@ exports.createPages = ({graphql, actions}) => {
   });
 };
 
-
+export const createSchemaCustomization = ({actions, schema}) => {
+  const {createTypes} = actions;
+  const typeDefs = [
+    "type Mdx implements Node { frontmatter: Frontmatter }",
+    schema.buildObjectType({
+      name: "Frontmatter",
+      fields: {
+        author: {
+          type: "AuthorYaml",
+          resolve: (source, args, context, info) => {
+            return context.nodeModel.findOne({
+              type: "AuthorYaml",
+              query: {
+                filter: {slug: {eq: source.author}},
+              },
+            });
+          },
+        },
+      },
+    }),
+  ];
+  createTypes(typeDefs);
+};

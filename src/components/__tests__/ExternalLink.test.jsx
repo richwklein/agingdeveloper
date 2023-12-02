@@ -1,18 +1,16 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {cleanup, render} from "@testing-library/react";
 import ExternalLink from "../ExternalLink";
 
 describe("ExternalLink", () => {
   afterEach(cleanup);
 
-  const renderComponent = () => {
-    return render(
-        <ExternalLink
-          to="https://example.com">
-          <Fragment>Test Content</Fragment>
-        </ExternalLink>,
-    );
-  };
+  const renderComponent = () => render(
+      <ExternalLink
+        to="https://example.com">
+        Test Content
+      </ExternalLink>,
+  );
 
   test("that it renders correctly.", () => {
     const {container} = renderComponent();

@@ -14,9 +14,11 @@ describe("PageFooter", () => {
 
   afterEach(cleanup);
 
-  const renderComponent = () => {
-    return render( <PageFooter title="test-title" repository="https://github.com/test-repository" />);
-  };
+  const renderComponent = () => render(
+      <PageFooter
+        title="test-title"
+        repository="https://github.com/test-repository" />,
+  );
 
   test("that it renders correctly.", () => {
     const {container} = renderComponent();

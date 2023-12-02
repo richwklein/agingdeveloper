@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 const AboutPage = () => {
   return (
@@ -9,4 +9,8 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
-export const Head = () => <title>About</title>;
+
+export const Head = () => {
+  return <title>About</title>;
+};
+

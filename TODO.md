@@ -14,3 +14,5 @@
     - linking to authors
 - Add RSS feed link to footer
 - Figure out full height body
+- Convert tests to mjs files
+- Add head SEO https://www.gatsbyjs.com/docs/how-to/adding-common-features/adding-seo-component

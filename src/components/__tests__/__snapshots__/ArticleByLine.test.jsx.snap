@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExternalLink that it renders correctly. 1`] = `
+<div
+  class="MuiBox-root css-0"
+>
+  <h6
+    class="MuiTypography-root MuiTypography-subtitle2 css-1ab5it3-MuiTypography-root"
+  >
+    <a
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-qb75xw-MuiTypography-root-MuiLink-root"
+      data-link="internal"
+      href="/author/georgia-smith"
+    >
+      Georgia Smith
+    </a>
+  </h6>
+  <h6
+    class="MuiTypography-root MuiTypography-subtitle2 css-15yipx9-MuiTypography-root"
+  >
+    November 1st, 2023
+  </h6>
+</div>
+`;

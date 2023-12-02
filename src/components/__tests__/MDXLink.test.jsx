@@ -1,18 +1,15 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {cleanup, render} from "@testing-library/react";
 import MDXLink from "../MDXLink";
 
 describe("MDXLink", () => {
   afterEach(cleanup);
 
-  const renderComponent = (href) => {
-    return render(
-        <MDXLink
-          href={href}>
-          <Fragment>Test Content</Fragment>
-        </MDXLink>,
-    );
-  };
+  const renderComponent = (href) => render(
+      <MDXLink href={href}>
+      Test Content
+      </MDXLink>,
+  );
 
   test("that an absolute url is external.", () => {
     const {container} = renderComponent("https://example.com");
