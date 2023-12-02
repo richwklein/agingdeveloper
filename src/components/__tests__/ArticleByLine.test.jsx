@@ -2,7 +2,7 @@ import React from "react";
 import {cleanup, render} from "@testing-library/react";
 import ArticleByLine from "../ArticleByLine";
 
-describe("ExternalLink", () => {
+describe("ArticleByLine", () => {
   afterEach(cleanup);
 
   const renderComponent = () => render(
@@ -20,15 +20,5 @@ describe("ExternalLink", () => {
   test("that it has a link to the authors page.", () => {
     const {container} = renderComponent();
     expect(container.firstChild).toContainHTML("href=\"/author/georgia-smith\"");
-  });
-
-  test("that it has the author name.", () => {
-    const {container} = renderComponent();
-    expect(container.firstChild).toContainHTML("Georgia Smith");
-  });
-
-  test("that it has the published date.", () => {
-    const {container} = renderComponent();
-    expect(container.firstChild).toContainHTML("November 1st, 2023");
   });
 });

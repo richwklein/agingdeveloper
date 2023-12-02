@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExternalLink that it renders correctly. 1`] = `
+<div
+  class="MuiBox-root css-164r41r"
+>
+  <h2
+    class="MuiTypography-root MuiTypography-h2 css-1sra7t5-MuiTypography-root"
+  >
+    Tesing Gatsby with Jest
+  </h2>
+  <div
+    class="MuiTypography-root MuiTypography-subtitle MuiBox-root css-37hqdj-MuiTypography-root"
+  >
+    You can test with Jest with the best of them.
+  </div>
+</div>
+`;

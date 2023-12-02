@@ -2,30 +2,12 @@ import React from "react";
 import {graphql} from "gatsby";
 import {MDXProvider} from "@mdx-js/react";
 import MDXLink from "../components/MDXLink";
-import {Box, Typography} from "@mui/material";
 import ArticleByLine from "../components/ArticleByLine";
 import PropTypes from "prop-types";
+import ArticleTitleBlock from "../components/ArticleTitleBlock";
 
 const components = {
   a: MDXLink,
-};
-
-
-export const TitleBlock = ({title, description}) => {
-  return (
-    <Box
-      sx={{
-        marginTop: 1,
-      }}>
-      <Typography variant="h2">{title}</Typography>
-      <Typography variant="subtitle" component={Box}>
-        {description}</Typography>
-    </Box>
-  );
-};
-TitleBlock.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
 };
 
 const ArticleTemplate = ({data: {mdx}, children}) => {
@@ -33,7 +15,7 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
   return (
     <article>
       <ArticleByLine authorName={author.name} authorSlug={author.slug} publishedDate={date} />
-      <TitleBlock title={title} description={description } />
+      <ArticleTitleBlock title={title} description={description } />
       <MDXProvider components={components}>
         {children}
       </MDXProvider>
