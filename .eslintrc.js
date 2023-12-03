@@ -8,11 +8,13 @@ module.exports = {
   "env": {
     "jest": true,
     "node": true,
+    "es6": true,
   },
   "globals": {
     graphql: true,
     __PATH_PREFIX__: true,
     __TRAILING_SLASH__: true,
+    Promise: true,
   },
   "extends": [
     "eslint:recommended",
@@ -24,6 +26,7 @@ module.exports = {
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true,
+      "modules": true,
     },
   },
   "plugins": ["react", "react-hooks"],

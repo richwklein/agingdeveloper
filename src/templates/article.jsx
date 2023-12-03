@@ -3,18 +3,23 @@ import {graphql} from "gatsby";
 import {MDXProvider} from "@mdx-js/react";
 import MDXLink from "../components/common/MDXLink";
 import ByLine from "../components/article/ByLine";
-import {Box} from "@mui/material";
+import {Box, Grid} from "@mui/material";
 import TitleBlock from "../components/article/TitleBlock";
 import FeaturedImage from "../components/article/FeaturedImage";
+import TagBar from "../components/article/TagBar";
 
 const components = {
   a: MDXLink,
 };
 
 const ArticleTemplate = ({data: {mdx}, children}) => {
-  const {frontmatter: {title, description, author, featured, date}} = mdx;
+  const {frontmatter: {title, description, author, featured, date, category, tags}} = mdx;
   return (
-    <article>
+    <Box component="article" sx={{
+      "lineHeight": 1.4,
+      "fontFamily": "Merriweather, sans-serif, serif",
+      "fontSize": "1.1rem",
+    }}>
       <ByLine authorName={author.name} authorSlug={author.slug} publishedDate={date} />
       <TitleBlock title={title} description={description } />
       <FeaturedImage
@@ -29,10 +34,18 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
         borderTopStyle: "dashed",
         borderTopColor: "primary.dark",
       }} />
-      <MDXProvider components={components}>
-        {children}
-      </MDXProvider>
-    </article>
+      <Grid container spacing={2}>
+        <Grid item lg={9} sm={12}>
+          <MDXProvider components={components}>
+            {children}
+          </MDXProvider>
+          <TagBar category={category} tags={tags} />
+        </Grid>
+        <Grid item lg={3} sm={12}>
+
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
@@ -51,6 +64,8 @@ export const pageQuery = graphql`
         slug
         title
         description
+        category
+        tags
         author {
           name
           slug

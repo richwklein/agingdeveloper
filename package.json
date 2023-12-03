@@ -3,11 +3,12 @@
   "private": true,
   "description": "The personal site of Richard Klein",
   "version": "2.0.0-alpha.1",
+  "type": "commonjs",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "eslint --fix 'src/**/*.{js,jsx}'",
-    "lint": "eslint . --ext .js,.jsx",
+    "format": "eslint --fix 'src/**/*.{js,jsx,mjs,cjs}'",
+    "lint": "eslint . --ext .js,.jsx,.mjs,.cjs",
     "start": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
@@ -28,7 +29,8 @@
     "gatsby-transformer-yaml": "^5.12.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "slug": "^8.2.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.4",
