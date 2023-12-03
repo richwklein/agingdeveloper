@@ -17,7 +17,7 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
   return (
     <Box component="article" sx={{
       "lineHeight": 1.4,
-      "fontFamily": "Merriweather, sans-serif, serif",
+      "fontFamily": "Merriweather, Merriweather Sans, sans-serif, serif",
       "fontSize": "1.1rem",
     }}>
       <ByLine authorName={author.name} authorSlug={author.slug} publishedDate={date} />

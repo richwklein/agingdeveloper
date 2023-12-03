@@ -36,6 +36,7 @@ const config = {
             resolve: "gatsby-remark-images",
             options: {
               maxWidth: 1200,
+              wrapperStyle: "border: 1px solid rgba(0, 0, 0, 0.12)",
             },
           },
         ],
