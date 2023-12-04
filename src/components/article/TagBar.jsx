@@ -6,15 +6,16 @@ import TagOutlinedIcon from "@mui/icons-material/TagOutlined";
 import PropTypes from "prop-types";
 import slug from "slug";
 
-export const Tag = ({name, relativeUrl, isCategory=false}) => {
+export const Tag = ({name, isCategory=false}) => {
   const icon = isCategory ? <FolderOutlinedIcon/ > : <TagOutlinedIcon />;
+  const url = isCategory ? `/category/${slug(name)}` : `/tag/${slug(name)}`;
   return (
     <Button
       startIcon={icon}
       edge="start"
       variant="text"
       component={InternalLink}
-      to={relativeUrl}
+      to={url}
       sx={{
         "& .MuiButton-startIcon": {
           marginRight: .35,
@@ -27,7 +28,6 @@ export const Tag = ({name, relativeUrl, isCategory=false}) => {
 
 Tag.propTypes = {
   name: PropTypes.string.isRequired,
-  relativeUrl: PropTypes.string.isRequired,
   isCategory: PropTypes.bool,
 };
 
@@ -35,12 +35,12 @@ const TagBar = ({category, tags}) => {
   return (
     <Grid container spacing={.5}>
       <Grid item key={category}>
-        <Tag name={category} relativeUrl={`/category/${slug(category)}`} isCategory={true} />
+        <Tag name={category} isCategory={true} />
       </Grid>
       {tags.map((tag) => {
         return (
           <Grid item key={tag}>
-            <Tag name={tag} relativeUrl={`/tag/${slug(tag)}`} />
+            <Tag name={tag} />
           </Grid>
         );
       })}
