@@ -1,5 +1,5 @@
 import React from "react";
-import {GatsbyImage, GatsbyImageData} from "gatsby-plugin-image";
+import {GatsbyImage} from "gatsby-plugin-image";
 import ExternalLink from "../common/ExternalLink";
 import {Box, Typography} from "@mui/material";
 import PropTypes from "prop-types";
@@ -33,6 +33,5 @@ FeaturedImage.propTypes = {
   authorUrl: PropTypes.string.isRequired,
   siteName: PropTypes.string.isRequired,
   siteUrl: PropTypes.string.isRequired,
-  image: PropTypes.instanceOf(GatsbyImageData),
 };
 export default FeaturedImage;

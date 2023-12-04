@@ -20,7 +20,10 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
       "fontFamily": "Merriweather, Merriweather Sans, sans-serif, serif",
       "fontSize": "1.1rem",
     }}>
-      <ByLine authorName={author.name} authorSlug={author.slug} publishedDate={date} />
+      <ByLine
+        author={author}
+        category={category}
+        date={date} />
       <TitleBlock title={title} description={description } />
       <FeaturedImage
         authorName={featured.author.name}
@@ -39,7 +42,7 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
           <MDXProvider components={components}>
             {children}
           </MDXProvider>
-          <TagBar category={category} tags={tags} />
+          <TagBar tags={tags} />
         </Grid>
         <Grid item lg={3} sm={12}>
 
@@ -81,7 +84,11 @@ export const pageQuery = graphql`
           }
           image {
             childImageSharp {
-              gatsbyImageData(width: 1200, layout: CONSTRAINED)
+              gatsbyImageData(
+                width: 1200, 
+                placeholder: BLURRED
+                layout: FIXED
+              )
           }
           }
         }

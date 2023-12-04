@@ -1,8 +1,9 @@
 import React from "react";
-import {AppBar, Box, Typography} from "@mui/material";
+import {AppBar, ButtonBase, Stack, Typography} from "@mui/material";
 import PropTypes from "prop-types";
-
 import InnerContainer from "./InnerContainer";
+import PageAvatar from "./PageAvatar";
+import InternalLink from "./InternalLink";
 
 const PageHeader = ({title, tagline}) => {
   return (
@@ -16,15 +17,21 @@ const PageHeader = ({title, tagline}) => {
         marginBottom: 4,
       }}
     >
-      <InnerContainer display="flex" alignItems="center">
-        <Box width="100%">
-          <Typography variant="h4" sx={{marginBottom: 0.5}}>
-            {title}
-          </Typography>
-          <Typography variant="h6" sx={{fontSize: "1rem", lineHeight: 1.4}}>
-            {tagline}
-          </Typography>
-        </Box>
+      <InnerContainer>
+        <ButtonBase component={InternalLink} to="/">
+          <PageAvatar/>
+          <Stack direction="column"
+            useFlexGap
+            alignItems="flex-start"
+            sx={{marginLeft: 3}}>
+            <Typography variant="h4" sx={{marginBottom: 0.5}}>
+              {title}
+            </Typography>
+            <Typography variant="h6" sx={{fontSize: "1rem", lineHeight: 1.4}}>
+              {tagline}
+            </Typography>
+          </Stack>
+        </ButtonBase>
       </InnerContainer>
     </AppBar>
   );

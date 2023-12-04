@@ -7,9 +7,9 @@ describe("ByLine", () => {
 
   const renderComponent = () => render(
       <ByLine
-        authorName="Georgia Smith"
-        authorSlug="georgia-smith"
-        publishedDate="November 1st, 2023" />,
+        author={{name: "Georgia Smith", slug: "georgia-smith"}}
+        category="Site"
+        date="November 1st, 2023" />,
   );
 
   test("that it renders correctly.", () => {
@@ -20,5 +20,10 @@ describe("ByLine", () => {
   test("that it has a link to the authors page.", () => {
     const {container} = renderComponent();
     expect(container.firstChild).toContainHTML("href=\"/author/georgia-smith\"");
+  });
+
+  test("that it has a link to the category page.", () => {
+    const {container} = renderComponent();
+    expect(container.firstChild).toContainHTML("href=\"/category/site\"");
   });
 });

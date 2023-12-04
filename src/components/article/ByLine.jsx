@@ -1,43 +1,34 @@
 import React from "react";
-import {Box, Typography} from "@mui/material";
+import {Stack, Typography} from "@mui/material";
 import InternalLink from "../common/InternalLink";
 import PropTypes from "prop-types";
+import slug from "slug";
 
-const ByLine = ({authorName, authorSlug, publishedDate}) => {
+const ByLine = ({author, category, date}) => {
   return (
-    <Box>
-      <Typography variant="subtitle2"
-        sx={{
-          display: "inline-block",
-          backgroundColor: "primary.dark",
-          color: "primary.contrastText",
-          marginRight: .25,
-        }}>
-        <InternalLink to={`/author/${authorSlug}`}
-          sx={{
-            display: "inline-block",
-            backgroundColor: "inherit",
-            color: "inherit",
-            textDecoration: "underline",
-            padding: .75,
-          }}>
-          {authorName}
-        </InternalLink>
+    <Stack direction="row" spacing={2}
+      useFlexGap
+      alignItems="center">
+      <InternalLink to={`/author/${author.slug}`} variant="subtitle1">
+        {author.name}
+      </InternalLink>
+      <InternalLink to={`/category/${slug(category)}`} variant="subtitle1">
+        {category}
+      </InternalLink>
+      <Typography variant="subtitle2">
+        {date}
       </Typography>
-      <Typography variant="subtitle2" sx={{
-        display: "inline-block",
-        padding: .75,
-      }}>
-        {publishedDate}
-      </Typography>
-    </Box>
+    </Stack>
   );
 };
 
 ByLine.propTypes = {
-  authorName: PropTypes.string.isRequired,
-  authorSlug: PropTypes.string.isRequired,
-  publishedDate: PropTypes.string.isRequired,
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+  }),
+  category: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
 };
 
 export default ByLine;

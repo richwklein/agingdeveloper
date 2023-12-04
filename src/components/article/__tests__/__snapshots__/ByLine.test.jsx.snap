@@ -2,21 +2,24 @@
 
 exports[`ByLine that it renders correctly. 1`] = `
 <div
-  class="MuiBox-root css-0"
+  class="MuiStack-root css-12djzut-MuiStack-root"
 >
-  <h6
-    class="MuiTypography-root MuiTypography-subtitle2 css-1ab5it3-MuiTypography-root"
+  <a
+    class="MuiTypography-root MuiTypography-subtitle1 MuiLink-root MuiLink-underlineAlways css-1f9rlei-MuiTypography-root-MuiLink-root"
+    data-link="internal"
+    href="/author/georgia-smith"
   >
-    <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-qb75xw-MuiTypography-root-MuiLink-root"
-      data-link="internal"
-      href="/author/georgia-smith"
-    >
-      Georgia Smith
-    </a>
-  </h6>
+    Georgia Smith
+  </a>
+  <a
+    class="MuiTypography-root MuiTypography-subtitle1 MuiLink-root MuiLink-underlineAlways css-1f9rlei-MuiTypography-root-MuiLink-root"
+    data-link="internal"
+    href="/category/site"
+  >
+    Site
+  </a>
   <h6
-    class="MuiTypography-root MuiTypography-subtitle2 css-15yipx9-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
   >
     November 1st, 2023
   </h6>
