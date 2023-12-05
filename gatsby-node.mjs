@@ -1,4 +1,16 @@
 import {resolve as pathResolve} from "path";
+import readingTime from "reading-time";
+
+export const onCreateNode = ({node, actions}) => {
+  const {createNodeField} = actions;
+  if (node.internal.type === "Mdx") {
+    createNodeField({
+      node,
+      name: "timeToRead",
+      value: readingTime(node.body),
+    });
+  }
+};
 
 export const createPages = ({graphql, actions}) => {
   // A Gatsby function which will be used to create the post pages from GraphQL data and a template.

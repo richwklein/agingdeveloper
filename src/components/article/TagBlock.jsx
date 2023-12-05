@@ -1,17 +1,22 @@
 import React from "react";
 import {Button, Grid} from "@mui/material";
 import InternalLink from "../common/InternalLink";
+import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import TagOutlinedIcon from "@mui/icons-material/TagOutlined";
 import PropTypes from "prop-types";
 import slug from "slug";
 
-export const Tag = ({name}) => {
+export const Tag = ({name, isCategory=false}) => {
+  const icon = isCategory ? <FolderOutlinedIcon/ > : <TagOutlinedIcon />;
+  const url = isCategory ? `/category/${slug(name)}` : `/tag/${slug(name)}`;
   return (
     <Button
-      startIcon={ <TagOutlinedIcon />}
+      startIcon={icon}
+      edge="start"
+      size="small"
       variant="text"
       component={InternalLink}
-      to={`/tag/${slug(name)}`}
+      to={url}
       sx={{
         "& .MuiButton-startIcon": {
           marginRight: .35,
@@ -24,11 +29,15 @@ export const Tag = ({name}) => {
 
 Tag.propTypes = {
   name: PropTypes.string.isRequired,
+  isCategory: PropTypes.bool,
 };
 
-const TagBar = ({tags}) => {
+const TagBlock = ({category, tags}) => {
   return (
     <Grid container spacing={.5}>
+      <Grid item key={category}>
+        <Tag name={category} isCategory={true} />
+      </Grid>
       {tags.map((tag) => {
         return (
           <Grid item key={tag}>
@@ -40,8 +49,9 @@ const TagBar = ({tags}) => {
   );
 };
 
-TagBar.propTypes = {
+TagBlock.propTypes = {
+  category: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default TagBar;
+export default TagBlock;

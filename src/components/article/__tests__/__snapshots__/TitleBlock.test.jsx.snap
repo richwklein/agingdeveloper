@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TitleBlock that it renders correctly. 1`] = `
-<div
+<header
   class="MuiBox-root css-164r41r"
 >
   <h2
@@ -14,5 +14,5 @@ exports[`TitleBlock that it renders correctly. 1`] = `
   >
     You can test with Jest with the best of them.
   </div>
-</div>
+</header>
 `;

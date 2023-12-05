@@ -3,17 +3,21 @@ import {graphql} from "gatsby";
 import {MDXProvider} from "@mdx-js/react";
 import MDXLink from "../components/common/MDXLink";
 import ByLine from "../components/article/ByLine";
-import {Box, Grid} from "@mui/material";
+import {Box, Card, Grid, Stack, Typography} from "@mui/material";
 import TitleBlock from "../components/article/TitleBlock";
 import FeaturedImage from "../components/article/FeaturedImage";
-import TagBar from "../components/article/TagBar";
+import TagBlock from "../components/article/TagBlock";
+import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
+import TimeToRead from "../components/article/TimeToRead";
+import {useSiteData} from "../hooks/useSiteData";
 
 const components = {
   a: MDXLink,
 };
 
 const ArticleTemplate = ({data: {mdx}, children}) => {
-  const {frontmatter: {title, description, author, featured, date, category, tags}} = mdx;
+  const {lang} = useSiteData();
+  const {frontmatter: {title, description, author, featured, date, category, tags}, fields: {timeToRead}, tableOfContents} = mdx;
   return (
     <Box component="article" sx={{
       "lineHeight": 1.4,
@@ -22,30 +26,21 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
     }}>
       <ByLine
         author={author}
-        category={category}
         date={date} />
       <TitleBlock title={title} description={description } />
       <FeaturedImage
-        authorName={featured.author.name}
-        authorUrl={featured.author.url}
-        siteName={featured.site.name}
-        siteUrl={featured.site.url}
+        author={featured.author}
+        site={featured.site}
         image={featured.image.childImageSharp.gatsbyImageData} />
-      <Box component="hr" sx={{
-        border: 0,
-        borderTopWidth: "1px",
-        borderTopStyle: "dashed",
-        borderTopColor: "primary.dark",
-      }} />
-      <Grid container spacing={2}>
+      <Grid container direction="row-reverse" spacing={2}>
+        <Grid item lg={3} sm={12}>
+          <TimeToRead minutes={timeToRead.minutes} words={timeToRead.words} lang={lang} />
+        </Grid>
         <Grid item lg={9} sm={12}>
           <MDXProvider components={components}>
             {children}
           </MDXProvider>
-          <TagBar tags={tags} />
-        </Grid>
-        <Grid item lg={3} sm={12}>
-
+          <TagBlock category={category} tags={tags} />
         </Grid>
       </Grid>
     </Box>
@@ -62,6 +57,13 @@ export const Head = ({data: {mdx}}) => {
 export const pageQuery = graphql`
   query($currentPath: String) {
     mdx(frontmatter: { slug: { eq: $currentPath } }) {
+      fields {
+          timeToRead {
+            minutes
+            words
+          }
+      }
+      tableOfContents
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         slug
@@ -85,7 +87,7 @@ export const pageQuery = graphql`
           image {
             childImageSharp {
               gatsbyImageData(
-                width: 1200, 
+                width: 1152, 
                 placeholder: BLURRED
                 layout: FIXED
               )

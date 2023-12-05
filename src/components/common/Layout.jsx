@@ -6,23 +6,31 @@ import PageHeader from "./PageHeader";
 import theme from "../../styles/theme";
 import PageFooter from "./PageFooter";
 import InnerContainer from "./InnerContainer";
+import {useSiteData} from "../../hooks/useSiteData";
 
 const Layout = ({children, props}) => {
+  const {title, tagline, image, repository} = useSiteData();
+  const avatar = image.childImageSharp.gatsbyImageData;
   return (
     <ThemeProvider {...props} theme={theme}>
       <CssBaseline />
       <PageHeader
-        title="The Aging Developer"
-        tagline="for growing old in the software development community"
+        title={title}
+        tagline={tagline}
+        avatar={avatar}
       />
       <InnerContainer component="main">{children}</InnerContainer>
-      <PageFooter title="The Aging Developer" repository="https://github.com/richwklein/agingdeveloper" />
+      <PageFooter title={title} repository={repository} />
     </ThemeProvider>
   );
 };
 
 Layout.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
   props: PropTypes.any,
 };
 

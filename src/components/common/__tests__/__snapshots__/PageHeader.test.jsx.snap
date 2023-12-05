@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageHeader that it renders correctly. 1`] = `
+<header
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionSticky css-19fj0jp-MuiPaper-root-MuiAppBar-root"
+>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+  >
+    <a
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root css-p9t2xs-MuiTypography-root-MuiLink-root-MuiButtonBase-root"
+      data-link="internal"
+      href="/"
+      tabindex="0"
+    >
+      <div
+        class="MuiAvatar-root MuiAvatar-rounded MuiAvatar-colorDefault css-jr00k3-MuiAvatar-root"
+      />
+      <div
+        class="MuiStack-root css-q5z1w7-MuiStack-root"
+      >
+        <h4
+          class="MuiTypography-root MuiTypography-h4 css-725ddr-MuiTypography-root"
+        >
+          Test title
+        </h4>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-1ry1zvy-MuiTypography-root"
+        >
+          Test tagline is the best tagline
+        </h6>
+      </div>
+    </a>
+  </div>
+</header>
+`;

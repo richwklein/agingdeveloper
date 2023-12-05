@@ -1,24 +1,25 @@
 import React from "react";
-import {Stack, Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import InternalLink from "../common/InternalLink";
 import PropTypes from "prop-types";
-import slug from "slug";
 
-const ByLine = ({author, category, date}) => {
+const ByLine = ({author, date}) => {
   return (
-    <Stack direction="row" spacing={2}
-      useFlexGap
-      alignItems="center">
-      <InternalLink to={`/author/${author.slug}`} variant="subtitle1">
+    <Box>
+      <InternalLink to={`/author/${author.slug}`} variant="subtitle1" sx={{
+        display: "inline-block",
+        padding: .5,
+        marginRight: 1,
+      }}>
         {author.name}
       </InternalLink>
-      <InternalLink to={`/category/${slug(category)}`} variant="subtitle1">
-        {category}
-      </InternalLink>
-      <Typography variant="subtitle2">
+      <Typography variant="subtitle2" sx={{
+        display: "inline-block",
+        padding: .5,
+      }}>
         {date}
       </Typography>
-    </Stack>
+    </Box>
   );
 };
 
@@ -27,7 +28,6 @@ ByLine.propTypes = {
     name: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
   }),
-  category: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
 };
 

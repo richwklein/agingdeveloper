@@ -2,16 +2,20 @@ import React from "react";
 import {Container} from "@mui/material";
 import PropTypes from "prop-types";
 
-const InnerContainer = (props) => {
+const InnerContainer = ({props, children}) => {
   return (
     <Container maxWidth="lg" {...props}>
-      {props.children}
+      {children}
     </Container>
   );
 };
 
 InnerContainer.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
   props: PropTypes.any,
 };
 

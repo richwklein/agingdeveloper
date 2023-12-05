@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 const TitleBlock = ({title, description}) => {
   return (
     <Box
+      component="header"
       sx={{
         marginTop: 1,
       }}>

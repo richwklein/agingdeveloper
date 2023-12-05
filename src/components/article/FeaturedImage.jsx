@@ -4,7 +4,7 @@ import ExternalLink from "../common/ExternalLink";
 import {Box, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 
-const FeaturedImage = ({authorName, authorUrl, siteName, siteUrl, image}) => {
+const FeaturedImage = ({author, site, image}) => {
   return (
     <Box component="figure"
       sx={{
@@ -19,9 +19,9 @@ const FeaturedImage = ({authorName, authorUrl, siteName, siteUrl, image}) => {
           marginTop: .25,
         }}>
         {"Image by "}
-        <ExternalLink to={authorUrl}>{authorName}</ExternalLink>
+        <ExternalLink to={author.url}>{author.name}</ExternalLink>
         {" on "}
-        <ExternalLink to={siteUrl}>{siteName}</ExternalLink>
+        <ExternalLink to={site.url}>{site.name}</ExternalLink>
       </Typography>
     </Box>
 
@@ -29,9 +29,14 @@ const FeaturedImage = ({authorName, authorUrl, siteName, siteUrl, image}) => {
 };
 
 FeaturedImage.propTypes = {
-  authorName: PropTypes.string.isRequired,
-  authorUrl: PropTypes.string.isRequired,
-  siteName: PropTypes.string.isRequired,
-  siteUrl: PropTypes.string.isRequired,
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  }),
+  site: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  }),
+  image: PropTypes.any,
 };
 export default FeaturedImage;

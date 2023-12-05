@@ -8,10 +8,8 @@ describe("FeaturedImage", () => {
 
   const renderComponent = () => render(
       <FeaturedImage
-        authorName="Georgia Smith"
-        authorUrl="https://example.com/georgia-smith"
-        siteName="Unsplash"
-        siteUrl="https://example.com/unsplash" />,
+        author={{name: "Georgia Smith", url: "https://example.com/georgia-smith"}}
+        site={{name: "Unsplash", url: "https://example.com/unsplash"}} />,
   );
 
   test("that it renders correctly.", () => {
