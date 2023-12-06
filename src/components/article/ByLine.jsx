@@ -27,7 +27,7 @@ ByLine.propTypes = {
   author: PropTypes.shape({
     name: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
   date: PropTypes.string.isRequired,
 };
 

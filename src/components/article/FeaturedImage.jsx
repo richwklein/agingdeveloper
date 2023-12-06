@@ -32,11 +32,11 @@ FeaturedImage.propTypes = {
   author: PropTypes.shape({
     name: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
   site: PropTypes.shape({
     name: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
   image: PropTypes.any,
 };
 export default FeaturedImage;

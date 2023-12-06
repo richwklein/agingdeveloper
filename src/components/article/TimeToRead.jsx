@@ -26,8 +26,8 @@ const TimeToRead = ({minutes, words, lang}) => {
 };
 
 TimeToRead.propTypes = {
-  minutes: PropTypes.number,
-  words: PropTypes.number,
+  minutes: PropTypes.number.isRequired,
+  words: PropTypes.number.isRequired,
   lang: PropTypes.string.isRequired,
 };
 

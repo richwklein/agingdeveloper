@@ -48,12 +48,12 @@ const PageFooter = ({title, repository}) => {
         marginTop: 4,
       }}
     >
-      <Grid item sm={12} md={4} />
-      <Grid item sm={12} md={4}>
+      <Grid item sm={4} xs={12}/>
+      <Grid item sm={4} xs={12}>
         <Copyright title={title} repository={repository} />
         <PoweredBy />
       </Grid>
-      <Grid item sm={12} md={4} />
+      <Grid item sm={4} xs={12}/>
     </Grid>
   );
 };

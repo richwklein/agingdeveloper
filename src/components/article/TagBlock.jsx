@@ -51,7 +51,7 @@ const TagBlock = ({category, tags}) => {
 
 TagBlock.propTypes = {
   category: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string),
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default TagBlock;

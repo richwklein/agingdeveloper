@@ -3,11 +3,10 @@ import {graphql} from "gatsby";
 import {MDXProvider} from "@mdx-js/react";
 import MDXLink from "../components/common/MDXLink";
 import ByLine from "../components/article/ByLine";
-import {Box, Card, Grid, Stack, Typography} from "@mui/material";
+import {Box, Grid} from "@mui/material";
 import TitleBlock from "../components/article/TitleBlock";
 import FeaturedImage from "../components/article/FeaturedImage";
 import TagBlock from "../components/article/TagBlock";
-import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import TimeToRead from "../components/article/TimeToRead";
 import {useSiteData} from "../hooks/useSiteData";
 
@@ -17,7 +16,7 @@ const components = {
 
 const ArticleTemplate = ({data: {mdx}, children}) => {
   const {lang} = useSiteData();
-  const {frontmatter: {title, description, author, featured, date, category, tags}, fields: {timeToRead}, tableOfContents} = mdx;
+  const {frontmatter: {title, description, author, featured, date, category, tags}, fields: {timeToRead}} = mdx;
   return (
     <Box component="article" sx={{
       "lineHeight": 1.4,
@@ -33,10 +32,10 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
         site={featured.site}
         image={featured.image.childImageSharp.gatsbyImageData} />
       <Grid container direction="row-reverse" spacing={2}>
-        <Grid item lg={3} sm={12}>
+        <Grid item md={3} sm={12} xs={12}>
           <TimeToRead minutes={timeToRead.minutes} words={timeToRead.words} lang={lang} />
         </Grid>
-        <Grid item lg={9} sm={12}>
+        <Grid item md={9} sm={12} xs={12}>
           <MDXProvider components={components}>
             {children}
           </MDXProvider>
@@ -63,7 +62,6 @@ export const pageQuery = graphql`
             words
           }
       }
-      tableOfContents
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         slug
@@ -89,7 +87,7 @@ export const pageQuery = graphql`
               gatsbyImageData(
                 width: 1152, 
                 placeholder: BLURRED
-                layout: FIXED
+                layout: CONSTRAINED
               )
           }
           }

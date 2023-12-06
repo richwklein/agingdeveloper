@@ -24,6 +24,7 @@ const config = {
   },
   plugins: [
     "gatsby-plugin-image",
+    "gatsby-plugin-remove-fingerprints",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     "gatsby-transformer-yaml",

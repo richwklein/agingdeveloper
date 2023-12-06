@@ -29,6 +29,7 @@ const PageHeader = ({title, tagline, avatar}) => {
     <AppBar
       position="sticky"
       component="header"
+      elevation={0}
       sx={{
         color: "primary.contrastText",
         backgroundColor: "primary.dark",

@@ -2,7 +2,7 @@
 
 exports[`PageHeader that it renders correctly. 1`] = `
 <header
-  class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionSticky css-19fj0jp-MuiPaper-root-MuiAppBar-root"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionSticky css-h63l1h-MuiPaper-root-MuiAppBar-root"
 >
   <div
     class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
