@@ -40,30 +40,21 @@ const config = {
               wrapperStyle: "border: 1px solid rgba(0, 0, 0, 0.12)",
             },
           },
+          {
+            resolve: "gatsby-remark-prismjs",
+            options: {
+              classPrefix: "language-",
+              showLineNumbers: false,
+              noInlineHighlight: false,
+            },
+          },
         ],
       },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "data",
-        path: `${__dirname}/content/data/`,
-        fastHash: true,
-      },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "articles",
-        path: `${__dirname}/content/article/`,
-        fastHash: true,
-      },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "images",
-        path: `${__dirname}/content/image/`,
+        path: `${__dirname}/content`,
         fastHash: true,
       },
     },

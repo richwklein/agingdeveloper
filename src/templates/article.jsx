@@ -14,6 +14,7 @@ const components = {
   a: MDXLink,
 };
 
+// TODO proptypes and head-seo
 const ArticleTemplate = ({data: {mdx}, children}) => {
   const {lang} = useSiteData();
   const {frontmatter: {title, description, author, featured, date, category, tags}, fields: {timeToRead}} = mdx;

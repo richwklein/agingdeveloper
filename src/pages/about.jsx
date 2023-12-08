@@ -1,16 +1,19 @@
 import React from "react";
+import {Typography} from "@mui/material";
 
-const AboutPage = () => {
+// TODO everything
+const PageAbout = () => {
   return (
-    <main>
-      <h1>About</h1>
-    </main>
+    <Typography variant="h1">
+      About
+    </Typography>
   );
 };
-
-export default AboutPage;
 
 export const Head = () => {
   return <title>About</title>;
 };
+
+export default PageAbout;
+
 

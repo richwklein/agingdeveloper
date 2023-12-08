@@ -2,10 +2,10 @@
 
 exports[`TimeToRead that it renders correctly. 1`] = `
 <div
-  class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1hqzemx-MuiPaper-root-MuiCard-root"
+  class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1bsf4kt-MuiPaper-root-MuiCard-root"
 >
   <div
-    class="MuiStack-root css-1qxw92a-MuiStack-root"
+    class="MuiStack-root css-1ewakdf-MuiStack-root"
   >
     <svg
       aria-hidden="true"

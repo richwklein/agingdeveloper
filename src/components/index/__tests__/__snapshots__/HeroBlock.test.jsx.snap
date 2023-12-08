@@ -2,7 +2,7 @@
 
 exports[`HeroBlock that it renders correctly. 1`] = `
 <div
-  class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1gyh4ns-MuiPaper-root-MuiCard-root"
+  class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-19afsmk-MuiPaper-root-MuiCard-root"
 >
   <a
     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiCardActionArea-root css-1wtuwsy-MuiTypography-root-MuiLink-root-MuiButtonBase-root-MuiCardActionArea-root"
@@ -14,13 +14,13 @@ exports[`HeroBlock that it renders correctly. 1`] = `
       class="MuiCardMedia-root css-16cvb1l-MuiCardMedia-root"
     />
     <div
-      class="MuiBox-root css-1n5d35j"
+      class="MuiBox-root css-1liqlke"
     >
       <div
         class="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
       >
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-6 css-1fyyp8j-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-8 MuiGrid-grid-lg-6 css-1ihtruj-MuiGrid-root"
         >
           <div
             class="MuiBox-root css-1chv412"

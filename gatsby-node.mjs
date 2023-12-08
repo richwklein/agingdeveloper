@@ -75,23 +75,6 @@ export const createSchemaCustomization = ({actions, schema}) => {
         },
       },
     }),
-    "type Mdx implements Node { frontmatter: Frontmatter }",
-    schema.buildObjectType({
-      name: "Frontmatter",
-      fields: {
-        featured: {
-          type: "FeaturedYaml",
-          resolve: (source, args, context, info) => {
-            return context.nodeModel.findOne({
-              type: "FeaturedYaml",
-              query: {
-                filter: {slug: {eq: source.featured}},
-              },
-            });
-          },
-        },
-      },
-    }),
   ];
   createTypes(typeDefs);
 };

@@ -1,17 +1,25 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {GatsbyImage} from "gatsby-plugin-image";
-import {Box, Card, CardActionArea, CardContent, CardHeader, CardMedia, Grid, Typography} from "@mui/material";
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@mui/material";
 import InternalLink from "../common/InternalLink";
 import PropTypes from "prop-types";
 
+// TODO proptypes for image
 const HeroBlock = ({hero: {title, slug, excerpt, image}}) => {
   return (
     <Card
       variant="outlined"
       sx={{
         position: "relative",
-        backgroundColor: "primary.main",
-        color: "primary.contrastText",
       }}
     >
       <CardActionArea disableRipple component={InternalLink} to={`/article/${slug}`}>
@@ -27,12 +35,13 @@ const HeroBlock = ({hero: {title, slug, excerpt, image}}) => {
             height: "100%",
             zIndex: 2,
             backgroundColor: "rgb(55, 71, 79, 0.5)",
+            color: "primary.contrastText",
             backdropFilter: "blur(4px)",
             overflowY: {xs: "scroll", sm: "hidden"},
           }}
         >
           <Grid container>
-            <Grid item md={6} sm={12} xs={12}>
+            <Grid item lg={6} md={8} sm={12} xs={12}>
               <Box
                 sx={{
                   p: {xs: 1, md: 4},
@@ -45,7 +54,7 @@ const HeroBlock = ({hero: {title, slug, excerpt, image}}) => {
                     {excerpt}
                   </Typography>
                   <Typography variant="subtitle1" color="inherit">
-                    <Fragment>{"Continue Reading"}&hellip;</Fragment>
+                    {"Continue Reading"}&hellip;
                   </Typography>
                 </CardContent>
               </Box>

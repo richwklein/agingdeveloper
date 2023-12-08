@@ -38,6 +38,7 @@ const PoweredBy = () => {
   );
 };
 
+// TODO RSS icon & maybe scroll to top
 const PageFooter = ({title, repository}) => {
   return (
     <Grid

@@ -8,6 +8,7 @@ import PageFooter from "./PageFooter";
 import InnerContainer from "./InnerContainer";
 import {useSiteData} from "../../hooks/useSiteData";
 
+// TODO remove spred
 const Layout = ({children, props}) => {
   const {title, tagline, image, repository} = useSiteData();
   const avatar = image.childImageSharp.gatsbyImageData;

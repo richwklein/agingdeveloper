@@ -6,6 +6,7 @@ import InternalLink from "./InternalLink";
 // Checks against absolute URLs so we can still pass it along to the internal link component
 const domainRegex = /^http[s]*:\/\/[www.]*agingdeveloper\.(com|net)[/]?/;
 
+// TODO remove spread
 const MDXLink = ({href, ...props}) => {
   const sameDomain = domainRegex.test(href);
   let to = href;

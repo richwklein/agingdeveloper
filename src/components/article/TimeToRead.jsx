@@ -9,8 +9,8 @@ const TimeToRead = ({minutes, words, lang}) => {
   const wordsTemplate = `${wordFormat} words`;
 
   return (
-    <Card variant="outlined" sx={{padding: .5}}>
-      <Stack direction="row" useFlexGap alignItems="center" spacing={1}>
+    <Card variant="outlined" sx={{padding: .75}}>
+      <Stack direction="row" useFlexGap alignItems="center" spacing={1.5}>
         <AccessTimeOutlinedIcon />
         <Box flex={1}>
           <Typography component={Box} variant="body2">

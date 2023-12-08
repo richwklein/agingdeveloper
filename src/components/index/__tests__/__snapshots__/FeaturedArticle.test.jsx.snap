@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeaturedArticle that it renders correctly. 1`] = `
+<div
+  class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-12 MuiGrid-grid-md-6 css-13i4rnv-MuiGrid-root"
+>
+  <div
+    class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1v5z4dq-MuiPaper-root-MuiCard-root"
+  >
+    <a
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiCardActionArea-root css-n7xk9b-MuiTypography-root-MuiLink-root-MuiButtonBase-root-MuiCardActionArea-root"
+      data-link="internal"
+      href="/article/2023-12-01-slug"
+      tabindex="0"
+    >
+      <div
+        class="MuiBox-root css-l0kwbt"
+      >
+        <div
+          class="MuiCardHeader-root css-18qyd10-MuiCardHeader-root"
+        >
+          <div
+            class="MuiCardHeader-content css-1qbkelo-MuiCardHeader-content"
+          >
+            <span
+              class="MuiTypography-root MuiTypography-h5 MuiCardHeader-title css-1qvr50w-MuiTypography-root"
+            >
+              This is an Aritcle Title
+            </span>
+          </div>
+        </div>
+        <p
+          class="MuiCardContent-root css-dsyuoz-MuiCardContent-root"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle1 css-10wpov9-MuiTypography-root"
+          >
+            This is content from the article.
+          </h6>
+        </p>
+      </div>
+      <div
+        class="MuiCardMedia-root css-16cvb1l-MuiCardMedia-root"
+      />
+      <span
+        class="MuiCardActionArea-focusHighlight css-1v2exvi-MuiCardActionArea-focusHighlight"
+      />
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </a>
+  </div>
+</div>
+`;

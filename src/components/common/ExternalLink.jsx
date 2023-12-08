@@ -2,6 +2,7 @@ import React from "react";
 import MuiLink from "@mui/material/Link";
 import PropTypes from "prop-types";
 
+// TODO remove spread, fix forwardRef error
 const ExternalLink = React.forwardRef((props, ref) => (
   <MuiLink
     data-link="external"

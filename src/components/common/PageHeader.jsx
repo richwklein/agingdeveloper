@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import InnerContainer from "./InnerContainer";
 import InternalLink from "./InternalLink";
 
+// TODO proptypes for image
 const PageAvatar = ({image}) => {
   return (<Avatar
     variant="rounded"

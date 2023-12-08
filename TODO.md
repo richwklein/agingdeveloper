@@ -21,4 +21,9 @@
 - Get rid of the use of any for a proptype and come up with a better type for the children prop https://www.npmjs.com/package/prop-types
 - pull the article slug from the path
 - Add "npm run format &&" back to the ci build
-- move page avatar query
+- make note of the aspect ratio calculator and how I use it. https://calculateaspectratio.com/
+- RSS support
+- sorting of imports
+- partial hydration vs slices
+- add tests for layout
+- add tests for pages, and templates
