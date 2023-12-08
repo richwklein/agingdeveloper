@@ -3,7 +3,7 @@ import {graphql} from "gatsby";
 import {MDXProvider} from "@mdx-js/react";
 import MDXLink from "../components/common/MDXLink";
 import ByLine from "../components/article/ByLine";
-import {Box, Grid} from "@mui/material";
+import {Box, Divider, Grid} from "@mui/material";
 import TitleBlock from "../components/article/TitleBlock";
 import FeaturedImage from "../components/article/FeaturedImage";
 import TagBlock from "../components/article/TagBlock";
@@ -40,9 +40,10 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
           <MDXProvider components={components}>
             {children}
           </MDXProvider>
-          <TagBlock category={category} tags={tags} />
         </Grid>
       </Grid>
+      <Divider variant="fullWidth" sx={{marginTop: 2, marginBottom: 2}} />
+      <TagBlock category={category} tags={tags} />
     </Box>
   );
 };
@@ -86,7 +87,8 @@ export const pageQuery = graphql`
           image {
             childImageSharp {
               gatsbyImageData(
-                width: 1152, 
+                width: 1152,
+                height: 648, 
                 placeholder: BLURRED
                 layout: CONSTRAINED
               )

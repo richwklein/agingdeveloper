@@ -27,3 +27,6 @@
 - partial hydration vs slices
 - add tests for layout
 - add tests for pages, and templates
+- robots, sitemap, etc...
+- redirect incorrect slugs like ("rss-dead-long-live-rss")
+- add series support
