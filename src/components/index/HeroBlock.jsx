@@ -36,7 +36,7 @@ const HeroBlock = ({hero: {title, slug, excerpt, image}}) => {
             zIndex: 2,
             backgroundColor: "rgb(55, 71, 79, 0.5)",
             color: "primary.contrastText",
-            backdropFilter: "blur(4px)",
+            backdropFilter: "blur(2px)",
             overflowY: {xs: "scroll", sm: "hidden"},
           }}
         >
