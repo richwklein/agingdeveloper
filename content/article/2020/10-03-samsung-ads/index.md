@@ -2,7 +2,7 @@
 slug: 2020-10-03-samsung-ads
 title: Samsung is pushing us to be an all Apple family
 description: Why we are going to make the move to only Apple devices
-author: richwklein@gmail.com
+author: richwklein
 featured:
   image: david-svihovec-5pE-lRcua5A-unsplash.jpg
   author:
