@@ -7,6 +7,10 @@ import theme from "../styles/theme";
 import PageFooter from "./PageFooter";
 import InnerContainer from "./InnerContainer";
 import {useSiteData} from "../hooks/useSiteData";
+import {ChildrenType} from "../types";
+import "prismjs/themes/prism-tomorrow.css";
+import "../styles/layout.css";
+import {Container} from "@mui/material";
 
 // TODO remove spred
 const Layout = ({children, props}) => {
@@ -20,18 +24,16 @@ const Layout = ({children, props}) => {
         tagline={tagline}
         avatar={avatar}
       />
-      <InnerContainer component="main">{children}</InnerContainer>
+      <Container maxWidth="lg" component="main">
+        {children}
+      </Container>
       <PageFooter title={title} repository={repository} />
     </ThemeProvider>
   );
 };
 
 Layout.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]),
+  children: ChildrenType,
   props: PropTypes.any,
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
 import {Container} from "@mui/material";
 import PropTypes from "prop-types";
+import {ChildrenType} from "../types";
 
 // TODO remove spread
 const InnerContainer = ({props, children}) => {
@@ -12,11 +13,7 @@ const InnerContainer = ({props, children}) => {
 };
 
 InnerContainer.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]),
+  children: ChildrenType,
   props: PropTypes.any,
 };
 

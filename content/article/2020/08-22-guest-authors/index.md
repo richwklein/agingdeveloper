@@ -12,7 +12,6 @@ featured:
     name: Unsplash
     url: https://unsplash.com/photos/fountain-pen-on-black-lined-paper-y02jEX_B0O0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
 tags:
-  - gatsby
   - gatsbyjs
   - material-ui
   - public
@@ -45,7 +44,6 @@ title: Support for Guest Authors
 author: richwklein
 image: aaron-burden-y02jEX_B0O0-unsplash.jpg
 tags:
-  - gatsby
   - gatsbyjs
   - material-ui
   - public

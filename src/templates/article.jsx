@@ -2,14 +2,15 @@ import React from "react";
 import {graphql} from "gatsby";
 import {MDXProvider} from "@mdx-js/react";
 import MDXLink from "../components/MDXLink";
-import ByLine from "../components/article/ByLine";
+import ArticleByLine from "../components/ArticleByLine";
 import {Box, Divider, Grid} from "@mui/material";
-import TitleBlock from "../components/article/TitleBlock";
-import FeaturedImage from "../components/article/FeaturedImage";
-import TagBlock from "../components/article/TagBlock";
-import TimeToRead from "../components/article/TimeToRead";
+import TitleBlock from "../components/TitleBlock";
+import ArticleImage from "../components/ArticleImage";
+import ArticleTagGrid from "../components/ArticleTagGrid";
+import ArticleTimeToRead from "../components/ArticleTimeToRead";
 import {useSiteData} from "../hooks/useSiteData";
 import PropTypes from "prop-types";
+import {ChildrenType} from "../types";
 
 const components = {
   a: MDXLink,
@@ -26,17 +27,17 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
       "fontFamily": "Merriweather, Merriweather Sans, sans-serif, serif",
       "fontSize": "1.1rem",
     }}>
-      <ByLine
+      <ArticleByLine
         author={author}
         date={date} />
       <TitleBlock title={title} description={description } />
-      <FeaturedImage
+      <ArticleImage
         author={featured.author}
         site={featured.site}
         image={featured.image.childImageSharp.gatsbyImageData} />
       <Grid container direction="row-reverse" spacing={2}>
         <Grid item md={3} sm={12} xs={12}>
-          <TimeToRead minutes={timeToRead.minutes} words={timeToRead.words} lang={lang} />
+          <ArticleTimeToRead minutes={timeToRead.minutes} words={timeToRead.words} lang={lang} />
         </Grid>
         <Grid item md={9} sm={12} xs={12}>
           <MDXProvider components={components}>
@@ -45,7 +46,7 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
         </Grid>
       </Grid>
       <Divider variant="fullWidth" sx={{my: 2}} />
-      <TagBlock category={category} tags={tags} />
+      <ArticleTagGrid category={category} tags={tags} />
     </Box>
   );
 };
@@ -74,18 +75,13 @@ ArticleTemplate.propTypes = {
       }).isRequired,
     }).isRequired,
   }).isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]).isRequired,
+  children: ChildrenType,
 };
 
 export const Head = ({data: {mdx}}) => {
   const {frontmatter: {title}} = mdx;
   return (<title>{title}</title>);
 };
-
 Head.propTypes = {
   data: PropTypes.shape({
     mdx: PropTypes.shape({

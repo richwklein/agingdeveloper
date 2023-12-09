@@ -9,6 +9,7 @@ import {
   CardMedia,
   Grid,
   Typography,
+  alpha,
 } from "@mui/material";
 import InternalLink from "./InternalLink";
 import PropTypes from "prop-types";
@@ -27,18 +28,18 @@ const HeroArticle = ({hero: {title, slug, excerpt, image}}) => {
           <GatsbyImage image={image} sx={{zIndex: 1}} />
         </CardMedia>
         <Box
-          sx={{
+          sx={(theme) => ({
             position: "absolute",
             top: 0,
             left: 0,
             width: "100%",
             height: "100%",
             zIndex: 2,
-            backgroundColor: "rgb(55, 71, 79, 0.5)",
+            bgcolor: alpha(theme.palette.primary.main, 0.5),
             color: "primary.contrastText",
             backdropFilter: "blur(2px)",
             overflowY: {xs: "scroll", sm: "hidden"},
-          }}
+          })}
         >
           <Grid container>
             <Grid item lg={6} md={8} sm={12} xs={12}>

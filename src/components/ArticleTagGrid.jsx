@@ -1,33 +1,7 @@
 import React from "react";
 import {Grid} from "@mui/material";
-import InternalLink from "./InternalLink";
-import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
-import TagOutlinedIcon from "@mui/icons-material/TagOutlined";
 import PropTypes from "prop-types";
-import slug from "slug";
-
-export const Tag = ({name, isCategory=false}) => {
-  const icon = isCategory ? <FolderOutlinedIcon fontSize="inherit" sx={{mr: .3}} /> :
-    <TagOutlinedIcon fontSize="inherit" sx={{mr: .3}} />;
-  const url = isCategory ? `/category/${slug(name)}` : `/tag/${slug(name)}`;
-  return (
-    <InternalLink
-      underline="hover"
-      sx={{display: "flex", alignItems: "center"}}
-      color="primary"
-      to={url}
-    >
-      {icon}
-      {name}
-    </InternalLink>
-
-  );
-};
-
-Tag.propTypes = {
-  name: PropTypes.string.isRequired,
-  isCategory: PropTypes.bool,
-};
+import Tag from "./Tag";
 
 const ArticleTagGrid = ({category, tags}) => {
   return (

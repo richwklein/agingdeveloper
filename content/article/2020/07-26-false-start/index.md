@@ -13,7 +13,6 @@ featured:
     url: https://unsplash.com/photos/man-on-running-field-9HI8UJMSdZA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
 tags:
   - tech
-  - gatsby
   - gatsbyjs
   - react
   - material-ui

@@ -1,0 +1,22 @@
+html {
+  min-height: 100vh;
+}
+
+body,
+#___gatsby,
+#gatsby-focus-wrapper {
+  min-height: 100vh;
+}
+
+#gatsby-focus-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
+
+pre[class*="language-"] {
+  border-radius: .3em;
+}

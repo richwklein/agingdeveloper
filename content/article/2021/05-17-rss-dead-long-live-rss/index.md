@@ -16,7 +16,6 @@ tags:
   - authorization
   - Facebook
   - Feed
-  - gatsby
   - gatsbyjs
   - RSS
   - Syndicate
