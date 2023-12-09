@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import {GatsbyImage} from "gatsby-plugin-image";
-import InternalLink from "../common/InternalLink";
+import InternalLink from "../InternalLink";
 
 // TODO proptypes for image
 const FeaturedArticle = ({article: {title, excerpt, date, slug, image}}) => {

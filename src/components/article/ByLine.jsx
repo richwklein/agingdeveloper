@@ -1,6 +1,6 @@
 import React from "react";
 import {Box, Typography} from "@mui/material";
-import InternalLink from "../common/InternalLink";
+import InternalLink from "../InternalLink";
 import PropTypes from "prop-types";
 
 const ByLine = ({author, date}) => {

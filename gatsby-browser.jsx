@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "./src/components/common/Layout";
+import Layout from "./src/components/Layout";
 import "prismjs/themes/prism-tomorrow.css";
 
 export const wrapPageElement = ({element, props}) => (

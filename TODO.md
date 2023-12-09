@@ -20,7 +20,6 @@
 - Get rid of prop spread
 - Get rid of the use of any for a proptype and come up with a better type for the children prop https://www.npmjs.com/package/prop-types
 - pull the article slug from the path
-- Add "npm run format &&" back to the ci build
 - make note of the aspect ratio calculator and how I use it. https://calculateaspectratio.com/
 - RSS support
 - sorting of imports
@@ -30,3 +29,4 @@
 - robots, sitemap, etc...
 - redirect incorrect slugs like ("rss-dead-long-live-rss")
 - add series support
+- define some common proptypes that can be imported into components

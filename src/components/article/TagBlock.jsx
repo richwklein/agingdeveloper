@@ -1,6 +1,6 @@
 import React from "react";
-import {Button, Grid} from "@mui/material";
-import InternalLink from "../common/InternalLink";
+import {Grid} from "@mui/material";
+import InternalLink from "../InternalLink";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import TagOutlinedIcon from "@mui/icons-material/TagOutlined";
 import PropTypes from "prop-types";

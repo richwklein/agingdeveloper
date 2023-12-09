@@ -4,7 +4,8 @@ import {Box, Button, Grid} from "@mui/material";
 import HeroBlock from "../components/index/HeroBlock";
 import FeaturedPost from "../components/index/FeaturedArticle";
 import {useSiteData} from "../hooks/useSiteData";
-import InternalLink from "../components/common/InternalLink";
+import InternalLink from "../components/InternalLink";
+import PropTypes from "prop-types";
 
 // TODO proptypes and head-seo
 const PageIndex = ({data: {lead, remaining}}) => {
@@ -16,7 +17,12 @@ const PageIndex = ({data: {lead, remaining}}) => {
       <HeroBlock hero={{title: title, slug: slug, excerpt: excerpt, image: featuredImage}} />
       <Grid container spacing={4} sx={{mt: 2}}>
         {remaining.edges.map((edge) => (
-          <FeaturedPost key={edge.node.frontmatter.slug} article={{date: edge.node.frontmatter.date, excerpt: edge.node.excerpt, image: edge.node.frontmatter.featured.image.childImageSharp.gatsbyImageData, title: edge.node.frontmatter.title, slug: edge.node.frontmatter.slug}} />
+          <FeaturedPost key={edge.node.frontmatter.slug} article={{
+            date: edge.node.frontmatter.date,
+            excerpt: edge.node.excerpt,
+            image: edge.node.frontmatter.featured.image.childImageSharp.gatsbyImageData,
+            title: edge.node.frontmatter.title,
+            slug: edge.node.frontmatter.slug}} />
         ))}
       </Grid>
       <Box sx={{mt: 2}}>
@@ -33,6 +39,46 @@ const PageIndex = ({data: {lead, remaining}}) => {
       </Box>
     </main>
   );
+};
+
+PageIndex.propTypes = {
+  data: PropTypes.shape({
+    lead: PropTypes.shape({
+      edges: PropTypes.arrayOf(
+          PropTypes.shape({
+            node: PropTypes.shape({
+              frontmatter: PropTypes.shape({
+                title: PropTypes.string.isRequired,
+                slug: PropTypes.string.isRequired,
+                featured: PropTypes.shape({
+                  author: PropTypes.object.isRequired,
+                  site: PropTypes.object.isRequired,
+                  image: PropTypes.any,
+                }).isRequired,
+              }).isRequired,
+              excerpt: PropTypes.string.isRequired,
+            }).isRequired,
+          }).isRequired,
+      ).isRequired,
+    }).isRequired,
+    remaining: PropTypes.shape({
+      edges: PropTypes.arrayOf(
+          PropTypes.shape({
+            node: PropTypes.shape({
+              frontmatter: PropTypes.shape({
+                title: PropTypes.string.isRequired,
+                slug: PropTypes.string.isRequired,
+                date: PropTypes.string.isRequired,
+                featured: PropTypes.shape({
+                  image: PropTypes.any,
+                }).isRequired,
+              }).isRequired,
+              excerpt: PropTypes.string.isRequired,
+            }).isRequired,
+          }).isRequired,
+      ).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export const Head = () => {

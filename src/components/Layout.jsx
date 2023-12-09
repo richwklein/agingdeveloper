@@ -3,10 +3,10 @@ import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import CssBaseline from "@mui/material/CssBaseline";
 import PropTypes from "prop-types";
 import PageHeader from "./PageHeader";
-import theme from "../../styles/theme";
+import theme from "../styles/theme";
 import PageFooter from "./PageFooter";
 import InnerContainer from "./InnerContainer";
-import {useSiteData} from "../../hooks/useSiteData";
+import {useSiteData} from "../hooks/useSiteData";
 
 // TODO remove spred
 const Layout = ({children, props}) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import {GatsbyImage} from "gatsby-plugin-image";
-import ExternalLink from "../common/ExternalLink";
+import ExternalLink from "../ExternalLink";
 import {Box, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 

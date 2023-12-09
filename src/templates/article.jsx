@@ -1,7 +1,7 @@
 import React from "react";
 import {graphql} from "gatsby";
 import {MDXProvider} from "@mdx-js/react";
-import MDXLink from "../components/common/MDXLink";
+import MDXLink from "../components/MDXLink";
 import ByLine from "../components/article/ByLine";
 import {Box, Divider, Grid} from "@mui/material";
 import TitleBlock from "../components/article/TitleBlock";
@@ -9,15 +9,17 @@ import FeaturedImage from "../components/article/FeaturedImage";
 import TagBlock from "../components/article/TagBlock";
 import TimeToRead from "../components/article/TimeToRead";
 import {useSiteData} from "../hooks/useSiteData";
+import PropTypes from "prop-types";
 
 const components = {
   a: MDXLink,
 };
 
-// TODO proptypes and head-seo
+// TODO image propertype and head-seo
 const ArticleTemplate = ({data: {mdx}, children}) => {
   const {lang} = useSiteData();
-  const {frontmatter: {title, description, author, featured, date, category, tags}, fields: {timeToRead}} = mdx;
+  const {frontmatter: {title, description, author, featured, date, category, tags},
+    fields: {timeToRead}} = mdx;
   return (
     <Box component="article" sx={{
       "lineHeight": 1.4,
@@ -48,11 +50,50 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
   );
 };
 
-export default ArticleTemplate;
+ArticleTemplate.propTypes = {
+  data: PropTypes.shape({
+    mdx: PropTypes.shape({
+      frontmatter: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        category: PropTypes.string.isRequired,
+        tags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        author: PropTypes.object.isRequired,
+        featured: PropTypes.shape({
+          author: PropTypes.object.isRequired,
+          site: PropTypes.object.isRequired,
+          image: PropTypes.any,
+        }).isRequired,
+      }).isRequired,
+      fields: PropTypes.shape({
+        timeToRead: PropTypes.shape({
+          minutes: PropTypes.number.isRequired,
+          words: PropTypes.number.isRequired,
+        }).isRequired,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]).isRequired,
+};
 
 export const Head = ({data: {mdx}}) => {
   const {frontmatter: {title}} = mdx;
   return (<title>{title}</title>);
+};
+
+Head.propTypes = {
+  data: PropTypes.shape({
+    mdx: PropTypes.shape({
+      frontmatter: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export const pageQuery = graphql`
@@ -100,3 +141,4 @@ export const pageQuery = graphql`
   }
 `;
 
+export default ArticleTemplate;

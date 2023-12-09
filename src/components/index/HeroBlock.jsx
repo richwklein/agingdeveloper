@@ -10,7 +10,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import InternalLink from "../common/InternalLink";
+import InternalLink from "../InternalLink";
 import PropTypes from "prop-types";
 
 // TODO proptypes for image

@@ -1,6 +1,6 @@
 import React from "react";
 import {GatsbyImage} from "gatsby-plugin-image";
-import {AppBar, Avatar, ButtonBase, Stack, Typography} from "@mui/material";
+import {AppBar, Avatar, Stack, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 import InnerContainer from "./InnerContainer";
 import InternalLink from "./InternalLink";
