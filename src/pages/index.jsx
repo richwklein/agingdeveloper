@@ -117,7 +117,7 @@ export const pageQuery = graphql`
       }
     },
     remaining: allMdx(
-      limit: 6
+      limit: 8
       skip: 1
       sort: [{frontmatter: {date: DESC}}, {frontmatter:{title:ASC}}]
     ) {
