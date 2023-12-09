@@ -1,12 +1,12 @@
 import React from "react";
 import {cleanup, render} from "@testing-library/react";
-import TimeToRead from "../TimeToRead";
+import ArticleTimeToRead from "../ArticleTimeToRead";
 
-describe("TimeToRead", () => {
+describe("ArticleTimeToRead", () => {
   afterEach(cleanup);
 
   const renderComponent = () => render(
-      <TimeToRead
+      <ArticleTimeToRead
         minutes={12.25}
         words={99999}
         lang="en-us" />,

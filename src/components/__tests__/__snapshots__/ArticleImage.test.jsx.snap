@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FeaturedImage that it renders correctly. 1`] = `
+exports[`ArticleImage that it renders correctly. 1`] = `
 <figure
   class="MuiBox-root css-r5049d"
 >

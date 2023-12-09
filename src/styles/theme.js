@@ -10,6 +10,7 @@ const theme = createTheme({
     ].join(","),
   },
   palette: {
+    mode: "light",
     primary: {
       light: "#62727b",
       main: "#37474f",

@@ -30,6 +30,9 @@ exports[`PageHeader that it renders correctly. 1`] = `
           Test tagline is the best tagline
         </h6>
       </div>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
     </a>
   </div>
 </header>

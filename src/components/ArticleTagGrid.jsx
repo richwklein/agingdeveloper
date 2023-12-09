@@ -1,6 +1,6 @@
 import React from "react";
 import {Grid} from "@mui/material";
-import InternalLink from "../InternalLink";
+import InternalLink from "./InternalLink";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import TagOutlinedIcon from "@mui/icons-material/TagOutlined";
 import PropTypes from "prop-types";
@@ -29,7 +29,7 @@ Tag.propTypes = {
   isCategory: PropTypes.bool,
 };
 
-const TagBlock = ({category, tags}) => {
+const ArticleTagGrid = ({category, tags}) => {
   return (
     <Grid container spacing={1.5}>
       <Grid item key={category}>
@@ -46,9 +46,9 @@ const TagBlock = ({category, tags}) => {
   );
 };
 
-TagBlock.propTypes = {
+ArticleTagGrid.propTypes = {
   category: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default TagBlock;
+export default ArticleTagGrid;

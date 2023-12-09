@@ -27,6 +27,11 @@ exports[`FeaturedArticle that it renders correctly. 1`] = `
             >
               This is an Aritcle Title
             </span>
+            <span
+              class="MuiTypography-root MuiTypography-body1 MuiCardHeader-subheader css-nrdprl-MuiTypography-root"
+            >
+              2023-12-01
+            </span>
           </div>
         </div>
         <p

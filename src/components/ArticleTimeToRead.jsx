@@ -3,7 +3,7 @@ import {Box, Card, Stack, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 
-const TimeToRead = ({minutes, words, lang}) => {
+const ArticleTimeToRead = ({minutes, words, lang}) => {
   const wordFormat = new Intl.NumberFormat(lang).format(words);
   const readTemplate = `${Math.ceil(minutes)} min read`;
   const wordsTemplate = `${wordFormat} words`;
@@ -25,10 +25,10 @@ const TimeToRead = ({minutes, words, lang}) => {
   );
 };
 
-TimeToRead.propTypes = {
+ArticleTimeToRead.propTypes = {
   minutes: PropTypes.number.isRequired,
   words: PropTypes.number.isRequired,
   lang: PropTypes.string.isRequired,
 };
 
-export default TimeToRead;
+export default ArticleTimeToRead;

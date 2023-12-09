@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TagBlock that it renders correctly. 1`] = `
+exports[`ArticleTagGrid that it renders correctly. 1`] = `
 <div
   class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1.5 css-acctgf-MuiGrid-root"
 >

@@ -1,13 +1,13 @@
 import React from "react";
 import {cleanup, render} from "@testing-library/react";
-import FeaturedImage from "../FeaturedImage";
+import ArticleImage from "../ArticleImage";
 
 // TODO improve tests
-describe("FeaturedImage", () => {
+describe("ArticleImage", () => {
   afterEach(cleanup);
 
   const renderComponent = () => render(
-      <FeaturedImage
+      <ArticleImage
         author={{name: "Georgia Smith", url: "https://example.com/georgia-smith"}}
         site={{name: "Unsplash", url: "https://example.com/unsplash"}} />,
   );

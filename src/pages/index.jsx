@@ -1,8 +1,8 @@
 import React from "react";
 import {graphql} from "gatsby";
 import {Box, Button, Grid} from "@mui/material";
-import HeroBlock from "../components/index/HeroBlock";
-import FeaturedPost from "../components/index/FeaturedArticle";
+import HeroArticle from "../components/HeroArticle";
+import FeaturedPost from "../components/FeaturedArticle";
 import {useSiteData} from "../hooks/useSiteData";
 import InternalLink from "../components/InternalLink";
 import PropTypes from "prop-types";
@@ -14,7 +14,7 @@ const PageIndex = ({data: {lead, remaining}}) => {
 
   return (
     <main>
-      <HeroBlock hero={{title: title, slug: slug, excerpt: excerpt, image: featuredImage}} />
+      <HeroArticle hero={{title: title, slug: slug, excerpt: excerpt, image: featuredImage}} />
       <Grid container rowSpacing={4} columnSpacing={3} sx={{mt: 0}}>
         {remaining.edges.map((edge) => (
           <FeaturedPost key={edge.node.frontmatter.slug} article={{

@@ -1,10 +1,10 @@
 import React from "react";
 import {GatsbyImage} from "gatsby-plugin-image";
-import ExternalLink from "../ExternalLink";
+import ExternalLink from "./ExternalLink";
 import {Box, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 
-const FeaturedImage = ({author, site, image}) => {
+const ArticleImage = ({author, site, image}) => {
   return (
     <Box component="figure"
       sx={{
@@ -23,7 +23,7 @@ const FeaturedImage = ({author, site, image}) => {
   );
 };
 
-FeaturedImage.propTypes = {
+ArticleImage.propTypes = {
   author: PropTypes.shape({
     name: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
@@ -34,4 +34,4 @@ FeaturedImage.propTypes = {
   }).isRequired,
   image: PropTypes.any,
 };
-export default FeaturedImage;
+export default ArticleImage;

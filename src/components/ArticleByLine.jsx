@@ -1,9 +1,9 @@
 import React from "react";
 import {Box, Typography} from "@mui/material";
-import InternalLink from "../InternalLink";
+import InternalLink from "./InternalLink";
 import PropTypes from "prop-types";
 
-const ByLine = ({author, date}) => {
+const ArticleByLine = ({author, date}) => {
   return (
     <Box>
       <InternalLink to={`/author/${author.slug}`} variant="subtitle1"
@@ -17,7 +17,7 @@ const ByLine = ({author, date}) => {
   );
 };
 
-ByLine.propTypes = {
+ArticleByLine.propTypes = {
   author: PropTypes.shape({
     name: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
@@ -25,4 +25,4 @@ ByLine.propTypes = {
   date: PropTypes.string.isRequired,
 };
 
-export default ByLine;
+export default ArticleByLine;

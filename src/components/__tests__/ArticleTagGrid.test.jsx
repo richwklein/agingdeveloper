@@ -1,14 +1,14 @@
 import React from "react";
 import {cleanup, render} from "@testing-library/react";
-import TagBlock, {Tag} from "../TagBlock";
+import ArticleTagGrid, {Tag} from "../ArticleTagGrid";
 
-describe("TagBlock", () => {
+describe("ArticleTagGrid", () => {
   afterEach(cleanup);
 
   const tags = ["Theme Park", "Genie+", "Sadness", "I ♥ Dogs"];
 
   const renderComponent = () => render(
-      <TagBlock category={"Family"} tags={tags} />,
+      <ArticleTagGrid category={"Family"} tags={tags} />,
   );
 
   test("that it renders correctly.", () => {

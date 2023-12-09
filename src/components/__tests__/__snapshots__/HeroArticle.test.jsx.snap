@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HeroBlock that it renders correctly. 1`] = `
+exports[`HeroArticle that it renders correctly. 1`] = `
 <div
   class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-19afsmk-MuiPaper-root-MuiCard-root"
 >
