@@ -29,6 +29,18 @@ const config = {
     "gatsby-transformer-sharp",
     "gatsby-transformer-yaml",
     {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        google: {
+          families: [
+            "Helvetica Neue",
+            "Merriweather",
+            "Merriweather Sans",
+          ],
+        },
+      },
+    },
+    {
       resolve: "gatsby-plugin-mdx",
       options: {
         extensions: [".mdx", ".md"],

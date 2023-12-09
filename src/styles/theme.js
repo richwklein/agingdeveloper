@@ -2,6 +2,12 @@ import {createTheme} from "@mui/material/styles";
 
 const theme = createTheme({
   typography: {
+    fontFamily: [
+      '"Helvetica Neue"',
+      '"Arial"',
+      '"sans-serif"',
+      '"serif"',
+    ].join(","),
   },
   palette: {
     primary: {
@@ -15,6 +21,13 @@ const theme = createTheme({
       main: "#8bc34a",
       dark: "#5a9216",
       contrastText: "#000000",
+    },
+  },
+  components: {
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
     },
   },
 });

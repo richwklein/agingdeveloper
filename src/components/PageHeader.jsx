@@ -1,6 +1,6 @@
 import React from "react";
 import {GatsbyImage} from "gatsby-plugin-image";
-import {AppBar, Avatar, Stack, Typography} from "@mui/material";
+import {AppBar, Avatar, ButtonBase, Stack, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 import InnerContainer from "./InnerContainer";
 import InternalLink from "./InternalLink";
@@ -39,22 +39,22 @@ const PageHeader = ({title, tagline, avatar}) => {
       }}
     >
       <InnerContainer>
-        <InternalLink to={"/"} sx={{color: "primary.contrastText", textDecoration: "none"}}>
-          <Stack direction="row" alignItems="center">
-            <PageAvatar image={avatar} />
-            <Stack direction="column"
-              useFlexGap
-              alignItems="flex-start"
-              sx={{ml: 3}}>
-              <Typography variant="h4" sx={{mb: 0.5}}>
-                {title}
-              </Typography>
-              <Typography variant="h6" sx={{fontSize: "1rem", lineHeight: 1.4}}>
-                {tagline}
-              </Typography>
-            </Stack>
+        <ButtonBase component={InternalLink} to={"/"}
+          sx={{color: "primary.contrastText", textDecoration: "none"}}>
+          <PageAvatar image={avatar} />
+          <Stack direction="column"
+            flexShrink={1}
+            useFlexGap
+            alignItems="flex-start"
+            sx={{ml: 3}}>
+            <Typography variant="h4" sx={{mb: 0.5}}>
+              {title}
+            </Typography>
+            <Typography variant="h6" sx={{fontSize: "1rem", lineHeight: 1.4}}>
+              {tagline}
+            </Typography>
           </Stack>
-        </InternalLink>
+        </ButtonBase>
       </InnerContainer>
     </AppBar>
   );

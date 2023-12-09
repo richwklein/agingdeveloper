@@ -15,7 +15,7 @@ const PageIndex = ({data: {lead, remaining}}) => {
   return (
     <main>
       <HeroBlock hero={{title: title, slug: slug, excerpt: excerpt, image: featuredImage}} />
-      <Grid container spacing={4} sx={{mt: 2}}>
+      <Grid container rowSpacing={4} columnSpacing={3} sx={{mt: 0}}>
         {remaining.edges.map((edge) => (
           <FeaturedPost key={edge.node.frontmatter.slug} article={{
             date: edge.node.frontmatter.date,

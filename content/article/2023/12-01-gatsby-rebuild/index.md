@@ -50,6 +50,8 @@ This section is going to be where I run into difficulties that make this develop
 - comments
 - material ui
 
+proptypes head api and local development does not work together
+
 ### Material UI Upgrade
 Doing this upgrade I went from v4.* of [Material UI](https://mui.com/material-ui/getting-started/) to v5.*.
 The import paths all changed. They went from "@material-ui" to "@mui/material/". Another big changes to deal with with going 
