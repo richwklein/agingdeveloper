@@ -44,10 +44,7 @@ const PageFooter = ({title, repository}) => {
     <Grid
       container
       component="footer"
-      sx={{
-        padding: 2,
-        marginTop: 4,
-      }}
+      sx={{p: 2, mt: 4}}
     >
       <Grid item sm={4} xs={12}/>
       <Grid item sm={4} xs={12}>

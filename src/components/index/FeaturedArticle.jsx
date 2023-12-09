@@ -16,20 +16,27 @@ import InternalLink from "../common/InternalLink";
 // TODO proptypes for image
 const FeaturedArticle = ({article: {title, excerpt, date, slug, image}}) => {
   return (
-    <Grid item sm={12} md={6}>
+    <Grid item key={slug} sm={12} md={6}>
       <Card variant="outlined">
         <CardActionArea component={InternalLink} to={`/article/${slug}`} sx={{display: "flex"}} >
-          <Box sx={{flex: 1, maxHeight: "240px", overflowY: {sm: "scroll", md: "hidden"}}}>
+          <Box sx={{
+            flex: 1,
+            maxHeight: "240px",
+            overflowY: {
+              sm: "scroll",
+              md: "hidden",
+            },
+          }}>
             <CardHeader titleTypographyProps={{"variant": "h5"}}
               title={title}
               subheader={date}
-              sx={{paddingBottom: 1, paddingTop: 1.5}} />
+              sx={{pb: 1, pt: 1.5}} />
             <CardContent component="p"
               sx={{
-                "margin": 0,
-                "paddingTop": 1,
+                "m": 0,
+                "pt": 1,
                 "&:last-child": {
-                  paddingBottom: 1.5,
+                  pb: 1.5,
                 },
               }}>
               <Typography variant="subtitle1">

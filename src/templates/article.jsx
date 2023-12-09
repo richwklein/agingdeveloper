@@ -42,7 +42,7 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
           </MDXProvider>
         </Grid>
       </Grid>
-      <Divider variant="fullWidth" sx={{marginTop: 2, marginBottom: 2}} />
+      <Divider variant="fullWidth" sx={{my: 2}} />
       <TagBlock category={category} tags={tags} />
     </Box>
   );

@@ -7,23 +7,20 @@ import PropTypes from "prop-types";
 import slug from "slug";
 
 export const Tag = ({name, isCategory=false}) => {
-  const icon = isCategory ? <FolderOutlinedIcon/ > : <TagOutlinedIcon />;
+  const icon = isCategory ? <FolderOutlinedIcon fontSize="inherit" sx={{mr: .3}} /> :
+    <TagOutlinedIcon fontSize="inherit" sx={{mr: .3}} />;
   const url = isCategory ? `/category/${slug(name)}` : `/tag/${slug(name)}`;
   return (
-    <Button
-      startIcon={icon}
-      edge="start"
-      size="small"
-      variant="text"
-      component={InternalLink}
+    <InternalLink
+      underline="hover"
+      sx={{display: "flex", alignItems: "center"}}
+      color="primary"
       to={url}
-      sx={{
-        "& .MuiButton-startIcon": {
-          marginRight: .35,
-        },
-      }}>
+    >
+      {icon}
       {name}
-    </Button>
+    </InternalLink>
+
   );
 };
 
@@ -34,7 +31,7 @@ Tag.propTypes = {
 
 const TagBlock = ({category, tags}) => {
   return (
-    <Grid container spacing={.5}>
+    <Grid container spacing={1.5}>
       <Grid item key={category}>
         <Tag name={category} isCategory={true} />
       </Grid>

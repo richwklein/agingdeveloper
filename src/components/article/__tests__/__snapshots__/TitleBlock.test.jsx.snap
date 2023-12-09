@@ -4,11 +4,11 @@ exports[`TitleBlock that it renders correctly. 1`] = `
 <header
   class="MuiBox-root css-164r41r"
 >
-  <h2
-    class="MuiTypography-root MuiTypography-h2 css-1sra7t5-MuiTypography-root"
+  <h3
+    class="MuiTypography-root MuiTypography-h3 css-gepadz-MuiTypography-root"
   >
     Tesing Gatsby with Jest
-  </h2>
+  </h3>
   <div
     class="MuiTypography-root MuiTypography-subtitle MuiBox-root css-37hqdj-MuiTypography-root"
   >

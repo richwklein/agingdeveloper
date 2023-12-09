@@ -6,17 +6,11 @@ import PropTypes from "prop-types";
 const ByLine = ({author, date}) => {
   return (
     <Box>
-      <InternalLink to={`/author/${author.slug}`} variant="subtitle1" sx={{
-        display: "inline-block",
-        padding: .5,
-        marginRight: 1,
-      }}>
+      <InternalLink to={`/author/${author.slug}`} variant="subtitle1"
+        sx={{display: "inline-block", p: .5, mr: 1}}>
         {author.name}
       </InternalLink>
-      <Typography variant="subtitle2" sx={{
-        display: "inline-block",
-        padding: .5,
-      }}>
+      <Typography variant="subtitle2" sx={{display: "inline-block", p: .5}}>
         {date}
       </Typography>
     </Box>

@@ -8,16 +8,11 @@ const FeaturedImage = ({author, site, image}) => {
   return (
     <Box component="figure"
       sx={{
-        marginTop: 1.25,
-        marginBottom: 1.25,
-        marginLeft: 0,
-        marginRight: 0,
+        my: 1.25,
+        mx: 0,
       }}>
       <GatsbyImage image={image} />
-      <Typography variant="caption" component="figcaption"
-        sx={{
-          marginTop: .25,
-        }}>
+      <Typography variant="caption" component="figcaption" sx={{mt: .25}}>
         {"Image by "}
         <ExternalLink to={author.url}>{author.name}</ExternalLink>
         {" on "}

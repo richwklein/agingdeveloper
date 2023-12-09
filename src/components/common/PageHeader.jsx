@@ -10,7 +10,7 @@ const PageAvatar = ({image}) => {
   return (<Avatar
     variant="rounded"
     sx={{
-      backgroundColor: "primary.dark",
+      bgcolor: "primary.dark",
       borderWidth: 1,
       borderColor: "secondary.light",
       borderStyle: "solid",
@@ -33,26 +33,28 @@ const PageHeader = ({title, tagline, avatar}) => {
       elevation={0}
       sx={{
         color: "primary.contrastText",
-        backgroundColor: "primary.dark",
-        padding: 2,
-        marginBottom: 4,
+        bgcolor: "primary.dark",
+        p: 2,
+        mb: 4,
       }}
     >
       <InnerContainer>
-        <ButtonBase component={InternalLink} to="/" disableRipple={true}>
-          <PageAvatar image={avatar} />
-          <Stack direction="column"
-            useFlexGap
-            alignItems="flex-start"
-            sx={{marginLeft: 3}}>
-            <Typography variant="h4" sx={{marginBottom: 0.5}}>
-              {title}
-            </Typography>
-            <Typography variant="h6" sx={{fontSize: "1rem", lineHeight: 1.4}}>
-              {tagline}
-            </Typography>
+        <InternalLink to={"/"} sx={{color: "primary.contrastText", textDecoration: "none"}}>
+          <Stack direction="row" alignItems="center">
+            <PageAvatar image={avatar} />
+            <Stack direction="column"
+              useFlexGap
+              alignItems="flex-start"
+              sx={{ml: 3}}>
+              <Typography variant="h4" sx={{mb: 0.5}}>
+                {title}
+              </Typography>
+              <Typography variant="h6" sx={{fontSize: "1rem", lineHeight: 1.4}}>
+                {tagline}
+              </Typography>
+            </Stack>
           </Stack>
-        </ButtonBase>
+        </InternalLink>
       </InnerContainer>
     </AppBar>
   );

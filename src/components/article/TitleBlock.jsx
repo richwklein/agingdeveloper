@@ -4,12 +4,8 @@ import PropTypes from "prop-types";
 
 const TitleBlock = ({title, description}) => {
   return (
-    <Box
-      component="header"
-      sx={{
-        marginTop: 1,
-      }}>
-      <Typography variant="h2">{title}</Typography>
+    <Box component="header" sx={{mt: 1}}>
+      <Typography variant="h3">{title}</Typography>
       <Typography variant="subtitle" component={Box}>
         {description}</Typography>
     </Box>

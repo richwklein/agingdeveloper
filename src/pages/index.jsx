@@ -14,20 +14,21 @@ const PageIndex = ({data: {lead, remaining}}) => {
   return (
     <main>
       <HeroBlock hero={{title: title, slug: slug, excerpt: excerpt, image: featuredImage}} />
-      <Grid container spacing={4} sx={{marginTop: 2}}>
+      <Grid container spacing={4} sx={{mt: 2}}>
         {remaining.edges.map((edge) => (
           <FeaturedPost key={edge.node.frontmatter.slug} article={{date: edge.node.frontmatter.date, excerpt: edge.node.excerpt, image: edge.node.frontmatter.featured.image.childImageSharp.gatsbyImageData, title: edge.node.frontmatter.title, slug: edge.node.frontmatter.slug}} />
         ))}
       </Grid>
-      <Box sx={{marginTop: 2}}>
+      <Box sx={{mt: 2}}>
         <Button
           variant="contained"
           color="secondary"
-          fullWidth={true}
+          disableElevation
+          fullWidth
           component={InternalLink}
           to={"/article"}
         >
-          View All
+          View All Articles
         </Button>
       </Box>
     </main>
