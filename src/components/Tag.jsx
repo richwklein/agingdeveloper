@@ -6,7 +6,7 @@ import TagOutlinedIcon from "@mui/icons-material/TagOutlined";
 import PropTypes from "prop-types";
 import slug from "slug";
 
-const Tag = ({name, weight=1, isCategory=false}) => {
+const Tag = ({name, weight=400, isCategory=false}) => {
   const icon = isCategory ? <FolderOutlinedIcon fontSize="inherit" sx={{mr: .3}} /> :
     <TagOutlinedIcon fontSize="inherit" sx={{mr: .3}} />;
   const url = isCategory ? `/category/${slug(name)}` : `/tag/${slug(name)}`;

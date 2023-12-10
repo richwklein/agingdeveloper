@@ -30,7 +30,7 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
       <ArticleByLine
         author={author}
         date={date} />
-      <TitleBlock title={title} description={description } />
+      <TitleBlock title={title} subtitle={description } />
       <ArticleImage
         author={featured.author}
         site={featured.site}
@@ -93,8 +93,8 @@ Head.propTypes = {
 };
 
 export const pageQuery = graphql`
-  query($currentPath: String) {
-    mdx(frontmatter: { slug: { eq: $currentPath } }) {
+  query($pathSuffix: String) {
+    mdx(frontmatter: { slug: { eq: $pathSuffix } }) {
       fields {
           timeToRead {
             minutes

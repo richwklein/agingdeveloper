@@ -8,11 +8,16 @@ describe("TitleBlock", () => {
   const renderComponent = () => render(
       <TitleBlock
         title= "Tesing Gatsby with Jest"
-        description="You can test with Jest with the best of them." />,
+        subtitle="You can test with Jest with the best of them." />,
   );
 
   test("that it renders correctly.", () => {
     const {container} = renderComponent();
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  test("that it renders without a subtitle.", () => {
+    const {container} = render(<TitleBlock title="without subtitle" />);
     expect(container.firstChild).toMatchSnapshot();
   });
 });

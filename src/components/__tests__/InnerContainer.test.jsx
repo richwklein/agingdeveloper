@@ -7,12 +7,17 @@ describe("InnerContainer", () => {
 
   const renderComponent = () => render(
       <InnerContainer>
-        <Fragment>Test Content</Fragment>
+        <Fragment>Test</Fragment>
       </InnerContainer>,
   );
 
   test("that it renders correctly.", () => {
     const {container} = renderComponent();
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  test("that it renders with main.", () => {
+    const {container} = render(<InnerContainer isMain={true}>Test</InnerContainer>);
     expect(container.firstChild).toMatchSnapshot();
   });
 

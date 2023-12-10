@@ -6,7 +6,7 @@ import Tag from "./Tag";
 const calculateWeight = (count, totalCount) => {
   // calculate a weight between 400 and 900 (which is normal to bold font weight)
   const oldRange = totalCount - 1;
-  const newValue = (((count - 1) * 500) / oldRange) + 400;
+  const newValue = (((count - 1) * 600) / oldRange) + 300;
   return Math.round(newValue/100)*100;
 };
 calculateWeight.propTypes = {

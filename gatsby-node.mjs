@@ -1,5 +1,6 @@
 import {resolve as pathResolve} from "path";
 import readingTime from "reading-time";
+import slug from "slug";
 
 export const onCreateNode = ({node, actions}) => {
   const {createNodeField} = actions;
@@ -10,49 +11,6 @@ export const onCreateNode = ({node, actions}) => {
       value: readingTime(node.body),
     });
   }
-};
-
-export const createPages = ({graphql, actions}) => {
-  // A Gatsby function which will be used to create the post pages from GraphQL data and a template.
-  const {createPage} = actions;
-
-  // This gets ALL markdown posts, sorting by most recent date first.
-  // We only need to retrieve the slug so that the post template can use this
-  // to lookup all the other content from in a page query (see next section).
-  return new Promise((resolve) => {
-    graphql(`
-      {
-        allMdx(sort: {frontmatter: {date: DESC}}) {
-          edges {
-            node {
-              frontmatter {
-                slug
-              }
-              internal {
-                contentFilePath
-              }
-            }
-          }
-        }
-      }
-    `).then((result) => {
-      const template = pathResolve("src/templates/article.jsx");
-      const prefix = "/article";
-
-      result.data.allMdx.edges.forEach(({node}) => {
-        const currentPath = node.frontmatter.slug;
-
-        return createPage({
-          path: `${prefix}/${currentPath}`,
-          component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
-          context: {
-            currentPath,
-          },
-        });
-      });
-      resolve();
-    });
-  });
 };
 
 export const createSchemaCustomization = ({actions, schema}) => {
@@ -77,4 +35,123 @@ export const createSchemaCustomization = ({actions, schema}) => {
     }),
   ];
   createTypes(typeDefs);
+};
+
+
+export const createPages = async ({graphql, actions, reporter}) => {
+  const {createPage} = actions;
+  const result = await graphql(`
+  {
+    articles: allMdx(sort: {frontmatter: {date: DESC}}) {
+      edges {
+        node {
+          frontmatter {
+            slug
+          }
+          internal {
+            contentFilePath
+          }
+        }
+      }
+    }
+    tags: allMdx {
+      group(field: {frontmatter: {tags: SELECT}}) {
+        tag: fieldValue
+      }
+    }
+    categories: allMdx {
+      group(field: {frontmatter: {category: SELECT}}) {
+        category: fieldValue
+      }
+    }
+    authors: allAuthorYaml(sort: {name: ASC}) {
+      edges {
+        node {
+          slug
+        }
+      }
+    }
+  }`);
+
+  if (result.errors) {
+    reporter.panicOnBuild("Error while running GraphQL query.");
+    return;
+  }
+
+  createArticlePages(createPage, result.data.articles.edges);
+  createTagPages(createPage, result.data.tags.group);
+  createCategoryPages(createPage, result.data.categories.group);
+  createAuthorPages(createPage, result.data.authors.edges);
+};
+
+const createArticlePages = (createPage, articles) => {
+  const template = pathResolve("src/templates/article.jsx");
+  const pathPrefix = "/article";
+
+  articles.forEach(({node}) => {
+    const pathSuffix = node.frontmatter.slug;
+
+    return createPage({
+      path: `${pathPrefix}/${pathSuffix}`,
+      component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
+      context: {
+        pathSuffix,
+      },
+    });
+  });
+
+  // TODO create paginated article list pages
+};
+
+const createTagPages = (createPage, tags) => {
+  const template = pathResolve("src/templates/tag.jsx");
+  const pathPrefix = "/tag";
+
+  tags.forEach(({tag}) => {
+    const pathSuffix = slug(tag);
+
+    createPage({
+      path: `${pathPrefix}/${pathSuffix}`,
+      component: template,
+      context: {
+        pathSuffix,
+        tag,
+      },
+    });
+  });
+};
+
+const createCategoryPages = (createPage, categories) => {
+  const template = pathResolve("src/templates/category.jsx");
+  const pathPrefix = "/category";
+
+  categories.forEach(({category}) => {
+    const pathSuffix = slug(category);
+
+    createPage({
+      path: `${pathPrefix}/${pathSuffix}`,
+      component: template,
+      context: {
+        pathSuffix,
+        category,
+      },
+    });
+  });
+};
+
+const createAuthorPages = (createPage, authors) => {
+  const template = pathResolve("src/templates/author.jsx");
+  const pathPrefix = "/author";
+
+  authors.forEach(({node}) => {
+    const pathSuffix = node.slug;
+
+    return createPage({
+      path: `${pathPrefix}/${pathSuffix}`,
+      component: template,
+      context: {
+        pathSuffix,
+      },
+    });
+  });
 };

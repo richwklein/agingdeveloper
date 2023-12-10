@@ -1,7 +1,6 @@
 import React from "react";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import CssBaseline from "@mui/material/CssBaseline";
-import {Container} from "@mui/material";
 import PropTypes from "prop-types";
 import PageHeader from "./PageHeader";
 import theme from "../styles/theme";
@@ -10,6 +9,7 @@ import {useSiteData} from "../hooks/useSiteData";
 import {ChildrenType} from "../types";
 import "prismjs/themes/prism-tomorrow.css";
 import "../styles/layout.css";
+import InnerContainer from "./InnerContainer";
 
 // TODO remove spred
 const Layout = ({children, props}) => {
@@ -23,9 +23,9 @@ const Layout = ({children, props}) => {
         tagline={tagline}
         avatar={avatar}
       />
-      <Container maxWidth="lg" component="main">
+      <InnerContainer isMain={true}>
         {children}
-      </Container>
+      </InnerContainer>
       <PageFooter title={title} repository={repository} />
     </ThemeProvider>
   );

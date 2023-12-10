@@ -9,10 +9,27 @@ exports[`TitleBlock that it renders correctly. 1`] = `
   >
     Tesing Gatsby with Jest
   </h3>
+  if (subtitle) 
   <div
     class="MuiTypography-root MuiTypography-subtitle MuiBox-root css-37hqdj-MuiTypography-root"
   >
     You can test with Jest with the best of them.
   </div>
+</header>
+`;
+
+exports[`TitleBlock that it renders without a subtitle. 1`] = `
+<header
+  class="MuiBox-root css-164r41r"
+>
+  <h3
+    class="MuiTypography-root MuiTypography-h3 css-gepadz-MuiTypography-root"
+  >
+    without subtitle
+  </h3>
+  if (subtitle) 
+  <div
+    class="MuiTypography-root MuiTypography-subtitle MuiBox-root css-37hqdj-MuiTypography-root"
+  />
 </header>
 `;
