@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/ArticleImage.jsx</title>
+    <title>JSDoc: Source: components/TitleBlock.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/ArticleImage.jsx</h1>
+    <h1 class="page-title">Source: components/TitleBlock.jsx</h1>
 
     
 
@@ -27,58 +27,42 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import {GatsbyImage} from "gatsby-plugin-image";
-import ExternalLink from "./ExternalLink";
 import {Box, Typography} from "@mui/material";
-import {ImageAuthorType, ImageSiteType} from "../types";
 import PropTypes from "prop-types";
 
 /**
- * React component for showing an article's featured image.
- * The image should be in a Cinemascope 21:9 ratio.
+ * React component for showing the title and subtitle of an article.
  *
- * @param {ArticleImageType} props - The article image props.
+ * @param {TitleBlockType} props - The title and subtitle props.
  * @return {React.ReactElement}
  *
  * @example
- * &lt;ArticleImage
- *   author={featured.author}
- *   site={featured.site}
- *   image={featured.image.childImageSharp.gatsbyImageData} />
-
- * @todo handle missing author, site, author.url, or site.url
+ * &lt;TitleBlock title={title} subtitle={description } />
  */
-const ArticleImage = ({author, site, image}) => {
+const TitleBlock = ({title, subtitle}) => {
   return (
-    &lt;Box component="figure"
-      sx={{
-        my: 1.25,
-        mx: 0,
-      }}>
-      &lt;GatsbyImage image={image} />
-      &lt;Typography variant="caption" component="figcaption" sx={{mt: .25}}>
-        {"Image by "}
-        &lt;ExternalLink to={author.url}>{author.name}&lt;/ExternalLink>
-        {" on "}
-        &lt;ExternalLink to={site.url}>{site.name}&lt;/ExternalLink>
-      &lt;/Typography>
+    &lt;Box component="header" sx={{mt: 1}}>
+      &lt;Typography variant="h3">{title}&lt;/Typography>
+      {subtitle &amp;&amp;
+        &lt;Typography variant="subtitle" component={Box}>
+          {subtitle}
+        &lt;/Typography>
+      }
     &lt;/Box>
-
   );
 };
 
 /**
- * @typedef ArticleImageType - The article featured image PropTypes.
- * @property {GatsbyImageData} image - The GatsbyImageData of the image.
- * @property {ImageAuthorType} [author] - The author of the image.
- * @property {ImageSiteType} [site] - The site the image comes from.
+ * @typedef TitleBlockType - The title block PropTypes.
+ * @property {string} title - The title of the article.
+ * @property {string} [subtitle] - The subtitle of the article.
  */
-ArticleImage.propTypes = {
-  image: PropTypes.object.isRequired,
-  author: ImageAuthorType,
-  site: ImageSiteType,
+TitleBlock.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
 };
-export default ArticleImage;
+
+export default TitleBlock;
 </code></pre>
         </article>
     </section>
