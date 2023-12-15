@@ -66,4 +66,4 @@ I'm going to stick with using the ES Module syntax. I've got the type set in pac
 ## Take Away
 One philosophy I've picked up and used from work is that we should avoid stateful components including graphql queries. The page should be responsible for running the queries and passing the data to each component that the component needs to render.
 
-Talk about prop types https://www.npmjs.com/package/prop-types#prop-types-
+Talk about prop types https://www.npmjs.com/package/prop-types#prop-types- and generated documentation
