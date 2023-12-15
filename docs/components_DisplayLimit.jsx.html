@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/ArticleByLine.jsx</title>
+    <title>JSDoc: Source: components/DisplayLimit.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/ArticleByLine.jsx</h1>
+    <h1 class="page-title">Source: components/DisplayLimit.jsx</h1>
 
     
 
@@ -27,45 +27,37 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import {Box, Typography} from "@mui/material";
-import InternalLink from "./InternalLink";
-import {ArticleAuthorDigestType} from "../types";
 import PropTypes from "prop-types";
+import {Alert} from "@mui/material";
+
+const message = "Maximum number of articles displayed.";
 
 /**
- * React component for showing an article's by-line.
+ * React component for showing an alert when the number of articles exceeds the limit of the page.
  *
- * @param {ArticleByLineType} props - The author and published date of the article.
+ * @param {DisplayLimitType} props - The limit and total props.
  * @return {React.ReactElement}
  *
  * @example
- * &lt;ArticleByLine author={author} date={date} />
+ * &lt;DisplayLimit limit={maxDisplay} total={totalCount} />
+ *
+ * @todo Add search to message once implemented.
  */
-const ArticleByLine = ({author, date}) => {
-  return (
-    &lt;Box>
-      &lt;InternalLink to={`/author/${author.slug}`} variant="subtitle1"
-        sx={{display: "inline-block", p: .5, mr: 1}}>
-        {author.name}
-      &lt;/InternalLink>
-      &lt;Typography variant="subtitle2" sx={{display: "inline-block", p: .5}}>
-        {date}
-      &lt;/Typography>
-    &lt;/Box>
-  );
+const DisplayLimit = ({limit, total}) => {
+  return total &lt;= limit ? null : &lt;Alert severity="info">{message}&lt;/Alert>;
 };
 
 /**
- * @typedef ArticleByLineType - The article by-line PropTypes.
- * @property {ArticleAuthorDigestType} author - The author of the article.
- * @property {string} date - The date the article was published.
+ * @typedef DisplayLimitType - The display limit PropTypes.
+ * @property {number} limit - The number of articles allowed on the page.
+ * @property {number} total - The total number of articles.
  */
-ArticleByLine.propTypes = {
-  author: ArticleAuthorDigestType.isRequired,
-  date: PropTypes.string.isRequired,
+DisplayLimit.propTypes = {
+  limit: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
 };
 
-export default ArticleByLine;
+export default DisplayLimit;
 </code></pre>
         </article>
     </section>
