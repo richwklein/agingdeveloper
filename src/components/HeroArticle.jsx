@@ -12,10 +12,11 @@ import {
   alpha,
 } from "@mui/material";
 import InternalLink from "./InternalLink";
-import PropTypes from "prop-types";
+import {ArticleDigestType} from "../types";
 
 // TODO proptypes for image
 const HeroArticle = ({hero: {title, slug, excerpt, image}}) => {
+  // Image ratio is Cinemascope 21:9
   return (
     <Card
       variant="outlined"
@@ -25,7 +26,7 @@ const HeroArticle = ({hero: {title, slug, excerpt, image}}) => {
     >
       <CardActionArea disableRipple component={InternalLink} to={`/article/${slug}`}>
         <CardMedia>
-          <GatsbyImage image={image} sx={{zIndex: 1}} />
+          <GatsbyImage image={image} />
         </CardMedia>
         <Box
           sx={(theme) => ({
@@ -34,7 +35,6 @@ const HeroArticle = ({hero: {title, slug, excerpt, image}}) => {
             left: 0,
             width: "100%",
             height: "100%",
-            zIndex: 2,
             bgcolor: alpha(theme.palette.primary.main, 0.5),
             color: "primary.contrastText",
             backdropFilter: "blur(2px)",
@@ -68,12 +68,7 @@ const HeroArticle = ({hero: {title, slug, excerpt, image}}) => {
 };
 
 HeroArticle.propTypes = {
-  hero: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    excerpt: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    image: PropTypes.any,
-  }).isRequired,
+  hero: ArticleDigestType.isRequired,
 };
 
 export default HeroArticle;
