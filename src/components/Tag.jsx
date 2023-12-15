@@ -6,7 +6,20 @@ import TagOutlinedIcon from "@mui/icons-material/TagOutlined";
 import PropTypes from "prop-types";
 import slug from "slug";
 
-const Tag = ({name, weight=400, isCategory=false}) => {
+/**
+ * React component used to render a tag in either the {@link ArticleTagGrid} or
+ * {@link TagGrid}.
+ *
+ * @param {TagType} props - The tags and total.
+ * @return {React.ReactElement}
+ *
+ * @example
+ * <Tag
+ *   name={tag.name}
+ *   weight={calculateWeight(tag.count, totalCount)}
+ *   isCategory={isCategory} />
+ */
+const Tag = ({name, weight=300, isCategory=false}) => {
   const icon = isCategory ? <FolderOutlinedIcon fontSize="inherit" sx={{mr: .3}} /> :
     <TagOutlinedIcon fontSize="inherit" sx={{mr: .3}} />;
   const url = isCategory ? `/category/${slug(name)}` : `/tag/${slug(name)}`;
@@ -29,6 +42,13 @@ const Tag = ({name, weight=400, isCategory=false}) => {
   );
 };
 
+/**
+ * @typedef TagType - The tag PropTypes.
+ * @property {string} name - The name of the tag.
+ * @property {number} [weight=300] - The font weight to render the tag.
+ * @property {bool} [isCategory=false] - If the tags represent categories.
+ *
+ */
 Tag.propTypes = {
   name: PropTypes.string.isRequired,
   weight: PropTypes.number,

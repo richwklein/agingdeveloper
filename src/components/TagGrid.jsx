@@ -26,8 +26,6 @@ const calculateWeight = (count, totalCount) => {
  *
  * @example
  * <TagGrid tags={group} totalCount={totalCount} isCategory={true} />
- *
- * @todo Add search to message once implemented.
  */
 const TagGrid = ({tags, totalCount, isCategory=false}) => {
   return (

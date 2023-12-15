@@ -8,7 +8,7 @@ exports[`ArticleTagGrid that it renders correctly. 1`] = `
     class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
   >
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-xtzmir-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1weoc95-MuiTypography-root-MuiLink-root"
       data-link="internal"
       href="/category/family"
     >
@@ -30,7 +30,7 @@ exports[`ArticleTagGrid that it renders correctly. 1`] = `
     class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
   >
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-xtzmir-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1weoc95-MuiTypography-root-MuiLink-root"
       data-link="internal"
       href="/tag/theme-park"
     >
@@ -52,7 +52,7 @@ exports[`ArticleTagGrid that it renders correctly. 1`] = `
     class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
   >
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-xtzmir-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1weoc95-MuiTypography-root-MuiLink-root"
       data-link="internal"
       href="/tag/genie"
     >
@@ -74,7 +74,7 @@ exports[`ArticleTagGrid that it renders correctly. 1`] = `
     class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
   >
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-xtzmir-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1weoc95-MuiTypography-root-MuiLink-root"
       data-link="internal"
       href="/tag/sadness"
     >
@@ -96,7 +96,7 @@ exports[`ArticleTagGrid that it renders correctly. 1`] = `
     class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
   >
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-xtzmir-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1weoc95-MuiTypography-root-MuiLink-root"
       data-link="internal"
       href="/tag/i-dogs"
     >

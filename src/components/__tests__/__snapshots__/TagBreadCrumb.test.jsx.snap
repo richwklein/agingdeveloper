@@ -109,52 +109,6 @@ exports[`TagBreadcrumb that a tag breadcrumb is generated correctly. 1`] = `
 </div>
 `;
 
-exports[`TagBreadcrumb that a tag breadcrumb is generated correctly. 2`] = `
-<div
-  class="MuiDivider-root MuiDivider-fullWidth MuiDivider-withChildren css-1x4plm3-MuiDivider-root"
-  role="separator"
->
-  <span
-    class="MuiDivider-wrapper css-qywfm8-MuiDivider-wrapper"
-  >
-    <nav
-      class="MuiTypography-root MuiTypography-body1 MuiBreadcrumbs-root css-63vwl1-MuiTypography-root-MuiBreadcrumbs-root"
-    >
-      <ol
-        class="MuiBreadcrumbs-ol css-4pdmu4-MuiBreadcrumbs-ol"
-      >
-        <li
-          class="MuiBreadcrumbs-li"
-        >
-          <a
-            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-bvyohc-MuiTypography-root-MuiLink-root"
-            data-link="internal"
-            href="/tag/"
-          >
-            tags
-          </a>
-        </li>
-        <li
-          aria-hidden="true"
-          class="MuiBreadcrumbs-separator css-1wuw8dw-MuiBreadcrumbs-separator"
-        >
-          /
-        </li>
-        <li
-          class="MuiBreadcrumbs-li"
-        >
-          <p
-            class="MuiTypography-root MuiTypography-body1 css-1gqyz35-MuiTypography-root"
-          >
-            gatsbyjs
-          </p>
-        </li>
-      </ol>
-    </nav>
-  </span>
-</div>
-`;
-
 exports[`TagBreadcrumb that a tag index is generated correctly. 1`] = `
 <div
   class="MuiDivider-root MuiDivider-fullWidth MuiDivider-withChildren css-1x4plm3-MuiDivider-root"
