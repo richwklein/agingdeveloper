@@ -6,7 +6,7 @@ import {ImageAuthorType, ImageSiteType} from "../types";
 import PropTypes from "prop-types";
 
 /**
- * React component for rendering an article's featured image.
+ * React component for showing an article's featured image.
  * The image should be in a Cinemascope 21:9 ratio.
  *
  * @param {ArticleImageType} props - The article image props.

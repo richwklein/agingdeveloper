@@ -5,7 +5,7 @@ import {ArticleAuthorDigestType} from "../types";
 import PropTypes from "prop-types";
 
 /**
- * React component for rendering an article's by-line.
+ * React component for showing an article's by-line.
  *
  * @param {ArticleByLineType} props - The author and published date of the article.
  * @return {React.ReactElement}

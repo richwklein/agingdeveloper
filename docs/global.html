@@ -112,7 +112,7 @@
 
 
 <div class="description">
-    <p>React component for rendering an article's by-line.</p>
+    <p>React component for showing an article's by-line.</p>
 </div>
 
 
@@ -272,7 +272,7 @@
 
 
 <div class="description">
-    <p>React component for rendering an article's featured image.
+    <p>React component for showing an article's featured image.
 The image should be in a Cinemascope 21:9 ratio.</p>
 </div>
 
@@ -443,7 +443,7 @@ The image should be in a Cinemascope 21:9 ratio.</p>
 
 
 <div class="description">
-    <p>React component for rendering an article's category and tags.</p>
+    <p>React component for showing an article's category and tags.</p>
 </div>
 
 
@@ -485,7 +485,7 @@ The image should be in a Cinemascope 21:9 ratio.</p>
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></span>
+<span class="param-type"><a href="global.html#ArticleTagGridType">ArticleTagGridType</a></span>
 
 
             
@@ -586,6 +586,166 @@ The image should be in a Cinemascope 21:9 ratio.</p>
     <h5>Example</h5>
     
     <pre class="prettyprint"><code>&lt;ArticleTagGrid category={category} tags={tags} /></code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="ArticleTimeToRead"><span class="type-signature"></span>ArticleTimeToRead<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>React component for showing the word count and time to read for an article.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#ArticleTimeToReadType">ArticleTimeToReadType</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The time to read related props.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_ArticleTimeToRead.jsx.html">components/ArticleTimeToRead.jsx</a>, <a href="components_ArticleTimeToRead.jsx.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">React.ReactElement</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;ArticleTimeToRead minutes={timeToRead.minutes} words={timeToRead.words} lang={lang} /></code></pre>
 
 
 
@@ -1043,7 +1203,7 @@ The image should be in a Cinemascope 21:9 ratio.</p>
 
             
                 
-<h4 class="name" id="ArticleTagGrid">ArticleTagGrid</h4>
+<h4 class="name" id="ArticleTagGridType">ArticleTagGridType</h4>
 
 
 
@@ -1159,6 +1319,162 @@ The image should be in a Cinemascope 21:9 ratio.</p>
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="components_ArticleTagGrid.jsx.html">components/ArticleTagGrid.jsx</a>, <a href="components_ArticleTagGrid.jsx.html#line32">line 32</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="ArticleTimeToReadType">ArticleTimeToReadType</h4>
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>minutes</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The number of minutes it takes to read.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>words</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The number of words in the article.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lang</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The language the article is in.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_ArticleTimeToRead.jsx.html">components/ArticleTimeToRead.jsx</a>, <a href="components_ArticleTimeToRead.jsx.html#line37">line 37</a>
     </li></ul></dd>
     
 
@@ -1486,13 +1802,13 @@ The image should be in a Cinemascope 21:9 ratio.</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Dec 15 2023 10:12:42 GMT-0600 (Central Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Dec 15 2023 10:18:38 GMT-0600 (Central Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
