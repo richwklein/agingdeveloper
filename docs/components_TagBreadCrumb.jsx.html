@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/ArticleTagGrid.jsx</title>
+    <title>JSDoc: Source: components/TagBreadCrumb.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/ArticleTagGrid.jsx</h1>
+    <h1 class="page-title">Source: components/TagBreadCrumb.jsx</h1>
 
     
 
@@ -27,47 +27,61 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import {Grid} from "@mui/material";
+import {Breadcrumbs, Divider, Typography} from "@mui/material";
+import InternalLink from "../components/InternalLink";
 import PropTypes from "prop-types";
-import Tag from "./Tag";
 
 /**
- * React component for showing an article's category and tags.
+ * React component for showing a breadcrumb for tag pages.
+ * If name is null then just the name of the index page is shown.
+ * Otherwise, a link to the index page and the name of the tag are shown.
  *
- * @param {ArticleTagGridType} props - The category and tags on the article.
+ * @param {TagBreadcrumbType} props - The tag name and if it is a category.
  * @return {React.ReactElement}
  *
  * @example
- * &lt;ArticleTagGrid category={category} tags={tags} />
+ * &lt;TagBreadcrumb name={category} isCategory={true} />
  */
-const ArticleTagGrid = ({category, tags}) => {
+const TagBreadcrumb = ({name=null, isCategory=false}) => {
+  const headName = isCategory ? "Category" : "Tag";
+  const headPath = isCategory ? "/category/" : "/tag/";
+
   return (
-    &lt;Grid container spacing={1.5}>
-      &lt;Grid item key={category}>
-        &lt;Tag name={category} isCategory={true} />
-      &lt;/Grid>
-      {tags.map((tag) => {
-        return (
-          &lt;Grid item key={tag}>
-            &lt;Tag name={tag} />
-          &lt;/Grid>
-        );
-      })}
-    &lt;/Grid>
+    &lt;Divider sx={{
+      "mb": 4,
+      ".MuiBreadcrumbs-ol": {
+        flexFlow: "row",
+      },
+    }}>
+      {name == null ? (
+        &lt;Typography color="text.primary">{headName}&lt;/Typography>
+      ) : (
+        &lt;Breadcrumbs>
+          &lt;InternalLink
+            underline="hover"
+            color="inherit"
+            to={headPath}>
+            {headName}
+          &lt;/InternalLink>
+          &lt;Typography color="text.primary">{name.toLowerCase()}&lt;/Typography>
+        &lt;/Breadcrumbs>
+      )}
+    &lt;/Divider>
   );
 };
 
 /**
- * @typedef ArticleTagGridType - The article tags PropTypes.
- * @property {string} category - The article's category.
- * @property {arrayOf(string)} tags - The tags on the article.
+ * @typedef TagBreadcrumbType - The tag breadcrumb PropTypes.
+ * @property {string} [name=null] - The name of the tag.
+ * @property {bool} [isCategory=false] - If the tags represent categories.
+ *
  */
-ArticleTagGrid.propTypes = {
-  category: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+TagBreadcrumb.propTypes = {
+  name: PropTypes.string,
+  isCategory: PropTypes.bool,
 };
 
-export default ArticleTagGrid;
+export default TagBreadcrumb;
 </code></pre>
         </article>
     </section>

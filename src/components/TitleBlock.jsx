@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
  * @example
  * <TitleBlock title={title} subtitle={description } />
  */
-const TitleBlock = ({title, subtitle}) => {
+const TitleBlock = ({title, subtitle=null}) => {
   return (
     <Box component="header" sx={{mt: 1}}>
       <Typography variant="h3">{title}</Typography>
@@ -27,7 +27,7 @@ const TitleBlock = ({title, subtitle}) => {
 /**
  * @typedef TitleBlockType - The title block PropTypes.
  * @property {string} title - The title of the article.
- * @property {string} [subtitle] - The subtitle of the article.
+ * @property {string} [subtitle=null] - The subtitle of the article.
  */
 TitleBlock.propTypes = {
   title: PropTypes.string.isRequired,

@@ -1,8 +1,9 @@
 import React from "react";
 import {graphql} from "gatsby";
-import {Box, Divider} from "@mui/material";
+import {Box} from "@mui/material";
 import PropTypes from "prop-types";
 import TagGrid from "../components/TagGrid";
+import TagBreadcrumb from "../components/TagBreadCrumb";
 
 // TODO everything
 const PageCategory = ({data}) => {
@@ -10,7 +11,7 @@ const PageCategory = ({data}) => {
 
   return (
     <Box>
-      <Divider sx={{mb: 4}}>{"Categories"}</Divider>
+      <TagBreadcrumb isCategory={true} />
       <TagGrid tags={group} totalCount={totalCount} isCategory={true} />
     </Box>
   );

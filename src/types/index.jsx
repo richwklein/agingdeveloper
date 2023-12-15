@@ -43,3 +43,13 @@ export const ImageSiteType = PropTypes.shape({
   name: PropTypes.string.isRequired,
   url: PropTypes.string,
 });
+
+/**
+ * @typedef TagWithCountType - The tag name and count PropTypes.
+ * @property {string} name - The name of the tag.
+ * @property {number} count - The number of occurances for the tag.
+ */
+export const TagWithCountType = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  count: PropTypes.number.isRequired,
+});

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/ArticleTagGrid.jsx</title>
+    <title>JSDoc: Source: components/TagGrid.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/ArticleTagGrid.jsx</h1>
+    <h1 class="page-title">Source: components/TagGrid.jsx</h1>
 
     
 
@@ -30,26 +30,43 @@
 import {Grid} from "@mui/material";
 import PropTypes from "prop-types";
 import Tag from "./Tag";
+import {TagWithCountType} from "../types";
 
 /**
- * React component for showing an article's category and tags.
+ * Calculates a font weight between 300 and 900 for tag display.
  *
- * @param {ArticleTagGridType} props - The category and tags on the article.
+ * @param {number} count - The number of times the tag has occurred.
+ * @param {number} totalCount - The total number of tags.
+ * @return {number} The font weight.
+ * @ignore
+ */
+const calculateWeight = (count, totalCount) => {
+  const oldRange = totalCount - 1;
+  const newValue = (((count - 1) * 600) / oldRange) + 300;
+  return Math.round(newValue/100)*100;
+};
+
+/**
+ * React component for showing a grid of tags or categories.
+ *
+ * @param {TagGridType} props - The tags and total.
  * @return {React.ReactElement}
  *
  * @example
- * &lt;ArticleTagGrid category={category} tags={tags} />
+ * &lt;TagGrid tags={group} totalCount={totalCount} isCategory={true} />
+ *
+ * @todo Add search to message once implemented.
  */
-const ArticleTagGrid = ({category, tags}) => {
+const TagGrid = ({tags, totalCount, isCategory=false}) => {
   return (
-    &lt;Grid container spacing={1.5}>
-      &lt;Grid item key={category}>
-        &lt;Tag name={category} isCategory={true} />
-      &lt;/Grid>
+    &lt;Grid container spacing={2}>
       {tags.map((tag) => {
         return (
-          &lt;Grid item key={tag}>
-            &lt;Tag name={tag} />
+          &lt;Grid item md={2} sm={6} xs={12} key={tag.name}>
+            &lt;Tag
+              name={tag.name}
+              weight={calculateWeight(tag.count, totalCount)}
+              isCategory={isCategory} />
           &lt;/Grid>
         );
       })}
@@ -58,16 +75,18 @@ const ArticleTagGrid = ({category, tags}) => {
 };
 
 /**
- * @typedef ArticleTagGridType - The article tags PropTypes.
- * @property {string} category - The article's category.
- * @property {arrayOf(string)} tags - The tags on the article.
+ * @typedef TagGridType - The display limit PropTypes.
+ * @property {arrayOf(TagWithCountType)} tags - The list of tags.
+ * @property {number} totalCount - The total number of tags.
+ * @property {bool} [isCategory=false] - If the tags represent categories.
  */
-ArticleTagGrid.propTypes = {
-  category: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+TagGrid.propTypes = {
+  tags: PropTypes.arrayOf(TagWithCountType),
+  totalCount: PropTypes.number.isRequired,
+  isCategory: PropTypes.bool,
 };
 
-export default ArticleTagGrid;
+export default TagGrid;
 </code></pre>
         </article>
     </section>

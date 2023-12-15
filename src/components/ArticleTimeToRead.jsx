@@ -10,7 +10,10 @@ import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
  * @return {React.ReactElement}
  *
  * @example
- * <ArticleTimeToRead minutes={timeToRead.minutes} words={timeToRead.words} lang={lang} />
+ * <ArticleTimeToRead
+ *   minutes={timeToRead.minutes}
+ *   words={timeToRead.words}
+ *   lang={lang} />
  */
 const ArticleTimeToRead = ({minutes, words, lang}) => {
   const wordFormat = new Intl.NumberFormat(lang).format(words);
