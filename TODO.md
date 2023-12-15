@@ -27,3 +27,4 @@
 - redirect incorrect slugs like ("rss-dead-long-live-rss")
 - add series support
 - define some common proptypes that can be imported into components
+- Add JSDocs to the components

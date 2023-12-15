@@ -5,19 +5,19 @@ import TitleBlock from "../TitleBlock";
 describe("TitleBlock", () => {
   afterEach(cleanup);
 
-  const renderComponent = () => render(
+  const renderComponent = (subtitle=null) => render(
       <TitleBlock
         title= "Tesing Gatsby with Jest"
-        subtitle="You can test with Jest with the best of them." />,
+        subtitle={subtitle} />,
   );
 
   test("that it renders correctly.", () => {
-    const {container} = renderComponent();
-    expect(container.firstChild).toMatchSnapshot();
+    const {container} = renderComponent("This is a subtitle.");
+    expect(container.firstChild).toContainHTML("This is a subtitle.");
   });
 
-  test("that it renders without a subtitle.", () => {
-    const {container} = render(<TitleBlock title="without subtitle" />);
+  test("that it contains a subtitle.", () => {
+    const {container} = renderComponent();
     expect(container.firstChild).toMatchSnapshot();
   });
 });

@@ -63,7 +63,7 @@ const PageHeader = ({title, tagline, avatar}) => {
 PageHeader.propTypes = {
   title: PropTypes.string.isRequired,
   tagline: PropTypes.string.isRequired,
-  avatar: PropTypes.any,
+  avatar: PropTypes.object.isRequired,
 };
 
 export default PageHeader;

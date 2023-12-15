@@ -23,7 +23,7 @@ const Layout = ({children, props}) => {
         tagline={tagline}
         avatar={avatar}
       />
-      <InnerContainer isMain={true}>
+      <InnerContainer useMain={true}>
         {children}
       </InnerContainer>
       <PageFooter title={title} repository={repository} />

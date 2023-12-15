@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import {ChildrenType} from "../types";
 
 // TODO remove spread
-const InnerContainer = ({children, isMain=false}) => {
-  const component = isMain ? "main" : "div";
+const InnerContainer = ({children, useMain=false}) => {
+  const component = useMain ? "main" : "div";
 
   return (
     <Container maxWidth="lg" component={component}>
@@ -16,7 +16,7 @@ const InnerContainer = ({children, isMain=false}) => {
 
 InnerContainer.propTypes = {
   children: ChildrenType,
-  isMain: PropTypes.bool,
+  useMain: PropTypes.bool,
 };
 
 export default InnerContainer;

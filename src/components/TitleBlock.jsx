@@ -6,7 +6,7 @@ const TitleBlock = ({title, subtitle}) => {
   return (
     <Box component="header" sx={{mt: 1}}>
       <Typography variant="h3">{title}</Typography>
-      if (subtitle) {
+      {subtitle &&
         <Typography variant="subtitle" component={Box}>
           {subtitle}
         </Typography>

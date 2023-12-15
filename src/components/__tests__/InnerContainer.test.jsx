@@ -5,8 +5,8 @@ import InnerContainer from "../InnerContainer";
 describe("InnerContainer", () => {
   afterEach(cleanup);
 
-  const renderComponent = () => render(
-      <InnerContainer>
+  const renderComponent = (useMain=false) => render(
+      <InnerContainer useMain={useMain}>
         <Fragment>Test</Fragment>
       </InnerContainer>,
   );
@@ -17,7 +17,7 @@ describe("InnerContainer", () => {
   });
 
   test("that it renders with main.", () => {
-    const {container} = render(<InnerContainer isMain={true}>Test</InnerContainer>);
+    const {container} = renderComponent({useMain: true});
     expect(container.firstChild).toMatchSnapshot();
   });
 
