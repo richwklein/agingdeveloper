@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/DisplayLimit.jsx</title>
+    <title>JSDoc: Source: components/InternalLink.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/DisplayLimit.jsx</h1>
+    <h1 class="page-title">Source: components/InternalLink.jsx</h1>
 
     
 
@@ -27,37 +27,28 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import PropTypes from "prop-types";
-import {Alert} from "@mui/material";
+import MuiLink from "@mui/material/Link";
+import {Link as GatsbyLink} from "gatsby";
+import {LinkProps} from "../props";
 
-const message = "Maximum number of articles displayed.";
 
 /**
- * React component for showing an alert when the number of articles exceeds the limit of the page.
+ * React component used to render a link internal to the site.
  *
- * @param {DisplayLimitProps} props - The limit and total props.
- * @return {React.ReactElement|null} - The react component or null
+ * @param {LinkProps} props - The to link and rest.
+ * @return {React.ReactElement} - The react component
  *
  * @example
- * &lt;DisplayLimit limit={maxDisplay} total={totalCount} />
- *
- * @todo Add search to message once implemented.
+ * &lt;InternalLinkProps to="tags">Tags&lt;/InternalLink>
+ * @todo Remove prop spread
  */
-const DisplayLimit = ({limit, total}) => {
-  return total &lt;= limit ? null : &lt;Alert severity="info">{message}&lt;/Alert>;
-};
+const InternalLink = ({to, ...rest}) => (
+  &lt;MuiLink data-link="internal" component={GatsbyLink} to={to} {...rest} />
+);
 
-/**
- * @typedef DisplayLimitProps - The article display limit props.
- * @property {number} limit - The number of articles allowed on the page.
- * @property {number} total - The total number of articles.
- */
-DisplayLimit.propTypes = {
-  limit: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
-};
+InternalLink.propTypes = LinkProps;
 
-export default DisplayLimit;
+export default InternalLink;
 </code></pre>
         </article>
     </section>

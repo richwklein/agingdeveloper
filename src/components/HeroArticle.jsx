@@ -12,11 +12,19 @@ import {
   alpha,
 } from "@mui/material";
 import InternalLink from "./InternalLink";
-import {ArticleDigestType} from "../types";
+import {ArticleDigestProps} from "../props";
 
-// TODO proptypes for image
-const HeroArticle = ({hero: {title, slug, excerpt, image}}) => {
-  // Image ratio is Cinemascope 21:9
+/**
+ * React component for rendering a featured image as a hero image.
+ * The image should be in the Cinemascope 21:9 ratio.
+ *
+ * @param {HeroArticleProps} props - The hero article props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * <HeroArticle article={article} />
+ */
+const HeroArticle = ({article: {title, slug, excerpt, image}}) => {
   return (
     <Card
       variant="outlined"
@@ -67,8 +75,12 @@ const HeroArticle = ({hero: {title, slug, excerpt, image}}) => {
   );
 };
 
+/**
+ * @typedef HeroArticleProps - A hero article props.
+ * @property {ArticleDigestProps} article - The article to display.
+ */
 HeroArticle.propTypes = {
-  hero: ArticleDigestType.isRequired,
+  article: ArticleDigestProps.isRequired,
 };
 
 export default HeroArticle;

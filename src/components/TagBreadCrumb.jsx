@@ -4,12 +4,12 @@ import InternalLink from "../components/InternalLink";
 import PropTypes from "prop-types";
 
 /**
- * React component for showing a breadcrumb for tag pages.
+ * React component for rendering a breadcrumb for tag pages.
  * If name is null then just the name of the index page is shown.
  * Otherwise, a link to the index page and the name of the tag are shown.
  *
- * @param {TagBreadcrumbType} props - The tag name and if it is a category.
- * @return {React.ReactElement}
+ * @param {TagBreadcrumbProps} props - The tag breadcrumb props.
+ * @return {React.ReactElement} - The react component
  *
  * @example
  * <TagBreadcrumb name={category} isCategory={true} />
@@ -43,7 +43,7 @@ const TagBreadcrumb = ({name=null, isCategory=false}) => {
 };
 
 /**
- * @typedef TagBreadcrumbType - The tag breadcrumb PropTypes.
+ * @typedef TagBreadcrumbProps - The tag breadcrumb props.
  * @property {string} [name=null] - The name of the tag.
  * @property {bool} [isCategory=false] - If the tags represent categories.
  *

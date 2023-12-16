@@ -7,7 +7,6 @@ exports[`ExternalLink that it renders correctly. 1`] = `
   href="https://example.com"
   rel="noopener noreferrer"
   target="_blank"
-  to="https://example.com"
 >
   Test Content
 </a>

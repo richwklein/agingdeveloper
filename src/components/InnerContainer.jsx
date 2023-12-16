@@ -1,9 +1,20 @@
 import React from "react";
 import {Container} from "@mui/material";
 import PropTypes from "prop-types";
-import {ChildrenType} from "../types";
+import {ChildrenProps} from "../props";
 
-// TODO remove spread
+/**
+ * React component that constrains context to a large breakpoint.
+ *
+ * @param {InnerContainerProps} props - The inner container props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * <InnerContainer useMain={true}>
+ *   <TagBreadcrumb name={category} isCategory={true} />
+ *   <TagGrid tags={group} />
+ * </InnerContainer>
+ */
 const InnerContainer = ({children, useMain=false}) => {
   const component = useMain ? "main" : "div";
 
@@ -14,8 +25,13 @@ const InnerContainer = ({children, useMain=false}) => {
   );
 };
 
+/**
+ * @typedef InnerContainerProps - An inner container.
+ * @property {ChildrenProps} children - The children of the component.
+ * @property {bool} [useMain=false] - If the html tag should be a main tag.
+ */
 InnerContainer.propTypes = {
-  children: ChildrenType,
+  children: ChildrenProps,
   useMain: PropTypes.bool,
 };
 

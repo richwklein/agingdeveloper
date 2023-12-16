@@ -5,7 +5,17 @@ import PropTypes from "prop-types";
 import InnerContainer from "./InnerContainer";
 import InternalLink from "./InternalLink";
 
-// TODO proptypes for image
+/**
+ * React component used to render the page avatar.
+ *
+ * @param {PageAvatarProps} props - The page avatar props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * <PageAvatar image={image} />
+ *
+ * @ignore
+ */
 const PageAvatar = ({image}) => {
   return (<Avatar
     variant="rounded"
@@ -21,10 +31,29 @@ const PageAvatar = ({image}) => {
   </Avatar>);
 };
 
+/**
+ * @typedef PageAvatarProps - The page avatr props.
+ * @property {GatsbyImageData} image - The gatsby image data for the site avatar.
+ *
+ * @ignore
+ */
 PageAvatar.propTypes = {
-  image: PropTypes.any,
+  image: PropTypes.object.isRequired,
 };
 
+/**
+ * React component used to render the page header.
+ *
+ * @param {PageHeaderProps} props - The page header props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * <PageHeader
+ *   title={title}
+ *   tagline={tagline}
+ *   avatar={avatar}
+ * />
+ */
 const PageHeader = ({title, tagline, avatar}) => {
   return (
     <AppBar
@@ -60,6 +89,12 @@ const PageHeader = ({title, tagline, avatar}) => {
   );
 };
 
+/**
+ * @typedef PageHeaderProps - The page header props.
+ * @property {string} title - The title of the site.
+ * @property {string} tagline - The tagline for the site.
+ * @property {GatsbyImageData} avatar - The gatsby image data for the site avatar.
+ */
 PageHeader.propTypes = {
   title: PropTypes.string.isRequired,
   tagline: PropTypes.string.isRequired,

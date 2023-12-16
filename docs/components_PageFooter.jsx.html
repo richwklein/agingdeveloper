@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/PageFooter.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/PageFooter.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {Box, Grid, Typography} from "@mui/material";
+import React from "react";
+import PropTypes from "prop-types";
+import ExternalLink from "./ExternalLink";
+
+/**
+ * React component used to render the copyright of the site.
+ *
+ * @param {CopyrightProps} props - The copyright props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * &lt;Copyright title={title} repository={repository} />
+ *
+ * @ignore
+ */
+const Copyright = ({title, repository}) => {
+  return (
+    &lt;Box textAlign="center">
+      &lt;Typography variant="caption" align="center">
+        &amp;copy;
+        {" "}
+        {new Date().getFullYear()}
+        {" "}
+        &lt;ExternalLink to={repository}>{title}&lt;/ExternalLink>
+      &lt;/Typography>
+    &lt;/Box>
+  );
+};
+
+/**
+ * @typedef CopyrightProps - The copyright props.
+ * @property {string} title - The title of the site.
+ * @property {string} repository - The repository the site code is in.
+ */
+Copyright.propTypes = {
+  title: PropTypes.string.isRequired,
+  repository: PropTypes.string.isRequired,
+};
+
+/**
+ * React component used to render the powered by line.
+ *
+ * @return {React.ReactElement}
+ *
+ * @example
+ * &lt;PoweredBy />
+ *
+ * @ignore
+ */
+const PoweredBy = () => {
+  return (
+    &lt;Box textAlign="center">
+      &lt;Typography variant="caption">
+        {"Powered by "}
+        &lt;ExternalLink to="https://www.gatsbyjs.org/">Gatsby&lt;/ExternalLink>
+        {" "}
+        and
+        {" "}
+        &lt;ExternalLink to="https://app.netlify.com">Netlify&lt;/ExternalLink>
+        .
+      &lt;/Typography>
+    &lt;/Box>
+  );
+};
+
+/**
+ * React component used to render the page footer.
+ *
+ * @param {PageFooterProps} props - The page footer props.
+ * @return {React.ReactElement}
+ *
+ * @example
+ * &lt;PageFooter title={title} repository={repository} />
+ *
+ * @todo RSS icon &amp; maybe scroll to top
+ */
+const PageFooter = ({title, repository}) => {
+  return (
+    &lt;Grid
+      container
+      component="footer"
+      sx={{p: 2, mt: 4}}
+    >
+      &lt;Grid item sm={4} xs={12}/>
+      &lt;Grid item sm={4} xs={12}>
+        &lt;Copyright title={title} repository={repository} />
+        &lt;PoweredBy />
+      &lt;/Grid>
+      &lt;Grid item sm={4} xs={12}/>
+    &lt;/Grid>
+  );
+};
+
+/**
+ * @typedef PageFooterProps - The page footer props.
+ * @property {string} title - The title of the site.
+ * @property {string} repository - The repository the site code is in.
+ */
+PageFooter.propTypes = {
+  title: PropTypes.string.isRequired,
+  repository: PropTypes.string.isRequired,
+};
+
+export default PageFooter;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Dec 16 2023 09:11:09 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

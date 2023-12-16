@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/DisplayLimit.jsx</title>
+    <title>JSDoc: Source: components/SecondaryArticle.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/DisplayLimit.jsx</h1>
+    <h1 class="page-title">Source: components/SecondaryArticle.jsx</h1>
 
     
 
@@ -26,38 +26,67 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import PropTypes from "prop-types";
-import {Alert} from "@mui/material";
-
-const message = "Maximum number of articles displayed.";
+            <pre class="prettyprint source linenums"><code>import * as React from "react";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Typography,
+} from "@mui/material";
+import {GatsbyImage} from "gatsby-plugin-image";
+import InternalLink from "./InternalLink";
+import {ArticleDigestProps} from "../props";
 
 /**
- * React component for showing an alert when the number of articles exceeds the limit of the page.
+ * React component for showing an article as a rectangle card in a
+ * {@link SecondaryArticleGrid} component. The image is displayed at the top
+ * of the card in a HD Video 16x9.
  *
- * @param {DisplayLimitProps} props - The limit and total props.
- * @return {React.ReactElement|null} - The react component or null
+ * @param {SecondaryArticleProps} props - The secondary article props.
+ * @return {React.ReactElement} - The react component
  *
  * @example
- * &lt;DisplayLimit limit={maxDisplay} total={totalCount} />
- *
- * @todo Add search to message once implemented.
+ *  &lt;SecondaryArticle article={article} />
  */
-const DisplayLimit = ({limit, total}) => {
-  return total &lt;= limit ? null : &lt;Alert severity="info">{message}&lt;/Alert>;
+const SecondaryArticle = ({article: {title, excerpt, date, slug, image}}) => {
+  return (
+    &lt;Card variant="outlined">
+      &lt;CardActionArea component={InternalLink} to={`/article/${slug}`} sx={{minHeight: 452}}>
+        &lt;CardMedia>
+          &lt;GatsbyImage image={image} />
+        &lt;/CardMedia>
+        &lt;CardHeader titleTypographyProps={{"variant": "h6"}}
+          title={title}
+          subheader={date}
+          sx={{pb: 1, pt: 1.5}} />
+        &lt;CardContent component="p"
+          sx={{
+            "m": 0,
+            "pt": 1,
+            "&amp;:last-child": {
+              pb: 1.5,
+            },
+          }}>
+          &lt;Typography variant="subtitle1" component="span">
+            {excerpt}
+          &lt;/Typography>
+        &lt;/CardContent>
+      &lt;/CardActionArea>
+    &lt;/Card>
+  );
 };
 
 /**
- * @typedef DisplayLimitProps - The article display limit props.
- * @property {number} limit - The number of articles allowed on the page.
- * @property {number} total - The total number of articles.
+ * @typedef SecondaryArticleProps - A secondary article card props.
+ * @property {ArticleDigestProps} article - The article to display.
  */
-DisplayLimit.propTypes = {
-  limit: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
+SecondaryArticle.propTypes = {
+  article: ArticleDigestProps.isRequired,
 };
 
-export default DisplayLimit;
+export default SecondaryArticle;
 </code></pre>
         </article>
     </section>

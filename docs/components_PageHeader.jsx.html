@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/PageHeader.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/PageHeader.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import {GatsbyImage} from "gatsby-plugin-image";
+import {AppBar, Avatar, ButtonBase, Stack, Typography} from "@mui/material";
+import PropTypes from "prop-types";
+import InnerContainer from "./InnerContainer";
+import InternalLink from "./InternalLink";
+
+/**
+ * React component used to render the page avatar.
+ *
+ * @param {PageAvatarProps} props - The page avatar props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * &lt;PageAvatar image={image} />
+ *
+ * @ignore
+ */
+const PageAvatar = ({image}) => {
+  return (&lt;Avatar
+    variant="rounded"
+    sx={{
+      bgcolor: "primary.dark",
+      borderWidth: 1,
+      borderColor: "secondary.light",
+      borderStyle: "solid",
+      width: "72px",
+      height: "72px",
+    }}>
+    &lt;GatsbyImage image={image} sx={{backgroundColor: "inherit"}} />
+  &lt;/Avatar>);
+};
+
+/**
+ * @typedef PageAvatarProps - The page avatr props.
+ * @property {GatsbyImageData} image - The gatsby image data for the site avatar.
+ *
+ * @ignore
+ */
+PageAvatar.propTypes = {
+  image: PropTypes.object.isRequired,
+};
+
+/**
+ * React component used to render the page header.
+ *
+ * @param {PageHeaderProps} props - The page header props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * &lt;PageHeader
+ *   title={title}
+ *   tagline={tagline}
+ *   avatar={avatar}
+ * />
+ */
+const PageHeader = ({title, tagline, avatar}) => {
+  return (
+    &lt;AppBar
+      position="sticky"
+      component="header"
+      elevation={0}
+      sx={{
+        color: "primary.contrastText",
+        bgcolor: "primary.dark",
+        p: 2,
+        mb: 4,
+      }}
+    >
+      &lt;InnerContainer>
+        &lt;ButtonBase component={InternalLink} to={"/"}
+          sx={{color: "primary.contrastText", textDecoration: "none"}}>
+          &lt;PageAvatar image={avatar} />
+          &lt;Stack direction="column"
+            flexShrink={1}
+            useFlexGap
+            alignItems="flex-start"
+            sx={{ml: 3}}>
+            &lt;Typography variant="h4" sx={{mb: 0.5}}>
+              {title}
+            &lt;/Typography>
+            &lt;Typography variant="h6" sx={{fontSize: "1rem", lineHeight: 1.4}}>
+              {tagline}
+            &lt;/Typography>
+          &lt;/Stack>
+        &lt;/ButtonBase>
+      &lt;/InnerContainer>
+    &lt;/AppBar>
+  );
+};
+
+/**
+ * @typedef PageHeaderProps - The page header props.
+ * @property {string} title - The title of the site.
+ * @property {string} tagline - The tagline for the site.
+ * @property {GatsbyImageData} avatar - The gatsby image data for the site avatar.
+ */
+PageHeader.propTypes = {
+  title: PropTypes.string.isRequired,
+  tagline: PropTypes.string.isRequired,
+  avatar: PropTypes.object.isRequired,
+};
+
+export default PageHeader;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Dec 16 2023 09:11:09 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

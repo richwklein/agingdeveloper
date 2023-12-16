@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/DisplayLimit.jsx</title>
+    <title>JSDoc: Source: components/SecondaryArticleGrid.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/DisplayLimit.jsx</h1>
+    <h1 class="page-title">Source: components/SecondaryArticleGrid.jsx</h1>
 
     
 
@@ -27,37 +27,41 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
+import {Grid} from "@mui/material";
+import SecondaryArticle from "../components/SecondaryArticle";
 import PropTypes from "prop-types";
-import {Alert} from "@mui/material";
-
-const message = "Maximum number of articles displayed.";
+import {ArticleDigestProps} from "../props";
 
 /**
- * React component for showing an alert when the number of articles exceeds the limit of the page.
+ * React component for showing a grid of {@link SecondaryArticle} components.
  *
- * @param {DisplayLimitProps} props - The limit and total props.
- * @return {React.ReactElement|null} - The react component or null
+ * @param {SecondaryArticleGridProps} props - The secondary article grid props.
+ * @return {React.ReactElement} - The react component
  *
  * @example
- * &lt;DisplayLimit limit={maxDisplay} total={totalCount} />
- *
- * @todo Add search to message once implemented.
+ *  &lt;SecondaryArticleGrid articles={articles} />
  */
-const DisplayLimit = ({limit, total}) => {
-  return total &lt;= limit ? null : &lt;Alert severity="info">{message}&lt;/Alert>;
+const SecondaryArticleGrid = ({articles}) => {
+  return (
+    &lt;Grid container rowSpacing={4} columnSpacing={3} sx={{mt: 0, mb: 4}}>
+      {articles.map((article) => (
+        &lt;Grid item key={article.slug} xs={12} sm={6} md={4}>
+          &lt;SecondaryArticle article={article} />
+        &lt;/Grid>
+      ))}
+    &lt;/Grid>
+  );
 };
 
 /**
- * @typedef DisplayLimitProps - The article display limit props.
- * @property {number} limit - The number of articles allowed on the page.
- * @property {number} total - The total number of articles.
+ * @typedef SecondaryArticleGridProps - A grid of secondary articles props.
+ * @property {ArticleDigestProps[]} articles - The list of articles to display.
  */
-DisplayLimit.propTypes = {
-  limit: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
+SecondaryArticleGrid.propTypes = {
+  articles: PropTypes.arrayOf(ArticleDigestProps).isRequired,
 };
 
-export default DisplayLimit;
+export default SecondaryArticleGrid;
 </code></pre>
         </article>
     </section>

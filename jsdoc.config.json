@@ -5,7 +5,7 @@
   },
   "source": {
     "include": ["src"],
-    "includePattern": ".+\\.js(doc|x|cjs|mjs)?$",
+    "includePattern": ".+\\.(c|m)?js(doc|x)?$",
     "excludePattern": "(^|\\/|\\\\)_"
   },
   "plugins": [

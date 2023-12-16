@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import TagGrid from "../components/TagGrid";
 import TagBreadcrumb from "../components/TagBreadCrumb";
 
-// TODO everything
 const PageCategory = ({data}) => {
   const {group, totalCount} = data.allMdx;
 

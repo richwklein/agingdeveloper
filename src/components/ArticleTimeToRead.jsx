@@ -6,8 +6,8 @@ import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 /**
  * React component for showing the word count and time to read for an article.
  *
- * @param {ArticleTimeToReadType} props - The time to read related props.
- * @return {React.ReactElement}
+ * @param {ArticleTimeToReadProps} props - The article time to read props.
+ * @return {React.ReactElement} - The react component
  *
  * @example
  * <ArticleTimeToRead
@@ -38,7 +38,7 @@ const ArticleTimeToRead = ({minutes, words, lang}) => {
 };
 
 /**
- * @typedef ArticleTimeToReadType - The article time to read PropTypes.
+ * @typedef ArticleTimeToReadProps - An article's time to read props.
  * @property {number} minutes - The number of minutes it takes to read.
  * @property {number} words - The number of words in the article.
  * @property {string} lang - The language the article is in.

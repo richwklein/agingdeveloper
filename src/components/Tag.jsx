@@ -8,10 +8,10 @@ import slug from "slug";
 
 /**
  * React component used to render a tag in either the {@link ArticleTagGrid} or
- * {@link TagGrid}.
+ * {@link TagGrid} component.
  *
- * @param {TagType} props - The tags and total.
- * @return {React.ReactElement}
+ * @param {TagProps} props - The tags and total props.
+ * @return {React.ReactElement} - The react component
  *
  * @example
  * <Tag
@@ -43,7 +43,7 @@ const Tag = ({name, weight=300, isCategory=false}) => {
 };
 
 /**
- * @typedef TagType - The tag PropTypes.
+ * @typedef TagProps - The tag props.
  * @property {string} name - The name of the tag.
  * @property {number} [weight=300] - The font weight to render the tag.
  * @property {bool} [isCategory=false] - If the tags represent categories.

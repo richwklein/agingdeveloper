@@ -1,22 +1,32 @@
 import React from "react";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import CssBaseline from "@mui/material/CssBaseline";
-import PropTypes from "prop-types";
 import PageHeader from "./PageHeader";
 import theme from "../styles/theme";
 import PageFooter from "./PageFooter";
 import {useSiteData} from "../hooks/useSiteData";
-import {ChildrenType} from "../types";
+import {ChildrenProps} from "../props";
 import "prismjs/themes/prism-tomorrow.css";
 import "../styles/layout.css";
 import InnerContainer from "./InnerContainer";
 
-// TODO remove spred
-const Layout = ({children, props}) => {
+/**
+ * React component used to render the overall layout of all pages.
+ *
+ * @param {PageLayoutProps} props - The page layout props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * <PageLayout>
+ *   <TagBreadcrumb name={category} isCategory={true} />
+ *   <TagGrid tags={group} />
+ * </PageLayout>
+ */
+const PageLayout = ({children}) => {
   const {title, tagline, image, repository} = useSiteData();
   const avatar = image.childImageSharp.gatsbyImageData;
   return (
-    <ThemeProvider {...props} theme={theme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <PageHeader
         title={title}
@@ -31,9 +41,12 @@ const Layout = ({children, props}) => {
   );
 };
 
-Layout.propTypes = {
-  children: ChildrenType,
-  props: PropTypes.any,
+/**
+ * @typedef PageLayoutProps - The page layout props.
+ * @property {ChildrenProps} children - The children of the component.
+ */
+PageLayout.propTypes = {
+  children: ChildrenProps,
 };
 
-export default Layout;
+export default PageLayout;

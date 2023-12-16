@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import Tag from "./Tag";
 
 /**
- * React component for showing an article's category and tags.
+ * React component for rendering an article's category and tags.
  *
- * @param {ArticleTagGridType} props - The category and tags on the article.
- * @return {React.ReactElement}
+ * @param {ArticleTagGridProps} props - An article tag and category props.
+ * @return {React.ReactElement} - The react component
  *
  * @example
  * <ArticleTagGrid category={category} tags={tags} />
@@ -30,9 +30,9 @@ const ArticleTagGrid = ({category, tags}) => {
 };
 
 /**
- * @typedef ArticleTagGridType - The article tags PropTypes.
+ * @typedef ArticleTagGridProps - An article's tag metadata props.
  * @property {string} category - The article's category.
- * @property {arrayOf(string)} tags - The tags on the article.
+ * @property {string[]} tags - The tags on the article.
  */
 ArticleTagGrid.propTypes = {
   category: PropTypes.string.isRequired,

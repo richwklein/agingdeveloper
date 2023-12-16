@@ -10,7 +10,7 @@ import ArticleTagGrid from "../components/ArticleTagGrid";
 import ArticleTimeToRead from "../components/ArticleTimeToRead";
 import {useSiteData} from "../hooks/useSiteData";
 import PropTypes from "prop-types";
-import {ChildrenType} from "../types";
+import {ChildrenProps} from "../props";
 
 const components = {
   a: MDXLink,
@@ -75,21 +75,12 @@ ArticleTemplate.propTypes = {
       }).isRequired,
     }).isRequired,
   }).isRequired,
-  children: ChildrenType,
+  children: ChildrenProps,
 };
 
 export const Head = ({data: {mdx}}) => {
   const {frontmatter: {title}} = mdx;
   return (<title>{title}</title>);
-};
-Head.propTypes = {
-  data: PropTypes.shape({
-    mdx: PropTypes.shape({
-      frontmatter: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-      }).isRequired,
-    }).isRequired,
-  }).isRequired,
 };
 
 export const pageQuery = graphql`
@@ -125,9 +116,9 @@ export const pageQuery = graphql`
             childImageSharp {
               gatsbyImageData(
                 width: 1152,
-                height: 648, 
                 placeholder: BLURRED
                 layout: CONSTRAINED
+                aspectRatio: 2.33
               )
           }
           }

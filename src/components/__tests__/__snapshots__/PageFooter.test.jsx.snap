@@ -26,7 +26,6 @@ exports[`PageFooter that it renders correctly. 1`] = `
           href="https://github.com/test-repository"
           rel="noopener noreferrer"
           target="_blank"
-          to="https://github.com/test-repository"
         >
           test-title
         </a>
@@ -45,7 +44,6 @@ exports[`PageFooter that it renders correctly. 1`] = `
           href="https://www.gatsbyjs.org/"
           rel="noopener noreferrer"
           target="_blank"
-          to="https://www.gatsbyjs.org/"
         >
           Gatsby
         </a>
@@ -58,7 +56,6 @@ exports[`PageFooter that it renders correctly. 1`] = `
           href="https://app.netlify.com"
           rel="noopener noreferrer"
           target="_blank"
-          to="https://app.netlify.com"
         >
           Netlify
         </a>

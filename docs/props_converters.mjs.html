@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/DisplayLimit.jsx</title>
+    <title>JSDoc: Source: props/converters.mjs</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/DisplayLimit.jsx</h1>
+    <h1 class="page-title">Source: props/converters.mjs</h1>
 
     
 
@@ -26,38 +26,27 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
+            <pre class="prettyprint source linenums"><code>/* eslint-disable no-unused-vars */
 import PropTypes from "prop-types";
-import {Alert} from "@mui/material";
-
-const message = "Maximum number of articles displayed.";
+import {ArticleDigestProps, MDXNodeProps} from ".";
 
 /**
- * React component for showing an alert when the number of articles exceeds the limit of the page.
+ * Convert a `graphql` mdx node into an object with the ArticleDigestProps.
  *
- * @param {DisplayLimitProps} props - The limit and total props.
- * @return {React.ReactElement|null} - The react component or null
- *
- * @example
- * &lt;DisplayLimit limit={maxDisplay} total={totalCount} />
- *
- * @todo Add search to message once implemented.
+ * @param {MDXNodeProps} node - The mdx node to convert.
+ * @return {ArticleDigestProps} - The article digest.
  */
-const DisplayLimit = ({limit, total}) => {
-  return total &lt;= limit ? null : &lt;Alert severity="info">{message}&lt;/Alert>;
+export const mdxNodeToArticleDigest = (node) => {
+  const article = {
+    slug: node.frontmatter.slug,
+    title: node.frontmatter.title,
+    date: node.frontmatter.date,
+    image: node.frontmatter.featured.image.childImageSharp.gatsbyImageData,
+    excerpt: node.excerpt,
+  };
+  PropTypes.checkPropTypes(ArticleDigestProps, article);
+  return article;
 };
-
-/**
- * @typedef DisplayLimitProps - The article display limit props.
- * @property {number} limit - The number of articles allowed on the page.
- * @property {number} total - The total number of articles.
- */
-DisplayLimit.propTypes = {
-  limit: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
-};
-
-export default DisplayLimit;
 </code></pre>
         </article>
     </section>

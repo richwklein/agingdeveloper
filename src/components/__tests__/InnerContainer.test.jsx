@@ -17,7 +17,7 @@ describe("InnerContainer", () => {
   });
 
   test("that it renders with main.", () => {
-    const {container} = renderComponent({useMain: true});
+    const {container} = renderComponent(true);
     expect(container.firstChild).toMatchSnapshot();
   });
 

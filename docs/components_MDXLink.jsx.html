@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/DisplayLimit.jsx</title>
+    <title>JSDoc: Source: components/MDXLink.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/DisplayLimit.jsx</h1>
+    <h1 class="page-title">Source: components/MDXLink.jsx</h1>
 
     
 
@@ -28,36 +28,52 @@
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
 import PropTypes from "prop-types";
-import {Alert} from "@mui/material";
+import ExternalLink from "./ExternalLink";
+import InternalLink from "./InternalLink";
 
-const message = "Maximum number of articles displayed.";
+// Checks against absolute URLs so we can still pass it along to the internal link component
+const domainRegex = /^http[s]*:\/\/[www.]*agingdeveloper\.(com|net)[/]?/;
 
-/**
- * React component for showing an alert when the number of articles exceeds the limit of the page.
- *
- * @param {DisplayLimitProps} props - The limit and total props.
- * @return {React.ReactElement|null} - The react component or null
- *
- * @example
- * &lt;DisplayLimit limit={maxDisplay} total={totalCount} />
- *
- * @todo Add search to message once implemented.
- */
-const DisplayLimit = ({limit, total}) => {
-  return total &lt;= limit ? null : &lt;Alert severity="info">{message}&lt;/Alert>;
-};
 
 /**
- * @typedef DisplayLimitProps - The article display limit props.
- * @property {number} limit - The number of articles allowed on the page.
- * @property {number} total - The total number of articles.
+ * React component used by the {@link MDXPropvider} to use when rendering an
+ * anchor tag in mdx.
+ *
+ * @param {MDXLinkrProps} props - The anchor tag props.
+ * @return {React.ReactElement} - The react component
  */
-DisplayLimit.propTypes = {
-  limit: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
+const MDXLink = ({href, ...rest}) => {
+  const sameDomain = domainRegex.test(href);
+  let to = href;
+
+  if (sameDomain) {
+    to = href.replace(domainRegex, "/");
+  }
+
+  if (to.startsWith("/")) {
+    return &lt;InternalLink to={to} {...rest} />;
+  }
+
+  // Treat urls that aren't web protocols as "normal" links
+  if (!href.startsWith("http")) {
+    return &lt;a data-link="same" href={to} {...rest} />;
+  }
+
+  return &lt;ExternalLink to={to} {...rest} />;
 };
 
-export default DisplayLimit;
+
+/**
+ * @typedef MDXLinkrProps - The mdx link props.
+ * @property {string} href - The anchor href property.
+ * @property {any} rest - The remaining props to spread.
+ */
+MDXLink.propTypes = {
+  href: PropTypes.string.isRequired,
+  rest: PropTypes.any,
+};
+
+export default MDXLink;
 </code></pre>
         </article>
     </section>

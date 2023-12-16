@@ -1,30 +1,23 @@
 import React from "react";
 import {graphql} from "gatsby";
-import {Box, Button, Grid} from "@mui/material";
+import {Box, Button} from "@mui/material";
 import HeroArticle from "../components/HeroArticle";
-import FeaturedPost from "../components/FeaturedArticle";
 import {useSiteData} from "../hooks/useSiteData";
 import InternalLink from "../components/InternalLink";
 import PropTypes from "prop-types";
+import {mdxNodeToArticleDigest} from "../props/converters.mjs";
+import FeaturedArticleGrid from "../components/FeaturedArticleGrid";
 
 // TODO proptypes and head-seo
 const PageIndex = ({data: {lead, remaining}}) => {
-  const {frontmatter: {title, slug, featured}, excerpt} = lead.edges[0].node;
-  const featuredImage = featured.image.childImageSharp.gatsbyImageData;
-
+  const leadArticle = mdxNodeToArticleDigest(lead.edges[0].node);
+  const remainingArticles = remaining.edges.map((edge) => {
+    return mdxNodeToArticleDigest(edge.node);
+  });
   return (
     <main>
-      <HeroArticle hero={{title: title, slug: slug, excerpt: excerpt, image: featuredImage}} />
-      <Grid container rowSpacing={4} columnSpacing={3} sx={{mt: 0}}>
-        {remaining.edges.map((edge) => (
-          <FeaturedPost key={edge.node.frontmatter.slug} article={{
-            date: edge.node.frontmatter.date,
-            excerpt: edge.node.excerpt,
-            image: edge.node.frontmatter.featured.image.childImageSharp.gatsbyImageData,
-            title: edge.node.frontmatter.title,
-            slug: edge.node.frontmatter.slug}} />
-        ))}
-      </Grid>
+      <HeroArticle article={leadArticle} />
+      <FeaturedArticleGrid articles={remainingArticles} />
       <Box sx={{mt: 2}}>
         <Button
           variant="contained"
@@ -50,9 +43,8 @@ PageIndex.propTypes = {
               frontmatter: PropTypes.shape({
                 title: PropTypes.string.isRequired,
                 slug: PropTypes.string.isRequired,
+                date: PropTypes.string.isRequired,
                 featured: PropTypes.shape({
-                  author: PropTypes.object.isRequired,
-                  site: PropTypes.object.isRequired,
                   image: PropTypes.any,
                 }).isRequired,
               }).isRequired,
@@ -104,11 +96,11 @@ export const pageQuery = graphql`
               image {
               childImageSharp {
                 gatsbyImageData(
-                width: 1150, 
-                height: 493,
-                placeholder: BLURRED
-                layout: CONSTRAINED
-              )
+                  width: 1150, 
+                  placeholder: BLURRED
+                  layout: CONSTRAINED
+                  aspectRatio: 2.33
+                )
                 }
               }
             }
@@ -130,13 +122,13 @@ export const pageQuery = graphql`
             title
             featured {
               image {
-              childImageSharp {
-                gatsbyImageData(
-                width: 180,
-                height: 240, 
-                placeholder: BLURRED
-                layout: CONSTRAINED
-              )
+                childImageSharp {
+                  gatsbyImageData(
+                    width: 180, 
+                    placeholder: BLURRED
+                    layout: CONSTRAINED
+                    aspectRatio: 0.75
+                  )
                 }
               }
             }

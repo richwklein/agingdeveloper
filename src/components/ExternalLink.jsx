@@ -1,19 +1,26 @@
 import React from "react";
 import MuiLink from "@mui/material/Link";
-import PropTypes from "prop-types";
+import {LinkProps} from "../props";
 
-// TODO remove spread
-const ExternalLink = (props) => (
+/**
+ * React component used to render a link to an external site.
+ *
+ * @param {LinkProps} props - The to link and rest.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * <ExternalLink to="https://github.com/richwklein">Github</ExternalLink>
+ * @todo Remove prop spread
+ */
+const ExternalLink = ({to, ...rest}) => (
   <MuiLink
     data-link="external"
-    href={props.to}
+    href={to}
     target="_blank"
     rel="noopener noreferrer"
-    {...props}/>
+    {...rest}/>
 );
 
-ExternalLink.propTypes = {
-  to: PropTypes.string.isRequired,
-};
+ExternalLink.propTypes = LinkProps;
 
 export default ExternalLink;

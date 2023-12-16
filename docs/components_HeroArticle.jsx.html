@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/ArticleTagGrid.jsx</title>
+    <title>JSDoc: Source: components/HeroArticle.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/ArticleTagGrid.jsx</h1>
+    <h1 class="page-title">Source: components/HeroArticle.jsx</h1>
 
     
 
@@ -27,47 +27,91 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import {Grid} from "@mui/material";
-import PropTypes from "prop-types";
-import Tag from "./Tag";
+import {GatsbyImage} from "gatsby-plugin-image";
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Grid,
+  Typography,
+  alpha,
+} from "@mui/material";
+import InternalLink from "./InternalLink";
+import {ArticleDigestProps} from "../props";
 
 /**
- * React component for rendering an article's category and tags.
+ * React component for rendering a featured image as a hero image.
+ * The image should be in the Cinemascope 21:9 ratio.
  *
- * @param {ArticleTagGridProps} props - An article tag and category props.
+ * @param {HeroArticleProps} props - The hero article props.
  * @return {React.ReactElement} - The react component
  *
  * @example
- * &lt;ArticleTagGrid category={category} tags={tags} />
+ * &lt;HeroArticle article={article} />
  */
-const ArticleTagGrid = ({category, tags}) => {
+const HeroArticle = ({article: {title, slug, excerpt, image}}) => {
   return (
-    &lt;Grid container spacing={1.5}>
-      &lt;Grid item key={category}>
-        &lt;Tag name={category} isCategory={true} />
-      &lt;/Grid>
-      {tags.map((tag) => {
-        return (
-          &lt;Grid item key={tag}>
-            &lt;Tag name={tag} />
+    &lt;Card
+      variant="outlined"
+      sx={{
+        position: "relative",
+      }}
+    >
+      &lt;CardActionArea disableRipple component={InternalLink} to={`/article/${slug}`}>
+        &lt;CardMedia>
+          &lt;GatsbyImage image={image} />
+        &lt;/CardMedia>
+        &lt;Box
+          sx={(theme) => ({
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            bgcolor: alpha(theme.palette.primary.main, 0.5),
+            color: "primary.contrastText",
+            backdropFilter: "blur(2px)",
+            overflowY: {xs: "scroll", sm: "hidden"},
+          })}
+        >
+          &lt;Grid container>
+            &lt;Grid item lg={6} md={8} sm={12} xs={12}>
+              &lt;Box
+                sx={{
+                  p: {xs: 1, md: 4},
+                  pr: {md: 0},
+                }}
+              >
+                &lt;CardHeader titleTypographyProps={{"variant": "h3", "color": "inherit"}} title={title} />
+                &lt;CardContent>
+                  &lt;Typography variant="h5" color="inherit" paragraph>
+                    {excerpt}
+                  &lt;/Typography>
+                  &lt;Typography variant="subtitle1" color="inherit">
+                    {"Continue Reading"}&amp;hellip;
+                  &lt;/Typography>
+                &lt;/CardContent>
+              &lt;/Box>
+            &lt;/Grid>
           &lt;/Grid>
-        );
-      })}
-    &lt;/Grid>
+        &lt;/Box>
+      &lt;/CardActionArea>
+    &lt;/Card>
   );
 };
 
 /**
- * @typedef ArticleTagGridProps - An article's tag metadata props.
- * @property {string} category - The article's category.
- * @property {string[]} tags - The tags on the article.
+ * @typedef HeroArticleProps - A hero article props.
+ * @property {ArticleDigestProps} article - The article to display.
  */
-ArticleTagGrid.propTypes = {
-  category: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+HeroArticle.propTypes = {
+  article: ArticleDigestProps.isRequired,
 };
 
-export default ArticleTagGrid;
+export default HeroArticle;
 </code></pre>
         </article>
     </section>

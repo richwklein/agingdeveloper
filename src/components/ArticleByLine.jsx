@@ -1,14 +1,14 @@
 import React from "react";
 import {Box, Typography} from "@mui/material";
 import InternalLink from "./InternalLink";
-import {ArticleAuthorDigestType} from "../types";
+import {ArticleAuthorDigestProps} from "../props";
 import PropTypes from "prop-types";
 
 /**
- * React component for showing an article's by-line.
+ * React component for rendering an article's by-line.
  *
- * @param {ArticleByLineType} props - The author and published date of the article.
- * @return {React.ReactElement}
+ * @param {ArticleByLineProps} props - The article by-line props.
+ * @return {React.ReactElement} - The react component
  *
  * @example
  * <ArticleByLine author={author} date={date} />
@@ -28,12 +28,12 @@ const ArticleByLine = ({author, date}) => {
 };
 
 /**
- * @typedef ArticleByLineType - The article by-line PropTypes.
- * @property {ArticleAuthorDigestType} author - The author of the article.
+ * @typedef ArticleByLineProps - Article by-line props
+ * @property {ArticleAuthorDigestProps} author - The author of the article.
  * @property {string} date - The date the article was published.
  */
 ArticleByLine.propTypes = {
-  author: ArticleAuthorDigestType.isRequired,
+  author: ArticleAuthorDigestProps.isRequired,
   date: PropTypes.string.isRequired,
 };
 

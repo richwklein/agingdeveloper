@@ -28,3 +28,5 @@
 - add series support
 - define some common proptypes that can be imported into components
 - Add JSDocs to the components
+- Add tests for PageLayout, FeatureArticleGrid, and SecondaryArticleGrid
+- Fix the console errors

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/DisplayLimit.jsx</title>
+    <title>JSDoc: Source: components/InnerContainer.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/DisplayLimit.jsx</h1>
+    <h1 class="page-title">Source: components/InnerContainer.jsx</h1>
 
     
 
@@ -27,37 +27,43 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
+import {Container} from "@mui/material";
 import PropTypes from "prop-types";
-import {Alert} from "@mui/material";
-
-const message = "Maximum number of articles displayed.";
+import {ChildrenProps} from "../props";
 
 /**
- * React component for showing an alert when the number of articles exceeds the limit of the page.
+ * React component that constrains context to a large breakpoint.
  *
- * @param {DisplayLimitProps} props - The limit and total props.
- * @return {React.ReactElement|null} - The react component or null
+ * @param {InnerContainerProps} props - The inner container props.
+ * @return {React.ReactElement} - The react component
  *
  * @example
- * &lt;DisplayLimit limit={maxDisplay} total={totalCount} />
- *
- * @todo Add search to message once implemented.
+ * &lt;InnerContainer useMain={true}>
+ *   &lt;TagBreadcrumb name={category} isCategory={true} />
+ *   &lt;TagGrid tags={group} />
+ * &lt;/InnerContainer>
  */
-const DisplayLimit = ({limit, total}) => {
-  return total &lt;= limit ? null : &lt;Alert severity="info">{message}&lt;/Alert>;
+const InnerContainer = ({children, useMain=false}) => {
+  const component = useMain ? "main" : "div";
+
+  return (
+    &lt;Container maxWidth="lg" component={component}>
+      {children}
+    &lt;/Container>
+  );
 };
 
 /**
- * @typedef DisplayLimitProps - The article display limit props.
- * @property {number} limit - The number of articles allowed on the page.
- * @property {number} total - The total number of articles.
+ * @typedef InnerContainerProps - An inner container.
+ * @property {ChildrenProps} children - The children of the component.
+ * @property {bool} [useMain=false] - If the html tag should be a main tag.
  */
-DisplayLimit.propTypes = {
-  limit: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
+InnerContainer.propTypes = {
+  children: ChildrenProps,
+  useMain: PropTypes.bool,
 };
 
-export default DisplayLimit;
+export default InnerContainer;
 </code></pre>
         </article>
     </section>

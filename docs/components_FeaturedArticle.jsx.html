@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/DisplayLimit.jsx</title>
+    <title>JSDoc: Source: components/FeaturedArticle.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/DisplayLimit.jsx</h1>
+    <h1 class="page-title">Source: components/FeaturedArticle.jsx</h1>
 
     
 
@@ -27,37 +27,76 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import PropTypes from "prop-types";
-import {Alert} from "@mui/material";
-
-const message = "Maximum number of articles displayed.";
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Typography,
+} from "@mui/material";
+import {GatsbyImage} from "gatsby-plugin-image";
+import InternalLink from "./InternalLink";
+import {ArticleDigestProps} from "../props";
 
 /**
- * React component for showing an alert when the number of articles exceeds the limit of the page.
+ * React component for showing an article as a horizontal feature card in a
+ * {@link FeaturedArticleGrid} component. The image is displayed in a vertical
+ * Standard Monitor 3x4 ratio.
  *
- * @param {DisplayLimitProps} props - The limit and total props.
- * @return {React.ReactElement|null} - The react component or null
+ * @param {FeaturedArticleProps} props - The featured article props.
+ * @return {React.ReactElement} - The react component
  *
  * @example
- * &lt;DisplayLimit limit={maxDisplay} total={totalCount} />
- *
- * @todo Add search to message once implemented.
+ *  &lt;FeaturedArticle article={article} />
  */
-const DisplayLimit = ({limit, total}) => {
-  return total &lt;= limit ? null : &lt;Alert severity="info">{message}&lt;/Alert>;
+const FeaturedArticle = ({article: {title, excerpt, date, slug, image}}) => {
+  return (
+    &lt;Card variant="outlined">
+      &lt;CardActionArea component={InternalLink} to={`/article/${slug}`} sx={{display: "flex"}} >
+        &lt;Box sx={{
+          flex: 1,
+          maxHeight: 240,
+          overflowY: {
+            md: "scroll",
+            lg: "hidden",
+          },
+        }}>
+          &lt;CardHeader titleTypographyProps={{"variant": "h6"}}
+            title={title}
+            subheader={date}
+            sx={{pb: 1, pt: 1.5}} />
+          &lt;CardContent component="p"
+            sx={{
+              "m": 0,
+              "pt": 1,
+              "&amp;:last-child": {
+                pb: 1.5,
+              },
+            }}>
+            &lt;Typography variant="subtitle1" component="span">
+              {excerpt}
+            &lt;/Typography>
+          &lt;/CardContent>
+        &lt;/Box>
+        &lt;CardMedia sx={{display: {xs: "none", sm: "block"}}}>
+          &lt;GatsbyImage image={image} />
+        &lt;/CardMedia>
+      &lt;/CardActionArea>
+    &lt;/Card>
+  );
 };
 
 /**
- * @typedef DisplayLimitProps - The article display limit props.
- * @property {number} limit - The number of articles allowed on the page.
- * @property {number} total - The total number of articles.
+ * @typedef FeaturedArticleProps - A featured article props.
+ * @property {ArticleDigestProps} article - The article to display.
  */
-DisplayLimit.propTypes = {
-  limit: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
+FeaturedArticle.propTypes = {
+  article: ArticleDigestProps.isRequired,
 };
 
-export default DisplayLimit;
+export default FeaturedArticle;
 </code></pre>
         </article>
     </section>

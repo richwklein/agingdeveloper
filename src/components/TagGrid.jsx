@@ -2,14 +2,14 @@ import React from "react";
 import {Grid} from "@mui/material";
 import PropTypes from "prop-types";
 import Tag from "./Tag";
-import {TagWithCountType} from "../types";
+import {TagWithCountProps} from "../props";
 
 /**
  * Calculates a font weight between 300 and 900 for tag display.
  *
  * @param {number} count - The number of times the tag has occurred.
  * @param {number} totalCount - The total number of tags.
- * @return {number} The font weight.
+ * @return {number} - The font weight.
  * @ignore
  */
 const calculateWeight = (count, totalCount) => {
@@ -19,10 +19,10 @@ const calculateWeight = (count, totalCount) => {
 };
 
 /**
- * React component for showing a grid of tags or categories.
+ * React component for rendering a grid of tags or categories.
  *
- * @param {TagGridType} props - The tags and total.
- * @return {React.ReactElement}
+ * @param {TagGridProps} props - The tag grid props.
+ * @return {React.ReactElement} - The react component
  *
  * @example
  * <TagGrid tags={group} totalCount={totalCount} isCategory={true} />
@@ -45,13 +45,13 @@ const TagGrid = ({tags, totalCount, isCategory=false}) => {
 };
 
 /**
- * @typedef TagGridType - The display limit PropTypes.
- * @property {arrayOf(TagWithCountType)} tags - The list of tags.
+ * @typedef TagGridProps - The tag grid props.
+ * @property {TagWithCountProps[]} tags - The list of tags.
  * @property {number} totalCount - The total number of tags.
  * @property {bool} [isCategory=false] - If the tags represent categories.
  */
 TagGrid.propTypes = {
-  tags: PropTypes.arrayOf(TagWithCountType),
+  tags: PropTypes.arrayOf(TagWithCountProps),
   totalCount: PropTypes.number.isRequired,
   isCategory: PropTypes.bool,
 };

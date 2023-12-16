@@ -7,8 +7,8 @@ const message = "Maximum number of articles displayed.";
 /**
  * React component for showing an alert when the number of articles exceeds the limit of the page.
  *
- * @param {DisplayLimitType} props - The limit and total props.
- * @return {React.ReactElement}
+ * @param {DisplayLimitProps} props - The limit and total props.
+ * @return {React.ReactElement|null} - The react component or null
  *
  * @example
  * <DisplayLimit limit={maxDisplay} total={totalCount} />
@@ -20,7 +20,7 @@ const DisplayLimit = ({limit, total}) => {
 };
 
 /**
- * @typedef DisplayLimitType - The display limit PropTypes.
+ * @typedef DisplayLimitProps - The article display limit props.
  * @property {number} limit - The number of articles allowed on the page.
  * @property {number} total - The total number of articles.
  */

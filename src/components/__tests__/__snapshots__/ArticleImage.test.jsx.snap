@@ -14,7 +14,6 @@ exports[`ArticleImage that it renders correctly. 1`] = `
       href="https://example.com/georgia-smith"
       rel="noopener noreferrer"
       target="_blank"
-      to="https://example.com/georgia-smith"
     >
       Georgia Smith
     </a>
@@ -25,7 +24,6 @@ exports[`ArticleImage that it renders correctly. 1`] = `
       href="https://example.com/unsplash"
       rel="noopener noreferrer"
       target="_blank"
-      to="https://example.com/unsplash"
     >
       Unsplash
     </a>

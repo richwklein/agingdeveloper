@@ -2,15 +2,15 @@ import React from "react";
 import {GatsbyImage} from "gatsby-plugin-image";
 import ExternalLink from "./ExternalLink";
 import {Box, Typography} from "@mui/material";
-import {ImageAuthorType, ImageSiteType} from "../types";
+import {ImageAuthorProps, ImageSiteProps} from "../props";
 import PropTypes from "prop-types";
 
 /**
- * React component for showing an article's featured image.
+ * React component for rendering an article's featured image.
  * The image should be in a Cinemascope 21:9 ratio.
  *
- * @param {ArticleImageType} props - The article image props.
- * @return {React.ReactElement}
+ * @param {ArticleImageProps} props - The article's featured image props.
+ * @return {React.ReactElement} - The react component
  *
  * @example
  * <ArticleImage
@@ -40,14 +40,14 @@ const ArticleImage = ({author, site, image}) => {
 };
 
 /**
- * @typedef ArticleImageType - The article featured image PropTypes.
+ * @typedef ArticleImageProps - The article's featured image props.
  * @property {GatsbyImageData} image - The GatsbyImageData of the image.
- * @property {ImageAuthorType} [author] - The author of the image.
- * @property {ImageSiteType} [site] - The site the image comes from.
+ * @property {ImageAuthorProps} [author] - The author of the image.
+ * @property {ImageSiteProps} [site] - The site the image comes from.
  */
 ArticleImage.propTypes = {
   image: PropTypes.object.isRequired,
-  author: ImageAuthorType,
-  site: ImageSiteType,
+  author: ImageAuthorProps,
+  site: ImageSiteProps,
 };
 export default ArticleImage;

@@ -7,7 +7,7 @@ describe("HeroArticle", () => {
   afterEach(cleanup);
 
   const renderComponent = () => render(
-      <HeroArticle hero={{
+      <HeroArticle article={{
         "title": "This is an Aritcle Title",
         "excerpt": "This is content from the article.",
         "slug": "2023-12-01-slug",

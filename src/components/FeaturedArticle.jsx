@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import {
   Box,
   Card,
@@ -10,11 +10,20 @@ import {
 } from "@mui/material";
 import {GatsbyImage} from "gatsby-plugin-image";
 import InternalLink from "./InternalLink";
-import {ArticleDigestType} from "../types";
+import {ArticleDigestProps} from "../props";
 
-// TODO proptypes for image
+/**
+ * React component for showing an article as a horizontal feature card in a
+ * {@link FeaturedArticleGrid} component. The image is displayed in a vertical
+ * Standard Monitor 3x4 ratio.
+ *
+ * @param {FeaturedArticleProps} props - The featured article props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ *  <FeaturedArticle article={article} />
+ */
 const FeaturedArticle = ({article: {title, excerpt, date, slug, image}}) => {
-  // Image ratio is Standard Monitor vertical 3x4
   return (
     <Card variant="outlined">
       <CardActionArea component={InternalLink} to={`/article/${slug}`} sx={{display: "flex"}} >
@@ -38,7 +47,7 @@ const FeaturedArticle = ({article: {title, excerpt, date, slug, image}}) => {
                 pb: 1.5,
               },
             }}>
-            <Typography variant="subtitle1">
+            <Typography variant="subtitle1" component="span">
               {excerpt}
             </Typography>
           </CardContent>
@@ -51,8 +60,12 @@ const FeaturedArticle = ({article: {title, excerpt, date, slug, image}}) => {
   );
 };
 
+/**
+ * @typedef FeaturedArticleProps - A featured article props.
+ * @property {ArticleDigestProps} article - The article to display.
+ */
 FeaturedArticle.propTypes = {
-  article: ArticleDigestType.isRequired,
+  article: ArticleDigestProps.isRequired,
 };
 
 export default FeaturedArticle;
