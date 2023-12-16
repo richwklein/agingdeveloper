@@ -13,8 +13,6 @@ exports[`ArticleByLine that it renders correctly. 1`] = `
   </a>
   <h6
     class="MuiTypography-root MuiTypography-subtitle2 css-92xwbh-MuiTypography-root"
-  >
-    November 1st, 2023
-  </h6>
+  />
 </div>
 `;

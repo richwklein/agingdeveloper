@@ -4,7 +4,15 @@ import {Box} from "@mui/material";
 import PropTypes from "prop-types";
 import TagGrid from "../components/TagGrid";
 import TagBreadcrumb from "../components/TagBreadCrumb";
+import {GroupsNodeProps} from "../props";
+import PageSEO from "../components/PageSEO";
 
+/**
+ * React component that renders a page with all the article categories.
+ *
+ * @param {PageCategoryProps} props - The category page props.
+ * @return {React.ReactElement} - The react component.
+ */
 const PageCategory = ({data}) => {
   const {group, totalCount} = data.allMdx;
 
@@ -16,17 +24,19 @@ const PageCategory = ({data}) => {
   );
 };
 
+/**
+ * @typedef PageCategoryProps - The props for the category page.
+ * @property {Object} data - The page data.
+ * @property {GroupsNodeProps} data.allMdx - The grouped nodes in the mdx.
+ */
 PageCategory.propTypes = {
   data: PropTypes.shape({
-    allMdx: PropTypes.shape({
-      group: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-      totalCount: PropTypes.number.isRequired,
-    }).isRequired,
+    allMdx: GroupsNodeProps.isRequired,
   }).isRequired,
 };
 
 export const Head = () => {
-  return <title>Categories</title>;
+  return <PageSEO title="Categories" />;
 };
 
 export const pageQuery = graphql`

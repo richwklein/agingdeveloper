@@ -20,7 +20,7 @@ tags:
   - defaults
   - java
 category: microservices
-date: '2020-08-14'
+published: '2020-08-14'
 ---
 
 An alternatively headline might be: *know how your service communicates with it's dependencies*. Ideally, a microservice could work in isolation without having to communicate with any other service or dependency. This is not likely the case and HTTP is the most common way that I've seen these services communicating. I've witnessed several problems that have been caused by default configurations being used by these clients. In this article I will explore a couple of these issues and how you can remediate them.

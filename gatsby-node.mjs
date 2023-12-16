@@ -42,7 +42,9 @@ export const createPages = async ({graphql, actions, reporter}) => {
   const {createPage} = actions;
   const result = await graphql(`
   {
-    articles: allMdx(sort: {frontmatter: {date: DESC}}) {
+    articles: allMdx(
+      sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
+      ) {
       edges {
         node {
           frontmatter {

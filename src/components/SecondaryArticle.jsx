@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import {
   Card,
   CardActionArea,
@@ -22,7 +22,7 @@ import {ArticleDigestProps} from "../props";
  * @example
  *  <SecondaryArticle article={article} />
  */
-const SecondaryArticle = ({article: {title, excerpt, date, slug, image}}) => {
+const SecondaryArticle = ({article: {title, excerpt, published, slug, image}}) => {
   return (
     <Card variant="outlined">
       <CardActionArea component={InternalLink} to={`/article/${slug}`} sx={{minHeight: 452}}>
@@ -31,7 +31,7 @@ const SecondaryArticle = ({article: {title, excerpt, date, slug, image}}) => {
         </CardMedia>
         <CardHeader titleTypographyProps={{"variant": "h6"}}
           title={title}
-          subheader={date}
+          subheader={published}
           sx={{pb: 1, pt: 1.5}} />
         <CardContent component="p"
           sx={{

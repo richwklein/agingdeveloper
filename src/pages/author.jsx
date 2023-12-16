@@ -1,5 +1,6 @@
 import React from "react";
 import {Typography} from "@mui/material";
+import PageSEO from "../components/PageSEO";
 
 // TODO everything
 const PageAuthor = () => {
@@ -10,8 +11,9 @@ const PageAuthor = () => {
   );
 };
 
+
 export const Head = () => {
-  return <title>Authors</title>;
+  return (<PageSEO title={"Authors"} />);
 };
 
 export default PageAuthor;

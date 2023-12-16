@@ -20,7 +20,7 @@ tags:
   - anger
   - choices
 category: consumer
-date: '2020-10-03'
+published: '2020-10-03'
 ---
 
 We are a fairly vendor agnostic family. We own devices from Amazon, Google, Apple, Samsung and others.

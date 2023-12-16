@@ -20,7 +20,7 @@ tags:
   - crypto
   - verified
 category: code
-date: '2021-02-05'
+published: '2021-02-05'
 ---
   
 I recently had to completely reinstall the OS and all software on my personal computer. I had to go back and set up my development tools including SSH and 

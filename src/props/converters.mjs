@@ -12,7 +12,7 @@ export const mdxNodeToArticleDigest = (node) => {
   const article = {
     slug: node.frontmatter.slug,
     title: node.frontmatter.title,
-    date: node.frontmatter.date,
+    published: node.frontmatter.published,
     image: node.frontmatter.featured.image.childImageSharp.gatsbyImageData,
     excerpt: node.excerpt,
   };

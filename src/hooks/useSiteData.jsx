@@ -11,6 +11,7 @@ export const useSiteData = () => {
       url
       repository
       image {
+        publicURL
         childImageSharp {
           gatsbyImageData(
             width: 72
@@ -21,8 +22,16 @@ export const useSiteData = () => {
         }
       }
     }
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
   }
 `);
 
-  return data.siteYaml;
+  const siteYaml = data.siteYaml;
+  siteYaml.url = data.site.siteMetadata.siteUrl;
+
+  return siteYaml;
 };

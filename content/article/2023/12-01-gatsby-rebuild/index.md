@@ -15,7 +15,7 @@ tags:
   - site
   - rebuild
 category: site
-date: "2023-12-01"
+published: "2023-12-01"
 ---
 
 I've previously wrote that [major versions should be considered harmful](/article/2022-02-26-major-harmful). I haven't done anything with this site in a long time partially because of that. Another reason is I wanted something where I could run a small amount of code on the front-end, but I wanted the majority of the site to be statically generated. When I say statically generated, I do not mean pre-generating large amounts of javascript that then hydrates and renders the page client side. I wanted to generate actual html that is returned by the server and only have small amount of js for interactions. That has lead me to look at various other static site generators like **[astro](https://astro.build/)** and **[11ty](https://www.11ty.dev/)**. I wasn't able to find a generator that really spoke to me. **[Gatsby](https://www.gatsbyjs.com/)** now has a feature called "Partial Hydration" (more details here) it seems like it may fulfill what I'm looking for so I'm back rebuilding with Gatsby.

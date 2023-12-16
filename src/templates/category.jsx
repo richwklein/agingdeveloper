@@ -36,13 +36,13 @@ export const pageQuery = graphql`
     allMdx(
       limit: 30
       filter: {frontmatter: {category: {eq: $category}}}
-      sort: [{frontmatter: {date: DESC}}, {frontmatter: {title: ASC}}]
+      sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
     ) {
       edges {
         node {
           excerpt(pruneLength: 160)
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            published(formatString: "MMMM DD, YYYY")
             slug
             title
             featured {

@@ -1,5 +1,6 @@
 import React from "react";
 import {Typography} from "@mui/material";
+import PageSEO from "../components/PageSEO";
 
 // TODO everything
 const PageArticle = () => {
@@ -11,7 +12,7 @@ const PageArticle = () => {
 };
 
 export const Head = () => {
-  return <title>Articles</title>;
+  return (<PageSEO title={"Articles"} />);
 };
 
 export default PageArticle;

@@ -11,9 +11,9 @@ import PropTypes from "prop-types";
  * @return {React.ReactElement} - The react component
  *
  * @example
- * <ArticleByLine author={author} date={date} />
+ * <ArticleByLine author={author} published={published} />
  */
-const ArticleByLine = ({author, date}) => {
+const ArticleByLine = ({author, published}) => {
   return (
     <Box>
       <InternalLink to={`/author/${author.slug}`} variant="subtitle1"
@@ -21,7 +21,7 @@ const ArticleByLine = ({author, date}) => {
         {author.name}
       </InternalLink>
       <Typography variant="subtitle2" sx={{display: "inline-block", p: .5}}>
-        {date}
+        {published}
       </Typography>
     </Box>
   );
@@ -30,11 +30,11 @@ const ArticleByLine = ({author, date}) => {
 /**
  * @typedef ArticleByLineProps - Article by-line props
  * @property {ArticleAuthorDigestProps} author - The author of the article.
- * @property {string} date - The date the article was published.
+ * @property {string} published - The date the article was published.
  */
 ArticleByLine.propTypes = {
   author: ArticleAuthorDigestProps.isRequired,
-  date: PropTypes.string.isRequired,
+  published: PropTypes.string.isRequired,
 };
 
 export default ArticleByLine;

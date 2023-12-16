@@ -19,7 +19,7 @@ tags:
   - covid
   - virtual
 category: technology
-date: '2020-12-23'
+published: '2020-12-23'
 ---
 
 I was recently listening to a [Twenty Thousand Hertz](https://www.20k.org) podcast. This podcast is a great exploration of various topics that all relate to sound. It is worth subscribing to. 

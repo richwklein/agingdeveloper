@@ -23,7 +23,7 @@ import {ArticleDigestProps} from "../props";
  * @example
  *  <FeaturedArticle article={article} />
  */
-const FeaturedArticle = ({article: {title, excerpt, date, slug, image}}) => {
+const FeaturedArticle = ({article: {title, excerpt, published, slug, image}}) => {
   return (
     <Card variant="outlined">
       <CardActionArea component={InternalLink} to={`/article/${slug}`} sx={{display: "flex"}} >
@@ -37,7 +37,7 @@ const FeaturedArticle = ({article: {title, excerpt, date, slug, image}}) => {
         }}>
           <CardHeader titleTypographyProps={{"variant": "h6"}}
             title={title}
-            subheader={date}
+            subheader={published}
             sx={{pb: 1, pt: 1.5}} />
           <CardContent component="p"
             sx={{

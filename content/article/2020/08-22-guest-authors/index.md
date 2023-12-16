@@ -20,7 +20,7 @@ tags:
   - author
   - support
 category: code
-date: '2020-08-22'
+published: '2020-08-22'
 ---
 
 I've previously [mentioned](/article/2020-07-21-intro) that this site was created for me to interact with the public again as well as to learn some new technical skills. That doesn't mean that "The Aging Developer" has to be a one man show. I do not have to be the only person to contribute to it. Both the code and the content of the site are both hosted in a public [github](https://github.com/richwklein/agingdeveloper) repo. 
@@ -53,7 +53,7 @@ tags:
   - support
   - yaml
 category: site
-date: '2020-08-22'
+published: '2020-08-22'
 ---
 ```
 

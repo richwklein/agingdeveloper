@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/InternalLink.jsx</title>
+    <title>JSDoc: Source: pages/tag.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/InternalLink.jsx</h1>
+    <h1 class="page-title">Source: pages/tag.jsx</h1>
 
     
 
@@ -27,28 +27,62 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import MuiLink from "@mui/material/Link";
-import {Link as GatsbyLink} from "gatsby";
-import {LinkProps} from "../props";
-
+import {graphql} from "gatsby";
+import {Box} from "@mui/material";
+import PropTypes from "prop-types";
+import TagGrid from "../components/TagGrid";
+import TagBreadcrumb from "../components/TagBreadCrumb";
+import {GroupsNodeProps} from "../props";
+import PageSEO from "../components/PageSEO";
 
 /**
- * React component used to render a link internal to the site.
+ * React component that renders a page with all the article tags.
  *
- * @param {LinkProps} props - The to link and rest.
- * @return {React.ReactElement} - The react component
- *
- * @example
- * &lt;InternalLinkProps to="tags">Tags&lt;/InternalLink>
- * @todo Remove prop spread
+ * @param {PageTagProps} props - The tag page props.
+ * @return {React.ReactElement} - The react component.
  */
-const InternalLink = ({to, ...rest}) => (
-  &lt;MuiLink data-link="internal" component={GatsbyLink} to={to} {...rest} />
-);
+const PageTag = ({data}) => {
+  const {group, totalCount} = data.allMdx;
 
-InternalLink.propTypes = LinkProps;
+  return (
+    &lt;Box>
+      &lt;TagBreadcrumb />
+      &lt;TagGrid tags={group} totalCount={totalCount} />
+    &lt;/Box>
+  );
+};
 
-export default InternalLink;
+/**
+ * @typedef PageTagProps - The props for the category page.
+ * @property {Object} data - The page data.
+ * @property {GroupsNodeProps} data.allMdx - The grouped nodes in the mdx.
+ */
+PageTag.propTypes = {
+  data: PropTypes.shape({
+    allMdx: GroupsNodeProps.isRequired,
+  }).isRequired,
+};
+
+export const Head = () => {
+  return &lt;PageSEO title="Tags" />;
+};
+
+export const pageQuery = graphql`
+  query {
+    allMdx {
+      group(field: { frontmatter: { tags: SELECT } }) {
+        name: fieldValue
+        count: totalCount
+      }
+      totalCount
+    }
+  }
+`;
+
+
+export default PageTag;
+
+
 </code></pre>
         </article>
     </section>

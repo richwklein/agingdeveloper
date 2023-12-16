@@ -21,7 +21,7 @@ tags:
   - misstep
   - false start
 category: site
-date: '2020-07-26'
+published: '2020-07-26'
 ---
 
 I only had two hard requirements when I started this site up. At work we have an internal development blog that uses a static site generator. The articles are markdown files that you check into the repository and the CI/CD system builds the site and deploys it. That workflow is very familiar to developers, and was an appealing workflow for here. I also wanted to use some newer frameworks, specifically front-end heavy ones, that I was not real familiar with so that I could learn as I was building. 

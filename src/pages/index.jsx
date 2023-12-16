@@ -2,11 +2,12 @@ import React from "react";
 import {graphql} from "gatsby";
 import {Box, Button} from "@mui/material";
 import HeroArticle from "../components/HeroArticle";
-import {useSiteData} from "../hooks/useSiteData";
 import InternalLink from "../components/InternalLink";
 import PropTypes from "prop-types";
 import {mdxNodeToArticleDigest} from "../props/converters.mjs";
 import FeaturedArticleGrid from "../components/FeaturedArticleGrid";
+import {MDXNodeProps} from "../props";
+import PageSEO from "../components/PageSEO";
 
 // TODO proptypes and head-seo
 const PageIndex = ({data: {lead, remaining}}) => {
@@ -39,34 +40,14 @@ PageIndex.propTypes = {
     lead: PropTypes.shape({
       edges: PropTypes.arrayOf(
           PropTypes.shape({
-            node: PropTypes.shape({
-              frontmatter: PropTypes.shape({
-                title: PropTypes.string.isRequired,
-                slug: PropTypes.string.isRequired,
-                date: PropTypes.string.isRequired,
-                featured: PropTypes.shape({
-                  image: PropTypes.any,
-                }).isRequired,
-              }).isRequired,
-              excerpt: PropTypes.string.isRequired,
-            }).isRequired,
+            node: MDXNodeProps.isRequired,
           }).isRequired,
       ).isRequired,
     }).isRequired,
     remaining: PropTypes.shape({
       edges: PropTypes.arrayOf(
           PropTypes.shape({
-            node: PropTypes.shape({
-              frontmatter: PropTypes.shape({
-                title: PropTypes.string.isRequired,
-                slug: PropTypes.string.isRequired,
-                date: PropTypes.string.isRequired,
-                featured: PropTypes.shape({
-                  image: PropTypes.any,
-                }).isRequired,
-              }).isRequired,
-              excerpt: PropTypes.string.isRequired,
-            }).isRequired,
+            node: MDXNodeProps.isRequired,
           }).isRequired,
       ).isRequired,
     }).isRequired,
@@ -74,8 +55,7 @@ PageIndex.propTypes = {
 };
 
 export const Head = () => {
-  const {title} = useSiteData();
-  return <title>{title}</title>;
+  return <PageSEO />;
 };
 
 
@@ -83,13 +63,13 @@ export const pageQuery = graphql`
   query {
     lead: allMdx(
       limit: 1
-      sort: [{frontmatter: {date: DESC}}, {frontmatter:{title:ASC}}]
+      sort: [{frontmatter: {published: DESC}}, {frontmatter:{title:ASC}}]
     ) {
       edges {
         node {
           excerpt(pruneLength: 280),
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            published(formatString: "MMMM DD, YYYY")
             slug
             title
             featured {
@@ -111,13 +91,13 @@ export const pageQuery = graphql`
     remaining: allMdx(
       limit: 8
       skip: 1
-      sort: [{frontmatter: {date: DESC}}, {frontmatter:{title:ASC}}]
+      sort: [{frontmatter: {published: DESC}}, {frontmatter:{title:ASC}}]
     ) {
       edges {
         node {
           excerpt(pruneLength: 160),
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            published(formatString: "MMMM DD, YYYY")
             slug
             title
             featured {

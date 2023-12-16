@@ -11,6 +11,7 @@ import ArticleTimeToRead from "../components/ArticleTimeToRead";
 import {useSiteData} from "../hooks/useSiteData";
 import PropTypes from "prop-types";
 import {ChildrenProps} from "../props";
+import PageSEO from "../components/PageSEO";
 
 const components = {
   a: MDXLink,
@@ -19,7 +20,7 @@ const components = {
 // TODO image propertype and head-seo
 const ArticleTemplate = ({data: {mdx}, children}) => {
   const {lang} = useSiteData();
-  const {frontmatter: {title, description, author, featured, date, category, tags},
+  const {frontmatter: {title, description, author, featured, published, category, tags},
     fields: {timeToRead}} = mdx;
   return (
     <Box component="article" sx={{
@@ -29,7 +30,7 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
     }}>
       <ArticleByLine
         author={author}
-        date={date} />
+        date={published} />
       <TitleBlock title={title} subtitle={description } />
       <ArticleImage
         author={featured.author}
@@ -57,7 +58,7 @@ ArticleTemplate.propTypes = {
       frontmatter: PropTypes.shape({
         title: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
+        published: PropTypes.string.isRequired,
         category: PropTypes.string.isRequired,
         tags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
         author: PropTypes.object.isRequired,
@@ -79,8 +80,13 @@ ArticleTemplate.propTypes = {
 };
 
 export const Head = ({data: {mdx}}) => {
-  const {frontmatter: {title}} = mdx;
-  return (<title>{title}</title>);
+  const {frontmatter: {title, slug, featured}} = mdx;
+
+  return <PageSEO
+    title={title}
+    path={`/article/${slug}`}
+    image={featured.image.publicURL}
+    isArticle={true} />;
 };
 
 export const pageQuery = graphql`
@@ -93,7 +99,7 @@ export const pageQuery = graphql`
           }
       }
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
+        published(formatString: "MMMM DD, YYYY")
         slug
         title
         description
@@ -113,6 +119,7 @@ export const pageQuery = graphql`
             url
           }
           image {
+            publicURL
             childImageSharp {
               gatsbyImageData(
                 width: 1152,

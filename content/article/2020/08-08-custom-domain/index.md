@@ -17,7 +17,7 @@ tags:
   - netlify
   - bluehost
 category: site
-date: '2020-08-08'
+published: '2020-08-08'
 ---
 
 [Netlify](https://www.netlify.com) is a great service. It gets my workflow and I can't heap enough praise on it. It provides a subdomain for your site to be hosted on by default. This is great way to get started. At some point though your going to want to move your site off to it's own domain. Making that change is not particularly hard, and Netlify has [great documentation](https://docs.netlify.com/domains-https/custom-domains/configure-external-dns/#configure-a-subdomain), but for those of us that have not worked much with  DNS it can be intimidating. So this article will walk through an example of how 

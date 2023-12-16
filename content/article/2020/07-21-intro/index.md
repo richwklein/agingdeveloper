@@ -19,7 +19,7 @@ tags:
   - participation
   - public
 category: site
-date: '2020-07-21'
+published: '2020-07-21'
 ---
     
 Throughout my 20s I was an active participant online. I followed and worked on open source projects in the late 90s and early 2000s. When [Web 2.0](https://en.wikipedia.org/wiki/Web_2.0) (also know as the Social Web) started to take shape I was involved. My Space, Digg, Twitter, Facebook were all sites where I participated early on and fairly regularly along with publishing my own blog. I was in constant contact with a thriving online community. This was especially true when I was working at AOL on the [Netscape](https://en.wikipedia.org/wiki/Netscape_Navigator_9) browser and [Propeller](https://web.archive.org/web/*/http://propeller.com) social news site.

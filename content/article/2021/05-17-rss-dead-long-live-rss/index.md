@@ -22,7 +22,7 @@ tags:
   - Twitter
   - feed
 category: site
-date: '2021-05-17'
+published: '2021-05-17'
 ---
 
 ## What is RSS?
@@ -99,7 +99,7 @@ The **feed** library does most of the heavy lifting here. I just pass the proper
       id: slug,
       link: `${metadata.siteUrl}/article/${slug}`,
       description: description,
-      date: asDate,
+      published: asDate,
       published: asDate,
       content: node.html,
       author: {

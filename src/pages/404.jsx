@@ -1,5 +1,6 @@
 import React from "react";
 import {Typography} from "@mui/material";
+import PageSEO from "../components/PageSEO";
 
 // TODO everything
 const Page404 = () => {
@@ -11,7 +12,7 @@ const Page404 = () => {
 };
 
 export const Head = () => {
-  return <title>Not Found (404)</title>;
+  return (<PageSEO title={"Not Found (404)"} />);
 };
 
 export default Page404;

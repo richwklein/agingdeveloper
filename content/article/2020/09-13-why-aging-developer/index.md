@@ -17,7 +17,7 @@ tags:
   - explanation
   - feelings
 category: site
-date: '2020-09-13'
+published: '2020-09-13'
 ---
 
 Now that the site is getting more feature complete and I have written a few articles, I wanted to explain in more depth why I chose &quot;The Aging Developer&quot; and what it means to me.

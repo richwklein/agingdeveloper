@@ -22,7 +22,7 @@ tags:
   - tech
   - version
   - strategy
-date: '2022-02-26'
+published: '2022-02-26'
 ---
 
 A large portion of software today follows some form of [SemVer](https://semver.org/) or *Semantic Versioning* when it comes to how that software is versioned. When software follows *Semantic Versioning* then the string used to identify the software's version has meaning. The version is made up of at least three parts separated by periods (`<MAJOR>`.`<MINOR>`.`<PATCH>`). There are specific rules about when each part of the version string should be updated.

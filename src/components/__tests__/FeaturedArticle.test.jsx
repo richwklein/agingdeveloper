@@ -11,7 +11,7 @@ describe("FeaturedArticle", () => {
         "title": "This is an Aritcle Title",
         "excerpt": "This is content from the article.",
         "slug": "2023-12-01-slug",
-        "date": "2023-12-01",
+        "published": "2023-12-01",
       }} />,
   );
 
