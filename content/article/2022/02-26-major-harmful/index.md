@@ -1,7 +1,7 @@
 ---
 slug: 2022-02-26-major-harmful
 title: Major Versions Considered Harmful?
-description: Semantic versioning and why you should be careful when deciding to do a major release. A major version upgrade may be considered harmful for your project.
+description: "Semantic versioning and why you should be careful when deciding to do a major release. A major version upgrade may be considered harmful for your project."
 author: richwklein
 featured:
   image: morgane-perraud-VUoMzpSFMrY-unsplash.jpg
@@ -11,7 +11,6 @@ featured:
   site:
     name: Unsplash
     url: https://unsplash.com/photos/text-VUoMzpSFMrY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
-category: code
 tags:
   - build
   - considerations
@@ -22,7 +21,8 @@ tags:
   - tech
   - version
   - strategy
-published: '2022-02-26'
+category: code
+published: "2022-02-26"
 ---
 
 A large portion of software today follows some form of [SemVer](https://semver.org/) or *Semantic Versioning* when it comes to how that software is versioned. When software follows *Semantic Versioning* then the string used to identify the software's version has meaning. The version is made up of at least three parts separated by periods (`<MAJOR>`.`<MINOR>`.`<PATCH>`). There are specific rules about when each part of the version string should be updated.

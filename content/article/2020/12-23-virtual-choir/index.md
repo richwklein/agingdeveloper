@@ -1,9 +1,8 @@
 ---
 slug: 2020-12-23-virtual-choir
 title: Sing Gently - A Virtual Choir
-description: Using technology to help people come together artistically
+description: "Using technology to help people come together artistically"
 author: richwklein
-image: david-beale-rU4kvQKjG2o-unsplash.jpg
 featured:
   image: david-beale-rU4kvQKjG2o-unsplash.jpg
   author:
@@ -19,7 +18,7 @@ tags:
   - covid
   - virtual
 category: technology
-published: '2020-12-23'
+published: "2020-12-23"
 ---
 
 I was recently listening to a [Twenty Thousand Hertz](https://www.20k.org) podcast. This podcast is a great exploration of various topics that all relate to sound. It is worth subscribing to. 

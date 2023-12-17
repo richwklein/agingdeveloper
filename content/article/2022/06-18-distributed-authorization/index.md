@@ -1,7 +1,7 @@
 ---
 slug: 2022-06-18-distributed-authorization
 title: Authorization in Distributed Systems
-description: Ideas on how authorization can be done in distributed systems.
+description: "Ideas on how authorization can be done in distributed systems."
 author: richwklein
 featured:
   image: parsoa-khorsand-Dd6n63H9szw-unsplash.jpg

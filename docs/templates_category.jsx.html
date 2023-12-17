@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: pages/category.jsx</title>
+    <title>JSDoc: Source: templates/category.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: pages/category.jsx</h1>
+    <h1 class="page-title">Source: templates/category.jsx</h1>
 
     
 
@@ -29,57 +29,104 @@
             <pre class="prettyprint source linenums"><code>import React from "react";
 import {graphql} from "gatsby";
 import {Box} from "@mui/material";
-import PropTypes from "prop-types";
-import TagGrid from "../components/TagGrid";
+import DisplayLimit from "../components/DisplayLimit";
+import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
 import TagBreadcrumb from "../components/TagBreadCrumb";
-import {GroupsNodeProps} from "../props";
-import PageSEO from "../components/PageSEO";
+import {mdxNodeToArticleDigest} from "../props/converters.mjs";
+import PropTypes from "prop-types";
+import {MDXNodeProps} from "../props";
+
+// Maximum number of articles to display on the page
+const maxDisplay = 30;
 
 /**
- * React component that renders a page with all the article categories.
+ * React component that renders a page for a single category
  *
- * @param {PageCategoryProps} props - The category page props.
+ * @param {CategoryTemplateProps} props - The category template props.
  * @return {React.ReactElement} - The react component.
  */
-const PageCategory = ({data}) => {
-  const {group, totalCount} = data.allMdx;
+const CategoryTemplate = ({data, pageContext}) => {
+  const {category} = pageContext;
+  const {edges, totalCount} = data.allMdx;
+  const articles = edges.map((edge) => {
+    return mdxNodeToArticleDigest(edge.node);
+  });
 
   return (
     &lt;Box>
-      &lt;TagBreadcrumb isCategory={true} />
-      &lt;TagGrid tags={group} totalCount={totalCount} isCategory={true} />
+      &lt;TagBreadcrumb name={category} isCategory={true} />
+      &lt;SecondaryArticleGrid articles={articles} />
+      &lt;DisplayLimit limit={maxDisplay} total={totalCount} />
     &lt;/Box>
   );
 };
 
 /**
- * @typedef PageCategoryProps - The props for the category page.
+ * @typedef CategoryTemplateProps - The category template props.
  * @property {Object} data - The page data.
- * @property {GroupsNodeProps} data.allMdx - The grouped nodes in the mdx.
+ * @property {Object} data.allMdx - The mdx node.
+ * @property {Object[]} data.allMdx.edges - All the edges in the graphql.
+ * @property {MDXNodeProps} data.allMdx.edges.node - The mdx nodes.
+ * @property {number} data.allMdx.totalCount - The count of nodes in the graphql.
+ * @property {Object} pageContext - The additional context passed to the page.
+ * @property {string} pageContext.category - The category the page is rendering.
  */
-PageCategory.propTypes = {
+CategoryTemplate.propTypes = {
   data: PropTypes.shape({
-    allMdx: GroupsNodeProps.isRequired,
+    allMdx: PropTypes.shape({
+      edges: PropTypes.arrayOf(
+          PropTypes.shape({
+            node: MDXNodeProps.isRequired,
+          }).isRequired,
+      ).isRequired,
+      totalCount: PropTypes.number.isRequired,
+    }).isRequired,
   }).isRequired,
+  pageContext: PropTypes.shape({
+    category: PropTypes.string.isRequired,
+  }),
 };
 
 export const Head = () => {
-  return &lt;PageSEO title="Categories" />;
+  return &lt;title>Category Template&lt;/title>;
 };
 
+// TODO map the edges into article digest types
 export const pageQuery = graphql`
-  query {
-    allMdx {
-      group(field: { frontmatter: { category: SELECT } }) {
-        name: fieldValue
-        count: totalCount
+  query($category: String) {
+    allMdx(
+      limit: 30
+      filter: {frontmatter: {category: {eq: $category}}}
+      sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
+    ) {
+      edges {
+        node {
+          excerpt(pruneLength: 160)
+          frontmatter {
+            published(formatString: "MMMM DD, YYYY")
+            slug
+            title
+            featured {
+              image {
+                childImageSharp {
+                  gatsbyImageData(
+                    width: 524
+                    placeholder: BLURRED
+                    layout: CONSTRAINED
+                    aspectRatio: 1.78
+                  )
+                }
+              }
+            }
+          }
+        }
       }
       totalCount
     }
   }
 `;
 
-export default PageCategory;
+export default CategoryTemplate;
 
 
 </code></pre>

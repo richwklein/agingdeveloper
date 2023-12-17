@@ -1,7 +1,7 @@
 ---
 slug: 2023-12-01-gatsby-rebuild
 title: Rebuilding with Gatsby
-description: TODO
+description: "The journey to bring this site back to life through a rebuild on the latest major releases."
 author: richwklein
 featured: 
   image: cande-cop-PhP4GQywOLE-unsplash.jpg
@@ -12,9 +12,14 @@ featured:
     name: Unsplash
     url: https://unsplash.com/photos/brown-and-black-car-steering-wheel-PhP4GQywOLE?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
 tags:
-  - site
+  - gatsbyjs
+  - material-ui
+  - jest
+  - test
+  - author
+  - support
   - rebuild
-category: site
+category: code
 published: "2023-12-01"
 ---
 

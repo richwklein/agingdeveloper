@@ -1,7 +1,7 @@
 ---
 slug: 2020-08-22-guest-authors
 title: Support for Guest Authors
-description: 'How I implemented authors and how you can become a guest author'
+description: "How I implemented authors and how you can become a guest author"
 author: richwklein
 featured:
   image: aaron-burden-y02jEX_B0O0-unsplash.jpg
@@ -20,7 +20,7 @@ tags:
   - author
   - support
 category: code
-published: '2020-08-22'
+published: "2020-08-22"
 ---
 
 I've previously [mentioned](/article/2020-07-21-intro) that this site was created for me to interact with the public again as well as to learn some new technical skills. That doesn't mean that "The Aging Developer" has to be a one man show. I do not have to be the only person to contribute to it. Both the code and the content of the site are both hosted in a public [github](https://github.com/richwklein/agingdeveloper) repo. 

@@ -38,7 +38,7 @@ export const ChildrenProps = PropTypes.oneOfType([
 ]);
 
 /**
- * @typedef ArticleAuthorDigestProps - A digest of article author props.
+ * @typedef ArticleAuthorDigestProps - Limited set of an article author props.
  * @property {string} name - The name of the author.
  * @property {string} slug - The path suffix to the author page.
  */
@@ -48,7 +48,7 @@ export const ArticleAuthorDigestProps = PropTypes.shape({
 });
 
 /**
- * @typedef ArticleDigestProps - A digest of a article props.
+ * @typedef ArticleDigestProps - Limited set of an article props.
  * @property {string} slug - The path suffix to the article page.
  * @property {string} title - The title of the article.
  * @property {string} published - The date the article was published.
@@ -104,13 +104,13 @@ export const LinkProps = {
 };
 
 /**
- * @typedef FrontmatterProps - Frontmatter props
+ * @typedef FrontmatterDigestProps - Limited set of frontmatter props
  * @property {string} slug - The path suffix of the article.
  * @property {string} title - The title of the article.
  * @property {string} published - The published date of the article.
  * @property {object} featured - The featured image data.
  */
-export const FrontmatterProps = PropTypes.shape({
+export const FrontmatterDigestProps = PropTypes.shape({
   slug: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   published: PropTypes.string.isRequired,
@@ -118,12 +118,51 @@ export const FrontmatterProps = PropTypes.shape({
 });
 
 /**
+ * @typedef FrontmatterProps - Frontmatter props
+ * @property {string} slug - The path suffix of the article.
+ * @property {string} title - The title of the article.
+ * @property {string} description - THe description of the article.
+ * @property {string} published - The published date of the article.
+ * @property {string} category - The category of the article.
+ * @property {string[]} tags - The tags of the article.
+ * @property {ArticleAuthorDigestProps} author - The author of the article.
+ * @property {Object} featured - The featured image meta.
+ * @property {ImageAuthorProps} featured.author - The author of the featured image.
+ * @property {ImageSiteProps} featured.site - The site of the featured image.
+ * @property {GatsbyImageData} featured.image - The featured image data.
+ */
+export const FrontmatterProps = PropTypes.shape({
+  slug: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  published: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  author: ArticleAuthorDigestProps.isRequired,
+  featured: PropTypes.shape({
+    author: ImageAuthorProps,
+    site: ImageSiteProps,
+    image: PropTypes.object.isRequired,
+  }),
+});
+
+/**
+ * @typedef TimeToReadDigestProps - A limited set of article's time to read props.
+ * @property {number} minutes - The number of minutes it takes to read.
+ * @property {number} words - The number of words in the article.
+ */
+export const TimeToReadDigestProps = {
+  minutes: PropTypes.number.isRequired,
+  words: PropTypes.number.isRequired,
+};
+
+/**
  * @typedef MDXNodeProps - MDX Node props
- * @property {FrontmatterProps} frontmatter - The frontmatter of the mdx.
+ * @property {FrontmatterDigestProps} frontmatter - The frontmatter of the mdx.
  * @property {string} excerpt - The excerpt from the front of the article.
  */
 export const MDXNodeProps = PropTypes.shape({
-  frontmatter: FrontmatterProps.isRequired,
+  frontmatter: FrontmatterDigestProps.isRequired,
   excerpt: PropTypes.string.isRequired,
 });
 
@@ -156,13 +195,13 @@ export const GroupsNodeProps = PropTypes.shape({
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Dec 16 2023 15:01:58 GMT-0600 (Central Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Dec 17 2023 09:02:28 GMT-0600 (Central Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

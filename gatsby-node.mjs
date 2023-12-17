@@ -33,6 +33,23 @@ export const createSchemaCustomization = ({actions, schema}) => {
         },
       },
     }),
+    "type SiteYaml implements Node",
+    schema.buildObjectType({
+      name: "SiteYaml",
+      fields: {
+        author: {
+          type: "AuthorYaml",
+          resolve: (source, args, context, info) => {
+            return context.nodeModel.findOne({
+              type: "AuthorYaml",
+              query: {
+                filter: {slug: {eq: source.author}},
+              },
+            });
+          },
+        },
+      },
+    }),
   ];
   createTypes(typeDefs);
 };

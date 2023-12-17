@@ -34,7 +34,7 @@ export const PageSEO = ({
     lang: lang || siteLang,
     url: path != null ? `${siteUrl}${path}` : siteUrl,
     image: image != null ? `${siteUrl}${image}` : `${siteUrl}${siteImage.publicURL}`,
-    imageAlt: imageAlt || description || siteDescription,
+    imageAlt: imageAlt || title || siteTitle,
     itemType: isArticle ? "http://schema.org/Article" : "http://schema.org/WebSite",
     ogType: isArticle ? "article" : "website",
   };

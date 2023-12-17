@@ -1,7 +1,7 @@
 ---
 slug: 2022-05-23-themepark-sadness
 title: Disappointed in Disney World
-description: We extended our vacation in February so we could take the boys to Disney World and were disappointed in the experience.
+description: "We extended our vacation in February so we could take the boys to Disney World and were disappointed in the experience."
 author: richwklein
 image: brian-mcgowan-uPQiTOzYoo0-unsplash.jpg
 featured:
@@ -19,12 +19,12 @@ tags:
   - genie+
   - disappointment
   - sadness
-  - unhappy
+  - anger
   - magic kingdom
   - hollywood studios
   - disney world
 category: family
-published: '2022-05-23'
+published: "2022-05-23"
 ---
   
 We had a cruise planned for our family vacation in February. Since we were flying to Florida anyway to get on the cruise ship, we decide to extend our vacation for a few days and go to Disney World as well. This family of 5 has been to Universal Studios a few different times, which we've loved. Rachel and I had been to Disney World prior to having kids, but we've never been to any of the Florida Disney parks as a whole family. Since we extended the trip for two days we decided that we would go to the [Magic Kingdom](https://disneyworld.disney.go.com/destinations/magic-kingdom/) and [Hollywood Studios](https://disneyworld.disney.go.com/destinations/hollywood-studios/) theme parks. As with any vacation we've taken, the chances are that I would do again. However, we were disappointed in the overall experience at Disney World and wanted to share with others. Our second day at Hollywood Studios was much better than Magic Kingdom, but it wasn't without its problems.

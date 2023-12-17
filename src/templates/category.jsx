@@ -5,11 +5,19 @@ import DisplayLimit from "../components/DisplayLimit";
 import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
 import TagBreadcrumb from "../components/TagBreadCrumb";
 import {mdxNodeToArticleDigest} from "../props/converters.mjs";
+import PropTypes from "prop-types";
+import {MDXNodeProps} from "../props";
+import PageSEO from "../components/PageSEO";
 
 // Maximum number of articles to display on the page
 const maxDisplay = 30;
 
-// TODO proptypes and seo
+/**
+ * React component that renders a page for a single category
+ *
+ * @param {CategoryTemplateProps} props - The category template props.
+ * @return {React.ReactElement} - The react component.
+ */
 const CategoryTemplate = ({data, pageContext}) => {
   const {category} = pageContext;
   const {edges, totalCount} = data.allMdx;
@@ -26,11 +34,38 @@ const CategoryTemplate = ({data, pageContext}) => {
   );
 };
 
-export const Head = () => {
-  return <title>Category Template</title>;
+/**
+ * @typedef CategoryTemplateProps - The category template props.
+ * @property {Object} data - The page data.
+ * @property {Object} data.allMdx - The mdx node.
+ * @property {Object[]} data.allMdx.edges - All the edges in the graphql.
+ * @property {MDXNodeProps} data.allMdx.edges.node - The mdx nodes.
+ * @property {number} data.allMdx.totalCount - The count of nodes in the graphql.
+ * @property {Object} pageContext - The additional context passed to the page.
+ * @property {string} pageContext.category - The category the page is rendering.
+ */
+CategoryTemplate.propTypes = {
+  data: PropTypes.shape({
+    allMdx: PropTypes.shape({
+      edges: PropTypes.arrayOf(
+          PropTypes.shape({
+            node: MDXNodeProps.isRequired,
+          }).isRequired,
+      ).isRequired,
+      totalCount: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+  pageContext: PropTypes.shape({
+    category: PropTypes.string.isRequired,
+  }),
 };
 
-// TODO map the edges into article digest types
+// eslint-disable-next-line react/prop-types
+export const Head = ({pageContext: {category}}) => {
+  const title = `${category} | Categories`;
+  return <PageSEO title={title} />;
+};
+
 export const pageQuery = graphql`
   query($category: String) {
     allMdx(

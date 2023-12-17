@@ -1,7 +1,7 @@
 ---
 slug: 2021-05-17-rss-dead-long-live-rss
 title: 'RSS is Dead, Long Live RSS'
-description: 'Many have written RSS or Atom off as a dead technology. However, it is alive and kicking. We explore why and how I added RSS support to this site.'
+description: "Many have written RSS or Atom off as a dead technology. However, it is alive and kicking. We explore why and how I added RSS support to this site."
 author: richwklein
 featured:
   image: david-clode-wOpm2alT6qU-unsplash.jpg
@@ -22,7 +22,7 @@ tags:
   - Twitter
   - feed
 category: site
-published: '2021-05-17'
+published: "2021-05-17"
 ---
 
 ## What is RSS?

@@ -1,9 +1,8 @@
 ---
 slug: 2021-02-05-github-signing
 title: Setting up Git Commit Signing
-description: The hows and whys of git commit signing
+description: "The hows and whys of git commit signing"
 author: richwklein
-image: romain-dancre-doplSDELX7E-unsplash.jpg
 featured:
   image: romain-dancre-doplSDELX7E-unsplash.jpg
   author:
@@ -20,7 +19,7 @@ tags:
   - crypto
   - verified
 category: code
-published: '2021-02-05'
+published: "2021-02-05"
 ---
   
 I recently had to completely reinstall the OS and all software on my personal computer. I had to go back and set up my development tools including SSH and 

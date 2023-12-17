@@ -10,14 +10,19 @@ import ArticleTagGrid from "../components/ArticleTagGrid";
 import ArticleTimeToRead from "../components/ArticleTimeToRead";
 import {useSiteData} from "../hooks/useSiteData";
 import PropTypes from "prop-types";
-import {ChildrenProps} from "../props";
+import {ChildrenProps, FrontmatterProps, TimeToReadDigestProps} from "../props";
 import PageSEO from "../components/PageSEO";
 
 const components = {
   a: MDXLink,
 };
 
-// TODO image propertype and head-seo
+/**
+ * React component that renders a page as an article.
+ *
+ * @param {ArticleTemplateProps} props - The article template page props.
+ * @return {React.ReactElement} - The react component.
+ */
 const ArticleTemplate = ({data: {mdx}, children}) => {
   const {lang} = useSiteData();
   const {frontmatter: {title, description, author, featured, published, category, tags},
@@ -31,7 +36,7 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
       <ArticleByLine
         author={author}
         date={published} />
-      <TitleBlock title={title} subtitle={description } />
+      <TitleBlock title={title} subtitle={description} />
       <ArticleImage
         author={featured.author}
         site={featured.site}
@@ -52,40 +57,36 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
   );
 };
 
+/**
+ * @typedef ArticleTemplateProps - The article template props
+ * @property {Object} data - The page data.
+ * @property {Object} data.mdx - The mdx node.
+ * @property {FrontmatterProps} data.mdx.frontmatter - The frontmatter of the node.
+ * @property {Object} data.mdx.fields - The additional fields on the node.
+ * @property {TimeToReadDigestProps} data.mdx.fields.timeToRead - The article time to read.
+ * @property {ChildrenProps} children - The rendered mdx as child components.
+ */
 ArticleTemplate.propTypes = {
   data: PropTypes.shape({
     mdx: PropTypes.shape({
-      frontmatter: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        published: PropTypes.string.isRequired,
-        category: PropTypes.string.isRequired,
-        tags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        author: PropTypes.object.isRequired,
-        featured: PropTypes.shape({
-          author: PropTypes.object.isRequired,
-          site: PropTypes.object.isRequired,
-          image: PropTypes.any,
-        }).isRequired,
-      }).isRequired,
+      frontmatter: FrontmatterProps.isRequired,
       fields: PropTypes.shape({
-        timeToRead: PropTypes.shape({
-          minutes: PropTypes.number.isRequired,
-          words: PropTypes.number.isRequired,
-        }).isRequired,
+        timeToRead: TimeToReadDigestProps.isRequired,
       }).isRequired,
     }).isRequired,
   }).isRequired,
   children: ChildrenProps,
 };
 
+// eslint-disable-next-line react/prop-types
 export const Head = ({data: {mdx}}) => {
-  const {frontmatter: {title, slug, featured}} = mdx;
+  // eslint-disable-next-line react/prop-types
+  const {frontmatter: {title, slug, featured: {image: {publicURL}}}} = mdx;
 
   return <PageSEO
     title={title}
     path={`/article/${slug}`}
-    image={featured.image.publicURL}
+    image={publicURL}
     isArticle={true} />;
 };
 

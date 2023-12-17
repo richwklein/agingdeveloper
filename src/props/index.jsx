@@ -10,7 +10,7 @@ export const ChildrenProps = PropTypes.oneOfType([
 ]);
 
 /**
- * @typedef ArticleAuthorDigestProps - A digest of article author props.
+ * @typedef ArticleAuthorDigestProps - Limited set of an article author props.
  * @property {string} name - The name of the author.
  * @property {string} slug - The path suffix to the author page.
  */
@@ -20,7 +20,7 @@ export const ArticleAuthorDigestProps = PropTypes.shape({
 });
 
 /**
- * @typedef ArticleDigestProps - A digest of a article props.
+ * @typedef ArticleDigestProps - Limited set of an article props.
  * @property {string} slug - The path suffix to the article page.
  * @property {string} title - The title of the article.
  * @property {string} published - The date the article was published.
@@ -76,13 +76,13 @@ export const LinkProps = {
 };
 
 /**
- * @typedef FrontmatterProps - Frontmatter props
+ * @typedef FrontmatterDigestProps - Limited set of frontmatter props
  * @property {string} slug - The path suffix of the article.
  * @property {string} title - The title of the article.
  * @property {string} published - The published date of the article.
  * @property {object} featured - The featured image data.
  */
-export const FrontmatterProps = PropTypes.shape({
+export const FrontmatterDigestProps = PropTypes.shape({
   slug: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   published: PropTypes.string.isRequired,
@@ -90,12 +90,51 @@ export const FrontmatterProps = PropTypes.shape({
 });
 
 /**
+ * @typedef FrontmatterProps - Frontmatter props
+ * @property {string} slug - The path suffix of the article.
+ * @property {string} title - The title of the article.
+ * @property {string} description - THe description of the article.
+ * @property {string} published - The published date of the article.
+ * @property {string} category - The category of the article.
+ * @property {string[]} tags - The tags of the article.
+ * @property {ArticleAuthorDigestProps} author - The author of the article.
+ * @property {Object} featured - The featured image meta.
+ * @property {ImageAuthorProps} featured.author - The author of the featured image.
+ * @property {ImageSiteProps} featured.site - The site of the featured image.
+ * @property {GatsbyImageData} featured.image - The featured image data.
+ */
+export const FrontmatterProps = PropTypes.shape({
+  slug: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  published: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  author: ArticleAuthorDigestProps.isRequired,
+  featured: PropTypes.shape({
+    author: ImageAuthorProps,
+    site: ImageSiteProps,
+    image: PropTypes.object.isRequired,
+  }),
+});
+
+/**
+ * @typedef TimeToReadDigestProps - A limited set of article's time to read props.
+ * @property {number} minutes - The number of minutes it takes to read.
+ * @property {number} words - The number of words in the article.
+ */
+export const TimeToReadDigestProps = {
+  minutes: PropTypes.number.isRequired,
+  words: PropTypes.number.isRequired,
+};
+
+/**
  * @typedef MDXNodeProps - MDX Node props
- * @property {FrontmatterProps} frontmatter - The frontmatter of the mdx.
+ * @property {FrontmatterDigestProps} frontmatter - The frontmatter of the mdx.
  * @property {string} excerpt - The excerpt from the front of the article.
  */
 export const MDXNodeProps = PropTypes.shape({
-  frontmatter: FrontmatterProps.isRequired,
+  frontmatter: FrontmatterDigestProps.isRequired,
   excerpt: PropTypes.string.isRequired,
 });
 
