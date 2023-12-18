@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Alert} from "@mui/material";
 
-const message = "Maximum number of articles displayed.";
-
 /**
  * React component for showing an alert when the number of articles exceeds the limit of the page.
  *
@@ -16,6 +14,8 @@ const message = "Maximum number of articles displayed.";
  * @todo Add search to message once implemented.
  */
 const DisplayLimit = ({limit, total}) => {
+  const remaining = total - limit;
+  const message = `Maximum number of articles displayed, ${remaining} remaining.`;
   return total <= limit ? null : <Alert severity="info">{message}</Alert>;
 };
 

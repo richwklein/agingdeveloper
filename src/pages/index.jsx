@@ -70,7 +70,7 @@ PageIndex.propTypes = {
 };
 
 export const Head = () => {
-  return <PageSEO />;
+  return <PageSEO path="/" />;
 };
 
 

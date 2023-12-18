@@ -35,7 +35,7 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
     }}>
       <ArticleByLine
         author={author}
-        date={published} />
+        published={published} />
       <TitleBlock title={title} subtitle={description} />
       <ArticleImage
         author={featured.author}
@@ -64,6 +64,8 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
  * @property {FrontmatterProps} data.mdx.frontmatter - The frontmatter of the node.
  * @property {Object} data.mdx.fields - The additional fields on the node.
  * @property {TimeToReadDigestProps} data.mdx.fields.timeToRead - The article time to read.
+ * @property {Object} pageContext - The additional context passed to the page.
+ * @property {string} pageContext.pathSuffix - The suffix (slug) of the url for these pages.
  * @property {ChildrenProps} children - The rendered mdx as child components.
  */
 ArticleTemplate.propTypes = {
@@ -75,23 +77,26 @@ ArticleTemplate.propTypes = {
       }).isRequired,
     }).isRequired,
   }).isRequired,
+  pageContext: PropTypes.shape({
+    pathSuffix: PropTypes.string.isRequired,
+  }),
   children: ChildrenProps,
 };
 
 // eslint-disable-next-line react/prop-types
-export const Head = ({data: {mdx}}) => {
+export const Head = ({data: {mdx}, pageContext: {pathSuffix}}) => {
   // eslint-disable-next-line react/prop-types
-  const {frontmatter: {title, slug, featured: {image: {publicURL}}}} = mdx;
+  const {frontmatter: {title, featured: {image: {publicURL}}}} = mdx;
 
   return <PageSEO
     title={title}
-    path={`/article/${slug}`}
+    path={`/article/${pathSuffix}`}
     image={publicURL}
     isArticle={true} />;
 };
 
 export const pageQuery = graphql`
-  query($pathSuffix: String) {
+  query($pathSuffix: String!) {
     mdx(frontmatter: { slug: { eq: $pathSuffix } }) {
       fields {
           timeToRead {

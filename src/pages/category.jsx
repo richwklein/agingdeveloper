@@ -36,7 +36,7 @@ PageCategory.propTypes = {
 };
 
 export const Head = () => {
-  return <PageSEO title="Categories" />;
+  return <PageSEO title="Categories" path="/category" />;
 };
 
 export const pageQuery = graphql`

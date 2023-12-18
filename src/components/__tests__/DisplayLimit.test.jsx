@@ -14,7 +14,12 @@ describe("DisplayLimit", () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  test("that that less than limit nothing is rendered", () => {
+  test("that it shows remaining", () => {
+    const {container} = renderComponent();
+    expect(container.firstChild).toContainHTML("90 remaining");
+  });
+
+  test("that less than limit nothing is rendered", () => {
     const {container} = renderComponent(110);
     expect(container).toBeEmptyDOMElement();
   });

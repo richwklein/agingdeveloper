@@ -35,9 +35,7 @@ import TagBreadcrumb from "../components/TagBreadCrumb";
 import {mdxNodeToArticleDigest} from "../props/converters.mjs";
 import PropTypes from "prop-types";
 import {MDXNodeProps} from "../props";
-
-// Maximum number of articles to display on the page
-const maxDisplay = 30;
+import PageSEO from "../components/PageSEO";
 
 /**
  * React component that renders a page for a single category
@@ -46,7 +44,7 @@ const maxDisplay = 30;
  * @return {React.ReactElement} - The react component.
  */
 const CategoryTemplate = ({data, pageContext}) => {
-  const {category} = pageContext;
+  const {category, limit} = pageContext;
   const {edges, totalCount} = data.allMdx;
   const articles = edges.map((edge) => {
     return mdxNodeToArticleDigest(edge.node);
@@ -56,7 +54,7 @@ const CategoryTemplate = ({data, pageContext}) => {
     &lt;Box>
       &lt;TagBreadcrumb name={category} isCategory={true} />
       &lt;SecondaryArticleGrid articles={articles} />
-      &lt;DisplayLimit limit={maxDisplay} total={totalCount} />
+      &lt;DisplayLimit limit={limit} total={totalCount} />
     &lt;/Box>
   );
 };
@@ -69,6 +67,8 @@ const CategoryTemplate = ({data, pageContext}) => {
  * @property {MDXNodeProps} data.allMdx.edges.node - The mdx nodes.
  * @property {number} data.allMdx.totalCount - The count of nodes in the graphql.
  * @property {Object} pageContext - The additional context passed to the page.
+ * @property {number} pageContext.limit - The limit of articles to show on the page.
+ * @property {string} pageContext.pathSuffix - The suffix (slug) of the url for these pages.
  * @property {string} pageContext.category - The category the page is rendering.
  */
 CategoryTemplate.propTypes = {
@@ -83,19 +83,22 @@ CategoryTemplate.propTypes = {
     }).isRequired,
   }).isRequired,
   pageContext: PropTypes.shape({
+    limit: PropTypes.number.isRequired,
+    pathSuffix: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
   }),
 };
 
-export const Head = () => {
-  return &lt;title>Category Template&lt;/title>;
+// eslint-disable-next-line react/prop-types
+export const Head = ({pageContext: {pathSuffix, category}}) => {
+  const title = `${category} | Categories`;
+  return &lt;PageSEO title={title} path={`/category/${pathSuffix}`} />;
 };
 
-// TODO map the edges into article digest types
 export const pageQuery = graphql`
-  query($category: String) {
+  query($category: String!, $limit: Int!) {
     allMdx(
-      limit: 30
+      limit: $limit
       filter: {frontmatter: {category: {eq: $category}}}
       sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
     ) {
@@ -139,13 +142,13 @@ export default CategoryTemplate;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Dec 17 2023 09:02:28 GMT-0600 (Central Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Dec 18 2023 11:43:24 GMT-0600 (Central Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -22,6 +22,7 @@ const config = {
   siteMetadata: {
     siteUrl,
   },
+  trailingSlash: "never",
   plugins: [
     "gatsby-plugin-image",
     "gatsby-plugin-remove-fingerprints",

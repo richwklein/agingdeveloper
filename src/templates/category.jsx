@@ -9,9 +9,6 @@ import PropTypes from "prop-types";
 import {MDXNodeProps} from "../props";
 import PageSEO from "../components/PageSEO";
 
-// Maximum number of articles to display on the page
-const maxDisplay = 30;
-
 /**
  * React component that renders a page for a single category
  *
@@ -19,7 +16,7 @@ const maxDisplay = 30;
  * @return {React.ReactElement} - The react component.
  */
 const CategoryTemplate = ({data, pageContext}) => {
-  const {category} = pageContext;
+  const {category, limit} = pageContext;
   const {edges, totalCount} = data.allMdx;
   const articles = edges.map((edge) => {
     return mdxNodeToArticleDigest(edge.node);
@@ -29,7 +26,7 @@ const CategoryTemplate = ({data, pageContext}) => {
     <Box>
       <TagBreadcrumb name={category} isCategory={true} />
       <SecondaryArticleGrid articles={articles} />
-      <DisplayLimit limit={maxDisplay} total={totalCount} />
+      <DisplayLimit limit={limit} total={totalCount} />
     </Box>
   );
 };
@@ -42,6 +39,8 @@ const CategoryTemplate = ({data, pageContext}) => {
  * @property {MDXNodeProps} data.allMdx.edges.node - The mdx nodes.
  * @property {number} data.allMdx.totalCount - The count of nodes in the graphql.
  * @property {Object} pageContext - The additional context passed to the page.
+ * @property {number} pageContext.limit - The limit of articles to show on the page.
+ * @property {string} pageContext.pathSuffix - The suffix (slug) of the url for these pages.
  * @property {string} pageContext.category - The category the page is rendering.
  */
 CategoryTemplate.propTypes = {
@@ -56,20 +55,22 @@ CategoryTemplate.propTypes = {
     }).isRequired,
   }).isRequired,
   pageContext: PropTypes.shape({
+    limit: PropTypes.number.isRequired,
+    pathSuffix: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
   }),
 };
 
 // eslint-disable-next-line react/prop-types
-export const Head = ({pageContext: {category}}) => {
+export const Head = ({pageContext: {pathSuffix, category}}) => {
   const title = `${category} | Categories`;
-  return <PageSEO title={title} />;
+  return <PageSEO title={title} path={`/category/${pathSuffix}`} />;
 };
 
 export const pageQuery = graphql`
-  query($category: String) {
+  query($category: String!, $limit: Int!) {
     allMdx(
-      limit: 30
+      limit: $limit
       filter: {frontmatter: {category: {eq: $category}}}
       sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
     ) {

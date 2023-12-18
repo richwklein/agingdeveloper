@@ -63,7 +63,7 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
     }}>
       &lt;ArticleByLine
         author={author}
-        date={published} />
+        published={published} />
       &lt;TitleBlock title={title} subtitle={description} />
       &lt;ArticleImage
         author={featured.author}
@@ -92,6 +92,8 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
  * @property {FrontmatterProps} data.mdx.frontmatter - The frontmatter of the node.
  * @property {Object} data.mdx.fields - The additional fields on the node.
  * @property {TimeToReadDigestProps} data.mdx.fields.timeToRead - The article time to read.
+ * @property {Object} pageContext - The additional context passed to the page.
+ * @property {string} pageContext.pathSuffix - The suffix (slug) of the url for these pages.
  * @property {ChildrenProps} children - The rendered mdx as child components.
  */
 ArticleTemplate.propTypes = {
@@ -103,23 +105,26 @@ ArticleTemplate.propTypes = {
       }).isRequired,
     }).isRequired,
   }).isRequired,
+  pageContext: PropTypes.shape({
+    pathSuffix: PropTypes.string.isRequired,
+  }),
   children: ChildrenProps,
 };
 
 // eslint-disable-next-line react/prop-types
-export const Head = ({data: {mdx}}) => {
+export const Head = ({data: {mdx}, pageContext: {pathSuffix}}) => {
   // eslint-disable-next-line react/prop-types
-  const {frontmatter: {title, slug, featured: {image: {publicURL}}}} = mdx;
+  const {frontmatter: {title, featured: {image: {publicURL}}}} = mdx;
 
   return &lt;PageSEO
     title={title}
-    path={`/article/${slug}`}
+    path={`/article/${pathSuffix}`}
     image={publicURL}
     isArticle={true} />;
 };
 
 export const pageQuery = graphql`
-  query($pathSuffix: String) {
+  query($pathSuffix: String!) {
     mdx(frontmatter: { slug: { eq: $pathSuffix } }) {
       fields {
           timeToRead {
@@ -175,13 +180,13 @@ export default ArticleTemplate;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Dec 17 2023 09:02:28 GMT-0600 (Central Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Dec 18 2023 11:43:24 GMT-0600 (Central Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

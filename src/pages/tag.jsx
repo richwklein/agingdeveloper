@@ -36,7 +36,7 @@ PageTag.propTypes = {
 };
 
 export const Head = () => {
-  return <PageSEO title="Tags" />;
+  return <PageSEO title="Tags" path="/tag" />;
 };
 
 export const pageQuery = graphql`

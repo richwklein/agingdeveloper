@@ -2,6 +2,8 @@ import {resolve as pathResolve} from "path";
 import readingTime from "reading-time";
 import slug from "slug";
 
+const articlesPerPage = 15;
+
 export const onCreateNode = ({node, actions}) => {
   const {createNodeField} = actions;
   if (node.internal.type === "Mdx") {
@@ -54,8 +56,7 @@ export const createSchemaCustomization = ({actions, schema}) => {
   createTypes(typeDefs);
 };
 
-
-export const createPages = async ({graphql, actions, reporter}) => {
+export const createPages = async ({actions, reporter, graphql}) => {
   const {createPage} = actions;
   const result = await graphql(`
   {
@@ -97,7 +98,9 @@ export const createPages = async ({graphql, actions, reporter}) => {
     return;
   }
 
+  // Create various pages from templates
   createArticlePages(createPage, result.data.articles.edges);
+  createArchivePages(createPage, result.data.articles.edges);
   createTagPages(createPage, result.data.tags.group);
   createCategoryPages(createPage, result.data.categories.group);
   createAuthorPages(createPage, result.data.authors.edges);
@@ -106,7 +109,6 @@ export const createPages = async ({graphql, actions, reporter}) => {
 const createArticlePages = (createPage, articles) => {
   const template = pathResolve("src/templates/article.jsx");
   const pathPrefix = "/article";
-
   articles.forEach(({node}) => {
     const pathSuffix = node.frontmatter.slug;
 
@@ -118,8 +120,26 @@ const createArticlePages = (createPage, articles) => {
       },
     });
   });
+};
 
-  // TODO create paginated article list pages
+const createArchivePages = (createPage, articles) => {
+  const template = pathResolve("src/templates/archive.jsx");
+  const pathPrefix = "/article";
+  const pageCount = Math.ceil(articles.length / articlesPerPage);
+
+  Array.from({length: pageCount}).forEach((_, i) => {
+    const pageNumber = i + 1;
+    createPage({
+      path: i === 0 ? `${pathPrefix}/` : `${pathPrefix}/archive-${pageNumber}`,
+      component: template,
+      context: {
+        limit: articlesPerPage,
+        skip: i * articlesPerPage,
+        pageCount,
+        pageNumber,
+      },
+    });
+  });
 };
 
 const createTagPages = (createPage, tags) => {
@@ -133,6 +153,7 @@ const createTagPages = (createPage, tags) => {
       path: `${pathPrefix}/${pathSuffix}`,
       component: template,
       context: {
+        limit: articlesPerPage,
         pathSuffix,
         tag,
       },
@@ -151,6 +172,7 @@ const createCategoryPages = (createPage, categories) => {
       path: `${pathPrefix}/${pathSuffix}`,
       component: template,
       context: {
+        limit: articlesPerPage,
         pathSuffix,
         category,
       },
@@ -169,6 +191,7 @@ const createAuthorPages = (createPage, authors) => {
       path: `${pathPrefix}/${pathSuffix}`,
       component: template,
       context: {
+        limit: articlesPerPage,
         pathSuffix,
       },
     });

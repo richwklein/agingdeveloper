@@ -13,7 +13,7 @@ const PageAuthor = () => {
 
 
 export const Head = () => {
-  return (<PageSEO title={"Authors"} />);
+  return (<PageSEO title={"Authors"} path="/author" />);
 };
 
 export default PageAuthor;

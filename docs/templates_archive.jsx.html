@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: pages/index.jsx</title>
+    <title>JSDoc: Source: templates/archive.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: pages/index.jsx</h1>
+    <h1 class="page-title">Source: templates/archive.jsx</h1>
 
     
 
@@ -27,67 +27,108 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import {graphql} from "gatsby";
-import {Box, Button} from "@mui/material";
-import HeroArticle from "../components/HeroArticle";
-import InternalLink from "../components/InternalLink";
-import PropTypes from "prop-types";
+import {navigate, graphql} from "gatsby";
 import {mdxNodeToArticleDigest} from "../props/converters.mjs";
-import FeaturedArticleGrid from "../components/FeaturedArticleGrid";
+import PropTypes from "prop-types";
 import {MDXNodeProps} from "../props";
 import PageSEO from "../components/PageSEO";
+import {Breadcrumbs, Divider, Pagination, Stack, Typography} from "@mui/material";
+import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
+import InternalLink from "../components/InternalLink";
 
 /**
- * React component that renders the index page of the site.
+ * React component for rendering a breadcrumb for archive pages.
+ * If page is 1 then just the name of the index page is shown.
+ * Otherwise, a link to the index page and the name of the pageNumber are shown.
  *
- * @param {PageIndexProps} props - The index page props.
- * @return {React.ReactElement} - The react component.
+ * @param {ArchiveBreadcrumbProps} props - The archive breadcrumb props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * &lt;ArchiveBreadcrumb page={1} />
+ *
+ * @ignore
  */
-const PageIndex = ({data: {lead, remaining}}) => {
-  const leadArticle = mdxNodeToArticleDigest(lead.edges[0].node);
-  const remainingArticles = remaining.edges.map((edge) => {
-    return mdxNodeToArticleDigest(edge.node);
-  });
+const ArchiveBreadcrumb = ({page}) => {
   return (
-    &lt;main>
-      &lt;HeroArticle article={leadArticle} />
-      &lt;FeaturedArticleGrid articles={remainingArticles} />
-      &lt;Box sx={{mt: 2}}>
-        &lt;Button
-          variant="contained"
-          color="secondary"
-          disableElevation
-          fullWidth
-          component={InternalLink}
-          to={"/article"}
-        >
-          View All Articles
-        &lt;/Button>
-      &lt;/Box>
-    &lt;/main>
+    &lt;Divider sx={{
+      "mb": 4,
+      ".MuiBreadcrumbs-ol": {
+        flexFlow: "row",
+      },
+    }}>
+      &lt;Breadcrumbs>
+        {page == 1 ? (
+        &lt;Typography color="text.primary">{"Archives"}&lt;/Typography>
+      ) : (
+          &lt;InternalLink
+            underline="hover"
+            color="inherit"
+            to={"/article"}>
+            {"Archives"}
+          &lt;/InternalLink>
+      )}
+        &lt;Typography color="text.primary">{page}&lt;/Typography>
+      &lt;/Breadcrumbs>
+    &lt;/Divider>
   );
 };
 
 /**
- * @typedef PageIndexProps - The props for the index page.
- * @property {Object} data - The page data.
- * @property {Object} data.lead - A graphql query for the lead.
- * @property {Object[]} data.lead.edges - All the nodes in the lead graphql.
- * @property {MDXNodeProps} data.lead.edges.node - The lead mdx node.
- * @property {Object} data.remaining - A graphql query for remaining nodes on the page.
- * @property {Object[]} data.remaining.edges - All the nodes in the remaining graphql.
- * @property {MDXNodeProps} data.remaining.edges.node - The remaining mdx node.
+ * @typedef ArchiveBreadcrumbProps - The archive breadcrumb props.
+ * @property {number} page - The current page of the archive.
+ *
+ * @ignore
  */
-PageIndex.propTypes = {
+ArchiveBreadcrumb.propTypes = {
+  page: PropTypes.number.isRequired,
+};
+
+/**
+ * React component that renders an archive page of articles.
+ *
+ * @param {ArchiveTemplateProps} props - The archive template page props.
+ * @return {React.ReactElement} - The react component.
+ */
+const ArchiveTemplate = ({data, pageContext}) => {
+  const {pageCount, pageNumber} = pageContext;
+  const {edges} = data.allMdx;
+  const articles = edges.map((edge) => {
+    return mdxNodeToArticleDigest(edge.node);
+  });
+
+  const handleChange = (event, value) => {
+    if (value == 1) {
+      navigate("/article");
+    } else {
+      navigate(`/article/archive-${value}`);
+    }
+  };
+
+  return (
+    &lt;Stack direction="column" alignItems="center" spacing={0} useFlexGap>
+      &lt;ArchiveBreadcrumb page={pageNumber} />
+      &lt;SecondaryArticleGrid articles={articles} />
+      &lt;Pagination count={pageCount} page={pageNumber} size="large" onChange={handleChange} />
+    &lt;/Stack>
+  );
+};
+
+/**
+ * @typedef ArchiveTemplateProps - The archive template props.
+ * @property {Object} data - The page data.
+ * @property {Object} data.allMdx - The mdx node.
+ * @property {Object[]} data.allMdx.edges - All the edges in the graphql.
+ * @property {MDXNodeProps} data.allMdx.edges.node - The mdx nodes.
+ * @property {Object} pageContext - The additional context passed to the page.
+ * @property {string} pageContext.limit - The graphql query limit.
+ * @property {string} pageContext.limit - The graphql query skip.
+ * @property {string} pageContext.pageCount - The total number of pages.
+ * @property {string} pageContext.pageNumber - The number of the current page.
+ */
+ArchiveTemplate.propTypes = {
   data: PropTypes.shape({
-    lead: PropTypes.shape({
-      edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: MDXNodeProps.isRequired,
-          }).isRequired,
-      ).isRequired,
-    }).isRequired,
-    remaining: PropTypes.shape({
+    allMdx: PropTypes.shape({
       edges: PropTypes.arrayOf(
           PropTypes.shape({
             node: MDXNodeProps.isRequired,
@@ -95,50 +136,32 @@ PageIndex.propTypes = {
       ).isRequired,
     }).isRequired,
   }).isRequired,
+  pageContext: PropTypes.shape({
+    limit: PropTypes.number.isRequired,
+    skip: PropTypes.number.isRequired,
+    pageCount: PropTypes.number.isRequired,
+    pageNumber: PropTypes.number.isRequired,
+  }),
 };
 
-export const Head = () => {
-  return &lt;PageSEO path="/" />;
-};
+// eslint-disable-next-line react/prop-types
+export const Head = ({pageContext: {pageNumber}}) => {
+  const title = pageNumber == 1 ? "Archive" : `Archive ${pageNumber}`;
+  const path = pageNumber == 1 ? "/article" : `/article/archive-${pageNumber}`;
 
+  return &lt;PageSEO title={title} path={path} />;
+};
 
 export const pageQuery = graphql`
-  query {
-    lead: allMdx(
-      limit: 1
-      sort: [{frontmatter: {published: DESC}}, {frontmatter:{title:ASC}}]
+  query ($skip: Int!, $limit: Int!) {
+    allMdx(
+      sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
+      limit: $limit
+      skip: $skip
     ) {
       edges {
         node {
-          excerpt(pruneLength: 280),
-          frontmatter {
-            published(formatString: "MMMM DD, YYYY")
-            slug
-            title
-            featured {
-              image {
-              childImageSharp {
-                gatsbyImageData(
-                  width: 1150, 
-                  placeholder: BLURRED
-                  layout: CONSTRAINED
-                  aspectRatio: 2.33
-                )
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    remaining: allMdx(
-      limit: 8
-      skip: 1
-      sort: [{frontmatter: {published: DESC}}, {frontmatter:{title:ASC}}]
-    ) {
-      edges {
-        node {
-          excerpt(pruneLength: 160),
+          excerpt(pruneLength: 160)
           frontmatter {
             published(formatString: "MMMM DD, YYYY")
             slug
@@ -147,10 +170,10 @@ export const pageQuery = graphql`
               image {
                 childImageSharp {
                   gatsbyImageData(
-                    width: 180, 
+                    width: 524
                     placeholder: BLURRED
                     layout: CONSTRAINED
-                    aspectRatio: 0.75
+                    aspectRatio: 1.78
                   )
                 }
               }
@@ -162,8 +185,7 @@ export const pageQuery = graphql`
   }
 `;
 
-
-export default PageIndex;
+export default ArchiveTemplate;
 </code></pre>
         </article>
     </section>

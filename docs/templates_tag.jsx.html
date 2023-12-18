@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: pages/index.jsx</title>
+    <title>JSDoc: Source: templates/tag.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: pages/index.jsx</h1>
+    <h1 class="page-title">Source: templates/tag.jsx</h1>
 
     
 
@@ -28,117 +28,82 @@
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
 import {graphql} from "gatsby";
-import {Box, Button} from "@mui/material";
-import HeroArticle from "../components/HeroArticle";
-import InternalLink from "../components/InternalLink";
-import PropTypes from "prop-types";
+import {Box} from "@mui/material";
+import DisplayLimit from "../components/DisplayLimit";
+import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
+import TagBreadcrumb from "../components/TagBreadCrumb";
 import {mdxNodeToArticleDigest} from "../props/converters.mjs";
-import FeaturedArticleGrid from "../components/FeaturedArticleGrid";
+import PropTypes from "prop-types";
 import {MDXNodeProps} from "../props";
 import PageSEO from "../components/PageSEO";
 
 /**
- * React component that renders the index page of the site.
+ * React component that renders a page for a single tag.
  *
- * @param {PageIndexProps} props - The index page props.
+ * @param {TagTemplateProps} props - The tag template props.
  * @return {React.ReactElement} - The react component.
  */
-const PageIndex = ({data: {lead, remaining}}) => {
-  const leadArticle = mdxNodeToArticleDigest(lead.edges[0].node);
-  const remainingArticles = remaining.edges.map((edge) => {
+const TagTemplate = ({data, pageContext}) => {
+  const {tag, limit} = pageContext;
+  const {edges, totalCount} = data.allMdx;
+  const articles = edges.map((edge) => {
     return mdxNodeToArticleDigest(edge.node);
   });
   return (
-    &lt;main>
-      &lt;HeroArticle article={leadArticle} />
-      &lt;FeaturedArticleGrid articles={remainingArticles} />
-      &lt;Box sx={{mt: 2}}>
-        &lt;Button
-          variant="contained"
-          color="secondary"
-          disableElevation
-          fullWidth
-          component={InternalLink}
-          to={"/article"}
-        >
-          View All Articles
-        &lt;/Button>
-      &lt;/Box>
-    &lt;/main>
+    &lt;Box>
+      &lt;TagBreadcrumb name={tag} />
+      &lt;SecondaryArticleGrid articles={articles} />
+      &lt;DisplayLimit limit={limit} total={totalCount} />
+    &lt;/Box>
   );
 };
 
 /**
- * @typedef PageIndexProps - The props for the index page.
+ * @typedef TagTemplateProps - The tag template props.
  * @property {Object} data - The page data.
- * @property {Object} data.lead - A graphql query for the lead.
- * @property {Object[]} data.lead.edges - All the nodes in the lead graphql.
- * @property {MDXNodeProps} data.lead.edges.node - The lead mdx node.
- * @property {Object} data.remaining - A graphql query for remaining nodes on the page.
- * @property {Object[]} data.remaining.edges - All the nodes in the remaining graphql.
- * @property {MDXNodeProps} data.remaining.edges.node - The remaining mdx node.
+ * @property {Object} data.allMdx - The mdx node.
+ * @property {Object[]} data.allMdx.edges - All the edges in the graphql.
+ * @property {MDXNodeProps} data.allMdx.edges.node - The mdx nodes.
+ * @property {number} data.allMdx.totalCount - The count of nodes in the graphql.
+ * @property {Object} pageContext - The additional context passed to the page.
+ * @property {number} pageContext.limit - The limit of articles to show on the page.
+ * @property {string} pageContext.pathSuffix - The suffix (slug) of the url for these pages.
+ * @property {string} pageContext.tag - The tag the page is rendering.
  */
-PageIndex.propTypes = {
+TagTemplate.propTypes = {
   data: PropTypes.shape({
-    lead: PropTypes.shape({
+    allMdx: PropTypes.shape({
       edges: PropTypes.arrayOf(
           PropTypes.shape({
             node: MDXNodeProps.isRequired,
           }).isRequired,
       ).isRequired,
-    }).isRequired,
-    remaining: PropTypes.shape({
-      edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: MDXNodeProps.isRequired,
-          }).isRequired,
-      ).isRequired,
+      totalCount: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
+  pageContext: PropTypes.shape({
+    limit: PropTypes.number.isRequired,
+    pathSuffix: PropTypes.string.isRequired,
+    tag: PropTypes.string.isRequired,
+  }),
 };
 
-export const Head = () => {
-  return &lt;PageSEO path="/" />;
+// eslint-disable-next-line react/prop-types
+export const Head = ({pageContext: {pathSuffix, tag}}) => {
+  const title = `${tag} | Tags`;
+  return &lt;PageSEO title={title} path={`/tag/${pathSuffix}`} />;
 };
-
 
 export const pageQuery = graphql`
-  query {
-    lead: allMdx(
-      limit: 1
-      sort: [{frontmatter: {published: DESC}}, {frontmatter:{title:ASC}}]
+  query($tag: String!, $limit: Int!) {
+    allMdx(
+      limit: $limit
+      filter: {frontmatter: {tags: {eq: $tag}}}
+      sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
     ) {
       edges {
         node {
-          excerpt(pruneLength: 280),
-          frontmatter {
-            published(formatString: "MMMM DD, YYYY")
-            slug
-            title
-            featured {
-              image {
-              childImageSharp {
-                gatsbyImageData(
-                  width: 1150, 
-                  placeholder: BLURRED
-                  layout: CONSTRAINED
-                  aspectRatio: 2.33
-                )
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    remaining: allMdx(
-      limit: 8
-      skip: 1
-      sort: [{frontmatter: {published: DESC}}, {frontmatter:{title:ASC}}]
-    ) {
-      edges {
-        node {
-          excerpt(pruneLength: 160),
+          excerpt(pruneLength: 160)
           frontmatter {
             published(formatString: "MMMM DD, YYYY")
             slug
@@ -147,10 +112,10 @@ export const pageQuery = graphql`
               image {
                 childImageSharp {
                   gatsbyImageData(
-                    width: 180, 
+                    width: 524
                     placeholder: BLURRED
                     layout: CONSTRAINED
-                    aspectRatio: 0.75
+                    aspectRatio: 1.78
                   )
                 }
               }
@@ -158,12 +123,14 @@ export const pageQuery = graphql`
           }
         }
       }
+      totalCount
     }
   }
 `;
 
+export default TagTemplate;
 
-export default PageIndex;
+
 </code></pre>
         </article>
     </section>

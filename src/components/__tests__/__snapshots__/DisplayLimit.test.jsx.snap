@@ -23,7 +23,7 @@ exports[`DisplayLimit that it renders correctly. 1`] = `
   <div
     class="MuiAlert-message css-1pxa9xg-MuiAlert-message"
   >
-    Maximum number of articles displayed.
+    Maximum number of articles displayed, 90 remaining.
   </div>
 </div>
 `;
