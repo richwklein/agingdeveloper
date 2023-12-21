@@ -40,4 +40,6 @@ describe("MDXLink", () => {
     const {container} = renderComponent("ftp://example.com");
     expect(container.firstChild).toHaveAttribute("data-link", "unknown");
   });
+
+  test.todo("passing an additional attribute");
 });

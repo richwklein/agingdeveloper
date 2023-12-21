@@ -163,3 +163,13 @@ export const GroupsNodeProps = PropTypes.shape({
   group: PropTypes.arrayOf(GroupNodeProps).isRequired,
   totalCount: PropTypes.number.isRequired,
 });
+
+/**
+ * @typedef SocialProps - Props for social media links.
+ * @property {string} name - The name of the social media site.
+ * @property {string} url - The url to the site.
+ */
+export const SocialProps = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+});

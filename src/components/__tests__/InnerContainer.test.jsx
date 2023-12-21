@@ -14,11 +14,13 @@ describe("InnerContainer", () => {
   test("that it renders correctly.", () => {
     const {container} = renderComponent();
     expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstChild).toContainHTML("<div");
   });
 
   test("that it renders with main.", () => {
     const {container} = renderComponent(true);
     expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstChild).toContainHTML("<main");
   });
 
   test("that it has a maxWidth of large.", () => {

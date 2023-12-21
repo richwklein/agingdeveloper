@@ -21,4 +21,6 @@ describe("InternalLink", () => {
     const {container} = renderComponent();
     expect(container.firstChild).toHaveAttribute("data-link", "internal");
   });
+
+  test.todo("passing an additional attribute");
 });

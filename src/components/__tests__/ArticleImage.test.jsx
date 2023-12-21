@@ -2,7 +2,6 @@ import React from "react";
 import {cleanup, render} from "@testing-library/react";
 import ArticleImage from "../ArticleImage";
 
-// TODO improve tests
 describe("ArticleImage", () => {
   afterEach(cleanup);
 
@@ -16,4 +15,6 @@ describe("ArticleImage", () => {
     const {container} = renderComponent();
     expect(container.firstChild).toMatchSnapshot();
   });
+
+  test.todo("add image to test");
 });

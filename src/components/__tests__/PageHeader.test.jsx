@@ -2,7 +2,6 @@ import React from "react";
 import {cleanup, render} from "@testing-library/react";
 import PageHeader from "../PageHeader";
 
-// TODO improve test
 describe("PageHeader", () => {
   afterEach(cleanup);
 
@@ -14,4 +13,6 @@ describe("PageHeader", () => {
     const {container} = renderComponent();
     expect(container.firstChild).toMatchSnapshot();
   });
+
+  test.todo("Improve tests");
 });

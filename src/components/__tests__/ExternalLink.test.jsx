@@ -31,4 +31,6 @@ describe("ExternalLink", () => {
     const {container} = renderComponent();
     expect(container.firstChild).toHaveAttribute("rel", "noopener noreferrer");
   });
+
+  test.todo("passing an additional attribute");
 });

@@ -19,4 +19,7 @@ describe("HeroArticle", () => {
     const {container} = renderComponent();
     expect(container.firstChild).toMatchSnapshot();
   });
+
+  test.todo("add image to test");
+  test.todo("verify more info");
 });
