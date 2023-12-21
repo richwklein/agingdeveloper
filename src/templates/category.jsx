@@ -1,13 +1,12 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {graphql} from "gatsby";
-import {Box} from "@mui/material";
+import PropTypes from "prop-types";
 import DisplayLimit from "../components/DisplayLimit";
+import PageSEO from "../components/PageSEO";
 import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
 import TagBreadcrumb from "../components/TagBreadCrumb";
-import {mdxNodeToArticleDigest} from "../props/converters.mjs";
-import PropTypes from "prop-types";
 import {MDXNodeProps} from "../props";
-import PageSEO from "../components/PageSEO";
+import {mdxNodeToArticleDigest} from "../props/converters.mjs";
 
 /**
  * React component that renders a page for a single category
@@ -23,11 +22,11 @@ const CategoryTemplate = ({data, pageContext}) => {
   });
 
   return (
-    <Box>
+    <Fragment>
       <TagBreadcrumb name={category} isCategory={true} />
       <SecondaryArticleGrid articles={articles} />
       <DisplayLimit limit={limit} total={totalCount} />
-    </Box>
+    </Fragment>
   );
 };
 
@@ -60,6 +59,8 @@ CategoryTemplate.propTypes = {
     category: PropTypes.string.isRequired,
   }),
 };
+
+export default CategoryTemplate;
 
 // eslint-disable-next-line react/prop-types
 export const Head = ({pageContext: {pathSuffix, category}}) => {
@@ -100,7 +101,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default CategoryTemplate;
-
-

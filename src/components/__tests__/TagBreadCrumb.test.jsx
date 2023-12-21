@@ -16,14 +16,14 @@ describe("TagBreadcrumb", () => {
   });
 
   test("that a category breadcrumb is generated correctly.", () => {
-    const {container} = render(<TagBreadcrumb name="Microservice" isCategory={true} />);
+    const {container} = render(<TagBreadcrumb name="microservice" isCategory={true} />);
     expect(container.firstChild).toMatchSnapshot();
     expect(container.firstChild).toContainHTML("href=\"/category/\"");
     expect(container.firstChild).toContainHTML("microservice");
   });
 
   test("that a tag breadcrumb is generated correctly.", () => {
-    const {container} = render(<TagBreadcrumb name="Gatsbyjs"/>);
+    const {container} = render(<TagBreadcrumb name="gatsbyjs"/>);
     expect(container.firstChild).toMatchSnapshot();
     expect(container.firstChild).toContainHTML("href=\"/tag/\"");
     expect(container.firstChild).toContainHTML("gatsbyjs");

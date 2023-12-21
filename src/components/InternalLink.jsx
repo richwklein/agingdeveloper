@@ -1,8 +1,12 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import MuiLink from "@mui/material/Link";
 import {Link as GatsbyLink} from "gatsby";
-import {LinkProps} from "../props";
 
+const ForwardInternalLink = React.forwardRef((props, ref) => (
+  <GatsbyLink {...props} />
+));
+ForwardInternalLink.displayName = "ForwardInternalLink";
 
 /**
  * React component used to render a link internal to the site.
@@ -12,12 +16,15 @@ import {LinkProps} from "../props";
  *
  * @example
  * <InternalLinkProps to="tags">Tags</InternalLink>
- * @todo Remove prop spread
  */
-const InternalLink = ({to, ...rest}) => (
-  <MuiLink data-link="internal" component={GatsbyLink} to={to} {...rest} />
-);
-
-InternalLink.propTypes = LinkProps;
+export const InternalLink = React.forwardRef(({to, ...rest}, ref) => (
+  <MuiLink
+    component={ForwardInternalLink}
+    data-link="internal"
+    ref={ref}
+    to={to}
+    {...rest} />
+));
+InternalLink.displayName = "InternalLink";
 
 export default InternalLink;

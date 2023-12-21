@@ -26,8 +26,18 @@ describe("MDXLink", () => {
     expect(container.firstChild).toHaveAttribute("data-link", "internal");
   });
 
-  test("that the same page is an anchor tag.", () => {
+  test("that an anchor tag is internal.", () => {
     const {container} = renderComponent("#anchor");
-    expect(container.firstChild).toHaveAttribute("data-link", "same");
+    expect(container.firstChild).toHaveAttribute("data-link", "internal");
+  });
+
+  test("that a querystring param is internal.", () => {
+    const {container} = renderComponent("?param=xyz");
+    expect(container.firstChild).toHaveAttribute("data-link", "internal");
+  });
+
+  test("that non-http is unkown.", () => {
+    const {container} = renderComponent("ftp://example.com");
+    expect(container.firstChild).toHaveAttribute("data-link", "unknown");
   });
 });

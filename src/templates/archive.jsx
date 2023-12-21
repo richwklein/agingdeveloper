@@ -1,60 +1,12 @@
-import React from "react";
-import {navigate, graphql} from "gatsby";
-import {mdxNodeToArticleDigest} from "../props/converters.mjs";
+import React, {Fragment} from "react";
+import {Pagination, Stack} from "@mui/material";
+import {graphql, navigate} from "gatsby";
 import PropTypes from "prop-types";
-import {MDXNodeProps} from "../props";
+import BreadcrumbBlock from "../components/BreadcrumbBlock";
 import PageSEO from "../components/PageSEO";
-import {Breadcrumbs, Divider, Pagination, Stack, Typography} from "@mui/material";
 import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
-import InternalLink from "../components/InternalLink";
-
-/**
- * React component for rendering a breadcrumb for archive pages.
- * If page is 1 then just the name of the index page is shown.
- * Otherwise, a link to the index page and the name of the pageNumber are shown.
- *
- * @param {ArchiveBreadcrumbProps} props - The archive breadcrumb props.
- * @return {React.ReactElement} - The react component
- *
- * @example
- * <ArchiveBreadcrumb page={1} />
- *
- * @ignore
- */
-const ArchiveBreadcrumb = ({page}) => {
-  return (
-    <Divider sx={{
-      "mb": 4,
-      ".MuiBreadcrumbs-ol": {
-        flexFlow: "row",
-      },
-    }}>
-      <Breadcrumbs>
-        {page == 1 ? (
-        <Typography color="text.primary">{"Archives"}</Typography>
-      ) : (
-          <InternalLink
-            underline="hover"
-            color="inherit"
-            to={"/article"}>
-            {"Archives"}
-          </InternalLink>
-      )}
-        <Typography color="text.primary">{page}</Typography>
-      </Breadcrumbs>
-    </Divider>
-  );
-};
-
-/**
- * @typedef ArchiveBreadcrumbProps - The archive breadcrumb props.
- * @property {number} page - The current page of the archive.
- *
- * @ignore
- */
-ArchiveBreadcrumb.propTypes = {
-  page: PropTypes.number.isRequired,
-};
+import {MDXNodeProps} from "../props";
+import {mdxNodeToArticleDigest} from "../props/converters.mjs";
 
 /**
  * React component that renders an archive page of articles.
@@ -64,6 +16,8 @@ ArchiveBreadcrumb.propTypes = {
  */
 const ArchiveTemplate = ({data, pageContext}) => {
   const {pageCount, pageNumber} = pageContext;
+  const tail = pageNumber == 1 ? null : pageNumber;
+
   const {edges} = data.allMdx;
   const articles = edges.map((edge) => {
     return mdxNodeToArticleDigest(edge.node);
@@ -78,11 +32,13 @@ const ArchiveTemplate = ({data, pageContext}) => {
   };
 
   return (
-    <Stack direction="column" alignItems="center" spacing={0} useFlexGap>
-      <ArchiveBreadcrumb page={pageNumber} />
+    <Fragment>
+      <BreadcrumbBlock head={{name: "Archive", path: "/article"}} tail={tail} />
       <SecondaryArticleGrid articles={articles} />
-      <Pagination count={pageCount} page={pageNumber} size="large" onChange={handleChange} />
-    </Stack>
+      <Stack sx={{mt: 2}} direction="column" alignItems="center">
+        <Pagination count={pageCount} page={pageNumber} size="large" onChange={handleChange} />
+      </Stack>
+    </Fragment>
   );
 };
 
@@ -115,6 +71,8 @@ ArchiveTemplate.propTypes = {
     pageNumber: PropTypes.number.isRequired,
   }),
 };
+
+export default ArchiveTemplate;
 
 // eslint-disable-next-line react/prop-types
 export const Head = ({pageContext: {pageNumber}}) => {
@@ -156,5 +114,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default ArchiveTemplate;

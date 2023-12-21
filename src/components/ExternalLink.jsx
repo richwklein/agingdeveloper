@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import MuiLink from "@mui/material/Link";
-import {LinkProps} from "../props";
 
 /**
  * React component used to render a link to an external site.
@@ -10,17 +10,17 @@ import {LinkProps} from "../props";
  *
  * @example
  * <ExternalLink to="https://github.com/richwklein">Github</ExternalLink>
- * @todo Remove prop spread
+ * @todo Add forward class when needed
  */
-const ExternalLink = ({to, ...rest}) => (
+export const ExternalLink = React.forwardRef(({to, ...rest}, ref) => (
   <MuiLink
     data-link="external"
-    href={to}
     target="_blank"
     rel="noopener noreferrer"
+    ref={ref}
+    href={to}
     {...rest}/>
-);
-
-ExternalLink.propTypes = LinkProps;
+));
+ExternalLink.displayName = "ExternalLink";
 
 export default ExternalLink;

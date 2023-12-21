@@ -16,4 +16,8 @@
   },
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
+  "cSpell.words": [
+    "agingdeveloper",
+    "frontmatter"
+  ],
 }

@@ -1,9 +1,9 @@
 import React from "react";
-import {GatsbyImage} from "gatsby-plugin-image";
-import ExternalLink from "./ExternalLink";
 import {Box, Typography} from "@mui/material";
-import {ImageAuthorProps, ImageSiteProps} from "../props";
+import {GatsbyImage} from "gatsby-plugin-image";
 import PropTypes from "prop-types";
+import {ImageAuthorProps, ImageSiteProps} from "../props";
+import ExternalLink from "./ExternalLink";
 
 /**
  * React component for rendering an article's featured image.
@@ -17,17 +17,18 @@ import PropTypes from "prop-types";
  *   author={featured.author}
  *   site={featured.site}
  *   image={featured.image.childImageSharp.gatsbyImageData} />
-
+ *
  * @todo handle missing author, site, author.url, or site.url
+ * @todo come up with a better alt for the image.
  */
-const ArticleImage = ({author, site, image}) => {
+export const ArticleImage = ({author, site, image}) => {
   return (
     <Box component="figure"
       sx={{
         my: 1.25,
         mx: 0,
       }}>
-      <GatsbyImage image={image} />
+      <GatsbyImage image={image} alt={author.name} />
       <Typography variant="caption" component="figcaption" sx={{mt: .25}}>
         {"Image by "}
         <ExternalLink to={author.url}>{author.name}</ExternalLink>
@@ -50,4 +51,5 @@ ArticleImage.propTypes = {
   author: ImageAuthorProps,
   site: ImageSiteProps,
 };
+
 export default ArticleImage;

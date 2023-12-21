@@ -98,6 +98,1260 @@
 
         
             
+<h4 class="name" id="ArticleByLine"><span class="type-signature">(constant) </span>ArticleByLine<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for rendering an article's by-line.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_ArticleByLine.jsx.html">components/ArticleByLine.jsx</a>, <a href="components_ArticleByLine.jsx.html#line16">line 16</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;ArticleByLine author={author} published={published} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="ArticleImage"><span class="type-signature">(constant) </span>ArticleImage<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for rendering an article's featured image.
+The image should be in a Cinemascope 21:9 ratio.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_ArticleImage.jsx.html">components/ArticleImage.jsx</a>, <a href="components_ArticleImage.jsx.html#line24">line 24</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>handle missing author, site, author.url, or site.url</li>
+        
+            <li>come up with a better alt for the image.</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;ArticleImage
+  author={featured.author}
+  site={featured.site}
+  image={featured.image.childImageSharp.gatsbyImageData} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="ArticleTagGrid"><span class="type-signature">(constant) </span>ArticleTagGrid<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for rendering an article's category and tags.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_ArticleTagGrid.jsx.html">components/ArticleTagGrid.jsx</a>, <a href="components_ArticleTagGrid.jsx.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;ArticleTagGrid category={category} tags={tags} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="ArticleTimeToRead"><span class="type-signature">(constant) </span>ArticleTimeToRead<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for showing the word count and time to read for an article.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_ArticleTimeToRead.jsx.html">components/ArticleTimeToRead.jsx</a>, <a href="components_ArticleTimeToRead.jsx.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;ArticleTimeToRead
+  minutes={timeToRead.minutes}
+  words={timeToRead.words}
+  lang={lang} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="AuthorGrid"><span class="type-signature">(constant) </span>AuthorGrid<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for showing a grid of author cards.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_AuthorGrid.jsx.html">components/AuthorGrid.jsx</a>, <a href="components_AuthorGrid.jsx.html#line63">line 63</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;AuthorGrid authors={authors} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="BreadcrumbBlock"><span class="type-signature">(constant) </span>BreadcrumbBlock<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for rendering a breadcrumb at the top of the page.
+If tail is null then just the name of the head page is shown.
+Otherwise, a link to the head page and the name of the tail are shown.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_BreadcrumbBlock.jsx.html">components/BreadcrumbBlock.jsx</a>, <a href="components_BreadcrumbBlock.jsx.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;BreadcrumbBlock head={{name: "Archive", path="/article"}} tail="1" /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="DisplayLimit"><span class="type-signature">(constant) </span>DisplayLimit<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for showing an alert when the number of articles exceeds the limit of the page.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_DisplayLimit.jsx.html">components/DisplayLimit.jsx</a>, <a href="components_DisplayLimit.jsx.html#line16">line 16</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Add search to message once implemented.</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;DisplayLimit limit={maxDisplay} total={totalCount} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="ExternalLink"><span class="type-signature">(constant) </span>ExternalLink<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component used to render a link to an external site.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_ExternalLink.jsx.html">components/ExternalLink.jsx</a>, <a href="components_ExternalLink.jsx.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Add forward class when needed</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;ExternalLink to="https://github.com/richwklein">Github&lt;/ExternalLink></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="FeaturedArticle"><span class="type-signature">(constant) </span>FeaturedArticle<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for showing an article as a horizontal feature card in a
+<a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a> component. The image is displayed in a vertical
+Standard Monitor 3x4 ratio.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_FeaturedArticleGrid.jsx.html">components/FeaturedArticleGrid.jsx</a>, <a href="components_FeaturedArticleGrid.jsx.html#line19">line 19</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;FeaturedArticle article={article} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="FeaturedArticleGrid"><span class="type-signature">(constant) </span>FeaturedArticleGrid<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for showing a grid of <a href="global.html#FeaturedArticle">FeaturedArticle</a> components.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_FeaturedArticleGrid.jsx.html">components/FeaturedArticleGrid.jsx</a>, <a href="components_FeaturedArticleGrid.jsx.html#line73">line 73</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;FeaturedArticleGrid articles={articles} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="HeroArticle"><span class="type-signature">(constant) </span>HeroArticle<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for rendering a featured image as a hero image.
+The image should be in the Cinemascope 21:9 ratio.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_HeroArticle.jsx.html">components/HeroArticle.jsx</a>, <a href="components_HeroArticle.jsx.html#line27">line 27</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;HeroArticle article={article} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="InnerContainer"><span class="type-signature">(constant) </span>InnerContainer<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component that constrains context to a large breakpoint.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_InnerContainer.jsx.html">components/InnerContainer.jsx</a>, <a href="components_InnerContainer.jsx.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;InnerContainer useMain={true}>
+  &lt;TagBreadcrumb name={category} isCategory={true} />
+  &lt;TagGrid tags={group} />
+&lt;/InnerContainer></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="InternalLink"><span class="type-signature">(constant) </span>InternalLink<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component used to render a link internal to the site.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_InternalLink.jsx.html">components/InternalLink.jsx</a>, <a href="components_InternalLink.jsx.html#line20">line 20</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;InternalLinkProps to="tags">Tags&lt;/InternalLink></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="MDXLink"><span class="type-signature">(constant) </span>MDXLink<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component used by the MDXProvider to use when rendering an
+anchor tag in mdx.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_MDXLink.jsx.html">components/MDXLink.jsx</a>, <a href="components_MDXLink.jsx.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="PageAvatar"><span class="type-signature">(constant) </span>PageAvatar<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component used to render the page avatar.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_PageHeader.jsx.html">components/PageHeader.jsx</a>, <a href="components_PageHeader.jsx.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;PageAvatar image={image} title={title} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="PageFooter"><span class="type-signature">(constant) </span>PageFooter<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component used to render the page footer.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_PageFooter.jsx.html">components/PageFooter.jsx</a>, <a href="components_PageFooter.jsx.html#line78">line 78</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>RSS icon & maybe scroll to top</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;PageFooter title={title} repository={repository} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="PageHeader"><span class="type-signature">(constant) </span>PageHeader<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component used to render the page header.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_PageHeader.jsx.html">components/PageHeader.jsx</a>, <a href="components_PageHeader.jsx.html#line55">line 55</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;PageHeader
+  title={title}
+  tagline={tagline}
+  avatar={avatar}
+/></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="PageLayout"><span class="type-signature">(constant) </span>PageLayout<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component used to render the overall layout of all pages.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_PageLayout.jsx.html">components/PageLayout.jsx</a>, <a href="components_PageLayout.jsx.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;PageLayout>
+  &lt;TagBreadcrumb name={category} isCategory={true} />
+  &lt;TagGrid tags={group} />
+&lt;/PageLayout></code></pre>
+
+
+
+        
+            
 <h4 class="name" id="PageSEO"><span class="type-signature">(constant) </span>PageSEO<span class="type-signature"></span></h4>
 
 
@@ -105,7 +1359,7 @@
 
 <div class="description">
     <p>A react component for rendering the head of a page. This will default to
-values from the useSiteData hook if values are not passed in.</p>
+values from the <a href="global.html#useSiteData">useSiteData</a> hook if values are not passed in.</p>
 </div>
 
 
@@ -168,6 +1422,478 @@ values from the useSiteData hook if values are not passed in.</p>
 
         
             
+<h4 class="name" id="SecondaryArticle"><span class="type-signature">(constant) </span>SecondaryArticle<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for showing an article as a rectangle card in a
+<a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a> component. The image is displayed at the top
+of the card in a HD Video 16x9.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_SecondaryArticleGrid.jsx.html">components/SecondaryArticleGrid.jsx</a>, <a href="components_SecondaryArticleGrid.jsx.html#line20">line 20</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;SecondaryArticle article={article} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="SecondaryArticleGrid"><span class="type-signature">(constant) </span>SecondaryArticleGrid<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for showing a grid of <a href="global.html#SecondaryArticle">SecondaryArticle</a> components.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_SecondaryArticleGrid.jsx.html">components/SecondaryArticleGrid.jsx</a>, <a href="components_SecondaryArticleGrid.jsx.html#line65">line 65</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;SecondaryArticleGrid articles={articles} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="Tag"><span class="type-signature">(constant) </span>Tag<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component used to render a tag in either the <a href="global.html#ArticleTagGrid">ArticleTagGrid</a> or
+<a href="global.html#TagGrid">TagGrid</a> component.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_TagGrid.jsx.html">components/TagGrid.jsx</a>, <a href="components_TagGrid.jsx.html#line23">line 23</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;Tag
+  name={tag.name}
+  weight={calculateWeight(tag.count, totalCount)}
+  isCategory={isCategory} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="TagBreadcrumb"><span class="type-signature">(constant) </span>TagBreadcrumb<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for rendering a breadcrumb for tag pages.
+If name is null then just the name of the index page is shown.
+Otherwise, a link to the index page and the name of the tag are shown.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_TagBreadCrumb.jsx.html">components/TagBreadCrumb.jsx</a>, <a href="components_TagBreadCrumb.jsx.html#line16">line 16</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;TagBreadcrumb name={category} isCategory={true} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="TagGrid"><span class="type-signature">(constant) </span>TagGrid<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for rendering a grid of tags or categories.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_TagGrid.jsx.html">components/TagGrid.jsx</a>, <a href="components_TagGrid.jsx.html#line81">line 81</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;TagGrid tags={group} totalCount={totalCount} isCategory={true} /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="TitleBlock"><span class="type-signature">(constant) </span>TitleBlock<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React component for rendering the title and subtitle of an article.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_TitleBlock.jsx.html">components/TitleBlock.jsx</a>, <a href="components_TitleBlock.jsx.html#line14">line 14</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;TitleBlock title={title} subtitle={description } /></code></pre>
+
+
+
+        
+            
+<h4 class="name" id="calculateWeight"><span class="type-signature">(constant) </span>calculateWeight<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Calculates a font weight between 300 and 900 for tag display.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_TagGrid.jsx.html">components/TagGrid.jsx</a>, <a href="components_TagGrid.jsx.html#line66">line 66</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id="mdxNodeToArticleDigest"><span class="type-signature">(constant) </span>mdxNodeToArticleDigest<span class="type-signature"></span></h4>
 
 
@@ -213,6 +1939,68 @@ values from the useSiteData hook if values are not passed in.</p>
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="props_converters.mjs.html">props/converters.mjs</a>, <a href="props_converters.mjs.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="useSiteData"><span class="type-signature">(constant) </span>useSiteData<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>React hook that does a graphql query on the site yaml metadata.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hooks_useSiteData.jsx.html">hooks/useSiteData.jsx</a>, <a href="hooks_useSiteData.jsx.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -341,7 +2129,7 @@ values from the useSiteData hook if values are not passed in.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="templates_archive.jsx.html">templates/archive.jsx</a>, <a href="templates_archive.jsx.html#line65">line 65</a>
+        <a href="templates_archive.jsx.html">templates/archive.jsx</a>, <a href="templates_archive.jsx.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -392,515 +2180,6 @@ values from the useSiteData hook if values are not passed in.</p>
     
 
 
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="ArticleByLine"><span class="type-signature"></span>ArticleByLine<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component for rendering an article's by-line.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#ArticleByLineProps">ArticleByLineProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The article by-line props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_ArticleByLine.jsx.html">components/ArticleByLine.jsx</a>, <a href="components_ArticleByLine.jsx.html#line16">line 16</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;ArticleByLine author={author} published={published} /></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="ArticleImage"><span class="type-signature"></span>ArticleImage<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component for rendering an article's featured image.
-The image should be in a Cinemascope 21:9 ratio.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#ArticleImageProps">ArticleImageProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The article's featured image props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_ArticleImage.jsx.html">components/ArticleImage.jsx</a>, <a href="components_ArticleImage.jsx.html#line23">line 23</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-    <dt class="tag-todo">To Do:</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>handle missing author, site, author.url, or site.url</li>
-        </ul>
-    </dd>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;ArticleImage
-  author={featured.author}
-  site={featured.site}
-  image={featured.image.childImageSharp.gatsbyImageData} /></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="ArticleTagGrid"><span class="type-signature"></span>ArticleTagGrid<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component for rendering an article's category and tags.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#ArticleTagGridProps">ArticleTagGridProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>An article tag and category props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_ArticleTagGrid.jsx.html">components/ArticleTagGrid.jsx</a>, <a href="components_ArticleTagGrid.jsx.html#line15">line 15</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;ArticleTagGrid category={category} tags={tags} /></code></pre>
 
 
 
@@ -1071,175 +2350,6 @@ The image should be in a Cinemascope 21:9 ratio.</p>
     
 
     
-    <h4 class="name" id="ArticleTimeToRead"><span class="type-signature"></span>ArticleTimeToRead<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component for showing the word count and time to read for an article.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#ArticleTimeToReadProps">ArticleTimeToReadProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The article time to read props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_ArticleTimeToRead.jsx.html">components/ArticleTimeToRead.jsx</a>, <a href="components_ArticleTimeToRead.jsx.html#line18">line 18</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;ArticleTimeToRead
-  minutes={timeToRead.minutes}
-  words={timeToRead.words}
-  lang={lang} /></code></pre>
-
-
-
-        
-            
-
-    
-
-    
     <h4 class="name" id="CategoryTemplate"><span class="type-signature"></span>CategoryTemplate<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
     
 
@@ -1341,7 +2451,7 @@ The image should be in a Cinemascope 21:9 ratio.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="templates_category.jsx.html">templates/category.jsx</a>, <a href="templates_category.jsx.html#line18">line 18</a>
+        <a href="templates_category.jsx.html">templates/category.jsx</a>, <a href="templates_category.jsx.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -1372,1360 +2482,6 @@ The image should be in a Cinemascope 21:9 ratio.</p>
 <div class="param-desc">
     <ul>
 <li>The react component.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="DisplayLimit"><span class="type-signature"></span>DisplayLimit<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement|null}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component for showing an alert when the number of articles exceeds the limit of the page.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#DisplayLimitProps">DisplayLimitProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The limit and total props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_DisplayLimit.jsx.html">components/DisplayLimit.jsx</a>, <a href="components_DisplayLimit.jsx.html#line16">line 16</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-    <dt class="tag-todo">To Do:</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>Add search to message once implemented.</li>
-        </ul>
-    </dd>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component or null</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-|
-
-<span class="param-type">null</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;DisplayLimit limit={maxDisplay} total={totalCount} /></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="ExternalLink"><span class="type-signature"></span>ExternalLink<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component used to render a link to an external site.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#LinkProps">LinkProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The to link and rest.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_ExternalLink.jsx.html">components/ExternalLink.jsx</a>, <a href="components_ExternalLink.jsx.html#line15">line 15</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-    <dt class="tag-todo">To Do:</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>Remove prop spread</li>
-        </ul>
-    </dd>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;ExternalLink to="https://github.com/richwklein">Github&lt;/ExternalLink></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="FeaturedArticle"><span class="type-signature"></span>FeaturedArticle<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component for showing an article as a horizontal feature card in a
-<a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a> component. The image is displayed in a vertical
-Standard Monitor 3x4 ratio.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#FeaturedArticleProps">FeaturedArticleProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The featured article props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_FeaturedArticle.jsx.html">components/FeaturedArticle.jsx</a>, <a href="components_FeaturedArticle.jsx.html#line26">line 26</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;FeaturedArticle article={article} /></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="FeaturedArticleGrid"><span class="type-signature"></span>FeaturedArticleGrid<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component for showing a grid of <a href="global.html#FeaturedArticle">FeaturedArticle</a> components.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#FeaturedArticleGridProps">FeaturedArticleGridProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The featured article grid props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_FeaturedArticleGrid.jsx.html">components/FeaturedArticleGrid.jsx</a>, <a href="components_FeaturedArticleGrid.jsx.html#line16">line 16</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;FeaturedArticleGrid articles={articles} /></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="HeroArticle"><span class="type-signature"></span>HeroArticle<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component for rendering a featured image as a hero image.
-The image should be in the Cinemascope 21:9 ratio.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#HeroArticleProps">HeroArticleProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The hero article props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_HeroArticle.jsx.html">components/HeroArticle.jsx</a>, <a href="components_HeroArticle.jsx.html#line27">line 27</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;HeroArticle article={article} /></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="InnerContainer"><span class="type-signature"></span>InnerContainer<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component that constrains context to a large breakpoint.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#InnerContainerProps">InnerContainerProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The inner container props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_InnerContainer.jsx.html">components/InnerContainer.jsx</a>, <a href="components_InnerContainer.jsx.html#line18">line 18</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;InnerContainer useMain={true}>
-  &lt;TagBreadcrumb name={category} isCategory={true} />
-  &lt;TagGrid tags={group} />
-&lt;/InnerContainer></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="InternalLink"><span class="type-signature"></span>InternalLink<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component used to render a link internal to the site.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#LinkProps">LinkProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The to link and rest.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_InternalLink.jsx.html">components/InternalLink.jsx</a>, <a href="components_InternalLink.jsx.html#line17">line 17</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-    <dt class="tag-todo">To Do:</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>Remove prop spread</li>
-        </ul>
-    </dd>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;InternalLinkProps to="tags">Tags&lt;/InternalLink></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="MDXLink"><span class="type-signature"></span>MDXLink<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component used by the MDXPropvider to use when rendering an
-anchor tag in mdx.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#MDXLinkrProps">MDXLinkrProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The anchor tag props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_MDXLink.jsx.html">components/MDXLink.jsx</a>, <a href="components_MDXLink.jsx.html#line17">line 17</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
 </ul>
 </div>
 
@@ -2856,7 +2612,7 @@ anchor tag in mdx.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_category.jsx.html">pages/category.jsx</a>, <a href="pages_category.jsx.html#line16">line 16</a>
+        <a href="pages_category.jsx.html">pages/category.jsx</a>, <a href="pages_category.jsx.html#line15">line 15</a>
     </li></ul></dd>
     
 
@@ -2907,343 +2663,6 @@ anchor tag in mdx.</p>
     
 
 
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="PageFooter"><span class="type-signature"></span>PageFooter<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component used to render the page footer.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#PageFooterProps">PageFooterProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The page footer props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_PageFooter.jsx.html">components/PageFooter.jsx</a>, <a href="components_PageFooter.jsx.html#line78">line 78</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-    <dt class="tag-todo">To Do:</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>RSS icon & maybe scroll to top</li>
-        </ul>
-    </dd>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;PageFooter title={title} repository={repository} /></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="PageHeader"><span class="type-signature"></span>PageHeader<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component used to render the page header.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#PageHeaderProps">PageHeaderProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The page header props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_PageHeader.jsx.html">components/PageHeader.jsx</a>, <a href="components_PageHeader.jsx.html#line57">line 57</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;PageHeader
-  title={title}
-  tagline={tagline}
-  avatar={avatar}
-/></code></pre>
 
 
 
@@ -3414,175 +2833,6 @@ anchor tag in mdx.</p>
     
 
     
-    <h4 class="name" id="PageLayout"><span class="type-signature"></span>PageLayout<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component used to render the overall layout of all pages.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#PageLayoutProps">PageLayoutProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The page layout props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_PageLayout.jsx.html">components/PageLayout.jsx</a>, <a href="components_PageLayout.jsx.html#line25">line 25</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;PageLayout>
-  &lt;TagBreadcrumb name={category} isCategory={true} />
-  &lt;TagGrid tags={group} />
-&lt;/PageLayout></code></pre>
-
-
-
-        
-            
-
-    
-
-    
     <h4 class="name" id="PageTag"><span class="type-signature"></span>PageTag<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
     
 
@@ -3684,7 +2934,7 @@ anchor tag in mdx.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_tag.jsx.html">pages/tag.jsx</a>, <a href="pages_tag.jsx.html#line16">line 16</a>
+        <a href="pages_tag.jsx.html">pages/tag.jsx</a>, <a href="pages_tag.jsx.html#line15">line 15</a>
     </li></ul></dd>
     
 
@@ -3735,844 +2985,6 @@ anchor tag in mdx.</p>
     
 
 
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="SecondaryArticle"><span class="type-signature"></span>SecondaryArticle<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component for showing an article as a rectangle card in a
-<a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a> component. The image is displayed at the top
-of the card in a HD Video 16x9.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#SecondaryArticleProps">SecondaryArticleProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The secondary article props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_SecondaryArticle.jsx.html">components/SecondaryArticle.jsx</a>, <a href="components_SecondaryArticle.jsx.html#line25">line 25</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;SecondaryArticle article={article} /></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="SecondaryArticleGrid"><span class="type-signature"></span>SecondaryArticleGrid<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component for showing a grid of <a href="global.html#SecondaryArticle">SecondaryArticle</a> components.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#SecondaryArticleGridProps">SecondaryArticleGridProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The secondary article grid props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_SecondaryArticleGrid.jsx.html">components/SecondaryArticleGrid.jsx</a>, <a href="components_SecondaryArticleGrid.jsx.html#line16">line 16</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;SecondaryArticleGrid articles={articles} /></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="Tag"><span class="type-signature"></span>Tag<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component used to render a tag in either the <a href="global.html#ArticleTagGrid">ArticleTagGrid</a> or
-<a href="global.html#TagGrid">TagGrid</a> component.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#TagProps">TagProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The tags and total props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_Tag.jsx.html">components/Tag.jsx</a>, <a href="components_Tag.jsx.html#line22">line 22</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;Tag
-  name={tag.name}
-  weight={calculateWeight(tag.count, totalCount)}
-  isCategory={isCategory} /></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="TagBreadcrumb"><span class="type-signature"></span>TagBreadcrumb<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component for rendering a breadcrumb for tag pages.
-If name is null then just the name of the index page is shown.
-Otherwise, a link to the index page and the name of the tag are shown.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#TagBreadcrumbProps">TagBreadcrumbProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The tag breadcrumb props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_TagBreadCrumb.jsx.html">components/TagBreadCrumb.jsx</a>, <a href="components_TagBreadCrumb.jsx.html#line17">line 17</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;TagBreadcrumb name={category} isCategory={true} /></code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="TagGrid"><span class="type-signature"></span>TagGrid<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component for rendering a grid of tags or categories.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#TagGridProps">TagGridProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The tag grid props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_TagGrid.jsx.html">components/TagGrid.jsx</a>, <a href="components_TagGrid.jsx.html#line30">line 30</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;TagGrid tags={group} totalCount={totalCount} isCategory={true} /></code></pre>
 
 
 
@@ -4683,7 +3095,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="templates_tag.jsx.html">templates/tag.jsx</a>, <a href="templates_tag.jsx.html#line18">line 18</a>
+        <a href="templates_tag.jsx.html">templates/tag.jsx</a>, <a href="templates_tag.jsx.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -4734,172 +3146,6 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
 
 
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="TitleBlock"><span class="type-signature"></span>TitleBlock<span class="signature">(props)</span><span class="type-signature"> &rarr; {React.ReactElement}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>React component for rendering the title and subtitle of an article.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#TitleBlockProps">TitleBlockProps</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The title and subtitle props.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_TitleBlock.jsx.html">components/TitleBlock.jsx</a>, <a href="components_TitleBlock.jsx.html#line14">line 14</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>The react component</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">React.ReactElement</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;TitleBlock title={title} subtitle={description } /></code></pre>
 
 
 
@@ -5287,7 +3533,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="templates_archive.jsx.html">templates/archive.jsx</a>, <a href="templates_archive.jsx.html#line89">line 89</a>
+        <a href="templates_archive.jsx.html">templates/archive.jsx</a>, <a href="templates_archive.jsx.html#line45">line 45</a>
     </li></ul></dd>
     
 
@@ -5935,7 +4181,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_ArticleImage.jsx.html">components/ArticleImage.jsx</a>, <a href="components_ArticleImage.jsx.html#line42">line 42</a>
+        <a href="components_ArticleImage.jsx.html">components/ArticleImage.jsx</a>, <a href="components_ArticleImage.jsx.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -6613,6 +4859,550 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
 
             
                 
+<h4 class="name" id="AuthorDigestProps">AuthorDigestProps</h4>
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The name of the author.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>slug</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The path suffix to the author page.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>published</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The date of the authors first published article.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tagline</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The tagline for the author.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>image</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The avatar image for the author.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="AuthorGridProps">AuthorGridProps</h4>
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>articles</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="global.html#ArticleDigestProps">ArticleDigestProps</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The list of authors to display.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_AuthorGrid.jsx.html">components/AuthorGrid.jsx</a>, <a href="components_AuthorGrid.jsx.html#line75">line 75</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="BreadcrumbBlock">BreadcrumbBlock</h4>
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>head</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The head element of the breadcrumb.</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The name to display for the head.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The path to the head page.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="description last"><p>The tail to display.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_BreadcrumbBlock.jsx.html">components/BreadcrumbBlock.jsx</a>, <a href="components_BreadcrumbBlock.jsx.html#line40">line 40</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
 <h4 class="name" id="CategoryTemplateProps">CategoryTemplateProps</h4>
 
 
@@ -6989,7 +5779,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="templates_category.jsx.html">templates/category.jsx</a>, <a href="templates_category.jsx.html#line34">line 34</a>
+        <a href="templates_category.jsx.html">templates/category.jsx</a>, <a href="templates_category.jsx.html#line33">line 33</a>
     </li></ul></dd>
     
 
@@ -7443,7 +6233,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_FeaturedArticleGrid.jsx.html">components/FeaturedArticleGrid.jsx</a>, <a href="components_FeaturedArticleGrid.jsx.html#line28">line 28</a>
+        <a href="components_FeaturedArticleGrid.jsx.html">components/FeaturedArticleGrid.jsx</a>, <a href="components_FeaturedArticleGrid.jsx.html#line85">line 85</a>
     </li></ul></dd>
     
 
@@ -7553,7 +6343,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_FeaturedArticle.jsx.html">components/FeaturedArticle.jsx</a>, <a href="components_FeaturedArticle.jsx.html#line63">line 63</a>
+        <a href="components_FeaturedArticleGrid.jsx.html">components/FeaturedArticleGrid.jsx</a>, <a href="components_FeaturedArticleGrid.jsx.html#line56">line 56</a>
     </li></ul></dd>
     
 
@@ -7732,7 +6522,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line78">line 78</a>
+        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line84">line 84</a>
     </li></ul></dd>
     
 
@@ -8097,7 +6887,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line92">line 92</a>
+        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line98">line 98</a>
     </li></ul></dd>
     
 
@@ -8230,7 +7020,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line141">line 141</a>
+        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line147">line 147</a>
     </li></ul></dd>
     
 
@@ -8363,7 +7153,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line151">line 151</a>
+        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line157">line 157</a>
     </li></ul></dd>
     
 
@@ -8622,7 +7412,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line38">line 38</a>
+        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line54">line 54</a>
     </li></ul></dd>
     
 
@@ -8771,7 +7561,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line48">line 48</a>
+        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line64">line 64</a>
     </li></ul></dd>
     
 
@@ -8950,272 +7740,6 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
 
             
                 
-<h4 class="name" id="LinkProps">LinkProps</h4>
-
-
-
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>to</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The external link.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>rest</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">any</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The remaining props to spread.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line68">line 68</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-            
-                
-<h4 class="name" id="MDXLinkrProps">MDXLinkrProps</h4>
-
-
-
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>href</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The anchor href property.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>rest</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">any</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The remaining props to spread.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_MDXLink.jsx.html">components/MDXLink.jsx</a>, <a href="components_MDXLink.jsx.html#line38">line 38</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-            
-                
 <h4 class="name" id="MDXNodeProps">MDXNodeProps</h4>
 
 
@@ -9331,7 +7855,140 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line131">line 131</a>
+        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line137">line 137</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="PageAvatarProps">PageAvatarProps</h4>
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>image</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">GatsbyImageData</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The gatsby image data for the site avatar.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The title of the site.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_PageHeader.jsx.html">components/PageHeader.jsx</a>, <a href="components_PageHeader.jsx.html#line32">line 32</a>
     </li></ul></dd>
     
 
@@ -9489,7 +8146,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_category.jsx.html">pages/category.jsx</a>, <a href="pages_category.jsx.html#line27">line 27</a>
+        <a href="pages_category.jsx.html">pages/category.jsx</a>, <a href="pages_category.jsx.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -9778,7 +8435,213 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_PageHeader.jsx.html">components/PageHeader.jsx</a>, <a href="components_PageHeader.jsx.html#line92">line 92</a>
+        <a href="components_PageHeader.jsx.html">components/PageHeader.jsx</a>, <a href="components_PageHeader.jsx.html#line90">line 90</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="PageIndexProps">PageIndexProps</h4>
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The page data.</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>lead</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A graphql query for the lead.</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>edges</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>All the nodes in the lead graphql.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_author.jsx.html">pages/author.jsx</a>, <a href="pages_author.jsx.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -10794,7 +9657,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_tag.jsx.html">pages/tag.jsx</a>, <a href="pages_tag.jsx.html#line27">line 27</a>
+        <a href="pages_tag.jsx.html">pages/tag.jsx</a>, <a href="pages_tag.jsx.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -10904,7 +9767,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_SecondaryArticleGrid.jsx.html">components/SecondaryArticleGrid.jsx</a>, <a href="components_SecondaryArticleGrid.jsx.html#line28">line 28</a>
+        <a href="components_SecondaryArticleGrid.jsx.html">components/SecondaryArticleGrid.jsx</a>, <a href="components_SecondaryArticleGrid.jsx.html#line77">line 77</a>
     </li></ul></dd>
     
 
@@ -11014,7 +9877,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_SecondaryArticle.jsx.html">components/SecondaryArticle.jsx</a>, <a href="components_SecondaryArticle.jsx.html#line53">line 53</a>
+        <a href="components_SecondaryArticleGrid.jsx.html">components/SecondaryArticleGrid.jsx</a>, <a href="components_SecondaryArticleGrid.jsx.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -11179,7 +10042,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_TagBreadCrumb.jsx.html">components/TagBreadCrumb.jsx</a>, <a href="components_TagBreadCrumb.jsx.html#line45">line 45</a>
+        <a href="components_TagBreadCrumb.jsx.html">components/TagBreadCrumb.jsx</a>, <a href="components_TagBreadCrumb.jsx.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -11373,7 +10236,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_TagGrid.jsx.html">components/TagGrid.jsx</a>, <a href="components_TagGrid.jsx.html#line47">line 47</a>
+        <a href="components_TagGrid.jsx.html">components/TagGrid.jsx</a>, <a href="components_TagGrid.jsx.html#line98">line 98</a>
     </li></ul></dd>
     
 
@@ -11571,7 +10434,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_Tag.jsx.html">components/Tag.jsx</a>, <a href="components_Tag.jsx.html#line45">line 45</a>
+        <a href="components_TagGrid.jsx.html">components/TagGrid.jsx</a>, <a href="components_TagGrid.jsx.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -11965,7 +10828,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="templates_tag.jsx.html">templates/tag.jsx</a>, <a href="templates_tag.jsx.html#line33">line 33</a>
+        <a href="templates_tag.jsx.html">templates/tag.jsx</a>, <a href="templates_tag.jsx.html#line32">line 32</a>
     </li></ul></dd>
     
 
@@ -12098,7 +10961,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line58">line 58</a>
+        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line74">line 74</a>
     </li></ul></dd>
     
 
@@ -12231,7 +11094,7 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line121">line 121</a>
+        <a href="props_index.jsx.html">props/index.jsx</a>, <a href="props_index.jsx.html#line127">line 127</a>
     </li></ul></dd>
     
 
@@ -12422,13 +11285,13 @@ Otherwise, a link to the index page and the name of the tag are shown.</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#AuthorGrid">AuthorGrid</a></li><li><a href="global.html#BreadcrumbBlock">BreadcrumbBlock</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageAvatar">PageAvatar</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#calculateWeight">calculateWeight</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li><li><a href="global.html#useSiteData">useSiteData</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Dec 18 2023 11:43:24 GMT-0600 (Central Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Dec 20 2023 19:30:17 GMT-0600 (Central Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

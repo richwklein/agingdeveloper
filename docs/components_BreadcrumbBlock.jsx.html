@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/TagGrid.jsx</title>
+    <title>JSDoc: Source: components/BreadcrumbBlock.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/TagGrid.jsx</h1>
+    <h1 class="page-title">Source: components/BreadcrumbBlock.jsx</h1>
 
     
 
@@ -27,115 +27,61 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
-import TagOutlinedIcon from "@mui/icons-material/TagOutlined";
-import {Grid} from "@mui/material";
+import {Breadcrumbs, Divider, Typography} from "@mui/material";
 import PropTypes from "prop-types";
-import slug from "slug";
-import {TagWithCountProps} from "../props";
-import InternalLink from "./InternalLink";
+import InternalLink from "../components/InternalLink";
 
 /**
- * React component used to render a tag in either the {@link ArticleTagGrid} or
- * {@link TagGrid} component.
+ * React component for rendering a breadcrumb at the top of the page.
+ * If tail is null then just the name of the head page is shown.
+ * Otherwise, a link to the head page and the name of the tail are shown.
  *
- * @param {TagProps} props - The tags and total props.
+ * @param {TagBreadcrumbProps} props - The tag breadcrumb props.
  * @return {React.ReactElement} - The react component
  *
  * @example
- * &lt;Tag
- *   name={tag.name}
- *   weight={calculateWeight(tag.count, totalCount)}
- *   isCategory={isCategory} />
+ * &lt;BreadcrumbBlock head={{name: "Archive", path="/article"}} tail="1" />
  */
-export const Tag = ({name, weight=300, isCategory=false}) => {
-  const icon = isCategory ? &lt;FolderOutlinedIcon fontSize="inherit" sx={{mr: .3}} /> :
-    &lt;TagOutlinedIcon fontSize="inherit" sx={{mr: .3}} />;
-  const url = isCategory ? `/category/${slug(name)}` : `/tag/${slug(name)}`;
+export const BreadcrumbBlock = ({head, tail=null}) => {
   return (
-    &lt;InternalLink
-      underline="hover"
+    &lt;Divider component="header" flexItem
       sx={{
-        display: "flex",
-        alignItems: "center",
-        textTransform: "capitalize",
-        fontWeight: weight,
-      }}
-      color="primary"
-      to={url}
-    >
-      {icon}
-      {name}
-    &lt;/InternalLink>
-
+        "textTransform": "capitalize",
+        ".MuiBreadcrumbs-ol": {
+          flexFlow: "row",
+        },
+      }}>
+      &lt;Breadcrumbs>
+        {tail == null ? (
+        &lt;Typography color="text.primary">{head.name}&lt;/Typography>
+      ) : (
+          &lt;InternalLink underline="hover" color="inherit" to={head.path}>
+            {head.name}
+          &lt;/InternalLink>
+      )}
+        {tail != null &amp;&amp; &lt;Typography color="text.primary">{tail}&lt;/Typography>}
+      &lt;/Breadcrumbs>
+    &lt;/Divider>
   );
 };
 
 /**
- * @typedef TagProps - The tag props.
- * @property {string} name - The name of the tag.
- * @property {number} [weight=300] - The font weight to render the tag.
- * @property {bool} [isCategory=false] - If the tags represent categories.
+ * @typedef BreadcrumbBlock - The breadcrumb block props.
+ * @property {Object} head - The head element of the breadcrumb.
+ * @property {string} head.name - The name to display for the head.
+ * @property {string} head.path - The path to the head page.
+ * @property {string} [tail=null] - The tail to display.
  *
  */
-Tag.propTypes = {
-  name: PropTypes.string.isRequired,
-  weight: PropTypes.number,
-  isCategory: PropTypes.bool,
+BreadcrumbBlock.propTypes = {
+  head: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    path: PropTypes.string.isRequired,
+  }).isRequired,
+  tail: PropTypes.string,
 };
 
-/**
- * Calculates a font weight between 300 and 900 for tag display.
- *
- * @param {number} count - The number of times the tag has occurred.
- * @param {number} totalCount - The total number of tags.
- * @return {number} - The font weight.
- */
-export const calculateWeight = (count, totalCount) => {
-  const oldRange = totalCount - 1;
-  const newValue = (((count - 1) * 600) / oldRange) + 300;
-  return Math.round(newValue/100)*100;
-};
-
-/**
- * React component for rendering a grid of tags or categories.
- *
- * @param {TagGridProps} props - The tag grid props.
- * @return {React.ReactElement} - The react component
- *
- * @example
- * &lt;TagGrid tags={group} totalCount={totalCount} isCategory={true} />
- */
-export const TagGrid = ({tags, totalCount, isCategory=false}) => {
-  return (
-    &lt;Grid container spacing={2} sx={{mt: 2}}>
-      {tags.map((tag) => {
-        return (
-          &lt;Grid item md={2} sm={6} xs={12} key={tag.name}>
-            &lt;Tag
-              name={tag.name}
-              weight={calculateWeight(tag.count, totalCount)}
-              isCategory={isCategory} />
-          &lt;/Grid>
-        );
-      })}
-    &lt;/Grid>
-  );
-};
-
-/**
- * @typedef TagGridProps - The tag grid props.
- * @property {TagWithCountProps[]} tags - The list of tags.
- * @property {number} totalCount - The total number of tags.
- * @property {bool} [isCategory=false] - If the tags represent categories.
- */
-TagGrid.propTypes = {
-  tags: PropTypes.arrayOf(TagWithCountProps),
-  totalCount: PropTypes.number.isRequired,
-  isCategory: PropTypes.bool,
-};
-
-export default TagGrid;
+export default BreadcrumbBlock;
 </code></pre>
         </article>
     </section>

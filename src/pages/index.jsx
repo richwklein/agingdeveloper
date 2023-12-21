@@ -1,13 +1,13 @@
-import React from "react";
-import {graphql} from "gatsby";
+import React, {Fragment} from "react";
 import {Box, Button} from "@mui/material";
+import {graphql} from "gatsby";
+import PropTypes from "prop-types";
+import FeaturedArticleGrid from "../components/FeaturedArticleGrid";
 import HeroArticle from "../components/HeroArticle";
 import InternalLink from "../components/InternalLink";
-import PropTypes from "prop-types";
-import {mdxNodeToArticleDigest} from "../props/converters.mjs";
-import FeaturedArticleGrid from "../components/FeaturedArticleGrid";
-import {MDXNodeProps} from "../props";
 import PageSEO from "../components/PageSEO";
+import {MDXNodeProps} from "../props";
+import {mdxNodeToArticleDigest} from "../props/converters.mjs";
 
 /**
  * React component that renders the index page of the site.
@@ -21,7 +21,7 @@ const PageIndex = ({data: {lead, remaining}}) => {
     return mdxNodeToArticleDigest(edge.node);
   });
   return (
-    <main>
+    <Fragment>
       <HeroArticle article={leadArticle} />
       <FeaturedArticleGrid articles={remainingArticles} />
       <Box sx={{mt: 2}}>
@@ -36,7 +36,7 @@ const PageIndex = ({data: {lead, remaining}}) => {
           View All Articles
         </Button>
       </Box>
-    </main>
+    </Fragment>
   );
 };
 
@@ -69,10 +69,11 @@ PageIndex.propTypes = {
   }).isRequired,
 };
 
+export default PageIndex;
+
 export const Head = () => {
   return <PageSEO path="/" />;
 };
-
 
 export const pageQuery = graphql`
   query {
@@ -133,6 +134,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-
-export default PageIndex;

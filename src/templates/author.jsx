@@ -10,10 +10,8 @@ const AuthorTemplate = () => {
   );
 };
 
+export default AuthorTemplate;
+
 export const Head = () => {
   return <title>Author Template</title>;
 };
-
-export default AuthorTemplate;
-
-

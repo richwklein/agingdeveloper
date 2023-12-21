@@ -1,5 +1,5 @@
-import {Box, Grid, Typography} from "@mui/material";
 import React from "react";
+import {Box, Grid, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 import ExternalLink from "./ExternalLink";
 
@@ -75,7 +75,7 @@ const PoweredBy = () => {
  *
  * @todo RSS icon & maybe scroll to top
  */
-const PageFooter = ({title, repository}) => {
+export const PageFooter = ({title, repository}) => {
   return (
     <Grid
       container

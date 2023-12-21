@@ -1,7 +1,7 @@
 import React from "react";
 import {Grid} from "@mui/material";
 import PropTypes from "prop-types";
-import Tag from "./Tag";
+import {Tag} from "./TagGrid";
 
 /**
  * React component for rendering an article's category and tags.
@@ -12,7 +12,7 @@ import Tag from "./Tag";
  * @example
  * <ArticleTagGrid category={category} tags={tags} />
  */
-const ArticleTagGrid = ({category, tags}) => {
+export const ArticleTagGrid = ({category, tags}) => {
   return (
     <Grid container spacing={1.5}>
       <Grid item key={category}>

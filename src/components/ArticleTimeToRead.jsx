@@ -1,7 +1,7 @@
 import React from "react";
+import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import {Box, Card, Stack, Typography} from "@mui/material";
 import PropTypes from "prop-types";
-import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 
 /**
  * React component for showing the word count and time to read for an article.
@@ -15,7 +15,7 @@ import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
  *   words={timeToRead.words}
  *   lang={lang} />
  */
-const ArticleTimeToRead = ({minutes, words, lang}) => {
+export const ArticleTimeToRead = ({minutes, words, lang}) => {
   const wordFormat = new Intl.NumberFormat(lang).format(words);
   const readTemplate = `${Math.ceil(minutes)} min read`;
   const wordsTemplate = `${wordFormat} words`;

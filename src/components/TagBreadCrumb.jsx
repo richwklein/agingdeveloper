@@ -1,7 +1,6 @@
 import React from "react";
-import {Breadcrumbs, Divider, Typography} from "@mui/material";
-import InternalLink from "../components/InternalLink";
 import PropTypes from "prop-types";
+import BreadcrumbBlock from "./BreadcrumbBlock";
 
 /**
  * React component for rendering a breadcrumb for tag pages.
@@ -14,31 +13,14 @@ import PropTypes from "prop-types";
  * @example
  * <TagBreadcrumb name={category} isCategory={true} />
  */
-const TagBreadcrumb = ({name=null, isCategory=false}) => {
-  const headName = isCategory ? "categories" : "tags";
+export const TagBreadcrumb = ({name=null, isCategory=false}) => {
+  const headName = isCategory ? "Categories" : "Tags";
   const headPath = isCategory ? "/category/" : "/tag/";
 
   return (
-    <Divider sx={{
-      "mb": 4,
-      ".MuiBreadcrumbs-ol": {
-        flexFlow: "row",
-      },
-    }}>
-      {name == null ? (
-        <Typography color="text.primary">{headName}</Typography>
-      ) : (
-        <Breadcrumbs>
-          <InternalLink
-            underline="hover"
-            color="inherit"
-            to={headPath}>
-            {headName}
-          </InternalLink>
-          <Typography color="text.primary">{name.toLowerCase()}</Typography>
-        </Breadcrumbs>
-      )}
-    </Divider>
+    <BreadcrumbBlock
+      head={{name: headName, path: headPath}}
+      tail={name} />
   );
 };
 

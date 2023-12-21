@@ -15,7 +15,7 @@ import {ChildrenProps} from "../props";
  *   <TagGrid tags={group} />
  * </InnerContainer>
  */
-const InnerContainer = ({children, useMain=false}) => {
+export const InnerContainer = ({children, useMain=false}) => {
   const component = useMain ? "main" : "div";
 
   return (

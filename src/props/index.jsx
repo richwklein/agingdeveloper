@@ -36,6 +36,22 @@ export const ArticleDigestProps = PropTypes.shape({
 });
 
 /**
+ * @typedef AuthorDigestProps - Limited set of author props.
+ * @property {string} name - The name of the author.
+ * @property {string} slug - The path suffix to the author page.
+ * @property {string} published - The date of the authors first published article.
+ * @property {string} tagline - The tagline for the author.
+ * @property {Object} image - The avatar image for the author.
+ */
+export const AuthorDigestProps = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
+  published: PropTypes.string.isRequired,
+  tagline: PropTypes.string.isRequired,
+  image: PropTypes.object.isRequired,
+});
+
+/**
  * @typedef ImageAuthorProps - Featured image author props.
  * @property {string} name - The name of the author.
  * @property {string} [url] - The url of the author.
@@ -64,16 +80,6 @@ export const TagWithCountProps = PropTypes.shape({
   name: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired,
 });
-
-/**
- * @typedef LinkProps - Hyperlink props.
- * @property {string} to - The external link.
- * @property {any} rest - The remaining props to spread.
- */
-export const LinkProps = {
-  to: PropTypes.string.isRequired,
-  rest: PropTypes.any,
-};
 
 /**
  * @typedef FrontmatterDigestProps - Limited set of frontmatter props
@@ -123,10 +129,10 @@ export const FrontmatterProps = PropTypes.shape({
  * @property {number} minutes - The number of minutes it takes to read.
  * @property {number} words - The number of words in the article.
  */
-export const TimeToReadDigestProps = {
+export const TimeToReadDigestProps = PropTypes.shape({
   minutes: PropTypes.number.isRequired,
   words: PropTypes.number.isRequired,
-};
+});
 
 /**
  * @typedef MDXNodeProps - MDX Node props
@@ -154,6 +160,6 @@ export const GroupNodeProps = PropTypes.shape({
  * @property {number} totalCount - The total count of items.
  */
 export const GroupsNodeProps = PropTypes.shape({
-  groups: PropTypes.arrayOf(GroupNodeProps).isRequired,
+  group: PropTypes.arrayOf(GroupNodeProps).isRequired,
   totalCount: PropTypes.number.isRequired,
 });

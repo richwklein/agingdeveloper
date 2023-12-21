@@ -1,11 +1,10 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {graphql} from "gatsby";
-import {Box} from "@mui/material";
 import PropTypes from "prop-types";
-import TagGrid from "../components/TagGrid";
-import TagBreadcrumb from "../components/TagBreadCrumb";
-import {GroupsNodeProps} from "../props";
 import PageSEO from "../components/PageSEO";
+import TagBreadcrumb from "../components/TagBreadCrumb";
+import TagGrid from "../components/TagGrid";
+import {GroupsNodeProps} from "../props";
 
 /**
  * React component that renders a page with all the article categories.
@@ -17,10 +16,10 @@ const PageCategory = ({data}) => {
   const {group, totalCount} = data.allMdx;
 
   return (
-    <Box>
+    <Fragment>
       <TagBreadcrumb isCategory={true} />
       <TagGrid tags={group} totalCount={totalCount} isCategory={true} />
-    </Box>
+    </Fragment>
   );
 };
 
@@ -34,6 +33,8 @@ PageCategory.propTypes = {
     allMdx: GroupsNodeProps.isRequired,
   }).isRequired,
 };
+
+export default PageCategory;
 
 export const Head = () => {
   return <PageSEO title="Categories" path="/category" />;
@@ -50,7 +51,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default PageCategory;
-
-

@@ -1,14 +1,14 @@
 import React from "react";
-import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import CssBaseline from "@mui/material/CssBaseline";
-import PageHeader from "./PageHeader";
-import theme from "../styles/theme";
-import PageFooter from "./PageFooter";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import {useSiteData} from "../hooks/useSiteData";
 import {ChildrenProps} from "../props";
+import theme from "../styles/theme";
+import InnerContainer from "./InnerContainer";
+import PageFooter from "./PageFooter";
+import PageHeader from "./PageHeader";
 import "prismjs/themes/prism-tomorrow.css";
 import "../styles/layout.css";
-import InnerContainer from "./InnerContainer";
 
 /**
  * React component used to render the overall layout of all pages.
@@ -22,7 +22,7 @@ import InnerContainer from "./InnerContainer";
  *   <TagGrid tags={group} />
  * </PageLayout>
  */
-const PageLayout = ({children}) => {
+export const PageLayout = ({children}) => {
   const {title, tagline, image, repository} = useSiteData();
   const avatar = image.childImageSharp.gatsbyImageData;
   return (

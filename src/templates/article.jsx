@@ -1,17 +1,17 @@
 import React from "react";
-import {graphql} from "gatsby";
 import {MDXProvider} from "@mdx-js/react";
-import MDXLink from "../components/MDXLink";
-import ArticleByLine from "../components/ArticleByLine";
 import {Box, Divider, Grid} from "@mui/material";
-import TitleBlock from "../components/TitleBlock";
+import {graphql} from "gatsby";
+import PropTypes from "prop-types";
+import {ArticleByLine} from "../components/ArticleByLine";
 import ArticleImage from "../components/ArticleImage";
 import ArticleTagGrid from "../components/ArticleTagGrid";
 import ArticleTimeToRead from "../components/ArticleTimeToRead";
-import {useSiteData} from "../hooks/useSiteData";
-import PropTypes from "prop-types";
-import {ChildrenProps, FrontmatterProps, TimeToReadDigestProps} from "../props";
+import MDXLink from "../components/MDXLink";
 import PageSEO from "../components/PageSEO";
+import TitleBlock from "../components/TitleBlock";
+import {useSiteData} from "../hooks/useSiteData";
+import {ChildrenProps, FrontmatterProps, TimeToReadDigestProps} from "../props";
 
 const components = {
   a: MDXLink,
@@ -83,6 +83,8 @@ ArticleTemplate.propTypes = {
   children: ChildrenProps,
 };
 
+export default ArticleTemplate;
+
 // eslint-disable-next-line react/prop-types
 export const Head = ({data: {mdx}, pageContext: {pathSuffix}}) => {
   // eslint-disable-next-line react/prop-types
@@ -140,5 +142,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default ArticleTemplate;

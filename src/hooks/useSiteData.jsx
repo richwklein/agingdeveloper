@@ -1,5 +1,10 @@
 import {graphql, useStaticQuery} from "gatsby";
 
+/**
+ * React hook that does a graphql query on the site yaml metadata.
+ *
+ * @return {Object} - The site metadata nodes.
+ */
 export const useSiteData = () => {
   const data = useStaticQuery(graphql`
   query SiteQuery {
@@ -36,3 +41,5 @@ export const useSiteData = () => {
 
   return siteYaml;
 };
+
+export default useSiteData;

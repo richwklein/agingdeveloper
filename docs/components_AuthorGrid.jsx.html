@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/TagGrid.jsx</title>
+    <title>JSDoc: Source: components/AuthorGrid.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/TagGrid.jsx</h1>
+    <h1 class="page-title">Source: components/AuthorGrid.jsx</h1>
 
     
 
@@ -27,115 +27,88 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
-import TagOutlinedIcon from "@mui/icons-material/TagOutlined";
-import {Grid} from "@mui/material";
+import {Box, Card, CardActionArea, CardContent, CardHeader, CardMedia, Grid, Typography} from "@mui/material";
+import {GatsbyImage} from "gatsby-plugin-image";
 import PropTypes from "prop-types";
-import slug from "slug";
-import {TagWithCountProps} from "../props";
+import {AuthorDigestProps} from "../props";
 import InternalLink from "./InternalLink";
 
 /**
- * React component used to render a tag in either the {@link ArticleTagGrid} or
- * {@link TagGrid} component.
+ * A react component for displaying an author.
  *
- * @param {TagProps} props - The tags and total props.
- * @return {React.ReactElement} - The react component
+ * @param {AuthorDigestProps} props
+ * @return {React.ReactElement} - The react component.
  *
- * @example
- * &lt;Tag
- *   name={tag.name}
- *   weight={calculateWeight(tag.count, totalCount)}
- *   isCategory={isCategory} />
+ * @ignore
  */
-export const Tag = ({name, weight=300, isCategory=false}) => {
-  const icon = isCategory ? &lt;FolderOutlinedIcon fontSize="inherit" sx={{mr: .3}} /> :
-    &lt;TagOutlinedIcon fontSize="inherit" sx={{mr: .3}} />;
-  const url = isCategory ? `/category/${slug(name)}` : `/tag/${slug(name)}`;
+export const AuthorCard = ({author: {slug, name, email, tagline, image}}) => {
   return (
-    &lt;InternalLink
-      underline="hover"
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        textTransform: "capitalize",
-        fontWeight: weight,
-      }}
-      color="primary"
-      to={url}
-    >
-      {icon}
-      {name}
-    &lt;/InternalLink>
-
+    &lt;Card variant="outlined">
+      &lt;CardActionArea component={InternalLink} to={`/author/${slug}`} sx={{display: "flex"}} >
+        &lt;CardMedia sx={{display: {xs: "none", sm: "block"}}}>
+          &lt;GatsbyImage image={image} />
+        &lt;/CardMedia>
+        &lt;Box sx={{
+          flex: 1,
+          maxHeight: 240,
+          overflowY: {
+            md: "scroll",
+            lg: "hidden",
+          },
+        }}>
+          &lt;CardHeader titleTypographyProps={{"variant": "h6"}}
+            title={name}
+            subheader={email}
+            sx={{pb: 1, pt: 1.5}} />
+          &lt;CardContent component="p"
+            sx={{
+              "m": 0,
+              "pt": 1,
+              "&amp;:last-child": {
+                pb: 1.5,
+              },
+            }}>
+            &lt;Typography variant="subtitle1" component="span">
+              {tagline}
+            &lt;/Typography>
+          &lt;/CardContent>
+        &lt;/Box>
+      &lt;/CardActionArea>
+    &lt;/Card>
   );
 };
+AuthorCard.propTypes = AuthorDigestProps;
 
 /**
- * @typedef TagProps - The tag props.
- * @property {string} name - The name of the tag.
- * @property {number} [weight=300] - The font weight to render the tag.
- * @property {bool} [isCategory=false] - If the tags represent categories.
+ * React component for showing a grid of author cards.
  *
- */
-Tag.propTypes = {
-  name: PropTypes.string.isRequired,
-  weight: PropTypes.number,
-  isCategory: PropTypes.bool,
-};
-
-/**
- * Calculates a font weight between 300 and 900 for tag display.
- *
- * @param {number} count - The number of times the tag has occurred.
- * @param {number} totalCount - The total number of tags.
- * @return {number} - The font weight.
- */
-export const calculateWeight = (count, totalCount) => {
-  const oldRange = totalCount - 1;
-  const newValue = (((count - 1) * 600) / oldRange) + 300;
-  return Math.round(newValue/100)*100;
-};
-
-/**
- * React component for rendering a grid of tags or categories.
- *
- * @param {TagGridProps} props - The tag grid props.
+ * @param {AuthorGridProps} props - The author grid props.
  * @return {React.ReactElement} - The react component
  *
  * @example
- * &lt;TagGrid tags={group} totalCount={totalCount} isCategory={true} />
+ *  &lt;AuthorGrid authors={authors} />
  */
-export const TagGrid = ({tags, totalCount, isCategory=false}) => {
+export const AuthorGrid = ({authors}) => {
   return (
-    &lt;Grid container spacing={2} sx={{mt: 2}}>
-      {tags.map((tag) => {
-        return (
-          &lt;Grid item md={2} sm={6} xs={12} key={tag.name}>
-            &lt;Tag
-              name={tag.name}
-              weight={calculateWeight(tag.count, totalCount)}
-              isCategory={isCategory} />
-          &lt;/Grid>
-        );
-      })}
+    &lt;Grid container rowSpacing={4} columnSpacing={3} sx={{mt: 0}}>
+      {authors.map((author) => (
+        &lt;Grid item key={author.slug} sm={12} md={6}>
+          &lt;AuthorCard author={author} />
+        &lt;/Grid>
+      ))}
     &lt;/Grid>
   );
 };
 
 /**
- * @typedef TagGridProps - The tag grid props.
- * @property {TagWithCountProps[]} tags - The list of tags.
- * @property {number} totalCount - The total number of tags.
- * @property {bool} [isCategory=false] - If the tags represent categories.
+ * @typedef AuthorGridProps - A grid of authors props.
+ * @property {ArticleDigestProps[]} articles - The list of authors to display.
  */
-TagGrid.propTypes = {
-  tags: PropTypes.arrayOf(TagWithCountProps),
-  totalCount: PropTypes.number.isRequired,
-  isCategory: PropTypes.bool,
+AuthorGrid.propTypes = {
+  authors: PropTypes.arrayOf(AuthorDigestProps).isRequired,
 };
 
-export default TagGrid;
+export default AuthorGrid;
 </code></pre>
         </article>
     </section>

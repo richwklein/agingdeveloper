@@ -26,8 +26,8 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import PropTypes from "prop-types";
+            <pre class="prettyprint source linenums"><code>/* eslint-disable react/prop-types */
+import React from "react";
 import ExternalLink from "./ExternalLink";
 import InternalLink from "./InternalLink";
 
@@ -36,13 +36,13 @@ const domainRegex = /^http[s]*:\/\/[www.]*agingdeveloper\.(com|net)[/]?/;
 
 
 /**
- * React component used by the {@link MDXPropvider} to use when rendering an
+ * React component used by the {@link MDXProvider} to use when rendering an
  * anchor tag in mdx.
  *
- * @param {MDXLinkrProps} props - The anchor tag props.
+ * @param {MDXLinkProps} props - The anchor tag props.
  * @return {React.ReactElement} - The react component
  */
-const MDXLink = ({href, ...rest}) => {
+export const MDXLink = ({href, ...rest}) => {
   const sameDomain = domainRegex.test(href);
   let to = href;
 
@@ -50,27 +50,16 @@ const MDXLink = ({href, ...rest}) => {
     to = href.replace(domainRegex, "/");
   }
 
-  if (to.startsWith("/")) {
+  if (to.startsWith("/") || to.startsWith("#") || to.startsWith("?")) {
     return &lt;InternalLink to={to} {...rest} />;
   }
 
   // Treat urls that aren't web protocols as "normal" links
   if (!href.startsWith("http")) {
-    return &lt;a data-link="same" href={to} {...rest} />;
+    return &lt;a data-link="unknown" href={to} {...rest} />;
   }
 
   return &lt;ExternalLink to={to} {...rest} />;
-};
-
-
-/**
- * @typedef MDXLinkrProps - The mdx link props.
- * @property {string} href - The anchor href property.
- * @property {any} rest - The remaining props to spread.
- */
-MDXLink.propTypes = {
-  href: PropTypes.string.isRequired,
-  rest: PropTypes.any,
 };
 
 export default MDXLink;
@@ -84,13 +73,13 @@ export default MDXLink;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#AuthorGrid">AuthorGrid</a></li><li><a href="global.html#BreadcrumbBlock">BreadcrumbBlock</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageAvatar">PageAvatar</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#calculateWeight">calculateWeight</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li><li><a href="global.html#useSiteData">useSiteData</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Dec 18 2023 11:43:24 GMT-0600 (Central Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Dec 20 2023 19:30:17 GMT-0600 (Central Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

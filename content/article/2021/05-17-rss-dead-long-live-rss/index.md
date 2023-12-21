@@ -12,12 +12,12 @@ featured:
     name: Unsplash
     url: https://unsplash.com/photos/gray-animal-tongue-wOpm2alT6qU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
 tags:
-  - Atom
+  - atom
   - authorization
   - Facebook
   - Feed
   - gatsbyjs
-  - RSS
+  - rss
   - Syndicate
   - Twitter
   - feed

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TagBreadcrumb that a category breadcrumb is generated correctly. 1`] = `
-<div
-  class="MuiDivider-root MuiDivider-fullWidth MuiDivider-withChildren css-1x4plm3-MuiDivider-root"
+<header
+  class="MuiDivider-root MuiDivider-fullWidth MuiDivider-flexItem MuiDivider-withChildren css-692r42-MuiDivider-root"
   role="separator"
 >
   <span
@@ -22,7 +22,7 @@ exports[`TagBreadcrumb that a category breadcrumb is generated correctly. 1`] = 
             data-link="internal"
             href="/category/"
           >
-            categories
+            Categories
           </a>
         </li>
         <li
@@ -43,29 +43,41 @@ exports[`TagBreadcrumb that a category breadcrumb is generated correctly. 1`] = 
       </ol>
     </nav>
   </span>
-</div>
+</header>
 `;
 
 exports[`TagBreadcrumb that a category index is generated correctly. 1`] = `
-<div
-  class="MuiDivider-root MuiDivider-fullWidth MuiDivider-withChildren css-1x4plm3-MuiDivider-root"
+<header
+  class="MuiDivider-root MuiDivider-fullWidth MuiDivider-flexItem MuiDivider-withChildren css-692r42-MuiDivider-root"
   role="separator"
 >
   <span
     class="MuiDivider-wrapper css-qywfm8-MuiDivider-wrapper"
   >
-    <p
-      class="MuiTypography-root MuiTypography-body1 css-1gqyz35-MuiTypography-root"
+    <nav
+      class="MuiTypography-root MuiTypography-body1 MuiBreadcrumbs-root css-63vwl1-MuiTypography-root-MuiBreadcrumbs-root"
     >
-      categories
-    </p>
+      <ol
+        class="MuiBreadcrumbs-ol css-4pdmu4-MuiBreadcrumbs-ol"
+      >
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1gqyz35-MuiTypography-root"
+          >
+            Categories
+          </p>
+        </li>
+      </ol>
+    </nav>
   </span>
-</div>
+</header>
 `;
 
 exports[`TagBreadcrumb that a tag breadcrumb is generated correctly. 1`] = `
-<div
-  class="MuiDivider-root MuiDivider-fullWidth MuiDivider-withChildren css-1x4plm3-MuiDivider-root"
+<header
+  class="MuiDivider-root MuiDivider-fullWidth MuiDivider-flexItem MuiDivider-withChildren css-692r42-MuiDivider-root"
   role="separator"
 >
   <span
@@ -85,7 +97,7 @@ exports[`TagBreadcrumb that a tag breadcrumb is generated correctly. 1`] = `
             data-link="internal"
             href="/tag/"
           >
-            tags
+            Tags
           </a>
         </li>
         <li
@@ -106,22 +118,34 @@ exports[`TagBreadcrumb that a tag breadcrumb is generated correctly. 1`] = `
       </ol>
     </nav>
   </span>
-</div>
+</header>
 `;
 
 exports[`TagBreadcrumb that a tag index is generated correctly. 1`] = `
-<div
-  class="MuiDivider-root MuiDivider-fullWidth MuiDivider-withChildren css-1x4plm3-MuiDivider-root"
+<header
+  class="MuiDivider-root MuiDivider-fullWidth MuiDivider-flexItem MuiDivider-withChildren css-692r42-MuiDivider-root"
   role="separator"
 >
   <span
     class="MuiDivider-wrapper css-qywfm8-MuiDivider-wrapper"
   >
-    <p
-      class="MuiTypography-root MuiTypography-body1 css-1gqyz35-MuiTypography-root"
+    <nav
+      class="MuiTypography-root MuiTypography-body1 MuiBreadcrumbs-root css-63vwl1-MuiTypography-root-MuiBreadcrumbs-root"
     >
-      tags
-    </p>
+      <ol
+        class="MuiBreadcrumbs-ol css-4pdmu4-MuiBreadcrumbs-ol"
+      >
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1gqyz35-MuiTypography-root"
+          >
+            Tags
+          </p>
+        </li>
+      </ol>
+    </nav>
   </span>
-</div>
+</header>
 `;

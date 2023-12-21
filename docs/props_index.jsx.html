@@ -64,6 +64,22 @@ export const ArticleDigestProps = PropTypes.shape({
 });
 
 /**
+ * @typedef AuthorDigestProps - Limited set of author props.
+ * @property {string} name - The name of the author.
+ * @property {string} slug - The path suffix to the author page.
+ * @property {string} published - The date of the authors first published article.
+ * @property {string} tagline - The tagline for the author.
+ * @property {Object} image - The avatar image for the author.
+ */
+export const AuthorDigestProps = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
+  published: PropTypes.string.isRequired,
+  tagline: PropTypes.string.isRequired,
+  image: PropTypes.object.isRequired,
+});
+
+/**
  * @typedef ImageAuthorProps - Featured image author props.
  * @property {string} name - The name of the author.
  * @property {string} [url] - The url of the author.
@@ -92,16 +108,6 @@ export const TagWithCountProps = PropTypes.shape({
   name: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired,
 });
-
-/**
- * @typedef LinkProps - Hyperlink props.
- * @property {string} to - The external link.
- * @property {any} rest - The remaining props to spread.
- */
-export const LinkProps = {
-  to: PropTypes.string.isRequired,
-  rest: PropTypes.any,
-};
 
 /**
  * @typedef FrontmatterDigestProps - Limited set of frontmatter props
@@ -151,10 +157,10 @@ export const FrontmatterProps = PropTypes.shape({
  * @property {number} minutes - The number of minutes it takes to read.
  * @property {number} words - The number of words in the article.
  */
-export const TimeToReadDigestProps = {
+export const TimeToReadDigestProps = PropTypes.shape({
   minutes: PropTypes.number.isRequired,
   words: PropTypes.number.isRequired,
-};
+});
 
 /**
  * @typedef MDXNodeProps - MDX Node props
@@ -182,7 +188,7 @@ export const GroupNodeProps = PropTypes.shape({
  * @property {number} totalCount - The total count of items.
  */
 export const GroupsNodeProps = PropTypes.shape({
-  groups: PropTypes.arrayOf(GroupNodeProps).isRequired,
+  group: PropTypes.arrayOf(GroupNodeProps).isRequired,
   totalCount: PropTypes.number.isRequired,
 });
 </code></pre>
@@ -195,13 +201,13 @@ export const GroupsNodeProps = PropTypes.shape({
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#AuthorGrid">AuthorGrid</a></li><li><a href="global.html#BreadcrumbBlock">BreadcrumbBlock</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageAvatar">PageAvatar</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#calculateWeight">calculateWeight</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li><li><a href="global.html#useSiteData">useSiteData</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Dec 18 2023 11:43:24 GMT-0600 (Central Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Dec 20 2023 19:30:17 GMT-0600 (Central Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
  * @example
  * <TitleBlock title={title} subtitle={description } />
  */
-const TitleBlock = ({title, subtitle=null}) => {
+export const TitleBlock = ({title, subtitle=null}) => {
   return (
     <Box component="header" sx={{mt: 1}}>
       <Typography variant="h3">{title}</Typography>

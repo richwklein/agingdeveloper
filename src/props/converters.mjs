@@ -13,9 +13,8 @@ export const mdxNodeToArticleDigest = (node) => {
     slug: node.frontmatter.slug,
     title: node.frontmatter.title,
     published: node.frontmatter.published,
-    image: node.frontmatter.featured.image.childImageSharp.gatsbyImageData,
     excerpt: node.excerpt,
+    image: node.frontmatter.featured.image.childImageSharp.gatsbyImageData,
   };
-  PropTypes.checkPropTypes(ArticleDigestProps, article);
   return article;
 };

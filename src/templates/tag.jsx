@@ -1,13 +1,12 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {graphql} from "gatsby";
-import {Box} from "@mui/material";
+import PropTypes from "prop-types";
 import DisplayLimit from "../components/DisplayLimit";
+import PageSEO from "../components/PageSEO";
 import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
 import TagBreadcrumb from "../components/TagBreadCrumb";
-import {mdxNodeToArticleDigest} from "../props/converters.mjs";
-import PropTypes from "prop-types";
 import {MDXNodeProps} from "../props";
-import PageSEO from "../components/PageSEO";
+import {mdxNodeToArticleDigest} from "../props/converters.mjs";
 
 /**
  * React component that renders a page for a single tag.
@@ -22,11 +21,11 @@ const TagTemplate = ({data, pageContext}) => {
     return mdxNodeToArticleDigest(edge.node);
   });
   return (
-    <Box>
+    <Fragment>
       <TagBreadcrumb name={tag} />
       <SecondaryArticleGrid articles={articles} />
       <DisplayLimit limit={limit} total={totalCount} />
-    </Box>
+    </Fragment>
   );
 };
 
@@ -60,11 +59,14 @@ TagTemplate.propTypes = {
   }),
 };
 
+export default TagTemplate;
+
 // eslint-disable-next-line react/prop-types
 export const Head = ({pageContext: {pathSuffix, tag}}) => {
   const title = `${tag} | Tags`;
   return <PageSEO title={title} path={`/tag/${pathSuffix}`} />;
 };
+
 
 export const pageQuery = graphql`
   query($tag: String!, $limit: Int!) {
@@ -99,7 +101,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default TagTemplate;
-
-

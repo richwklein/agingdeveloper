@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
-import {useSiteData} from "../hooks/useSiteData";
 import PropTypes from "prop-types";
+import {useSiteData} from "../hooks/useSiteData";
 import {ChildrenProps} from "../props";
 
 /**

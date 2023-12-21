@@ -1,6 +1,6 @@
 import React from "react";
-import {GatsbyImage} from "gatsby-plugin-image";
 import {AppBar, Avatar, ButtonBase, Stack, Typography} from "@mui/material";
+import {GatsbyImage} from "gatsby-plugin-image";
 import PropTypes from "prop-types";
 import InnerContainer from "./InnerContainer";
 import InternalLink from "./InternalLink";
@@ -12,11 +12,9 @@ import InternalLink from "./InternalLink";
  * @return {React.ReactElement} - The react component
  *
  * @example
- * <PageAvatar image={image} />
- *
- * @ignore
+ * <PageAvatar image={image} title={title} />
  */
-const PageAvatar = ({image}) => {
+export const PageAvatar = ({image, title}) => {
   return (<Avatar
     variant="rounded"
     sx={{
@@ -27,18 +25,18 @@ const PageAvatar = ({image}) => {
       width: "72px",
       height: "72px",
     }}>
-    <GatsbyImage image={image} sx={{backgroundColor: "inherit"}} />
+    <GatsbyImage image={image} sx={{backgroundColor: "inherit"}} alt={title} />
   </Avatar>);
 };
 
 /**
- * @typedef PageAvatarProps - The page avatr props.
+ * @typedef PageAvatarProps - The page avatar props.
  * @property {GatsbyImageData} image - The gatsby image data for the site avatar.
- *
- * @ignore
+ * @property {string} title - The title of the site.
  */
 PageAvatar.propTypes = {
   image: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 /**
@@ -54,7 +52,7 @@ PageAvatar.propTypes = {
  *   avatar={avatar}
  * />
  */
-const PageHeader = ({title, tagline, avatar}) => {
+export const PageHeader = ({title, tagline, avatar}) => {
   return (
     <AppBar
       position="sticky"
@@ -70,7 +68,7 @@ const PageHeader = ({title, tagline, avatar}) => {
       <InnerContainer>
         <ButtonBase component={InternalLink} to={"/"}
           sx={{color: "primary.contrastText", textDecoration: "none"}}>
-          <PageAvatar image={avatar} />
+          <PageAvatar image={avatar} title={title} />
           <Stack direction="column"
             flexShrink={1}
             useFlexGap

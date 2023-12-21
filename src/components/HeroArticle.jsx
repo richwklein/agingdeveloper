@@ -1,6 +1,6 @@
 import React from "react";
-import {GatsbyImage} from "gatsby-plugin-image";
 import {
+  alpha,
   Box,
   Card,
   CardActionArea,
@@ -9,10 +9,10 @@ import {
   CardMedia,
   Grid,
   Typography,
-  alpha,
 } from "@mui/material";
-import InternalLink from "./InternalLink";
+import {GatsbyImage} from "gatsby-plugin-image";
 import {ArticleDigestProps} from "../props";
+import InternalLink from "./InternalLink";
 
 /**
  * React component for rendering a featured image as a hero image.
@@ -24,7 +24,7 @@ import {ArticleDigestProps} from "../props";
  * @example
  * <HeroArticle article={article} />
  */
-const HeroArticle = ({article: {title, slug, excerpt, image}}) => {
+export const HeroArticle = ({article: {title, slug, excerpt, image}}) => {
   return (
     <Card
       variant="outlined"
@@ -34,7 +34,7 @@ const HeroArticle = ({article: {title, slug, excerpt, image}}) => {
     >
       <CardActionArea disableRipple component={InternalLink} to={`/article/${slug}`}>
         <CardMedia>
-          <GatsbyImage image={image} />
+          <GatsbyImage image={image} alt={title} />
         </CardMedia>
         <Box
           sx={(theme) => ({

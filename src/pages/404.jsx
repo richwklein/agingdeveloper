@@ -11,10 +11,8 @@ const Page404 = () => {
   );
 };
 
+export default Page404;
+
 export const Head = () => {
   return (<PageSEO title={"Not Found (404)"} />);
 };
-
-export default Page404;
-
-

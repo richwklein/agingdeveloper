@@ -27,19 +27,19 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import {graphql} from "gatsby";
 import {MDXProvider} from "@mdx-js/react";
-import MDXLink from "../components/MDXLink";
-import ArticleByLine from "../components/ArticleByLine";
 import {Box, Divider, Grid} from "@mui/material";
-import TitleBlock from "../components/TitleBlock";
+import {graphql} from "gatsby";
+import PropTypes from "prop-types";
+import {ArticleByLine} from "../components/ArticleByLine";
 import ArticleImage from "../components/ArticleImage";
 import ArticleTagGrid from "../components/ArticleTagGrid";
 import ArticleTimeToRead from "../components/ArticleTimeToRead";
-import {useSiteData} from "../hooks/useSiteData";
-import PropTypes from "prop-types";
-import {ChildrenProps, FrontmatterProps, TimeToReadDigestProps} from "../props";
+import MDXLink from "../components/MDXLink";
 import PageSEO from "../components/PageSEO";
+import TitleBlock from "../components/TitleBlock";
+import {useSiteData} from "../hooks/useSiteData";
+import {ChildrenProps, FrontmatterProps, TimeToReadDigestProps} from "../props";
 
 const components = {
   a: MDXLink,
@@ -111,6 +111,8 @@ ArticleTemplate.propTypes = {
   children: ChildrenProps,
 };
 
+export default ArticleTemplate;
+
 // eslint-disable-next-line react/prop-types
 export const Head = ({data: {mdx}, pageContext: {pathSuffix}}) => {
   // eslint-disable-next-line react/prop-types
@@ -168,8 +170,6 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default ArticleTemplate;
 </code></pre>
         </article>
     </section>
@@ -180,13 +180,13 @@ export default ArticleTemplate;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#AuthorGrid">AuthorGrid</a></li><li><a href="global.html#BreadcrumbBlock">BreadcrumbBlock</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageAvatar">PageAvatar</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#calculateWeight">calculateWeight</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li><li><a href="global.html#useSiteData">useSiteData</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Dec 18 2023 11:43:24 GMT-0600 (Central Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Dec 20 2023 19:30:17 GMT-0600 (Central Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

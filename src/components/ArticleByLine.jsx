@@ -1,8 +1,8 @@
 import React from "react";
 import {Box, Typography} from "@mui/material";
-import InternalLink from "./InternalLink";
-import {ArticleAuthorDigestProps} from "../props";
 import PropTypes from "prop-types";
+import {ArticleAuthorDigestProps} from "../props";
+import InternalLink from "./InternalLink";
 
 /**
  * React component for rendering an article's by-line.
@@ -13,7 +13,7 @@ import PropTypes from "prop-types";
  * @example
  * <ArticleByLine author={author} published={published} />
  */
-const ArticleByLine = ({author, published}) => {
+export const ArticleByLine = ({author, published}) => {
   return (
     <Box>
       <InternalLink to={`/author/${author.slug}`} variant="subtitle1"
