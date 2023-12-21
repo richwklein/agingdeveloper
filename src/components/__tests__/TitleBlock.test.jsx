@@ -7,7 +7,7 @@ describe("TitleBlock", () => {
 
   const renderComponent = (subtitle=null) => render(
       <TitleBlock
-        title= "Tesing Gatsby with Jest"
+        title= "Testing Gatsby with Jest"
         subtitle={subtitle} />,
   );
 

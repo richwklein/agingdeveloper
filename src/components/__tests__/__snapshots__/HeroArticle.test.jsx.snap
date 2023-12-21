@@ -34,7 +34,7 @@ exports[`HeroArticle that it renders correctly. 1`] = `
                 <span
                   class="MuiTypography-root MuiTypography-h3 MuiCardHeader-title css-s3bcgd-MuiTypography-root"
                 >
-                  This is an Aritcle Title
+                  This is an Article Title
                 </span>
               </div>
             </div>

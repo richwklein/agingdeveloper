@@ -36,7 +36,7 @@ describe("MDXLink", () => {
     expect(container.firstChild).toHaveAttribute("data-link", "internal");
   });
 
-  test("that non-http is unkown.", () => {
+  test("that non-http is unknown.", () => {
     const {container} = renderComponent("ftp://example.com");
     expect(container.firstChild).toHaveAttribute("data-link", "unknown");
   });

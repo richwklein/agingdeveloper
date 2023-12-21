@@ -7,7 +7,7 @@ exports[`TitleBlock that it contains a subtitle. 1`] = `
   <h3
     class="MuiTypography-root MuiTypography-h3 css-gepadz-MuiTypography-root"
   >
-    Tesing Gatsby with Jest
+    Testing Gatsby with Jest
   </h3>
 </header>
 `;
