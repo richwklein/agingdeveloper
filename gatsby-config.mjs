@@ -11,12 +11,14 @@ import {fileURLToPath} from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const {
+  ANALYTICS_TRACKING_ID,
   URL: SITE_URL = "https://agingdeveloper.com",
   DEPLOY_PRIME_URL: DEPLOY_URL = SITE_URL,
   CONTEXT: DEPLOY_CONTEXT = "dev",
 } = process.env;
 
 const siteUrl = DEPLOY_CONTEXT === "production" ? SITE_URL : DEPLOY_URL;
+const analyticsTrackingId = ANALYTICS_TRACKING_ID || "INVALID";
 
 const config = {
   siteMetadata: {
@@ -30,14 +32,16 @@ const config = {
     "gatsby-transformer-sharp",
     "gatsby-transformer-yaml",
     {
-      resolve: "gatsby-plugin-web-font-loader",
+      resolve: "gatsby-plugin-google-gtag",
       options: {
-        google: {
-          families: [
-            "Helvetica Neue",
-            "Merriweather",
-            "Merriweather Sans",
-          ],
+        trackingIds: [analyticsTrackingId],
+        gtagConfig: {
+          anonymize_ip: true,
+          cookie_expires: 0,
+        },
+        pluginConfig: {
+          head: false,
+          respectDNT: true,
         },
       },
     },
@@ -89,6 +93,18 @@ const config = {
             sitemap: null,
             host: null,
           },
+        },
+      },
+    },
+    {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        google: {
+          families: [
+            "Helvetica Neue",
+            "Merriweather",
+            "Merriweather Sans",
+          ],
         },
       },
     },

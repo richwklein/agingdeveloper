@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import MuiLink from "@mui/material/Link";
+import {OutboundLink} from "gatsby-plugin-google-gtag";
 
 /**
  * React component used to render a link to an external site.
@@ -14,6 +15,7 @@ import MuiLink from "@mui/material/Link";
  */
 export const ExternalLink = React.forwardRef(({to, ...rest}, ref) => (
   <MuiLink
+    component={OutboundLink}
     data-link="external"
     target="_blank"
     rel="noopener noreferrer"

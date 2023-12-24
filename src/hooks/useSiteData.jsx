@@ -15,7 +15,6 @@ export const useSiteData = () => {
       lang
       url
       repository
-      published
       image {
         publicURL
         childImageSharp {
