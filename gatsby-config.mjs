@@ -13,7 +13,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const {
   URL: SITE_URL = "https://agingdeveloper.com",
   DEPLOY_PRIME_URL: DEPLOY_URL = SITE_URL,
-  CONTEXT: DEPLOY_CONTEXT = "deploy-preview",
+  CONTEXT: DEPLOY_CONTEXT = "dev",
 } = process.env;
 
 const siteUrl = DEPLOY_CONTEXT === "production" ? SITE_URL : DEPLOY_URL;
@@ -62,6 +62,34 @@ const config = {
             },
           },
         ],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        resolveEnv: () => DEPLOY_CONTEXT,
+        host: siteUrl,
+        sitemap: siteUrl + "/sitemap.xml",
+        env: {
+          "production": {
+            policy: [{userAgent: "*", allow: ["/"]}],
+          },
+          "branch-deploy": {
+            policy: [{userAgent: "*", disallow: ["/"]}],
+            sitemap: null,
+            host: null,
+          },
+          "deploy-preview": {
+            policy: [{userAgent: "*", disallow: ["/"]}],
+            sitemap: null,
+            host: null,
+          },
+          "dev": {
+            policy: [{userAgent: "*", disallow: ["/"]}],
+            sitemap: null,
+            host: null,
+          },
+        },
       },
     },
     {
