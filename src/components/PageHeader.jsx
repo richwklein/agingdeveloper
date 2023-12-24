@@ -1,6 +1,5 @@
 import React from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import {AppBar, Avatar, Box, ButtonBase, Stack, Toolbar, Typography} from "@mui/material";
+import {AppBar, Avatar, Box, ButtonBase, Toolbar, Typography} from "@mui/material";
 import {GatsbyImage} from "gatsby-plugin-image";
 import PropTypes from "prop-types";
 import InnerContainer from "./InnerContainer";
