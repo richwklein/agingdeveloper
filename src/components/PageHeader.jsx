@@ -1,10 +1,10 @@
 import React from "react";
-import {AppBar, Avatar, ButtonBase, Stack, Typography} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import {AppBar, Avatar, Box, ButtonBase, Stack, Toolbar, Typography} from "@mui/material";
 import {GatsbyImage} from "gatsby-plugin-image";
 import PropTypes from "prop-types";
 import InnerContainer from "./InnerContainer";
 import InternalLink from "./InternalLink";
-
 /**
  * React component used to render the page avatar.
  *
@@ -59,29 +59,27 @@ export const PageHeader = ({title, tagline, avatar}) => {
       component="header"
       elevation={0}
       sx={{
-        color: "primary.contrastText",
         bgcolor: "primary.dark",
+        color: "primary.contrastText",
         p: 2,
         mb: 4,
       }}
     >
       <InnerContainer>
-        <ButtonBase component={InternalLink} to={"/"}
-          sx={{color: "primary.contrastText", textDecoration: "none"}}>
-          <PageAvatar image={avatar} title={title} />
-          <Stack direction="column"
-            flexShrink={1}
-            useFlexGap
-            alignItems="flex-start"
-            sx={{ml: 3}}>
-            <Typography variant="h4" sx={{mb: 0.5}}>
-              {title}
-            </Typography>
-            <Typography variant="h6" sx={{fontSize: "1rem", lineHeight: 1.4}}>
-              {tagline}
-            </Typography>
-          </Stack>
-        </ButtonBase>
+        <Toolbar disableGutters>
+          <ButtonBase component={InternalLink} to={"/"}
+            sx={{color: "inherit", textDecoration: "none"}}>
+            <PageAvatar image={avatar} title={title} />
+            <Box sx={{ml: 2}}>
+              <Typography variant="h4" sx={{mb: 0.5}}>
+                {title}
+              </Typography>
+              <Typography variant="h6" sx={{fontSize: "1rem", lineHeight: 1.4}}>
+                {tagline}
+              </Typography>
+            </Box>
+          </ButtonBase>
+        </Toolbar>
       </InnerContainer>
     </AppBar>
   );

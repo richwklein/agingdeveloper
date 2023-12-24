@@ -35,4 +35,6 @@ describe("SocialButtonBar", () => {
     const {getByTestId} = render(<SocialIcon name="unknown" />);
     expect(getByTestId("PublicIcon")).toBeInTheDocument();
   });
+
+  test.todo("Test each of the icons is correct");
 });

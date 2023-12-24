@@ -35,18 +35,17 @@ export const PageSEO = ({
     url: path != null ? `${siteUrl}${path}` : siteUrl,
     image: image != null ? `${siteUrl}${image}` : `${siteUrl}${siteImage.publicURL}`,
     imageAlt: imageAlt || title || siteTitle,
-    itemType: isArticle ? "http://schema.org/Article" : "http://schema.org/WebSite",
     ogType: isArticle ? "article" : "website",
   };
   return (
     <Fragment>
-      <html itemScope itemType={seo.itemType} lang={seo.lang} />
+      <html lang={seo.lang} />
       <title>{seo.title}</title>
-      <link itemProp="url" rel="canonical" href={seo.url} />
+      <link rel="canonical" href={seo.url} />
       <meta property="og:type" content={seo.ogType} />
       <meta property="og:url" content={seo.url} />
-      <meta property="og:title" itemProp="name" content={seo.name} />
-      <meta property="og:description" itemProp="description" name="description" content={seo.description} />
+      <meta property="og:title" content={seo.name} />
+      <meta property="og:description" name="description" content={seo.description} />
       <meta property="og:site_name" content={siteTitle} />
       <meta property="og:locale" content={seo.lang} />
       <meta property="og:image" content={seo.image} />
