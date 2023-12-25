@@ -2,12 +2,16 @@
 
 exports[`TitleBlock that it contains a subtitle. 1`] = `
 <header
-  class="MuiBox-root css-164r41r"
+  class="MuiToolbar-root MuiToolbar-regular css-5e1eij-MuiToolbar-root"
 >
-  <h3
-    class="MuiTypography-root MuiTypography-h3 css-gepadz-MuiTypography-root"
+  <div
+    class="MuiStack-root css-mqr1fz-MuiStack-root"
   >
-    Testing Gatsby with Jest
-  </h3>
+    <h3
+      class="MuiTypography-root MuiTypography-h3 css-gepadz-MuiTypography-root"
+    >
+      Testing Gatsby with Jest
+    </h3>
+  </div>
 </header>
 `;

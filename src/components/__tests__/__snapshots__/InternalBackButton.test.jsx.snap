@@ -28,32 +28,3 @@ exports[`InternalBackButton that it renders correctly. 1`] = `
   />
 </a>
 `;
-
-exports[`InternalBackButton that it renders with main. 1`] = `
-<a
-  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-disableElevation MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-disableElevation css-1vgpm7k-MuiTypography-root-MuiLink-root-MuiButtonBase-root-MuiButton-root"
-  data-link="internal"
-  href="/author"
-  tabindex="0"
->
-  <span
-    class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
-  >
-    <svg
-      aria-hidden="true"
-      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-      data-testid="ChevronLeftIcon"
-      focusable="false"
-      viewBox="0 0 24 24"
-    >
-      <path
-        d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-      />
-    </svg>
-  </span>
-  view all authors
-  <span
-    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-  />
-</a>
-`;

@@ -20,4 +20,7 @@ describe("TitleBlock", () => {
     const {container} = renderComponent();
     expect(container.firstChild).toMatchSnapshot();
   });
+
+  test.todo("Test with an avatar");
+  test.todo("Test with children");
 });
