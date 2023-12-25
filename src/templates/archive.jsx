@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {Pagination, Stack} from "@mui/material";
 import {graphql, navigate} from "gatsby";
 import PropTypes from "prop-types";
@@ -32,13 +32,13 @@ const ArchiveTemplate = ({data, pageContext}) => {
   };
 
   return (
-    <Fragment>
-      <BreadcrumbBlock head={{name: "Archive", path: "/article"}} tail={tail} />
+    <>
+      <BreadcrumbBlock head={{name: "Articles", path: "/article"}} tail={tail} />
       <SecondaryArticleGrid articles={articles} />
       <Stack sx={{mt: 2}} direction="column" alignItems="center">
         <Pagination count={pageCount} page={pageNumber} size="large" onChange={handleChange} />
       </Stack>
-    </Fragment>
+    </>
   );
 };
 
@@ -76,7 +76,7 @@ export default ArchiveTemplate;
 
 // eslint-disable-next-line react/prop-types
 export const Head = ({pageContext: {pageNumber}}) => {
-  const title = pageNumber == 1 ? "Archive" : `Archive ${pageNumber}`;
+  const title = pageNumber == 1 ? "Articles" : `Articles ${pageNumber}`;
   const path = pageNumber == 1 ? "/article" : `/article/archive-${pageNumber}`;
 
   return <PageSEO title={title} path={path} />;

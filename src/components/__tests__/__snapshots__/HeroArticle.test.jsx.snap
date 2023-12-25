@@ -14,7 +14,7 @@ exports[`HeroArticle that it renders correctly. 1`] = `
       class="MuiCardMedia-root css-16cvb1l-MuiCardMedia-root"
     />
     <div
-      class="MuiBox-root css-2m3mrk"
+      class="MuiBox-root css-b89ar9"
     >
       <div
         class="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"

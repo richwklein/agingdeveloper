@@ -1,7 +1,8 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {graphql} from "gatsby";
 import PropTypes from "prop-types";
 import DisplayLimit from "../components/DisplayLimit";
+import InternalBackButton from "../components/InternalBackButton";
 import PageSEO from "../components/PageSEO";
 import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
 import TagBreadcrumb from "../components/TagBreadCrumb";
@@ -22,11 +23,12 @@ const CategoryTemplate = ({data, pageContext}) => {
   });
 
   return (
-    <Fragment>
+    <>
       <TagBreadcrumb name={category} isCategory={true} />
       <SecondaryArticleGrid articles={articles} />
       <DisplayLimit limit={limit} total={totalCount} />
-    </Fragment>
+      <InternalBackButton name="categories" path="/category" />
+    </>
   );
 };
 

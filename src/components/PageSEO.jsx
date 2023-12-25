@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {useSiteData} from "../hooks/useSiteData";
 import {ChildrenProps} from "../props";
@@ -38,7 +38,7 @@ export const PageSEO = ({
     ogType: isArticle ? "article" : "website",
   };
   return (
-    <Fragment>
+    <>
       <html lang={seo.lang} />
       <title>{seo.title}</title>
       <link rel="canonical" href={seo.url} />
@@ -52,7 +52,7 @@ export const PageSEO = ({
       <meta property="og:image:alt" content={seo.imageAlt} />
       <meta name="twitter:card" content="summary" />
       {children}
-    </Fragment>
+    </>
   );
 };
 

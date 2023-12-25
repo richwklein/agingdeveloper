@@ -16,7 +16,7 @@ import PropTypes from "prop-types";
 export const DisplayLimit = ({limit, total}) => {
   const remaining = total - limit;
   const message = `Maximum number of articles displayed, ${remaining} remaining.`;
-  return total <= limit ? null : <Alert severity="info">{message}</Alert>;
+  return total <= limit ? null : <Alert severity="info" sx={{mt: 0, mb: 4}}>{message}</Alert>;
 };
 
 /**

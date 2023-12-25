@@ -20,18 +20,22 @@ export const FeaturedArticle = ({article: {title, excerpt, published, slug, imag
   return (
     <Card variant="outlined">
       <CardActionArea component={InternalLink} to={`/article/${slug}`} sx={{display: "flex"}} >
-        <Box sx={{
-          flex: 1,
-          maxHeight: 240,
-          overflowY: {
-            md: "scroll",
-            lg: "hidden",
-          },
-        }}>
+        <Box
+          sx={(theme) => ({
+            flex: 1,
+            maxHeight: 240,
+            [theme.breakpoints.up("lg")]: {
+              overflowY: "hidden",
+            },
+            [theme.breakpoints.down("lg")]: {
+              overflowY: "scroll",
+            },
+          })}>
           <CardHeader titleTypographyProps={{"variant": "h6"}}
             title={title}
             subheader={published}
-            sx={{pb: 1, pt: 1.5}} />
+            sx={{pb: 1, pt: 1.5}}
+          />
           <CardContent component="p"
             sx={{
               "m": 0,
@@ -45,7 +49,16 @@ export const FeaturedArticle = ({article: {title, excerpt, published, slug, imag
             </Typography>
           </CardContent>
         </Box>
-        <CardMedia sx={{display: {xs: "none", sm: "block"}}}>
+        <CardMedia
+          sx={(theme) => ({
+            [theme.breakpoints.up("sm")]: {
+              display: "block",
+            },
+            [theme.breakpoints.down("sm")]: {
+              display: "none",
+            },
+          })}
+        >
           <GatsbyImage image={image} alt={title} />
         </CardMedia>
       </CardActionArea>
@@ -72,7 +85,7 @@ FeaturedArticle.propTypes = {
  */
 export const FeaturedArticleGrid = ({articles}) => {
   return (
-    <Grid container rowSpacing={4} columnSpacing={3} sx={{mt: 0}}>
+    <Grid container rowSpacing={4} columnSpacing={3} sx={{mt: 0, mb: 4}}>
       {articles.map((article) => (
         <Grid item key={article.slug} sm={12} md={6}>
           <FeaturedArticle article={article} />

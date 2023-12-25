@@ -46,7 +46,12 @@ export const HeroArticle = ({article: {title, slug, excerpt, image}}) => {
             bgcolor: alpha(theme.palette.primary.main, 0.5),
             color: "primary.contrastText",
             backdropFilter: "blur(2px)",
-            overflowY: {xs: "scroll", sm: "hidden"},
+            [theme.breakpoints.up("md")]: {
+              overflowY: "hidden",
+            },
+            [theme.breakpoints.down("md")]: {
+              overflowY: "scroll",
+            },
           })}
         >
           <Grid container>

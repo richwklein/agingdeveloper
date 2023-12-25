@@ -1,10 +1,9 @@
-import React, {Fragment} from "react";
-import {Box, Button} from "@mui/material";
+import React from "react";
 import {graphql} from "gatsby";
 import PropTypes from "prop-types";
 import FeaturedArticleGrid from "../components/FeaturedArticleGrid";
 import HeroArticle from "../components/HeroArticle";
-import InternalLink from "../components/InternalLink";
+import InternalBackButton from "../components/InternalBackButton";
 import PageSEO from "../components/PageSEO";
 import {MDXNodeProps} from "../props";
 import {mdxNodeToArticleDigest} from "../props/converters.mjs";
@@ -21,22 +20,11 @@ const PageIndex = ({data: {lead, remaining}}) => {
     return mdxNodeToArticleDigest(edge.node);
   });
   return (
-    <Fragment>
+    <>
       <HeroArticle article={leadArticle} />
       <FeaturedArticleGrid articles={remainingArticles} />
-      <Box sx={{mt: 2}}>
-        <Button
-          variant="contained"
-          color="secondary"
-          disableElevation
-          fullWidth
-          component={InternalLink}
-          to={"/article"}
-        >
-          View All Articles
-        </Button>
-      </Box>
-    </Fragment>
+      <InternalBackButton name="articles" path="/article" />
+    </>
   );
 };
 

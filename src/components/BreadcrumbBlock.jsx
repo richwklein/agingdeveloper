@@ -8,7 +8,7 @@ import InternalLink from "../components/InternalLink";
  * If tail is null then just the name of the head page is shown.
  * Otherwise, a link to the head page and the name of the tail are shown.
  *
- * @param {TagBreadcrumbProps} props - The tag breadcrumb props.
+ * @param {BreadcrumbBlockProps} props - The tag breadcrumb props.
  * @return {React.ReactElement} - The react component
  *
  * @example
@@ -38,7 +38,7 @@ export const BreadcrumbBlock = ({head, tail=null}) => {
 };
 
 /**
- * @typedef BreadcrumbBlock - The breadcrumb block props.
+ * @typedef BreadcrumbBlockProps - The breadcrumb block props.
  * @property {Object} head - The head element of the breadcrumb.
  * @property {string} head.name - The name to display for the head.
  * @property {string} head.path - The path to the head page.

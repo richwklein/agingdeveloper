@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {cleanup, render} from "@testing-library/react";
 import InnerContainer from "../InnerContainer";
 
@@ -7,7 +7,7 @@ describe("InnerContainer", () => {
 
   const renderComponent = (useMain=false) => render(
       <InnerContainer useMain={useMain}>
-        <Fragment>Test</Fragment>
+        <>Test</>
       </InnerContainer>,
   );
 

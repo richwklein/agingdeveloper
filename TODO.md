@@ -1,6 +1,5 @@
 
 - Update the readme
-- Add analytics (include the outbound links)
 - Add documentation around testing
     https://www.gatsbyjs.com/docs/how-to/testing/unit-testing/
     https://danielabaron.me/blog/gatsby-unit-testing/
@@ -14,9 +13,9 @@
 - Add missing tests (layout, pages, templates)
 - Group documentation https://jsdoc.app/
 - Sitemap
-- Comments
 - favicon (manifest)
 - Author index page
 - Author page
 - Top level navigation
 - Scroll to top
+- Get a better version of my profile image

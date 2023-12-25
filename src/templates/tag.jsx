@@ -1,7 +1,8 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {graphql} from "gatsby";
 import PropTypes from "prop-types";
 import DisplayLimit from "../components/DisplayLimit";
+import InternalBackButton from "../components/InternalBackButton";
 import PageSEO from "../components/PageSEO";
 import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
 import TagBreadcrumb from "../components/TagBreadCrumb";
@@ -21,11 +22,12 @@ const TagTemplate = ({data, pageContext}) => {
     return mdxNodeToArticleDigest(edge.node);
   });
   return (
-    <Fragment>
+    <>
       <TagBreadcrumb name={tag} />
       <SecondaryArticleGrid articles={articles} />
       <DisplayLimit limit={limit} total={totalCount} />
-    </Fragment>
+      <InternalBackButton name="tags" path="/tag" />
+    </>
   );
 };
 
@@ -66,7 +68,6 @@ export const Head = ({pageContext: {pathSuffix, tag}}) => {
   const title = `${tag} | Tags`;
   return <PageSEO title={title} path={`/tag/${pathSuffix}`} />;
 };
-
 
 export const pageQuery = graphql`
   query($tag: String!, $limit: Int!) {

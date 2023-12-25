@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {graphql} from "gatsby";
 import PropTypes from "prop-types";
 import PageSEO from "../components/PageSEO";
@@ -16,10 +16,10 @@ const PageCategory = ({data}) => {
   const {group, totalCount} = data.allMdx;
 
   return (
-    <Fragment>
+    <>
       <TagBreadcrumb isCategory={true} />
       <TagGrid tags={group} totalCount={totalCount} isCategory={true} />
-    </Fragment>
+    </>
   );
 };
 
