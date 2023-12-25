@@ -1,7 +1,6 @@
 import {resolve as pathResolve} from "path";
 import readingTime from "reading-time";
 import slug from "slug";
-import redirects from "./redirects";
 
 const articlesPerPage = 15;
 
@@ -89,14 +88,8 @@ export const createPages = async ({actions, reporter, graphql}) => {
   createCategoryPages(createPage, result.data.categories.group);
   createAuthorPages(createPage, result.data.authors.edges);
 
-  // Create redirects
-  redirects.forEach((redirect) =>
-    createRedirect({
-      fromPath: redirect.from,
-      toPath: redirect.to,
-      isPermanent: redirect.permanent,
-    }),
-  );
+  // create redirects on old files
+  createRedirects(createRedirect);
 };
 
 const createArticlePages = (createPage, articles) => {
@@ -188,5 +181,33 @@ const createAuthorPages = (createPage, authors) => {
         pathSuffix,
       },
     });
+  });
+};
+
+const createRedirects = (createRedirect) => {
+  createRedirect({
+    fromPath: "article/rss-dead-long-live-rss",
+    toPath: "article/2021-05-17-rss-dead-long-live-rss",
+    isPermanent: true,
+  });
+  createRedirect({
+    fromPath: "/article/2020/08/14/default-http-config",
+    toPath: "/article/2020-08-14-default-http-config",
+    isPermanent: true,
+  });
+  createRedirect({
+    fromPath: "/article/2020/08/08/custom-domain",
+    toPath: "/article/2020-08-08-custom-domain",
+    isPermanent: true,
+  });
+  createRedirect({
+    fromPath: "/article/2020/07/26/false-start",
+    toPath: "/article/2020-07-26-false-start",
+    isPermanent: true,
+  });
+  createRedirect({
+    fromPath: "/article/2020/07/21/intro",
+    toPath: "/article/2020-07-21-intro",
+    isPermanent: true,
   });
 };
