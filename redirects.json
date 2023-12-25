@@ -1,0 +1,26 @@
+[
+  {
+    "from": "article/rss-dead-long-live-rss",
+    "to": "article/2021-05-17-rss-dead-long-live-rss",
+    "permanent": true
+  },
+  {
+    "from": "/article/2020/08/14/default-http-config",
+    "to": "/article/2020-08-14-default-http-config",
+    "permanent": true
+  },
+  {
+    "from": "/article/2020/08/08/custom-domain",
+    "to": "/article/2020-08-08-custom-domain",
+    "permanent": true
+  },
+  {
+    "from": "/article/2020/07/26/false-start",
+    "to": "/article/2020-07-26-false-start",
+    "permanent": true
+  },  {
+    "from": "/article/2020/07/21/intro",
+    "to":"/article/2020-07-21-intro",
+    "permanent": true
+  }
+]

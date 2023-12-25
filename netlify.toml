@@ -1,0 +1,12 @@
+[build]
+  base = "/"
+  publish = "public"
+  command = "npm run build:ci"
+
+[build.environment]
+  NODE_VERSION = "18.19.0"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Permissions-Policy = "interest-cohort=()"

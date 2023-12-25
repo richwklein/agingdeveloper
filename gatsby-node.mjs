@@ -1,6 +1,7 @@
 import {resolve as pathResolve} from "path";
 import readingTime from "reading-time";
 import slug from "slug";
+import redirects from "./redirects";
 
 const articlesPerPage = 15;
 
@@ -40,7 +41,7 @@ export const createSchemaCustomization = ({actions, schema}) => {
 };
 
 export const createPages = async ({actions, reporter, graphql}) => {
-  const {createPage} = actions;
+  const {createPage, createRedirect} = actions;
   const result = await graphql(`
   {
     articles: allMdx(
@@ -87,6 +88,15 @@ export const createPages = async ({actions, reporter, graphql}) => {
   createTagPages(createPage, result.data.tags.group);
   createCategoryPages(createPage, result.data.categories.group);
   createAuthorPages(createPage, result.data.authors.edges);
+
+  // Create redirects
+  redirects.forEach((redirect) =>
+    createRedirect({
+      fromPath: redirect.from,
+      toPath: redirect.to,
+      isPermanent: redirect.permanent,
+    }),
+  );
 };
 
 const createArticlePages = (createPage, articles) => {
