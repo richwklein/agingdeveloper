@@ -88,7 +88,7 @@ export const createPages = async ({actions, reporter, graphql}) => {
   createCategoryPages(createPage, result.data.categories.group);
   createAuthorPages(createPage, result.data.authors.edges);
 
-  // create redirects on old files
+  // create redirects where pages have moved around
   createRedirects(createRedirect);
 };
 
@@ -186,8 +186,8 @@ const createAuthorPages = (createPage, authors) => {
 
 const createRedirects = (createRedirect) => {
   createRedirect({
-    fromPath: "article/rss-dead-long-live-rss",
-    toPath: "article/2021-05-17-rss-dead-long-live-rss",
+    fromPath: "/article/rss-dead-long-live-rss",
+    toPath: "/article/2021-05-17-rss-dead-long-live-rss",
     isPermanent: true,
   });
   createRedirect({
