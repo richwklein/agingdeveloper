@@ -15,6 +15,7 @@ version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site is 
     - [Create a production build.](#create-a-production-build)
     - [Serve the production build locally.](#serve-the-production-build-locally)
   - [VSCode settings](#vscode-settings)
+  - [Testing](#testing)
 
 ## License
 - The site code is [MIT](/LICENSE) licensed 
@@ -25,24 +26,17 @@ version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site is 
 
 ## Content vs Source Code
 
-Both the source code for the site and the content that is hosted on the site are
-stored in this repository. With the exception of some top level files the majority
-of the source code is located in the `src` folder. The content hosted on the site
-is located in the `content` folder.
+Both the source code for the site and the content that is hosted on the site are stored in this repository. With the exception of some top level files the majority of the source code is located in the `src` folder. The content hosted on the site is located in the `content` folder.
 
 ## Start local development
 
-Most javascript developers will likely already have the tools installed, but here is a quick rundown of setting things 
-up just in case you do not. I'm using brew here since I develop on a Mac. Windows developers will have to use other 
-package managers.
+Most javascript developers will likely already have the tools installed, but here is a quick rundown of setting things up just in case you do not. I'm using asdf-vm here to allow multiple versions of tools to be installed at the same time.
 
 1. **Install dev tools**
 
-I use *asdf* to install dev tools. Use the [getting started](https://asdf-vm.com/guide/getting-started.html) page to make sure
-it is installed and set up correctly.
+I use *asdf* to install dev tools. Use the [getting started](https://asdf-vm.com/guide/getting-started.html) page to make sure it is installed and set up correctly.
 
-Once you have asdf installed you can use that to install node & npm. These are setup as being the global versions, but with asdf
-you could just use the version locally.
+Once you have asdf installed you can use that to install node & npm. These are setup as being the global versions, but with asdf you could just use the version locally.
 
 ```shell
 asdf plugin add nodejs
@@ -61,9 +55,7 @@ This will install local npm dependencies.
 
 ## VSCode Settings
 
-VSCode is the main editor that is used on this site. ESLint is used for linting and formatting. 
-These settings are included in the `.vscode` folder in the root of the project.
-They should be used for a good workflow where lint issues are automatically corrected on save.
+VSCode is the main editor that is used on this site. ESLint is used for linting and formatting. These settings are included in the `.vscode` folder in the root of the project. They should be used for a good workflow where lint issues are automatically corrected on save.
 
 ```json
 {
@@ -76,3 +68,8 @@ They should be used for a good workflow where lint issues are automatically corr
     "eslint.format.enable": true,
     "eslint.lintTask.enable": true,
 }
+```
+
+## Testing
+
+Tests are built using `jest` and `jest-dom`. Any new components should have unit tests for it. A snapshot test is the minimum to include. Any logic branches should have individual unit tests around them.

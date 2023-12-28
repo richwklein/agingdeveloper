@@ -4,6 +4,7 @@ import {GatsbyImage} from "gatsby-plugin-image";
 import PropTypes from "prop-types";
 import InnerContainer from "./InnerContainer";
 import InternalLink from "./InternalLink";
+
 /**
  * React component used to render the page avatar.
  *
