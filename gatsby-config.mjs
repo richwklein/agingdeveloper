@@ -5,16 +5,19 @@
  *
  * @type {import('gatsby').GatsbyConfig}
  */
-import {dirname} from "path";
+import {readFileSync} from "fs";
+import YAML from "js-yaml";
+import {dirname, join} from "path";
 import {fileURLToPath} from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const siteData = YAML.load(readFileSync("content/data/site.yaml"))[0];
 
 const {
   ANALYTICS_TRACKING_ID,
-  URL: SITE_URL = "https://agingdeveloper.com",
+  URL: SITE_URL = siteData.url,
   DEPLOY_PRIME_URL: DEPLOY_URL = SITE_URL,
-  CONTEXT: DEPLOY_CONTEXT = "dev",
+  CONTEXT: DEPLOY_CONTEXT = "deploy-preview",
 } = process.env;
 
 const siteUrl = DEPLOY_CONTEXT === "production" ? SITE_URL : DEPLOY_URL;
@@ -43,6 +46,23 @@ const config = {
           head: false,
           respectDNT: true,
         },
+      },
+    },
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        name: siteData.title,
+        short_name: siteData.title,
+        description: siteData.tagline,
+        categories: [siteData.category],
+        start_url: "/",
+        display: "browser",
+        background_color: siteData.background,
+        theme_color: siteData.theme,
+        lang: siteData.lang,
+        icon: join(__dirname, "content", "data", siteData.icon),
+        scope: siteUrl,
+        cache_busting_mode: "none",
       },
     },
     {

@@ -11,7 +11,6 @@
 - Add missing tests (layout, pages, templates)
 - Group documentation https://jsdoc.app/
 - Sitemap
-- favicon (manifest)
 - Top level navigation
 - Scroll to top
 - Get a better version of my profile image
