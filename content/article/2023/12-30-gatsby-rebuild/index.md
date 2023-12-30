@@ -106,7 +106,7 @@ I ended up sticking with using the ES Module syntax where possible. I have the t
 
 While working, I usually run `gatsby develop` from the command line to view the site. I use *Ctrl+C* to send a **SIGINT** and stop the process like normal. However, whenever I try to run either the build or develop commands again from that terminal I get a segfault exception. At first I would have to quit and restart the terminal to get around this. Eventually, I figured out I could run `gatsby clean` in between and it would avoid the failure. Because of this, I now run the below command every time.
 
- ```cmd
+ ```shell
  npm run clean && npm run develop
  ```
 
