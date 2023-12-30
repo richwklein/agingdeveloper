@@ -17,7 +17,7 @@ const {
   ANALYTICS_TRACKING_ID,
   URL: SITE_URL = siteData.url,
   DEPLOY_PRIME_URL: DEPLOY_URL = SITE_URL,
-  CONTEXT: DEPLOY_CONTEXT = "deploy-preview",
+  CONTEXT: DEPLOY_CONTEXT = "production",
 } = process.env;
 
 const siteUrl = DEPLOY_CONTEXT === "production" ? SITE_URL : DEPLOY_URL;
@@ -31,7 +31,9 @@ const config = {
   plugins: [
     "gatsby-plugin-image",
     "gatsby-plugin-remove-fingerprints",
+    "gatsby-plugin-sitemap",
     "gatsby-plugin-sharp",
+    "gatsby-plugin-sitemap",
     "gatsby-transformer-sharp",
     "gatsby-transformer-yaml",
     {
@@ -93,7 +95,7 @@ const config = {
       options: {
         resolveEnv: () => DEPLOY_CONTEXT,
         host: siteUrl,
-        sitemap: siteUrl + "/sitemap.xml",
+        sitemap: siteUrl + "/sitemap-index.xml",
         env: {
           "production": {
             policy: [{userAgent: "*", allow: ["/"]}],

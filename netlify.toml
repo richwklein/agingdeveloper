@@ -7,6 +7,11 @@
   NODE_VERSION = "18.19.0"
   NPM_VERSION = "10.2.3"
 
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+  [plugins.inputs]
+    sitemapPath = "/sitemap-index.xml"
+
 [[headers]]
   for = "/*"
   [headers.values]
