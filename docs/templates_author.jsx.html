@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: templates/archive.jsx</title>
+    <title>JSDoc: Source: templates/author.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: templates/archive.jsx</h1>
+    <h1 class="page-title">Source: templates/author.jsx</h1>
 
     
 
@@ -27,62 +27,56 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import {Pagination, Stack} from "@mui/material";
-import {graphql, navigate} from "gatsby";
+import {graphql} from "gatsby";
 import PropTypes from "prop-types";
-import BreadcrumbBlock from "../components/BreadcrumbBlock";
+import DisplayLimit from "../components/DisplayLimit";
+import {InternalBackButton} from "../components/InternalBackButton";
 import PageSEO from "../components/PageSEO";
 import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
-import {MDXNodeProps} from "../props";
+import SocialButtonBar from "../components/SocialButtonBar";
+import TitleBlock from "../components/TitleBlock";
+import {AuthorNodeProps, MDXNodeProps} from "../props";
 import {mdxNodeToArticleDigest} from "../props/converters.mjs";
 
-/**
- * React component that renders an archive page of articles.
- *
- * @param {ArchiveTemplateProps} props - The archive template page props.
- * @return {React.ReactElement} - The react component.
- */
-const ArchiveTemplate = ({data, pageContext}) => {
-  const {pageCount, pageNumber} = pageContext;
-  const tail = pageNumber == 1 ? null : pageNumber;
 
-  const {edges} = data.allMdx;
+/**
+ * Renders the page of an individual author.
+ *
+ * @param {AuthorTemplateProps} props
+ * @return {React.ReactElement} - The react component
+ */
+const AuthorTemplate = ({data, pageContext}) => {
+  const {limit} = pageContext;
+  const {edges, totalCount} = data.allMdx;
+  const {name, image, bio, socials} = data.authorYaml;
   const articles = edges.map((edge) => {
     return mdxNodeToArticleDigest(edge.node);
   });
-
-  const handleChange = (event, value) => {
-    if (value == 1) {
-      navigate("/article");
-    } else {
-      navigate(`/article/archive-${value}`);
-    }
-  };
-
   return (
     &lt;>
-      &lt;BreadcrumbBlock head={{name: "Articles", path: "/article"}} tail={tail} />
+      &lt;TitleBlock title={name} subtitle={bio} image={image.childImageSharp.gatsbyImageData}>
+        &lt;SocialButtonBar socials={socials} />
+      &lt;/TitleBlock>
       &lt;SecondaryArticleGrid articles={articles} />
-      &lt;Stack sx={{mt: 2}} direction="column" alignItems="center">
-        &lt;Pagination count={pageCount} page={pageNumber} size="large" onChange={handleChange} />
-      &lt;/Stack>
+      &lt;DisplayLimit limit={limit} total={totalCount} />
+      &lt;InternalBackButton name={"authors"} path={"/author"} />
     &lt;/>
   );
 };
 
 /**
- * @typedef ArchiveTemplateProps - The archive template props.
+ * @typedef AuthorTemplateProps - The author template props.
  * @property {Object} data - The page data.
  * @property {Object} data.allMdx - The mdx node.
  * @property {Object[]} data.allMdx.edges - All the edges in the graphql.
  * @property {MDXNodeProps} data.allMdx.edges.node - The mdx nodes.
+ * @property {number} data.allMdx.totalCount - The count of nodes in the graphql.
+ * @property {AuthorNodeProps} data.authorYaml - The author node.
  * @property {Object} pageContext - The additional context passed to the page.
- * @property {string} pageContext.limit - The graphql query limit.
- * @property {string} pageContext.limit - The graphql query skip.
- * @property {string} pageContext.pageCount - The total number of pages.
- * @property {string} pageContext.pageNumber - The number of the current page.
+ * @property {number} pageContext.limit - The limit of articles to show on the page.
+ * @property {string} pageContext.pathSuffix - The suffix (slug) of the url for these pages.
  */
-ArchiveTemplate.propTypes = {
+AuthorTemplate.propTypes = {
   data: PropTypes.shape({
     allMdx: PropTypes.shape({
       edges: PropTypes.arrayOf(
@@ -90,32 +84,33 @@ ArchiveTemplate.propTypes = {
             node: MDXNodeProps.isRequired,
           }).isRequired,
       ).isRequired,
+      totalCount: PropTypes.number.isRequired,
     }).isRequired,
+    authorYaml: AuthorNodeProps.isRequired,
   }).isRequired,
   pageContext: PropTypes.shape({
     limit: PropTypes.number.isRequired,
-    skip: PropTypes.number.isRequired,
-    pageCount: PropTypes.number.isRequired,
-    pageNumber: PropTypes.number.isRequired,
+    pathSuffix: PropTypes.string.isRequired,
   }),
 };
 
-export default ArchiveTemplate;
+export default AuthorTemplate;
 
 // eslint-disable-next-line react/prop-types
-export const Head = ({pageContext: {pageNumber}}) => {
-  const title = pageNumber == 1 ? "Articles" : `Articles ${pageNumber}`;
-  const path = pageNumber == 1 ? "/article" : `/article/archive-${pageNumber}`;
-
-  return &lt;PageSEO title={title} path={path} />;
+export const Head = ({data, pageContext: {pathSuffix}}) => {
+  // eslint-disable-next-line react/prop-types
+  const {name} = data.authorYaml;
+  const title = `${name} | Authors`;
+  return &lt;PageSEO title={title} path={`/authors/${pathSuffix}`} />;
 };
 
+
 export const pageQuery = graphql`
-  query ($skip: Int!, $limit: Int!) {
+  query($pathSuffix: String!, $limit: Int!) {
     allMdx(
-      sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
       limit: $limit
-      skip: $skip
+      filter: {frontmatter: {author: {slug: {eq: $pathSuffix}}}}
+      sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
     ) {
       edges {
         node {
@@ -139,9 +134,29 @@ export const pageQuery = graphql`
           }
         }
       }
+      totalCount
+    }
+    authorYaml(slug: {eq: $pathSuffix}) {
+      name
+      bio
+      image {
+        childImageSharp {
+              gatsbyImageData(
+                width: 150,
+                placeholder: BLURRED
+                layout: CONSTRAINED
+                aspectRatio: 0.75
+              )
+        }
+      }
+      socials {
+        name
+        url
+      }
     }
   }
 `;
+
 </code></pre>
         </article>
     </section>

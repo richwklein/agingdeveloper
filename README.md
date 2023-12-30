@@ -72,4 +72,4 @@ VSCode is the main editor that is used on this site. ESLint is used for linting 
 
 ## Testing
 
-Tests are built using `jest` and `jest-dom`. Any new components should have unit tests for it. A snapshot test is the minimum to include. Any logic branches should have individual unit tests around them.
+Tests are built using `jest` and `jest-dom`. Any new components should have unit tests for it. A [snapshot test](https://jestjs.io/docs/snapshot-testing) is the minimum to include. Any logic branches should have individual unit tests around them.

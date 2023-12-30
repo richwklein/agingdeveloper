@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: templates/archive.jsx</title>
+    <title>JSDoc: Source: components/InternalBackButton.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: templates/archive.jsx</h1>
+    <h1 class="page-title">Source: components/InternalBackButton.jsx</h1>
 
     
 
@@ -27,121 +27,50 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import {Pagination, Stack} from "@mui/material";
-import {graphql, navigate} from "gatsby";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import {Button} from "@mui/material";
 import PropTypes from "prop-types";
-import BreadcrumbBlock from "../components/BreadcrumbBlock";
-import PageSEO from "../components/PageSEO";
-import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
-import {MDXNodeProps} from "../props";
-import {mdxNodeToArticleDigest} from "../props/converters.mjs";
+import InternalLink from "./InternalLink";
 
 /**
- * React component that renders an archive page of articles.
+ * Renders a contained button as an anchor with the "View all {name}" template.
  *
- * @param {ArchiveTemplateProps} props - The archive template page props.
- * @return {React.ReactElement} - The react component.
+ * @param {InternalBackButtonProps} props
+ * @return {React.ReactElement} - The react component
  */
-const ArchiveTemplate = ({data, pageContext}) => {
-  const {pageCount, pageNumber} = pageContext;
-  const tail = pageNumber == 1 ? null : pageNumber;
-
-  const {edges} = data.allMdx;
-  const articles = edges.map((edge) => {
-    return mdxNodeToArticleDigest(edge.node);
-  });
-
-  const handleChange = (event, value) => {
-    if (value == 1) {
-      navigate("/article");
-    } else {
-      navigate(`/article/archive-${value}`);
-    }
-  };
+export const InternalBackButton = ({name, path}) => {
+  const text = `view all ${name}`;
 
   return (
-    &lt;>
-      &lt;BreadcrumbBlock head={{name: "Articles", path: "/article"}} tail={tail} />
-      &lt;SecondaryArticleGrid articles={articles} />
-      &lt;Stack sx={{mt: 2}} direction="column" alignItems="center">
-        &lt;Pagination count={pageCount} page={pageNumber} size="large" onChange={handleChange} />
-      &lt;/Stack>
-    &lt;/>
+    &lt;Button
+      startIcon={&lt;ChevronLeftIcon />}
+      variant="contained"
+      color="secondary"
+      disableElevation
+      component={InternalLink}
+      to={path}
+      sx={{
+        mx: 0,
+        my: 0,
+        textTransform: "capitalize",
+      }}
+    >
+      {text}
+    &lt;/Button>
   );
 };
 
 /**
- * @typedef ArchiveTemplateProps - The archive template props.
- * @property {Object} data - The page data.
- * @property {Object} data.allMdx - The mdx node.
- * @property {Object[]} data.allMdx.edges - All the edges in the graphql.
- * @property {MDXNodeProps} data.allMdx.edges.node - The mdx nodes.
- * @property {Object} pageContext - The additional context passed to the page.
- * @property {string} pageContext.limit - The graphql query limit.
- * @property {string} pageContext.limit - The graphql query skip.
- * @property {string} pageContext.pageCount - The total number of pages.
- * @property {string} pageContext.pageNumber - The number of the current page.
+ * @typedef InternalBackButtonProps - The internal back button props
+ * @property {string} name - The name of the view to put in the text.
+ * @property {string} path - The path to the view.
  */
-ArchiveTemplate.propTypes = {
-  data: PropTypes.shape({
-    allMdx: PropTypes.shape({
-      edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: MDXNodeProps.isRequired,
-          }).isRequired,
-      ).isRequired,
-    }).isRequired,
-  }).isRequired,
-  pageContext: PropTypes.shape({
-    limit: PropTypes.number.isRequired,
-    skip: PropTypes.number.isRequired,
-    pageCount: PropTypes.number.isRequired,
-    pageNumber: PropTypes.number.isRequired,
-  }),
+InternalBackButton.propTypes = {
+  name: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
-export default ArchiveTemplate;
-
-// eslint-disable-next-line react/prop-types
-export const Head = ({pageContext: {pageNumber}}) => {
-  const title = pageNumber == 1 ? "Articles" : `Articles ${pageNumber}`;
-  const path = pageNumber == 1 ? "/article" : `/article/archive-${pageNumber}`;
-
-  return &lt;PageSEO title={title} path={path} />;
-};
-
-export const pageQuery = graphql`
-  query ($skip: Int!, $limit: Int!) {
-    allMdx(
-      sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
-      limit: $limit
-      skip: $skip
-    ) {
-      edges {
-        node {
-          excerpt(pruneLength: 160)
-          frontmatter {
-            published(formatString: "MMMM DD, YYYY")
-            slug
-            title
-            featured {
-              image {
-                childImageSharp {
-                  gatsbyImageData(
-                    width: 524
-                    placeholder: BLURRED
-                    layout: CONSTRAINED
-                    aspectRatio: 1.78
-                  )
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+export default InternalBackButton;
 </code></pre>
         </article>
     </section>

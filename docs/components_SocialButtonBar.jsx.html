@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: templates/archive.jsx</title>
+    <title>JSDoc: Source: components/SocialButtonBar.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: templates/archive.jsx</h1>
+    <h1 class="page-title">Source: components/SocialButtonBar.jsx</h1>
 
     
 
@@ -27,121 +27,101 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import {Pagination, Stack} from "@mui/material";
-import {graphql, navigate} from "gatsby";
+import {Facebook, GitHub, Instagram, LinkedIn, Pinterest, Public, Reddit, Twitter} from "@mui/icons-material";
+import {ButtonGroup, IconButton} from "@mui/material";
 import PropTypes from "prop-types";
-import BreadcrumbBlock from "../components/BreadcrumbBlock";
-import PageSEO from "../components/PageSEO";
-import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
-import {MDXNodeProps} from "../props";
-import {mdxNodeToArticleDigest} from "../props/converters.mjs";
+import {SocialProps} from "../props";
+import ExternalLink from "./ExternalLink";
 
 /**
- * React component that renders an archive page of articles.
+ * A react component for rendering a social media icon.
+ * If the name is not provided, a default image is used.
  *
- * @param {ArchiveTemplateProps} props - The archive template page props.
+ * @param {SocialIconProps} props
  * @return {React.ReactElement} - The react component.
  */
-const ArchiveTemplate = ({data, pageContext}) => {
-  const {pageCount, pageNumber} = pageContext;
-  const tail = pageNumber == 1 ? null : pageNumber;
+export const SocialIcon = React.memo(({name=null}) => {
+  switch (name.toLowerCase()) {
+    case "twitter":
+      return &lt;Twitter />;
+    case "facebook":
+      return &lt;Facebook />;
+    case "linkedin":
+      return &lt;LinkedIn />;
+    case "github":
+      return &lt;GitHub />;
+    case "instagram":
+      return &lt;Instagram />;
+    case "pinterest":
+      return &lt;Pinterest />;
+    case "reddit":
+      return &lt;Reddit />;
+    default:
+      return &lt;Public />;
+  }
+});
 
-  const {edges} = data.allMdx;
-  const articles = edges.map((edge) => {
-    return mdxNodeToArticleDigest(edge.node);
-  });
+SocialIcon.displayName = "SocialIcon";
 
-  const handleChange = (event, value) => {
-    if (value == 1) {
-      navigate("/article");
-    } else {
-      navigate(`/article/archive-${value}`);
-    }
-  };
+/**
+ * @typedef SocialIconProps - The props for the social icon.
+ * @property {string} [name] - The name of the social site.
+ */
+SocialIcon.propTypes = {
+  name: PropTypes.string,
+};
 
+/**
+ * A react component for rendering a social media buttons.
+ *
+ * @param {SocialButtonProps} props
+ * @return {React.ReactElement} - The react component.
+ */
+export const SocialButton = ({social: {name, url}}) => {
   return (
-    &lt;>
-      &lt;BreadcrumbBlock head={{name: "Articles", path: "/article"}} tail={tail} />
-      &lt;SecondaryArticleGrid articles={articles} />
-      &lt;Stack sx={{mt: 2}} direction="column" alignItems="center">
-        &lt;Pagination count={pageCount} page={pageNumber} size="large" onChange={handleChange} />
-      &lt;/Stack>
-    &lt;/>
+    &lt;IconButton
+      component={ExternalLink }
+      to={url}
+      title={name}
+      sx={{color: "primary.main"}}>
+      &lt;SocialIcon name={name} />
+    &lt;/IconButton>
   );
 };
 
 /**
- * @typedef ArchiveTemplateProps - The archive template props.
- * @property {Object} data - The page data.
- * @property {Object} data.allMdx - The mdx node.
- * @property {Object[]} data.allMdx.edges - All the edges in the graphql.
- * @property {MDXNodeProps} data.allMdx.edges.node - The mdx nodes.
- * @property {Object} pageContext - The additional context passed to the page.
- * @property {string} pageContext.limit - The graphql query limit.
- * @property {string} pageContext.limit - The graphql query skip.
- * @property {string} pageContext.pageCount - The total number of pages.
- * @property {string} pageContext.pageNumber - The number of the current page.
+ * @typedef SocialButtonProps - The social links button props.
+ * @property {SocialProp} social - The social metadata.
  */
-ArchiveTemplate.propTypes = {
-  data: PropTypes.shape({
-    allMdx: PropTypes.shape({
-      edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: MDXNodeProps.isRequired,
-          }).isRequired,
-      ).isRequired,
-    }).isRequired,
-  }).isRequired,
-  pageContext: PropTypes.shape({
-    limit: PropTypes.number.isRequired,
-    skip: PropTypes.number.isRequired,
-    pageCount: PropTypes.number.isRequired,
-    pageNumber: PropTypes.number.isRequired,
-  }),
+SocialButton.propTypes = {
+  social: SocialProps,
 };
 
-export default ArchiveTemplate;
-
-// eslint-disable-next-line react/prop-types
-export const Head = ({pageContext: {pageNumber}}) => {
-  const title = pageNumber == 1 ? "Articles" : `Articles ${pageNumber}`;
-  const path = pageNumber == 1 ? "/article" : `/article/archive-${pageNumber}`;
-
-  return &lt;PageSEO title={title} path={path} />;
+/**
+ * A react component for rendering a bar of social media buttons.
+ *
+ * @param {SocialButtonBarProps} props
+ * @return {React.ReactElement} - The react component.
+ */
+export const SocialButtonBar = ({socials}) => {
+  return (
+    &lt;ButtonGroup>
+      {socials.map((social) => {
+        return (
+          &lt;SocialButton key={social.name} social={social} />
+        );
+      })};
+    &lt;/ButtonGroup>);
 };
 
-export const pageQuery = graphql`
-  query ($skip: Int!, $limit: Int!) {
-    allMdx(
-      sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
-      limit: $limit
-      skip: $skip
-    ) {
-      edges {
-        node {
-          excerpt(pruneLength: 160)
-          frontmatter {
-            published(formatString: "MMMM DD, YYYY")
-            slug
-            title
-            featured {
-              image {
-                childImageSharp {
-                  gatsbyImageData(
-                    width: 524
-                    placeholder: BLURRED
-                    layout: CONSTRAINED
-                    aspectRatio: 1.78
-                  )
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+/**
+ * @typedef SocialButtonBarProps - The social links button bar props.
+ * @property {SocialProps[]} socials - A list of social metadata.
+ */
+SocialButtonBar.propTypes = {
+  socials: PropTypes.arrayOf(SocialProps).isRequired,
+};
+export default SocialButtonBar;
 </code></pre>
         </article>
     </section>
