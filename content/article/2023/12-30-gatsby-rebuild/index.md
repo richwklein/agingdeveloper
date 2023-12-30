@@ -170,6 +170,6 @@ These are things that did not make the rebuild. Some of them are coming back sho
 - comments: I have an [issue](https://github.com/richwklein/agingdeveloper/issues/193) to re-evaluate this, but they may be gone for good.
 - top level navigation: These links are not how people truly interact with the site. They are likely going to be replaced with a searchbox instead.
 
-## Take Away
+## Take Aways
 
 All-in-all I think the site is in pretty good shape now. I have some immediate improvements that I want to make. I also have a few article ideas floating around (I also have have not forgotten about the distributed authorization series I promised). Doing this rework has also rekindled some of the enjoyment I use to have doing development. That joy has been lacking a little bit lately so this rebuild was worth it just for that.
