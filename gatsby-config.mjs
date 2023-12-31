@@ -17,7 +17,7 @@ const {
   ANALYTICS_TRACKING_ID,
   URL: SITE_URL = siteData.url,
   DEPLOY_PRIME_URL: DEPLOY_URL = SITE_URL,
-  CONTEXT: DEPLOY_CONTEXT = "production",
+  CONTEXT: DEPLOY_CONTEXT = "deploy-preview",
 } = process.env;
 
 const siteUrl = DEPLOY_CONTEXT === "production" ? SITE_URL : DEPLOY_URL;
@@ -45,8 +45,7 @@ const config = {
           cookie_expires: 0,
         },
         pluginConfig: {
-          head: false,
-          respectDNT: true,
+          head: true,
         },
       },
     },
