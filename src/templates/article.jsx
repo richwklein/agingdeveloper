@@ -88,13 +88,14 @@ export default ArticleTemplate;
 // eslint-disable-next-line react/prop-types
 export const Head = ({data: {mdx}, pageContext: {pathSuffix}}) => {
   // eslint-disable-next-line react/prop-types
-  const {frontmatter: {title, featured: {image: {publicURL}}}} = mdx;
+  const {frontmatter: {title, author: {twitterUsername}, featured: {image: {publicURL}}}} = mdx;
 
   return <PageSEO
     title={title}
     path={`/article/${pathSuffix}`}
     image={publicURL}
-    isArticle={true} />;
+    isArticle={true}
+    twitterCreator={twitterUsername} />;
 };
 
 export const pageQuery = graphql`
@@ -116,6 +117,7 @@ export const pageQuery = graphql`
         author {
           name
           slug
+          twitterUsername
         }
         featured {
           author {

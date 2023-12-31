@@ -9,8 +9,6 @@ import {ChildrenProps} from "../props";
  *
  * @param {PageSEOProps} props - The page seo props.
  * @return {React.ReactElement} - The react component.
- *
- * @todo add twitter:creator - author or site twitter username
  */
 export const PageSEO = ({
   title,
@@ -18,6 +16,7 @@ export const PageSEO = ({
   lang, path,
   image,
   imageAlt,
+  twitterCreator,
   isArticle=false,
   children}) => {
   const {
@@ -25,9 +24,11 @@ export const PageSEO = ({
     tagline: siteDescription,
     lang: siteLang,
     url: siteUrl,
+    twitterUsername: siteTwitterUsername,
     image: siteImage} = useSiteData();
 
   const seo = {
+    ogType: isArticle ? "article" : "website",
     title: title != null ? `${title} | ${siteTitle}` : siteTitle,
     name: title || siteTitle,
     description: description || siteDescription,
@@ -35,7 +36,7 @@ export const PageSEO = ({
     url: path != null ? `${siteUrl}${path}` : siteUrl,
     image: image != null ? `${siteUrl}${image}` : `${siteUrl}${siteImage.publicURL}`,
     imageAlt: imageAlt || title || siteTitle,
-    ogType: isArticle ? "article" : "website",
+    twitterCreator: twitterCreator || siteTwitterUsername,
   };
   return (
     <>
@@ -50,7 +51,9 @@ export const PageSEO = ({
       <meta property="og:locale" content={seo.lang} />
       <meta property="og:image" content={seo.image} />
       <meta property="og:image:alt" content={seo.imageAlt} />
-      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content={siteTwitterUsername} />
+      <meta name="twitter:creator" content={seo.twitterCreator} />
       {children}
     </>
   );
@@ -64,6 +67,7 @@ export const PageSEO = ({
  * @property {string} [path] - The path to the page.
  * @property {string} [image] - The path to the image for the page.
  * @property {string} [imageAlt] - The alternate text for the image.
+ * @property {string} [twitterUsername] - The twitter username to associate as the creator.
  * @property {bool} [isArticle=false] - If this head element is for an article.
  * @property {ChildrenProps} [children=null] - Child components.
  */
@@ -74,6 +78,7 @@ PageSEO.propTypes = {
   path: PropTypes.string,
   image: PropTypes.string,
   imageAlt: PropTypes.string,
+  twitterCreator: PropTypes.string,
   isArticle: PropTypes.bool,
   children: ChildrenProps,
 };

@@ -15,6 +15,7 @@ export const useSiteData = () => {
       lang
       url
       repository
+      twitterUsername
       image {
         publicURL
         childImageSharp {
