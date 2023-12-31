@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: templates/archive.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: templates/archive.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import {Pagination, Stack} from "@mui/material";
+import {graphql, navigate} from "gatsby";
+import PropTypes from "prop-types";
+import BreadcrumbBlock from "../components/BreadcrumbBlock";
+import PageSEO from "../components/PageSEO";
+import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
+import {MDXNodeProps} from "../props";
+import {mdxNodeToArticleDigest} from "../props/converters.mjs";
+
+/**
+ * React component that renders an archive page of articles.
+ *
+ * @param {ArchiveTemplateProps} props - The archive template page props.
+ * @return {React.ReactElement} - The react component.
+ */
+const ArchiveTemplate = ({data, pageContext}) => {
+  const {pageCount, pageNumber} = pageContext;
+  const tail = pageNumber == 1 ? null : pageNumber;
+
+  const {edges} = data.allMdx;
+  const articles = edges.map((edge) => {
+    return mdxNodeToArticleDigest(edge.node);
+  });
+
+  const handleChange = (event, value) => {
+    if (value == 1) {
+      navigate("/article");
+    } else {
+      navigate(`/article/archive-${value}`);
+    }
+  };
+
+  return (
+    &lt;>
+      &lt;BreadcrumbBlock head={{name: "Articles", path: "/article"}} tail={tail} />
+      &lt;SecondaryArticleGrid articles={articles} />
+      &lt;Stack sx={{mt: 2}} direction="column" alignItems="center">
+        &lt;Pagination count={pageCount} page={pageNumber} size="large" onChange={handleChange} />
+      &lt;/Stack>
+    &lt;/>
+  );
+};
+
+/**
+ * @typedef ArchiveTemplateProps - The archive template props.
+ * @property {Object} data - The page data.
+ * @property {Object} data.allMdx - The mdx node.
+ * @property {Object[]} data.allMdx.edges - All the edges in the graphql.
+ * @property {MDXNodeProps} data.allMdx.edges.node - The mdx nodes.
+ * @property {Object} pageContext - The additional context passed to the page.
+ * @property {string} pageContext.limit - The graphql query limit.
+ * @property {string} pageContext.limit - The graphql query skip.
+ * @property {string} pageContext.pageCount - The total number of pages.
+ * @property {string} pageContext.pageNumber - The number of the current page.
+ */
+ArchiveTemplate.propTypes = {
+  data: PropTypes.shape({
+    allMdx: PropTypes.shape({
+      edges: PropTypes.arrayOf(
+          PropTypes.shape({
+            node: MDXNodeProps.isRequired,
+          }).isRequired,
+      ).isRequired,
+    }).isRequired,
+  }).isRequired,
+  pageContext: PropTypes.shape({
+    limit: PropTypes.number.isRequired,
+    skip: PropTypes.number.isRequired,
+    pageCount: PropTypes.number.isRequired,
+    pageNumber: PropTypes.number.isRequired,
+  }),
+};
+
+export default ArchiveTemplate;
+
+// eslint-disable-next-line react/prop-types
+export const Head = ({pageContext: {pageNumber}}) => {
+  const title = pageNumber == 1 ? "Articles" : `Articles ${pageNumber}`;
+  const path = pageNumber == 1 ? "/article" : `/article/archive-${pageNumber}`;
+
+  return &lt;PageSEO title={title} path={path} />;
+};
+
+export const pageQuery = graphql`
+  query ($skip: Int!, $limit: Int!) {
+    allMdx(
+      sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
+      limit: $limit
+      skip: $skip
+    ) {
+      edges {
+        node {
+          excerpt(pruneLength: 160)
+          frontmatter {
+            published(formatString: "MMMM DD, YYYY")
+            slug
+            title
+            featured {
+              image {
+                childImageSharp {
+                  gatsbyImageData(
+                    width: 524
+                    placeholder: BLURRED
+                    layout: CONSTRAINED
+                    aspectRatio: 1.78
+                  )
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#AuthorAvatar">AuthorAvatar</a></li><li><a href="global.html#AuthorButton">AuthorButton</a></li><li><a href="global.html#AuthorGrid">AuthorGrid</a></li><li><a href="global.html#AuthorTemplate">AuthorTemplate</a></li><li><a href="global.html#BreadcrumbBlock">BreadcrumbBlock</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalBackButton">InternalBackButton</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageAvatar">PageAvatar</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#SocialButton">SocialButton</a></li><li><a href="global.html#SocialButtonBar">SocialButtonBar</a></li><li><a href="global.html#SocialIcon">SocialIcon</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleAvatar">TitleAvatar</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#calculateWeight">calculateWeight</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li><li><a href="global.html#useSiteData">useSiteData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Dec 30 2023 11:14:32 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

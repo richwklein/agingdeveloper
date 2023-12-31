@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArticleImage that it renders correctly. 1`] = `
+<figure
+  class="MuiBox-root css-r5049d"
+>
+  <figcaption
+    class="MuiTypography-root MuiTypography-caption css-12ijyxk-MuiTypography-root"
+  >
+    Image by 
+    <a
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
+      data-link="external"
+      href="https://example.com/georgia-smith"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Georgia Smith
+    </a>
+     on 
+    <a
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
+      data-link="external"
+      href="https://example.com/unsplash"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Unsplash
+    </a>
+  </figcaption>
+</figure>
+`;

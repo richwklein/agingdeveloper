@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageFooter that it renders correctly. 1`] = `
+<footer
+  class="MuiGrid-root MuiGrid-container css-bw06ur-MuiGrid-root"
+>
+  <div
+    class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-wg4xta-MuiGrid-root"
+  />
+  <div
+    class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-wg4xta-MuiGrid-root"
+  >
+    <div
+      class="MuiBox-root css-xi606m"
+    >
+      <span
+        class="MuiTypography-root MuiTypography-caption MuiTypography-alignCenter css-1v2k9m3-MuiTypography-root"
+      >
+        ©
+         
+        2020
+         
+        <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
+          data-link="external"
+          href="https://github.com/test-repository"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          test-title
+        </a>
+      </span>
+    </div>
+    <div
+      class="MuiBox-root css-xi606m"
+    >
+      <span
+        class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+      >
+        Powered by 
+        <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
+          data-link="external"
+          href="https://www.gatsbyjs.org/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Gatsby
+        </a>
+         
+        and
+         
+        <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
+          data-link="external"
+          href="https://app.netlify.com"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Netlify
+        </a>
+        .
+      </span>
+    </div>
+  </div>
+  <div
+    class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-wg4xta-MuiGrid-root"
+  />
+</footer>
+`;

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InnerContainer that it renders correctly. 1`] = `
+<div
+  class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+>
+  Test
+</div>
+`;
+
+exports[`InnerContainer that it renders with main. 1`] = `
+<main
+  class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+>
+  Test
+</main>
+`;

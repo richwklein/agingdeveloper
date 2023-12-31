@@ -1,69 +1,25 @@
 {
-  "jshint.enable": false,
+  "files.exclude": {
+    ".git/": true,
+    "node_modules/": false,
+    "public/": false
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/docs": true,
+  },
   "editor.tabCompletion": "on",
   "editor.rulers": [80, 100, 120],
   "editor.tabSize": 2,
   "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
-  "frontMatter.taxonomy.tags": [
-    "authentication",
-    "authn",
-    "authorization",
-    "authz",
-    "bluehost",
-    "build",
-    "casbin",
-    "choir",
-    "commit",
-    "config",
-    "covid",
-    "crypto",
-    "defaults",
-    "dependency",
-    "distributed",
-    "dns",
-    "domain",
-    "emerge",
-    "engage",
-    "explanation",
-    "false start",
-    "gatsby",
-    "gatsbyjs",
-    "git",
-    "github",
-    "http",
-    "intro",
-    "java",
-    "jwt",
-    "material-ui",
-    "microservice",
-    "misstep",
-    "music",
-    "name",
-    "netlify",
-    "oauth",
-    "opa",
-    "participation",
-    "podcast",
-    "policy",
-    "public",
-    "react",
-    "reason",
-    "sign",
-    "tech",
-    "verified",
-    "virtual"
-  ],
-  "frontMatter.taxonomy.categories": [
-    "microservices",
-    "site"
-  ],
-  "frontMatter.taxonomy.dateFormat": "yyyy-MM-dd",
   "cSpell.words": [
-    "microservice",
-    "microservices"
-  ],
+    "agingdeveloper",
+    "frontmatter",
+    "pinterest"
+  ]
 }

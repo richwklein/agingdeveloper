@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/HeroArticle.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/HeroArticle.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import {
+  alpha,
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@mui/material";
+import {GatsbyImage} from "gatsby-plugin-image";
+import {ArticleDigestProps} from "../props";
+import InternalLink from "./InternalLink";
+
+/**
+ * React component for rendering a featured image as a hero image.
+ * The image should be in the Cinemascope 21:9 ratio.
+ *
+ * @param {HeroArticleProps} props - The hero article props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * &lt;HeroArticle article={article} />
+ */
+export const HeroArticle = ({article: {title, slug, excerpt, image}}) => {
+  return (
+    &lt;Card
+      variant="outlined"
+      sx={{
+        position: "relative",
+      }}
+    >
+      &lt;CardActionArea disableRipple component={InternalLink} to={`/article/${slug}`}>
+        &lt;CardMedia>
+          &lt;GatsbyImage image={image} alt={title} />
+        &lt;/CardMedia>
+        &lt;Box
+          sx={(theme) => ({
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            bgcolor: alpha(theme.palette.primary.main, 0.5),
+            color: "primary.contrastText",
+            backdropFilter: "blur(2px)",
+            [theme.breakpoints.up("md")]: {
+              overflowY: "hidden",
+            },
+            [theme.breakpoints.down("md")]: {
+              overflowY: "scroll",
+            },
+          })}
+        >
+          &lt;Grid container>
+            &lt;Grid item lg={6} md={8} sm={12} xs={12}>
+              &lt;Box
+                sx={{
+                  p: {xs: 1, md: 4},
+                  pr: {md: 0},
+                }}
+              >
+                &lt;CardHeader titleTypographyProps={{"variant": "h3", "color": "inherit"}} title={title} />
+                &lt;CardContent>
+                  &lt;Typography variant="h5" color="inherit" paragraph>
+                    {excerpt}
+                  &lt;/Typography>
+                  &lt;Typography variant="subtitle1" color="inherit">
+                    {"Continue Reading"}&amp;hellip;
+                  &lt;/Typography>
+                &lt;/CardContent>
+              &lt;/Box>
+            &lt;/Grid>
+          &lt;/Grid>
+        &lt;/Box>
+      &lt;/CardActionArea>
+    &lt;/Card>
+  );
+};
+
+/**
+ * @typedef HeroArticleProps - A hero article props.
+ * @property {ArticleDigestProps} article - The article to display.
+ */
+HeroArticle.propTypes = {
+  article: ArticleDigestProps.isRequired,
+};
+
+export default HeroArticle;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#AuthorAvatar">AuthorAvatar</a></li><li><a href="global.html#AuthorButton">AuthorButton</a></li><li><a href="global.html#AuthorGrid">AuthorGrid</a></li><li><a href="global.html#AuthorTemplate">AuthorTemplate</a></li><li><a href="global.html#BreadcrumbBlock">BreadcrumbBlock</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalBackButton">InternalBackButton</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageAvatar">PageAvatar</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#SocialButton">SocialButton</a></li><li><a href="global.html#SocialButtonBar">SocialButtonBar</a></li><li><a href="global.html#SocialIcon">SocialIcon</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleAvatar">TitleAvatar</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#calculateWeight">calculateWeight</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li><li><a href="global.html#useSiteData">useSiteData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Dec 30 2023 11:14:32 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

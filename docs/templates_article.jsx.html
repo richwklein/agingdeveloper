@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: templates/article.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: templates/article.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import {MDXProvider} from "@mdx-js/react";
+import {Box, Divider, Grid} from "@mui/material";
+import {graphql} from "gatsby";
+import PropTypes from "prop-types";
+import {ArticleByLine} from "../components/ArticleByLine";
+import ArticleImage from "../components/ArticleImage";
+import ArticleTagGrid from "../components/ArticleTagGrid";
+import ArticleTimeToRead from "../components/ArticleTimeToRead";
+import MDXLink from "../components/MDXLink";
+import PageSEO from "../components/PageSEO";
+import TitleBlock from "../components/TitleBlock";
+import {useSiteData} from "../hooks/useSiteData";
+import {ChildrenProps, FrontmatterProps, TimeToReadDigestProps} from "../props";
+
+const components = {
+  a: MDXLink,
+};
+
+/**
+ * React component that renders a page as an article.
+ *
+ * @param {ArticleTemplateProps} props - The article template page props.
+ * @return {React.ReactElement} - The react component.
+ */
+const ArticleTemplate = ({data: {mdx}, children}) => {
+  const {lang} = useSiteData();
+  const {frontmatter: {title, description, author, featured, published, category, tags},
+    fields: {timeToRead}} = mdx;
+  return (
+    &lt;Box component="article" sx={{
+      "lineHeight": 1.4,
+      "fontFamily": "Merriweather, Merriweather Sans, sans-serif, serif",
+      "fontSize": "1.1rem",
+    }}>
+      &lt;ArticleByLine
+        author={author}
+        published={published} />
+      &lt;TitleBlock title={title} subtitle={description} />
+      &lt;ArticleImage
+        author={featured.author}
+        site={featured.site}
+        image={featured.image.childImageSharp.gatsbyImageData} />
+      &lt;Grid container direction="row-reverse" spacing={2}>
+        &lt;Grid item md={3} sm={12} xs={12}>
+          &lt;ArticleTimeToRead minutes={timeToRead.minutes} words={timeToRead.words} lang={lang} />
+        &lt;/Grid>
+        &lt;Grid item md={9} sm={12} xs={12}>
+          &lt;MDXProvider components={components}>
+            {children}
+          &lt;/MDXProvider>
+        &lt;/Grid>
+      &lt;/Grid>
+      &lt;Divider variant="fullWidth" sx={{my: 2}} />
+      &lt;ArticleTagGrid category={category} tags={tags} />
+    &lt;/Box>
+  );
+};
+
+/**
+ * @typedef ArticleTemplateProps - The article template props
+ * @property {Object} data - The page data.
+ * @property {Object} data.mdx - The mdx node.
+ * @property {FrontmatterProps} data.mdx.frontmatter - The frontmatter of the node.
+ * @property {Object} data.mdx.fields - The additional fields on the node.
+ * @property {TimeToReadDigestProps} data.mdx.fields.timeToRead - The article time to read.
+ * @property {Object} pageContext - The additional context passed to the page.
+ * @property {string} pageContext.pathSuffix - The suffix (slug) of the url for these pages.
+ * @property {ChildrenProps} children - The rendered mdx as child components.
+ */
+ArticleTemplate.propTypes = {
+  data: PropTypes.shape({
+    mdx: PropTypes.shape({
+      frontmatter: FrontmatterProps.isRequired,
+      fields: PropTypes.shape({
+        timeToRead: TimeToReadDigestProps.isRequired,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
+  pageContext: PropTypes.shape({
+    pathSuffix: PropTypes.string.isRequired,
+  }),
+  children: ChildrenProps,
+};
+
+export default ArticleTemplate;
+
+// eslint-disable-next-line react/prop-types
+export const Head = ({data: {mdx}, pageContext: {pathSuffix}}) => {
+  // eslint-disable-next-line react/prop-types
+  const {frontmatter: {title, featured: {image: {publicURL}}}} = mdx;
+
+  return &lt;PageSEO
+    title={title}
+    path={`/article/${pathSuffix}`}
+    image={publicURL}
+    isArticle={true} />;
+};
+
+export const pageQuery = graphql`
+  query($pathSuffix: String!) {
+    mdx(frontmatter: { slug: { eq: $pathSuffix } }) {
+      fields {
+          timeToRead {
+            minutes
+            words
+          }
+      }
+      frontmatter {
+        published(formatString: "MMMM DD, YYYY")
+        slug
+        title
+        description
+        category
+        tags
+        author {
+          name
+          slug
+        }
+        featured {
+          author {
+            name
+            url
+          }
+          site {
+            name
+            url
+          }
+          image {
+            publicURL
+            childImageSharp {
+              gatsbyImageData(
+                width: 1152,
+                placeholder: BLURRED
+                layout: CONSTRAINED
+                aspectRatio: 2.33
+              )
+          }
+          }
+        }
+      }
+    }
+  }
+`;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#AuthorAvatar">AuthorAvatar</a></li><li><a href="global.html#AuthorButton">AuthorButton</a></li><li><a href="global.html#AuthorGrid">AuthorGrid</a></li><li><a href="global.html#AuthorTemplate">AuthorTemplate</a></li><li><a href="global.html#BreadcrumbBlock">BreadcrumbBlock</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalBackButton">InternalBackButton</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageAvatar">PageAvatar</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#SocialButton">SocialButton</a></li><li><a href="global.html#SocialButtonBar">SocialButtonBar</a></li><li><a href="global.html#SocialIcon">SocialIcon</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleAvatar">TitleAvatar</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#calculateWeight">calculateWeight</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li><li><a href="global.html#useSiteData">useSiteData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Dec 30 2023 11:14:32 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

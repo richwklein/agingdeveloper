@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TagBreadcrumb that a category breadcrumb is generated correctly. 1`] = `
+<header
+  class="MuiDivider-root MuiDivider-fullWidth MuiDivider-flexItem MuiDivider-withChildren css-692r42-MuiDivider-root"
+  role="separator"
+>
+  <span
+    class="MuiDivider-wrapper css-qywfm8-MuiDivider-wrapper"
+  >
+    <nav
+      class="MuiTypography-root MuiTypography-body1 MuiBreadcrumbs-root css-63vwl1-MuiTypography-root-MuiBreadcrumbs-root"
+    >
+      <ol
+        class="MuiBreadcrumbs-ol css-4pdmu4-MuiBreadcrumbs-ol"
+      >
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-bvyohc-MuiTypography-root-MuiLink-root"
+            data-link="internal"
+            href="/category/"
+          >
+            Categories
+          </a>
+        </li>
+        <li
+          aria-hidden="true"
+          class="MuiBreadcrumbs-separator css-1wuw8dw-MuiBreadcrumbs-separator"
+        >
+          /
+        </li>
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1gqyz35-MuiTypography-root"
+          >
+            microservice
+          </p>
+        </li>
+      </ol>
+    </nav>
+  </span>
+</header>
+`;
+
+exports[`TagBreadcrumb that a category index is generated correctly. 1`] = `
+<header
+  class="MuiDivider-root MuiDivider-fullWidth MuiDivider-flexItem MuiDivider-withChildren css-692r42-MuiDivider-root"
+  role="separator"
+>
+  <span
+    class="MuiDivider-wrapper css-qywfm8-MuiDivider-wrapper"
+  >
+    <nav
+      class="MuiTypography-root MuiTypography-body1 MuiBreadcrumbs-root css-63vwl1-MuiTypography-root-MuiBreadcrumbs-root"
+    >
+      <ol
+        class="MuiBreadcrumbs-ol css-4pdmu4-MuiBreadcrumbs-ol"
+      >
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1gqyz35-MuiTypography-root"
+          >
+            Categories
+          </p>
+        </li>
+      </ol>
+    </nav>
+  </span>
+</header>
+`;
+
+exports[`TagBreadcrumb that a tag breadcrumb is generated correctly. 1`] = `
+<header
+  class="MuiDivider-root MuiDivider-fullWidth MuiDivider-flexItem MuiDivider-withChildren css-692r42-MuiDivider-root"
+  role="separator"
+>
+  <span
+    class="MuiDivider-wrapper css-qywfm8-MuiDivider-wrapper"
+  >
+    <nav
+      class="MuiTypography-root MuiTypography-body1 MuiBreadcrumbs-root css-63vwl1-MuiTypography-root-MuiBreadcrumbs-root"
+    >
+      <ol
+        class="MuiBreadcrumbs-ol css-4pdmu4-MuiBreadcrumbs-ol"
+      >
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-bvyohc-MuiTypography-root-MuiLink-root"
+            data-link="internal"
+            href="/tag/"
+          >
+            Tags
+          </a>
+        </li>
+        <li
+          aria-hidden="true"
+          class="MuiBreadcrumbs-separator css-1wuw8dw-MuiBreadcrumbs-separator"
+        >
+          /
+        </li>
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1gqyz35-MuiTypography-root"
+          >
+            gatsbyjs
+          </p>
+        </li>
+      </ol>
+    </nav>
+  </span>
+</header>
+`;
+
+exports[`TagBreadcrumb that a tag index is generated correctly. 1`] = `
+<header
+  class="MuiDivider-root MuiDivider-fullWidth MuiDivider-flexItem MuiDivider-withChildren css-692r42-MuiDivider-root"
+  role="separator"
+>
+  <span
+    class="MuiDivider-wrapper css-qywfm8-MuiDivider-wrapper"
+  >
+    <nav
+      class="MuiTypography-root MuiTypography-body1 MuiBreadcrumbs-root css-63vwl1-MuiTypography-root-MuiBreadcrumbs-root"
+    >
+      <ol
+        class="MuiBreadcrumbs-ol css-4pdmu4-MuiBreadcrumbs-ol"
+      >
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1gqyz35-MuiTypography-root"
+          >
+            Tags
+          </p>
+        </li>
+      </ol>
+    </nav>
+  </span>
+</header>
+`;

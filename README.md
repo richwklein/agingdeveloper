@@ -1,4 +1,3 @@
-
 # Aging Developer
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9fff03eb-d9c8-48d1-887d-11aea21246cd/deploy-status)](https://app.netlify.com/sites/agingdeveloper/deploys)
@@ -16,6 +15,7 @@ version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site is 
     - [Create a production build.](#create-a-production-build)
     - [Serve the production build locally.](#serve-the-production-build-locally)
   - [VSCode settings](#vscode-settings)
+  - [Testing](#testing)
 
 ## License
 - The site code is [MIT](/LICENSE) licensed 
@@ -26,75 +26,36 @@ version of it at [agingdeveloper.com](https://agingdeveloper.com/). The site is 
 
 ## Content vs Source Code
 
-Both the source code for the site and the content that is hosted on the site are
-stored in this repository. With the exception of some top level files the majority
-of the source code is located in the `src` folder. The content hosted on the site
-is located in the `content` folder.
+Both the source code for the site and the content that is hosted on the site are stored in this repository. With the exception of some top level files the majority of the source code is located in the `src` folder. The content hosted on the site is located in the `content` folder.
 
 ## Start local development
 
-Most javascript developers will likely already have the tools installed, but here is a quick rundown of setting things 
-up just in case you do not. I'm using brew here since I develop on a Mac. Windows developers will have to use other 
-package managers.
+Most javascript developers will likely already have the tools installed, but here is a quick rundown of setting things up just in case you do not. I'm using asdf-vm here to allow multiple versions of tools to be installed at the same time.
 
-1. **Install node and npm**
+1. **Install dev tools**
+
+I use *asdf* to install dev tools. Use the [getting started](https://asdf-vm.com/guide/getting-started.html) page to make sure it is installed and set up correctly.
+
+Once you have asdf installed you can use that to install node & npm. These are setup as being the global versions, but with asdf you could just use the version locally.
 
 ```shell
-brew install node
+asdf plugin add nodejs
+asdf install nodejs 18.9.1
+asdf global nodejs 18.9.1
 ```
 
 2. **Install dependencies**
 
 ```shell
 cd agingdeveloper/
-make install
+npm install
 ```
 
 This will install local npm dependencies.
 
-1. **Start the development server**
-
-```shell
-make develop
-```
-
-5. **Open the source code and start editing**
-
-Gatsby will start a hot-reloading development environment accessible by default at `http://localhost:8000`.
-
-> You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data.
-
-Try editing the JavaScript pages in src/pages. Saved changes will live reload in the browser.
-
-## Create a build.
-
-```cli
-make build
-```
-
-Gatsby will perform an optimized production build for your site, generating static HTML and per-route JavaScript code bundles.
-
-## Serve the build locally.
-
-```cli
-make serve
-```
-
-Gatsby starts a local HTML server for testing your built site. Remember to build your site using gatsby build before using this command.
-
-## Create a CI build
-
-```cli
-make build-ci
-```
-
-This will make sure source code is formatted, run tests, then create a build.
-
 ## VSCode Settings
 
-VSCode is the main editor that is used on this site. ESLint is used for linting and formatting. 
-These settings are included in the `.vscode` folder in the root of the project.
-They should be used for a good workflow where lint issues are automatically corrected on save.
+VSCode is the main editor that is used on this site. ESLint is used for linting and formatting. These settings are included in the `.vscode` folder in the root of the project. They should be used for a good workflow where lint issues are automatically corrected on save.
 
 ```json
 {
@@ -108,3 +69,7 @@ They should be used for a good workflow where lint issues are automatically corr
     "eslint.lintTask.enable": true,
 }
 ```
+
+## Testing
+
+Tests are built using `jest` and `jest-dom`. Any new components should have unit tests for it. A [snapshot test](https://jestjs.io/docs/snapshot-testing) is the minimum to include. Any logic branches should have individual unit tests around them.

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/TitleBlock.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/TitleBlock.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import {Avatar, Box, Stack, Toolbar, Typography} from "@mui/material";
+import {GatsbyImage} from "gatsby-plugin-image";
+import PropTypes from "prop-types";
+import {ChildrenProps} from "../props";
+
+/**
+ * React component used to render the author avatar.
+ *
+ * @param {TitleAvatar} props - The author avatar props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * &lt;PageAvatar image={image} alt={alt} />
+ */
+const TitleAvatar = ({image, alt}) => {
+  return (&lt;Avatar
+    variant="rounded"
+    sx={{
+      mr: 2,
+      bgcolor: "primary.dark",
+      borderWidth: 1,
+      borderColor: "secondary.light",
+      borderStyle: "solid",
+      width: 150,
+      height: 200,
+    }}>
+    &lt;GatsbyImage image={image} sx={{backgroundColor: "inherit"}} alt={alt} />
+  &lt;/Avatar>);
+};
+
+/**
+ * @typedef PageAvatarProps - The title avatar props.
+ * @property {GatsbyImageData} image - The gatsby image data for the avatar.
+ * @property {string} alt - The alt of the avatar.
+ */
+TitleAvatar.propTypes = {
+  image: PropTypes.object.isRequired,
+  alt: PropTypes.string.isRequired,
+};
+
+/**
+ * React component for rendering the title and subtitle of an article.
+ *
+ * @param {TitleBlockProps} props - The title and subtitle props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * &lt;TitleBlock title={title} subtitle={description } />
+ */
+export const TitleBlock = ({title, subtitle, image, children}) => {
+  return (
+    &lt;Toolbar disableGutters component="header" sx={{mt: 1}}>
+      {image &amp;&amp; &lt;TitleAvatar image={image} alt={title} />}
+      &lt;Stack direction="column"
+        flexShrink={1}
+        useFlexGap
+        alignItems="flex-start">
+        &lt;Typography variant="h3">{title}&lt;/Typography>
+        {subtitle &amp;&amp;
+        &lt;Typography variant="subtitle" component={Box}>
+          {subtitle}
+        &lt;/Typography>
+        }
+        {children}
+      &lt;/Stack>
+    &lt;/Toolbar>
+  );
+};
+
+/**
+ * @typedef TitleBlockProps - The title block props.
+ * @property {string} title - The title of the page.
+ * @property {string} [subtitle] - The subtitle of the page.
+ * @property {Object} [image] - The avatar image for the page.
+ * @property {ChildrenProps} [children] - The children of the title.
+ */
+TitleBlock.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  image: PropTypes.object,
+  children: ChildrenProps,
+};
+
+export default TitleBlock;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#AuthorAvatar">AuthorAvatar</a></li><li><a href="global.html#AuthorButton">AuthorButton</a></li><li><a href="global.html#AuthorGrid">AuthorGrid</a></li><li><a href="global.html#AuthorTemplate">AuthorTemplate</a></li><li><a href="global.html#BreadcrumbBlock">BreadcrumbBlock</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalBackButton">InternalBackButton</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageAvatar">PageAvatar</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#SocialButton">SocialButton</a></li><li><a href="global.html#SocialButtonBar">SocialButtonBar</a></li><li><a href="global.html#SocialIcon">SocialIcon</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleAvatar">TitleAvatar</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#calculateWeight">calculateWeight</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li><li><a href="global.html#useSiteData">useSiteData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Dec 30 2023 11:14:32 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

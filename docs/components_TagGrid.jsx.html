@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/TagGrid.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/TagGrid.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
+import TagOutlinedIcon from "@mui/icons-material/TagOutlined";
+import {Grid} from "@mui/material";
+import PropTypes from "prop-types";
+import slug from "slug";
+import {TagWithCountProps} from "../props";
+import InternalLink from "./InternalLink";
+
+/**
+ * React component used to render a tag in either the {@link ArticleTagGrid} or
+ * {@link TagGrid} component.
+ *
+ * @param {TagProps} props - The tags and total props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * &lt;Tag
+ *   name={tag.name}
+ *   weight={calculateWeight(tag.count, totalCount)}
+ *   isCategory={isCategory} />
+ */
+export const Tag = ({name, weight=300, isCategory=false}) => {
+  const icon = isCategory ? &lt;FolderOutlinedIcon fontSize="inherit" sx={{mr: .3}} /> :
+    &lt;TagOutlinedIcon fontSize="inherit" sx={{mr: .3}} />;
+  const url = isCategory ? `/category/${slug(name)}` : `/tag/${slug(name)}`;
+  return (
+    &lt;InternalLink
+      underline="hover"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        textTransform: "capitalize",
+        fontWeight: weight,
+      }}
+      color="primary"
+      to={url}
+    >
+      {icon}
+      {name}
+    &lt;/InternalLink>
+
+  );
+};
+
+/**
+ * @typedef TagProps - The tag props.
+ * @property {string} name - The name of the tag.
+ * @property {number} [weight=300] - The font weight to render the tag.
+ * @property {bool} [isCategory=false] - If the tags represent categories.
+ *
+ */
+Tag.propTypes = {
+  name: PropTypes.string.isRequired,
+  weight: PropTypes.number,
+  isCategory: PropTypes.bool,
+};
+
+/**
+ * Calculates a font weight between 300 and 900 for tag display.
+ *
+ * @param {number} count - The number of times the tag has occurred.
+ * @param {number} totalCount - The total number of tags.
+ * @return {number} - The font weight.
+ */
+export const calculateWeight = (count, totalCount) => {
+  const oldRange = totalCount - 1;
+  const newValue = (((count - 1) * 600) / oldRange) + 300;
+  return Math.round(newValue/100)*100;
+};
+
+/**
+ * React component for rendering a grid of tags or categories.
+ *
+ * @param {TagGridProps} props - The tag grid props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * &lt;TagGrid tags={group} totalCount={totalCount} isCategory={true} />
+ */
+export const TagGrid = ({tags, totalCount, isCategory=false}) => {
+  return (
+    &lt;Grid container spacing={2} sx={{mt: 2}}>
+      {tags.map((tag) => {
+        return (
+          &lt;Grid item md={2} sm={6} xs={12} key={tag.name}>
+            &lt;Tag
+              name={tag.name}
+              weight={calculateWeight(tag.count, totalCount)}
+              isCategory={isCategory} />
+          &lt;/Grid>
+        );
+      })}
+    &lt;/Grid>
+  );
+};
+
+/**
+ * @typedef TagGridProps - The tag grid props.
+ * @property {TagWithCountProps[]} tags - The list of tags.
+ * @property {number} totalCount - The total number of tags.
+ * @property {bool} [isCategory=false] - If the tags represent categories.
+ */
+TagGrid.propTypes = {
+  tags: PropTypes.arrayOf(TagWithCountProps),
+  totalCount: PropTypes.number.isRequired,
+  isCategory: PropTypes.bool,
+};
+
+export default TagGrid;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#AuthorAvatar">AuthorAvatar</a></li><li><a href="global.html#AuthorButton">AuthorButton</a></li><li><a href="global.html#AuthorGrid">AuthorGrid</a></li><li><a href="global.html#AuthorTemplate">AuthorTemplate</a></li><li><a href="global.html#BreadcrumbBlock">BreadcrumbBlock</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalBackButton">InternalBackButton</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#PageAvatar">PageAvatar</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#SocialButton">SocialButton</a></li><li><a href="global.html#SocialButtonBar">SocialButtonBar</a></li><li><a href="global.html#SocialIcon">SocialIcon</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleAvatar">TitleAvatar</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#calculateWeight">calculateWeight</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li><li><a href="global.html#useSiteData">useSiteData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Dec 30 2023 11:14:32 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
