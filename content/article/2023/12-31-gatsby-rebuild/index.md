@@ -1,5 +1,5 @@
 ---
-slug: 2023-12-30-gatsby-rebuild
+slug: 2023-12-31-gatsby-rebuild
 title: Rebuilding with Gatsby
 description: "The journey to bring this site back to life through a rebuild on the latest major releases."
 author: richwklein
@@ -39,7 +39,7 @@ Hydration or re-hydration is the process of using client-side JavaScript to add 
 
 ![Partial Hydration](./full-partial-hydration.png)
 
-After doing some more reading the partial hydration feature there were some caveats that I had to evaluate. It required using an experimental version of *react* and *react-dom*. It may not work well with some other new features that improve performance like [Slices](https://www.gatsbyjs.com/docs/reference/release-notes/v5.0/#slice-api). After all it really didn't seem like what I was looking for anyway, but I continued the rebuild anyway and hoped there were no show stoppers.
+After doing some more reading the partial hydration feature there were some caveats that I had to evaluate. It required using an experimental version of *react* and *react-dom*. It may not work well with some other new features that improve performance like [Slices](https://www.gatsbyjs.com/docs/reference/release-notes/v5.0/#slice-api). It also didn't really seem like what I was looking. I continued the rebuild anyway and hoped there were no show stoppers.
 
 ## Testing
 
@@ -59,19 +59,15 @@ Module not found: Error: Can't resolve '@mdx-js/react'
 ```
 
 ### Material UI Upgrade
-Doing this upgrade I went from v4.* of [Material UI](https://mui.com/material-ui/getting-started/) to v5.*. The import paths all changed. The paths went from "@material-ui" to "@mui/material/". Another big change to deal with was going from JSS to [Emotion](https://emotion.sh/docs/introduction) for the default styling. This meant a whole new syntax when wanting to override the theme.
+Doing this upgrade I went up a major version of [Material UI](https://mui.com/material-ui/getting-started/). Between the versions the import paths all changed. The paths went from "@material-ui" to "@mui/material/". Another big change to deal with was going from JSS to [Emotion](https://emotion.sh/docs/introduction) for the default styling. This meant a whole new syntax when wanting to override the theme.
 
 I had to switch from doing something like:
 
 ```jsx
 const useStyles = makeStyles((theme) => ({
-  cardAction: {
-    "maxWidth": 598,
-    "minHeight": 492,
-    [theme.breakpoints.down("sm")]: {
-      maxWidth: 880,
-      height: "auto",
-    },
+  cardContent: {
+    margin: 0,
+    paddingTop: theme.spacing(1),
   },
 });
 
@@ -90,21 +86,17 @@ to the [sx syntax](https://mui.com/material-ui/customization/theme-components/#t
       pb: 1.5,
     },
   }}>
-  <Typography variant="subtitle1" component="span">
-  {excerpt}
-  </Typography>
-</CardContent>
 ```
 
 ### Common JS vs ES Modules
 
-I started out with the react components for this build using the ES modules syntax for imports and exports. I also started to switch over Gatsby files to that format as well. The eslint configuration is setup using the module syntax. I started to run into some problems with an import statement in some of my unit tests. This lead me down a rabbit hole where I learned Jest only has experimental support for ES Modules and Gatsby also only has partial support. If I specify "module" as the type in my *package.json* then the `gatsby develop` command starts failing trying to load a file from cache without an extension on it. 
+I started out with the react components for this build using the ES modules syntax for imports and exports. I also started to switch over Gatsby files to that format as well. The eslint configuration is setup using the module syntax. I then started to run into some import problems with the slugify library in my unit tests. This lead me down a rabbit hole where I learned Jest only has experimental support for ES Modules and Gatsby also only has partial support. If I specify "module" as the type in my *package.json* then the `gatsby develop` command starts failing trying to load a file from cache without an extension on it. 
 
 I ended up sticking with using the ES Module syntax where possible. I have the type set in package.json to commonjs, to act as the default syntax, but I used the ES Module syntax in `.mjs` files for Gatsby and in the `.jsx` files for React.
 
 ### NPM Segfault
 
-While working, I usually run `gatsby develop` from the command line to view the site. I use *Ctrl+C* to send a **SIGINT** and stop the process like normal. However, whenever I try to run either the build or develop commands again from that terminal I get a segfault exception. At first I would have to quit and restart the terminal to get around this. Eventually, I figured out I could run `gatsby clean` in between and it would avoid the failure. Because of this, I now run the below command every time.
+While working, I usually run `gatsby develop` from the command line to view updates to the site in real time. When I need to stop the process, I use *Ctrl+C* to send a **SIGINT**. Whenever I try to run either the build or develop commands after that I get a segfault exception. At first I would quit the terminal and restart it, which took a long time. Eventually, I figured out I could run `gatsby clean` in between and it would avoid the failure. Because of this, I now run the below command every time.
 
  ```shell
  npm run clean && npm run develop
@@ -116,13 +108,15 @@ There were a few stumbling blocks that slowed development, but I feel like the c
 
 ### Improvements
 
-The front page of the site has been tweaked to have a new hero image component on the top, and then a grid of horizontal article cards below it. This replaces the vertical cards with the new badge. The badge was some of the client-side interactions that I thought could be used in the partial hydration. Instead this new layout freshens up the site a little bit. The article pages have the author byline and time to read moved around. The hero / featured image on the article has been wrapped in a `<figure>` tag with credits for the image now in a `<figcaption>`. 
+The front page of the site has been tweaked to have a new hero image component on the top, and then a grid of horizontal article cards below it. This replaces the vertical cards with badging on the new articles. The badge was some of the client-side interactions that I thought would be used with partial hydration. Instead this new layout freshens up the site a little bit. 
 
-I have added JSDoc strings to all the react components. Those can be generated via `npm run docs`. I am going to continue to make improvements to that documentation and look to see if I can use something like a github hook to automatically generate new documentation when merging pull requests into master.
+The article pages have the author byline and time to read moved around with some space added for a related articles feature that I'm planning in the future. The hero / featured image on the article has been wrapped in a `<figure>` tag with credits for the image now in a `<figcaption>`. 
 
-All components should now have [prop-type](https://www.npmjs.com/package/prop-types) validation. There are a few tests that break the validation, but the deployed site has all console errors taken care of. Also, I've had to comment out that validation for the `Head` hook that Gatsby provides as that caused build problems.
+I have added JSDoc strings to all the react components. Those can be generated via `npm run docs`. I am going to continue to make improvements to that documentation and look to see if I can use something like a github action to automatically generate new documentation when merging pull requests into master.
 
-I added support to the site for [multiple authors](/article/2020-08-22-guest-authors). When I was first looking to rebuild I thought that might be a feature that hit the cutting room floor. The mappings in the *gatsby-config* file was not very robust. Being honest with myself, no one else is going to publish to this thing. However, getting author support readded was pretty easy, and I like the way I did it. Instead of an **author** subdirectory in the data folder, I have a single **author.yaml** file now. The file contains a list of author nodes. I then added some schema customization to the *gatsby-node* file that maps the author in the mdx frontmatter to the AuthorYaml node via a "slug" property in the yaml.
+Almost all the components now have [prop-type](https://www.npmjs.com/package/prop-types) validation. There are a few tests that break the validation, but the deployed site has all console errors taken care of. I had to comment out some lint rules and not provide prop-types for the `Head` hook that Gatsby provides as that caused problems during the build.
+
+I previously had support for [guest authors](/article/2020-08-22-guest-authors). When I was first looking to rebuild I thought that might be a feature that hit the cutting room floor. The mappings in the *gatsby-config* file was not very robust and honestly no one else is going to publish to this thing. However, getting author support re-added was pretty easy, and I like the way I did it. Instead of an **author** subdirectory in the data folder, I have a single **author.yaml** file now. The file contains a list of author nodes. I then added some schema customization to the *gatsby-node* file that maps the author in the mdx frontmatter to the AuthorYaml node via a "slug" property in the yaml.
 
 ```js
 export const createSchemaCustomization = ({actions, schema}) => {
@@ -150,7 +144,7 @@ export const createSchemaCustomization = ({actions, schema}) => {
 };
 ```
 
-Previously, all links in the mdx content files themselves were just regular anchors. I was able to replace those anchors with a new ```MDXLink``` component. This component tests the href. If it is a relative url then an internal Gatsby link is used. If the url starts out with the same host as the site then an internal like is used. Otherwise, an external link is used. This is done by using a shortcode for the anchor tag.
+Before the rebuild all links in the mdx content files were rendered as regular anchors tags. I was able to replace those anchors with a new ```MDXLink``` component. This component tests the href. If the href is a relative url then the internal Gatsby link component is used. If the url starts out with the same host as the site then the href is converted to a relative link. Otherwise, an external link is used. This is done by using the components property of the ```MDXProvider```.
 
 ```js
 const components = {
@@ -162,14 +156,14 @@ const components = {
 </MDXProvider>
 ```
 
-### Cuts
+### Trims
 
 These are things that did not make the rebuild. Some of them are coming back shortly, but others are likely gone for good.
 
-- rss support: this will be re-added shortly via [issue #580](https://github.com/richwklein/agingdeveloper/issues/580).
-- comments: I have an [issue](https://github.com/richwklein/agingdeveloper/issues/193) to re-evaluate this, but they may be gone for good.
-- top level navigation: These links are not how people truly interact with the site. They are likely going to be replaced with a searchbox instead.
+- **RSS Support**: this will be re-added shortly via [issue #580](https://github.com/richwklein/agingdeveloper/issues/580).
+- **Comments**: I have an [issue](https://github.com/richwklein/agingdeveloper/issues/193) to re-evaluate this, but they are probably gone for good.
+- **Top Level Navigation**: These links are not how people interact with the site. They are being replaced with a searchbox instead.
 
 ## Take Aways
 
-All-in-all I think the site is in pretty good shape now. I have some immediate improvements that I want to make. I also have a few article ideas floating around (I also have have not forgotten about the distributed authorization series I promised). Doing this rework has also rekindled some of the enjoyment I use to have doing development. That joy has been lacking a little bit lately so this rebuild was worth it just for that.
+All-in-all I think the site is in pretty good shape now and should be easier to maintain. I have some immediate improvements that I want to make. I also have a few article ideas floating around (including the distributed authorization series I previously promised). Doing this rework has also rekindled some of the enjoyment I use to have doing this kind of development. That joy has been lacking a little bit lately so this rebuild was worth it just for that.
