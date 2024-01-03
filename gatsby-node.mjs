@@ -1,4 +1,6 @@
-import {resolve as pathResolve} from "path";
+import {Feed} from "feed";
+import {writeFileSync} from "fs";
+import {join as pathJoin, resolve as pathResolve} from "path";
 import readingTime from "reading-time";
 import slug from "slug";
 
@@ -210,4 +212,161 @@ const createRedirects = (createRedirect) => {
     toPath: "/article/2020-07-21-intro",
     isPermanent: true,
   });
+};
+
+export const onPostBuild = async ({graphql, reporter}) => {
+  const activity = reporter.activityTimer("Building feeds");
+  activity.start();
+
+  const publicPath = "./public";
+  const feedOptions = {
+    "rss": {
+      func: "rss2",
+      path: "/rss.xml",
+    },
+    "atom": {
+      func: "atom1",
+      path: "/atom.xml",
+    },
+    "json": {
+      func: "json1",
+      path: "/feed.json",
+    },
+  };
+
+  const result = await graphql(`
+    {
+      siteYaml(slug: {eq: "agingdeveloper"}) {
+        title
+        tagline
+        category
+        lang
+        image {
+          childImageSharp {
+            gatsbyImageData(width: 1152, formats: PNG, layout: FIXED, height: 494)
+          }
+        }
+        icon {
+          childImageSharp {
+            gatsbyImageData(width: 32, height:32, layout:FIXED, formats:PNG)
+          }
+        }
+      }
+      site {
+        siteMetadata {
+          siteUrl
+        }
+      }
+      allAuthorYaml(sort: {name: ASC}) {
+        edges {
+          node {
+            slug
+            name
+            email
+          }
+        }
+      }
+      allMdx(
+        sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
+      ) {
+        edges {
+          node {
+            frontmatter {
+              slug
+              title
+              description
+              published
+              featured {
+                image {
+                  childImageSharp {
+                    gatsbyImageData(width: 1152, formats: PNG, layout: FIXED, height: 494)
+                  }
+                }
+              author {
+                slug
+                name
+                email
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  if (result.errors) {
+    reporter.error(result.errors);
+    reporter.panicOnBuild("Error while running GraphQL query.");
+    return;
+  }
+
+  const siteData = result.data.siteYaml;
+  siteData.url = result.data.site.siteMetadata.siteUrl;
+  const siteImage = siteData.image.childImageSharp.gatsbyImageData.images.fallback.src;
+  const siteIcon = siteData.image.childImageSharp.gatsbyImageData.images.fallback.src;
+  const authors = result.data.allAuthorYaml.edges;
+  const articles = result.data.allMdx.edges;
+
+  const feedLinks = {};
+  for (const [key, option] of Object.entries(feedOptions)) {
+    feedLinks[key] = `${siteData.url}${option.path}`;
+  }
+
+  const feed = new Feed({
+    title: siteData.title,
+    description: siteData.tagline,
+    id: siteData.url,
+    link: siteData.url,
+    language: "en",
+    image: `${siteData.url}${siteImage}`,
+    favicon: `${siteData.url}${siteIcon}`,
+    feedLinks: feedLinks,
+  });
+
+  feed.addCategory(siteData.category);
+  authors.map(({node: {slug, name, email}}) => {
+    return feed.addContributor({
+      name: name,
+      email: email,
+      link: `${siteData.url}/author/${slug}`,
+    });
+  });
+
+  articles.map(({node}) => {
+    const {title, slug, description, published} = node.frontmatter;
+    const author = node.frontmatter.author;
+    const featured = node.frontmatter.featured;
+    const image = featured.image.childImageSharp.gatsbyImageData.images.fallback.src;
+
+    return feed.addItem({
+      title: title,
+      id: slug,
+      link: `${siteData.url}/article/${slug}`,
+      description: description,
+      date: published,
+      published: published,
+      content: node.html,
+      author: {
+        name: author.name,
+        email: author.email,
+        link: `${siteData.url}/author/${author.slug}`,
+      },
+      image: {
+        url: `${siteData.url}${image.publicURL}`,
+      },
+    });
+  });
+
+  const options = Object.values(feedOptions);
+  options.map((option) => {
+    const outputPath = pathJoin(publicPath, option.path);
+
+    writeFileSync(
+        outputPath,
+        feed[option.func].call(),
+        {encoding: "utf8"},
+    );
+  });
+
+  activity.end();
 };
