@@ -3,7 +3,6 @@ slug: 2022-05-23-themepark-sadness
 title: Disappointed in Disney World
 description: "We extended our vacation in February so we could take the boys to Disney World and were disappointed in the experience."
 author: richwklein
-image: brian-mcgowan-uPQiTOzYoo0-unsplash.jpg
 featured:
   image: brian-mcgowan-uPQiTOzYoo0-unsplash.jpg
   author:
