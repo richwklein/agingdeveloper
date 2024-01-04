@@ -176,12 +176,20 @@ export const SocialProps = PropTypes.shape({
  * @typedef AuthorNodeProps - Props for a full author node.
  * @property {string} name - The name of the author.
  * @property {string} bio - The author's biography.
+ * @property {string} tagline - The tagline for the author.
  * @property {Object} image - The image of the author.
+ * @property {string} firstName - The author's first name.
+ * @property {string} lastName - The author's last name.
+ * @property {string} slug - The path suffix to the author page.
  * @property {SocialProps[]} socials - The author's social media links.
  */
 export const AuthorNodeProps = PropTypes.shape({
   name: PropTypes.string.isRequired,
   bio: PropTypes.string.isRequired,
+  tagline: PropTypes.string.isRequired,
   image: PropTypes.object.isRequired,
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
   socials: PropTypes.arrayOf(SocialProps).isRequired,
 });

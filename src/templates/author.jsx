@@ -1,6 +1,7 @@
 import React from "react";
 import {graphql} from "gatsby";
 import PropTypes from "prop-types";
+import AuthorSEO from "../components/AuthorSEO";
 import DisplayLimit from "../components/DisplayLimit";
 import {InternalBackButton} from "../components/InternalBackButton";
 import PageSEO from "../components/PageSEO";
@@ -71,9 +72,21 @@ export default AuthorTemplate;
 // eslint-disable-next-line react/prop-types
 export const Head = ({data, pageContext: {pathSuffix}}) => {
   // eslint-disable-next-line react/prop-types
-  const {name} = data.authorYaml;
+  const author = data.authorYaml;
+  // eslint-disable-next-line react/prop-types
+  const {name, tagline, image: {publicURL}} = data.authorYaml;
   const title = `${name} | Authors`;
-  return <PageSEO title={title} path={`/authors/${pathSuffix}`} />;
+  return (
+    <PageSEO
+      title={title}
+      description={tagline}
+      image={publicURL}
+      imageAlt={name}
+      path={`/authors/${pathSuffix}`}
+    >
+      <AuthorSEO author={author} />
+    </PageSEO>
+  );
 };
 
 
@@ -111,7 +124,12 @@ export const pageQuery = graphql`
     authorYaml(slug: {eq: $pathSuffix}) {
       name
       bio
+      tagline
+      firstName
+      lastName
+      slug
       image {
+        publicURL
         childImageSharp {
               gatsbyImageData(
                 width: 150,
