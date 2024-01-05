@@ -17,26 +17,80 @@ export const onCreateNode = ({node, actions}) => {
 
 export const createSchemaCustomization = ({actions, schema}) => {
   const {createTypes} = actions;
-  const typeDefs = [
-    "type Mdx implements Node { frontmatter: Frontmatter }",
-    schema.buildObjectType({
-      name: "Frontmatter",
-      fields: {
-        author: {
-          type: "AuthorYaml",
-          resolve: (source, args, context, info) => {
-            return context.nodeModel.findOne({
-              type: "AuthorYaml",
-              query: {
-                filter: {slug: {eq: source.author}},
-              },
-            });
-          },
+  createTypes(
+      `type ImageAuthor @dontInfer { 
+        name: String!,
+        url: String 
+      }
+      type ImageSite @dontInfer {
+        name: String!,
+        url: String 
+      }
+      type FeaturedImage @dontInfer {
+        author: ImageAuthor
+        site: ImageSite
+        image: File @fileByRelativePath
+      }
+      type Frontmatter @dontinfer {
+        slug: String!
+        title: String!
+        description: String!
+        published: Date! @dateformat
+        modified: Date! @dateformat
+        author: AuthorYaml!
+        featured: FeaturedImage!
+        category: String!
+        tags: [String!] 
+      }
+      type Mdx implements Node @infer { 
+        frontmatter: Frontmatter! 
+      }
+      `,
+  );
+};
+
+export const createResolvers = ({createResolvers}) => {
+  createResolvers({
+    Frontmatter: {
+      author: {
+        resolve: (source, args, context, info) => {
+          return context.nodeModel.findOne({
+            type: "AuthorYaml",
+            query: {
+              filter: {slug: {eq: source.author}},
+            },
+          });
         },
       },
-    }),
-  ];
-  createTypes(typeDefs);
+      category: {
+        resolve(source, args, context, info) {
+          const {category} = source;
+          if (source.category == null) {
+            return "uncategorized";
+          }
+          return category;
+        },
+      },
+      modified: {
+        resolve: (source, args, context, info) => {
+          const {modified} = source;
+          if (source.modified == null) {
+            return source.published;
+          }
+          return modified;
+        },
+      },
+      tags: {
+        resolve(source, args, context, info) {
+          const {tags} = source;
+          if (source.tags == null || (Array.isArray(tags) && !tags.length)) {
+            return [source.category];
+          }
+          return tags;
+        },
+      },
+    },
+  });
 };
 
 export const createPages = async ({actions, reporter, graphql}) => {
