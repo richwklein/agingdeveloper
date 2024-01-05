@@ -1,5 +1,4 @@
 import {readFileSync} from "fs";
-import YAML from "js-yaml";
 import {resolve as pathResolve} from "path";
 import readingTime from "reading-time";
 import slug from "slug";
