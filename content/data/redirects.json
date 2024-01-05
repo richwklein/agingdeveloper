@@ -2,26 +2,26 @@
   {
     "fromPath": "/article/rss-dead-long-live-rss",
     "toPath": "/article/2021-05-17-rss-dead-long-live-rss",
-    "isPermanent": true,
+    "isPermanent": true
   },
   {
     "fromPath": "/article/2020/08/14/default-http-config",
     "toPath": "/article/2020-08-14-default-http-config",
-    "isPermanent": true,
+    "isPermanent": true
   },
   {
     "fromPath": "/article/2020/08/08/custoPathm-domain",
     "toPath": "/article/2020-08-08-custoPathm-domain",
-    "isPermanent": true,
+    "isPermanent": true
   },
   {
     "fromPath": "/article/2020/07/26/false-start",
     "toPath": "/article/2020-07-26-false-start",
-    "isPermanent": true,
+    "isPermanent": true
   },
   {
     "fromPath": "/article/2020/07/21/intro",
     "toPath": "/article/2020-07-21-intro",
-    "isPermanent": true,
-  },
-];
+    "isPermanent": true
+  }
+]
