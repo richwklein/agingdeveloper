@@ -20,7 +20,7 @@ import {mdxNodeToArticleDigest} from "../props/converters.mjs";
 const AuthorTemplate = ({data, pageContext}) => {
   const {limit} = pageContext;
   const {edges, totalCount} = data.allMdx;
-  const {name, image, bio, socials} = data.authorYaml;
+  const {name, image, bio, socials} = data.authorJson;
   const articles = edges.map((edge) => {
     return mdxNodeToArticleDigest(edge.node);
   });
@@ -43,7 +43,7 @@ const AuthorTemplate = ({data, pageContext}) => {
  * @property {Object[]} data.allMdx.edges - All the edges in the graphql.
  * @property {MDXNodeProps} data.allMdx.edges.node - The mdx nodes.
  * @property {number} data.allMdx.totalCount - The count of nodes in the graphql.
- * @property {AuthorNodeProps} data.authorYaml - The author node.
+ * @property {AuthorNodeProps} data.authorJson - The author node.
  * @property {Object} pageContext - The additional context passed to the page.
  * @property {number} pageContext.limit - The limit of articles to show on the page.
  * @property {string} pageContext.pathSuffix - The suffix (slug) of the url for these pages.
@@ -58,7 +58,7 @@ AuthorTemplate.propTypes = {
       ).isRequired,
       totalCount: PropTypes.number.isRequired,
     }).isRequired,
-    authorYaml: AuthorNodeProps.isRequired,
+    authorJson: AuthorNodeProps.isRequired,
   }).isRequired,
   pageContext: PropTypes.shape({
     limit: PropTypes.number.isRequired,
@@ -71,7 +71,7 @@ export default AuthorTemplate;
 // eslint-disable-next-line react/prop-types
 export const Head = ({data, pageContext: {pathSuffix}}) => {
   // eslint-disable-next-line react/prop-types
-  const {name} = data.authorYaml;
+  const {name} = data.authorJson;
   const title = `${name} | Authors`;
   return <PageSEO title={title} path={`/authors/${pathSuffix}`} />;
 };
@@ -108,7 +108,7 @@ export const pageQuery = graphql`
       }
       totalCount
     }
-    authorYaml(slug: {eq: $pathSuffix}) {
+    authorJson(slug: {eq: $pathSuffix}) {
       name
       bio
       image {

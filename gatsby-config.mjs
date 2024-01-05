@@ -6,12 +6,11 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 import {readFileSync} from "fs";
-import YAML from "js-yaml";
 import {dirname, join} from "path";
 import {fileURLToPath} from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const siteData = YAML.load(readFileSync("content/data/site.yaml"))[0];
+const siteData = JSON.parse(readFileSync("content/data/site.json"))[0];
 
 const {
   ANALYTICS_TRACKING_ID,
@@ -34,8 +33,8 @@ const config = {
     "gatsby-plugin-sitemap",
     "gatsby-plugin-sharp",
     "gatsby-plugin-sitemap",
+    "gatsby-transformer-json",
     "gatsby-transformer-sharp",
-    "gatsby-transformer-yaml",
     {
       resolve: "gatsby-plugin-google-gtag",
       options: {

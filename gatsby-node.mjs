@@ -32,13 +32,13 @@ export const createSchemaCustomization = ({actions, schema}) => {
         site: ImageSite
         image: File @fileByRelativePath
       }
-      type Frontmatter @dontinfer {
+      type Frontmatter @dontInfer {
         slug: String!
         title: String!
         description: String!
         published: Date! @dateformat
         modified: Date! @dateformat
-        author: AuthorYaml!
+        author: AuthorJson!
         featured: FeaturedImage!
         category: String!
         tags: [String!] 
@@ -53,10 +53,11 @@ export const createSchemaCustomization = ({actions, schema}) => {
 export const createResolvers = ({createResolvers}) => {
   createResolvers({
     Frontmatter: {
+      type: "AuthorJson!",
       author: {
         resolve: (source, args, context, info) => {
           return context.nodeModel.findOne({
-            type: "AuthorYaml",
+            type: "AuthorJson",
             query: {
               filter: {slug: {eq: source.author}},
             },
@@ -64,6 +65,7 @@ export const createResolvers = ({createResolvers}) => {
         },
       },
       category: {
+        type: "String!",
         resolve(source, args, context, info) {
           const {category} = source;
           if (source.category == null) {
@@ -73,6 +75,8 @@ export const createResolvers = ({createResolvers}) => {
         },
       },
       modified: {
+        type: "Date!",
+        extensions: {dateformat: {}},
         resolve: (source, args, context, info) => {
           const {modified} = source;
           if (source.modified == null) {
@@ -82,6 +86,7 @@ export const createResolvers = ({createResolvers}) => {
         },
       },
       tags: {
+        type: "[String!]",
         resolve(source, args, context, info) {
           const {tags} = source;
           if (source.tags == null || (Array.isArray(tags) && !tags.length)) {
@@ -122,7 +127,7 @@ export const createPages = async ({actions, reporter, graphql}) => {
         category: fieldValue
       }
     }
-    authors: allAuthorYaml(sort: {name: ASC}) {
+    authors: allAuthorJson(sort: {name: ASC}) {
       edges {
         node {
           slug
@@ -240,7 +245,7 @@ const createAuthorPages = (createPage, authors) => {
 };
 
 const createRedirects = (createRedirect) => {
-  const redirects = JSON.parse(readFileSync("redirects.json"));
+  const redirects = JSON.parse(readFileSync("content/data/redirects.json"));
   redirects.forEach((redirect) =>
     createRedirect({
       fromPath: redirect.fromPath,
