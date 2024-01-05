@@ -1,3 +1,5 @@
+import {readFileSync} from "fs";
+import YAML from "js-yaml";
 import {resolve as pathResolve} from "path";
 import readingTime from "reading-time";
 import slug from "slug";
@@ -239,29 +241,12 @@ const createAuthorPages = (createPage, authors) => {
 };
 
 const createRedirects = (createRedirect) => {
-  createRedirect({
-    fromPath: "/article/rss-dead-long-live-rss",
-    toPath: "/article/2021-05-17-rss-dead-long-live-rss",
-    isPermanent: true,
-  });
-  createRedirect({
-    fromPath: "/article/2020/08/14/default-http-config",
-    toPath: "/article/2020-08-14-default-http-config",
-    isPermanent: true,
-  });
-  createRedirect({
-    fromPath: "/article/2020/08/08/custom-domain",
-    toPath: "/article/2020-08-08-custom-domain",
-    isPermanent: true,
-  });
-  createRedirect({
-    fromPath: "/article/2020/07/26/false-start",
-    toPath: "/article/2020-07-26-false-start",
-    isPermanent: true,
-  });
-  createRedirect({
-    fromPath: "/article/2020/07/21/intro",
-    toPath: "/article/2020-07-21-intro",
-    isPermanent: true,
-  });
+  const redirects = JSON.parse(readFileSync("redirects.json"));
+  redirects.forEach((redirect) =>
+    createRedirect({
+      fromPath: redirect.fromPath,
+      toPath: redirect.toPath,
+      isPermanent: redirect.isPermanent,
+    }),
+  );
 };
