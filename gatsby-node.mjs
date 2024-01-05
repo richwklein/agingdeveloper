@@ -53,6 +53,7 @@ export const createSchemaCustomization = ({actions, schema}) => {
 export const createResolvers = ({createResolvers}) => {
   createResolvers({
     Frontmatter: {
+      type: "AuthorJson!",
       author: {
         resolve: (source, args, context, info) => {
           return context.nodeModel.findOne({
@@ -64,6 +65,7 @@ export const createResolvers = ({createResolvers}) => {
         },
       },
       category: {
+        type: "String!",
         resolve(source, args, context, info) {
           const {category} = source;
           if (source.category == null) {
@@ -73,6 +75,8 @@ export const createResolvers = ({createResolvers}) => {
         },
       },
       modified: {
+        type: "Date!",
+        extensions: {dateformat: {}},
         resolve: (source, args, context, info) => {
           const {modified} = source;
           if (source.modified == null) {
@@ -82,6 +86,7 @@ export const createResolvers = ({createResolvers}) => {
         },
       },
       tags: {
+        type: "[String!]",
         resolve(source, args, context, info) {
           const {tags} = source;
           if (source.tags == null || (Array.isArray(tags) && !tags.length)) {
