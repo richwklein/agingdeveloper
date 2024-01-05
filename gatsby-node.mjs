@@ -32,7 +32,7 @@ export const createSchemaCustomization = ({actions, schema}) => {
         site: ImageSite
         image: File @fileByRelativePath
       }
-      type Frontmatter @dontinfer {
+      type Frontmatter @dontInfer {
         slug: String!
         title: String!
         description: String!
