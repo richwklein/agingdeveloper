@@ -38,7 +38,7 @@ export const createSchemaCustomization = ({actions, schema}) => {
         description: String!
         published: Date! @dateformat
         modified: Date! @dateformat
-        author: AuthorYaml!
+        author: AuthorJson!
         featured: FeaturedImage!
         category: String!
         tags: [String!] 
@@ -56,7 +56,7 @@ export const createResolvers = ({createResolvers}) => {
       author: {
         resolve: (source, args, context, info) => {
           return context.nodeModel.findOne({
-            type: "AuthorYaml",
+            type: "AuthorJson",
             query: {
               filter: {slug: {eq: source.author}},
             },
@@ -122,7 +122,7 @@ export const createPages = async ({actions, reporter, graphql}) => {
         category: fieldValue
       }
     }
-    authors: allAuthorYaml(sort: {name: ASC}) {
+    authors: allAuthorJson(sort: {name: ASC}) {
       edges {
         node {
           slug
@@ -240,7 +240,7 @@ const createAuthorPages = (createPage, authors) => {
 };
 
 const createRedirects = (createRedirect) => {
-  const redirects = JSON.parse(readFileSync("redirects.json"));
+  const redirects = JSON.parse(readFileSync("content/data/redirects.json"));
   redirects.forEach((redirect) =>
     createRedirect({
       fromPath: redirect.fromPath,

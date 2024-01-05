@@ -8,7 +8,7 @@ import {graphql, useStaticQuery} from "gatsby";
 export const useSiteData = () => {
   const data = useStaticQuery(graphql`
   query SiteQuery {
-    siteYaml(slug: {eq: "agingdeveloper"}) {
+    siteJson(slug: {eq: "agingdeveloper"}) {
       title
       tagline
       category
@@ -36,10 +36,10 @@ export const useSiteData = () => {
   }
 `);
 
-  const siteYaml = data.siteYaml;
-  siteYaml.url = data.site.siteMetadata.siteUrl;
+  const siteJson = data.siteJson;
+  siteJson.url = data.site.siteMetadata.siteUrl;
 
-  return siteYaml;
+  return siteJson;
 };
 
 export default useSiteData;
