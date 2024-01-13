@@ -29,7 +29,7 @@ An alternatively headline might be: *know how your service communicates with it'
 When the JVM resolves hostnames to ip addresses it caches those lookups. Depending on the configuration this might not be refreshed until the JVM is restarted. This can especially be an issue if you are using AWS services where the IP Address may
 change for a service. I've seen this occurs with aurora failovers and other scenarios. You can prevent this by setting `networkaddress.cache.ttl` in the `$JAVA_HOME/jre/lib/security/java.security` file to some low number of seconds. Amazon recommends no more than 60 seconds.
 
-```java
+```jsx
 networkaddress.cache.ttl=5
 ```
 
@@ -40,7 +40,7 @@ This is fine when you are communicating over HTTP/2 because that protocol allows
 
 Http/1.1 however, can only have a single request over the connection at a time. This can create a Head-of-line **(HOL)** blocking issue if you have to make multiple concurrent requests to the same dependency. The result of which may cause your service's requests to back up and cause a cascading failure. The most basic way to mitigated this is by increasing the maximum connections per route.
 
-```java
+```kotlin
 HttpClientBuilder builder = HttpClients.custom()
 builder.setMaxConnPerRoute(20)
 return builder.build()
@@ -49,7 +49,7 @@ return builder.build()
 #### Request Timeout
 A lot of clients by default use the timeout set by the OS. This is true for clients in both Java and Go. This is another possible way to cause cascading failures. The best advice is to configure your client with something other than the default. The example below does this globally for the client, but you can also set these on a per request basis.
 
-```java
+```kotlin
 RequestConfig requestConfig = RequestConfig.custom()
         .setConnectTimeout(5000)
         .setSocketTimeout(5000)

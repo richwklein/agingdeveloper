@@ -54,7 +54,7 @@ Part of the hesitancy with creating tests before was around all the scaffolding 
 
 I hit a few stumbling blocks along the way which made / makes development more difficult than it needed to be. I couldn't get the site to build locally with those experimental react components so the rebuild was done using the long term releases instead which meant *no partial hydration*.
 
-```js
+```shell
 Module not found: Error: Can't resolve '@mdx-js/react'
 ```
 
@@ -118,7 +118,7 @@ Almost all the components now have [prop-type](https://www.npmjs.com/package/pro
 
 I previously had support for [guest authors](/article/2020-08-22-guest-authors). When I was first looking to rebuild I thought that might be a feature that hit the cutting room floor. The mappings in the *gatsby-config* file was not very robust and honestly no one else is going to publish to this thing. However, getting author support re-added was pretty easy, and I like the way I did it. Instead of an **author** subdirectory in the data folder, I have a single **author.yaml** file now. The file contains a list of author nodes. I then added some schema customization to the *gatsby-node* file that maps the author in the mdx frontmatter to the AuthorYaml node via a "slug" property in the yaml.
 
-```js
+```jsx
 export const createSchemaCustomization = ({actions, schema}) => {
   const {createTypes} = actions;
   const typeDefs = [
@@ -146,7 +146,7 @@ export const createSchemaCustomization = ({actions, schema}) => {
 
 Before the rebuild all links in the mdx content files were rendered as regular anchors tags. I was able to replace those anchors with a new ```MDXLink``` component. This component tests the href. If the href is a relative url then the internal Gatsby link component is used. If the url starts out with the same host as the site then the href is converted to a relative link. Otherwise, an external link is used. This is done by using the components property of the ```MDXProvider```.
 
-```js
+```jsx
 const components = {
   a: MDXLink,
 };
