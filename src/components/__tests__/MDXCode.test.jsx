@@ -27,4 +27,9 @@ describe("MDXCode", () => {
     const {container} = renderComponent(div);
     expect(container.firstChild).toContainHTML("<pre><div>This is a div block</div></pre>");
   });
+
+  test("that a string is wrapped in a pre tag.", () => {
+    const {container} = renderComponent("content");
+    expect(container.firstChild).toContainHTML("<pre>content</pre>");
+  });
 });
