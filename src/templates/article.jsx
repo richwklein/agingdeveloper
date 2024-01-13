@@ -7,6 +7,7 @@ import {ArticleByLine} from "../components/ArticleByLine";
 import ArticleImage from "../components/ArticleImage";
 import ArticleTagGrid from "../components/ArticleTagGrid";
 import ArticleTimeToRead from "../components/ArticleTimeToRead";
+import MDXCode from "../components/MDXCode";
 import MDXLink from "../components/MDXLink";
 import PageSEO from "../components/PageSEO";
 import TitleBlock from "../components/TitleBlock";
@@ -14,6 +15,7 @@ import {useSiteData} from "../hooks/useSiteData";
 import {ChildrenProps, FrontmatterProps, TimeToReadDigestProps} from "../props";
 
 const components = {
+  pre: MDXCode,
   a: MDXLink,
 };
 

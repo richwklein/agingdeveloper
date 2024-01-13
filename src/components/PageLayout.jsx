@@ -7,7 +7,6 @@ import theme from "../styles/theme";
 import InnerContainer from "./InnerContainer";
 import PageFooter from "./PageFooter";
 import PageHeader from "./PageHeader";
-import "prismjs/themes/prism-tomorrow.css";
 import "../styles/layout.css";
 
 /**
