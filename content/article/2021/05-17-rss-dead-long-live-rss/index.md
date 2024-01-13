@@ -66,7 +66,7 @@ So instead of using one of the pre-built plugins, I rolled my own support.
 The first thing I did was add the [feed](https://www.npmjs.com/package/feed) library as a dependency. It does all the
 heavy lifting for creating RSS 2.0, JSON Feed 1.0, and Atom 1.0 formats.
 
-```bash
+```shell
 npm install --save feed
 ```
 
@@ -78,7 +78,7 @@ You can see the full implementation [here](https://github.com/richwklein/agingde
 The posts are sorted in the graphql by date then title.
 
 
-```js
+```graphql
       allMdx(
         sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
       )
@@ -87,7 +87,7 @@ The posts are sorted in the graphql by date then title.
 
 The **feed** library does most of the heavy lifting here. I just pass the properties the mdx nodes in the graph into it.
 
-```js
+```jsx
   articles.map(({node}) => {
     const {title, slug, description, date} = node.frontmatter;
     const author = node.frontmatter.author;
@@ -117,7 +117,7 @@ The **feed** library does most of the heavy lifting here. I just pass the proper
 I created a [FeedLinks](https://github.com/richwklein/agingdeveloper/blob/1381c628fff2e674e5a84345bd21bb8617cb0b17/src/components/FeedLinks.js) 
 component that is used for the auto-discovery links that go in the head of the site.
 
-```js
+```jsx
 const FeedLinks = ({siteName, siteUrl}) => {
   return (
     <Helmet>
@@ -139,7 +139,7 @@ const FeedLinks = ({siteName, siteUrl}) => {
 
 To ease discovery I also placed an RSS icon in the bottom bar on the site which links to the rss feed file.
 
-```js
+```jsx
   <Grid item sm={12} md={4}>
     <IconButton component={ExternalLink}
       title={`${title} RSS`}

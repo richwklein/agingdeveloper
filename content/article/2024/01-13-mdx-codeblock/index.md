@@ -146,7 +146,7 @@ I added a snapshot test to make sure the component was rendering like I wanted a
 
 The prismjs package had been installed directly so that one of the built-in themes could be used. I remove the reference to that theme from the *PageLayout* component. Uninstalled the old plugin and remove the reference to it from the *gatsby-config.mjs*
 
-```js
+```jsx
 -          {
 -            resolve: "gatsby-remark-prismjs",
 -            options: {
