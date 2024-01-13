@@ -8,8 +8,7 @@ const domainRegex = /^http[s]*:\/\/[www.]*agingdeveloper\.(com|net)[/]?/;
 
 
 /**
- * React component used by the {@link MDXProvider} to use when rendering an
- * anchor tag in mdx.
+ * React component used by the {@link MDXProvider} when rendering an anchor tag in mdx.
  *
  * @param {MDXLinkProps} props - The anchor tag props.
  * @return {React.ReactElement} - The react component

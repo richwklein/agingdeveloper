@@ -77,14 +77,6 @@ const config = {
               wrapperStyle: "border: 1px solid rgba(0, 0, 0, 0.12)",
             },
           },
-          {
-            resolve: "gatsby-remark-prismjs",
-            options: {
-              classPrefix: "language-",
-              showLineNumbers: false,
-              noInlineHighlight: false,
-            },
-          },
         ],
       },
     },
