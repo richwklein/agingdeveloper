@@ -89,11 +89,12 @@ export default ArticleTemplate;
 
 // eslint-disable-next-line react/prop-types
 export const Head = ({data: {mdx}, pageContext: {pathSuffix}}) => {
-  // eslint-disable-next-line react/prop-types
-  const {frontmatter: {title, author: {twitterUsername}, featured: {image: {publicURL}}}} = mdx;
+  // eslint-disable-next-line react/prop-types, max-len
+  const {frontmatter: {title, description, author: {twitterUsername}, featured: {image: {publicURL}}}} = mdx;
 
   return <PageSEO
     title={title}
+    description={description}
     path={`/article/${pathSuffix}`}
     image={publicURL}
     isArticle={true}
