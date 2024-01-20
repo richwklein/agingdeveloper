@@ -7,7 +7,7 @@ import PageSEO from "../components/PageSEO";
 import {AuthorDigestProps} from "../props";
 
 const PageAuthor = ({data}) => {
-  const authors = data.allAuthorYaml.edges.map((edge) => {
+  const authors = data.allAuthorJson.edges.map((edge) => {
     return {
       name: edge.node.name,
       slug: edge.node.slug,
@@ -28,13 +28,13 @@ const PageAuthor = ({data}) => {
 /**
  * @typedef PageIndexProps - The props for the index page.
  * @property {Object} data - The page data.
- * @property {Object} data.allAuthorYaml - A graphql query for all authors.
- * @property {Object[]} data.allAuthorYaml.edges - All the nodes in the lead graphql.
+ * @property {Object} data.allAuthorJson - A graphql query for all authors.
+ * @property {Object[]} data.allAuthorJson.edges - All the nodes in the lead graphql.
 * @property {AuthorDigestProps} data.allMdx.edges.node - The author nodes.
  */
 PageAuthor.propTypes = {
   data: PropTypes.shape({
-    allAuthorYaml: PropTypes.shape({
+    allAuthorJson: PropTypes.shape({
       edges: PropTypes.arrayOf(
           PropTypes.shape({
             node: AuthorDigestProps.isRequired,
@@ -52,7 +52,7 @@ export const Head = () => {
 
 export const pageQuery = graphql`
   query {
-    allAuthorYaml(sort: {name: ASC}) {
+    allAuthorJson(sort: {name: ASC}) {
       edges {
         node {
           name

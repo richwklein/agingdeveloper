@@ -77,7 +77,7 @@ Now on to how I implemented support for authors on the site. [Gatsby](https://ww
 
 In my **_gatsby-config.js_** file I have my file source set up to point at the **_/content_** directory. This allows just a single source plugin to supply both the article and author data. If you want to serve author information out of a different directory than the article information, you can set up a copy of the file source plugin with a path set to a different directory.
 
-```js
+```jsx
 plugins: [
   {
     resolve: "gatsby-source-filesystem",
@@ -96,7 +96,7 @@ plugin to transform the author file content into a node in the graph with the ap
 npm install --save gatsby-transformer-yaml
 ```
 
-```js
+```jsx
 plugins: [
   "gatsby-transformer-yaml",
   {
@@ -113,7 +113,7 @@ After creating my YAML file, **_/content/author/richwklein.yaml_**, and starting
 
 Once I had the author information in the graph, I needed to provide a way to link that information with the articles that the author wrote. I did this by adding an "author" key to the front matter of the article files. The key contains the id of the author to link back to. I then added a "mapping" configuration to the **_gatsby-config.js_** file. 
 
-```js
+```jsx
 mapping: {
   "Mdx.frontmatter.author": "AuthorYaml",
 },
@@ -131,7 +131,7 @@ The [Authors](https://agingdeveloper.com/author) page contains a grid of all the
 
 The author's individual page has their name, bio, social links, and articles they have written. the page is built from a template via **_gatsby-node.js_**. This is done by including the author in the graphql query that runs as part of the build. It outputs a page for each node in the author section of the graph.
 
-```js
+```jsx
 exports.createPages = async ({actions, graphql, reporter}) => {
   const {createPage} = actions;
 

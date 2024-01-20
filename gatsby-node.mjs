@@ -1,3 +1,4 @@
+import {readFileSync} from "fs";
 import {resolve as pathResolve} from "path";
 import readingTime from "reading-time";
 import slug from "slug";
@@ -17,26 +18,85 @@ export const onCreateNode = ({node, actions}) => {
 
 export const createSchemaCustomization = ({actions, schema}) => {
   const {createTypes} = actions;
-  const typeDefs = [
-    "type Mdx implements Node { frontmatter: Frontmatter }",
-    schema.buildObjectType({
-      name: "Frontmatter",
-      fields: {
-        author: {
-          type: "AuthorYaml",
-          resolve: (source, args, context, info) => {
-            return context.nodeModel.findOne({
-              type: "AuthorYaml",
-              query: {
-                filter: {slug: {eq: source.author}},
-              },
-            });
-          },
+  createTypes(
+      `type ImageAuthor @dontInfer { 
+        name: String!,
+        url: String 
+      }
+      type ImageSite @dontInfer {
+        name: String!,
+        url: String 
+      }
+      type FeaturedImage @dontInfer {
+        author: ImageAuthor
+        site: ImageSite
+        image: File @fileByRelativePath
+      }
+      type Frontmatter @dontInfer {
+        slug: String!
+        title: String!
+        description: String!
+        published: Date! @dateformat
+        modified: Date! @dateformat
+        author: AuthorJson!
+        featured: FeaturedImage!
+        category: String!
+        tags: [String!] 
+      }
+      type Mdx implements Node @infer { 
+        frontmatter: Frontmatter! 
+      }
+      `,
+  );
+};
+
+export const createResolvers = ({createResolvers}) => {
+  createResolvers({
+    Frontmatter: {
+      type: "AuthorJson!",
+      author: {
+        resolve: (source, args, context, info) => {
+          return context.nodeModel.findOne({
+            type: "AuthorJson",
+            query: {
+              filter: {slug: {eq: source.author}},
+            },
+          });
         },
       },
-    }),
-  ];
-  createTypes(typeDefs);
+      category: {
+        type: "String!",
+        resolve(source, args, context, info) {
+          const {category} = source;
+          if (source.category == null) {
+            return "uncategorized";
+          }
+          return category;
+        },
+      },
+      modified: {
+        type: "Date!",
+        extensions: {dateformat: {}},
+        resolve: (source, args, context, info) => {
+          const {modified} = source;
+          if (source.modified == null) {
+            return source.published;
+          }
+          return modified;
+        },
+      },
+      tags: {
+        type: "[String!]",
+        resolve(source, args, context, info) {
+          const {tags} = source;
+          if (source.tags == null || (Array.isArray(tags) && !tags.length)) {
+            return [source.category];
+          }
+          return tags;
+        },
+      },
+    },
+  });
 };
 
 export const createPages = async ({actions, reporter, graphql}) => {
@@ -67,7 +127,7 @@ export const createPages = async ({actions, reporter, graphql}) => {
         category: fieldValue
       }
     }
-    authors: allAuthorYaml(sort: {name: ASC}) {
+    authors: allAuthorJson(sort: {name: ASC}) {
       edges {
         node {
           slug
@@ -185,29 +245,12 @@ const createAuthorPages = (createPage, authors) => {
 };
 
 const createRedirects = (createRedirect) => {
-  createRedirect({
-    fromPath: "/article/rss-dead-long-live-rss",
-    toPath: "/article/2021-05-17-rss-dead-long-live-rss",
-    isPermanent: true,
-  });
-  createRedirect({
-    fromPath: "/article/2020/08/14/default-http-config",
-    toPath: "/article/2020-08-14-default-http-config",
-    isPermanent: true,
-  });
-  createRedirect({
-    fromPath: "/article/2020/08/08/custom-domain",
-    toPath: "/article/2020-08-08-custom-domain",
-    isPermanent: true,
-  });
-  createRedirect({
-    fromPath: "/article/2020/07/26/false-start",
-    toPath: "/article/2020-07-26-false-start",
-    isPermanent: true,
-  });
-  createRedirect({
-    fromPath: "/article/2020/07/21/intro",
-    toPath: "/article/2020-07-21-intro",
-    isPermanent: true,
-  });
+  const redirects = JSON.parse(readFileSync("content/data/redirects.json"));
+  redirects.forEach((redirect) =>
+    createRedirect({
+      fromPath: redirect.fromPath,
+      toPath: redirect.toPath,
+      isPermanent: redirect.isPermanent,
+    }),
+  );
 };

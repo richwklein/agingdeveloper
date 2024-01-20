@@ -7,6 +7,7 @@ import {ArticleByLine} from "../components/ArticleByLine";
 import ArticleImage from "../components/ArticleImage";
 import ArticleTagGrid from "../components/ArticleTagGrid";
 import ArticleTimeToRead from "../components/ArticleTimeToRead";
+import MDXCode from "../components/MDXCode";
 import MDXLink from "../components/MDXLink";
 import PageSEO from "../components/PageSEO";
 import TitleBlock from "../components/TitleBlock";
@@ -14,6 +15,7 @@ import {useSiteData} from "../hooks/useSiteData";
 import {ChildrenProps, FrontmatterProps, TimeToReadDigestProps} from "../props";
 
 const components = {
+  pre: MDXCode,
   a: MDXLink,
 };
 
@@ -87,11 +89,12 @@ export default ArticleTemplate;
 
 // eslint-disable-next-line react/prop-types
 export const Head = ({data: {mdx}, pageContext: {pathSuffix}}) => {
-  // eslint-disable-next-line react/prop-types
-  const {frontmatter: {title, author: {twitterUsername}, featured: {image: {publicURL}}}} = mdx;
+  // eslint-disable-next-line react/prop-types, max-len
+  const {frontmatter: {title, description, author: {twitterUsername}, featured: {image: {publicURL}}}} = mdx;
 
   return <PageSEO
     title={title}
+    description={description}
     path={`/article/${pathSuffix}`}
     image={publicURL}
     isArticle={true}
@@ -137,7 +140,7 @@ export const pageQuery = graphql`
                 layout: CONSTRAINED
                 aspectRatio: 2.33
               )
-          }
+            }
           }
         }
       }
