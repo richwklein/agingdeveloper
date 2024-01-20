@@ -140,7 +140,7 @@ export const pageQuery = graphql`
                 layout: CONSTRAINED
                 aspectRatio: 2.33
               )
-          }
+            }
           }
         }
       }
