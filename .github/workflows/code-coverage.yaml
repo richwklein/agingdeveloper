@@ -12,8 +12,10 @@ jobs:
           - name: "Checkout source code"
             uses: "actions/checkout@v4.1.1"
             with:
+              fetch-depth: 0
               ref: ${{ github.ref }}
           - name: "Code Coverage"
+            id: "coverage"
             uses: "ArtiomTr/jest-coverage-report-action@v2.2.6"
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
