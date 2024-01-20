@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/InnerContainer.jsx</title>
+    <title>JSDoc: Source: pages/404.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/InnerContainer.jsx</h1>
+    <h1 class="page-title">Source: pages/404.jsx</h1>
 
     
 
@@ -27,43 +27,90 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import {Container} from "@mui/material";
+import {Box, Typography} from "@mui/material";
+import {graphql} from "gatsby";
 import PropTypes from "prop-types";
-import {ChildrenProps} from "../props";
+import ArticleImage from "../components/ArticleImage";
+import InternalBackButton from "../components/InternalBackButton";
+import PageSEO from "../components/PageSEO";
 
 /**
- * React component that constrains context to a large breakpoint.
+ * React component that renders a 404 page.
  *
- * @param {InnerContainerProps} props - The inner container props.
- * @return {React.ReactElement} - The react component
- *
- * @example
- * &lt;InnerContainer useMain={true}>
- *   &lt;TagBreadcrumb name={category} isCategory={true} />
- *   &lt;TagGrid tags={group} />
- * &lt;/InnerContainer>
+ * @param {Page404Props} props - The 404 page props.
+ * @return {React.ReactElement} - The react component.
  */
-export const InnerContainer = ({children, useMain=false}) => {
-  const component = useMain ? "main" : "div";
-
+const Page404 = ({data: {file}}) => {
   return (
-    &lt;Container maxWidth="lg" component={component}>
-      {children}
-    &lt;/Container>
+    &lt;>
+      &lt;ArticleImage
+        author={{
+          name: "Lachlan Donald",
+          url: "https://unsplash.com/@lox?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash",
+        }}
+        site={{
+          name: "Unsplash",
+          url: "https://unsplash.com/photos/green-signage-on-concrete-road-during-day-time-eaTHXNIUsYM?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash",
+        }}
+        image={file.childImageSharp.gatsbyImageData}
+      />
+      &lt;Box component="header">
+        &lt;Typography variant="h3">
+          Not Found (404)
+        &lt;/Typography>
+      &lt;/Box>
+      &lt;Box component="p">
+        {"The page you are looking for might have been removed,"}
+        &lt;br/>
+        {"had it's name changed, or be temporarily unavailable."}
+      &lt;/Box>
+      &lt;InternalBackButton name="Home" path="/" useViewText={false} />
+    &lt;/>
   );
 };
 
 /**
- * @typedef InnerContainerProps - An inner container.
- * @property {ChildrenProps} children - The children of the component.
- * @property {bool} [useMain=false] - If the html tag should be a main tag.
+ * @typedef Page404Props - The 404 page props
+ * @property {Object} data - The page data.
+ * @property {Object} data.file - The file object.
+ * @property {string} data.file.publicURL - The public url to the image.
+ * @property {Object} data.file.childImageSharp - The image object.
+ * @property {Object} data.file.childImageSharp.gatsbyImageData - The gatsbyImageData.
  */
-InnerContainer.propTypes = {
-  children: ChildrenProps,
-  useMain: PropTypes.bool,
+Page404.propTypes = {
+  data: PropTypes.shape({
+    file: PropTypes.shape({
+      publicURL: PropTypes.string.isRequired,
+      childImageSharp: PropTypes.shape({
+        gatsbyImageData: PropTypes.object.isRequired,
+      }),
+    }),
+  }),
 };
 
-export default InnerContainer;
+export default Page404;
+
+// eslint-disable-next-line react/prop-types
+export const Head = ({data: {file}}) => {
+  // eslint-disable-next-line react/prop-types
+  return (&lt;PageSEO title={"Not Found (404)"} image={file.publicURL} />);
+};
+
+export const pageQuery = graphql`
+  query {
+    file(relativePath: {eq: "image/lachlan-donald-eaTHXNIUsYM-unsplash.jpg"}) {
+      publicURL
+      childImageSharp {
+        gatsbyImageData(
+          width: 1152,
+          placeholder: BLURRED
+          layout: CONSTRAINED
+          aspectRatio: 2.33
+        )
+      }
+    }
+  }
+`;
 </code></pre>
         </article>
     </section>

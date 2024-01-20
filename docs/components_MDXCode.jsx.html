@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/InnerContainer.jsx</title>
+    <title>JSDoc: Source: components/MDXCode.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/InnerContainer.jsx</h1>
+    <h1 class="page-title">Source: components/MDXCode.jsx</h1>
 
     
 
@@ -27,43 +27,60 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import {Container} from "@mui/material";
-import PropTypes from "prop-types";
+import {Highlight, themes} from "prism-react-renderer";
 import {ChildrenProps} from "../props";
 
 /**
- * React component that constrains context to a large breakpoint.
+ * React component used by the {@link MDXProvider} when rendering code in mdx.
  *
- * @param {InnerContainerProps} props - The inner container props.
+ * @param {MDXCodeProps} props - The code tag props.
  * @return {React.ReactElement} - The react component
- *
- * @example
- * &lt;InnerContainer useMain={true}>
- *   &lt;TagBreadcrumb name={category} isCategory={true} />
- *   &lt;TagGrid tags={group} />
- * &lt;/InnerContainer>
  */
-export const InnerContainer = ({children, useMain=false}) => {
-  const component = useMain ? "main" : "div";
+export const MDXCode = ({children}) => {
+  if (children.type != "code") {
+    return (
+      &lt;pre>{children}&lt;/pre>
+    );
+  }
+
+  const {props: {className, children: code}} = children;
+  const language = className?.replace(/language-/, "").trim() || "";
 
   return (
-    &lt;Container maxWidth="lg" component={component}>
-      {children}
-    &lt;/Container>
+    &lt;Highlight
+      theme={themes.vsDark}
+      code={code.trim()}
+      language={language}
+    >
+      {({className, style, tokens, getLineProps, getTokenProps}) => (
+        &lt;pre className={className} style={{...style}}>
+          {tokens.map((line, index) => {
+            const lineProps = getLineProps({line, key: index});
+            return (
+              &lt;div key={index} {...lineProps}>
+                {line.map((token, key) => (
+                  &lt;span key={key}{...getTokenProps({token, key})} />
+                ))}
+              &lt;/div>
+            );
+          },
+          )}
+
+        &lt;/pre>
+      )}
+    &lt;/Highlight>
   );
 };
 
 /**
- * @typedef InnerContainerProps - An inner container.
- * @property {ChildrenProps} children - The children of the component.
- * @property {bool} [useMain=false] - If the html tag should be a main tag.
+ * @typedef MDXCodeProps - The code tag props
+ * @property {ChildrenProps} children - The children of the tag.
  */
-InnerContainer.propTypes = {
+MDXCode.propTypes = {
   children: ChildrenProps,
-  useMain: PropTypes.bool,
 };
 
-export default InnerContainer;
+export default MDXCode;
 </code></pre>
         </article>
     </section>
