@@ -1,11 +1,17 @@
 import React from "react";
-import {Box, Stack, Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import {graphql} from "gatsby";
+import PropTypes from "prop-types";
 import ArticleImage from "../components/ArticleImage";
 import InternalBackButton from "../components/InternalBackButton";
 import PageSEO from "../components/PageSEO";
 
-// TODO everything
+/**
+ * React component that renders a 404 page.
+ *
+ * @param {Page404Props} props - The 404 page props.
+ * @return {React.ReactElement} - The react component.
+ */
 const Page404 = ({data: {file}}) => {
   return (
     <>
@@ -33,6 +39,25 @@ const Page404 = ({data: {file}}) => {
       <InternalBackButton name="Home" path="/" useViewText={false} />
     </>
   );
+};
+
+/**
+ * @typedef Page404Props - The 404 page props
+ * @property {Object} data - The page data.
+ * @property {Object} data.file - The file object.
+ * @property {string} data.file.publicURL - The public url to the image.
+ * @property {Object} data.file.childImageSharp - The image object.
+ * @property {Object} data.file.childImageSharp.gatsbyImageData - The gatsbyImageData.
+ */
+Page404.propTypes = {
+  data: PropTypes.shape({
+    file: PropTypes.shape({
+      publicURL: PropTypes.string.isRequired,
+      childImageSharp: PropTypes.shape({
+        gatsbyImageData: PropTypes.object.isRequired,
+      }),
+    }),
+  }),
 };
 
 export default Page404;
