@@ -9,5 +9,11 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v3
-            - uses: ArtiomTr/jest-coverage-report-action@v2
+          - name: "Checkout source code"
+            uses: "actions/checkout@v3"
+            with:
+              ref: ${{ github.ref }}
+          - name: "Code Coverage"
+            uses: "ArtiomTr/jest-coverage-report-action@v2"
+            with: 
+              github-token: ${{ secrets.SECRET_TOKEN }}

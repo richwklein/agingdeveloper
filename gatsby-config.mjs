@@ -127,6 +127,7 @@ const config = {
         fastHash: true,
       },
     },
+    "gatsby-plugin-offline", // Listed last for correct ordering with gatsby-plugin-manifest
   ],
 };
 
