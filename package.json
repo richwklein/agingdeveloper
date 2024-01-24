@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "type": "commonjs",
   "scripts": {
     "build": "gatsby build",

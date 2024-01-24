@@ -97,7 +97,7 @@ export const Head = ({data: {mdx}, pageContext: {pathSuffix}}) => {
     description={description}
     path={`/article/${pathSuffix}`}
     image={publicURL}
-    isArticle={true}
+    ogType="article"
     twitterCreator={twitterUsername} />;
 };
 

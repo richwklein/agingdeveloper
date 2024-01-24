@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {AuthorNodeProps} from "../props";
+import PageSEO from "./PageSEO";
 
 /**
  * A react component for rendering the head of an author page.
@@ -8,12 +9,12 @@ import {AuthorNodeProps} from "../props";
  * @param {AuthorSEOProps} props - The author page seo props.
  * @return {React.ReactElement} - The react component.
  */
-export const AuthorSEO = ({author}) => {
+export const AuthorSEO = ({author, writeCount}) => {
   const ld = {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
-    "dateCreated": "2019-12-23T12:34:00-05:00",
-    "dateModified": "2019-12-26T14:53:00-05:00",
+    "dateCreated": author.published,
+    "dateModified": author.modified,
     "mainEntity": {
       "@type": "Person",
       "name": author.name,
@@ -21,7 +22,7 @@ export const AuthorSEO = ({author}) => {
       "agentInteractionStatistic": {
         "@type": "InteractionCounter",
         "interactionType": "https://schema.org/WriteAction",
-        "userInteractionCount": 2346,
+        "userInteractionCount": writeCount,
       },
       "description": author.tagline,
       "image": author.image.publicURL,
@@ -33,25 +34,32 @@ export const AuthorSEO = ({author}) => {
   const json =JSON.stringify(ld);
 
   return (
-    <>
-      <meta id="og:type" property="og:type" content="profile" />
+    <PageSEO
+      title={`${author.name} | Authors`}
+      description={author.tagline}
+      image={author.image.publicURL}
+      imageAlt={author.name}
+      path={`/authors/${author.slug}`}
+      ogType="profile"
+    >
       <meta property="profile:first_name" content={author.firstName} />
       <meta property="profile:last_name" content={author.lastName} />
       <meta property="profile:username" content={author.slug} />
       <script id="ld-json" type="application/ld+json">
         {json}
       </script>
-
-    </>
+    </PageSEO>
   );
 };
 
 /**
  * @typedef AuthorSEOProps - The SEO Head for the author props.
- * @property {AuthorNodeProps} - The author graphql node.
+ * @property {AuthorNodeProps} author - The author graphql node.
+ * @property {number} writeCount - The total number of written articles by the author.
  */
 AuthorSEO.propTypes = {
-  author: AuthorNodeProps,
+  author: AuthorNodeProps.isRequired,
+  writeCount: PropTypes.number.isRequired,
 };
 
 export default AuthorSEO;

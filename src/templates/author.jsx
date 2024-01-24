@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import AuthorSEO from "../components/AuthorSEO";
 import DisplayLimit from "../components/DisplayLimit";
 import {InternalBackButton} from "../components/InternalBackButton";
-import PageSEO from "../components/PageSEO";
 import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
 import SocialButtonBar from "../components/SocialButtonBar";
 import TitleBlock from "../components/TitleBlock";
@@ -70,20 +69,9 @@ AuthorTemplate.propTypes = {
 export default AuthorTemplate;
 
 // eslint-disable-next-line react/prop-types
-export const Head = ({data, pageContext: {pathSuffix}}) => {
-  // eslint-disable-next-line react/prop-types
-  const {name, tagline, image: {publicURL}} = data.authorJson;
-  const title = `${name} | Authors`;
+export const Head = ({data: {allMdx: {totalCount}, authorJson}}) => {
   return (
-    <PageSEO
-      title={title}
-      description={tagline}
-      image={publicURL}
-      imageAlt={name}
-      path={`/authors/${pathSuffix}`}
-    >
-      <AuthorSEO author={author} />
-    </PageSEO>
+    <AuthorSEO author={authorJson} writeCount={totalCount} />
   );
 };
 
@@ -141,6 +129,8 @@ export const pageQuery = graphql`
         name
         url
       }
+      published(formatString: "YYYY-MM-DDTHH:MM:SS")
+      modified(formatString: "YYYY-MM-DDTHH:MM:SS")
     }
   }
 `;

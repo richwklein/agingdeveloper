@@ -182,6 +182,8 @@ export const SocialProps = PropTypes.shape({
  * @property {string} lastName - The author's last name.
  * @property {string} slug - The path suffix to the author page.
  * @property {SocialProps[]} socials - The author's social media links.
+ * @property {string} published - The published date of the author's data.
+ * @property {string} modified - The last modified date of the author's data.
  */
 export const AuthorNodeProps = PropTypes.shape({
   name: PropTypes.string.isRequired,
@@ -192,4 +194,6 @@ export const AuthorNodeProps = PropTypes.shape({
   lastName: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
   socials: PropTypes.arrayOf(SocialProps).isRequired,
+  published: PropTypes.string.isRequired,
+  modified: PropTypes.string.isRequired,
 });
