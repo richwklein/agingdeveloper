@@ -1,9 +1,9 @@
 import React from "react";
 import {graphql} from "gatsby";
 import PropTypes from "prop-types";
+import AuthorSEO from "../components/AuthorSEO";
 import DisplayLimit from "../components/DisplayLimit";
 import {InternalBackButton} from "../components/InternalBackButton";
-import PageSEO from "../components/PageSEO";
 import SecondaryArticleGrid from "../components/SecondaryArticleGrid";
 import SocialButtonBar from "../components/SocialButtonBar";
 import TitleBlock from "../components/TitleBlock";
@@ -69,11 +69,10 @@ AuthorTemplate.propTypes = {
 export default AuthorTemplate;
 
 // eslint-disable-next-line react/prop-types
-export const Head = ({data, pageContext: {pathSuffix}}) => {
-  // eslint-disable-next-line react/prop-types
-  const {name} = data.authorJson;
-  const title = `${name} | Authors`;
-  return <PageSEO title={title} path={`/authors/${pathSuffix}`} />;
+export const Head = ({data: {allMdx: {totalCount}, authorJson}}) => {
+  return (
+    <AuthorSEO author={authorJson} writeCount={totalCount} />
+  );
 };
 
 
@@ -111,7 +110,12 @@ export const pageQuery = graphql`
     authorJson(slug: {eq: $pathSuffix}) {
       name
       bio
+      tagline
+      firstName
+      lastName
+      slug
       image {
+        publicURL
         childImageSharp {
               gatsbyImageData(
                 width: 150,
@@ -125,6 +129,8 @@ export const pageQuery = graphql`
         name
         url
       }
+      published(formatString: "YYYY-MM-DDTHH:MM:SS")
+      modified(formatString: "YYYY-MM-DDTHH:MM:SS")
     }
   }
 `;

@@ -11,7 +11,6 @@ const PageAuthor = ({data}) => {
     return {
       name: edge.node.name,
       slug: edge.node.slug,
-      email: edge.node.email,
       tagline: edge.node.tagline,
       image: edge.node.image.childImageSharp.gatsbyImageData,
     };

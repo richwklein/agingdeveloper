@@ -18,85 +18,169 @@ export const onCreateNode = ({node, actions}) => {
 
 export const createSchemaCustomization = ({actions, schema}) => {
   const {createTypes} = actions;
-  createTypes(
-      `type ImageAuthor @dontInfer { 
-        name: String!,
-        url: String 
-      }
-      type ImageSite @dontInfer {
-        name: String!,
-        url: String 
-      }
-      type FeaturedImage @dontInfer {
-        author: ImageAuthor
-        site: ImageSite
-        image: File @fileByRelativePath
-      }
-      type Frontmatter @dontInfer {
-        slug: String!
-        title: String!
-        description: String!
-        published: Date! @dateformat
-        modified: Date! @dateformat
-        author: AuthorJson!
-        featured: FeaturedImage!
-        category: String!
-        tags: [String!] 
-      }
-      type Mdx implements Node @infer { 
-        frontmatter: Frontmatter! 
-      }
-      `,
-  );
-};
-
-export const createResolvers = ({createResolvers}) => {
-  createResolvers({
-    Frontmatter: {
-      type: "AuthorJson!",
-      author: {
-        resolve: (source, args, context, info) => {
-          return context.nodeModel.findOne({
-            type: "AuthorJson",
-            query: {
-              filter: {slug: {eq: source.author}},
-            },
-          });
+  const typeDefs = [
+    schema.buildObjectType({
+      name: "Socials",
+      fields: {
+        name: "String!",
+        url: "String!",
+      },
+      extensions: {
+        infer: false,
+      },
+    }),
+    schema.buildObjectType({
+      name: "AuthorJson",
+      fields: {
+        slug: "String!",
+        name: "String!",
+        firstName: "String!",
+        lastName: "String!",
+        image: {
+          type: "File!",
+          extensions: {
+            fileByRelativePath: {},
+          },
+        },
+        tagline: "String!",
+        bio: "String!",
+        twitterUsername: "String",
+        socials: "[Socials!]",
+        published: {
+          type: "Date!",
+          extensions: {
+            dateformat: {},
+          },
+        },
+        modified: {
+          type: "Date!",
+          extensions: {
+            dateformat: {},
+          },
+          resolve: (source, args, context, info) => {
+            const {modified} = source;
+            if (source.modified == null) {
+              return source.published;
+            }
+            return modified;
+          },
         },
       },
-      category: {
-        type: "String!",
-        resolve(source, args, context, info) {
-          const {category} = source;
-          if (source.category == null) {
-            return "uncategorized";
-          }
-          return category;
+      interfaces: ["Node"],
+      extensions: {
+        infer: true,
+      },
+    }),
+    schema.buildObjectType({
+      name: "ImageAuthor",
+      fields: {
+        name: "String!",
+        url: "String!",
+      },
+      extensions: {
+        infer: false,
+      },
+    }),
+    schema.buildObjectType({
+      name: "ImageSite",
+      fields: {
+        name: "String!",
+        url: "String!",
+      },
+      extensions: {
+        infer: false,
+      },
+    }),
+    schema.buildObjectType({
+      name: "FeaturedImage",
+      fields: {
+        author: "ImageAuthor",
+        site: "ImageSite",
+        image: {
+          type: "File!",
+          extensions: {
+            fileByRelativePath: {},
+          },
         },
       },
-      modified: {
-        type: "Date!",
-        extensions: {dateformat: {}},
-        resolve: (source, args, context, info) => {
-          const {modified} = source;
-          if (source.modified == null) {
-            return source.published;
-          }
-          return modified;
+      extensions: {
+        infer: false,
+      },
+    }),
+    schema.buildObjectType({
+      name: "Frontmatter",
+      fields: {
+        slug: "String!",
+        title: "String!",
+        description: "String!",
+        featured: "FeaturedImage!",
+        published: {
+          type: "Date!",
+          extensions: {
+            dateformat: {},
+          },
+        },
+        modified: {
+          type: "Date!",
+          extensions: {
+            dateformat: {},
+          },
+          resolve: (source, args, context, info) => {
+            const {modified} = source;
+            if (source.modified == null) {
+              return source.published;
+            }
+            return modified;
+          },
+        },
+        author: {
+          type: "AuthorJson!",
+          resolve: (source, args, context, info) => {
+            return context.nodeModel.findOne({
+              type: "AuthorJson",
+              query: {
+                filter: {slug: {eq: source.author}},
+              },
+            });
+          },
+        },
+        category: {
+          type: "String!",
+          resolve(source, args, context, info) {
+            const {category} = source;
+            if (source.category == null) {
+              return "uncategorized";
+            }
+            return category;
+          },
+        },
+        tags: {
+          type: "[String!]",
+          resolve(source, args, context, info) {
+            const {tags} = source;
+            if (source.tags == null || (Array.isArray(tags) && !tags.length)) {
+              return [source.category];
+            }
+            return tags;
+          },
         },
       },
-      tags: {
-        type: "[String!]",
-        resolve(source, args, context, info) {
-          const {tags} = source;
-          if (source.tags == null || (Array.isArray(tags) && !tags.length)) {
-            return [source.category];
-          }
-          return tags;
-        },
+      extensions: {
+        infer: false,
       },
-    },
-  });
+    }),
+    schema.buildObjectType({
+      name: "Mdx",
+      fields: {
+        frontmatter: "Frontmatter!",
+      },
+      interfaces: ["Node"],
+      extensions: {
+        infer: true,
+      },
+    }),
+  ];
+  createTypes(typeDefs);
 };
 
 export const createPages = async ({actions, reporter, graphql}) => {
@@ -150,6 +234,11 @@ export const createPages = async ({actions, reporter, graphql}) => {
 
   // create redirects where pages have moved around
   createRedirects(createRedirect);
+
+  /**
+   * TODO kick off a job from here to create the rss feeds
+   * https://www.gatsbyjs.com/docs/reference/config-files/actions/#createJobV2
+   */
 };
 
 const createArticlePages = (createPage, articles) => {

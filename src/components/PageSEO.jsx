@@ -17,7 +17,7 @@ export const PageSEO = ({
   image,
   imageAlt,
   twitterCreator,
-  isArticle=false,
+  ogType,
   children}) => {
   const {
     title: siteTitle,
@@ -27,8 +27,16 @@ export const PageSEO = ({
     twitterUsername: siteTwitterUsername,
     image: siteImage} = useSiteData();
 
+  const ld = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": siteTitle,
+    "url": siteUrl,
+  };
+  const json =JSON.stringify(ld);
+
   const seo = {
-    ogType: isArticle ? "article" : "website",
+    ogType: ogType || "website",
     title: title != null ? `${title} | ${siteTitle}` : siteTitle,
     name: title || siteTitle,
     description: description || siteDescription,
@@ -38,6 +46,7 @@ export const PageSEO = ({
     imageAlt: imageAlt || title || siteTitle,
     twitterCreator: twitterCreator || siteTwitterUsername,
   };
+
   return (
     <>
       <html lang={seo.lang} />
@@ -54,6 +63,9 @@ export const PageSEO = ({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={siteTwitterUsername} />
       <meta name="twitter:creator" content={seo.twitterCreator} />
+      <script id="ld-json" type="application/ld+json">
+        {json}
+      </script>
       {children}
     </>
   );
@@ -68,7 +80,7 @@ export const PageSEO = ({
  * @property {string} [image] - The path to the image for the page.
  * @property {string} [imageAlt] - The alternate text for the image.
  * @property {string} [twitterUsername] - The twitter username to associate as the creator.
- * @property {bool} [isArticle=false] - If this head element is for an article.
+ * @property {string} [ogType] - The type of page the seo is for.
  * @property {ChildrenProps} [children=null] - Child components.
  */
 PageSEO.propTypes = {
@@ -79,7 +91,7 @@ PageSEO.propTypes = {
   image: PropTypes.string,
   imageAlt: PropTypes.string,
   twitterCreator: PropTypes.string,
-  isArticle: PropTypes.bool,
+  ogType: PropTypes.string,
   children: ChildrenProps,
 };
 
