@@ -8,7 +8,7 @@ describe("ArticleByLine", () => {
   const renderComponent = () => render(
       <ArticleByLine
         author={{name: "Georgia Smith", slug: "georgia-smith"}}
-        published="2023-11-02:00:01:00Z" />,
+        published="2023-11-02:15:30:00Z" />,
   );
 
   test("that it renders correctly.", () => {
