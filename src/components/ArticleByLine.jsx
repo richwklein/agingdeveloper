@@ -1,5 +1,6 @@
 import React from "react";
 import {Box, Typography} from "@mui/material";
+import moment from "moment/moment";
 import PropTypes from "prop-types";
 import {ArticleAuthorDigestProps} from "../props";
 import InternalLink from "./InternalLink";
@@ -14,6 +15,8 @@ import InternalLink from "./InternalLink";
  * <ArticleByLine author={author} published={published} />
  */
 export const ArticleByLine = ({author, published}) => {
+  const formatted = moment(published).format("MMMM DD, YYYY");
+
   return (
     <Box>
       <InternalLink to={`/author/${author.slug}`} variant="subtitle1"
@@ -21,7 +24,7 @@ export const ArticleByLine = ({author, published}) => {
         {author.name}
       </InternalLink>
       <Typography variant="subtitle2" sx={{display: "inline-block", p: .5}}>
-        {published}
+        {formatted}
       </Typography>
     </Box>
   );

@@ -42,7 +42,7 @@ export const PageSEO = ({
     description: description || siteDescription,
     lang: lang || siteLang,
     url: path != null ? `${siteUrl}${path}` : siteUrl,
-    image: image != null ? `${siteUrl}${image}` : `${siteUrl}${siteImage.publicURL}`,
+    image: image != null ? image : siteImage.publicURL,
     imageAlt: imageAlt || title || siteTitle,
     twitterCreator: twitterCreator || siteTwitterUsername,
   };

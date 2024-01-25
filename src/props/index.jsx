@@ -99,6 +99,7 @@ export const FrontmatterDigestProps = PropTypes.shape({
  * @property {string} title - The title of the article.
  * @property {string} description - THe description of the article.
  * @property {string} published - The published date of the article.
+ * @property {string} modified - The modified date of the article.
  * @property {string} category - The category of the article.
  * @property {string[]} tags - The tags of the article.
  * @property {ArticleAuthorDigestProps} author - The author of the article.
@@ -112,6 +113,7 @@ export const FrontmatterProps = PropTypes.shape({
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   published: PropTypes.string.isRequired,
+  modified: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   author: ArticleAuthorDigestProps.isRequired,

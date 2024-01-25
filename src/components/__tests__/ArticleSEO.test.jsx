@@ -1,7 +1,7 @@
 import {cleanup} from "@testing-library/react";
 import * as Gatsby from "gatsby";
 
-describe("AuthorSEO", () => {
+describe("ArticleSEO", () => {
   const useStaticQuery = jest.spyOn(Gatsby, "useStaticQuery");
   const mockUseStaticQuery = {
     allSiteJson: {

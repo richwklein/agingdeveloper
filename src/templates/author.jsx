@@ -87,7 +87,7 @@ export const pageQuery = graphql`
         node {
           excerpt(pruneLength: 160)
           frontmatter {
-            published(formatString: "MMMM DD, YYYY")
+            published
             slug
             title
             featured {
@@ -129,8 +129,8 @@ export const pageQuery = graphql`
         name
         url
       }
-      published(formatString: "YYYY-MM-DDTHH:MM:SS")
-      modified(formatString: "YYYY-MM-DDTHH:MM:SS")
+      published
+      modified
     }
   }
 `;
