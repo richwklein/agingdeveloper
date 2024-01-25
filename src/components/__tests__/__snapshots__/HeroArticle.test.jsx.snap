@@ -14,13 +14,13 @@ exports[`HeroArticle that it renders correctly. 1`] = `
       class="MuiCardMedia-root css-16cvb1l-MuiCardMedia-root"
     />
     <div
-      class="MuiBox-root css-b89ar9"
+      class="MuiBox-root css-1pb0qeg"
     >
       <div
         class="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
       >
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-8 MuiGrid-grid-lg-6 css-1ihtruj-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-lg-8 css-1hjr3y7-MuiGrid-root"
         >
           <div
             class="MuiBox-root css-1chv412"
@@ -35,6 +35,11 @@ exports[`HeroArticle that it renders correctly. 1`] = `
                   class="MuiTypography-root MuiTypography-h3 MuiCardHeader-title css-s3bcgd-MuiTypography-root"
                 >
                   This is an Article Title
+                </span>
+                <span
+                  class="MuiTypography-root MuiTypography-body1 MuiCardHeader-subheader css-1jufriz-MuiTypography-root"
+                >
+                  November 21, 2023
                 </span>
               </div>
             </div>

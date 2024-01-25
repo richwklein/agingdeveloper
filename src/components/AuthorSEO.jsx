@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import PropTypes from "prop-types";
 import {AuthorNodeProps} from "../props";
 import PageSEO from "./PageSEO";
@@ -13,8 +14,8 @@ export const AuthorSEO = ({author, writeCount}) => {
   const ld = {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
-    "dateCreated": author.published,
-    "dateModified": author.modified,
+    "dateCreated": moment(author.published).format("YYYY-MM-DDTHH:MM:SSZ"),
+    "dateModified": moment(author.modified).format("YYYY-MM-DDTHH:MM:SSZ"),
     "mainEntity": {
       "@type": "Person",
       "name": author.name,
