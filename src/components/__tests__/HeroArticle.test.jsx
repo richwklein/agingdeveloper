@@ -11,7 +11,7 @@ describe("HeroArticle", () => {
         "title": "This is an Article Title",
         "excerpt": "This is content from the article.",
         "slug": "2023-12-01-slug",
-        "published": "YYYY-MM-DDTHH:MM:SSZ",
+        "published": "2023-11-21T00:01:00Z",
       }} />,
   );
 
