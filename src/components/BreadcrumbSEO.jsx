@@ -29,11 +29,9 @@ export const BreadcrumbSEO = ({crumbs}) => {
   const json =JSON.stringify(ld);
 
   return (
-    <>
-      <script id="ld-crumb" type="application/ld+json">
-        {json}
-      </script>
-    </>
+    <script id="ld-crumb" type="application/ld+json">
+      {json}
+    </script>
   );
 };
 
