@@ -73,7 +73,7 @@ export const pageQuery = graphql`
         node {
           excerpt(pruneLength: 280),
           frontmatter {
-            published(formatString: "MMMM DD, YYYY")
+            published
             slug
             title
             featured {
@@ -101,7 +101,7 @@ export const pageQuery = graphql`
         node {
           excerpt(pruneLength: 160),
           frontmatter {
-            published(formatString: "MMMM DD, YYYY")
+            published
             slug
             title
             featured {

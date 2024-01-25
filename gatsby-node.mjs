@@ -1,5 +1,5 @@
 import {Feed} from "feed";
-import {writeFileSync} from "fs";
+import {readFileSync, writeFileSync} from "fs";
 import {join as pathJoin, resolve as pathResolve} from "path";
 import readingTime from "reading-time";
 import slug from "slug";
@@ -20,21 +20,164 @@ export const onCreateNode = ({node, actions}) => {
 export const createSchemaCustomization = ({actions, schema}) => {
   const {createTypes} = actions;
   const typeDefs = [
-    "type Mdx implements Node { frontmatter: Frontmatter }",
+    schema.buildObjectType({
+      name: "Socials",
+      fields: {
+        name: "String!",
+        url: "String!",
+      },
+      extensions: {
+        infer: false,
+      },
+    }),
+    schema.buildObjectType({
+      name: "AuthorJson",
+      fields: {
+        slug: "String!",
+        name: "String!",
+        firstName: "String!",
+        lastName: "String!",
+        image: {
+          type: "File!",
+          extensions: {
+            fileByRelativePath: {},
+          },
+        },
+        tagline: "String!",
+        bio: "String!",
+        twitterUsername: "String",
+        socials: "[Socials!]",
+        published: {
+          type: "Date!",
+          extensions: {
+            dateformat: {},
+          },
+        },
+        modified: {
+          type: "Date!",
+          extensions: {
+            dateformat: {},
+          },
+          resolve: (source, args, context, info) => {
+            const {modified} = source;
+            if (source.modified == null) {
+              return source.published;
+            }
+            return modified;
+          },
+        },
+      },
+      interfaces: ["Node"],
+      extensions: {
+        infer: true,
+      },
+    }),
+    schema.buildObjectType({
+      name: "ImageAuthor",
+      fields: {
+        name: "String!",
+        url: "String!",
+      },
+      extensions: {
+        infer: false,
+      },
+    }),
+    schema.buildObjectType({
+      name: "ImageSite",
+      fields: {
+        name: "String!",
+        url: "String!",
+      },
+      extensions: {
+        infer: false,
+      },
+    }),
+    schema.buildObjectType({
+      name: "FeaturedImage",
+      fields: {
+        author: "ImageAuthor",
+        site: "ImageSite",
+        image: {
+          type: "File!",
+          extensions: {
+            fileByRelativePath: {},
+          },
+        },
+      },
+      extensions: {
+        infer: false,
+      },
+    }),
     schema.buildObjectType({
       name: "Frontmatter",
       fields: {
+        slug: "String!",
+        title: "String!",
+        description: "String!",
+        featured: "FeaturedImage!",
+        published: {
+          type: "Date!",
+          extensions: {
+            dateformat: {},
+          },
+        },
+        modified: {
+          type: "Date!",
+          extensions: {
+            dateformat: {},
+          },
+          resolve: (source, args, context, info) => {
+            const {modified} = source;
+            if (source.modified == null) {
+              return source.published;
+            }
+            return modified;
+          },
+        },
         author: {
-          type: "AuthorYaml",
+          type: "AuthorJson!",
           resolve: (source, args, context, info) => {
             return context.nodeModel.findOne({
-              type: "AuthorYaml",
+              type: "AuthorJson",
               query: {
                 filter: {slug: {eq: source.author}},
               },
             });
           },
         },
+        category: {
+          type: "String!",
+          resolve(source, args, context, info) {
+            const {category} = source;
+            if (source.category == null) {
+              return "uncategorized";
+            }
+            return category;
+          },
+        },
+        tags: {
+          type: "[String!]",
+          resolve(source, args, context, info) {
+            const {tags} = source;
+            if (source.tags == null || (Array.isArray(tags) && !tags.length)) {
+              return [source.category];
+            }
+            return tags;
+          },
+        },
+      },
+      extensions: {
+        infer: false,
+      },
+    }),
+    schema.buildObjectType({
+      name: "Mdx",
+      fields: {
+        frontmatter: "Frontmatter!",
+      },
+      interfaces: ["Node"],
+      extensions: {
+        infer: true,
       },
     }),
   ];
@@ -69,7 +212,7 @@ export const createPages = async ({actions, reporter, graphql}) => {
         category: fieldValue
       }
     }
-    authors: allAuthorYaml(sort: {name: ASC}) {
+    authors: allAuthorJson(sort: {name: ASC}) {
       edges {
         node {
           slug
@@ -92,6 +235,11 @@ export const createPages = async ({actions, reporter, graphql}) => {
 
   // create redirects where pages have moved around
   createRedirects(createRedirect);
+
+  /**
+   * TODO kick off a job from here to create the rss feeds
+   * https://www.gatsbyjs.com/docs/reference/config-files/actions/#createJobV2
+   */
 };
 
 const createArticlePages = (createPage, articles) => {
@@ -187,31 +335,14 @@ const createAuthorPages = (createPage, authors) => {
 };
 
 const createRedirects = (createRedirect) => {
-  createRedirect({
-    fromPath: "/article/rss-dead-long-live-rss",
-    toPath: "/article/2021-05-17-rss-dead-long-live-rss",
-    isPermanent: true,
-  });
-  createRedirect({
-    fromPath: "/article/2020/08/14/default-http-config",
-    toPath: "/article/2020-08-14-default-http-config",
-    isPermanent: true,
-  });
-  createRedirect({
-    fromPath: "/article/2020/08/08/custom-domain",
-    toPath: "/article/2020-08-08-custom-domain",
-    isPermanent: true,
-  });
-  createRedirect({
-    fromPath: "/article/2020/07/26/false-start",
-    toPath: "/article/2020-07-26-false-start",
-    isPermanent: true,
-  });
-  createRedirect({
-    fromPath: "/article/2020/07/21/intro",
-    toPath: "/article/2020-07-21-intro",
-    isPermanent: true,
-  });
+  const redirects = JSON.parse(readFileSync("content/data/redirects.json"));
+  redirects.forEach((redirect) =>
+    createRedirect({
+      fromPath: redirect.fromPath,
+      toPath: redirect.toPath,
+      isPermanent: redirect.isPermanent,
+    }),
+  );
 };
 
 export const onPostBuild = async ({graphql, reporter}) => {

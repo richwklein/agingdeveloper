@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import {GatsbyImage} from "gatsby-plugin-image";
+import moment from "moment";
 import {ArticleDigestProps} from "../props";
 import InternalLink from "./InternalLink";
 
@@ -24,7 +25,7 @@ import InternalLink from "./InternalLink";
  * @example
  * <HeroArticle article={article} />
  */
-export const HeroArticle = ({article: {title, slug, excerpt, image}}) => {
+export const HeroArticle = ({article: {title, slug, published, excerpt, image}}) => {
   return (
     <Card
       variant="outlined"
@@ -43,9 +44,9 @@ export const HeroArticle = ({article: {title, slug, excerpt, image}}) => {
             left: 0,
             width: "100%",
             height: "100%",
-            bgcolor: alpha(theme.palette.primary.main, 0.5),
+            bgcolor: alpha(theme.palette.primary.main, 0.4),
             color: "primary.contrastText",
-            backdropFilter: "blur(2px)",
+            backdropFilter: "blur(4px)",
             [theme.breakpoints.up("md")]: {
               overflowY: "hidden",
             },
@@ -55,14 +56,18 @@ export const HeroArticle = ({article: {title, slug, excerpt, image}}) => {
           })}
         >
           <Grid container>
-            <Grid item lg={6} md={8} sm={12} xs={12}>
+            <Grid item lg={8} sm={12} xs={12}>
               <Box
                 sx={{
                   p: {xs: 1, md: 4},
                   pr: {md: 0},
                 }}
               >
-                <CardHeader titleTypographyProps={{"variant": "h3", "color": "inherit"}} title={title} />
+                <CardHeader
+                  titleTypographyProps={{"variant": "h3", "color": "inherit"}}
+                  title={title}
+                  subheaderTypographyProps={{"color": "inherit"}}
+                  subheader={moment.utc(published).format("MMMM DD, YYYY")} />
                 <CardContent>
                   <Typography variant="h5" color="inherit" paragraph>
                     {excerpt}

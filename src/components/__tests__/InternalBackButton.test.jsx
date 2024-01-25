@@ -5,8 +5,8 @@ import InternalBackButton from "../InternalBackButton";
 describe("InternalBackButton", () => {
   afterEach(cleanup);
 
-  const renderComponent = () => render(
-      <InternalBackButton name="authors" path="/author" />,
+  const renderComponent = (useViewText=true) => render(
+      <InternalBackButton name="authors" path="/author" useViewText={useViewText} />,
   );
 
   test("that it renders correctly.", () => {
@@ -17,6 +17,11 @@ describe("InternalBackButton", () => {
   test("that it contains the text.", () => {
     const {container} = renderComponent();
     expect(container.firstChild).toContainHTML("view all authors");
+  });
+
+  test("that it can exclude view all.", () => {
+    const {container} = renderComponent(false);
+    expect(container.firstChild).not.toContainHTML("view all");
   });
 
   test("that the icons and href are.", () => {

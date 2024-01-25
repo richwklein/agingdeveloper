@@ -1,7 +1,29 @@
 version: 2
 updates:
+- package-ecosystem: github-actions
+  directory: "/"
+  groups:
+    github-actions:
+      patterns:
+        - "*" 
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 20
 - package-ecosystem: npm
   directory: "/"
+  groups:
+    gatsby:
+      patterns:
+        - "gatsby"
+        - "gatsby-*"
+    material:
+      patterns:
+        - "@emotion/*"
+        - "@mui/*"
+    react:
+      patterns:
+        - "react"
+        - "react/*"
   schedule:
     interval: daily
   open-pull-requests-limit: 20

@@ -1,6 +1,7 @@
 import React from "react";
 import {Card, CardActionArea, CardContent, CardHeader, CardMedia, Grid, Typography} from "@mui/material";
 import {GatsbyImage} from "gatsby-plugin-image";
+import moment from "moment";
 import PropTypes from "prop-types";
 import {ArticleDigestProps} from "../props";
 import InternalLink from "./InternalLink";
@@ -26,7 +27,7 @@ export const SecondaryArticle = ({article: {title, excerpt, published, slug, ima
         </CardMedia>
         <CardHeader titleTypographyProps={{"variant": "h6"}}
           title={title}
-          subheader={published}
+          subheader={moment.utc(published).format("MMMM DD, YYYY")}
           sx={{pb: 1, pt: 1.5}}
         />
         <CardContent component="p"

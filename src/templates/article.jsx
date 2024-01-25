@@ -5,15 +5,17 @@ import {graphql} from "gatsby";
 import PropTypes from "prop-types";
 import {ArticleByLine} from "../components/ArticleByLine";
 import ArticleImage from "../components/ArticleImage";
+import ArticleSEO from "../components/ArticleSEO";
 import ArticleTagGrid from "../components/ArticleTagGrid";
 import ArticleTimeToRead from "../components/ArticleTimeToRead";
+import MDXCode from "../components/MDXCode";
 import MDXLink from "../components/MDXLink";
-import PageSEO from "../components/PageSEO";
 import TitleBlock from "../components/TitleBlock";
 import {useSiteData} from "../hooks/useSiteData";
 import {ChildrenProps, FrontmatterProps, TimeToReadDigestProps} from "../props";
 
 const components = {
+  pre: MDXCode,
   a: MDXLink,
 };
 
@@ -86,16 +88,8 @@ ArticleTemplate.propTypes = {
 export default ArticleTemplate;
 
 // eslint-disable-next-line react/prop-types
-export const Head = ({data: {mdx}, pageContext: {pathSuffix}}) => {
-  // eslint-disable-next-line react/prop-types
-  const {frontmatter: {title, author: {twitterUsername}, featured: {image: {publicURL}}}} = mdx;
-
-  return <PageSEO
-    title={title}
-    path={`/article/${pathSuffix}`}
-    image={publicURL}
-    isArticle={true}
-    twitterCreator={twitterUsername} />;
+export const Head = ({data: {mdx: {frontmatter, fields: {timeToRead}}}}) => {
+  return <ArticleSEO frontmatter={frontmatter} timeToRead={timeToRead} />;
 };
 
 export const pageQuery = graphql`
@@ -108,7 +102,8 @@ export const pageQuery = graphql`
           }
       }
       frontmatter {
-        published(formatString: "MMMM DD, YYYY")
+        published
+        modified
         slug
         title
         description
@@ -137,7 +132,7 @@ export const pageQuery = graphql`
                 layout: CONSTRAINED
                 aspectRatio: 2.33
               )
-          }
+            }
           }
         }
       }

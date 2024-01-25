@@ -10,8 +10,8 @@ import InternalLink from "./InternalLink";
  * @param {InternalBackButtonProps} props
  * @return {React.ReactElement} - The react component
  */
-export const InternalBackButton = ({name, path}) => {
-  const text = `view all ${name}`;
+export const InternalBackButton = ({name, path, useViewText=true}) => {
+  const text = (useViewText == true ) ? `view all ${name}` : name;
 
   return (
     <Button
@@ -36,10 +36,12 @@ export const InternalBackButton = ({name, path}) => {
  * @typedef InternalBackButtonProps - The internal back button props
  * @property {string} name - The name of the view to put in the text.
  * @property {string} path - The path to the view.
+ * @property {boolean} [useViewText=true] - If the text should include "view all".
  */
 InternalBackButton.propTypes = {
   name: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
+  useViewText: PropTypes.bool,
 };
 
 export default InternalBackButton;

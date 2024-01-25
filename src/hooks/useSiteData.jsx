@@ -8,23 +8,25 @@ import {graphql, useStaticQuery} from "gatsby";
 export const useSiteData = () => {
   const data = useStaticQuery(graphql`
   query SiteQuery {
-    siteYaml(slug: {eq: "agingdeveloper"}) {
-      title
-      tagline
-      category
-      lang
-      url
-      repository
-      twitterUsername
-      image {
-        publicURL
-        childImageSharp {
-          gatsbyImageData(
-            width: 72
-            height: 72
-            placeholder: BLURRED
-            layout: FIXED
-          )
+    allSiteJson(limit: 1) {
+      nodes {
+        title
+        tagline
+        category
+        lang
+        url
+        repository
+        twitterUsername
+        image {
+          publicURL
+          childImageSharp {
+            gatsbyImageData(
+              width: 72
+              height: 72
+              placeholder: BLURRED
+              layout: FIXED
+            )
+          }
         }
       }
     }
@@ -36,10 +38,10 @@ export const useSiteData = () => {
   }
 `);
 
-  const siteYaml = data.siteYaml;
-  siteYaml.url = data.site.siteMetadata.siteUrl;
+  const siteJson = data.allSiteJson.nodes[0];
+  siteJson.url = data.site.siteMetadata.siteUrl;
 
-  return siteYaml;
+  return siteJson;
 };
 
 export default useSiteData;
