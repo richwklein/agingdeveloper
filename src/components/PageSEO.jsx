@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {useSiteData} from "../hooks/useSiteData";
 import {ChildrenProps} from "../props";
+import BreadcrumbSEO from "./BreadcrumbSEO";
 
 /**
  * A react component for rendering the head of a page. This will default to
@@ -42,7 +43,7 @@ export const PageSEO = ({
     description: description || siteDescription,
     lang: lang || siteLang,
     url: path != null ? `${siteUrl}${path}` : siteUrl,
-    image: image != null ? image : siteImage.publicURL,
+    image: image != null ? `${siteUrl}${image}` : `${siteUrl}${siteImage.publicURL}`,
     imageAlt: imageAlt || title || siteTitle,
     twitterCreator: twitterCreator || siteTwitterUsername,
   };
@@ -63,9 +64,10 @@ export const PageSEO = ({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={siteTwitterUsername} />
       <meta name="twitter:creator" content={seo.twitterCreator} />
-      <script id="ld-json" type="application/ld+json">
+      <script id="ld-main" type="application/ld+json">
         {json}
       </script>
+      <BreadcrumbSEO />
       {children}
     </>
   );

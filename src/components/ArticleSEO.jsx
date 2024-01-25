@@ -1,6 +1,8 @@
 import React from "react";
 import moment from "moment";
+import useSiteData from "../hooks/useSiteData";
 import {FrontmatterProps, TimeToReadDigestProps} from "../props";
+import BreadcrumbSEO from "./BreadcrumbSEO";
 import PageSEO from "./PageSEO";
 
 /**
@@ -10,22 +12,24 @@ import PageSEO from "./PageSEO";
  * @return {React.ReactElement} - The react component.
  */
 export const ArticleSEO = ({frontmatter, timeToRead}) => {
-  const published = moment(frontmatter.published).format("YYYY-MM-DDTHH:MM:SSZ");
-  const modified = moment(frontmatter.modified).format("YYYY-MM-DDTHH:MM:SSZ");
+  const published = moment.utc(frontmatter.published).format("YYYY-MM-DDTHH:MM:SSZ");
+  const modified = moment.utc(frontmatter.modified).format("YYYY-MM-DDTHH:MM:SSZ");
+  const {url: siteUrl} = useSiteData();
+  const articlePath = `/article/${frontmatter.slug}`;
 
   const ld = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": frontmatter.title,
     "description": frontmatter.description,
-    "image": [frontmatter.featured.image.publicURL],
+    "image": [`${siteUrl}${frontmatter.featured.image.publicURL}`],
     "dateCreated": published,
     "datePublished": published,
     "dateModified": modified,
     "author": [{
       "@type": "Person",
       "name": frontmatter.author.name,
-      "url": `/author/${frontmatter.author.slug}`,
+      "url": `${siteUrl}/author/${frontmatter.author.slug}`,
     }],
     "wordCount": timeToRead.words,
   };
@@ -35,23 +39,28 @@ export const ArticleSEO = ({frontmatter, timeToRead}) => {
     <PageSEO
       title={frontmatter.title}
       description={frontmatter.description}
-      path={`/article/${frontmatter.slug}`}
+      path={articlePath}
       image={frontmatter.featured.image.publicURL}
       twitterCreator={frontmatter.author.twitterUsername}
       ogType="article"
     >
-      <meta property="article:published_time" content={published} />
-      <meta property="article:modified_time" content={modified} />
-      <meta property="article:author" content={`/author/${frontmatter.author.slug}`} />
-      <meta property="article:section" content={frontmatter.category} />
-      {frontmatter.tags.map((tag) => {
-        return (
-          <meta property="article:tag" key={tag} content={tag} />
-        );
-      })}
-      <script id="ld-json" type="application/ld+json">
-        {json}
-      </script>
+      <>
+        <meta property="article:published_time" content={published} />
+        <meta property="article:modified_time" content={modified} />
+        <meta property="article:author" content={`${siteUrl}/author/${frontmatter.author.slug}`} />
+        <meta property="article:section" content={frontmatter.category} />
+        {frontmatter.tags.map((tag) => {
+          return (
+            <meta property="article:tag" key={tag} content={tag} />
+          );
+        })}
+        <BreadcrumbSEO crumbs={[
+          {"name": "Articles", "path": "/article"}, {"name": frontmatter.title, "path": articlePath},
+        ]} />
+        <script id="ld-main" type="application/ld+json">
+          {json}
+        </script>
+      </>
     </PageSEO>
   );
 };
