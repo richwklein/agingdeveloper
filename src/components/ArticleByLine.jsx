@@ -15,7 +15,7 @@ import InternalLink from "./InternalLink";
  * <ArticleByLine author={author} published={published} />
  */
 export const ArticleByLine = ({author, published}) => {
-  const formatted = moment(published).format("MMMM DD, YYYY");
+  const formatted = moment.utc(published).format("MMMM DD, YYYY");
 
   return (
     <Box>

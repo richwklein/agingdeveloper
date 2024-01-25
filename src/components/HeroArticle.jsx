@@ -67,7 +67,7 @@ export const HeroArticle = ({article: {title, slug, published, excerpt, image}})
                   titleTypographyProps={{"variant": "h3", "color": "inherit"}}
                   title={title}
                   subheaderTypographyProps={{"color": "inherit"}}
-                  subheader={moment(published).format("MMMM DD, YYYY")} />
+                  subheader={moment.utc(published).format("MMMM DD, YYYY")} />
                 <CardContent>
                   <Typography variant="h5" color="inherit" paragraph>
                     {excerpt}

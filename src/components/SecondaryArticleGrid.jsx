@@ -27,7 +27,7 @@ export const SecondaryArticle = ({article: {title, excerpt, published, slug, ima
         </CardMedia>
         <CardHeader titleTypographyProps={{"variant": "h6"}}
           title={title}
-          subheader={moment(published).format("MMMM DD, YYYY")}
+          subheader={moment.utc(published).format("MMMM DD, YYYY")}
           sx={{pb: 1, pt: 1.5}}
         />
         <CardContent component="p"
