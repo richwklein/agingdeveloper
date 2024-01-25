@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/TagGrid.jsx</title>
+    <title>JSDoc: Source: components/ArticleSEO.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/TagGrid.jsx</h1>
+    <h1 class="page-title">Source: components/ArticleSEO.jsx</h1>
 
     
 
@@ -27,115 +27,74 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
-import TagOutlinedIcon from "@mui/icons-material/TagOutlined";
-import {Grid} from "@mui/material";
-import PropTypes from "prop-types";
-import slug from "slug";
-import {TagWithCountProps} from "../props";
-import InternalLink from "./InternalLink";
+import moment from "moment";
+import {FrontmatterProps, TimeToReadDigestProps} from "../props";
+import PageSEO from "./PageSEO";
 
 /**
- * React component used to render a tag in either the {@link ArticleTagGrid} or
- * {@link TagGrid} component.
+ * A react component for rendering the head of an article page.
  *
- * @param {TagProps} props - The tags and total props.
- * @return {React.ReactElement} - The react component
- *
- * @example
- * &lt;Tag
- *   name={tag.name}
- *   weight={calculateWeight(tag.count, totalCount)}
- *   isCategory={isCategory} />
+ * @param {ArticleSEOProps} props - The article page seo props.
+ * @return {React.ReactElement} - The react component.
  */
-export const Tag = ({name, weight=300, isCategory=false}) => {
-  const icon = isCategory ? &lt;FolderOutlinedIcon fontSize="inherit" sx={{mr: .3}} /> :
-    &lt;TagOutlinedIcon fontSize="inherit" sx={{mr: .3}} />;
-  const url = isCategory ? `/category/${slug(name)}` : `/tag/${slug(name)}`;
+export const ArticleSEO = ({frontmatter, timeToRead}) => {
+  const published = moment(frontmatter.published).format("YYYY-MM-DDTHH:MM:SSZ");
+  const modified = moment(frontmatter.modified).format("YYYY-MM-DDTHH:MM:SSZ");
+
+  const ld = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": frontmatter.title,
+    "description": frontmatter.description,
+    "image": [frontmatter.featured.image.publicURL],
+    "dateCreated": published,
+    "datePublished": published,
+    "dateModified": modified,
+    "author": [{
+      "@type": "Person",
+      "name": frontmatter.author.name,
+      "url": `/author/${frontmatter.author.slug}`,
+    }],
+    "wordCount": timeToRead.words,
+  };
+  const json =JSON.stringify(ld);
+
   return (
-    &lt;InternalLink
-      underline="hover"
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        textTransform: "capitalize",
-        fontWeight: weight,
-      }}
-      color="primary"
-      to={url}
+    &lt;PageSEO
+      title={frontmatter.title}
+      description={frontmatter.description}
+      path={`/article/${frontmatter.slug}`}
+      image={frontmatter.featured.image.publicURL}
+      twitterCreator={frontmatter.author.twitterUsername}
+      ogType="article"
     >
-      {icon}
-      {name}
-    &lt;/InternalLink>
-
-  );
-};
-
-/**
- * @typedef TagProps - The tag props.
- * @property {string} name - The name of the tag.
- * @property {number} [weight=300] - The font weight to render the tag.
- * @property {bool} [isCategory=false] - If the tags represent categories.
- *
- */
-Tag.propTypes = {
-  name: PropTypes.string.isRequired,
-  weight: PropTypes.number,
-  isCategory: PropTypes.bool,
-};
-
-/**
- * Calculates a font weight between 300 and 900 for tag display.
- *
- * @param {number} count - The number of times the tag has occurred.
- * @param {number} totalCount - The total number of tags.
- * @return {number} - The font weight.
- */
-export const calculateWeight = (count, totalCount) => {
-  const oldRange = totalCount - 1;
-  const newValue = (((count - 1) * 600) / oldRange) + 300;
-  return Math.round(newValue/100)*100;
-};
-
-/**
- * React component for rendering a grid of tags or categories.
- *
- * @param {TagGridProps} props - The tag grid props.
- * @return {React.ReactElement} - The react component
- *
- * @example
- * &lt;TagGrid tags={group} totalCount={totalCount} isCategory={true} />
- */
-export const TagGrid = ({tags, totalCount, isCategory=false}) => {
-  return (
-    &lt;Grid container spacing={2} sx={{mt: 2}}>
-      {tags.map((tag) => {
+      &lt;meta property="article:published_time" content={published} />
+      &lt;meta property="article:modified_time" content={modified} />
+      &lt;meta property="article:author" content={`/author/${frontmatter.author.slug}`} />
+      &lt;meta property="article:section" content={frontmatter.category} />
+      {frontmatter.tags.map((tag) => {
         return (
-          &lt;Grid item md={2} sm={6} xs={12} key={tag.name}>
-            &lt;Tag
-              name={tag.name}
-              weight={calculateWeight(tag.count, totalCount)}
-              isCategory={isCategory} />
-          &lt;/Grid>
+          &lt;meta property="article:tag" key={tag} content={tag} />
         );
       })}
-    &lt;/Grid>
+      &lt;script id="ld-json" type="application/ld+json">
+        {json}
+      &lt;/script>
+    &lt;/PageSEO>
   );
 };
 
 /**
- * @typedef TagGridProps - The tag grid props.
- * @property {TagWithCountProps[]} tags - The list of tags.
- * @property {number} totalCount - The total number of tags.
- * @property {bool} [isCategory=false] - If the tags represent categories.
+ * @typedef articleSEOProps - The SEO Head for the article props.
+ * @property {FrontmatterProps} frontmatter - The frontmatter of the article.
+ * @property {TimeToReadDigestProps} timeToRead - The time to read props.
  */
-TagGrid.propTypes = {
-  tags: PropTypes.arrayOf(TagWithCountProps),
-  totalCount: PropTypes.number.isRequired,
-  isCategory: PropTypes.bool,
+ArticleSEO.propTypes = {
+  frontmatter: FrontmatterProps.isRequired,
+  timeToRead: TimeToReadDigestProps.isRequired,
 };
 
-export default TagGrid;
+export default ArticleSEO;
 </code></pre>
         </article>
     </section>
