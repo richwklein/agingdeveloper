@@ -36,6 +36,25 @@ export const PageSEO = ({
   };
   const json =JSON.stringify(ld);
 
+
+  const feeds = [
+    {
+      postFix: "RSS",
+      mime: "application/rss+xml",
+      path: "/rss.xml",
+    },
+    {
+      postFix: "Atom",
+      mime: "application/atom+xml",
+      path: "/atom.xml",
+    },
+    {
+      postFix: "Feed",
+      mime: "application/json",
+      path: "/feed.json",
+    },
+  ];
+
   const seo = {
     ogType: ogType || "website",
     title: title != null ? `${title} | ${siteTitle}` : siteTitle,
@@ -68,6 +87,16 @@ export const PageSEO = ({
         {json}
       </script>
       <BreadcrumbSEO />
+      {feeds.map(({postFix, mime, path}) => {
+        return (
+          <link
+            rel="alternate"
+            type={mime}
+            title={`${siteTitle} - ${postFix}`}
+            href={`${siteUrl}${path}`}
+            key={path} />
+        );
+      })}
       {children}
     </>
   );

@@ -1,7 +1,9 @@
 import React from "react";
-import {Box, Grid, Typography} from "@mui/material";
+import {RssFeed} from "@mui/icons-material";
+import {Box, Grid, IconButton, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 import ExternalLink from "./ExternalLink";
+import InnerContainer from "./InnerContainer";
 
 /**
  * React component used to render the copyright of the site.
@@ -16,8 +18,8 @@ import ExternalLink from "./ExternalLink";
  */
 const Copyright = ({title, repository}) => {
   return (
-    <Box textAlign="center">
-      <Typography variant="caption" align="center">
+    <Box sx={{textAlign: "center"}}>
+      <Typography variant="caption">
         &copy;
         {" "}
         {new Date().getFullYear()}
@@ -50,7 +52,7 @@ Copyright.propTypes = {
  */
 const PoweredBy = () => {
   return (
-    <Box textAlign="center">
+    <Box sx={{textAlign: "center"}}>
       <Typography variant="caption">
         {"Powered by "}
         <ExternalLink to="https://www.gatsbyjs.org/">Gatsby</ExternalLink>
@@ -62,6 +64,37 @@ const PoweredBy = () => {
       </Typography>
     </Box>
   );
+};
+
+/**
+ * React component used to render the feed button.
+ *
+ * @param {FeedButtonProps} props - The copyright props.
+ * @return {React.ReactElement}
+ *
+ * @example
+ * <FeedButton />
+ *
+ * @ignore
+ */
+const FeedButton = ({title}) => {
+  return (
+    <Box sx={{textAlign: "right"}}>
+      <IconButton component={ExternalLink}
+        title={`${title} - Feed`}
+        to={"/feed.json"}>
+        <RssFeed color="primary" />
+      </IconButton>
+    </Box>
+  );
+};
+
+/**
+ * @typedef FeedButtonProps - The copyright props.
+ * @property {string} title - The title of the site.
+ */
+FeedButton.propTypes = {
+  title: PropTypes.string.isRequired,
 };
 
 /**
@@ -77,18 +110,20 @@ const PoweredBy = () => {
  */
 export const PageFooter = ({title, repository}) => {
   return (
-    <Grid
-      container
-      component="footer"
-      sx={{p: 2, mt: 4}}
-    >
-      <Grid item sm={4} xs={12}/>
-      <Grid item sm={4} xs={12}>
-        <Copyright title={title} repository={repository} />
-        <PoweredBy />
-      </Grid>
-      <Grid item sm={4} xs={12}/>
-    </Grid>
+    <Box component="footer" sx={{p: 2, mt: 6, mb: 2}} >
+      <InnerContainer tag="footer">
+        <Grid container>
+          <Grid item sm={4} xs={12} />
+          <Grid item sm={4} xs={12}>
+            <Copyright title={title} repository={repository} />
+            <PoweredBy />
+          </Grid>
+          <Grid item sm={4} xs={12}>
+            <FeedButton title={title} />
+          </Grid>
+        </Grid>
+      </InnerContainer>
+    </Box>
   );
 };
 

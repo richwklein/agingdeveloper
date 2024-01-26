@@ -1,5 +1,6 @@
 import {Feed} from "feed";
 import {readFileSync, writeFileSync} from "fs";
+import moment from "moment";
 import {join as pathJoin, resolve as pathResolve} from "path";
 import readingTime from "reading-time";
 import slug from "slug";
@@ -37,6 +38,7 @@ export const createSchemaCustomization = ({actions, schema}) => {
         name: "String!",
         firstName: "String!",
         lastName: "String!",
+        email: "String!",
         image: {
           type: "File!",
           extensions: {
@@ -350,80 +352,86 @@ export const onPostBuild = async ({graphql, reporter}) => {
   activity.start();
 
   const publicPath = "./public";
-  const feedOptions = {
-    "rss": {
-      func: "rss2",
-      path: "/rss.xml",
-    },
-    "atom": {
-      func: "atom1",
-      path: "/atom.xml",
-    },
-    "json": {
-      func: "json1",
-      path: "/feed.json",
-    },
-  };
+  const feedOptions = [{
+    id: "rss",
+    func: "rss2",
+    path: "/rss.xml",
+  },
+  {
+    id: "atom",
+    func: "atom1",
+    path: "/atom.xml",
+  },
+  {
+    id: "json",
+    func: "json1",
+    path: "/feed.json",
+  }];
+
 
   const result = await graphql(`
-    {
-      siteYaml(slug: {eq: "agingdeveloper"}) {
-        title
-        tagline
-        category
-        lang
-        image {
-          childImageSharp {
-            gatsbyImageData(width: 1152, formats: PNG, layout: FIXED, height: 494)
+  {
+    allSiteJson(limit:1) {
+      edges{
+        node {  
+          title
+          tagline
+          category
+          lang
+          image {
+            childImageSharp {
+              gatsbyImageData(width: 1152, formats: PNG, layout: FIXED, height: 494)
+            }
           }
-        }
-        icon {
-          childImageSharp {
-            gatsbyImageData(width: 32, height:32, layout:FIXED, formats:PNG)
-          }
-        }
-      }
-      site {
-        siteMetadata {
-          siteUrl
-        }
-      }
-      allAuthorYaml(sort: {name: ASC}) {
-        edges {
-          node {
-            slug
-            name
-            email
-          }
-        }
-      }
-      allMdx(
-        sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
-      ) {
-        edges {
-          node {
-            frontmatter {
-              slug
-              title
-              description
-              published
-              featured {
-                image {
-                  childImageSharp {
-                    gatsbyImageData(width: 1152, formats: PNG, layout: FIXED, height: 494)
-                  }
-                }
-              author {
-                slug
-                name
-                email
-              }
+          icon {
+            childImageSharp {
+              gatsbyImageData(width: 32, height:32, layout:FIXED, formats:PNG)
             }
           }
         }
       }
     }
-  `);
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
+    allAuthorJson(sort: {name: ASC}) {
+      edges {
+        node {
+          slug
+          name
+        }
+      }
+    }
+    allMdx(
+      sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
+    ) {
+      edges {
+        node {
+          frontmatter {
+            slug
+            title
+            description
+            published
+            modified
+            featured {
+              image {
+                childImageSharp {
+                  gatsbyImageData(width: 1152, formats: PNG, layout: FIXED, height: 494)
+                }
+              }
+            }
+            author {
+              slug
+              name
+              email
+            }
+          }
+        }
+      }
+    }
+  }`);
 
   if (result.errors) {
     reporter.error(result.errors);
@@ -431,27 +439,23 @@ export const onPostBuild = async ({graphql, reporter}) => {
     return;
   }
 
-  const siteData = result.data.siteYaml;
+  const siteData = result.data.allSiteJson.edges[0].node;
   siteData.url = result.data.site.siteMetadata.siteUrl;
+
   const siteImage = siteData.image.childImageSharp.gatsbyImageData.images.fallback.src;
   const siteIcon = siteData.image.childImageSharp.gatsbyImageData.images.fallback.src;
-  const authors = result.data.allAuthorYaml.edges;
+  const authors = result.data.allAuthorJson.edges;
   const articles = result.data.allMdx.edges;
-
-  const feedLinks = {};
-  for (const [key, option] of Object.entries(feedOptions)) {
-    feedLinks[key] = `${siteData.url}${option.path}`;
-  }
 
   const feed = new Feed({
     title: siteData.title,
     description: siteData.tagline,
     id: siteData.url,
     link: siteData.url,
-    language: "en",
+    language: siteData.lang,
     image: `${siteData.url}${siteImage}`,
     favicon: `${siteData.url}${siteIcon}`,
-    feedLinks: feedLinks,
+    feedLinks: new Map(feedOptions.map(({id, path}) => [id, `${siteData.url}${path}`])),
   });
 
   feed.addCategory(siteData.category);
@@ -464,7 +468,7 @@ export const onPostBuild = async ({graphql, reporter}) => {
   });
 
   articles.map(({node}) => {
-    const {title, slug, description, published} = node.frontmatter;
+    const {title, slug, description, published, modified} = node.frontmatter;
     const author = node.frontmatter.author;
     const featured = node.frontmatter.featured;
     const image = featured.image.childImageSharp.gatsbyImageData.images.fallback.src;
@@ -474,27 +478,25 @@ export const onPostBuild = async ({graphql, reporter}) => {
       id: slug,
       link: `${siteData.url}/article/${slug}`,
       description: description,
-      date: published,
-      published: published,
-      content: node.html,
+      date: moment.utc(modified).toDate(),
+      published: moment.utc(published).toDate(),
       author: {
         name: author.name,
         email: author.email,
         link: `${siteData.url}/author/${author.slug}`,
       },
       image: {
-        url: `${siteData.url}${image.publicURL}`,
+        url: `${siteData.url}${image}`,
       },
     });
   });
 
-  const options = Object.values(feedOptions);
-  options.map((option) => {
-    const outputPath = pathJoin(publicPath, option.path);
+  feedOptions.map(({func, path}) => {
+    const outputPath = pathJoin(publicPath, path);
 
     writeFileSync(
         outputPath,
-        feed[option.func].call(),
+        feed[func].call(),
         {encoding: "utf8"},
     );
   });

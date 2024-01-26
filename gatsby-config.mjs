@@ -30,7 +30,6 @@ const config = {
   plugins: [
     "gatsby-plugin-image",
     "gatsby-plugin-remove-fingerprints",
-    "gatsby-plugin-sitemap",
     "gatsby-plugin-sharp",
     "gatsby-plugin-sitemap",
     "gatsby-transformer-json",
