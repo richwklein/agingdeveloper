@@ -1,5 +1,7 @@
-import {readFileSync} from "fs";
-import {resolve as pathResolve} from "path";
+import {Feed} from "feed";
+import {readFileSync, writeFileSync} from "fs";
+import moment from "moment";
+import {join as pathJoin, resolve as pathResolve} from "path";
 import readingTime from "reading-time";
 import slug from "slug";
 
@@ -36,6 +38,7 @@ export const createSchemaCustomization = ({actions, schema}) => {
         name: "String!",
         firstName: "String!",
         lastName: "String!",
+        email: "String!",
         image: {
           type: "File!",
           extensions: {
@@ -342,4 +345,161 @@ const createRedirects = (createRedirect) => {
       isPermanent: redirect.isPermanent,
     }),
   );
+};
+
+export const onPostBuild = async ({graphql, reporter}) => {
+  const activity = reporter.activityTimer("Building feeds");
+  activity.start();
+
+  const publicPath = "./public";
+  const feedOptions = [{
+    id: "rss",
+    func: "rss2",
+    path: "/rss.xml",
+  },
+  {
+    id: "atom",
+    func: "atom1",
+    path: "/atom.xml",
+  },
+  {
+    id: "json",
+    func: "json1",
+    path: "/feed.json",
+  }];
+
+
+  const result = await graphql(`
+  {
+    allSiteJson(limit:1) {
+      edges{
+        node {  
+          title
+          tagline
+          category
+          lang
+          image {
+            childImageSharp {
+              gatsbyImageData(width: 1152, formats: PNG, layout: FIXED, height: 494)
+            }
+          }
+          icon {
+            childImageSharp {
+              gatsbyImageData(width: 32, height:32, layout:FIXED, formats:PNG)
+            }
+          }
+        }
+      }
+    }
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
+    allAuthorJson(sort: {name: ASC}) {
+      edges {
+        node {
+          slug
+          name
+        }
+      }
+    }
+    allMdx(
+      sort: [{frontmatter: {published: DESC}}, {frontmatter: {title: ASC}}]
+    ) {
+      edges {
+        node {
+          frontmatter {
+            slug
+            title
+            description
+            published
+            modified
+            featured {
+              image {
+                childImageSharp {
+                  gatsbyImageData(width: 1152, formats: PNG, layout: FIXED, height: 494)
+                }
+              }
+            }
+            author {
+              slug
+              name
+              email
+            }
+          }
+        }
+      }
+    }
+  }`);
+
+  if (result.errors) {
+    reporter.error(result.errors);
+    reporter.panicOnBuild("Error while running GraphQL query.");
+    return;
+  }
+
+  const siteData = result.data.allSiteJson.edges[0].node;
+  siteData.url = result.data.site.siteMetadata.siteUrl;
+
+  const siteImage = siteData.image.childImageSharp.gatsbyImageData.images.fallback.src;
+  const siteIcon = siteData.image.childImageSharp.gatsbyImageData.images.fallback.src;
+  const authors = result.data.allAuthorJson.edges;
+  const articles = result.data.allMdx.edges;
+
+  const feed = new Feed({
+    title: siteData.title,
+    description: siteData.tagline,
+    id: siteData.url,
+    link: siteData.url,
+    language: siteData.lang,
+    image: `${siteData.url}${siteImage}`,
+    favicon: `${siteData.url}${siteIcon}`,
+    feedLinks: new Map(feedOptions.map(({id, path}) => [id, `${siteData.url}${path}`])),
+  });
+
+  feed.addCategory(siteData.category);
+  authors.map(({node: {slug, name, email}}) => {
+    return feed.addContributor({
+      name: name,
+      email: email,
+      link: `${siteData.url}/author/${slug}`,
+    });
+  });
+
+  articles.map(({node}) => {
+    const {title, slug, description, published, modified} = node.frontmatter;
+    const author = node.frontmatter.author;
+    const featured = node.frontmatter.featured;
+    const image = featured.image.childImageSharp.gatsbyImageData.images.fallback.src;
+
+    return feed.addItem({
+      title: title,
+      id: slug,
+      link: `${siteData.url}/article/${slug}`,
+      description: description,
+      date: moment.utc(modified).toDate(),
+      published: moment.utc(published).toDate(),
+      author: {
+        name: author.name,
+        email: author.email,
+        link: `${siteData.url}/author/${author.slug}`,
+      },
+      image: {
+        url: `${siteData.url}${image}`,
+      },
+    });
+  });
+
+  feedOptions.map(({func, path}) => {
+    const outputPath = pathJoin(publicPath, path);
+
+    writeFileSync(
+        outputPath,
+        feed[func].call(),
+        {encoding: "utf8"},
+    );
+  });
+
+  activity.end();
 };

@@ -17,7 +17,7 @@ exports[`PageHeader that it renders correctly. 1`] = `
         tabindex="0"
       >
         <div
-          class="MuiAvatar-root MuiAvatar-rounded MuiAvatar-colorDefault css-jr00k3-MuiAvatar-root"
+          class="MuiAvatar-root MuiAvatar-rounded MuiAvatar-colorDefault css-1qmj1zq-MuiAvatar-root"
         />
         <div
           class="MuiBox-root css-d0uhtl"
