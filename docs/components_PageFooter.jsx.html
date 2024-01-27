@@ -27,9 +27,11 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import {Box, Grid, Typography} from "@mui/material";
+import {GitHub, RssFeed} from "@mui/icons-material";
+import {Box, ButtonGroup, Grid, IconButton, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 import ExternalLink from "./ExternalLink";
+import InnerContainer from "./InnerContainer";
 
 /**
  * React component used to render the copyright of the site.
@@ -42,15 +44,15 @@ import ExternalLink from "./ExternalLink";
  *
  * @ignore
  */
-const Copyright = ({title, repository}) => {
+const Copyright = ({title}) => {
   return (
-    &lt;Box textAlign="center">
-      &lt;Typography variant="caption" align="center">
+    &lt;Box sx={{textAlign: "center"}}>
+      &lt;Typography variant="caption">
         &amp;copy;
         {" "}
         {new Date().getFullYear()}
         {" "}
-        &lt;ExternalLink to={repository}>{title}&lt;/ExternalLink>
+        {title}
       &lt;/Typography>
     &lt;/Box>
   );
@@ -63,33 +65,45 @@ const Copyright = ({title, repository}) => {
  */
 Copyright.propTypes = {
   title: PropTypes.string.isRequired,
-  repository: PropTypes.string.isRequired,
 };
 
 /**
- * React component used to render the powered by line.
+ * React component used to render the action buttons.
  *
+ * @param {ActionButtonsProps} props - The action button props.
  * @return {React.ReactElement}
  *
  * @example
- * &lt;PoweredBy />
+ * &lt;FeedButton />
  *
  * @ignore
  */
-const PoweredBy = () => {
+const ActionButtons = ({title, repository}) => {
   return (
-    &lt;Box textAlign="center">
-      &lt;Typography variant="caption">
-        {"Powered by "}
-        &lt;ExternalLink to="https://www.gatsbyjs.org/">Gatsby&lt;/ExternalLink>
-        {" "}
-        and
-        {" "}
-        &lt;ExternalLink to="https://app.netlify.com">Netlify&lt;/ExternalLink>
-        .
-      &lt;/Typography>
+    &lt;Box sx={{textAlign: "left"}}>
+      &lt;ButtonGroup>
+        &lt;IconButton component={ExternalLink}
+          title={`${title} - Feed`}
+          to={"/atom.xml"}>
+          &lt;RssFeed color="primary" />
+        &lt;/IconButton>
+        &lt;IconButton component={ExternalLink}
+          title={`${title} - Repository`}
+          to={repository}>
+          &lt;GitHub color="primary" />
+        &lt;/IconButton>
+      &lt;/ButtonGroup>
     &lt;/Box>
   );
+};
+
+/**
+ * @typedef FeedButtonProps - The copyright props.
+ * @property {string} title - The title of the site.
+ */
+ActionButtons.propTypes = {
+  title: PropTypes.string.isRequired,
+  repository: PropTypes.string.isRequired,
 };
 
 /**
@@ -105,18 +119,19 @@ const PoweredBy = () => {
  */
 export const PageFooter = ({title, repository}) => {
   return (
-    &lt;Grid
-      container
-      component="footer"
-      sx={{p: 2, mt: 4}}
-    >
-      &lt;Grid item sm={4} xs={12}/>
-      &lt;Grid item sm={4} xs={12}>
-        &lt;Copyright title={title} repository={repository} />
-        &lt;PoweredBy />
-      &lt;/Grid>
-      &lt;Grid item sm={4} xs={12}/>
-    &lt;/Grid>
+    &lt;Box component="footer" sx={{p: 2, mt: 6, mb: 2}} >
+      &lt;InnerContainer>
+        &lt;Grid container>
+          &lt;Grid item sm={4} xs={12}>
+            &lt;ActionButtons title={title} repository={repository} />
+          &lt;/Grid>
+          &lt;Grid item sm={4} xs={12}>
+            &lt;Copyright title={title} />
+          &lt;/Grid>
+          &lt;Grid item sm={4} xs={12} />
+        &lt;/Grid>
+      &lt;/InnerContainer>
+    &lt;/Box>
   );
 };
 
@@ -141,13 +156,13 @@ export default PageFooter;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleSEO">ArticleSEO</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#AuthorAvatar">AuthorAvatar</a></li><li><a href="global.html#AuthorButton">AuthorButton</a></li><li><a href="global.html#AuthorGrid">AuthorGrid</a></li><li><a href="global.html#AuthorSEO">AuthorSEO</a></li><li><a href="global.html#AuthorTemplate">AuthorTemplate</a></li><li><a href="global.html#BreadcrumbBlock">BreadcrumbBlock</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalBackButton">InternalBackButton</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXCode">MDXCode</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#Page404">Page404</a></li><li><a href="global.html#PageAvatar">PageAvatar</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#SocialButton">SocialButton</a></li><li><a href="global.html#SocialButtonBar">SocialButtonBar</a></li><li><a href="global.html#SocialIcon">SocialIcon</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleAvatar">TitleAvatar</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#calculateWeight">calculateWeight</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li><li><a href="global.html#useSiteData">useSiteData</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArchiveTemplate">ArchiveTemplate</a></li><li><a href="global.html#ArticleByLine">ArticleByLine</a></li><li><a href="global.html#ArticleImage">ArticleImage</a></li><li><a href="global.html#ArticleSEO">ArticleSEO</a></li><li><a href="global.html#ArticleTagGrid">ArticleTagGrid</a></li><li><a href="global.html#ArticleTemplate">ArticleTemplate</a></li><li><a href="global.html#ArticleTimeToRead">ArticleTimeToRead</a></li><li><a href="global.html#AuthorAvatar">AuthorAvatar</a></li><li><a href="global.html#AuthorButton">AuthorButton</a></li><li><a href="global.html#AuthorGrid">AuthorGrid</a></li><li><a href="global.html#AuthorSEO">AuthorSEO</a></li><li><a href="global.html#AuthorTemplate">AuthorTemplate</a></li><li><a href="global.html#BreadcrumbBlock">BreadcrumbBlock</a></li><li><a href="global.html#BreadcrumbSEO">BreadcrumbSEO</a></li><li><a href="global.html#CategoryTemplate">CategoryTemplate</a></li><li><a href="global.html#DisplayLimit">DisplayLimit</a></li><li><a href="global.html#ExternalLink">ExternalLink</a></li><li><a href="global.html#FeaturedArticle">FeaturedArticle</a></li><li><a href="global.html#FeaturedArticleGrid">FeaturedArticleGrid</a></li><li><a href="global.html#HeroArticle">HeroArticle</a></li><li><a href="global.html#InnerContainer">InnerContainer</a></li><li><a href="global.html#InternalBackButton">InternalBackButton</a></li><li><a href="global.html#InternalLink">InternalLink</a></li><li><a href="global.html#MDXCode">MDXCode</a></li><li><a href="global.html#MDXLink">MDXLink</a></li><li><a href="global.html#Page404">Page404</a></li><li><a href="global.html#PageAvatar">PageAvatar</a></li><li><a href="global.html#PageCategory">PageCategory</a></li><li><a href="global.html#PageFooter">PageFooter</a></li><li><a href="global.html#PageHeader">PageHeader</a></li><li><a href="global.html#PageIndex">PageIndex</a></li><li><a href="global.html#PageLayout">PageLayout</a></li><li><a href="global.html#PageSEO">PageSEO</a></li><li><a href="global.html#PageTag">PageTag</a></li><li><a href="global.html#SecondaryArticle">SecondaryArticle</a></li><li><a href="global.html#SecondaryArticleGrid">SecondaryArticleGrid</a></li><li><a href="global.html#SocialButton">SocialButton</a></li><li><a href="global.html#SocialButtonBar">SocialButtonBar</a></li><li><a href="global.html#SocialIcon">SocialIcon</a></li><li><a href="global.html#Tag">Tag</a></li><li><a href="global.html#TagBreadcrumb">TagBreadcrumb</a></li><li><a href="global.html#TagGrid">TagGrid</a></li><li><a href="global.html#TagTemplate">TagTemplate</a></li><li><a href="global.html#TitleAvatar">TitleAvatar</a></li><li><a href="global.html#TitleBlock">TitleBlock</a></li><li><a href="global.html#calculateWeight">calculateWeight</a></li><li><a href="global.html#mdxNodeToArticleDigest">mdxNodeToArticleDigest</a></li><li><a href="global.html#useSiteData">useSiteData</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Jan 24 2024 20:29:34 GMT-0600 (Central Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Jan 27 2024 09:47:07 GMT-0600 (Central Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

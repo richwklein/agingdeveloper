@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: pages/index.jsx</title>
+    <title>JSDoc: Source: components/BreadcrumbSEO.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: pages/index.jsx</h1>
+    <h1 class="page-title">Source: components/BreadcrumbSEO.jsx</h1>
 
     
 
@@ -27,129 +27,56 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import {graphql} from "gatsby";
 import PropTypes from "prop-types";
-import FeaturedArticleGrid from "../components/FeaturedArticleGrid";
-import HeroArticle from "../components/HeroArticle";
-import InternalBackButton from "../components/InternalBackButton";
-import PageSEO from "../components/PageSEO";
-import {MDXNodeProps} from "../props";
-import {mdxNodeToArticleDigest} from "../props/converters.mjs";
+import useSiteData from "../hooks/useSiteData";
 
 /**
- * React component that renders the index page of the site.
+ * A react component for rendering the breadcrumb ld+json seo.
  *
- * @param {PageIndexProps} props - The index page props.
+ * @param {BreadcrumbSEOProps} props - The author page seo props.
  * @return {React.ReactElement} - The react component.
  */
-const PageIndex = ({data: {lead, remaining}}) => {
-  const leadArticle = mdxNodeToArticleDigest(lead.edges[0].node);
-  const remainingArticles = remaining.edges.map((edge) => {
-    return mdxNodeToArticleDigest(edge.node);
-  });
+export const BreadcrumbSEO = ({crumbs}) => {
+  const {title: siteTitle, url: siteUrl} = useSiteData();
+  const head = [{name: siteTitle, path: "/"}];
+  const full = (crumbs != null) ? head.concat(crumbs) : head;
+
+  const ld = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": full.map((crumb, index) => {
+      return {
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": crumb.name,
+        "item": `${siteUrl}${crumb.path}`,
+      };
+    }),
+  };
+
+  const json =JSON.stringify(ld);
+
   return (
-    &lt;>
-      &lt;HeroArticle article={leadArticle} />
-      &lt;FeaturedArticleGrid articles={remainingArticles} />
-      &lt;InternalBackButton name="articles" path="/article" />
-    &lt;/>
+    &lt;script id="ld-crumb" type="application/ld+json">
+      {json}
+    &lt;/script>
   );
 };
 
 /**
- * @typedef PageIndexProps - The props for the index page.
- * @property {Object} data - The page data.
- * @property {Object} data.lead - A graphql query for the lead.
- * @property {Object[]} data.lead.edges - All the nodes in the lead graphql.
- * @property {MDXNodeProps} data.lead.edges.node - The lead mdx node.
- * @property {Object} data.remaining - A graphql query for remaining nodes on the page.
- * @property {Object[]} data.remaining.edges - All the nodes in the remaining graphql.
- * @property {MDXNodeProps} data.remaining.edges.node - The remaining mdx node.
+ * @typedef BreadcrumbSEOProps - The SEO Head for breadcrumb ld+json.
+ * @property {Object} [crumbs] - The crumbs to the page.
  */
-PageIndex.propTypes = {
-  data: PropTypes.shape({
-    lead: PropTypes.shape({
-      edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: MDXNodeProps.isRequired,
-          }).isRequired,
-      ).isRequired,
-    }).isRequired,
-    remaining: PropTypes.shape({
-      edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: MDXNodeProps.isRequired,
-          }).isRequired,
-      ).isRequired,
-    }).isRequired,
-  }).isRequired,
+BreadcrumbSEO.propTypes = {
+  crumbs: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        path: PropTypes.string.isRequired,
+      }),
+  ),
 };
 
-export default PageIndex;
-
-export const Head = () => {
-  return &lt;PageSEO path="/" />;
-};
-
-export const pageQuery = graphql`
-  query {
-    lead: allMdx(
-      limit: 1
-      sort: [{frontmatter: {published: DESC}}, {frontmatter:{title:ASC}}]
-    ) {
-      edges {
-        node {
-          excerpt(pruneLength: 280),
-          frontmatter {
-            published
-            slug
-            title
-            featured {
-              image {
-              childImageSharp {
-                gatsbyImageData(
-                  width: 1150, 
-                  placeholder: BLURRED
-                  layout: CONSTRAINED
-                  aspectRatio: 2.33
-                )
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    remaining: allMdx(
-      limit: 8
-      skip: 1
-      sort: [{frontmatter: {published: DESC}}, {frontmatter:{title:ASC}}]
-    ) {
-      edges {
-        node {
-          excerpt(pruneLength: 160),
-          frontmatter {
-            published
-            slug
-            title
-            featured {
-              image {
-                childImageSharp {
-                  gatsbyImageData(
-                    width: 180, 
-                    placeholder: BLURRED
-                    layout: CONSTRAINED
-                    aspectRatio: 0.75
-                  )
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+export default BreadcrumbSEO;
 </code></pre>
         </article>
     </section>
