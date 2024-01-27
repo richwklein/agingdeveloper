@@ -6,10 +6,9 @@
   "type": "commonjs",
   "scripts": {
     "build": "gatsby build",
-    "build:ci": "npm run format && npm run build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
-    "format": "eslint --fix 'src/**/*.{js,jsx,mjs,cjs}'",
+    "format": "eslint . --fix --ext .js,.jsx,.mjs,.cjs",
     "lint": "eslint . --ext .js,.jsx,.mjs,.cjs",
     "start": "gatsby develop",
     "serve": "gatsby serve",
