@@ -1,12 +1,14 @@
 import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import {Link} from "gatsby";
 import {useSiteData} from "../hooks/useSiteData";
 import {ChildrenProps} from "../props";
 import theme from "../styles/theme";
 import InnerContainer from "./InnerContainer";
 import PageFooter from "./PageFooter";
 import PageHeader from "./PageHeader";
+import ScrollTop from "./ScrollTop";
 import "../styles/layout.css";
 
 /**
@@ -24,9 +26,11 @@ import "../styles/layout.css";
 export const PageLayout = ({children}) => {
   const {title, tagline, image, repository} = useSiteData();
   const avatar = image.childImageSharp.gatsbyImageData;
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <Link id="scroll-top" to="/" />
       <PageHeader
         title={title}
         tagline={tagline}
@@ -35,6 +39,7 @@ export const PageLayout = ({children}) => {
       <InnerContainer useMain={true}>
         {children}
       </InnerContainer>
+      <ScrollTop />
       <PageFooter title={title} repository={repository} />
     </ThemeProvider>
   );

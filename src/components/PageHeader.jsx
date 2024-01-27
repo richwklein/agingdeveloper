@@ -55,14 +55,13 @@ PageAvatar.propTypes = {
 export const PageHeader = ({title, tagline, avatar}) => {
   return (
     <AppBar
-      position="sticky"
+      position="fixed"
       component="header"
       elevation={0}
       sx={{
         bgcolor: "primary.dark",
         color: "primary.contrastText",
         p: 2,
-        mb: 4,
       }}
     >
       <InnerContainer>
