@@ -15,11 +15,11 @@ import {ChildrenProps} from "../props";
  *   <TagGrid tags={group} />
  * </InnerContainer>
  */
-export const InnerContainer = ({children, useMain=false}) => {
+export const InnerContainer = ({children, useMain=false, sx=null}) => {
   const component = useMain ? "main" : "div";
 
   return (
-    <Container maxWidth="lg" component={component}>
+    <Container maxWidth="lg" component={component} sx={sx}>
       {children}
     </Container>
   );
@@ -33,6 +33,16 @@ export const InnerContainer = ({children, useMain=false}) => {
 InnerContainer.propTypes = {
   children: ChildrenProps,
   useMain: PropTypes.bool,
+  sx: PropTypes.oneOfType([
+    PropTypes.arrayOf([
+      PropTypes.func,
+      PropTypes.object,
+      PropTypes.bool,
+    ]),
+    PropTypes.func,
+    PropTypes.object,
+  ],
+  ),
 };
 
 export default InnerContainer;

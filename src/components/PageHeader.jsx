@@ -17,14 +17,20 @@ import InternalLink from "./InternalLink";
 export const PageAvatar = ({image, title}) => {
   return (<Avatar
     variant="rounded"
-    sx={{
+    sx={(theme) => ({
       bgcolor: "primary.dark",
       borderWidth: 1,
       borderColor: "secondary.light",
       borderStyle: "solid",
-      width: "72px",
-      height: "72px",
-    }}>
+      [theme.breakpoints.up("sm")]: {
+        width: "72px",
+        height: "72px",
+      },
+      [theme.breakpoints.down("sm")]: {
+        width: "48px",
+        height: "48px",
+      },
+    })}>
     <GatsbyImage image={image} sx={{backgroundColor: "inherit"}} alt={title} />
   </Avatar>);
 };
@@ -65,7 +71,7 @@ export const PageHeader = ({title, tagline, avatar}) => {
       }}
     >
       <InnerContainer>
-        <Toolbar disableGutters>
+        <Toolbar disableGutters sx={{minWidth: "500px"}}>
           <ButtonBase component={InternalLink} to={"/"}
             sx={{color: "inherit", textDecoration: "none"}}>
             <PageAvatar image={avatar} title={title} />
@@ -73,7 +79,16 @@ export const PageHeader = ({title, tagline, avatar}) => {
               <Typography variant="h4" sx={{mb: 0.5}}>
                 {title}
               </Typography>
-              <Typography variant="h6" sx={{fontSize: "1rem", lineHeight: 1.4}}>
+              <Typography variant="h6" sx={(theme) => ({
+                fontSize: "1rem",
+                lineHeight: 1.4,
+                [theme.breakpoints.up("sm")]: {
+                  display: "block",
+                },
+                [theme.breakpoints.down("sm")]: {
+                  display: "none",
+                },
+              })}>
                 {tagline}
               </Typography>
             </Box>
