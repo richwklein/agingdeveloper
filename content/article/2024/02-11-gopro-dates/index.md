@@ -1,13 +1,13 @@
 ---
 slug: 2024-02-11-gopro-dates
-title: GoPro Library Timeline
+title: GoPro Timeline Fix
 description: "How I fix created date information in GoPro videos to correctly locate the media in my library timelines."
 author: richwklein
 featured:
-  image: saketh-OLx2ur13jXc-unsplash.jpg
+  image: jakob-owens-PJziurStmac-unsplash.jpg
   author:
-    name: Saketh
-    url: https://unsplash.com/@sakiii999?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
+    name: Jakob Owens
+    url: https://unsplash.com/@jakobowens1?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
   site:
     name: Unsplash
     url: https://unsplash.com/photos/gray-activity-camera-photography-OLx2ur13jXc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
@@ -21,7 +21,7 @@ tags:
 category: code
 published: "2024-02-11"
 ---
-
+  
 When we started to travel more extensively as a family I wanted to get a GoPro. I thought that it would be worthwhile for capturing moments we normally couldn't get with a regular camera or phone. I ended up purchasing the [Hero 6 Black](https://www.amazon.com/GoPro-HERO6-Black-Waterproof-Digital/dp/B074X5WPC5) which was the newest model at the time. I've used it on several of our vacations and we've got a trip coming in the fall where I'll likely use it again. It is especially handy while in the water. I've captured some really great moments like the one below. 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/IRFGZpP04MQ?si=lbEt5v6q0TmvDBIw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
