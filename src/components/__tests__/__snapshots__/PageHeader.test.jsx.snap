@@ -8,7 +8,7 @@ exports[`PageHeader that it renders correctly. 1`] = `
     class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
   >
     <div
-      class="MuiToolbar-root MuiToolbar-regular css-4o7ow2-MuiToolbar-root"
+      class="MuiToolbar-root MuiToolbar-regular css-r6ewbb-MuiToolbar-root"
     >
       <a
         class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root css-1hyky9h-MuiTypography-root-MuiLink-root-MuiButtonBase-root"
@@ -23,7 +23,7 @@ exports[`PageHeader that it renders correctly. 1`] = `
           class="MuiBox-root css-d0uhtl"
         >
           <h4
-            class="MuiTypography-root MuiTypography-h4 css-725ddr-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h4 MuiTypography-noWrap css-8el3nn-MuiTypography-root"
           >
             Test title
           </h4>

@@ -71,12 +71,12 @@ export const PageHeader = ({title, tagline, avatar}) => {
       }}
     >
       <InnerContainer>
-        <Toolbar disableGutters sx={{minWidth: "500px"}}>
+        <Toolbar disableGutters>
           <ButtonBase component={InternalLink} to={"/"}
             sx={{color: "inherit", textDecoration: "none"}}>
             <PageAvatar image={avatar} title={title} />
             <Box sx={{ml: 2}}>
-              <Typography variant="h4" sx={{mb: 0.5}}>
+              <Typography variant="h4" noWrap={true} sx={{mb: 0.5}}>
                 {title}
               </Typography>
               <Typography variant="h6" sx={(theme) => ({
