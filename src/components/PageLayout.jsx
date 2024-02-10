@@ -36,7 +36,14 @@ export const PageLayout = ({children}) => {
         tagline={tagline}
         avatar={avatar}
       />
-      <InnerContainer useMain={true}>
+      <InnerContainer useMain={true} sx={(theme) => ({
+        [theme.breakpoints.up("sm")]: {
+          paddingTop: 17,
+        },
+        [theme.breakpoints.down("sm")]: {
+          paddingTop: 15,
+        },
+      })}>
         {children}
       </InnerContainer>
       <ScrollTop />

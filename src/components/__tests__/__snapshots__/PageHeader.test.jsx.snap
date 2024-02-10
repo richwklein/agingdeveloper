@@ -8,7 +8,7 @@ exports[`PageHeader that it renders correctly. 1`] = `
     class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
   >
     <div
-      class="MuiToolbar-root MuiToolbar-regular css-r6ewbb-MuiToolbar-root"
+      class="MuiToolbar-root MuiToolbar-regular css-4o7ow2-MuiToolbar-root"
     >
       <a
         class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root css-1hyky9h-MuiTypography-root-MuiLink-root-MuiButtonBase-root"
@@ -17,7 +17,7 @@ exports[`PageHeader that it renders correctly. 1`] = `
         tabindex="0"
       >
         <div
-          class="MuiAvatar-root MuiAvatar-rounded MuiAvatar-colorDefault css-1qmj1zq-MuiAvatar-root"
+          class="MuiAvatar-root MuiAvatar-rounded MuiAvatar-colorDefault css-bodjmb-MuiAvatar-root"
         />
         <div
           class="MuiBox-root css-d0uhtl"
@@ -28,7 +28,7 @@ exports[`PageHeader that it renders correctly. 1`] = `
             Test title
           </h4>
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-1ry1zvy-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h6 css-xoljz8-MuiTypography-root"
           >
             Test tagline is the best tagline
           </h6>
