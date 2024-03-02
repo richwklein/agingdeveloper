@@ -23,6 +23,7 @@ export const ArticleSEO = ({frontmatter, timeToRead}) => {
     "headline": frontmatter.title,
     "description": frontmatter.description,
     "image": [`${siteUrl}${frontmatter.featured.image.publicURL}`],
+    "license": `${siteUrl}/${articlePath}#license`,
     "dateCreated": published,
     "datePublished": published,
     "dateModified": modified,
@@ -66,7 +67,7 @@ export const ArticleSEO = ({frontmatter, timeToRead}) => {
 };
 
 /**
- * @typedef articleSEOProps - The SEO Head for the article props.
+ * @typedef ArticleSEOProps - The SEO Head for the article props.
  * @property {FrontmatterProps} frontmatter - The frontmatter of the article.
  * @property {TimeToReadDigestProps} timeToRead - The time to read props.
  */

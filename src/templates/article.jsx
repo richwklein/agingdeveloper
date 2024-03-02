@@ -5,6 +5,7 @@ import {graphql} from "gatsby";
 import PropTypes from "prop-types";
 import {ArticleByLine} from "../components/ArticleByLine";
 import ArticleImage from "../components/ArticleImage";
+import ArticleLicense from "../components/ArticleLicense";
 import ArticleSEO from "../components/ArticleSEO";
 import ArticleTagGrid from "../components/ArticleTagGrid";
 import ArticleTimeToRead from "../components/ArticleTimeToRead";
@@ -46,6 +47,7 @@ const ArticleTemplate = ({data: {mdx}, children}) => {
       <Grid container direction="row-reverse" spacing={2}>
         <Grid item md={3} sm={12} xs={12}>
           <ArticleTimeToRead minutes={timeToRead.minutes} words={timeToRead.words} lang={lang} />
+          <ArticleLicense />
         </Grid>
         <Grid item md={9} sm={12} xs={12}>
           <MDXProvider components={components}>
