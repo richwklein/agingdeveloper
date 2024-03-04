@@ -16,6 +16,6 @@ jobs:
               ref: ${{ github.ref }}
           - name: "Code Coverage"
             id: "coverage"
-            uses: "ArtiomTr/jest-coverage-report-action@v2.2.6"
+            uses: "ArtiomTr/jest-coverage-report-action@v2.3.0"
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
