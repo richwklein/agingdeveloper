@@ -1,6 +1,6 @@
 import React from "react";
 import {MDXProvider} from "@mdx-js/react";
-import {Box, Divider, Grid} from "@mui/material";
+import {Alert, Box, Divider, Grid} from "@mui/material";
 import {graphql} from "gatsby";
 import PropTypes from "prop-types";
 import {ArticleByLine} from "../components/ArticleByLine";
@@ -17,6 +17,7 @@ import {ChildrenProps, FrontmatterProps, TimeToReadDigestProps} from "../props";
 const components = {
   pre: MDXCode,
   a: MDXLink,
+  Alert: Alert,
 };
 
 /**
