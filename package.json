@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "type": "commonjs",
   "scripts": {
     "build": "gatsby build",
@@ -21,7 +21,7 @@
     "@mui/icons-material": "^5.15.4",
     "@mui/material": "^5.15.4",
     "feed": "^4.2.2",
-    "gatsby": "^5.13.1",
+    "gatsby": "^5.13.6",
     "gatsby-adapter-netlify": "^1.1.1",
     "gatsby-plugin-google-gtag": "^5.13.0",
     "gatsby-plugin-image": "^3.12.3",
