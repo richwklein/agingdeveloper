@@ -25,7 +25,7 @@ published: "2024-06-15"
 ---
 
 
-This article is the exploration of distributed authorization using the [Casbin](https://casbin.org) library. It is a follow up from a 2022 [article](2022-06-18-distributed-authorization) I published. In the previous article, I detailed various access control models, the parts of an authorization system, some typical patterns you see in those systems, and the pros and cons. This article is one of the promised follow up articles implementing authorization systems using various libraries.
+This article is the exploration of distributed authorization using the [Casbin](https://casbin.org) library. It is a follow up from a 2022 [article](2022-06-18-distributed-authorization) I published. In the previous article, I detailed various access control models, the parts of an authorization system, some typical patterns you see in those systems, and the pros and cons. This article is a promised follow up article showing an implementation using various libraries.
 
 <Alert variant="outlined" severity="warning">The code and and recommendations in this article has not been tested in a real production environment.</Alert>
 
