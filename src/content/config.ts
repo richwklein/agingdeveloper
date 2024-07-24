@@ -57,7 +57,6 @@ const site = defineCollection({
       tagline: z.string(),
       category: z.string(),
       lang: z.string(),
-      url: z.string().url(),
       repository: z.string(),
       twitterUsername: z.string().optional(),
       avatar: image(),
