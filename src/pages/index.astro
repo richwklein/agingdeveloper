@@ -1,0 +1,23 @@
+---
+import InternalLink from "@components/InternalLink.astro";
+import Layout from "@layouts/Layout.astro";
+import { getArticles } from "src/utils";
+
+// get the articles and sort them in decending published date
+const articleEntries = await getArticles(9);
+const leadEntry = articleEntries.shift();
+---
+
+<Layout title="Welcome to Astro.">
+  <h1>{leadEntry?.data.title}</h1>
+  <hr />
+  <ol>
+    {
+      articleEntries.map((entry) => (
+        <li>
+          <InternalLink to={`/article/${entry.slug}`}>{entry.data.title}</InternalLink>{" "}
+        </li>
+      ))
+    }
+  </ol>
+</Layout>

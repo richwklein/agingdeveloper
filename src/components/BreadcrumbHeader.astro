@@ -1,0 +1,44 @@
+---
+/**
+ * Component used for rendering a breadcrumb at the top of the page.
+ * If tail is null then just the name of the head page is shown.
+ * Otherwise, a link to the head page and the name of the tail are shown.
+ *
+ * @param {Props} props - The head and tail parts of the breadcrumb.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <BreadcrumbBlock head={{name: "Archive", path="/article"}} tail="1" />
+ */
+import InternalLink from "./InternalLink.astro";
+
+interface Props {
+  head: {
+    name: string;
+    path: string;
+  };
+  tail?: string;
+  class?: string;
+}
+
+const { head, tail, class: className } = Astro.props;
+---
+
+<header class:list={[className, "flex w-full items-center"]}>
+  <span class:list={["mr-2 h-px flex-grow rounded bg-gray-300"]}></span>
+  <ol class:list={["text-primary inline-flex items-center space-x-0 capitalize md:space-x-3"]}>
+    {
+      tail == null ? (
+        <li>{head.name}</li>
+      ) : (
+        <li class:list={["after:mx-1 after:text-gray-300 after:content-['/']"]}>
+          <InternalLink to={head.path} class:list={["hover:underline", "text-inherit"]}>
+            {head.name}
+          </InternalLink>
+        </li>
+      )
+    }
+    {tail != null && <li>{tail}</li>}
+  </ol>
+  <span class:list={["ml-2 h-px flex-grow rounded bg-gray-300"]}></span>
+</header>

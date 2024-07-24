@@ -1,0 +1,27 @@
+---
+import Layout from "@layouts/Layout.astro";
+import slugify from "@sindresorhus/slugify";
+import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
+import { getTags, getArticlesByTag } from "src/utils";
+export async function getStaticPaths() {
+  const pages = (await getTags()).map((tag) => {
+    return {
+      params: { slug: slugify(tag) },
+      props: { tag: tag },
+    };
+  });
+
+  return pages;
+}
+
+const { tag } = Astro.props;
+const limit = import.meta.env.ARTICLE_DISPLAY_LIMIT;
+const articleEntries = await getArticlesByTag(tag, limit);
+---
+
+<Layout title={`${tag} | Tags`}>
+  <BreadcrumbHeader head={{ name: "Tags", path: "/tag" }} tail={tag} class:list={["mb-4"]} />
+  <ol>
+    {articleEntries.map((entry) => <li>{entry.data.title}</li>)}
+  </ol>
+</Layout>

@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary-light: 98 114 123;
+    --color-primary-main: 55 71 79;
+    --color-primary-dark: 16 32 39;
+    --color-primary-contrast: 255 255 255;
+    --color-secondary-light: 190 246 122;
+    --color-secondary-main: 139 195 74;
+    --color-secondary-dark: 90 146 22;
+    --color-secondary-contrast: 46 46 46;
+  }
+
+  html {
+    min-height: 100vh;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex-grow: 1;
+  }
+}

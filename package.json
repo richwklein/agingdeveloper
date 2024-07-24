@@ -2,75 +2,35 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "2.4.0",
-  "type": "commonjs",
+  "version": "3.0.0-alpha1",
+  "type": "module",
   "scripts": {
-    "build": "gatsby build",
-    "clean": "gatsby clean",
-    "develop": "gatsby develop",
-    "format": "eslint . --fix --ext .js,.jsx,.mjs,.cjs",
-    "lint": "eslint . --ext .js,.jsx,.mjs,.cjs",
-    "start": "gatsby develop",
-    "serve": "gatsby serve",
-    "test": "jest",
-    "docs": "jsdoc -c jsdoc.config.json"
+    "dev": "astro dev",
+    "format": "prettier --write  \"**/*.{js,mjs,cjs,jsx,ts,tsx,md,mdx,astro}\"",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.4",
-    "@mui/material": "^5.15.4",
-    "feed": "^4.2.2",
-    "gatsby": "^5.13.6",
-    "gatsby-adapter-netlify": "^1.1.1",
-    "gatsby-plugin-google-gtag": "^5.13.0",
-    "gatsby-plugin-image": "^3.12.3",
-    "gatsby-plugin-manifest": "^5.13.0",
-    "gatsby-plugin-mdx": "^5.12.3",
-    "gatsby-plugin-offline": "^6.13.0",
-    "gatsby-plugin-remove-fingerprints": "^0.0.2",
-    "gatsby-plugin-robots-txt": "^1.8.0",
-    "gatsby-plugin-sharp": "^5.13.0",
-    "gatsby-plugin-sitemap": "^6.13.0",
-    "gatsby-plugin-web-font-loader": "^1.0.4",
-    "gatsby-remark-images": "^7.12.3",
-    "gatsby-source-filesystem": "^5.13.0",
-    "gatsby-transformer-json": "^5.13.0",
-    "gatsby-transformer-sharp": "^5.13.0",
-    "moment": "^2.29.4",
-    "prism-react-renderer": "^2.3.1",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "reading-time": "^1.5.0",
-    "slug": "^9.0.0"
+    "@astrojs/check": "^0.8.2",
+    "@astrojs/netlify": "^5.4.0",
+    "@astrojs/tailwind": "^5.1.0",
+    "@iconify-json/mdi": "^1.1.66",
+    "@sindresorhus/slugify": "^2.2.1",
+    "@tailwindcss/typography": "^0.5.13",
+    "astro": "^4.12.2",
+    "astro-icon": "^1.1.0",
+    "astro-robots": "^2.0.1",
+    "tailwindcss": "^3.4.3"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.2.0",
-    "@testing-library/react": "^16.0.0",
-    "babel-jest": "^29.7.0",
-    "babel-preset-gatsby": "^3.12.0",
-    "eslint": "^7.32.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-simple-import-sort": "^12.0.0",
-    "gatsby-cli": "^5.13.1",
-    "identity-obj-proxy": "^3.0.0",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "jsdoc": "^4.0.2"
-  },
-  "overrides": {
-    "react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825": {
-      "react": "^18.2.0"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/richwklein/agingdeveloper"
-  },
-  "bugs": {
-    "url": "https://github.com/richwklein/agingdeveloper"
+    "@vitest/coverage-v8": "^2.0.3",
+    "prettier": "^3.2.5",
+    "prettier-plugin-astro": "^0.13.0",
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "typescript": "^5.4.5",
+    "vitest": "^2.0.3"
   }
 }

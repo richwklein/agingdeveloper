@@ -1,0 +1,17 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { getArticles } from "src/utils";
+
+export async function getStaticPaths({ paginate }: any) {
+  const articleEntries = await getArticles();
+  const limit = import.meta.env.ARTICLE_DISPLAY_LIMIT;
+
+  return paginate(articleEntries, { pageSize: limit });
+}
+
+const { page: Page } = Astro.props;
+---
+
+<Layout title="Articles">
+  <h1>Archive Page</h1>
+</Layout>

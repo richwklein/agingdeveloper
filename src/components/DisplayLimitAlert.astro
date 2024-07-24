@@ -1,0 +1,36 @@
+---
+/**
+ * Component used for for showing an alert when the number of articles exceeds
+ * the limit of the page.
+ *
+ * @param {Props} props - The limit and total.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <DisplayLimit limit={maxDisplay} total={totalCount} />
+ *
+ * @todo Add search to message once implemented.
+ */
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  limit: number;
+  total: number;
+  class?: string;
+}
+
+const { limit, total, class: className } = Astro.props;
+const remaining = total - limit;
+---
+
+{
+  total > limit ? (
+    <div
+      class:list={[className, "flex items-center rounded-md bg-blue-100 p-3 text-blue-600"]}
+      role="alert"
+    >
+      <Icon name="mdi:information-outline" class:list={["mr-3"]} />
+      <p>{`Maximum number of articles displayed, ${remaining} remaining.`}</p>
+    </div>
+  ) : null
+}

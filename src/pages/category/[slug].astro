@@ -1,0 +1,31 @@
+---
+import Layout from "@layouts/Layout.astro";
+import slugify from "@sindresorhus/slugify";
+import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
+import { getCategories, getArticlesByCategory } from "src/utils";
+export async function getStaticPaths() {
+  const pages = (await getCategories()).map((category) => {
+    return {
+      params: { slug: slugify(category) },
+      props: { category: category },
+    };
+  });
+
+  return pages;
+}
+
+const { category } = Astro.props;
+const limit = import.meta.env.ARTICLE_DISPLAY_LIMIT;
+const articleEntries = await getArticlesByCategory(category, limit);
+---
+
+<Layout title={`${category} | Tags`}>
+  <BreadcrumbHeader
+    head={{ name: "Categories", path: "/category" }}
+    tail={category}
+    class:list={["mb-4"]}
+  />
+  <ol>
+    {articleEntries.map((entry) => <li>{entry.data.title}</li>)}
+  </ol>
+</Layout>

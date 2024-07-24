@@ -1,8 +1,8 @@
 name: "Lint"
 on:
-    pull_request:
-        branches:
-            - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   lint:
@@ -10,15 +10,13 @@ jobs:
 
     steps:
       - name: "Checkout source code"
-        uses: "actions/checkout@v4.1.7"
+        uses: "actions/checkout@v4.1.3"
         with:
           fetch-depth: 0
           ref: ${{ github.ref }}
 
-      - name: Install Dependencies
+      - name: "Install Dependencies"
         run: npm install
 
-      - name: Run Lint
+      - name: "Run Lint"
         run: npm run lint
-
-      

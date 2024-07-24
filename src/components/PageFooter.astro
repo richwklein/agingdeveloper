@@ -1,0 +1,28 @@
+---
+/**
+ * The component used to render the page footer.
+
+ * @param {Props} props - The properties of the page footer.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <PageFooter />
+ */
+import { getEntry } from "astro:content";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const siteId = import.meta.env.SITE_ID;
+const entry = await getEntry("site", siteId);
+const site = entry.data;
+const year = new Date().getFullYear();
+---
+
+<footer class:list={[className, "container mx-auto grid-rows-3 p-4"]}>
+  <div></div>
+  <div class:list={["text-center text-xs"]}>&copy; {year} {site.title}</div>
+  <div></div>
+</footer>

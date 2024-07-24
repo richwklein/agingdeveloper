@@ -1,0 +1,21 @@
+---
+/**
+ * Component used to render a link internal to the site.
+ *
+ * @param {Props} props - The properties of the link.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <InternalLinkProps to="tags">Tags</InternalLink>
+ */
+
+interface Props {
+  to: string;
+  class?: string;
+}
+
+const { to, class: className } = Astro.props;
+---
+
+<!--prettier-ignore -->
+<a data-link="internal" target="_self" href={to} class:list={[className]}><slot /></a>

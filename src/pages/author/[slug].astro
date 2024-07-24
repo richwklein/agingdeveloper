@@ -1,0 +1,41 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import slugify from "@sindresorhus/slugify";
+import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
+import { getArticlesByAuthor } from "src/utils";
+import DisplayLimitAlert from "@components/DisplayLimitAlert.astro";
+import { getEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const authorEntries = await getCollection("author");
+
+  const pages = authorEntries.map((entry) => {
+    return {
+      params: { slug: slugify(entry.id) },
+      props: { id: entry.id },
+    };
+  });
+
+  return pages;
+}
+
+const { id } = Astro.props;
+const limit = import.meta.env.ARTICLE_DISPLAY_LIMIT;
+const authorEntry = await getEntry("author", id);
+const author = authorEntry.data;
+const articleEntries = await getArticlesByAuthor(id, limit);
+---
+
+<Layout title={`${author.name} | Authors`}>
+  <BreadcrumbHeader
+    head={{ name: "Authors", path: "/author" }}
+    tail={author.name}
+    class:list={["mb-4"]}
+  />
+  <h1>{author.name}</h1>
+  <ol>
+    {articleEntries.map((entry) => <li>{entry.data.title}</li>)}
+  </ol>
+  <DisplayLimitAlert total={articleEntries.length} limit={limit} class:list={["mt-4"]} />
+</Layout>

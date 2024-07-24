@@ -1,0 +1,26 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { getEntry } from "astro:content";
+import { getArticles } from "src/utils";
+
+export async function getStaticPaths() {
+  const articleEntries = await getArticles();
+
+  const pages = articleEntries.map((entry) => {
+    return {
+      params: { slug: entry.slug },
+    };
+  });
+
+  return pages;
+}
+
+const { slug } = Astro.params;
+const entry = await getEntry("article", slug);
+const article = entry.data;
+const { Content } = await entry.render();
+---
+
+<Layout title={`${article.title} | Authors`}>
+  <article class:list={["prose md:prose-lg lg:prose-xl"]}><Content /></article>
+</Layout>
