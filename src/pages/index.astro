@@ -1,23 +1,31 @@
 ---
+import InternalBackLink from "@components/InternalBackLink.astro";
 import InternalLink from "@components/InternalLink.astro";
 import Layout from "@layouts/Layout.astro";
 import { getArticles } from "src/utils";
 
 // get the articles and sort them in decending published date
-const articleEntries = await getArticles(9);
-const leadEntry = articleEntries.shift();
+const entries = await getArticles(9);
+const lead = entries.shift();
 ---
 
 <Layout title="Welcome to Astro.">
-  <h1>{leadEntry?.data.title}</h1>
+  <h1 class:list={["font-extrabold"]}>
+    {
+      lead != null ? (
+        <InternalLink to={`/article/${lead.slug}`}>{lead.data.title}</InternalLink>
+      ) : null
+    }
+  </h1>
   <hr />
   <ol>
     {
-      articleEntries.map((entry) => (
+      entries.map((entry) => (
         <li>
-          <InternalLink to={`/article/${entry.slug}`}>{entry.data.title}</InternalLink>{" "}
+          <InternalLink to={`/article/${entry.slug}`}>{entry.data.title}</InternalLink>
         </li>
       ))
     }
   </ol>
+  <InternalBackLink name="articles" path="/article" class:list={["mt-4"]} />
 </Layout>

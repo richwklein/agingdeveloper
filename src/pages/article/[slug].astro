@@ -1,26 +1,40 @@
 ---
+import ArticleImage from "@components/ArticleImage.astro";
+import ArticleTagGrid from "@components/ArticleTagGrid.astro";
+import ArticleTitle from "@components/ArticleTitle.astro";
 import Layout from "@layouts/Layout.astro";
-import { getEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import { getArticles } from "src/utils";
 
-export async function getStaticPaths() {
-  const articleEntries = await getArticles();
+interface Props {
+  entry: CollectionEntry<"article">;
+}
 
-  const pages = articleEntries.map((entry) => {
+export async function getStaticPaths() {
+  const entries = await getArticles();
+
+  const pages = entries.map((entry) => {
     return {
       params: { slug: entry.slug },
+      props: { entry },
     };
   });
 
   return pages;
 }
 
-const { slug } = Astro.params;
-const entry = await getEntry("article", slug);
+const { entry } = Astro.props;
 const article = entry.data;
 const { Content } = await entry.render();
 ---
 
-<Layout title={`${article.title} | Authors`}>
-  <article class:list={["prose md:prose-lg lg:prose-xl"]}><Content /></article>
+<Layout title={`${article.title}`}>
+  <article>
+    <ArticleTitle title={article.title} description={article.description} class:list={["mt-4"]} />
+    <ArticleImage featured={article.featured} class:list={["mt-4"]} />
+    <section class:list={["prose max-w-none md:prose-lg lg:prose-xl"]}>
+      <Content />
+    </section>
+    <ArticleTagGrid category={article.category} tags={article.tags} class:list={["mt-4"]} />
+  </article>
 </Layout>

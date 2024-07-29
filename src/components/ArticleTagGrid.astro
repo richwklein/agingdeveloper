@@ -1,0 +1,35 @@
+---
+/**
+ * @name ArticleTagGrid
+ * Component used for rendering a grid of the category and tags associated with
+ * a single article.
+ *
+ * @param {Props} props - The properties of the tag grid.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <ArticleTagGrid tags={tags} category={category} />
+ */
+import TagGridLink from "./TagGridLink.astro";
+
+interface Props {
+  tags: Array<string>;
+  category: string;
+  class?: string;
+}
+
+const { tags, category, class: className } = Astro.props;
+---
+
+<section id="article-tags" class:list={[className]}>
+  <ul class:list={["flex list-none flex-wrap gap-1"]}>
+    <li><TagGridLink name={category} isCategory={true} /></li>
+    {
+      tags.map((tag) => (
+        <li>
+          <TagGridLink name={tag} />
+        </li>
+      ))
+    }
+  </ul>
+</section>

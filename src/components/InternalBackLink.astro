@@ -1,0 +1,35 @@
+---
+/**
+ * @name InternalBackButton
+ * Component used for rendering a link as a button back to another page.
+ *
+ * @param {Props} props - The properties of the link.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <InternalBackLink name={"authors"} path={"/author"}} />
+ */
+import { Icon } from "astro-icon/components";
+import InternalLink from "./InternalLink.astro";
+
+interface Props {
+  name: string;
+  path: string;
+  class?: string;
+  useViewText?: boolean;
+}
+
+const { name, path, class: className, useViewText = true } = Astro.props;
+const text = useViewText ? `view all ${name}` : name;
+---
+
+<InternalLink
+  to={path}
+  class:list={[
+    "m-0 inline-flex min-w-16 items-center justify-center rounded-md bg-secondary-main py-2 pl-3 pr-4 capitalize text-secondary-contrast hover:bg-secondary-dark focus:bg-secondary-dark",
+    className,
+  ]}
+>
+  <Icon name="mdi:chevron-left" class:list={["mr-1"]} />
+  {text}
+</InternalLink>

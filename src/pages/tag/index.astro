@@ -1,23 +1,13 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
-import InternalLink from "@components/InternalLink.astro";
-import { getTags } from "src/utils";
+import { getTagsWithCount } from "src/utils";
+import TagGrid from "@components/TagGrid.astro";
 
-const tags = await getTags();
+const { tags, total } = await getTagsWithCount();
 ---
 
 <Layout title="Tags">
   <BreadcrumbHeader head={{ name: "Tags", path: "/tag" }} class:list={["mb-4"]} />
-  <ol>
-    {
-      tags.map((tag) => (
-        <li>
-          <InternalLink class:list={["capitalize"]} to={`/tag/${tag}`}>
-            {tag}
-          </InternalLink>
-        </li>
-      ))
-    }
-  </ol>
+  <TagGrid tags={tags} total={total} isCategory={false} />
 </Layout>

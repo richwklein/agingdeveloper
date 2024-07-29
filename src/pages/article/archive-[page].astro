@@ -1,17 +1,32 @@
 ---
+import InternalLink from "@components/InternalLink.astro";
 import Layout from "@layouts/Layout.astro";
+import type { Page } from "astro";
 import { getArticles } from "src/utils";
 
-export async function getStaticPaths({ paginate }: any) {
-  const articleEntries = await getArticles();
-  const limit = import.meta.env.ARTICLE_DISPLAY_LIMIT;
-
-  return paginate(articleEntries, { pageSize: limit });
+interface Props {
+  page: Page;
 }
 
-const { page: Page } = Astro.props;
+export async function getStaticPaths({ paginate }: any) {
+  const entries = await getArticles();
+  const limit = import.meta.env.ARTICLE_DISPLAY_LIMIT;
+
+  return paginate(entries, { pageSize: limit });
+}
+
+const { page } = Astro.props;
 ---
 
 <Layout title="Articles">
   <h1>Archive Page</h1>
+  <ul>
+    {
+      page.data.map((entry) => (
+        <li>
+          <InternalLink to={`/article/${entry.slug}`}>{entry.data.title}</InternalLink>
+        </li>
+      ))
+    }
+  </ul>
 </Layout>

@@ -3,6 +3,14 @@ import Layout from "@layouts/Layout.astro";
 import slugify from "@sindresorhus/slugify";
 import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
 import { getCategories, getArticlesByCategory } from "src/utils";
+import DisplayLimitAlert from "@components/DisplayLimitAlert.astro";
+import InternalBackLink from "@components/InternalBackLink.astro";
+import InternalLink from "@components/InternalLink.astro";
+
+interface Props {
+  category: string;
+}
+
 export async function getStaticPaths() {
   const pages = (await getCategories()).map((category) => {
     return {
@@ -16,7 +24,7 @@ export async function getStaticPaths() {
 
 const { category } = Astro.props;
 const limit = import.meta.env.ARTICLE_DISPLAY_LIMIT;
-const articleEntries = await getArticlesByCategory(category, limit);
+const entries = await getArticlesByCategory(category, limit);
 ---
 
 <Layout title={`${category} | Tags`}>
@@ -26,6 +34,14 @@ const articleEntries = await getArticlesByCategory(category, limit);
     class:list={["mb-4"]}
   />
   <ol>
-    {articleEntries.map((entry) => <li>{entry.data.title}</li>)}
+    {
+      entries.map((entry) => (
+        <li>
+          <InternalLink to={`/article/${entry.slug}`}>{entry.data.title}</InternalLink>
+        </li>
+      ))
+    }
   </ol>
+  <DisplayLimitAlert total={entries.length} limit={limit} class:list={["mt-4"]} />
+  <InternalBackLink class:list={["mt-4"]} name={"categories"} path={"/category"} />
 </Layout>

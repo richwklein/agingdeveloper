@@ -1,24 +1,13 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
-import InternalLink from "@components/InternalLink.astro";
-import { getCategories } from "src/utils";
-import slugify from "@sindresorhus/slugify";
+import { getCategoriesWithCount } from "src/utils";
+import TagGrid from "@components/TagGrid.astro";
 
-const categories = await getCategories();
+const { categories, total } = await getCategoriesWithCount();
 ---
 
 <Layout title="Categories">
   <BreadcrumbHeader head={{ name: "Categories", path: "/category" }} class:list={["mb-4"]} />
-  <ol>
-    {
-      categories.map((category) => (
-        <li>
-          <InternalLink class:list={["capitalize"]} to={`/category/${slugify(category)}`}>
-            {category}
-          </InternalLink>
-        </li>
-      ))
-    }
-  </ol>
+  <TagGrid tags={categories} total={total} isCategory={true} />
 </Layout>

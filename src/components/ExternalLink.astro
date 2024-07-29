@@ -1,5 +1,6 @@
 ---
 /**
+ * @name ExternalLink
  * Component used to render a link to an external site.
  *
  * @param {Props} props - The properties of the link.
@@ -10,11 +11,12 @@
  */
 interface Props {
   to: string;
+  title?: string;
   class?: string;
 }
 
-const { to, class: className } = Astro.props;
+const { to, title, class: className } = Astro.props;
 ---
 
 <!--prettier-ignore -->
-<a data-link="external" target="_blank" rel="noopener noreferrer" href={to} class:list={[className]}><slot /></a>
+<a data-link="external" target="_blank" rel="noopener noreferrer" href={to} class:list={[className]} title={title}><slot /></a>

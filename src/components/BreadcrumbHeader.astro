@@ -1,5 +1,7 @@
 ---
 /**
+ *
+ * @name BreadcrumHeader
  * Component used for rendering a breadcrumb at the top of the page.
  * If tail is null then just the name of the head page is shown.
  * Otherwise, a link to the head page and the name of the tail are shown.
@@ -24,7 +26,7 @@ interface Props {
 const { head, tail, class: className } = Astro.props;
 ---
 
-<header class:list={[className, "flex w-full items-center"]}>
+<header class:list={["flex w-full items-center", className]}>
   <span class:list={["mr-2 h-px flex-grow rounded bg-gray-300"]}></span>
   <ol class:list={["text-primary inline-flex items-center space-x-0 capitalize md:space-x-3"]}>
     {

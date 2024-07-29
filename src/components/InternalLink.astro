@@ -1,5 +1,6 @@
 ---
 /**
+ * @name InternalLink
  * Component used to render a link internal to the site.
  *
  * @param {Props} props - The properties of the link.
@@ -11,11 +12,12 @@
 
 interface Props {
   to: string;
+  title?: string;
   class?: string;
 }
 
-const { to, class: className } = Astro.props;
+const { to, title, class: className } = Astro.props;
 ---
 
 <!--prettier-ignore -->
-<a data-link="internal" target="_self" href={to} class:list={[className]}><slot /></a>
+<a data-link="internal" target="_self" href={to} class:list={[className]} title={title}><slot /></a>

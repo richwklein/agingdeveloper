@@ -6,10 +6,12 @@ import netlify from "@astrojs/netlify";
 
 const {
   URL: SITE_URL,
-  DEPLOY_PRIME_URL: DEPLOY_URL = SITE_URL,
-  CONTEXT: DEPLOY_CONTEXT = "deploy-preview",
+  DEPLOY_PRIME_URL: DEPLOY_URL,
+  CONTEXT: DEPLOY_CONTEXT = "dev",
 } = process.env;
-const siteUrl = DEPLOY_CONTEXT === "production" ? SITE_URL : DEPLOY_URL;
+
+const siteUrl = (DEPLOY_CONTEXT === "dev") ? "http://localhost:4321" :
+  (DEPLOY_CONTEXT == "production") ? SITE_URL : DEPLOY_URL;
 
 // https://astro.build/config
 export default defineConfig({
