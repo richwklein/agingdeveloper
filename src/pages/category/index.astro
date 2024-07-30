@@ -1,7 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
-import { getCategoriesWithCount } from "src/utils";
+import { getCategoriesWithCount } from "@utils/article";
 import TagGrid from "@components/TagGrid.astro";
 
 const { categories, total } = await getCategoriesWithCount();

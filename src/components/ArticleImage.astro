@@ -24,20 +24,22 @@ interface Props {
       name: string;
       url: string;
     };
+    placeholder: string;
   };
   class?: string;
 }
 const {
-  featured: { image, author, site },
+  featured: { image, author, site, placeholder },
   class: className,
 } = Astro.props;
 const alt = author != null ? author.name : "unknown";
+console.log(placeholder);
 ---
 
-<section id="article-featured" class:list={["mb-4", className]}>
+<section id="article-featured" class:list={[className]}>
   <figure>
     <Picture
-      class:list={["aspect-video"]}
+      class:list={["aspect-video rounded-sm"]}
       src={image}
       alt={alt}
       formats={["webp"]}
@@ -47,23 +49,25 @@ const alt = author != null ? author.name : "unknown";
     />
     {
       author != null && site != null ? (
-        <figcaption class:list={["mt-1 text-sm text-primary-main/85"]}>
-          {author != null ? (
-            <>
-              {"Image by "}
-              <ExternalLink class:list={["underline"]} to={author.url}>
-                {author.name}
-              </ExternalLink>
-            </>
-          ) : null}
-          {site != null ? (
-            <>
-              {" on "}
-              <ExternalLink class:list={["underline"]} to={site.url}>
-                {site.name}
-              </ExternalLink>
-            </>
-          ) : null}
+        <figcaption>
+          <small class:list={["mt-1 text-sm text-primary-main/85"]}>
+            {author != null ? (
+              <>
+                {"Image by "}
+                <ExternalLink class:list={["underline"]} to={author.url}>
+                  {author.name}
+                </ExternalLink>
+              </>
+            ) : null}
+            {site != null ? (
+              <>
+                {" on "}
+                <ExternalLink class:list={["underline"]} to={site.url}>
+                  {site.name}
+                </ExternalLink>
+              </>
+            ) : null}
+          </small>
         </figcaption>
       ) : null
     }

@@ -20,5 +20,6 @@
   code linting
   [code coverage](https://github.com/marketplace/actions/vitest-coverage-report)
 - fix symlink between components
+- fallback blurred image
 
 <https://github.com/danielcgilibert/blog-template/blob/main/src/utils/post.ts>

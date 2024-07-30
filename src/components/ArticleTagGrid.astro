@@ -21,7 +21,7 @@ interface Props {
 const { tags, category, class: className } = Astro.props;
 ---
 
-<section id="article-tags" class:list={[className]}>
+<nav id="article-tags" class:list={[className]}>
   <ul class:list={["flex list-none flex-wrap gap-1"]}>
     <li><TagGridLink name={category} isCategory={true} /></li>
     {
@@ -32,4 +32,4 @@ const { tags, category, class: className } = Astro.props;
       ))
     }
   </ul>
-</section>
+</nav>

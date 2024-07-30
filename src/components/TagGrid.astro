@@ -10,7 +10,7 @@
  * @example
  * <TagGrid tags={tags} isCategory={true} />
  */
-import { calculateWeight } from "src/utils";
+import { calculateWeight } from "@utils/weight";
 import TagGridLink from "./TagGridLink.astro";
 
 interface Props {
@@ -23,17 +23,18 @@ interface Props {
 const { tags, total, isCategory = false, class: className } = Astro.props;
 ---
 
-<ul
-  class:list={[
-    "grid grid-flow-row grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6",
-    className,
-  ]}
->
-  {
-    Array.from(tags).map(([name, count]) => (
-      <li>
-        <TagGridLink name={name} weight={calculateWeight(count, total)} isCategory={isCategory} />
-      </li>
-    ))
-  }
-</ul>
+<nav class:list={[className]}>
+  <ul
+    class:list={[
+      "grid grid-flow-row grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6",
+    ]}
+  >
+    {
+      Array.from(tags).map(([name, count]) => (
+        <li>
+          <TagGridLink name={name} weight={calculateWeight(count, total)} isCategory={isCategory} />
+        </li>
+      ))
+    }
+  </ul>
+</nav>

@@ -1,0 +1,41 @@
+---
+/**
+ * @name ArticleTimeToRead
+ * Component for showing the word count and time to read for an article.
+ *
+ * @param {ArticleTimeToReadProps} props - The article time to read props.
+ * @return {React.ReactElement} - The react component
+ *
+ * @example
+ * <ArticleTimeToRead
+ *   minutes={timeToRead.minutes}
+ *   words={timeToRead.words}
+ *   lang={lang} />
+ */
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  minutes: number;
+  words: number;
+  lang: string;
+  class?: string;
+}
+
+const { minutes, words, lang, class: className } = Astro.props;
+const wordFormat = new Intl.NumberFormat(lang).format(words);
+const readTemplate = `${Math.ceil(minutes)} min read`;
+const wordsTemplate = `${wordFormat} words`;
+---
+
+<div
+  class:list={[
+    "flex flex-row items-center gap-x-2 rounded-sm border border-primary-main p-1",
+    className,
+  ]}
+>
+  <Icon class:list={["h-6 w-6"]} name="mdi:clock-outline" />
+  <div class:list={["flex flex-col"]}>
+    <small class:list={["text-sm"]}>{readTemplate}</small>
+    <small class:list={["text-sm"]}>{wordsTemplate}</small>
+  </div>
+</div>

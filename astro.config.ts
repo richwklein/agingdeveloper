@@ -3,6 +3,7 @@ import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
 import robots from "astro-robots";
 import netlify from "@astrojs/netlify";
+import { remarkReadingTime } from './src/utils/readTime.ts'
 
 const {
   URL: SITE_URL,
@@ -26,6 +27,9 @@ export default defineConfig({
     })
   ],
   image: {},
+  markdown: {
+    remarkPlugins: [remarkReadingTime],
+  },
   vite: {
     resolve: {
       // allow symlinking content into the src directory

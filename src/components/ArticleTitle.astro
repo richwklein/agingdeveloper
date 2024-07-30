@@ -18,7 +18,7 @@ interface Props {
 const { title, description, class: className } = Astro.props;
 ---
 
-<section id="article-title" class:list={[className]}>
-  <h3 class:list={["text-5xl leading-snug"]}>{title}</h3>
-  <p class:list={["text-lg"]}>{description}</p>
-</section>
+<hgroup id="article-title" class:list={[className]}>
+  <h2 class:list={["text-5xl leading-snug"]}>{title}</h2>
+  <h3 class:list={["text-lg leading-tight"]}>{description}</h3>
+</hgroup>

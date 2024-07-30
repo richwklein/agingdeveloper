@@ -2,7 +2,7 @@
 import InternalBackLink from "@components/InternalBackLink.astro";
 import InternalLink from "@components/InternalLink.astro";
 import Layout from "@layouts/Layout.astro";
-import { getArticles } from "src/utils";
+import { getArticles } from "@utils/article";
 
 // get the articles and sort them in decending published date
 const entries = await getArticles(9);

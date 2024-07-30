@@ -3,7 +3,7 @@ import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import slugify from "@sindresorhus/slugify";
 import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
-import { getArticlesByAuthor } from "src/utils";
+import { getArticlesByAuthor } from "@utils/article";
 import DisplayLimitAlert from "@components/DisplayLimitAlert.astro";
 import type { CollectionEntry } from "astro:content";
 import InternalBackLink from "@components/InternalBackLink.astro";
