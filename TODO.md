@@ -35,11 +35,6 @@
 
 - <https://docs.astro.build/en/guides/rss/>
 
-## Favicon support to add
-
-- <https://insertapps.com/en/blog/favicon-guide/>
-- <https://github.com/ACP-CODE/astro-favicons?tab=readme-ov-file#readme>
-
 ## Sitemap support to add
 
 - <https://docs.astro.build/en/guides/integrations-guide/sitemap/>
