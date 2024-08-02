@@ -8,7 +8,7 @@ import { remarkExcerpt } from "./src/utils/excerpt.ts";
 const {
   URL: SITE_URL,
   DEPLOY_PRIME_URL: DEPLOY_URL,
-  CONTEXT: DEPLOY_CONTEXT = "dev",
+  CONTEXT: DEPLOY_CONTEXT = "dev"
 } = process.env;
 
 const siteUrl =
@@ -26,18 +26,12 @@ export default defineConfig({
   integrations: [
     icon(),
     tailwind({
-      applyBaseStyles: false,
-    }),
+      applyBaseStyles: false
+    })
   ],
   image: {},
   markdown: {
-    remarkPlugins: [remarkReadingTime, remarkExcerpt],
+    remarkPlugins: [remarkReadingTime, remarkExcerpt]
   },
-  vite: {
-    resolve: {
-      // allow symlinking content into the src directory
-      preserveSymlinks: true,
-    },
-  },
-  adapter: netlify(),
+  adapter: netlify()
 });
