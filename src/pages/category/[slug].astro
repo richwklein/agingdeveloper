@@ -5,7 +5,7 @@ import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
 import { getCategories, getArticlesByCategory } from "@utils/article";
 import DisplayLimitAlert from "@components/DisplayLimitAlert.astro";
 import InternalBackLink from "@components/InternalBackLink.astro";
-import InternalLink from "@components/InternalLink.astro";
+import ArticleGrid from "@components/ArticleGrid.astro";
 
 interface Props {
   category: string;
@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 
 const { category } = Astro.props;
 const limit = import.meta.env.ARTICLE_DISPLAY_LIMIT;
-const entries = await getArticlesByCategory(category, limit);
+const { entries, total } = await getArticlesByCategory(category, limit);
 ---
 
 <Layout title={`${category} | Tags`}>
@@ -33,15 +33,7 @@ const entries = await getArticlesByCategory(category, limit);
     tail={category}
     class:list={["mb-4"]}
   />
-  <ol>
-    {
-      entries.map((entry) => (
-        <li>
-          <InternalLink to={`/article/${entry.slug}`}>{entry.data.title}</InternalLink>
-        </li>
-      ))
-    }
-  </ol>
-  <DisplayLimitAlert total={entries.length} limit={limit} class:list={["mt-4"]} />
+  <ArticleGrid articles={entries} class:list={["mt-4"]} />
+  <DisplayLimitAlert displayed={entries.length} total={total} class:list={["mt-4"]} />
   <InternalBackLink class:list={["mt-4"]} name={"categories"} path={"/category"} />
 </Layout>

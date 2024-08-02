@@ -5,19 +5,21 @@
 This is the personal site of Richard Klein. It is a static site built using [typescript](https://www.typescriptlang.org/), [astro](https://astro.build/) and [tailwindcss](https://tailwindcss.com/). It is deployed via [netlify](https://www.netlify.com/). You can find a live version of it at [agingdeveloper.com](https://agingdeveloper.com/). See the [github issues](https://github.com/richwklein/agingdeveloper/issues) to track development progress.
 
 ## What's in This Document
-  - [License](#license)
-  - [Content vs Source Code](#content-vs-source-code)
-  - [Start local development](#start-local-development)
-    - [Create a production build.](#create-a-production-build)
-    - [Serve the production build locally.](#serve-the-production-build-locally)
-  - [VSCode settings](#vscode-settings)
-  - [Testing](#testing)
+
+- [License](#license)
+- [Content vs Source Code](#content-vs-source-code)
+- [Start local development](#start-local-development)
+  - [Create a production build.](#create-a-production-build)
+  - [Serve the production build locally.](#serve-the-production-build-locally)
+- [VSCode settings](#vscode-settings)
+- [Testing](#testing)
 
 ## License
-- The site code is [MIT](/LICENSE) licensed 
+
+- The site code is [MIT](/LICENSE) licensed
 - The libraries the site is based upon are MIT licensed where feasible.
-- Content hosted on the site is 
-- [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) 
+- Content hosted on the site is
+- [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/)
   licensed unless otherwise noted.
 
 ## Content vs Source Code
@@ -30,7 +32,7 @@ Most Typescript developers will likely already have the tools installed, but her
 
 1. **Install dev tools**
 
-I use *asdf* to install dev tools. Use the [getting started](https://asdf-vm.com/guide/getting-started.html) page to make sure it is installed and set up correctly.
+I use _asdf_ to install dev tools. Use the [getting started](https://asdf-vm.com/guide/getting-started.html) page to make sure it is installed and set up correctly.
 
 Once you have asdf installed you can use that to install node & npm. These are setup as being the global versions, but with asdf you could just use the version locally.
 
@@ -55,14 +57,14 @@ VSCode is the main editor that is used on this site. ESLint is used for linting 
 
 ```json
 {
-    "editor.tabCompletion": "on",
-    "editor.rulers": [80, 100, 120],
-    "editor.tabSize": 2,
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "eslint.format.enable": true,
-    "eslint.lintTask.enable": true,
+  "editor.tabCompletion": "on",
+  "editor.rulers": [80, 100, 120],
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true
 }
 ```
 

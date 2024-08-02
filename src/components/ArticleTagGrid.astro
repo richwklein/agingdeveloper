@@ -22,7 +22,7 @@ const { tags, category, class: className } = Astro.props;
 ---
 
 <nav id="article-tags" class:list={[className]}>
-  <ul class:list={["flex list-none flex-wrap gap-1"]}>
+  <ol class:list={["flex list-none flex-wrap gap-1"]}>
     <li><TagGridLink name={category} isCategory={true} /></li>
     {
       tags.map((tag) => (
@@ -31,5 +31,5 @@ const { tags, category, class: className } = Astro.props;
         </li>
       ))
     }
-  </ul>
+  </ol>
 </nav>

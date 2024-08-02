@@ -1,16 +1,15 @@
-import DisplayLimitAlert from '@components/DisplayLimitAlert.astro';
-import { experimental_AstroContainer as AstroContainer } from 'astro/container';
-import { describe, expect, test } from 'vitest';
+import DisplayLimitAlert from "@components/DisplayLimitAlert.astro";
+import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import { describe, expect, test } from "vitest";
 
 describe("DisplayLimitAlert", () => {
-
   const render = async () => {
     const container = await AstroContainer.create();
     return container.renderToString(DisplayLimitAlert, {
       props: {
         limit: 5,
-        total: 10
-      }
+        total: 10,
+      },
     });
   };
 

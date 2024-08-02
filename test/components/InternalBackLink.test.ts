@@ -1,9 +1,8 @@
-import InternalBackLink from '@components/InternalBackLink.astro';
-import { experimental_AstroContainer as AstroContainer } from 'astro/container';
-import { describe, expect, test } from 'vitest';
+import InternalBackLink from "@components/InternalBackLink.astro";
+import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import { describe, expect, test } from "vitest";
 
 describe("InternalBackButton", async () => {
-
   const render = async (useViewText = true) => {
     const container = await AstroContainer.create();
     return container.renderToString(InternalBackLink, {
@@ -11,7 +10,7 @@ describe("InternalBackButton", async () => {
         name: "authors",
         path: "/author",
         useViewText: useViewText,
-      }
+      },
     });
   };
 
@@ -32,7 +31,7 @@ describe("InternalBackButton", async () => {
 
   test("that the icons and href are.", async () => {
     const result = await render();
-    expect(result).toContain("data-icon=\"mdi:chevron-left\"");
-    expect(result).toContain("href=\"/author\"");
+    expect(result).toContain('data-icon="mdi:chevron-left"');
+    expect(result).toContain('href="/author"');
   });
 });

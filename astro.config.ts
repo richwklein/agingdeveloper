@@ -1,9 +1,9 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
-import robots from "astro-robots";
 import netlify from "@astrojs/netlify";
-import { remarkReadingTime } from './src/utils/readTime.ts'
+import { remarkReadingTime } from "./src/utils/readTime.ts";
+import { remarkExcerpt } from "./src/utils/excerpt.ts";
 
 const {
   URL: SITE_URL,
@@ -11,8 +11,12 @@ const {
   CONTEXT: DEPLOY_CONTEXT = "dev",
 } = process.env;
 
-const siteUrl = (DEPLOY_CONTEXT === "dev") ? "http://localhost:4321" :
-  (DEPLOY_CONTEXT == "production") ? SITE_URL : DEPLOY_URL;
+const siteUrl =
+  DEPLOY_CONTEXT === "dev"
+    ? "http://localhost:4321"
+    : DEPLOY_CONTEXT == "production"
+      ? SITE_URL
+      : DEPLOY_URL;
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,20 +25,19 @@ export default defineConfig({
   trailingSlash: "never",
   integrations: [
     icon(),
-    robots({}),
     tailwind({
-      applyBaseStyles: false
-    })
+      applyBaseStyles: false,
+    }),
   ],
   image: {},
   markdown: {
-    remarkPlugins: [remarkReadingTime],
+    remarkPlugins: [remarkReadingTime, remarkExcerpt],
   },
   vite: {
     resolve: {
       // allow symlinking content into the src directory
-      preserveSymlinks: true
-    }
+      preserveSymlinks: true,
+    },
   },
-  adapter: netlify()
+  adapter: netlify(),
 });

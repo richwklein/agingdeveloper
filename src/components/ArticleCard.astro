@@ -1,0 +1,72 @@
+---
+/**
+ * @name ArticleCard
+ * Component used for rendering the cards for articles.
+ *
+ * @param {Props} props - The properties of the article.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <ArticleCard article={entry} />
+ */
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import InternalLink from "./InternalLink.astro";
+
+interface Props {
+  article: CollectionEntry<"article">;
+  class?: string;
+}
+
+const { article: entry, class: className } = Astro.props;
+const article = entry?.data;
+const { remarkPluginFrontmatter: frontmatter } = await entry.render();
+---
+
+<InternalLink to={`/article/${entry.slug}`}>
+  <article
+    class:list={[
+      "overflow-hidden rounded-md border border-gray-300 bg-white",
+      "xl:flex xl:max-h-60 xl:flex-row-reverse",
+      "hover:bg-gray-100/85",
+      className,
+    ]}
+  >
+    <Image
+      src={article.featured.image}
+      alt={article.title}
+      widths={[178, 498, 638, 766]}
+      sizes={`
+        (min-width: 1280px) 178px,
+        (min-width: 1024px) 498px,
+        (min-width: 768px) 766px,
+        638px
+      `}
+      loading={"eager"}
+      class:list={[
+        "object-cover object-center",
+        "aspect-square sm:aspect-[21/9] xl:aspect-[3/4]",
+        "w-full sm:w-[638px] md:w-[766px] lg:w-[498px] xl:w-[178px]",
+      ]}
+    />
+    <div class:list={["px-4 pb-2 pt-3"]}>
+      <h4 class:list={["text-lg font-medium leading-snug text-gray-800"]}>
+        {article.title}
+      </h4>
+      <small class:list={["text-sm text-gray-500/85"]}>
+        <time datetime={article.published.toISOString()}>
+          {
+            article.published.toLocaleDateString("en-us", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }
+        </time>
+      </small>
+      <p class:list={["text-md mt-2 leading-relaxed text-gray-600"]}>
+        {frontmatter.excerpt}&hellip;
+      </p>
+    </div>
+  </article>
+</InternalLink>

@@ -2,7 +2,7 @@
  * The page used to create the robots.txt file.
  */
 import type { APIRoute } from "astro";
-const url = new URL('sitemap-index.xml', import.meta.env.SITE);
+const url = new URL("sitemap-index.xml", import.meta.env.SITE);
 
 const robotsTxt = `
 User-agent: *

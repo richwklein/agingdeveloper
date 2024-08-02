@@ -7,6 +7,7 @@ import { getArticlesByAuthor } from "@utils/article";
 import DisplayLimitAlert from "@components/DisplayLimitAlert.astro";
 import type { CollectionEntry } from "astro:content";
 import InternalBackLink from "@components/InternalBackLink.astro";
+import ArticleGrid from "@components/ArticleGrid.astro";
 
 interface Props {
   entry: CollectionEntry<"author">;
@@ -28,7 +29,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const limit = import.meta.env.ARTICLE_DISPLAY_LIMIT;
 const author = entry.data;
-const articleEntries = await getArticlesByAuthor(entry.id, limit);
+const { entries: articleEntries, total } = await getArticlesByAuthor(entry.id, limit);
 ---
 
 <Layout title={`${author.name} | Authors`}>
@@ -38,9 +39,7 @@ const articleEntries = await getArticlesByAuthor(entry.id, limit);
     class:list={["mb-4"]}
   />
   <h1>{author.name}</h1>
-  <ol>
-    {articleEntries.map((entry) => <li>{entry.data.title}</li>)}
-  </ol>
-  <DisplayLimitAlert total={articleEntries.length} limit={limit} class:list={["mt-4"]} />
+  <ArticleGrid articles={articleEntries} class:list={["mt-4"]} />
+  <DisplayLimitAlert displayed={articleEntries.length} total={total} class:list={["mt-4"]} />
   <InternalBackLink class:list={["mt-4"]} name={"authors"} path={"/author"} />
 </Layout>

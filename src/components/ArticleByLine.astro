@@ -12,7 +12,6 @@
 import type { CollectionEntry } from "astro:content";
 import InternalLink from "./InternalLink.astro";
 import slugify from "@sindresorhus/slugify";
-import { getEntry } from "astro:content";
 
 interface Props {
   author: CollectionEntry<"author">;
@@ -23,10 +22,10 @@ const { author: entry, published, class: className } = Astro.props;
 const author = entry?.data;
 ---
 
-<small id="article-byline" class:list={["text-base text-primary-main/85", className]}>
-  <InternalLink to={`/author/${slugify(entry.id)}`} class:list={["mr-4 inline-block underline"]}
-    >{author?.name}</InternalLink
-  >
+<small id="article-byline" class:list={["text-base text-primary-dark/85", className]}>
+  <InternalLink to={`/author/${slugify(entry.id)}`} class:list={["mr-4 inline-block underline"]}>
+    {author?.name}
+  </InternalLink>
   <time datetime={published.toISOString()}>
     {
       published.toLocaleDateString("en-us", {
@@ -34,6 +33,6 @@ const author = entry?.data;
         month: "long",
         day: "numeric",
       })
-    }</time
-  >
+    }
+  </time>
 </small>

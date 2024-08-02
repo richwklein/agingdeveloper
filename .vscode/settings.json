@@ -1,21 +1,18 @@
 {
   "files.exclude": {
-    ".git/": true,
-    "node_modules/": true,
+    ".git/": true
   },
   "search.exclude": {
     "**/node_modules": true,
-    "**/dist": true,
+    "**/dist": true
   },
   "editor.tabCompletion": "on",
-  "editor.rulers": [
-    80,
-    100,
-    120
-  ],
+  "editor.rulers": [80, 100, 120],
   "editor.tabSize": 2,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.documentSelectors": ["**/*.{js,mjs,cjs,jsx,ts,tsx,md,mdx,astro}"],
   "cSpell.words": [
     "agingdeveloper",
     "astro",
@@ -25,5 +22,5 @@
     "tailwindcss",
     "uncategorized",
     "vitest"
-  ],
+  ]
 }

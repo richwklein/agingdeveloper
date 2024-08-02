@@ -19,5 +19,4 @@ interface Props {
 const { to, title, class: className } = Astro.props;
 ---
 
-<!--prettier-ignore -->
 <a data-link="internal" target="_self" href={to} class:list={[className]} title={title}><slot /></a>

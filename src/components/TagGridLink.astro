@@ -40,7 +40,9 @@ const pathPrefix = isCategory ? "/category" : "/tag";
 <InternalLink
   to={`${pathPrefix}/${slugify(name)}`}
   class:list={[
-    "text-primary justify-left m-0 inline-flex items-center px-2 py-1 capitalize hover:underline focus:underline",
+    "justify-left m-0 inline-flex items-center px-2 py-1",
+    "capitalize text-gray-800",
+    "hover:underline focus:underline",
     cssNames.get(weight),
     className,
   ]}

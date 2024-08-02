@@ -13,18 +13,32 @@
     --color-secondary-dark: 90 146 22;
     --color-secondary-contrast: 46 46 46;
   }
+}
 
-  html {
-    min-height: 100vh;
-  }
+html {
+  /* show scrollbar to prevent page jump */
+  overflow-y: scroll;
+  min-height: 100vh;
+}
 
-  body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+/* flex the page so footer is at the bottom */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-  main {
-    flex-grow: 1;
-  }
+main {
+  flex-grow: 1;
+}
+
+/* fade animations */
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.75s;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.75s;
 }

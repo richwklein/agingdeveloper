@@ -5,7 +5,7 @@ import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
 import { getTags, getArticlesByTag } from "@utils/article";
 import DisplayLimitAlert from "@components/DisplayLimitAlert.astro";
 import InternalBackLink from "@components/InternalBackLink.astro";
-import InternalLink from "@components/InternalLink.astro";
+import ArticleGrid from "@components/ArticleGrid.astro";
 
 interface Props {
   tag: string;
@@ -24,20 +24,12 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.props;
 const limit = import.meta.env.ARTICLE_DISPLAY_LIMIT;
-const entries = await getArticlesByTag(tag, limit);
+const { entries, total } = await getArticlesByTag(tag, limit);
 ---
 
 <Layout title={`${tag} | Tags`}>
   <BreadcrumbHeader head={{ name: "Tags", path: "/tag" }} tail={tag} class:list={["mb-4"]} />
-  <ol>
-    {
-      entries.map((entry) => (
-        <li>
-          <InternalLink to={`/article/${entry.slug}`}>{entry.data.title}</InternalLink>
-        </li>
-      ))
-    }
-  </ol>
-  <DisplayLimitAlert total={entries.length} limit={limit} class:list={["mt-4"]} />
+  <ArticleGrid articles={entries} class:list={["mt-4"]} />
+  <DisplayLimitAlert displayed={entries.length} total={total} class:list={["mt-4"]} />
   <InternalBackLink class:list={["mt-4"]} name={"tags"} path={"/tag"} />
 </Layout>

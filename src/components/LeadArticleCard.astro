@@ -1,0 +1,73 @@
+---
+/**
+ * @name LeadArticleCard
+ * Component used for rendering the lead article card.
+ *
+ * @param {Props} props - The properties of the article.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <LeadArticleCard article={entry} />
+ */
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import InternalLink from "./InternalLink.astro";
+
+interface Props {
+  article: CollectionEntry<"article">;
+  class?: string;
+}
+
+const { article: entry, class: className } = Astro.props;
+const article = entry?.data;
+const { remarkPluginFrontmatter: frontmatter } = await entry.render();
+---
+
+<InternalLink to={`/article/${entry.slug}`}>
+  <div
+    class:list={["relative overflow-hidden rounded-md border border-gray-300 bg-white", className]}
+  >
+    <Image
+      src={article.featured.image}
+      alt={article.title}
+      class:list={["aspect-square object-cover object-center sm:aspect-[21/9]"]}
+      widths={[638, 766, 1022, 1242]}
+      sizes={`
+        (min-width: 1280px) 1242px,
+        (min-width: 1024px) 1022px,
+        (min-width: 768px) 766px,
+        638px
+      `}
+      loading={"eager"}
+    />
+    <div
+      class:list={[
+        "absolute left-0 top-0 h-full w-full",
+        "bg-primary-main/40 text-primary-contrast backdrop-blur-sm",
+      ]}
+    >
+      <div class:list={["w-full p-3 text-primary-contrast/75", "md:p-8 lg:w-3/5"]}>
+        <h4 class:list={["text-2xl leading-snug", "md:text-5xl"]}>
+          {article.title}
+        </h4>
+        <small class:list={["block leading-snug", "md:text-lg"]}>
+          <time datetime={article.published.toISOString()}>
+            {
+              article.published.toLocaleDateString("en-us", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </time>
+        </small>
+        <p class:list={["mt-4 text-lg leading-relaxed", "md:mt-6 lg:mt-8"]}>
+          {frontmatter.excerpt}&hellip;
+        </p>
+        <small class:list={["mt-2 block text-xs", "md:mt-6 md:text-sm lg:mt-8"]}>
+          {"Continue Reading"}&hellip;
+        </small>
+      </div>
+    </div>
+  </div>
+</InternalLink>

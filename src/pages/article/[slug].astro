@@ -29,15 +29,13 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const article = entry.data;
 const author = await getEntry(entry.data.author);
-const siteId = import.meta.env.SITE_ID;
-const site = await getEntry("site", siteId);
 
 const { Content, remarkPluginFrontmatter: frontmatter } = await entry.render();
 ---
 
 <Layout title={`${article.title}`}>
   <article>
-    <ArticleByLine author={author} published={article.published} class:list={["mt-4"]} />
+    <ArticleByLine author={author} published={article.published} />
     <ArticleTitle title={article.title} description={article.description} class:list={["mt-4"]} />
     <ArticleImage featured={article.featured} class:list={["mt-4"]} />
     <section class:list={["mt-4 grid grid-flow-row grid-cols-5 gap-x-4"]}>
@@ -48,7 +46,6 @@ const { Content, remarkPluginFrontmatter: frontmatter } = await entry.render();
         <ArticleTimeToRead
           minutes={frontmatter.readingTime.minutes}
           words={frontmatter.readingTime.words}
-          lang={site.lang}
         />
       </aside>
     </section>

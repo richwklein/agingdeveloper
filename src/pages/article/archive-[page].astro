@@ -1,8 +1,10 @@
 ---
-import InternalLink from "@components/InternalLink.astro";
 import Layout from "@layouts/Layout.astro";
 import type { Page } from "astro";
 import { getArticles } from "@utils/article";
+import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
+import Pagniation from "@components/Pagniation.astro";
+import ArticleCard from "@components/ArticleCard.astro";
 
 interface Props {
   page: Page;
@@ -19,14 +21,13 @@ const { page } = Astro.props;
 ---
 
 <Layout title="Articles">
-  <h1>Archive Page</h1>
-  <ul>
-    {
-      page.data.map((entry) => (
-        <li>
-          <InternalLink to={`/article/${entry.slug}`}>{entry.data.title}</InternalLink>
-        </li>
-      ))
-    }
-  </ul>
+  <BreadcrumbHeader
+    head={{ name: "Archive", path: "/article" }}
+    class:list={["mb-4"]}
+    tail={page.currentPage.toString()}
+  />
+  <div class:list={["mt-4 grid grid-cols-1 gap-6 lg:grid-cols-2"]}>
+    {page.data.map((entry) => <ArticleCard article={entry} />)}
+  </div>
+  <Pagniation page={page} class:list={["mt-4"]} />
 </Layout>

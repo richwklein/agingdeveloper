@@ -8,18 +8,29 @@ const article = defineCollection({
       description: z.string(),
       featured: z.object({
         image: image(),
-        author: z.object({
-          name: z.string(),
-          url: z.string()
-        }).optional(),
-        site: z.object({
-          name: z.string(),
-          url: z.string()
-        }).optional(),
+        author: z
+          .object({
+            name: z.string(),
+            url: z.string(),
+          })
+          .optional(),
+        site: z
+          .object({
+            name: z.string(),
+            url: z.string(),
+          })
+          .optional(),
       }),
-      published: z.string().date().transform((val) => new Date(val)),
-      modified: z.string().date().transform((val) => new Date(val)).optional(),
-      author: reference('author'),
+      published: z
+        .string()
+        .date()
+        .transform((val) => new Date(val)),
+      modified: z
+        .string()
+        .date()
+        .transform((val) => new Date(val))
+        .optional(),
+      author: reference("author"),
       category: z.string().default("uncategorized"),
       tags: z.array(z.string()),
     }),

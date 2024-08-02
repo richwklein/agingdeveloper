@@ -11,7 +11,7 @@
  */
 import type { ImageMetadata } from "astro";
 import ExternalLink from "./ExternalLink.astro";
-import { Picture } from "astro:assets";
+import { Image } from "astro:assets";
 
 interface Props {
   featured: {
@@ -24,33 +24,38 @@ interface Props {
       name: string;
       url: string;
     };
-    placeholder: string;
   };
   class?: string;
 }
 const {
-  featured: { image, author, site, placeholder },
+  featured: { image, author, site },
   class: className,
 } = Astro.props;
 const alt = author != null ? author.name : "unknown";
-console.log(placeholder);
 ---
 
 <section id="article-featured" class:list={[className]}>
   <figure>
-    <Picture
-      class:list={["aspect-video rounded-sm"]}
-      src={image}
-      alt={alt}
-      formats={["webp"]}
-      fallbackFormat={image.format}
-      loading="eager"
-      fetchpriority="high"
-    />
+    <div class:list={["overflow-hidden rounded-md"]}>
+      <Image
+        class:list={["aspect-video object-cover object-center"]}
+        src={image}
+        alt={alt}
+        loading="eager"
+        fetchpriority="high"
+        sizes={`
+          (min-width: 1280px) 1280px, 
+          (min-width: 1024px) 1024px,
+          (min-width: 768px) 768px,
+          640px
+        `}
+        widths={[640, 768, 1024, 1280]}
+      />
+    </div>
     {
       author != null && site != null ? (
         <figcaption>
-          <small class:list={["mt-1 text-sm text-primary-main/85"]}>
+          <small class:list={["mt-1 text-sm text-primary-dark/85"]}>
             {author != null ? (
               <>
                 {"Image by "}

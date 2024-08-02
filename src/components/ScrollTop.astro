@@ -1,0 +1,49 @@
+---
+/**
+ * @name ScrollTop
+ * Component for creating a floating action button to scroll to the top of the page.
+ *
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <ScrollTop />
+ */
+import { Icon } from "astro-icon/components";
+---
+
+<scroll-top class:list={["fixed bottom-8 right-8"]}>
+  <button
+    class:list={[
+      "rounded-full bg-secondary-main p-2 text-secondary-contrast opacity-0 shadow-xl hover:bg-secondary-dark",
+    ]}
+  >
+    <Icon name="mdi:keyboard-arrow-up" class:list={["h-6 w-6 "]} />
+  </button>
+</scroll-top>
+
+<script>
+  // Define the behaviour for our new type of HTML element.
+  class ScrollTop extends HTMLElement {
+    constructor() {
+      super();
+
+      const button = this.querySelector("button");
+      button?.addEventListener("click", () => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      });
+
+      window.onscroll = () => {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+          button?.classList.remove("fade-out");
+          button?.classList.add("fade-in");
+        } else {
+          button?.classList.remove("fade-in");
+          button?.classList.add("fade-out");
+        }
+      };
+    }
+  }
+
+  // Tell the browser to use our AstroHeart class for <astro-heart> elements.
+  customElements.define("scroll-top", ScrollTop);
+</script>

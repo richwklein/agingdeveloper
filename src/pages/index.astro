@@ -1,6 +1,7 @@
 ---
+import ArticleGrid from "@components/ArticleGrid.astro";
 import InternalBackLink from "@components/InternalBackLink.astro";
-import InternalLink from "@components/InternalLink.astro";
+import LeadArticleCard from "@components/LeadArticleCard.astro";
 import Layout from "@layouts/Layout.astro";
 import { getArticles } from "@utils/article";
 
@@ -10,22 +11,7 @@ const lead = entries.shift();
 ---
 
 <Layout title="Welcome to Astro.">
-  <h1 class:list={["font-extrabold"]}>
-    {
-      lead != null ? (
-        <InternalLink to={`/article/${lead.slug}`}>{lead.data.title}</InternalLink>
-      ) : null
-    }
-  </h1>
-  <hr />
-  <ol>
-    {
-      entries.map((entry) => (
-        <li>
-          <InternalLink to={`/article/${entry.slug}`}>{entry.data.title}</InternalLink>
-        </li>
-      ))
-    }
-  </ol>
+  {lead != null ? <LeadArticleCard article={lead} /> : null}
+  <ArticleGrid articles={entries} class:list={["mt-4"]} />
   <InternalBackLink name="articles" path="/article" class:list={["mt-4"]} />
 </Layout>

@@ -1,0 +1,50 @@
+---
+/**
+ * @name PaginationLink
+ * Component used for creating the next and previous links in a paginated list.
+ *
+ * @param {Props} props - The properties of the link.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <PaginationLink link={"/article/archive-1"} icon="mdi:chevron-left" />
+ */
+import { Icon } from "astro-icon/components";
+import InternalLink from "./InternalLink.astro";
+
+interface Props {
+  link: string | undefined;
+  icon: string;
+  class?: string;
+}
+
+const { link, icon, class: className } = Astro.props;
+const path = link ?? "#";
+---
+
+{
+  link != null ? (
+    <InternalLink
+      to={path}
+      class:list={[
+        "block inline-flex h-10 w-10 items-center justify-center",
+        "rounded-full bg-inherit text-primary-dark",
+        "focus:bg-primary-light focus:text-primary-contrast",
+        "hover:bg-primary-light hover:text-primary-contrast",
+        className,
+      ]}
+    >
+      <Icon name={icon} class:list={["h-8 w-8"]} />
+    </InternalLink>
+  ) : (
+    <div
+      class:list={[
+        "block inline-flex h-10 w-10 items-center justify-center",
+        "rounded-full bg-inherit text-primary-dark/25",
+        className,
+      ]}
+    >
+      <Icon name={icon} class:list={["h-8 w-8"]} />
+    </div>
+  )
+}

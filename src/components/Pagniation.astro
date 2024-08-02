@@ -1,0 +1,43 @@
+---
+/**
+ * @name Pagination
+ * Component used for creating current page and navigation for a paged list.
+ *
+ * @param {Props} props - The properties of the page.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <Pagination page={page} />
+ */
+import type { Page } from "astro";
+import PaginationLink from "./PaginationLink.astro";
+
+interface Props {
+  page: Page;
+  class?: string;
+}
+
+const { page, class: className } = Astro.props;
+---
+
+<nav class:list={[className]}>
+  <ol class:list={["flex items-center justify-center gap-x-1"]}>
+    <li>
+      <PaginationLink link={page.url.first} icon="mdi:chevron-double-left" />
+    </li>
+    <li>
+      <PaginationLink link={page.url.prev} icon="mdi:chevron-left" />
+    </li>
+    <li>
+      <div class:list={["text-md bg-inherit px-10 text-primary-dark"]}>
+        {`Page ${page.currentPage} of ${page.lastPage}`}
+      </div>
+    </li>
+    <li>
+      <PaginationLink link={page.url.next} icon="mdi:chevron-right" />
+    </li>
+    <li>
+      <PaginationLink link={page.url.last} icon="mdi:chevron-double-right" />
+    </li>
+  </ol>
+</nav>
