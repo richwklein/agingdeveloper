@@ -10,18 +10,18 @@
  * @example
  * <TagGridLink name={"gatsby"} weight={350} />
  */
-import { Icon } from "astro-icon/components";
-import InternalLink from "./InternalLink.astro";
-import slugify from "@sindresorhus/slugify";
+import { Icon } from "astro-icon/components"
+import InternalLink from "./InternalLink.astro"
+import slugify from "@sindresorhus/slugify"
 
 interface Props {
-  name: string;
-  weight?: number;
-  isCategory?: boolean;
-  class?: string;
+  name: string
+  weight?: number
+  isCategory?: boolean
+  class?: string
 }
 
-const { name, weight = 300, isCategory = false, class: className } = Astro.props;
+const { name, weight = 300, isCategory = false, class: className } = Astro.props
 const cssNames = new Map<number, string>([
   [100, "font-thin"],
   [200, "font-extralight"],
@@ -32,9 +32,9 @@ const cssNames = new Map<number, string>([
   [700, "font-bold"],
   [800, "font-extrabold"],
   [900, "font-black"],
-]);
-const iconName = isCategory ? "mdi:label-outline" : "mdi:hashtag";
-const pathPrefix = isCategory ? "/category" : "/tag";
+])
+const iconName = isCategory ? "mdi:label-outline" : "mdi:hashtag"
+const pathPrefix = isCategory ? "/category" : "/tag"
 ---
 
 <InternalLink

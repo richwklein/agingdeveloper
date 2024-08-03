@@ -9,18 +9,18 @@
  * @example
  * <InternalBackLink name={"authors"} path={"/author"}} />
  */
-import { Icon } from "astro-icon/components";
-import InternalLink from "./InternalLink.astro";
+import { Icon } from "astro-icon/components"
+import InternalLink from "./InternalLink.astro"
 
 interface Props {
-  name: string;
-  path: string;
-  class?: string;
-  useViewText?: boolean;
+  name: string
+  path: string
+  class?: string
+  useViewText?: boolean
 }
 
-const { name, path, class: className, useViewText = true } = Astro.props;
-const text = useViewText ? `view all ${name}` : name;
+const { name, path, class: className, useViewText = true } = Astro.props
+const text = useViewText ? `view all ${name}` : name
 ---
 
 <InternalLink

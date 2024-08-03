@@ -1,12 +1,11 @@
 /// <reference types="vitest" />
-import { getViteConfig } from "astro/config";
+import { getViteConfig } from "astro/config"
 
 export default getViteConfig({
   test: {
-    root: "./test",
-    exclude: [],
     coverage: {
       reporter: ["text", "json-summary", "json"],
+      reportsDirectory: "test/coverage",
       reportOnFailure: true,
       thresholds: {
         lines: 60,
@@ -16,4 +15,4 @@ export default getViteConfig({
       },
     },
   },
-});
+})

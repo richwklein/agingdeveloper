@@ -9,17 +9,17 @@
  * @example
  * <ArticleByLine author={author} published={published} />
  */
-import type { CollectionEntry } from "astro:content";
-import InternalLink from "./InternalLink.astro";
-import slugify from "@sindresorhus/slugify";
+import type { CollectionEntry } from "astro:content"
+import InternalLink from "./InternalLink.astro"
+import slugify from "@sindresorhus/slugify"
 
 interface Props {
-  author: CollectionEntry<"author">;
-  published: Date;
-  class?: string;
+  author: CollectionEntry<"author">
+  published: Date
+  class?: string
 }
-const { author: entry, published, class: className } = Astro.props;
-const author = entry?.data;
+const { author: entry, published, class: className } = Astro.props
+const author = entry?.data
 ---
 
 <small id="article-byline" class:list={["text-base text-primary-dark/85", className]}>

@@ -10,17 +10,17 @@
  * @example
  * <TagGrid tags={tags} isCategory={true} />
  */
-import { calculateWeight } from "@utils/weight";
-import TagGridLink from "./TagGridLink.astro";
+import { calculateWeight } from "@utils/weight"
+import TagGridLink from "./TagGridLink.astro"
 
 interface Props {
-  tags: Map<string, number>;
-  total: number;
-  isCategory?: boolean;
-  class?: string;
+  tags: Map<string, number>
+  total: number
+  isCategory?: boolean
+  class?: string
 }
 
-const { tags, total, isCategory = false, class: className } = Astro.props;
+const { tags, total, isCategory = false, class: className } = Astro.props
 ---
 
 <nav class:list={[className]}>

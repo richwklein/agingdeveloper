@@ -1,12 +1,12 @@
 ---
-import { Image } from "astro:assets";
-import Layout from "@layouts/Layout.astro";
-import { getCollection } from "astro:content";
-import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
-import slugify from "@sindresorhus/slugify";
-import InternalLink from "@components/InternalLink.astro";
+import { Image } from "astro:assets"
+import Layout from "@layouts/Layout.astro"
+import { getCollection } from "astro:content"
+import BreadcrumbHeader from "@components/BreadcrumbHeader.astro"
+import slugify from "@sindresorhus/slugify"
+import InternalLink from "@components/InternalLink.astro"
 
-const entries = await getCollection("author");
+const entries = await getCollection("author")
 ---
 
 <Layout title="Authors">

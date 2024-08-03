@@ -12,16 +12,16 @@
  *
  * @todo Add search to message once implemented.
  */
-import { Icon } from "astro-icon/components";
+import { Icon } from "astro-icon/components"
 
 interface Props {
-  displayed: number;
-  total: number;
-  class?: string;
+  displayed: number
+  total: number
+  class?: string
 }
 
-const { displayed, total, class: className } = Astro.props;
-const remaining = total - displayed;
+const { displayed, total, class: className } = Astro.props
+const remaining = total - displayed
 ---
 
 {

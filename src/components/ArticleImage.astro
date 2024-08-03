@@ -9,29 +9,29 @@
  * @example
  * <ArticleImage featured={featured} />
  */
-import type { ImageMetadata } from "astro";
-import ExternalLink from "./ExternalLink.astro";
-import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro"
+import ExternalLink from "./ExternalLink.astro"
+import { Image } from "astro:assets"
 
 interface Props {
   featured: {
-    image: ImageMetadata;
+    image: ImageMetadata
     author?: {
-      name: string;
-      url: string;
-    };
+      name: string
+      url: string
+    }
     site?: {
-      name: string;
-      url: string;
-    };
-  };
-  class?: string;
+      name: string
+      url: string
+    }
+  }
+  class?: string
 }
 const {
   featured: { image, author, site },
   class: className,
-} = Astro.props;
-const alt = author != null ? author.name : "unknown";
+} = Astro.props
+const alt = author != null ? author.name : "unknown"
 ---
 
 <section id="article-featured" class:list={[className]}>

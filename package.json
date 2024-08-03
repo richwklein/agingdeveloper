@@ -6,10 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "format": "prettier --write  \"**/*.{js,mjs,cjs,jsx,ts,tsx,astro}\"",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro",
+    "format": "prettier --write  \"**/*.{js,mjs,cjs,jsx,ts,tsx,astro}\"",
     "test": "vitest run",
     "coverage": "vitest run --coverage"
   },

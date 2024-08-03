@@ -1,25 +1,25 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import type { Page } from "astro";
-import { getArticles } from "@utils/article";
-import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
-import Pagniation from "@components/Pagniation.astro";
-import ArticleCard from "@components/ArticleCard.astro";
-import { getSite } from "@utils/site";
+import Layout from "@layouts/Layout.astro"
+import type { Page } from "astro"
+import { getArticles } from "@utils/article"
+import BreadcrumbHeader from "@components/BreadcrumbHeader.astro"
+import Pagniation from "@components/Pagniation.astro"
+import ArticleCard from "@components/ArticleCard.astro"
+import { getSite } from "@utils/site"
 
 interface Props {
-  page: Page;
+  page: Page
 }
 
 export async function getStaticPaths({ paginate }: any) {
-  const entries = await getArticles();
-  const siteEntry = await getSite();
-  const limit = siteEntry.data.displayLimit;
+  const entries = await getArticles()
+  const siteEntry = await getSite()
+  const limit = siteEntry.data.displayLimit
 
-  return paginate(entries, { pageSize: limit });
+  return paginate(entries, { pageSize: limit })
 }
 
-const { page } = Astro.props;
+const { page } = Astro.props
 ---
 
 <Layout title="Articles">

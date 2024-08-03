@@ -11,18 +11,18 @@
  * @example
  * <BreadcrumbBlock head={{name: "Archive", path="/article"}} tail="1" />
  */
-import InternalLink from "./InternalLink.astro";
+import InternalLink from "./InternalLink.astro"
 
 interface Props {
   head: {
-    name: string;
-    path: string;
-  };
-  tail?: string;
-  class?: string;
+    name: string
+    path: string
+  }
+  tail?: string
+  class?: string
 }
 
-const { head, tail, class: className } = Astro.props;
+const { head, tail, class: className } = Astro.props
 ---
 
 <header class:list={["flex w-full items-center", className]}>

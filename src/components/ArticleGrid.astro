@@ -9,15 +9,15 @@
  * @example
  * <ArticleGrid articles={articles} />
  */
-import ArticleCard from "@components/ArticleCard.astro";
-import type { CollectionEntry } from "astro:content";
+import ArticleCard from "@components/ArticleCard.astro"
+import type { CollectionEntry } from "astro:content"
 
 interface Props {
-  articles: CollectionEntry<"article">[];
-  class?: string;
+  articles: CollectionEntry<"article">[]
+  class?: string
 }
 
-const { articles: entries, class: className } = Astro.props;
+const { articles: entries, class: className } = Astro.props
 ---
 
 <ol class:list={["grid grid-cols-1 gap-6", "lg:grid-cols-2", className]}>

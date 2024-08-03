@@ -9,15 +9,15 @@
  * @example
  * <Pagination page={page} />
  */
-import type { Page } from "astro";
-import PaginationLink from "./PaginationLink.astro";
+import type { Page } from "astro"
+import PaginationLink from "./PaginationLink.astro"
 
 interface Props {
-  page: Page;
-  class?: string;
+  page: Page
+  class?: string
 }
 
-const { page, class: className } = Astro.props;
+const { page, class: className } = Astro.props
 ---
 
 <nav class:list={[className]}>

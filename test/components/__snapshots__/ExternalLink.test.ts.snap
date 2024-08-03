@@ -1,3 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`ExternalLink > that it renders correctly. 1`] = `"<!DOCTYPE html><!--prettier-ignore --><a data-link="external" target="_blank" rel="noopener noreferrer" href="https://example.com" data-astro-source-file="/Users/richard/Development/Projects/agingdeveloper-astro/src/components/ExternalLink.astro" data-astro-source-loc="20:96">Test Content</a>"`;

@@ -1,4 +1,4 @@
-import { z, defineCollection, reference } from "astro:content";
+import { z, defineCollection, reference } from "astro:content"
 
 const article = defineCollection({
   type: "content",
@@ -34,7 +34,7 @@ const article = defineCollection({
       category: z.string().default("uncategorized"),
       tags: z.array(z.string()),
     }),
-});
+})
 
 const author = defineCollection({
   type: "data",
@@ -58,7 +58,7 @@ const author = defineCollection({
         .optional(),
       published: z.string().date(),
     }),
-});
+})
 
 const site = defineCollection({
   type: "data",
@@ -76,6 +76,6 @@ const site = defineCollection({
       theme: z.string(),
       displayLimit: z.number(),
     }),
-});
+})
 
-export const collections = { article, author, site };
+export const collections = { article, author, site }

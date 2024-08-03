@@ -10,15 +10,15 @@
  * @example
  * <ArticleTagGrid tags={tags} category={category} />
  */
-import TagGridLink from "./TagGridLink.astro";
+import TagGridLink from "./TagGridLink.astro"
 
 interface Props {
-  tags: Array<string>;
-  category: string;
-  class?: string;
+  tags: Array<string>
+  category: string
+  class?: string
 }
 
-const { tags, category, class: className } = Astro.props;
+const { tags, category, class: className } = Astro.props
 ---
 
 <nav id="article-tags" class:list={[className]}>

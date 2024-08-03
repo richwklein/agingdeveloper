@@ -8,7 +8,7 @@
  * @example
  * <ScrollTop />
  */
-import { Icon } from "astro-icon/components";
+import { Icon } from "astro-icon/components"
 ---
 
 <scroll-top class:list={["fixed bottom-8 right-8"]}>
@@ -25,33 +25,34 @@ import { Icon } from "astro-icon/components";
   // Define the behaviour for our new type of HTML element.
   class ScrollTop extends HTMLElement {
     constructor() {
-      super();
+      super()
 
-      const button = this.querySelector("button");
+      let timer: number
+      const button = this.querySelector("button")
       button?.addEventListener("click", () => {
-        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-      });
+        window.clearTimeout(timer)
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+      })
 
-      let timer: number;
       const showButton = () => {
-        window.clearTimeout(timer);
+        window.clearTimeout(timer)
         timer = window.setTimeout(() => {
           if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-            button?.classList.remove("fade-out");
-            button?.classList.add("fade-in");
+            button?.classList.remove("fade-out")
+            button?.classList.add("fade-in")
           } else {
-            button?.classList.remove("fade-in");
-            button?.classList.add("fade-out");
+            button?.classList.remove("fade-in")
+            button?.classList.add("fade-out")
           }
-        }, 2.5);
-      };
+        }, 2.5)
+      }
 
       window.onscroll = () => {
-        showButton();
-      };
+        showButton()
+      }
     }
   }
 
   // Tell the browser to use our AstroHeart class for <astro-heart> elements.
-  customElements.define("scroll-top", ScrollTop);
+  customElements.define("scroll-top", ScrollTop)
 </script>

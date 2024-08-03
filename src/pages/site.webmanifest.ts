@@ -1,12 +1,12 @@
 /**
  * The page used to create the webmanifest file.
  */
-import { getSite } from "@utils/site";
-import type { APIRoute } from "astro";
+import { getSite } from "@utils/site"
+import type { APIRoute } from "astro"
 
-const entry = await getSite();
-const site = entry.data;
-const baseUrl = import.meta.env.SITE;
+const entry = await getSite()
+const site = entry.data
+const baseUrl = import.meta.env.SITE
 
 const manifest = {
   name: site.title,
@@ -27,14 +27,14 @@ const manifest = {
     { src: "/icons/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
     { src: "/icons/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
   ],
-};
+}
 
-const webmanifest = JSON.stringify(manifest, null, 2);
+const webmanifest = JSON.stringify(manifest, null, 2)
 
 export const GET: APIRoute = () => {
   return new Response(webmanifest, {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
     },
-  });
-};
+  })
+}

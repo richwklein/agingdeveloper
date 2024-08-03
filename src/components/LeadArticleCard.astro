@@ -9,18 +9,18 @@
  * @example
  * <LeadArticleCard article={entry} />
  */
-import { Image } from "astro:assets";
-import type { CollectionEntry } from "astro:content";
-import InternalLink from "./InternalLink.astro";
+import { Image } from "astro:assets"
+import type { CollectionEntry } from "astro:content"
+import InternalLink from "./InternalLink.astro"
 
 interface Props {
-  article: CollectionEntry<"article">;
-  class?: string;
+  article: CollectionEntry<"article">
+  class?: string
 }
 
-const { article: entry, class: className } = Astro.props;
-const article = entry?.data;
-const { remarkPluginFrontmatter: frontmatter } = await entry.render();
+const { article: entry, class: className } = Astro.props
+const article = entry?.data
+const { remarkPluginFrontmatter: frontmatter } = await entry.render()
 ---
 
 <InternalLink to={`/article/${entry.slug}`}>

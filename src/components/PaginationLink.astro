@@ -9,17 +9,17 @@
  * @example
  * <PaginationLink link={"/article/archive-1"} icon="mdi:chevron-left" />
  */
-import { Icon } from "astro-icon/components";
-import InternalLink from "./InternalLink.astro";
+import { Icon } from "astro-icon/components"
+import InternalLink from "./InternalLink.astro"
 
 interface Props {
-  link: string | undefined;
-  icon: string;
-  class?: string;
+  link: string | undefined
+  icon: string
+  class?: string
 }
 
-const { link, icon, class: className } = Astro.props;
-const path = link ?? "#";
+const { link, icon, class: className } = Astro.props
+const path = link ?? "#"
 ---
 
 {

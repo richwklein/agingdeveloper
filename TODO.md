@@ -46,10 +46,6 @@
 - <https://docs.astro.build/en/guides/fonts/#register-fonts-in-tailwind>
 - <https://tailwindcss.com/docs/font-family>
 
-## Switch theme to custom colors
-
-- <https://tailwindcss.com/docs/customizing-colors>
-
 ## testing
 
 - <https://docs.astro.build/en/guides/testing/>

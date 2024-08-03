@@ -12,18 +12,18 @@
  *   words={timeToRead.words}
  *   lang={lang} />
  */
-import { Icon } from "astro-icon/components";
+import { Icon } from "astro-icon/components"
 
 interface Props {
-  minutes: number;
-  words: number;
-  class?: string;
+  minutes: number
+  words: number
+  class?: string
 }
 
-const { minutes, words, class: className } = Astro.props;
-const wordFormat = new Intl.NumberFormat("en-US").format(words);
-const readTemplate = `${Math.ceil(minutes)} min read`;
-const wordsTemplate = `${wordFormat} words`;
+const { minutes, words, class: className } = Astro.props
+const wordFormat = new Intl.NumberFormat("en-US").format(words)
+const readTemplate = `${Math.ceil(minutes)} min read`
+const wordsTemplate = `${wordFormat} words`
 ---
 
 <div

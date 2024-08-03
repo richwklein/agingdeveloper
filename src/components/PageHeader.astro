@@ -9,16 +9,16 @@
  * @example
  * <PageHeader />
  */
-import { getSite } from "@utils/site";
-import { Image } from "astro:assets";
+import { getSite } from "@utils/site"
+import { Image } from "astro:assets"
 
 interface Props {
-  class?: string;
+  class?: string
 }
 
-const { class: className } = Astro.props;
-const entry = await getSite();
-const site = entry.data;
+const { class: className } = Astro.props
+const entry = await getSite()
+const site = entry.data
 ---
 
 <header

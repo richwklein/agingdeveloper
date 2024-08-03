@@ -1,15 +1,15 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import slugify from "@sindresorhus/slugify";
-import BreadcrumbHeader from "@components/BreadcrumbHeader.astro";
-import { getCategories, getArticlesByCategory } from "@utils/article";
-import DisplayLimitAlert from "@components/DisplayLimitAlert.astro";
-import InternalBackLink from "@components/InternalBackLink.astro";
-import ArticleGrid from "@components/ArticleGrid.astro";
-import { getSite } from "@utils/site";
+import Layout from "@layouts/Layout.astro"
+import slugify from "@sindresorhus/slugify"
+import BreadcrumbHeader from "@components/BreadcrumbHeader.astro"
+import { getCategories, getArticlesByCategory } from "@utils/article"
+import DisplayLimitAlert from "@components/DisplayLimitAlert.astro"
+import InternalBackLink from "@components/InternalBackLink.astro"
+import ArticleGrid from "@components/ArticleGrid.astro"
+import { getSite } from "@utils/site"
 
 interface Props {
-  category: string;
+  category: string
 }
 
 export async function getStaticPaths() {
@@ -17,16 +17,16 @@ export async function getStaticPaths() {
     return {
       params: { slug: slugify(category) },
       props: { category: category },
-    };
-  });
+    }
+  })
 
-  return pages;
+  return pages
 }
 
-const { category } = Astro.props;
-const siteEntry = await getSite();
-const limit = siteEntry.data.displayLimit;
-const { entries, total } = await getArticlesByCategory(category, limit);
+const { category } = Astro.props
+const siteEntry = await getSite()
+const limit = siteEntry.data.displayLimit
+const { entries, total } = await getArticlesByCategory(category, limit)
 ---
 
 <Layout title={`${category} | Tags`}>

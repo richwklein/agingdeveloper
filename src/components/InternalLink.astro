@@ -11,12 +11,12 @@
  */
 
 interface Props {
-  to: string;
-  title?: string;
-  class?: string;
+  to: string
+  title?: string
+  class?: string
 }
 
-const { to, title, class: className } = Astro.props;
+const { to, title, class: className } = Astro.props
 ---
 
 <a data-link="internal" target="_self" href={to} class:list={[className]} title={title}><slot /></a>
