@@ -69,10 +69,12 @@ const site = defineCollection({
       category: z.string(),
       repository: z.string(),
       twitterUsername: z.string().optional(),
+      lang: z.string(),
       avatar: image(),
       icon: image(),
       background: z.string(),
       theme: z.string(),
+      displayLimit: z.number(),
     }),
 });
 

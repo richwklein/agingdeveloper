@@ -9,15 +9,14 @@
  * @example
  * <PageFooter />
  */
-import { getEntry } from "astro:content";
+import { getSite } from "@utils/site";
 
 interface Props {
   class?: string;
 }
 
 const { class: className } = Astro.props;
-const siteId = import.meta.env.SITE_ID;
-const entry = await getEntry("site", siteId);
+const entry = await getSite();
 const site = entry.data;
 const year = new Date().getFullYear();
 ---

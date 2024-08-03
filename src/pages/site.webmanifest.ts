@@ -1,11 +1,10 @@
 /**
  * The page used to create the webmanifest file.
  */
+import { getSite } from "@utils/site";
 import type { APIRoute } from "astro";
-import { getEntry } from "astro:content";
 
-const siteId = import.meta.env.SITE_ID;
-const entry = await getEntry("site", siteId);
+const entry = await getSite();
 const site = entry.data;
 const baseUrl = import.meta.env.SITE;
 
@@ -16,9 +15,9 @@ const manifest = {
   categories: [site.category],
   start_url: "/",
   display: "browser",
-  background_color: "#ffffff",
-  theme_color: "#37474f",
-  lang: "en-US",
+  background_color: site.background,
+  theme_color: site.theme,
+  lang: site.lang,
   scope: baseUrl,
   icons: [
     { src: "/icons/favicon.ico", sizes: "48x48", type: "image/x-icon" },

@@ -6,6 +6,7 @@ import { getTags, getArticlesByTag } from "@utils/article";
 import DisplayLimitAlert from "@components/DisplayLimitAlert.astro";
 import InternalBackLink from "@components/InternalBackLink.astro";
 import ArticleGrid from "@components/ArticleGrid.astro";
+import { getSite } from "@utils/site";
 
 interface Props {
   tag: string;
@@ -23,7 +24,8 @@ export async function getStaticPaths() {
 }
 
 const { tag } = Astro.props;
-const limit = import.meta.env.ARTICLE_DISPLAY_LIMIT;
+const siteEntry = await getSite();
+const limit = siteEntry.data.displayLimit;
 const { entries, total } = await getArticlesByTag(tag, limit);
 ---
 
