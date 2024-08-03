@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
-import netlify from "@astrojs/netlify";
 import { remarkReadingTime } from "./src/utils/readTime.ts";
 import { remarkExcerpt } from "./src/utils/excerpt.ts";
 import mdx from "@astrojs/mdx";
@@ -35,5 +34,4 @@ export default defineConfig({
     remarkPlugins: [remarkReadingTime, remarkExcerpt],
   },
   image: {},
-  adapter: netlify(),
 });
