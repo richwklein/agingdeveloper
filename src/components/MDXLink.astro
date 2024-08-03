@@ -1,0 +1,37 @@
+---
+/**
+ * Component used by the {@link Content} when rendering an anchor tag in mdx.
+ *
+ * @param props - The anchor tag props.
+ * @return {Function} an Astro component factory function.
+ */
+import ExternalLink from "@components/ExternalLink.astro";
+import InternalLink from "@components/InternalLink.astro";
+
+const props = Astro.props;
+
+// Checks against absolute URLs so we can still pass it along to the internal link component
+const domainRegex = /^http[s]*:\/\/[www.]*agingdeveloper\.(com|net)[/]?/;
+
+let to = props.href;
+if (domainRegex.test(to)) {
+  to = to.replace(domainRegex, "/");
+}
+const isInternal = to.startsWith("/") || to.startsWith("#") || to.startsWith("?");
+---
+
+{
+  isInternal ? (
+    <InternalLink to={to} {...props}>
+      <slot />
+    </InternalLink>
+  ) : !to.startsWith("http") ? (
+    <a data-link="other" href={to} {...props}>
+      <slot />
+    </a>
+  ) : (
+    <ExternalLink to={to} {...props}>
+      <slot />
+    </ExternalLink>
+  )
+}

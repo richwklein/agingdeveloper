@@ -4,6 +4,7 @@ import icon from "astro-icon";
 import netlify from "@astrojs/netlify";
 import { remarkReadingTime } from "./src/utils/readTime.ts";
 import { remarkExcerpt } from "./src/utils/excerpt.ts";
+import mdx from "@astrojs/mdx";
 
 const {
   URL: SITE_URL,
@@ -25,13 +26,14 @@ export default defineConfig({
   trailingSlash: "never",
   integrations: [
     icon(),
+    mdx(),
     tailwind({
       applyBaseStyles: false,
     }),
   ],
-  image: {},
   markdown: {
     remarkPlugins: [remarkReadingTime, remarkExcerpt],
   },
+  image: {},
   adapter: netlify(),
 });

@@ -1,0 +1,153 @@
+---
+slug: 2021-05-17-rss-dead-long-live-rss
+title: 'RSS is Dead, Long Live RSS'
+description: "Many have written RSS or Atom off as a dead technology. However, it is alive and kicking. We explore why and how I added RSS support to this site."
+author: richwklein
+featured:
+  image: david-clode-wOpm2alT6qU-unsplash.jpg
+  author:
+    name: David Clode
+    url: https://unsplash.com/@davidclode?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
+  site:
+    name: Unsplash
+    url: https://unsplash.com/photos/gray-animal-tongue-wOpm2alT6qU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
+tags:
+  - atom
+  - authorization
+  - Facebook
+  - Feed
+  - gatsbyjs
+  - rss
+  - Syndicate
+  - Twitter
+  - feed
+category: site
+published: "2021-05-17"
+---
+
+## What is RSS?
+RSS, RDF Site Summary, Really Simple Syndication, Rich Site Syndication, etc... is a computer readable file format 
+that websites publish to notify systems that there has been an update to the site. A link element is placed in the 
+head of the site to allow the [auto-discovery](https://www.rssboard.org/rss-autodiscovery) of these files. 
+The &quot;feeds&quot; could then be used for various purposes one of which is that they were often aggregated in a news 
+aggregator/reader.
+
+RSS was at it's height in popularity during the early Web 2.0 days prior to walled gardens such as Facebook taking over.
+During this time the Chrome & Firefox browsers built in support for these feeds. Google, Digg, and Mac had very popular 
+feed readers. It was all the rage.
+
+## The Death spiral
+With the rise of non-rss based feeds in Facebook and Twitter, as well as the increase of advertisements on sites, companies 
+no longer wanted you to experience their content outside of their site. Usage of these tools declined. This produced what 
+looked like a death spiral for the format. Firefox dropped its RSS button in 2011, Apple dropped RSS out of OS X Mountain 
+Lion, and Google pulled its Reader in 2013.
+
+The [RSS Advisory Board](https://www.rssboard.org/) latest news is from 2014.
+
+## Continued use
+People are [still using RSS](https://somedudesays.com/2020/04/rss-in-2020/), and publishing of the format has actually 
+seen an upward trend in the last couple of years. Some people have become increasingly disenfranchised by the way social 
+platforms use their algorithms to decide which news should show up in your feed. These people are 
+[turning back](https://atthis.link/blog/2021/rss.html) to [RSS and feed readers](http://techrights.org/2021/02/06/rss-feeds-www/) 
+as a way to control their own content consumption. 
+
+I have personally never stopped using an news reader. I use [Feedly](feedly.com/) for the local news as well as to stay up
+to date on specific categories of content that I'm interested in. 
+
+Because of this, I thought it was important to include feed support on this site.
+
+## Adding support
+There are several [plugins](https://www.gatsbyjs.com/plugins/?=feed) to add feed support to gatsby based sites. I 
+tried to use one of these, but there were a few drawbacks. I use [MDX](https://mdxjs.com/) which is markdown with JSX 
+and not all the plugins support it. Several of them also require using *graphql* in the **gatsby-config** file to 
+customize what is shown in the feed. That in and of itself isn't too bad, but I'm trying to keep code out of configuration files. 
+So instead of using one of the pre-built plugins, I rolled my own support.
+
+The first thing I did was add the [feed](https://www.npmjs.com/package/feed) library as a dependency. It does all the
+heavy lifting for creating RSS 2.0, JSON Feed 1.0, and Atom 1.0 formats.
+
+```shell
+npm install --save feed
+```
+
+Code in the **gatsby-node.js** file is run as part of the process of building the site. At the end of the production build 
+process the `onPostBuild` method is called. This is the callback I used to create the feed files. 
+You can see the full implementation [here](https://github.com/richwklein/agingdeveloper/blob/1381c628fff2e674e5a84345bd21bb8617cb0b17/gatsby-node.js#L142-L308).
+
+
+The posts are sorted in the graphql by date then title.
+
+
+```graphql
+      allMdx(
+        sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
+      )
+  `);
+```
+
+The **feed** library does most of the heavy lifting here. I just pass the properties the mdx nodes in the graph into it.
+
+```jsx
+  articles.map(({node}) => {
+    const {title, slug, description, date} = node.frontmatter;
+    const author = node.frontmatter.author;
+    const image = node.frontmatter.image.childImageSharp.fixed;
+    const asDate = moment(date).toDate();
+
+    return feed.addItem({
+      title: title,
+      id: slug,
+      link: `${metadata.siteUrl}/article/${slug}`,
+      description: description,
+      published: asDate,
+      published: asDate,
+      content: node.html,
+      author: {
+        name: author.name,
+        email: author.email,
+        link: `${metadata.siteUrl}/author/${author.id}`,
+      },
+      image: {
+        url: `${metadata.siteUrl}${image.src}`,
+      },
+    });
+  });
+```
+
+I created a [FeedLinks](https://github.com/richwklein/agingdeveloper/blob/1381c628fff2e674e5a84345bd21bb8617cb0b17/src/components/FeedLinks.js) 
+component that is used for the auto-discovery links that go in the head of the site.
+
+```jsx
+const FeedLinks = ({siteName, siteUrl}) => {
+  return (
+    <Helmet>
+      {feedData.map(({postFix, type, path}) => {
+        return (
+          <link
+            rel="alternate"
+            type={type}
+            title={`${siteName} ${postFix}`}
+            href={`${siteUrl}${path}`}
+            key={path} />
+        );
+      },
+      )}
+    </Helmet>
+  );
+};
+```
+
+To ease discovery I also placed an RSS icon in the bottom bar on the site which links to the rss feed file.
+
+```jsx
+  <Grid item sm={12} md={4}>
+    <IconButton component={ExternalLink}
+      title={`${title} RSS`}
+      to={"/rss.xml"}>
+      <RssFeed color="secondary" />
+    </IconButton>
+  </Grid>
+```
+
+So now you can use your favorite news aggregator/reader to catch up on [agingdeveloper](https://agingdeveloper.com/)
+whenever I have new content.
