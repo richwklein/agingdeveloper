@@ -68,5 +68,5 @@
 - jsdocs
 - investigate view transitions
 - github workflows
-- fix symlink between components
-- image backgrounds
+- image placeholders / backgrounds
+- debounce scroll top component

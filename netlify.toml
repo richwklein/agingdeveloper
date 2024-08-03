@@ -6,6 +6,16 @@
   package = "@netlify/plugin-lighthouse"
 
 [[redirects]]
+  from = "/article"
+  to = "/article/archive-1"
+  status = 308
+
+[[redirects]]
+  from = "/article/"
+  to = "/article/archive-1"
+  status = 308
+
+[[redirects]]
   from = "/article/rss-dead-long-live-rss"
   to = "/article/2021-05-17-rss-dead-long-live-rss"
   status = 308

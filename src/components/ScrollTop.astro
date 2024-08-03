@@ -32,14 +32,22 @@ import { Icon } from "astro-icon/components";
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
       });
 
+      let timer: number;
+      const showButton = () => {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(() => {
+          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            button?.classList.remove("fade-out");
+            button?.classList.add("fade-in");
+          } else {
+            button?.classList.remove("fade-in");
+            button?.classList.add("fade-out");
+          }
+        }, 2.5);
+      };
+
       window.onscroll = () => {
-        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-          button?.classList.remove("fade-out");
-          button?.classList.add("fade-in");
-        } else {
-          button?.classList.remove("fade-in");
-          button?.classList.add("fade-out");
-        }
+        showButton();
       };
     }
   }
