@@ -7,6 +7,7 @@
 - Fix up the README when eslint and prettier are installed together
 - <https://prettier.io/docs/en/integrating-with-linters>
 - code linting
+- compare config to [example blog](https://github.com/danielcgilibert/blog-template/blob/main/src/utils/post.ts)
 
 ## Components needing implemented
 
@@ -53,7 +54,7 @@
 
 - <https://docs.astro.build/en/guides/testing/>
 - <https://github.com/withastro/astro/tree/latest/examples/with-vitest>
-- fix where snapshots issues between components
+- fix where [snapshots](https://vitest.dev/guide/snapshot.html) issues between components
 - [code coverage](https://github.com/marketplace/actions/vitest-coverage-report)
 
 ## Investigate adding view transitions
@@ -69,7 +70,3 @@
 - github workflows
 - fix symlink between components
 - image backgrounds
-
-## Example blog
-
-<https://github.com/danielcgilibert/blog-template/blob/main/src/utils/post.ts>
