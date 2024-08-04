@@ -5,6 +5,11 @@
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
 
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+  sitemapPath = "/sitemap-index.xml"
+  providers = ["google"]
+
 [[redirects]]
   from = "/article"
   to = "/article/archive-1"

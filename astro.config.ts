@@ -4,9 +4,8 @@ import icon from "astro-icon"
 import { remarkReadingTime } from "./src/utils/readTime.ts"
 import { remarkExcerpt } from "./src/utils/excerpt.ts"
 import mdx from "@astrojs/mdx"
-
+import sitemap from "@astrojs/sitemap"
 const { URL: SITE_URL, DEPLOY_PRIME_URL: DEPLOY_URL, CONTEXT: DEPLOY_CONTEXT = "dev" } = process.env
-
 const siteUrl =
   DEPLOY_CONTEXT === "dev"
     ? "http://localhost:4321"
@@ -22,6 +21,7 @@ export default defineConfig({
   integrations: [
     icon(),
     mdx(),
+    sitemap(),
     tailwind({
       applyBaseStyles: false,
     }),
