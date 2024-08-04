@@ -7,8 +7,9 @@
 
 [[plugins]]
   package = "netlify-plugin-submit-sitemap"
-  sitemapPath = "/sitemap-index.xml"
-  providers = ["google"]
+  [plugins.inputs]
+    sitemapPath = "/sitemap-index.xml"
+    providers = ["google"]
 
 [[redirects]]
   from = "/article"
