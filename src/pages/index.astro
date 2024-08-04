@@ -1,10 +1,13 @@
 ---
+/**
+ * The page used as the home page
+ */
 import ArticleGrid from "@components/ArticleGrid.astro"
 import InternalBackLink from "@components/InternalBackLink.astro"
 import ArticleCardLead from "@components/ArticleCardLead.astro"
 import Layout from "@layouts/Layout.astro"
 import { getArticles } from "@utils/article"
-import SEOIndex from "@components/SEOIndex.astro"
+import HomeSEO from "@components/HomeSEO.astro"
 
 // get the articles and sort them in decending published date
 const entries = await getArticles(9)
@@ -12,7 +15,7 @@ const lead = entries.shift()
 ---
 
 <Layout>
-  <SEOIndex slot="seo" />
+  <HomeSEO slot="seo" />
   {lead != null ? <ArticleCardLead article={lead} /> : null}
   <ArticleGrid articles={entries} class:list={["mt-4"]} />
   <InternalBackLink name="articles" path="/article" class:list={["mt-4"]} />
