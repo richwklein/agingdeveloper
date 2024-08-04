@@ -9,6 +9,8 @@ import type { CollectionEntry } from "astro:content"
 import InternalBackLink from "@components/InternalBackLink.astro"
 import ArticleGrid from "@components/ArticleGrid.astro"
 import { getSite } from "@utils/site"
+import SocialBar from "@components/SocialBar.astro"
+import { Image } from "astro:assets"
 
 interface Props {
   entry: CollectionEntry<"author">
@@ -40,7 +42,28 @@ const { entries: articleEntries, total } = await getArticlesByAuthor(entry.id, l
     tail={author.name}
     class:list={["mb-4"]}
   />
-  <h1>{author.name}</h1>
+  <header class:list={["flex items-start"]}>
+    <div
+      class:list={[
+        "mb-2 mr-4",
+        "w-[150px] min-w-[150px] overflow-hidden rounded-lg ring-2 ring-secondary-light",
+      ]}
+    >
+      <Image
+        src={author.avatar}
+        alt={author.name}
+        loading={"eager"}
+        fetchpriority={"high"}
+        width={150}
+        class:list={["aspect-[3/4] object-cover object-center"]}
+      />
+    </div>
+    <div class:list={["flex flex-col"]}>
+      <h3 class:list={["text-3xl leading-snug", "md:text-5xl"]}>{author.name}</h3>
+      <p class:list={["text-md grow leading-tight", "xl:text-lg"]}>{author.bio}</p>
+      <SocialBar socials={author.socials} />
+    </div>
+  </header>
   <ArticleGrid articles={articleEntries} class:list={["mt-4"]} />
   <DisplayLimitAlert displayed={articleEntries.length} total={total} class:list={["mt-4"]} />
   <InternalBackLink class:list={["mt-4"]} name={"authors"} path={"/author"} />
