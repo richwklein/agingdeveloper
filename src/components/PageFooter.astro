@@ -10,6 +10,8 @@
  * <PageFooter />
  */
 import { getSite } from "@utils/site"
+import ExternalLink from "./ExternalLink.astro"
+import { Icon } from "astro-icon/components"
 
 interface Props {
   class?: string
@@ -22,7 +24,28 @@ const year = new Date().getFullYear()
 ---
 
 <footer class:list={["container mx-auto grid-rows-3 p-4 xl:max-w-screen-xl", className]}>
-  <div></div>
+  <div>
+    <ol class:list={["flex items-center gap-1"]}>
+      <li>
+        <ExternalLink
+          to="/rss.xml"
+          title={`${site.title} - Feed`}
+          class:list={["block rounded-full p-2", "hover:bg-gray-100 focus:bg-gray-300"]}
+        >
+          <Icon name="mdi:rss-feed" class:list={["h-6 w-6 text-primary-main"]} />
+        </ExternalLink>
+      </li>
+      <li>
+        <ExternalLink
+          to={site.repository}
+          title={`${site.title} - Repository`}
+          class:list={["block rounded-full p-2", "hover:bg-gray-100 focus:bg-gray-300"]}
+        >
+          <Icon name="mdi:github" class:list={["h-6 w-6 text-primary-main"]} />
+        </ExternalLink>
+      </li>
+    </ol>
+  </div>
   <div class:list={["text-center text-xs"]}>&copy; {year} {site.title}</div>
   <div></div>
 </footer>
