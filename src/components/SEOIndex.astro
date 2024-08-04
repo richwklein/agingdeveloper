@@ -1,0 +1,32 @@
+---
+import { getSite } from "@utils/site"
+import SEOBase from "@components/SEOBase.astro"
+import SEOBreadcrumbs from "@components/SEOBreadcrumbs.astro"
+
+const siteEntry = await getSite()
+const site = siteEntry.data
+const baseUrl = import.meta.env.SITE
+---
+
+<SEOBase
+  type={"website"}
+  title={site.title}
+  description={site.tagline}
+  path={""}
+  lang={site.lang}
+  creatorTwitterName={site.twitterUsername}
+  siteTitle={site.title}
+  siteTwitterName={site.twitterUsername}
+>
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: site.title,
+      url: baseUrl,
+    })}
+  />
+  <SEOBreadcrumbs />
+</SEOBase>

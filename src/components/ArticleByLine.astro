@@ -10,7 +10,7 @@
  * <ArticleByLine author={author} published={published} />
  */
 import type { CollectionEntry } from "astro:content"
-import InternalLink from "./InternalLink.astro"
+import LinkInternal from "@components/LinkInternal.astro"
 import slugify from "@sindresorhus/slugify"
 
 interface Props {
@@ -23,9 +23,9 @@ const author = entry?.data
 ---
 
 <small id="article-byline" class:list={["text-base text-primary-dark/85", className]}>
-  <InternalLink to={`/author/${slugify(entry.id)}`} class:list={["mr-4 inline-block underline"]}>
+  <LinkInternal to={`/author/${slugify(entry.id)}`} class:list={["mr-4 inline-block underline"]}>
     {author?.name}
-  </InternalLink>
+  </LinkInternal>
   <time datetime={published.toISOString()}>
     {
       published.toLocaleDateString("en-us", {

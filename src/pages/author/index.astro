@@ -4,7 +4,7 @@ import Layout from "@layouts/Layout.astro"
 import { getCollection } from "astro:content"
 import BreadcrumbHeader from "@components/BreadcrumbHeader.astro"
 import slugify from "@sindresorhus/slugify"
-import InternalLink from "@components/InternalLink.astro"
+import LinkInternal from "@components/LinkInternal.astro"
 
 const entries = await getCollection("author")
 ---
@@ -15,11 +15,11 @@ const entries = await getCollection("author")
     {
       entries.map((entry) => (
         <li>
-          <InternalLink class:list={["capitalize"]} to={`/author/${slugify(entry.id)}`}>
+          <LinkInternal class:list={["capitalize"]} to={`/author/${slugify(entry.id)}`}>
             <Image src={entry.data.avatar} alt={entry.data.name}>
               {entry.data.name}
             </Image>
-          </InternalLink>
+          </LinkInternal>
         </li>
       ))
     }

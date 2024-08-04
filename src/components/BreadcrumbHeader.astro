@@ -11,7 +11,7 @@
  * @example
  * <BreadcrumbBlock head={{name: "Archive", path="/article"}} tail="1" />
  */
-import InternalLink from "./InternalLink.astro"
+import LinkInternal from "@components/LinkInternal.astro"
 
 interface Props {
   head: {
@@ -33,9 +33,9 @@ const { head, tail, class: className } = Astro.props
         <li>{head.name}</li>
       ) : (
         <li class:list={["after:mx-1 after:text-gray-300 after:content-['/']"]}>
-          <InternalLink to={head.path} class:list={["hover:underline", "text-inherit"]}>
+          <LinkInternal to={head.path} class:list={["hover:underline", "text-inherit"]}>
             {head.name}
-          </InternalLink>
+          </LinkInternal>
         </li>
       )
     }

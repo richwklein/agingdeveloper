@@ -11,7 +11,7 @@
  * <TagGridLink name={"gatsby"} weight={350} />
  */
 import { Icon } from "astro-icon/components"
-import InternalLink from "./InternalLink.astro"
+import LinkInternal from "@components/LinkInternal.astro"
 import slugify from "@sindresorhus/slugify"
 
 interface Props {
@@ -37,7 +37,7 @@ const iconName = isCategory ? "mdi:label-outline" : "mdi:hashtag"
 const pathPrefix = isCategory ? "/category" : "/tag"
 ---
 
-<InternalLink
+<LinkInternal
   to={`${pathPrefix}/${slugify(name)}`}
   class:list={[
     "justify-left m-0 inline-flex items-center px-2 py-1",
@@ -49,4 +49,4 @@ const pathPrefix = isCategory ? "/category" : "/tag"
 >
   <Icon name={iconName} class:list={["mr-1"]} />
   {name.trim()}
-</InternalLink>
+</LinkInternal>

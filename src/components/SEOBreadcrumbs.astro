@@ -1,0 +1,43 @@
+---
+/**
+ * @name SEOBreadcrumbs
+ * Component used to build out an ld+json breadcrumb header.
+ *
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <SEOBreadcrumbs crumbs=[{name: "Articles", path: "/article"}] />
+ */
+import { getSite } from "@utils/site"
+
+interface Props {
+  crumbs?: {
+    name: string
+    path: string
+  }[]
+}
+
+const siteEntry = await getSite()
+const site = siteEntry.data
+const baseUrl = import.meta.env.SITE
+
+const { crumbs = [] } = Astro.props
+crumbs.unshift({ name: site.title, path: "" })
+---
+
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((crumb, index) => {
+      return {
+        "@type": "ListItem",
+        position: index + 1,
+        name: crumb.name,
+        item: `${baseUrl}${crumb.path}`,
+      }
+    }),
+  })}
+/>

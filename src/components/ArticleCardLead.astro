@@ -1,17 +1,17 @@
 ---
 /**
- * @name LeadArticleCard
+ * @name ArticleCardLead
  * Component used for rendering the lead article card.
  *
  * @param {Props} props - The properties of the article.
  * @return {Function} an Astro component factory function.
  *
  * @example
- * <LeadArticleCard article={entry} />
+ * <ArticleCardLead article={entry} />
  */
 import { Image } from "astro:assets"
 import type { CollectionEntry } from "astro:content"
-import InternalLink from "./InternalLink.astro"
+import LinkInternal from "@components/LinkInternal.astro"
 
 interface Props {
   article: CollectionEntry<"article">
@@ -23,7 +23,7 @@ const article = entry?.data
 const { remarkPluginFrontmatter: frontmatter } = await entry.render()
 ---
 
-<InternalLink to={`/article/${entry.slug}`}>
+<LinkInternal to={`/article/${entry.slug}`}>
   <div
     class:list={["relative overflow-hidden rounded-md border border-gray-300 bg-white", className]}
   >
@@ -70,4 +70,4 @@ const { remarkPluginFrontmatter: frontmatter } = await entry.render()
       </div>
     </div>
   </div>
-</InternalLink>
+</LinkInternal>

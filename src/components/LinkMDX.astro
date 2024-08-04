@@ -5,8 +5,8 @@
  * @param props - The anchor tag props.
  * @return {Function} an Astro component factory function.
  */
-import ExternalLink from "@components/ExternalLink.astro"
-import InternalLink from "@components/InternalLink.astro"
+import LinkExternal from "@components/LinkExternal.astro"
+import LinkInternal from "@components/LinkInternal.astro"
 
 const props = Astro.props
 
@@ -22,16 +22,16 @@ const isInternal = to.startsWith("/") || to.startsWith("#") || to.startsWith("?"
 
 {
   isInternal ? (
-    <InternalLink to={to} {...props}>
+    <LinkInternal to={to} {...props}>
       <slot />
-    </InternalLink>
+    </LinkInternal>
   ) : !to.startsWith("http") ? (
     <a data-link="other" href={to} {...props}>
       <slot />
     </a>
   ) : (
-    <ExternalLink to={to} {...props}>
+    <LinkExternal to={to} {...props}>
       <slot />
-    </ExternalLink>
+    </LinkExternal>
   )
 }

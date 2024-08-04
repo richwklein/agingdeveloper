@@ -1,17 +1,19 @@
 ---
 import ArticleGrid from "@components/ArticleGrid.astro"
 import InternalBackLink from "@components/InternalBackLink.astro"
-import LeadArticleCard from "@components/LeadArticleCard.astro"
+import ArticleCardLead from "@components/ArticleCardLead.astro"
 import Layout from "@layouts/Layout.astro"
 import { getArticles } from "@utils/article"
+import SEOIndex from "@components/SEOIndex.astro"
 
 // get the articles and sort them in decending published date
 const entries = await getArticles(9)
 const lead = entries.shift()
 ---
 
-<Layout title="Welcome to Astro.">
-  {lead != null ? <LeadArticleCard article={lead} /> : null}
+<Layout>
+  <SEOIndex slot="seo" />
+  {lead != null ? <ArticleCardLead article={lead} /> : null}
   <ArticleGrid articles={entries} class:list={["mt-4"]} />
   <InternalBackLink name="articles" path="/article" class:list={["mt-4"]} />
 </Layout>

@@ -10,7 +10,7 @@
  * <InternalBackLink name={"authors"} path={"/author"}} />
  */
 import { Icon } from "astro-icon/components"
-import InternalLink from "./InternalLink.astro"
+import LinkInternal from "@components/LinkInternal.astro"
 
 interface Props {
   name: string
@@ -23,7 +23,7 @@ const { name, path, class: className, useViewText = true } = Astro.props
 const text = useViewText ? `view all ${name}` : name
 ---
 
-<InternalLink
+<LinkInternal
   to={path}
   class:list={[
     "inline-flex min-w-16 items-center justify-center py-2 pl-3 pr-4",
@@ -35,4 +35,4 @@ const text = useViewText ? `view all ${name}` : name
 >
   <Icon name="mdi:chevron-left" class:list={["mr-1"]} />
   {text}
-</InternalLink>
+</LinkInternal>
