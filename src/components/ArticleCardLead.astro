@@ -31,12 +31,12 @@ const { remarkPluginFrontmatter: frontmatter } = await entry.render()
       src={article.featured.image}
       alt={article.title}
       class:list={["aspect-square object-cover object-center sm:aspect-[21/9]"]}
-      widths={[638, 766, 1022, 1242]}
+      widths={[640, 768, 1024, 1280]}
       sizes={`
-        (min-width: 1280px) 1242px,
-        (min-width: 1024px) 1022px,
-        (min-width: 768px) 766px,
-        638px
+        (min-width: 1280px) 1280px,
+        (min-width: 1024px) 1024px,
+        (min-width: 768px) 768px,
+        640px
       `}
       loading={"eager"}
     />

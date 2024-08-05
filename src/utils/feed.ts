@@ -27,6 +27,8 @@ export const getFeed = async () => {
     id: baseUrl,
     link: baseUrl,
     language: site.lang,
+    image: `${baseUrl}${site.avatar.src.split("?")[0]}`,
+    favicon: `${baseUrl}${site.icon.src.split("?")[0]}`,
     feedLinks: new Map(feedInfo.map(({ id, path }) => [id, `${baseUrl}${path}`])),
     copyright: new Date().toISOString(),
   })
@@ -62,6 +64,9 @@ export const getFeed = async () => {
           link: `${baseUrl}/author/${slugify(authorEntry.id)}`,
         },
       ],
+      image: {
+        url: `${baseUrl}${article.featured.image.src.split("?")[0]}`,
+      },
       content: sanitizeHtml(parser.render(entry.body), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
       }),
