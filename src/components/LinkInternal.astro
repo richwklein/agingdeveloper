@@ -19,4 +19,11 @@ interface Props {
 const { to, title, class: className } = Astro.props
 ---
 
-<a data-link="internal" target="_self" href={to} class:list={[className]} title={title}><slot /></a>
+<a
+  data-link="internal"
+  data-astro-prefetch="hover"
+  target="_self"
+  href={to}
+  class:list={[className]}
+  title={title}><slot /></a
+>

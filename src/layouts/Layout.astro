@@ -4,6 +4,7 @@ import PageHeader from "@components/PageHeader.astro"
 import ScrollTop from "@components/ScrollTop.astro"
 import "@styles/main.css"
 import { getSite } from "@utils/site"
+import { feedInfo } from "@utils/feed"
 
 const siteEntry = await getSite()
 const site = siteEntry.data
@@ -19,28 +20,20 @@ const baseUrl = import.meta.env.SITE
     <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/icons/android-icon-512x512.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icons/android-chrome-512x512.png" />
     <link rel="manifest" href='/site.webmanifest"' />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link
-      rel="alternate"
-      type="application/xml"
-      title={`${site.title} - RSS`}
-      href={`${baseUrl}/rss.xml`}
-    />
-    <link
-      rel="alternate"
-      type="application/atom+xml"
-      title={`${site.title} - Atom`}
-      href={`${baseUrl}/atom.xml`}
-    />
-    <link
-      rel="alternate"
-      type="application/json"
-      title={`${site.title} - Feed`}
-      href={`${baseUrl}/feed.json`}
-    />
+    {
+      feedInfo.map(({ id, type, path }) => (
+        <link
+          rel="alternate"
+          type={type}
+          title={`${site.title} - ${id.toUpperCase()}`}
+          href={`${baseUrl}${path}`}
+        />
+      ))
+    }
     <meta name="generator" content={Astro.generator} />
     <slot name="seo" />
   </head>

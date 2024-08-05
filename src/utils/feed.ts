@@ -7,10 +7,10 @@ import MarkdownIt from "markdown-it"
 
 const parser = new MarkdownIt()
 
-export const feedPaths = [
-  { id: "rss", path: "/rss.xml" },
-  { id: "atom", path: "/atom.xml" },
-  { id: "json", path: "/feed.json" },
+export const feedInfo = [
+  { id: "rss", type: "application/xml", path: "/rss.xml" },
+  { id: "atom", type: "application/atom+xml", path: "/atom.xml" },
+  { id: "feed", type: "application/json", path: "/feed.json" },
 ]
 
 export const getFeed = async () => {
@@ -27,7 +27,7 @@ export const getFeed = async () => {
     id: baseUrl,
     link: baseUrl,
     language: site.lang,
-    feedLinks: new Map(feedPaths.map(({ id, path }) => [id, `${baseUrl}${path}`])),
+    feedLinks: new Map(feedInfo.map(({ id, path }) => [id, `${baseUrl}${path}`])),
     copyright: new Date().toISOString(),
   })
 

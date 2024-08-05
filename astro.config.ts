@@ -16,6 +16,7 @@ const siteUrl =
 // https://astro.build/config
 export default defineConfig({
   output: "static",
+  prefetch: true,
   site: siteUrl,
   trailingSlash: "never",
   integrations: [
