@@ -1,3 +1,4 @@
+import { capitalize } from "@utils/misc"
 import { z, defineCollection, reference } from "astro:content"
 
 const article = defineCollection({
@@ -31,8 +32,11 @@ const article = defineCollection({
         .transform((val) => new Date(val))
         .optional(),
       author: reference("author"),
-      category: z.string().default("uncategorized"),
-      tags: z.array(z.string()),
+      category: z
+        .string()
+        .default("uncategorized")
+        .transform((val) => capitalize(val)),
+      tags: z.array(z.string().transform((val) => capitalize(val))),
     }),
 })
 

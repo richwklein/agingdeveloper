@@ -7,7 +7,7 @@ let articles: Array<CollectionEntry<"article">>
  */
 export const getCategories = async () => {
   const articles = await getArticles()
-  const categories = new Set<string>(articles.map((entry) => entry.data.category.toLowerCase()))
+  const categories = new Set<string>(articles.map((entry) => entry.data.category))
   return Array.from(categories)
 }
 
@@ -20,7 +20,7 @@ export const getCategoriesWithCount = async () => {
   const categories = new Map()
   let total = 0
   articles.forEach((entry) => {
-    const category = entry.data.category.toLowerCase()
+    const category = entry.data.category
     const value = (categories.get(category) || 0) + 1
     categories.set(category, value)
     total += value
@@ -34,7 +34,7 @@ export const getCategoriesWithCount = async () => {
 export const getTags = async () => {
   const articles = await getArticles()
   const tags = new Set<string>(
-    articles.flatMap((entry) => entry.data.tags.map((tag: string) => tag.toLowerCase()))
+    articles.flatMap((entry) => entry.data.tags.map((tag: string) => tag))
   )
 
   return Array.from(tags)
@@ -50,9 +50,8 @@ export const getTagsWithCount = async () => {
   let total = 0
   articles.forEach((entry) => {
     entry.data.tags.forEach((tag: string) => {
-      const lowercaseTag = tag.toLowerCase()
-      const value = (tags.get(lowercaseTag) || 0) + 1
-      tags.set(lowercaseTag, value)
+      const value = (tags.get(tag) || 0) + 1
+      tags.set(tag, value)
       total += value
     })
   })
@@ -76,7 +75,7 @@ export const getArticles = async (limit?: number) => {
  */
 export const getArticlesByAuthor = async (authorId: string, limit?: number) => {
   const articles = await getArticles()
-  const filtered = articles.filter((entry) => entry.data.author.id === authorId)
+  const filtered = articles.filter((entry) => entry.data.author.id == authorId)
   return {
     entries: filtered.slice(0, limit),
     total: filtered.length,
@@ -88,10 +87,7 @@ export const getArticlesByAuthor = async (authorId: string, limit?: number) => {
  */
 export const getArticlesByCategory = async (category: string, limit?: number) => {
   const articles = await getArticles()
-  const lowercaseCategory = category.toLowerCase()
-  const filtered = articles.filter(
-    (entry) => entry.data.category.toLowerCase() === lowercaseCategory
-  )
+  const filtered = articles.filter((entry) => entry.data.category == category)
   return {
     entries: filtered.slice(0, limit),
     total: filtered.length,
@@ -103,9 +99,8 @@ export const getArticlesByCategory = async (category: string, limit?: number) =>
  */
 export const getArticlesByTag = async (tag: string, limit?: number) => {
   const articles = await getArticles()
-  const lowercaseTag = tag.toLowerCase()
   const filtered = articles.filter((entry) => {
-    return entry.data.tags.some((articleTag: string) => articleTag.toLowerCase() === lowercaseTag)
+    return entry.data.tags.some((articleTag: string) => articleTag == tag)
   })
   return {
     entries: filtered.slice(0, limit),
