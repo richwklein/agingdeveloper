@@ -30,7 +30,8 @@ const loading = lazy ? "lazy" : "eager"
     class:list={[
       "overflow-hidden rounded-md border border-gray-300 bg-white",
       "xl:flex xl:max-h-60 xl:flex-row-reverse",
-      "hover:bg-gray-100/85",
+      "hover:bg-gray-100/85 hover:shadow-sm",
+      "focus:bg-gray-100/85 focus:shadow-sm",
       className,
     ]}
   >
@@ -47,7 +48,7 @@ const loading = lazy ? "lazy" : "eager"
       loading={loading}
       class:list={[
         "object-cover object-center",
-        "aspect-square sm:aspect-video xl:aspect-[3/4]",
+        "aspect-square sm:aspect-video md:aspect-[21/9] xl:aspect-[3/4]",
         "w-full sm:w-[638px] md:w-[766px] lg:w-[498px] xl:w-[178px]",
       ]}
     />

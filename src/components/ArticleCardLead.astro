@@ -25,12 +25,16 @@ const { remarkPluginFrontmatter: frontmatter } = await entry.render()
 
 <LinkInternal to={`/article/${entry.slug}`}>
   <div
-    class:list={["relative overflow-hidden rounded-md border border-gray-300 bg-white", className]}
+    class:list={[
+      "relative overflow-hidden rounded-md border border-gray-300 bg-white",
+      "focus:shadown-sm hover:shadow-sm",
+      className,
+    ]}
   >
     <Image
       src={article.featured.image}
       alt={article.title}
-      class:list={["aspect-square object-cover object-center sm:aspect-video"]}
+      class:list={["aspect-square object-cover object-center sm:aspect-video md:aspect-[21/9]"]}
       widths={[640, 768, 1024, 1280]}
       sizes={`
         (min-width: 1280px) 1280px,

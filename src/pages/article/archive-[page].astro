@@ -1,13 +1,12 @@
 ---
 /**
- * The article archive page.
+ * An archive page of all articles on the site.
  */
 import Layout from "@layouts/Layout.astro"
 import type { Page } from "astro"
 import { getArticles } from "@utils/article"
 import BreadcrumbHeader from "@components/BreadcrumbHeader.astro"
 import Pagniation from "@components/Pagniation.astro"
-import ArticleCard from "@components/ArticleCard.astro"
 import { getSite, getSiteAuthor } from "@utils/site"
 import type { CollectionEntry } from "astro:content"
 import SeoBasic from "@components/seo/SeoBasic.astro"

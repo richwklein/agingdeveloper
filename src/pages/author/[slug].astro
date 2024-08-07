@@ -1,6 +1,6 @@
 ---
 /**
- * A specific author page.
+ * A page for a single author and the latest articles from that author.
  */
 import Layout from "@layouts/Layout.astro"
 import { getCollection } from "astro:content"
@@ -16,9 +16,7 @@ import SocialBar from "@components/SocialBar.astro"
 import { Image } from "astro:assets"
 import SeoBasic from "@components/seo/SeoBasic.astro"
 import BreadcrumbJson from "@components/seo/BreadcrumbJson.astro"
-import OpenGraphBasic from "@components/seo/OpenGraphBasic.astro"
 import OpenGraphProfile from "@components/seo/OpenGraphProfile.astro"
-import OpenGraphImage from "@components/seo/OpenGraphImage.astro"
 import AuthorJson from "@components/seo/AuthorJson.astro"
 
 interface Props {

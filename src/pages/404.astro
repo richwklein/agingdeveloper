@@ -1,0 +1,43 @@
+---
+import ArticleImage from "@components/ArticleImage.astro"
+import Layout from "@layouts/Layout.astro"
+import { getSite, getSiteAuthor } from "@utils/site"
+import { getImage } from "astro:assets"
+import image from "../content/image/lachlan-donald-eaTHXNIUsYM-unsplash.jpg"
+import InternalBackLink from "@components/InternalBackLink.astro"
+
+/**
+ * A page for when the correct page is not found.
+ */
+
+const site = await getSite()
+const siteAuthor = await getSiteAuthor()
+const featured = {
+  image: image,
+  author: {
+    name: "Lachlan Donald",
+    url: "https://unsplash.com/@lox?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+  },
+  site: {
+    name: "Unsplash",
+    url: "https://unsplash.com/photos/green-signage-on-concrete-road-during-day-time-eaTHXNIUsYM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+  },
+}
+---
+
+<Layout site={site}>
+  <Fragment slot="seo">
+    <!-- TO Implement -->
+  </Fragment>
+  <ArticleImage featured={featured} />
+  <hgroup class:list={["mt-8"]}>
+    <h2 class:list={["text-5xl leading-relaxed"]}>{"Not Found (404)"}</h2>
+    <h3 class:list={["text-lg leading-relaxed"]}>
+      {"The page you are looking for might have been removed,"}
+      <br />
+      {"had it's name changed, or be temporarily unavailable."}
+    </h3>
+  </hgroup>
+
+  <InternalBackLink name="Home" path="/" useViewText={false} class:list={["mt-8"]} />
+</Layout>
