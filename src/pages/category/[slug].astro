@@ -9,30 +9,53 @@ import { getCategories, getArticlesByCategory } from "@utils/article"
 import DisplayLimitAlert from "@components/DisplayLimitAlert.astro"
 import InternalBackLink from "@components/InternalBackLink.astro"
 import ArticleGrid from "@components/ArticleGrid.astro"
-import { getSite } from "@utils/site"
+import { getSite, getSiteAuthor } from "@utils/site"
+import type { CollectionEntry } from "astro:content"
+import SeoBasic from "@components/seo/SeoBasic.astro"
+import BreadcrumbJson from "@components/seo/BreadcrumbJson.astro"
 
 interface Props {
   category: string
+  site: CollectionEntry<"site">
+  siteAuthor: CollectionEntry<"author">
 }
 
 export async function getStaticPaths() {
-  const pages = (await getCategories()).map((category) => {
+  const site = await getSite()
+  const siteAuthor = await getSiteAuthor()
+  const categories = await getCategories()
+  const pages = categories.map((category) => {
     return {
       params: { slug: slugify(category) },
-      props: { category: category },
+      props: { category, site, siteAuthor },
     }
   })
 
   return pages
 }
 
-const { category } = Astro.props
-const siteEntry = await getSite()
-const limit = siteEntry.data.displayLimit
+const { category, site, siteAuthor } = Astro.props
+const limit = site.data.displayLimit
 const { entries, total } = await getArticlesByCategory(category, limit)
+const categoryPath = Astro.url.pathname
 ---
 
-<Layout title={`${category} | Tags`}>
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic
+      title={`Latest ${category} Articles: Expert Insights & Tips`}
+      description={`Explore our selection of ${category} articles, offering valuable insights, practical tips, and up-to-date trends.`}
+      path={categoryPath}
+      author={siteAuthor}
+    />
+    <BreadcrumbJson
+      site={site}
+      crumbs={[
+        { name: "Categories", path: "/category" },
+        { name: category, path: categoryPath },
+      ]}
+    />
+  </Fragment>
   <BreadcrumbHeader
     head={{ name: "Categories", path: "/category" }}
     tail={category}

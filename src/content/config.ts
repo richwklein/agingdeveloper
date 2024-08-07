@@ -56,7 +56,15 @@ const author = defineCollection({
           })
         )
         .optional(),
-      published: z.string().date(),
+      published: z
+        .string()
+        .date()
+        .transform((val) => new Date(val)),
+      modified: z
+        .string()
+        .date()
+        .transform((val) => new Date(val))
+        .optional(),
     }),
 })
 
@@ -68,7 +76,7 @@ const site = defineCollection({
       tagline: z.string(),
       category: z.string(),
       repository: z.string(),
-      twitterUsername: z.string().optional(),
+      author: reference("author"),
       lang: z.string(),
       avatar: image(),
       icon: image(),

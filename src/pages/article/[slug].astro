@@ -12,36 +12,73 @@ import { getEntry } from "astro:content"
 import { getArticles } from "@utils/article"
 import ArticleTimeToRead from "@components/ArticleTimeToRead.astro"
 import LinkMDX from "@components/LinkMDX.astro"
+import { getSite } from "@utils/site"
+import SeoBasic from "@components/seo/SeoBasic.astro"
+import BreadcrumbJson from "@components/seo/BreadcrumbJson.astro"
+import OpenGraphBasic from "@components/seo/OpenGraphBasic.astro"
+import OpenGraphArticle from "@components/seo/OpenGraphArticle.astro"
+import OpenGraphImage from "@components/seo/OpenGraphImage.astro"
+import ArticleJson from "@components/seo/ArticleJson.astro"
 
 interface Props {
-  entry: CollectionEntry<"article">
+  article: CollectionEntry<"article">
+  site: CollectionEntry<"site">
 }
 
 export async function getStaticPaths() {
-  const entries = await getArticles()
+  const site = await getSite()
 
-  const pages = entries.map((entry) => {
+  const articles = await getArticles()
+  const pages = articles.map((article) => {
     return {
-      params: { slug: entry.slug },
-      props: { entry },
+      params: { slug: article.slug },
+      props: { article, site },
     }
   })
 
   return pages
 }
 
-const { entry } = Astro.props
-const article = entry.data
-const author = await getEntry(entry.data.author)
-
-const { Content, remarkPluginFrontmatter: frontmatter } = await entry.render()
+const { site, article } = Astro.props
+const data = article.data
+const author = await getEntry(data.author)
+const articlePath = Astro.url.pathname
+const { Content, remarkPluginFrontmatter: frontmatter } = await article.render()
 ---
 
-<Layout title={`${article.title}`}>
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic
+      title={data.title}
+      description={data.description}
+      path={articlePath}
+      author={author}
+    />
+    <BreadcrumbJson
+      site={site}
+      crumbs={[
+        { name: "Articles", path: "/article" },
+        { name: data.title, path: articlePath },
+      ]}
+    />
+    <OpenGraphBasic
+      title={data.title}
+      description={data.description}
+      path={articlePath}
+      type={"article"}
+      site={site}
+    />
+    <OpenGraphArticle article={article} />
+    <OpenGraphImage
+      image={data.featured.image}
+      imageAlt={data.featured.author ? data.featured.author.name : "unknown"}
+    />
+    <ArticleJson article={article} author={author} wordCount={frontmatter.readingTime.words} />
+  </Fragment>
   <article>
-    <ArticleByLine author={author} published={article.published} />
-    <ArticleTitle title={article.title} description={article.description} class:list={["mt-4"]} />
-    <ArticleImage featured={article.featured} class:list={["mt-4"]} />
+    <ArticleByLine author={author} published={data.published} />
+    <ArticleTitle title={data.title} description={data.description} class:list={["mt-4"]} />
+    <ArticleImage featured={data.featured} class:list={["mt-4"]} />
     <section class:list={["mt-4 grid grid-flow-row grid-cols-5 gap-x-4"]}>
       <div class:list={["prose col-span-4 max-w-none md:prose-lg lg:prose-xl"]}>
         <Content components={{ a: LinkMDX }} />
@@ -53,6 +90,6 @@ const { Content, remarkPluginFrontmatter: frontmatter } = await entry.render()
         />
       </aside>
     </section>
-    <ArticleTagGrid category={article.category} tags={article.tags} class:list={["mt-4"]} />
+    <ArticleTagGrid category={data.category} tags={data.tags} class:list={["mt-4"]} />
   </article>
 </Layout>

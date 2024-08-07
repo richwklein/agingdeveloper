@@ -8,19 +8,34 @@ import { getCollection } from "astro:content"
 import BreadcrumbHeader from "@components/BreadcrumbHeader.astro"
 import slugify from "@sindresorhus/slugify"
 import LinkInternal from "@components/LinkInternal.astro"
+import { getSite, getSiteAuthor } from "@utils/site"
+import SeoBasic from "@components/seo/SeoBasic.astro"
+import BreadcrumbJson from "@components/seo/BreadcrumbJson.astro"
 
-const entries = await getCollection("author")
+const authors = await getCollection("author")
+const site = await getSite()
+const siteAuthor = await getSiteAuthor()
+const authorsPath = Astro.url.pathname
 ---
 
-<Layout title="Authors">
-  <BreadcrumbHeader head={{ name: "Authors", path: "/author" }} class:list={["mb-4"]} />
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic
+      title="Meet Our Authors"
+      description="Meet Our Authors: Discover the Voices Behind Our Content."
+      path={authorsPath}
+      author={siteAuthor}
+    />
+    <BreadcrumbJson site={site} crumbs={[{ name: "Authors", path: authorsPath }]} />
+  </Fragment>
+  <BreadcrumbHeader head={{ name: "Authors", path: authorsPath }} class:list={["mb-4"]} />
   <ol>
     {
-      entries.map((entry) => (
+      authors.map((author) => (
         <li>
-          <LinkInternal class:list={["capitalize"]} to={`/author/${slugify(entry.id)}`}>
-            <Image src={entry.data.avatar} alt={entry.data.name}>
-              {entry.data.name}
+          <LinkInternal class:list={["capitalize"]} to={`/author/${slugify(author.id)}`}>
+            <Image src={author.data.avatar} alt={author.data.name}>
+              {author.data.name}
             </Image>
           </LinkInternal>
         </li>

@@ -4,6 +4,7 @@ import { Feed } from "feed"
 import slugify from "@sindresorhus/slugify"
 import sanitizeHtml from "sanitize-html"
 import MarkdownIt from "markdown-it"
+import { getArticles } from "./article"
 
 const parser = new MarkdownIt()
 
@@ -18,7 +19,7 @@ export const getFeed = async () => {
   const site = siteEntry.data
   const baseUrl = import.meta.env.SITE
   const authorEntries = await getCollection("author")
-  const articleEntries = await getCollection("article")
+  const articleEntries = await getArticles()
 
   // setup basic feed structure
   const feed = new Feed({

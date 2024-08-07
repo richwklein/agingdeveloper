@@ -31,7 +31,7 @@ const {
   featured: { image, author, site },
   class: className,
 } = Astro.props
-const alt = author != null ? author.name : "unknown"
+const alt = author ? author.name : "unknown"
 ---
 
 <section id="article-featured" class:list={[className]}>
@@ -53,10 +53,10 @@ const alt = author != null ? author.name : "unknown"
       />
     </div>
     {
-      author != null && site != null ? (
+      author && site ? (
         <figcaption>
           <small class:list={["mt-1 text-sm text-primary-dark/85"]}>
-            {author != null ? (
+            {author ? (
               <>
                 {"Image by "}
                 <LinkExternal class:list={["underline"]} to={author.url}>
@@ -64,7 +64,7 @@ const alt = author != null ? author.name : "unknown"
                 </LinkExternal>
               </>
             ) : null}
-            {site != null ? (
+            {site ? (
               <>
                 {" on "}
                 <LinkExternal class:list={["underline"]} to={site.url}>

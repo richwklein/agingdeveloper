@@ -4,9 +4,9 @@
   "category": "Technology",
   "repository": "https://github.com/richwklein/agingdeveloper",
   "lang": "en-US",
-  "twitterUsername": "@richwklein",
   "avatar": "../image/wizard.jpg",
   "icon": "../image/favicon.jpg",
+  "author": "richwklein",
   "background": "#ffffff",
   "theme": "#37474f",
   "displayLimit": 15

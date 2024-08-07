@@ -9,15 +9,15 @@
  * @example
  * <PageHeader />
  */
-import { getSite } from "@utils/site"
 import { Image } from "astro:assets"
+import type { CollectionEntry } from "astro:content"
 
 interface Props {
+  site: CollectionEntry<"site">
   class?: string
 }
 
-const { class: className } = Astro.props
-const entry = await getSite()
+const { site: entry, class: className } = Astro.props
 const site = entry.data
 ---
 

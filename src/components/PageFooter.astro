@@ -9,16 +9,16 @@
  * @example
  * <PageFooter />
  */
-import { getSite } from "@utils/site"
 import LinkExternal from "@components/LinkExternal.astro"
 import { Icon } from "astro-icon/components"
+import type { CollectionEntry } from "astro:content"
 
 interface Props {
+  site: CollectionEntry<"site">
   class?: string
 }
 
-const { class: className } = Astro.props
-const entry = await getSite()
+const { site: entry, class: className } = Astro.props
 const site = entry.data
 const year = new Date().getFullYear()
 ---

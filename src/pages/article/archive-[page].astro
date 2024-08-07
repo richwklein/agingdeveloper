@@ -8,24 +8,46 @@ import { getArticles } from "@utils/article"
 import BreadcrumbHeader from "@components/BreadcrumbHeader.astro"
 import Pagniation from "@components/Pagniation.astro"
 import ArticleCard from "@components/ArticleCard.astro"
-import { getSite } from "@utils/site"
+import { getSite, getSiteAuthor } from "@utils/site"
+import type { CollectionEntry } from "astro:content"
+import SeoBasic from "@components/seo/SeoBasic.astro"
+import BreadcrumbJson from "@components/seo/BreadcrumbJson.astro"
 
 interface Props {
-  page: Page
+  page: Page<CollectionEntry<"article">>
+  site: CollectionEntry<"site">
+  siteAuthor: CollectionEntry<"author">
 }
 
 export async function getStaticPaths({ paginate }: any) {
-  const entries = await getArticles()
-  const siteEntry = await getSite()
-  const limit = siteEntry.data.displayLimit
+  const site = await getSite()
+  const siteAuthor = await getSiteAuthor()
+  const limit = site.data.displayLimit
 
-  return paginate(entries, { pageSize: limit })
+  const entries = await getArticles()
+  return paginate(entries, { pageSize: limit, props: { site, siteAuthor } })
 }
 
-const { page } = Astro.props
+const { page, site, siteAuthor } = Astro.props
+const archivePath = Astro.url.pathname
 ---
 
-<Layout title="Articles">
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic
+      title={`Article Archive ${page.currentPage}: Explore All Our Content`}
+      description={`Browse our comprehensive archive of articles. Discover every article published on ${site.data.title}, all in one place.`}
+      path={archivePath}
+      author={siteAuthor}
+    />
+    <BreadcrumbJson
+      site={site}
+      crumbs={[
+        { name: "Articles", path: "/article" },
+        { name: `Archive ${page.currentPage}`, path: archivePath },
+      ]}
+    />
+  </Fragment>
   <BreadcrumbHeader
     head={{ name: "Archive", path: "/article" }}
     class:list={["mb-4"]}

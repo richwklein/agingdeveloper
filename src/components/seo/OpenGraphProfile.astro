@@ -1,0 +1,24 @@
+---
+/**
+ * @name OpenGraphProfile
+ * Component used to build out the profile open graph meta tags.
+ *
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <OpenGraphProfile id={entry.id} firstName={author.firstName} lastName={author.lastName} />
+ */
+import slugify from "@sindresorhus/slugify"
+import type { CollectionEntry } from "astro:content"
+
+interface Props {
+  author: CollectionEntry<"author">
+}
+
+const { author } = Astro.props
+const data = author.data
+---
+
+<meta property="profile:first_name" content={data.givenName} />
+<meta property="profile:last_name" content={data.familyName} />
+<meta property="profile:username" content={`${slugify(author.id)}`} />

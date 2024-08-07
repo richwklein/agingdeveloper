@@ -1,0 +1,51 @@
+---
+/**
+ * @name AuthorJson
+ * Component used to build out an ld+json user profile header.
+ *
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <AuthorJson author={author} writeCount={16} />
+ */
+import slugify from "@sindresorhus/slugify"
+import type { CollectionEntry } from "astro:content"
+
+interface Props {
+  author: CollectionEntry<"author">
+  writeCount: number
+}
+
+const baseUrl = import.meta.env.SITE
+const { author, writeCount } = Astro.props
+
+const data = author.data
+const modifiedDate = data.modified || data.published
+const socials = data.socials || []
+---
+
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    dateCreated: data.published.toISOString(),
+    dateModified: modifiedDate.toISOString(),
+    mainEntity: {
+      "@type": "Person",
+      name: data.name,
+      identifier: slugify(author.id),
+      agentInteractionStatistic: {
+        "@type": "InteractionCounter",
+        interactionType: "https://schema.org/WriteAction",
+        userInteractionCount: writeCount,
+      },
+      description: data.tagline,
+      image: `${baseUrl}${data.avatar.src.split("?")[0]}`,
+      sameAs: socials.map((social: any) => {
+        return social.url
+      }),
+    },
+  })}
+/>

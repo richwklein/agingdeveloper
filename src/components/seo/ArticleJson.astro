@@ -1,0 +1,48 @@
+---
+/**
+ * @name ArticleJson
+ * Component used to build out an ld+json article header.
+ *
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <ArticleJson article={article} author={author} wordCount={frontmatter.wordCount} />
+ */
+import slugify from "@sindresorhus/slugify"
+import type { CollectionEntry } from "astro:content"
+
+interface Props {
+  article: CollectionEntry<"article">
+  author: CollectionEntry<"author">
+  wordCount: number
+}
+
+const baseUrl = import.meta.env.SITE
+const { article, author, wordCount } = Astro.props
+
+const data = article.data
+const modifiedDate = data.modified ? data.modified : data.published
+---
+
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: data.title,
+    description: data.description,
+    image: [`${baseUrl}${data.featured.image.src.split("?")[0]}`],
+    dateCreated: data.published.toISOString(),
+    datePublished: data.published.toISOString(),
+    dateModified: modifiedDate.toISOString(),
+    author: [
+      {
+        "@type": "Person",
+        name: author.data.name,
+        url: `${baseUrl}/author/${slugify(author.id)}`,
+      },
+    ],
+    wordCount: wordCount,
+  })}
+/>

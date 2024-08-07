@@ -1,4 +1,6 @@
-import { getCollection } from "astro:content"
+import { getCollection, type CollectionEntry } from "astro:content"
+
+let articles: Array<CollectionEntry<"article">>
 
 /**
  * Get a list of categories.
@@ -32,7 +34,7 @@ export const getCategoriesWithCount = async () => {
 export const getTags = async () => {
   const articles = await getArticles()
   const tags = new Set<string>(
-    articles.flatMap((entry) => entry.data.tags.map((tag) => tag.toLowerCase()))
+    articles.flatMap((entry) => entry.data.tags.map((tag: string) => tag.toLowerCase()))
   )
 
   return Array.from(tags)
@@ -47,7 +49,7 @@ export const getTagsWithCount = async () => {
   const tags = new Map()
   let total = 0
   articles.forEach((entry) => {
-    entry.data.tags.forEach((tag) => {
+    entry.data.tags.forEach((tag: string) => {
       const lowercaseTag = tag.toLowerCase()
       const value = (tags.get(lowercaseTag) || 0) + 1
       tags.set(lowercaseTag, value)
@@ -61,7 +63,10 @@ export const getTagsWithCount = async () => {
  * Get a list of article collection entries.
  */
 export const getArticles = async (limit?: number) => {
-  return (await getCollection("article"))
+  if (articles == null) {
+    articles = await getCollection("article")
+  }
+  return articles
     .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
     .slice(0, limit)
 }
@@ -100,7 +105,7 @@ export const getArticlesByTag = async (tag: string, limit?: number) => {
   const articles = await getArticles()
   const lowercaseTag = tag.toLowerCase()
   const filtered = articles.filter((entry) => {
-    return entry.data.tags.some((articleTag) => articleTag.toLowerCase() === lowercaseTag)
+    return entry.data.tags.some((articleTag: string) => articleTag.toLowerCase() === lowercaseTag)
   })
   return {
     entries: filtered.slice(0, limit),

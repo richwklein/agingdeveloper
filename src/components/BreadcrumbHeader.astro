@@ -39,7 +39,7 @@ const { head, tail, class: className } = Astro.props
         </li>
       )
     }
-    {tail != null && <li>{tail}</li>}
+    {tail ? <li>{tail}</li> : null}
   </ol>
   <span class:list={["ml-2 h-px flex-grow rounded bg-gray-300"]}></span>
 </header>

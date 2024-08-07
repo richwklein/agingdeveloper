@@ -1,0 +1,28 @@
+---
+/**
+ * @name SeoBasic
+ * Component used to build out all the basic seo related head elements.
+ *
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <SeoBasic title={article.data.title} description={article.data.description} author={author.data.name} />
+ */
+import type { CollectionEntry } from "astro:content"
+
+interface Props {
+  title: string
+  description: string
+  path?: string
+  author: CollectionEntry<"author">
+}
+
+const { title, description, author, path } = Astro.props
+const baseUrl = import.meta.env.SITE
+const fullUrl = path ? `${baseUrl}${path}` : baseUrl
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{author ? <meta name="author" content={author.data.name} /> : null}
+<link rel="canonical" href={fullUrl} />

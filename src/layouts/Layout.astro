@@ -3,11 +3,14 @@ import PageFooter from "@components/PageFooter.astro"
 import PageHeader from "@components/PageHeader.astro"
 import ScrollTop from "@components/ScrollTop.astro"
 import "@styles/main.css"
-import { getSite } from "@utils/site"
 import { feedInfo } from "@utils/feed"
+import type { CollectionEntry } from "astro:content"
 
-const siteEntry = await getSite()
-const site = siteEntry.data
+interface Props {
+  site: CollectionEntry<"site">
+}
+const { site: entry } = Astro.props
+const site = entry.data
 const baseUrl = import.meta.env.SITE
 ---
 
@@ -38,11 +41,11 @@ const baseUrl = import.meta.env.SITE
     <slot name="seo" />
   </head>
   <body>
-    <PageHeader class:list={["mb-8"]} />
+    <PageHeader site={entry} class:list={["mb-8"]} />
     <main class:list={["container mx-auto px-4 xl:max-w-screen-xl"]}>
       <slot />
     </main>
-    <PageFooter class:list={["mb-4", "mt-8"]} />
+    <PageFooter site={entry} class:list={["mb-4", "mt-8"]} />
     <ScrollTop />
   </body>
 </html>

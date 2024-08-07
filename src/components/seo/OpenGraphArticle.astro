@@ -1,0 +1,28 @@
+---
+/**
+ * @name OpenGraphArticle
+ * Component used to build out the article open graph meta tags.
+ *
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <OpenGraphArticle published={article.published} modified={article.modified} authorId={article.author.id} ... />
+ */
+import slugify from "@sindresorhus/slugify"
+import type { CollectionEntry } from "astro:content"
+
+interface Props {
+  article: CollectionEntry<"article">
+}
+
+const { article } = Astro.props
+const data = article.data
+const modifiedDate = data.modified || data.published
+const baseUrl = import.meta.env.SITE
+---
+
+<meta property="article:published_time" content={data.published.toISOString()} />
+<meta property="article:modified_time" content={modifiedDate.toISOString()} />
+<meta property="article:author" content={`${baseUrl}/author/${slugify(data.author.id)}`} />
+<meta property="article:section" content={data.category} />
+{data.tags.map((tag: string) => <meta property="article:tag" content={tag} />)}

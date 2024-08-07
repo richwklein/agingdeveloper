@@ -11,38 +11,73 @@ import DisplayLimitAlert from "@components/DisplayLimitAlert.astro"
 import type { CollectionEntry } from "astro:content"
 import InternalBackLink from "@components/InternalBackLink.astro"
 import ArticleGrid from "@components/ArticleGrid.astro"
-import { getSite } from "@utils/site"
+import { getSite, getSiteAuthor } from "@utils/site"
 import SocialBar from "@components/SocialBar.astro"
 import { Image } from "astro:assets"
+import SeoBasic from "@components/seo/SeoBasic.astro"
+import BreadcrumbJson from "@components/seo/BreadcrumbJson.astro"
+import OpenGraphBasic from "@components/seo/OpenGraphBasic.astro"
+import OpenGraphProfile from "@components/seo/OpenGraphProfile.astro"
+import OpenGraphImage from "@components/seo/OpenGraphImage.astro"
+import AuthorJson from "@components/seo/AuthorJson.astro"
 
 interface Props {
-  entry: CollectionEntry<"author">
+  author: CollectionEntry<"author">
+  site: CollectionEntry<"site">
+  siteAuthor: CollectionEntry<"author">
 }
 
 export async function getStaticPaths() {
-  const entries = await getCollection("author")
+  const site = await getSite()
+  const siteAuthor = await getSiteAuthor()
+  const authors = await getCollection("author")
 
-  const pages = entries.map((entry) => {
+  const pages = authors.map((author) => {
     return {
-      params: { slug: slugify(entry.id) },
-      props: { entry },
+      params: { slug: slugify(author.id) },
+      props: { author, site, siteAuthor },
     }
   })
 
   return pages
 }
 
-const { entry } = Astro.props
-const siteEntry = await getSite()
-const limit = siteEntry.data.displayLimit
-const author = entry.data
-const { entries: articleEntries, total } = await getArticlesByAuthor(entry.id, limit)
+const { site, author, siteAuthor } = Astro.props
+const limit = site.data.displayLimit
+const data = author.data
+const { entries: articleEntries, total } = await getArticlesByAuthor(author.id, limit)
+const authorPath = Astro.url.pathname
 ---
 
-<Layout title={`${author.name} | Authors`}>
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic
+      title={`Articles by ${data.name}: Perspective & Expertise`}
+      description={`Explore the latest articles from ${data.name}. Dive into a collection of their work, showcasing their expertise, unique perspective, and contributions to our site.`}
+      path={authorPath}
+      author={author}
+    />
+    <BreadcrumbJson
+      site={site}
+      crumbs={[
+        { name: "Authors", path: "/author" },
+        { name: data.name, path: authorPath },
+      ]}
+    />
+    <OpenGraphBasic
+      title={data.name}
+      description={data.tagline}
+      path={authorPath}
+      type={"profile"}
+      site={site}
+    />
+    <OpenGraphImage image={data.avatar} imageAlt={data.name} />
+    <OpenGraphProfile author={author} />
+    <AuthorJson author={author} writeCount={total} />
+  </Fragment>
   <BreadcrumbHeader
     head={{ name: "Authors", path: "/author" }}
-    tail={author.name}
+    tail={data.name}
     class:list={["mb-4"]}
   />
   <header class:list={["flex items-start"]}>
@@ -53,8 +88,8 @@ const { entries: articleEntries, total } = await getArticlesByAuthor(entry.id, l
       ]}
     >
       <Image
-        src={author.avatar}
-        alt={author.name}
+        src={data.avatar}
+        alt={data.name}
         loading={"eager"}
         fetchpriority={"high"}
         width={150}
@@ -62,9 +97,9 @@ const { entries: articleEntries, total } = await getArticlesByAuthor(entry.id, l
       />
     </div>
     <div class:list={["flex flex-col"]}>
-      <h3 class:list={["text-3xl leading-snug", "md:text-5xl"]}>{author.name}</h3>
-      <p class:list={["text-md grow leading-tight", "xl:text-lg"]}>{author.bio}</p>
-      <SocialBar socials={author.socials} />
+      <h3 class:list={["text-3xl leading-snug", "md:text-5xl"]}>{data.name}</h3>
+      <p class:list={["text-md grow leading-tight", "xl:text-lg"]}>{data.bio}</p>
+      <SocialBar socials={data.socials} />
     </div>
   </header>
   <ArticleGrid articles={articleEntries} class:list={["mt-4"]} />
