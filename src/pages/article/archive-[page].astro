@@ -12,6 +12,7 @@ import { getSite, getSiteAuthor } from "@utils/site"
 import type { CollectionEntry } from "astro:content"
 import SeoBasic from "@components/seo/SeoBasic.astro"
 import BreadcrumbJson from "@components/seo/BreadcrumbJson.astro"
+import ArticleGrid from "@components/ArticleGrid.astro"
 
 interface Props {
   page: Page<CollectionEntry<"article">>
@@ -53,8 +54,6 @@ const archivePath = Astro.url.pathname
     class:list={["mb-4"]}
     tail={page.currentPage.toString()}
   />
-  <div class:list={["mt-4 grid grid-cols-1 gap-6 lg:grid-cols-2"]}>
-    {page.data.map((entry) => <ArticleCard article={entry} />)}
-  </div>
+  <ArticleGrid articles={page.data} />
   <Pagniation page={page} class:list={["mt-4"]} />
 </Layout>

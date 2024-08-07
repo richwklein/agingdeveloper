@@ -64,15 +64,7 @@ const authorPath = Astro.url.pathname
         { name: data.name, path: authorPath },
       ]}
     />
-    <OpenGraphBasic
-      title={data.name}
-      description={data.tagline}
-      path={authorPath}
-      type={"profile"}
-      site={site}
-    />
-    <OpenGraphImage image={data.avatar} imageAlt={data.name} />
-    <OpenGraphProfile author={author} />
+    <OpenGraphProfile author={author} site={site} />
     <AuthorJson author={author} writeCount={total} />
   </Fragment>
   <BreadcrumbHeader

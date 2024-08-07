@@ -15,9 +15,7 @@ import LinkMDX from "@components/LinkMDX.astro"
 import { getSite } from "@utils/site"
 import SeoBasic from "@components/seo/SeoBasic.astro"
 import BreadcrumbJson from "@components/seo/BreadcrumbJson.astro"
-import OpenGraphBasic from "@components/seo/OpenGraphBasic.astro"
 import OpenGraphArticle from "@components/seo/OpenGraphArticle.astro"
-import OpenGraphImage from "@components/seo/OpenGraphImage.astro"
 import ArticleJson from "@components/seo/ArticleJson.astro"
 
 interface Props {
@@ -61,18 +59,7 @@ const { Content, remarkPluginFrontmatter: frontmatter } = await article.render()
         { name: data.title, path: articlePath },
       ]}
     />
-    <OpenGraphBasic
-      title={data.title}
-      description={data.description}
-      path={articlePath}
-      type={"article"}
-      site={site}
-    />
-    <OpenGraphArticle article={article} />
-    <OpenGraphImage
-      image={data.featured.image}
-      imageAlt={data.featured.author ? data.featured.author.name : "unknown"}
-    />
+    <OpenGraphArticle article={article} site={site} />
     <ArticleJson article={article} author={author} wordCount={frontmatter.readingTime.words} />
   </Fragment>
   <article>

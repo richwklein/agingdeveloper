@@ -15,10 +15,11 @@ import LinkInternal from "@components/LinkInternal.astro"
 interface Props {
   link: string | undefined
   icon: string
+  title: string
   class?: string
 }
 
-const { link, icon, class: className } = Astro.props
+const { link, icon, title, class: className } = Astro.props
 const path = link ?? "#"
 ---
 
@@ -34,7 +35,7 @@ const path = link ?? "#"
         className,
       ]}
     >
-      <Icon name={icon} class:list={["h-8 w-8"]} />
+      <Icon name={icon} title={title} class:list={["h-8 w-8"]} />
     </LinkInternal>
   ) : (
     <div

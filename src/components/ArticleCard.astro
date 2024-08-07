@@ -15,12 +15,14 @@ import LinkInternal from "@components/LinkInternal.astro"
 
 interface Props {
   article: CollectionEntry<"article">
+  lazy?: boolean
   class?: string
 }
 
-const { article: entry, class: className } = Astro.props
+const { article: entry, lazy, class: className } = Astro.props
 const article = entry?.data
 const { remarkPluginFrontmatter: frontmatter } = await entry.render()
+const loading = lazy ? "lazy" : "eager"
 ---
 
 <LinkInternal to={`/article/${entry.slug}`}>
@@ -42,7 +44,7 @@ const { remarkPluginFrontmatter: frontmatter } = await entry.render()
         (min-width: 768px) 768px,
         640px
       `}
-      loading={"eager"}
+      loading={loading}
       class:list={[
         "object-cover object-center",
         "aspect-square sm:aspect-video xl:aspect-[3/4]",

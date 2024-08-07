@@ -9,13 +9,13 @@ import type { CollectionEntry } from "astro:content"
 interface Props {
   site: CollectionEntry<"site">
 }
-const { site: entry } = Astro.props
-const site = entry.data
+const { site } = Astro.props
+const data = site.data
 const baseUrl = import.meta.env.SITE
 ---
 
 <!doctype html>
-<html lang={site.lang.split("-")[0].toLowerCase()}>
+<html lang={data.lang.split("-")[0].toLowerCase()}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -32,7 +32,7 @@ const baseUrl = import.meta.env.SITE
         <link
           rel="alternate"
           type={type}
-          title={`${site.title} - ${id.toUpperCase()}`}
+          title={`${data.title} - ${id.toUpperCase()}`}
           href={`${baseUrl}${path}`}
         />
       ))
@@ -41,11 +41,11 @@ const baseUrl = import.meta.env.SITE
     <slot name="seo" />
   </head>
   <body>
-    <PageHeader site={entry} class:list={["mb-8"]} />
+    <PageHeader site={site} class:list={["mb-8"]} />
     <main class:list={["container mx-auto px-4 xl:max-w-screen-xl"]}>
       <slot />
     </main>
-    <PageFooter site={entry} class:list={["mb-4", "mt-8"]} />
+    <PageFooter site={site} class:list={["mb-4", "mt-8"]} />
     <ScrollTop />
   </body>
 </html>

@@ -14,17 +14,18 @@ import type { CollectionEntry } from "astro:content"
 
 interface Props {
   articles: CollectionEntry<"article">[]
+  foldCount?: number
   class?: string
 }
 
-const { articles: entries, class: className } = Astro.props
+const { articles: entries, foldCount = 10, class: className } = Astro.props
 ---
 
 <ol class:list={["grid grid-cols-1 gap-6", "lg:grid-cols-2", className]}>
   {
-    entries.map((entry) => (
+    entries.map((entry, index) => (
       <li>
-        <ArticleCard article={entry} />
+        <ArticleCard article={entry} lazy={index >= foldCount} />
       </li>
     ))
   }

@@ -4,9 +4,10 @@ dist/
 # generated types
 .astro/
 
-# dependencies
+# dependencies & cache
 node_modules/
 package-lock.json
+.netlify/
 
 # logs
 npm-debug.log*

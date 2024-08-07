@@ -23,10 +23,10 @@ const { page, class: className } = Astro.props
 <nav class:list={[className]}>
   <ol class:list={["flex items-center justify-center gap-x-1"]}>
     <li>
-      <PaginationLink link={page.url.first} icon="mdi:chevron-double-left" />
+      <PaginationLink link={page.url.first} icon="mdi:chevron-double-left" title="First" />
     </li>
     <li>
-      <PaginationLink link={page.url.prev} icon="mdi:chevron-left" />
+      <PaginationLink link={page.url.prev} icon="mdi:chevron-left" title="Previous" />
     </li>
     <li>
       <div class:list={["text-md bg-inherit px-10 text-primary-dark"]}>
@@ -34,10 +34,10 @@ const { page, class: className } = Astro.props
       </div>
     </li>
     <li>
-      <PaginationLink link={page.url.next} icon="mdi:chevron-right" />
+      <PaginationLink link={page.url.next} icon="mdi:chevron-right" title="Next" />
     </li>
     <li>
-      <PaginationLink link={page.url.last} icon="mdi:chevron-double-right" />
+      <PaginationLink link={page.url.last} icon="mdi:chevron-double-right" title="Last" />
     </li>
   </ol>
 </nav>

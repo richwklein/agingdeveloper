@@ -5,6 +5,7 @@ import { remarkReadingTime } from "./src/utils/readTime.ts"
 import { remarkExcerpt } from "./src/utils/excerpt.ts"
 import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
+import netlify from "@astrojs/netlify"
 const { URL: SITE_URL, DEPLOY_PRIME_URL: DEPLOY_URL, CONTEXT: DEPLOY_CONTEXT = "dev" } = process.env
 const siteUrl =
   DEPLOY_CONTEXT === "dev"
@@ -15,10 +16,13 @@ const siteUrl =
 
 // https://astro.build/config
 export default defineConfig({
+  adapter: netlify(),
+  markdown: {
+    remarkPlugins: [remarkReadingTime, remarkExcerpt],
+  },
   output: "static",
   prefetch: true,
-  site: siteUrl,
-  trailingSlash: "never",
+  image: {},
   integrations: [
     icon(),
     mdx(),
@@ -27,8 +31,15 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
   ],
-  markdown: {
-    remarkPlugins: [remarkReadingTime, remarkExcerpt],
+  redirects: {
+    "/article": {
+      destination: "/article/archive-1",
+      status: 308,
+    },
+    "/article/": {
+      destination: "/article/archive-1",
+      status: 308,
+    },
   },
-  image: {},
+  site: siteUrl,
 })
