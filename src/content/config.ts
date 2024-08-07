@@ -8,7 +8,10 @@ const article = defineCollection({
       title: z.string(),
       description: z.string(),
       featured: z.object({
-        image: image(),
+        image: image().refine(
+          (val) => val.width <= 1920,
+          "Featured image width must be less than 1920 pixels."
+        ),
         author: z
           .object({
             name: z.string(),
