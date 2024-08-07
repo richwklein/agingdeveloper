@@ -54,6 +54,7 @@ export const getFeed = async () => {
     return feed.addItem({
       title: article.title,
       id: `${baseUrl}/article/${entry.slug}`,
+      guid: `${baseUrl}/article/${entry.slug}`,
       link: `${baseUrl}/article/${entry.slug}`,
       description: article.description,
       date: article.modified || article.published,
