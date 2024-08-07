@@ -68,6 +68,10 @@ VSCode is the main editor that is used on this site. ESLint is used for linting 
 }
 ```
 
+## Images
+
+Several different size and aspect ratios are used for the cover images on the site. The article cards can have hd video, 3/4, or square aspect ratios depending on the breakpoint. The images are used raw in social media previews, because of that the images should be sized to _1920px_.
+
 ## Testing
 
 Tests are built using `vitest`. Any new components should have unit tests for it. A [snapshot test](https://vitest.dev/guide/snapshot.html) is the minimum to include. Any logic branches should have individual unit tests around them.

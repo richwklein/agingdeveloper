@@ -38,7 +38,7 @@ const alt = author ? author.name : "unknown"
   <figure>
     <div class:list={["overflow-hidden rounded-md"]}>
       <Image
-        class:list={["aspect-video object-cover object-center"]}
+        class:list={["aspect-square object-cover object-center sm:aspect-video"]}
         src={image}
         alt={alt}
         loading="eager"
