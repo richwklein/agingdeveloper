@@ -21,8 +21,8 @@ interface Props {
 const { author, published, class: className } = Astro.props
 ---
 
-<small id="article-byline" class:list={["text-base text-primary-dark/85", className]}>
-  <LinkInternal to={`/author/${slugify(author.id)}`} class:list={["mr-4 inline-block underline"]}>
+<small id="article-byline" class:list={["text-base text-stone-900/85", className]}>
+  <LinkInternal to={`/author/${slugify(author.id)}`} class:list={["mr-2 inline-block underline"]}>
     {author.data.name}
   </LinkInternal>
   <time datetime={published.toISOString()}>
