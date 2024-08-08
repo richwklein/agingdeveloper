@@ -63,5 +63,5 @@ const categoryPath = Astro.url.pathname
   />
   <ArticleGrid articles={entries} class:list={["mt-4"]} />
   <DisplayLimitAlert displayed={entries.length} total={total} class:list={["mt-4"]} />
-  <InternalBackLink class:list={["mt-4"]} name={"categories"} path={"/category"} />
+  <InternalBackLink class:list={["mt-4"]} name={"categories"} to={"/category"} />
 </Layout>

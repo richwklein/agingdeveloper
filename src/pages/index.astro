@@ -41,5 +41,5 @@ const lead = articles.shift()
   </Fragment>
   {lead ? <ArticleCardLead article={lead} /> : null}
   <ArticleGrid articles={articles} foldCount={4} class:list={["mt-4"]} />
-  <InternalBackLink name="articles" path="/article" class:list={["mt-4"]} />
+  <InternalBackLink name="articles" to={"/article"} class:list={["mt-4"]} />
 </Layout>

@@ -7,24 +7,24 @@
  * @return {Function} an Astro component factory function.
  *
  * @example
- * <InternalBackLink name={"authors"} path={"/author"}} />
+ * <InternalBackLink name={"authors"} to={"/author"}} />
  */
 import { Icon } from "astro-icon/components"
 import LinkInternal from "@components/LinkInternal.astro"
 
 interface Props {
   name: string
-  path: string
+  to: string
   class?: string
   useViewText?: boolean
 }
 
-const { name, path, class: className, useViewText = true } = Astro.props
+const { name, to, class: className, useViewText = true } = Astro.props
 const text = useViewText ? `view all ${name}` : name
 ---
 
 <LinkInternal
-  to={path}
+  to={to}
   class:list={[
     "inline-flex min-w-16 items-center justify-center py-2 pl-3 pr-4",
     "rounded-md bg-secondary-main capitalize text-secondary-contrast",

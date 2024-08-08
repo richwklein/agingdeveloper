@@ -94,5 +94,5 @@ const authorPath = Astro.url.pathname
   </header>
   <ArticleGrid articles={articleEntries} class:list={["mt-4"]} />
   <DisplayLimitAlert displayed={articleEntries.length} total={total} class:list={["mt-4"]} />
-  <InternalBackLink class:list={["mt-4"]} name={"authors"} path={"/author"} />
+  <InternalBackLink class:list={["mt-4"]} name={"authors"} to={"/author"} />
 </Layout>

@@ -61,5 +61,5 @@ const tagPath = Astro.url.pathname
   <BreadcrumbHeader head={{ name: "Tags", path: "/tag" }} tail={tag} class:list={["mb-4"]} />
   <ArticleGrid articles={entries} class:list={["mt-4"]} />
   <DisplayLimitAlert displayed={entries.length} total={total} class:list={["mt-4"]} />
-  <InternalBackLink class:list={["mt-4"]} name={"tags"} path={"/tag"} />
+  <InternalBackLink class:list={["mt-4"]} name={"tags"} to={"/tag"} />
 </Layout>

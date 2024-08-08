@@ -5,6 +5,8 @@ import { getSite, getSiteAuthor } from "@utils/site"
 import { getImage } from "astro:assets"
 import image from "../content/image/lachlan-donald-eaTHXNIUsYM-unsplash.jpg"
 import InternalBackLink from "@components/InternalBackLink.astro"
+import SeoBasic from "@components/seo/SeoBasic.astro"
+import LinkInternal from "@components/LinkInternal.astro"
 
 /**
  * A page for when the correct page is not found.
@@ -27,17 +29,38 @@ const featured = {
 
 <Layout site={site}>
   <Fragment slot="seo">
-    <!-- TO Implement -->
+    <SeoBasic
+      title={`Oops! Page Not Found - ${site.data.title}`}
+      description={`Sorry, the page you're looking for doesn't exist. Visit our homepage to find what you need. Explore more at ${site.data.title} for great content and resources.`}
+      author={siteAuthor}
+    />
   </Fragment>
   <ArticleImage featured={featured} />
   <hgroup class:list={["mt-8"]}>
-    <h2 class:list={["text-5xl leading-relaxed"]}>{"Not Found (404)"}</h2>
+    <h2 class:list={["text-4xl leading-relaxed"]}>
+      {"Oops! We Can't Seem to Find the Page You're Looking For"}
+    </h2>
     <h3 class:list={["text-lg leading-relaxed"]}>
-      {"The page you are looking for might have been removed,"}
-      <br />
-      {"had it's name changed, or be temporarily unavailable."}
+      {"But don’t worry, we’ll help you get back on track."}
     </h3>
   </hgroup>
-
-  <InternalBackLink name="Home" path="/" useViewText={false} class:list={["mt-8"]} />
+  <p class:list={["text-md"]}>
+    {"It looks like the page you’re searching for doesn’t exist or may have been moved. You can:"}
+  </p>
+  <ul class:list={["mt-4 list-inside list-disc"]}>
+    <li>
+      Go back to our <LinkInternal class:list={["underline"]} to={"/"}>Homepage</LinkInternal>.
+    </li>
+    <!--<li>Use the search bar below to find what you need.</li> -->
+    <li>
+      Explore our popular sections like
+      <LinkInternal to={"/author"} class:list={["underline"]}>Authors</LinkInternal>{", "}
+      <LinkInternal to={"/category"} class:list={["underline"]}>Categories</LinkInternal>{", or "}
+      <LinkInternal to={"/tag"} class:list={["underline"]}>Tags</LinkInternal>{"."}
+    </li>
+  </ul>
+  <p class:list={["mt-4"]}>
+    {"We're sorry for the inconvenience!"}
+  </p>
+  <InternalBackLink name={"Home"} to={"/"} useViewText={false} class:list={["mt-8"]} />
 </Layout>
