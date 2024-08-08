@@ -7,7 +7,7 @@ let articles: Array<CollectionEntry<"article">>
  */
 export const getCategories = async () => {
   const articles = await getArticles()
-  const categories = new Set<string>(articles.map((entry) => entry.data.category))
+  const categories = new Set<string>(articles.map((article) => article.data.category))
   return Array.from(categories)
 }
 
@@ -19,8 +19,8 @@ export const getCategoriesWithCount = async () => {
   const articles = await getArticles()
   const categories = new Map()
   let total = 0
-  articles.forEach((entry) => {
-    const category = entry.data.category
+  articles.forEach((article) => {
+    const category = article.data.category
     const value = (categories.get(category) || 0) + 1
     categories.set(category, value)
     total += value
@@ -34,7 +34,7 @@ export const getCategoriesWithCount = async () => {
 export const getTags = async () => {
   const articles = await getArticles()
   const tags = new Set<string>(
-    articles.flatMap((entry) => entry.data.tags.map((tag: string) => tag))
+    articles.flatMap((article) => article.data.tags.map((tag: string) => tag))
   )
 
   return Array.from(tags)
@@ -48,8 +48,8 @@ export const getTagsWithCount = async () => {
   const articles = await getArticles()
   const tags = new Map()
   let total = 0
-  articles.forEach((entry) => {
-    entry.data.tags.forEach((tag: string) => {
+  articles.forEach((article) => {
+    article.data.tags.forEach((tag: string) => {
       const value = (tags.get(tag) || 0) + 1
       tags.set(tag, value)
       total += value
@@ -75,7 +75,7 @@ export const getArticles = async (limit?: number) => {
  */
 export const getArticlesByAuthor = async (authorId: string, limit?: number) => {
   const articles = await getArticles()
-  const filtered = articles.filter((entry) => entry.data.author.id == authorId)
+  const filtered = articles.filter((article) => article.data.author.id == authorId)
   return {
     entries: filtered.slice(0, limit),
     total: filtered.length,
@@ -87,7 +87,7 @@ export const getArticlesByAuthor = async (authorId: string, limit?: number) => {
  */
 export const getArticlesByCategory = async (category: string, limit?: number) => {
   const articles = await getArticles()
-  const filtered = articles.filter((entry) => entry.data.category == category)
+  const filtered = articles.filter((article) => article.data.category == category)
   return {
     entries: filtered.slice(0, limit),
     total: filtered.length,
@@ -99,8 +99,8 @@ export const getArticlesByCategory = async (category: string, limit?: number) =>
  */
 export const getArticlesByTag = async (tag: string, limit?: number) => {
   const articles = await getArticles()
-  const filtered = articles.filter((entry) => {
-    return entry.data.tags.some((articleTag: string) => articleTag == tag)
+  const filtered = articles.filter((article) => {
+    return article.data.tags.some((articleTag: string) => articleTag == tag)
   })
   return {
     entries: filtered.slice(0, limit),

@@ -19,9 +19,8 @@ interface Props {
 const baseUrl = import.meta.env.SITE
 const { author, writeCount } = Astro.props
 
-const data = author.data
-const modifiedDate = data.modified || data.published
-const socials = data.socials || []
+const modifiedDate = author.data.modified || author.data.published
+const socials = author.data.socials || []
 ---
 
 <script
@@ -30,19 +29,19 @@ const socials = data.socials || []
   set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "ProfilePage",
-    dateCreated: data.published.toISOString(),
+    dateCreated: author.data.published.toISOString(),
     dateModified: modifiedDate.toISOString(),
     mainEntity: {
       "@type": "Person",
-      name: data.name,
+      name: author.data.name,
       identifier: slugify(author.id),
       agentInteractionStatistic: {
         "@type": "InteractionCounter",
         interactionType: "https://schema.org/WriteAction",
         userInteractionCount: writeCount,
       },
-      description: data.tagline,
-      image: `${baseUrl}${data.avatar.src.split("?")[0]}`,
+      description: author.data.tagline,
+      image: `${baseUrl}${author.data.avatar.src.split("?")[0]}`,
       sameAs: socials.map((social: any) => {
         return social.url
       }),

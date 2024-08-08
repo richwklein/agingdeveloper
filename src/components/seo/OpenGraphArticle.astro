@@ -19,24 +19,23 @@ interface Props {
 }
 
 const { article, site } = Astro.props
-const data = article.data
-const modifiedDate = data.modified || data.published
+const modifiedDate = article.data.modified || article.data.published
 const baseUrl = import.meta.env.SITE
 ---
 
 <OpenGraphBasic
-  title={data.title}
-  description={data.description}
+  title={article.data.title}
+  description={article.data.description}
   path={`${baseUrl}/article/${article.slug}`}
   type={"article"}
   site={site}
 />
 <OpenGraphImage
-  image={data.featured.image}
-  imageAlt={data.featured.author ? data.featured.author.name : "unknown"}
+  image={article.data.featured.image}
+  imageAlt={article.data.featured.author ? article.data.featured.author.name : "unknown"}
 />
-<meta property="article:published_time" content={data.published.toISOString()} />
+<meta property="article:published_time" content={article.data.published.toISOString()} />
 <meta property="article:modified_time" content={modifiedDate.toISOString()} />
-<meta property="article:author" content={`${baseUrl}/author/${slugify(data.author.id)}`} />
-<meta property="article:section" content={data.category} />
-{data.tags.map((tag: string) => <meta property="article:tag" content={tag} />)}
+<meta property="article:author" content={`${baseUrl}/author/${slugify(article.data.author.id)}`} />
+<meta property="article:section" content={article.data.category} />
+{article.data.tags.map((tag: string) => <meta property="article:tag" content={tag} />)}

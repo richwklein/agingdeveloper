@@ -18,14 +18,14 @@ interface Props {
   class?: string
 }
 
-const { articles: entries, foldCount = 10, class: className } = Astro.props
+const { articles, foldCount = 10, class: className } = Astro.props
 ---
 
 <ol class:list={["grid grid-cols-1 gap-6", "lg:grid-cols-2", className]}>
   {
-    entries.map((entry, index) => (
+    articles.map((article, index) => (
       <li>
-        <ArticleCard article={entry} lazy={index >= foldCount} />
+        <ArticleCard article={article} lazy={index >= foldCount} />
       </li>
     ))
   }

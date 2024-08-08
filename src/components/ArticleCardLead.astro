@@ -18,12 +18,11 @@ interface Props {
   class?: string
 }
 
-const { article: entry, class: className } = Astro.props
-const article = entry?.data
-const { remarkPluginFrontmatter: frontmatter } = await entry.render()
+const { article, class: className } = Astro.props
+const { remarkPluginFrontmatter: frontmatter } = await article.render()
 ---
 
-<LinkInternal to={`/article/${entry.slug}`}>
+<LinkInternal to={`/article/${article.slug}`}>
   <div
     class:list={[
       "relative overflow-hidden rounded-md border border-gray-300 bg-white",
@@ -32,8 +31,8 @@ const { remarkPluginFrontmatter: frontmatter } = await entry.render()
     ]}
   >
     <Image
-      src={article.featured.image}
-      alt={article.title}
+      src={article.data.featured.image}
+      alt={article.data.title}
       class:list={["aspect-square object-cover object-center sm:aspect-video md:aspect-[21/9]"]}
       widths={[640, 768, 1024, 1280]}
       sizes={`
@@ -52,12 +51,12 @@ const { remarkPluginFrontmatter: frontmatter } = await entry.render()
     >
       <div class:list={["w-full p-3 text-primary-contrast/75", "md:p-8 lg:w-3/5"]}>
         <h4 class:list={["text-2xl leading-snug", "md:text-5xl"]}>
-          {article.title}
+          {article.data.title}
         </h4>
         <small class:list={["block leading-snug", "md:text-lg"]}>
-          <time datetime={article.published.toISOString()}>
+          <time datetime={article.data.published.toISOString()}>
             {
-              article.published.toLocaleDateString("en-us", {
+              article.data.published.toLocaleDateString("en-us", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",

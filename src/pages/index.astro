@@ -3,7 +3,7 @@
  * The home page with a lead article and most recent.
  */
 import ArticleGrid from "@components/ArticleGrid.astro"
-import InternalBackLink from "@components/InternalBackLink.astro"
+import BackLink from "@components/BackLink.astro"
 import ArticleCardLead from "@components/ArticleCardLead.astro"
 import Layout from "@layouts/Layout.astro"
 import { getArticles } from "@utils/article"
@@ -41,5 +41,5 @@ const lead = articles.shift()
   </Fragment>
   {lead ? <ArticleCardLead article={lead} /> : null}
   <ArticleGrid articles={articles} foldCount={4} class:list={["mt-4"]} />
-  <InternalBackLink name="articles" to={"/article"} class:list={["mt-4"]} />
+  <BackLink name="articles" to={"/article"} class:list={["mt-4"]} />
 </Layout>

@@ -1,0 +1,32 @@
+---
+/**
+ * @name AuthorGrid
+ * Component used for rendering the grid of cards for authors.
+ *
+ * @param {Props} props - The properties of the grid.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <AuthorGrid authors={authors} />
+ */
+import AuthorCard from "@components/AuthorCard.astro"
+import type { CollectionEntry } from "astro:content"
+
+interface Props {
+  authors: CollectionEntry<"author">[]
+  foldCount?: number
+  class?: string
+}
+
+const { authors, foldCount = 10, class: className } = Astro.props
+---
+
+<ol class:list={["grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3", className]}>
+  {
+    authors.map((author, index) => (
+      <li>
+        <AuthorCard author={author} lazy={index >= foldCount} />
+      </li>
+    ))
+  }
+</ol>

@@ -19,13 +19,12 @@ interface Props {
   class?: string
 }
 
-const { article: entry, lazy, class: className } = Astro.props
-const article = entry?.data
-const { remarkPluginFrontmatter: frontmatter } = await entry.render()
+const { article, lazy, class: className } = Astro.props
+const { remarkPluginFrontmatter: frontmatter } = await article.render()
 const loading = lazy ? "lazy" : "eager"
 ---
 
-<LinkInternal to={`/article/${entry.slug}`}>
+<LinkInternal to={`/article/${article.slug}`}>
   <article
     class:list={[
       "overflow-hidden rounded-md border border-gray-300 bg-white",
@@ -36,8 +35,8 @@ const loading = lazy ? "lazy" : "eager"
     ]}
   >
     <Image
-      src={article.featured.image}
-      alt={article.title}
+      src={article.data.featured.image}
+      alt={article.data.title}
       widths={[180, 500, 640, 768]}
       sizes={`
         (min-width: 1280px) 180px,
@@ -49,17 +48,17 @@ const loading = lazy ? "lazy" : "eager"
       class:list={[
         "object-cover object-center",
         "aspect-square sm:aspect-video md:aspect-[21/9] xl:aspect-[3/4]",
-        "w-full sm:w-[638px] md:w-[766px] lg:w-[498px] xl:w-[178px]",
+        "w-full sm:w-[640px] md:w-[768px] lg:w-[500px] xl:w-[180px]",
       ]}
     />
     <div class:list={["px-4 pb-2 pt-3"]}>
       <h4 class:list={["text-lg font-medium leading-snug text-gray-800"]}>
-        {article.title}
+        {article.data.title}
       </h4>
       <small class:list={["text-sm text-gray-500/85"]}>
-        <time datetime={article.published.toISOString()}>
+        <time datetime={article.data.published.toISOString()}>
           {
-            article.published.toLocaleDateString("en-us", {
+            article.data.published.toLocaleDateString("en-us", {
               year: "numeric",
               month: "long",
               day: "numeric",

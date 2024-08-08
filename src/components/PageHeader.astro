@@ -17,8 +17,7 @@ interface Props {
   class?: string
 }
 
-const { site: entry, class: className } = Astro.props
-const site = entry.data
+const { site, class: className } = Astro.props
 ---
 
 <header
@@ -37,8 +36,8 @@ const site = entry.data
         ]}
       >
         <Image
-          src={site.avatar}
-          alt={site.title}
+          src={site.data.avatar}
+          alt={site.data.title}
           loading={"eager"}
           fetchpriority={"high"}
           widths={[48, 80]}
@@ -47,9 +46,9 @@ const site = entry.data
         />
       </div>
       <div class:list={["flex flex-col justify-center"]}>
-        <h1 class:list={["mb-2 text-base xs:text-3xl sm:text-4xl"]}>{site.title}</h1>
+        <h1 class:list={["mb-2 text-base xs:text-3xl sm:text-4xl"]}>{site.data.title}</h1>
         <p class:list={["hidden text-base sm:block"]}>
-          {site.tagline}
+          {site.data.tagline}
         </p>
       </div>
     </a>

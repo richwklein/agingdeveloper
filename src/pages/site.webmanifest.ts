@@ -4,20 +4,19 @@
 import { getSite } from "@utils/site"
 import type { APIRoute } from "astro"
 
-const entry = await getSite()
-const site = entry.data
+const site = await getSite()
 const baseUrl = import.meta.env.SITE
 
 const manifest = {
-  name: site.title,
-  short_name: site.title,
-  description: site.tagline,
-  categories: [site.category],
+  name: site.data.title,
+  short_name: site.data.title,
+  description: site.data.tagline,
+  categories: [site.data.category],
   start_url: "/",
   display: "browser",
-  background_color: site.background,
-  theme_color: site.theme,
-  lang: site.lang,
+  background_color: site.data.background,
+  theme_color: site.data.theme,
+  lang: site.data.lang,
   scope: baseUrl,
   icons: [
     { src: "/icons/favicon.ico", sizes: "48x48", type: "image/x-icon" },

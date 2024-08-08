@@ -18,13 +18,12 @@ interface Props {
   published: Date
   class?: string
 }
-const { author: entry, published, class: className } = Astro.props
-const author = entry?.data
+const { author, published, class: className } = Astro.props
 ---
 
 <small id="article-byline" class:list={["text-base text-primary-dark/85", className]}>
-  <LinkInternal to={`/author/${slugify(entry.id)}`} class:list={["mr-4 inline-block underline"]}>
-    {author?.name}
+  <LinkInternal to={`/author/${slugify(author.id)}`} class:list={["mr-4 inline-block underline"]}>
+    {author.data.name}
   </LinkInternal>
   <time datetime={published.toISOString()}>
     {

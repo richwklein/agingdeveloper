@@ -19,9 +19,7 @@ interface Props {
 
 const baseUrl = import.meta.env.SITE
 const { article, author, wordCount } = Astro.props
-
-const data = article.data
-const modifiedDate = data.modified ? data.modified : data.published
+const modifiedDate = article.data.modified ? article.data.modified : article.data.published
 ---
 
 <script
@@ -30,11 +28,11 @@ const modifiedDate = data.modified ? data.modified : data.published
   set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: data.title,
-    description: data.description,
-    image: [`${baseUrl}${data.featured.image.src.split("?")[0]}`],
-    dateCreated: data.published.toISOString(),
-    datePublished: data.published.toISOString(),
+    headline: article.data.title,
+    description: article.data.description,
+    image: [`${baseUrl}${article.data.featured.image.src.split("?")[0]}`],
+    dateCreated: article.data.published.toISOString(),
+    datePublished: article.data.published.toISOString(),
     dateModified: modifiedDate.toISOString(),
     author: [
       {

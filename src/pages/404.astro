@@ -2,9 +2,8 @@
 import ArticleImage from "@components/ArticleImage.astro"
 import Layout from "@layouts/Layout.astro"
 import { getSite, getSiteAuthor } from "@utils/site"
-import { getImage } from "astro:assets"
 import image from "../content/image/lachlan-donald-eaTHXNIUsYM-unsplash.jpg"
-import InternalBackLink from "@components/InternalBackLink.astro"
+import BackLink from "@components/BackLink.astro"
 import SeoBasic from "@components/seo/SeoBasic.astro"
 import LinkInternal from "@components/LinkInternal.astro"
 
@@ -62,5 +61,5 @@ const featured = {
   <p class:list={["mt-4"]}>
     {"We're sorry for the inconvenience!"}
   </p>
-  <InternalBackLink name={"Home"} to={"/"} useViewText={false} class:list={["mt-8"]} />
+  <BackLink name={"Home"} to={"/"} useViewText={false} class:list={["mt-8"]} />
 </Layout>

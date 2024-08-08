@@ -6,7 +6,7 @@
  * @return {Function} an Astro component factory function.
  *
  * @example
- * <OpenGraphProfile id={entry.id} firstName={author.firstName} lastName={author.lastName} />
+ * <OpenGraphProfile author={author} site={site} />
  */
 import slugify from "@sindresorhus/slugify"
 import type { CollectionEntry } from "astro:content"
@@ -19,18 +19,17 @@ interface Props {
 }
 
 const { author, site } = Astro.props
-const data = author.data
 const baseUrl = import.meta.env.SITE
 ---
 
 <OpenGraphBasic
-  title={data.name}
-  description={data.tagline}
+  title={author.data.name}
+  description={author.data.tagline}
   path={`${baseUrl}/author/${slugify(author.id)}`}
   type={"profile"}
   site={site}
 />
-<OpenGraphImage image={data.avatar} imageAlt={data.name} />
-<meta property="profile:first_name" content={data.givenName} />
-<meta property="profile:last_name" content={data.familyName} />
+<OpenGraphImage image={author.data.avatar} imageAlt={author.data.name} />
+<meta property="profile:first_name" content={author.data.givenName} />
+<meta property="profile:last_name" content={author.data.familyName} />
 <meta property="profile:username" content={`${slugify(author.id)}`} />
