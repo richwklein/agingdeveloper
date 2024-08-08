@@ -8,11 +8,12 @@ const site = await getSite()
 const baseUrl = import.meta.env.SITE
 
 const manifest = {
+  id: site.id,
   name: site.data.title,
   short_name: site.data.title,
   description: site.data.tagline,
   categories: [site.data.category],
-  start_url: "/",
+  start_url: baseUrl,
   display: "browser",
   background_color: site.data.background,
   theme_color: site.data.theme,
