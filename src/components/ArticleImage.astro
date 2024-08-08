@@ -44,12 +44,13 @@ const alt = author ? author.name : "unknown"
         loading={"eager"}
         fetchpriority={"high"}
         sizes={`
-          (min-width: 1280px) 1280px, 
+          (min-width: 1280px) 1280px,
           (min-width: 1024px) 1024px,
           (min-width: 768px) 768px,
-          640px
+          (min-width: 640px) 640px,
+          420px
         `}
-        widths={[640, 768, 1024, 1280]}
+        widths={[420, 640, 768, 1024, 1280]}
       />
     </div>
     {

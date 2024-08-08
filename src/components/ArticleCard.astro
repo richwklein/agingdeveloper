@@ -37,18 +37,19 @@ const loading = lazy ? "lazy" : "eager"
     <Image
       src={article.data.featured.image}
       alt={article.data.title}
-      widths={[180, 500, 640, 768]}
+      widths={[180, 420, 500, 640, 768]}
       sizes={`
         (min-width: 1280px) 180px,
         (min-width: 1024px) 500px,
         (min-width: 768px) 768px,
-        640px
+        (min-width: 640px) 640px,
+        420px
       `}
       loading={loading}
       class:list={[
         "object-cover object-center",
         "aspect-square sm:aspect-video md:aspect-[21/9] xl:aspect-[3/4]",
-        "w-full sm:w-[640px] md:w-[768px] lg:w-[500px] xl:w-[180px]",
+        "w-full xs:w-[420px] sm:w-[640px] md:w-[768px] lg:w-[500px] xl:w-[180px]",
       ]}
     />
     <div class:list={["px-4 pb-2 pt-3"]}>
