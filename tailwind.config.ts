@@ -1,3 +1,5 @@
+import defaultTheme from "tailwindcss/defaultTheme"
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{astro,html,js,csj,mjs,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -16,6 +18,11 @@ export default {
           dark: "rgb(var(--color-secondary-dark) / <alpha-value>)",
           contrast: "rgb(var(--color-secondary-contrast) / <alpha-value>)",
         },
+      },
+      fontFamily: {
+        mono: ["Fira Code", ...defaultTheme.fontFamily.mono],
+        serif: ["Noto Serif Georgian", ...defaultTheme.fontFamily.serif],
+        sans: ["Noto Sans Georgian", ...defaultTheme.fontFamily.sans],
       },
       screens: {
         xs: "420px",
