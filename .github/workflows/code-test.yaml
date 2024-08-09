@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-${{ matrix.branch }}
-          path: test/coverage
+          path: coverage
 
       # TODO move reporting to a separate workflow (see https://github.com/marketplace/actions/vitest-coverage-report#working-with-pull-requests-from-forks)
       - name: "Report coverage on pull request"
