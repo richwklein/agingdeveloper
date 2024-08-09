@@ -9,12 +9,12 @@
  * @example
  * <ArticleCardLead article={entry} />
  */
-import { Image } from "astro:assets"
-import type { CollectionEntry } from "astro:content"
-import LinkInternal from "@components/LinkInternal.astro"
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+import LinkInternal from '@components/LinkInternal.astro'
 
 interface Props {
-  article: CollectionEntry<"article">
+  article: CollectionEntry<'article'>
   class?: string
 }
 
@@ -25,15 +25,15 @@ const { remarkPluginFrontmatter: frontmatter } = await article.render()
 <LinkInternal to={`/article/${article.slug}`}>
   <div
     class:list={[
-      "relative overflow-hidden rounded-md border border-stone-300 bg-white",
-      "focus:shadown-sm hover:shadow-sm",
+      'relative overflow-hidden rounded-md border border-stone-300 bg-white',
+      'focus:shadown-sm hover:shadow-sm',
       className,
     ]}
   >
     <Image
       src={article.data.featured.image}
       alt={article.data.title}
-      class:list={["aspect-square object-cover object-center sm:aspect-video md:aspect-[21/9]"]}
+      class:list={['aspect-square object-cover object-center sm:aspect-video md:aspect-[21/9]']}
       widths={[420, 640, 768, 1024, 1280]}
       sizes={`
         (min-width: 1280px) 180px,
@@ -42,34 +42,34 @@ const { remarkPluginFrontmatter: frontmatter } = await article.render()
         (min-width: 640px) 640px,
         420px
       `}
-      loading={"eager"}
+      loading={'eager'}
     />
     <div
       class:list={[
-        "absolute left-0 top-0 h-full w-full",
-        "bg-primary-main/40 text-primary-contrast backdrop-blur-sm",
+        'absolute left-0 top-0 h-full w-full',
+        'bg-primary-main/40 text-primary-contrast backdrop-blur-sm',
       ]}
     >
-      <div class:list={["w-full p-3 text-primary-contrast/75", "md:p-8 lg:w-3/5"]}>
-        <h4 class:list={["text-2xl leading-snug", "md:text-5xl"]}>
+      <div class:list={['w-full p-3 text-primary-contrast/75', 'md:p-8 lg:w-3/5']}>
+        <h4 class:list={['text-2xl leading-snug', 'md:text-5xl']}>
           {article.data.title}
         </h4>
-        <small class:list={["block leading-snug", "md:text-lg"]}>
+        <small class:list={['block leading-snug', 'md:text-lg']}>
           <time datetime={article.data.published.toISOString()}>
             {
-              article.data.published.toLocaleDateString("en-us", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
+              article.data.published.toLocaleDateString('en-us', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
               })
             }
           </time>
         </small>
-        <p class:list={["mt-4 text-lg leading-relaxed", "md:mt-6 lg:mt-8"]}>
+        <p class:list={['mt-4 text-lg leading-relaxed', 'md:mt-6 lg:mt-8']}>
           {frontmatter.excerpt}&hellip;
         </p>
-        <small class:list={["mt-2 block text-xs", "md:mt-6 md:text-sm lg:mt-8"]}>
-          {"Continue Reading"}&hellip;
+        <small class:list={['mt-2 block text-xs', 'md:mt-6 md:text-sm lg:mt-8']}>
+          {'Continue Reading'}&hellip;
         </small>
       </div>
     </div>

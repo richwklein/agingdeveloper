@@ -8,13 +8,13 @@
  * @example
  * <SeoBasic title={article.data.title} description={article.data.description} author={author.data.name} />
  */
-import type { CollectionEntry } from "astro:content"
+import type { CollectionEntry } from 'astro:content'
 
 interface Props {
   title: string
   description: string
   path?: string
-  author: CollectionEntry<"author">
+  author: CollectionEntry<'author'>
 }
 
 const { title, description, author, path } = Astro.props

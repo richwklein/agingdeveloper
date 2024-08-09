@@ -1,10 +1,10 @@
-import ArticleTimeToRead from "@components/ArticleTimeToRead.astro"
-import { experimental_AstroContainer as AstroContainer } from "astro/container"
-import { beforeAll, describe, expect, test } from "vitest"
+import ArticleTimeToRead from '@components/ArticleTimeToRead.astro'
+import { experimental_AstroContainer as AstroContainer } from 'astro/container'
+import { beforeAll, describe, expect, test } from 'vitest'
 
 type RenderOptions = { className?: string }
 
-describe("ArticleTimeToRead", () => {
+describe('ArticleTimeToRead', () => {
   let ttr: string
 
   beforeAll(async () => {
@@ -21,20 +21,20 @@ describe("ArticleTimeToRead", () => {
       },
     })
   }
-  test("that it contains small tags", async () => {
-    expect(ttr).toContain("<small")
+  test('that it contains small tags', async () => {
+    expect(ttr).toContain('<small')
   })
 
-  test("that it contains the time to read", async () => {
-    expect(ttr).toContain(">10 min read<")
+  test('that it contains the time to read', async () => {
+    expect(ttr).toContain('>10 min read<')
   })
 
-  test("that it contains the number of words", async () => {
-    expect(ttr).toContain(">100 words<")
+  test('that it contains the number of words', async () => {
+    expect(ttr).toContain('>100 words<')
   })
 
-  test("that class is set", async () => {
-    const result = await render({ className: "test-class" })
-    expect(result).toContain("test-class")
+  test('that class is set', async () => {
+    const result = await render({ className: 'test-class' })
+    expect(result).toContain('test-class')
   })
 })

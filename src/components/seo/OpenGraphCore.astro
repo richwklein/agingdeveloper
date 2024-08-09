@@ -8,16 +8,16 @@
  * @example
  * <OpenGraphCore title={article.title} description={article.description} ... />
  */
-import type { CollectionEntry } from "astro:content"
+import type { CollectionEntry } from 'astro:content'
 
-export type OpenGraphType = "website" | "article" | "profile"
+export type OpenGraphType = 'website' | 'article' | 'profile'
 
 interface Props {
   type: OpenGraphType
   title: string
   description: string
   path?: string
-  site: CollectionEntry<"site">
+  site: CollectionEntry<'site'>
 }
 
 const { type, title, description, path, site } = Astro.props

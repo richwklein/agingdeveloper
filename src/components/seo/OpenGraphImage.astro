@@ -8,7 +8,7 @@
  * @example
  * <OpenGraphImage image={article.featured.image} />
  */
-import mime from "mime"
+import mime from 'mime'
 
 interface Props {
   image: ImageMetadata
@@ -20,7 +20,7 @@ const baseUrl = import.meta.env.SITE
 ---
 
 <meta property="og:image" content={`${baseUrl}${image.src}`} />
-<meta property="og:image:type" content={mime.getType(image.src.split("?")[0])} />
+<meta property="og:image:type" content={mime.getType(image.src.split('?')[0])} />
 <meta property="og:image:width" content={image.width.toString()} />
 <meta property="og:image:height" content={image.height.toString()} />
 <meta property="og:image:alt" content={imageAlt} />

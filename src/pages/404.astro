@@ -1,11 +1,11 @@
 ---
-import ArticleImage from "@components/ArticleImage.astro"
-import Layout from "@layouts/Layout.astro"
-import { getSite, getSiteAuthor } from "@utils/site"
-import image from "../content/image/lachlan-donald-eaTHXNIUsYM-unsplash.jpg"
-import BackLink from "@components/BackLink.astro"
-import SeoBasic from "@components/seo/SeoBasic.astro"
-import LinkInternal from "@components/LinkInternal.astro"
+import ArticleImage from '@components/ArticleImage.astro'
+import Layout from '@layouts/Layout.astro'
+import { getSite, getSiteAuthor } from '@utils/site'
+import image from '../content/image/lachlan-donald-eaTHXNIUsYM-unsplash.jpg'
+import BackLink from '@components/BackLink.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import LinkInternal from '@components/LinkInternal.astro'
 
 /**
  * A page for when the correct page is not found.
@@ -16,12 +16,12 @@ const siteAuthor = await getSiteAuthor()
 const featured = {
   image: image,
   author: {
-    name: "Lachlan Donald",
-    url: "https://unsplash.com/@lox?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    name: 'Lachlan Donald',
+    url: 'https://unsplash.com/@lox?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
   },
   site: {
-    name: "Unsplash",
-    url: "https://unsplash.com/photos/green-signage-on-concrete-road-during-day-time-eaTHXNIUsYM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    name: 'Unsplash',
+    url: 'https://unsplash.com/photos/green-signage-on-concrete-road-during-day-time-eaTHXNIUsYM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
   },
 }
 ---
@@ -35,31 +35,31 @@ const featured = {
     />
   </Fragment>
   <ArticleImage featured={featured} />
-  <hgroup class:list={["mt-8"]}>
-    <h2 class:list={["text-4xl leading-relaxed"]}>
+  <hgroup class:list={['mt-8']}>
+    <h2 class:list={['text-4xl leading-relaxed']}>
       {"Oops! We Can't Seem to Find the Page You're Looking For"}
     </h2>
-    <h3 class:list={["text-lg leading-relaxed"]}>
-      {"But don’t worry, we’ll help you get back on track."}
+    <h3 class:list={['text-lg leading-relaxed']}>
+      {'But don’t worry, we’ll help you get back on track.'}
     </h3>
   </hgroup>
-  <p class:list={["text-md"]}>
-    {"It looks like the page you’re searching for doesn’t exist or may have been moved. You can:"}
+  <p class:list={['text-md']}>
+    {'It looks like the page you’re searching for doesn’t exist or may have been moved. You can:'}
   </p>
-  <ul class:list={["mt-4 list-inside list-disc"]}>
+  <ul class:list={['mt-4 list-inside list-disc']}>
     <li>
-      Go back to our <LinkInternal class:list={["underline"]} to={"/"}>Homepage</LinkInternal>.
+      Go back to our <LinkInternal class:list={['underline']} to={'/'}>Homepage</LinkInternal>.
     </li>
     <!--<li>Use the search bar below to find what you need.</li> -->
     <li>
       Explore our popular sections like
-      <LinkInternal to={"/author"} class:list={["underline"]}>Authors</LinkInternal>{", "}
-      <LinkInternal to={"/category"} class:list={["underline"]}>Categories</LinkInternal>{", or "}
-      <LinkInternal to={"/tag"} class:list={["underline"]}>Tags</LinkInternal>{"."}
+      <LinkInternal to={'/author'} class:list={['underline']}>Authors</LinkInternal>{', '}
+      <LinkInternal to={'/category'} class:list={['underline']}>Categories</LinkInternal>{', or '}
+      <LinkInternal to={'/tag'} class:list={['underline']}>Tags</LinkInternal>{'.'}
     </li>
   </ul>
-  <p class:list={["mt-4"]}>
+  <p class:list={['mt-4']}>
     {"We're sorry for the inconvenience!"}
   </p>
-  <BackLink name={"Home"} to={"/"} useViewText={false} class:list={["mt-8"]} />
+  <BackLink name={'Home'} to={'/'} useViewText={false} class:list={['mt-8']} />
 </Layout>

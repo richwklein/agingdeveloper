@@ -9,11 +9,11 @@
  * @example
  * <ArticleGrid articles={articles} />
  */
-import ArticleCard from "@components/ArticleCard.astro"
-import type { CollectionEntry } from "astro:content"
+import ArticleCard from '@components/ArticleCard.astro'
+import type { CollectionEntry } from 'astro:content'
 
 interface Props {
-  articles: CollectionEntry<"article">[]
+  articles: CollectionEntry<'article'>[]
   foldCount?: number
   class?: string
 }
@@ -21,7 +21,7 @@ interface Props {
 const { articles, foldCount = 10, class: className } = Astro.props
 ---
 
-<ol class:list={["grid grid-cols-1 gap-6", "lg:grid-cols-2", className]}>
+<ol class:list={['grid grid-cols-1 gap-6', 'lg:grid-cols-2', className]}>
   {
     articles.map((article, index) => (
       <li>

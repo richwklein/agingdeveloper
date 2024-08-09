@@ -1,16 +1,16 @@
 ---
-import PageFooter from "@components/PageFooter.astro"
-import PageHeader from "@components/PageHeader.astro"
-import ScrollTop from "@components/ScrollTop.astro"
-import { feedInfo } from "@utils/feed"
-import type { CollectionEntry } from "astro:content"
-import "@fontsource/noto-serif-georgian"
-import "@fontsource/noto-sans-georgian"
-import "@fontsource/fira-code"
-import "@styles/main.css"
+import PageFooter from '@components/PageFooter.astro'
+import PageHeader from '@components/PageHeader.astro'
+import ScrollTop from '@components/ScrollTop.astro'
+import { feedInfo } from '@utils/feed'
+import type { CollectionEntry } from 'astro:content'
+import '@fontsource/noto-serif-georgian'
+import '@fontsource/noto-sans-georgian'
+import '@fontsource/fira-code'
+import '@styles/main.css'
 
 interface Props {
-  site: CollectionEntry<"site">
+  site: CollectionEntry<'site'>
 }
 const { site } = Astro.props
 const data = site.data
@@ -18,7 +18,7 @@ const baseUrl = import.meta.env.SITE
 ---
 
 <!doctype html>
-<html lang={data.lang.split("-")[0].toLowerCase()}>
+<html lang={data.lang.split('-')[0].toLowerCase()}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -44,11 +44,11 @@ const baseUrl = import.meta.env.SITE
     <slot name="seo" />
   </head>
   <body>
-    <PageHeader site={site} class:list={["mb-8"]} />
-    <main class:list={["container mx-auto px-4 xl:max-w-screen-xl"]}>
+    <PageHeader site={site} class:list={['mb-8']} />
+    <main class:list={['container mx-auto px-4 xl:max-w-screen-xl']}>
       <slot />
     </main>
-    <PageFooter site={site} class:list={["mb-4", "mt-8"]} />
+    <PageFooter site={site} class:list={['mb-4', 'mt-8']} />
     <ScrollTop />
   </body>
 </html>

@@ -8,8 +8,8 @@
  * @example
  * <ScrollTop />
  */
-import { Icon } from "astro-icon/components"
-import LinkExternal from "@components/LinkExternal.astro"
+import { Icon } from 'astro-icon/components'
+import LinkExternal from '@components/LinkExternal.astro'
 
 interface Props {
   socials:
@@ -25,19 +25,19 @@ const { socials, class: className } = Astro.props
 ---
 
 <nav class:list={[className]}>
-  <ol class:list={["flex items-center gap-1"]}>
+  <ol class:list={['flex items-center gap-1']}>
     {
       socials?.map((social) => (
         <li>
           <LinkExternal
             to={social.url}
             title={social.name}
-            class:list={["block rounded-full p-2", "hover:bg-stone-100 focus:bg-stone-300"]}
+            class:list={['block rounded-full p-2', 'hover:bg-stone-100 focus:bg-stone-300']}
           >
             <Icon
               name={`mdi:${social.name.toLowerCase()}`}
               title={social.name}
-              class:list={["h-6 w-6 text-primary-main"]}
+              class:list={['h-6 w-6 text-primary-main']}
             />
           </LinkExternal>
         </li>

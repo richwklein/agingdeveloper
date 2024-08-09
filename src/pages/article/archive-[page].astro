@@ -2,21 +2,21 @@
 /**
  * An archive page of all articles on the site.
  */
-import Layout from "@layouts/Layout.astro"
-import type { Page } from "astro"
-import { getArticles } from "@utils/article"
-import BreadcrumbHeader from "@components/BreadcrumbHeader.astro"
-import Pagniation from "@components/Pagniation.astro"
-import { getSite, getSiteAuthor } from "@utils/site"
-import type { CollectionEntry } from "astro:content"
-import SeoBasic from "@components/seo/SeoBasic.astro"
-import BreadcrumbJson from "@components/seo/BreadcrumbJson.astro"
-import ArticleGrid from "@components/ArticleGrid.astro"
+import Layout from '@layouts/Layout.astro'
+import type { Page } from 'astro'
+import { getArticles } from '@utils/article'
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import Pagniation from '@components/Pagniation.astro'
+import { getSite, getSiteAuthor } from '@utils/site'
+import type { CollectionEntry } from 'astro:content'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import ArticleGrid from '@components/ArticleGrid.astro'
 
 interface Props {
-  page: Page<CollectionEntry<"article">>
-  site: CollectionEntry<"site">
-  siteAuthor: CollectionEntry<"author">
+  page: Page<CollectionEntry<'article'>>
+  site: CollectionEntry<'site'>
+  siteAuthor: CollectionEntry<'author'>
 }
 
 export async function getStaticPaths({ paginate }: any) {
@@ -43,16 +43,16 @@ const archivePath = Astro.url.pathname
     <BreadcrumbJson
       site={site}
       crumbs={[
-        { name: "Articles", path: "/article" },
+        { name: 'Articles', path: '/article' },
         { name: `Archive ${page.currentPage}`, path: archivePath },
       ]}
     />
   </Fragment>
   <BreadcrumbHeader
-    head={{ name: "Archive", path: "/article" }}
-    class:list={["mb-4"]}
+    head={{ name: 'Archive', path: '/article' }}
+    class:list={['mb-4']}
     tail={page.currentPage.toString()}
   />
   <ArticleGrid articles={page.data} />
-  <Pagniation page={page} class:list={["mt-4"]} />
+  <Pagniation page={page} class:list={['mt-4']} />
 </Layout>

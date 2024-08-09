@@ -1,23 +1,23 @@
-import { getCollection } from "astro:content"
-import { getSite } from "./site"
-import { Feed } from "feed"
-import slugify from "@sindresorhus/slugify"
-import sanitizeHtml from "sanitize-html"
-import MarkdownIt from "markdown-it"
-import { getArticles } from "./article"
+import { getCollection } from 'astro:content'
+import { getSite } from './site'
+import { Feed } from 'feed'
+import slugify from '@sindresorhus/slugify'
+import sanitizeHtml from 'sanitize-html'
+import MarkdownIt from 'markdown-it'
+import { getArticles } from './article'
 
 const parser = new MarkdownIt()
 
 export const feedInfo = [
-  { id: "rss", type: "application/xml", path: "/rss.xml" },
-  { id: "atom", type: "application/atom+xml", path: "/atom.xml" },
-  { id: "feed", type: "application/json", path: "/feed.json" },
+  { id: 'rss', type: 'application/xml', path: '/rss.xml' },
+  { id: 'atom', type: 'application/atom+xml', path: '/atom.xml' },
+  { id: 'feed', type: 'application/json', path: '/feed.json' },
 ]
 
 export const getFeed = async () => {
   const site = await getSite()
   const baseUrl = import.meta.env.SITE
-  const authors = await getCollection("author")
+  const authors = await getCollection('author')
   const articles = await getArticles()
 
   // setup basic feed structure
@@ -27,8 +27,8 @@ export const getFeed = async () => {
     id: baseUrl,
     link: baseUrl,
     language: site.data.lang,
-    image: `${baseUrl}${site.data.avatar.src.split("?")[0]}`,
-    favicon: `${baseUrl}${site.data.icon.src.split("?")[0]}`,
+    image: `${baseUrl}${site.data.avatar.src.split('?')[0]}`,
+    favicon: `${baseUrl}${site.data.icon.src.split('?')[0]}`,
     feedLinks: new Map(feedInfo.map(({ id, path }) => [id, `${baseUrl}${path}`])),
     copyright: new Date().toISOString(),
   })
@@ -63,10 +63,10 @@ export const getFeed = async () => {
         },
       ],
       image: {
-        url: `${baseUrl}${article.data.featured.image.src.split("?")[0]}`,
+        url: `${baseUrl}${article.data.featured.image.src.split('?')[0]}`,
       },
       content: sanitizeHtml(parser.render(article.body), {
-        allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+        allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
       }),
     })
   })

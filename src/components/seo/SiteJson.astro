@@ -8,10 +8,10 @@
  * @example
  * <SiteJson site={site} />
  */
-import type { CollectionEntry } from "astro:content"
+import type { CollectionEntry } from 'astro:content'
 
 interface Props {
-  site: CollectionEntry<"site">
+  site: CollectionEntry<'site'>
 }
 
 const baseUrl = import.meta.env.SITE
@@ -22,8 +22,8 @@ const { site } = Astro.props
   is:inline
   type="application/ld+json"
   set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "WebSite",
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
     name: site.data.title,
     url: baseUrl,
   })}

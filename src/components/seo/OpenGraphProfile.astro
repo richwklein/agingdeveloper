@@ -8,14 +8,14 @@
  * @example
  * <OpenGraphProfile author={author} site={site} />
  */
-import slugify from "@sindresorhus/slugify"
-import type { CollectionEntry } from "astro:content"
-import OpenGraphCore from "./OpenGraphCore.astro"
-import OpenGraphImage from "./OpenGraphImage.astro"
+import slugify from '@sindresorhus/slugify'
+import type { CollectionEntry } from 'astro:content'
+import OpenGraphCore from './OpenGraphCore.astro'
+import OpenGraphImage from './OpenGraphImage.astro'
 
 interface Props {
-  author: CollectionEntry<"author">
-  site: CollectionEntry<"site">
+  author: CollectionEntry<'author'>
+  site: CollectionEntry<'site'>
 }
 
 const { author, site } = Astro.props
@@ -26,7 +26,7 @@ const baseUrl = import.meta.env.SITE
   title={author.data.name}
   description={author.data.tagline}
   path={`${baseUrl}/author/${slugify(author.id)}`}
-  type={"profile"}
+  type={'profile'}
   site={site}
 />
 <OpenGraphImage image={author.data.avatar} imageAlt={author.data.name} />

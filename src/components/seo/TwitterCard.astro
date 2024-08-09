@@ -8,15 +8,15 @@
  * @example
  * <TwitterCard title={article.title} author={author} wordCount={frontmatter.wordCount} />
  */
-import type { CollectionEntry } from "astro:content"
+import type { CollectionEntry } from 'astro:content'
 
 interface Props {
   title: string
   description: string
   image?: ImageMetadata
   imageAlt?: string
-  siteAuthor: CollectionEntry<"author">
-  contentAuthor: CollectionEntry<"author">
+  siteAuthor: CollectionEntry<'author'>
+  contentAuthor: CollectionEntry<'author'>
 }
 const { title, description, image, imageAlt, siteAuthor, contentAuthor } = Astro.props
 ---
@@ -24,7 +24,7 @@ const { title, description, image, imageAlt, siteAuthor, contentAuthor } = Astro
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-{image ? <meta name="twitter:image" content={image.src.split("?")[0]} /> : null}
+{image ? <meta name="twitter:image" content={image.src.split('?')[0]} /> : null}
 {image ? <meta name="twitter:image:alt" content={imageAlt || title} /> : null}
 {siteAuthor ? <meta name="twitter:site" content={siteAuthor.data.twitterUsername} /> : null}
 {

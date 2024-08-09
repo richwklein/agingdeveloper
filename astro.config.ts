@@ -1,17 +1,17 @@
-import { defineConfig } from "astro/config"
-import tailwind from "@astrojs/tailwind"
-import icon from "astro-icon"
-import { remarkReadingTime } from "./src/utils/readTime.ts"
-import { remarkExcerpt } from "./src/utils/excerpt.ts"
-import mdx from "@astrojs/mdx"
-import sitemap from "@astrojs/sitemap"
-import netlify from "@astrojs/netlify"
+import { defineConfig } from 'astro/config'
+import tailwind from '@astrojs/tailwind'
+import icon from 'astro-icon'
+import { remarkReadingTime } from './src/utils/readTime.ts'
+import { remarkExcerpt } from './src/utils/excerpt.ts'
+import mdx from '@astrojs/mdx'
+import sitemap from '@astrojs/sitemap'
+import netlify from '@astrojs/netlify'
 
-const { URL: SITE_URL, DEPLOY_PRIME_URL: DEPLOY_URL, CONTEXT: DEPLOY_CONTEXT = "dev" } = process.env
+const { URL: SITE_URL, DEPLOY_PRIME_URL: DEPLOY_URL, CONTEXT: DEPLOY_CONTEXT = 'dev' } = process.env
 const siteUrl =
-  DEPLOY_CONTEXT === "dev"
-    ? "http://localhost:4321"
-    : DEPLOY_CONTEXT == "production"
+  DEPLOY_CONTEXT === 'dev'
+    ? 'http://localhost:4321'
+    : DEPLOY_CONTEXT == 'production'
       ? SITE_URL
       : DEPLOY_URL
 
@@ -21,7 +21,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkReadingTime, remarkExcerpt],
   },
-  output: "static",
+  output: 'static',
   prefetch: true,
   image: {},
   integrations: [
@@ -33,29 +33,29 @@ export default defineConfig({
     }),
   ],
   redirects: {
-    "/article": { destination: "/article/archive-1", status: 308 },
-    "/article/": { destination: "/article/archive-1", status: 308 },
-    "/article/rss-dead-long-live-rss": {
-      destination: "/article/2021-05-17-rss-dead-long-live-rss",
+    '/article': { destination: '/article/archive-1', status: 308 },
+    '/article/': { destination: '/article/archive-1', status: 308 },
+    '/article/rss-dead-long-live-rss': {
+      destination: '/article/2021-05-17-rss-dead-long-live-rss',
       status: 308,
     },
-    "/article/2020/08/14/default-http-config": {
-      destination: "/article/2020-08-14-default-http-config",
+    '/article/2020/08/14/default-http-config': {
+      destination: '/article/2020-08-14-default-http-config',
       status: 308,
     },
-    "/article/2020/08/08/custoPathm-domain": {
-      destination: "/article/2020-08-14-default-http-config",
+    '/article/2020/08/08/custoPathm-domain': {
+      destination: '/article/2020-08-14-default-http-config',
       status: 308,
     },
-    "/article/2020/08/08/custom-domain": {
-      destination: "/article/22020-08-08-custom-domain",
+    '/article/2020/08/08/custom-domain': {
+      destination: '/article/22020-08-08-custom-domain',
       status: 308,
     },
-    "/article/2020/07/26/false-start": {
-      destination: "/article/2020-07-26-false-start",
+    '/article/2020/07/26/false-start': {
+      destination: '/article/2020-07-26-false-start',
       status: 308,
     },
-    "/article/2020/07/21/intro": { destination: "/article/2020-07-21-intro", status: 308 },
+    '/article/2020/07/21/intro': { destination: '/article/2020-07-21-intro', status: 308 },
   },
   site: siteUrl,
 })

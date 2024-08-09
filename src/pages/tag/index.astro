@@ -2,13 +2,13 @@
 /**
  * A page of all the tags used on the site.
  */
-import Layout from "@layouts/Layout.astro"
-import BreadcrumbHeader from "@components/BreadcrumbHeader.astro"
-import { getTagsWithCount } from "@utils/article"
-import TagGrid from "@components/TagGrid.astro"
-import { getSite, getSiteAuthor } from "@utils/site"
-import SeoBasic from "@components/seo/SeoBasic.astro"
-import BreadcrumbJson from "@components/seo/BreadcrumbJson.astro"
+import Layout from '@layouts/Layout.astro'
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import { getTagsWithCount } from '@utils/article'
+import TagGrid from '@components/TagGrid.astro'
+import { getSite, getSiteAuthor } from '@utils/site'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 
 const site = await getSite()
 const siteAuthor = await getSiteAuthor()
@@ -24,8 +24,8 @@ const tagsPath = Astro.url.pathname
       path={tagsPath}
       author={siteAuthor}
     />
-    <BreadcrumbJson site={site} crumbs={[{ name: "Tags", path: tagsPath }]} />
+    <BreadcrumbJson site={site} crumbs={[{ name: 'Tags', path: tagsPath }]} />
   </Fragment>
-  <BreadcrumbHeader head={{ name: "Tags", path: tagsPath }} class:list={["mb-4"]} />
+  <BreadcrumbHeader head={{ name: 'Tags', path: tagsPath }} class:list={['mb-4']} />
   <TagGrid tags={tags} total={total} isCategory={false} />
 </Layout>

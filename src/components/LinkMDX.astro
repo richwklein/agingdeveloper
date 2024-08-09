@@ -5,8 +5,8 @@
  * @param props - The anchor tag props.
  * @return {Function} an Astro component factory function.
  */
-import LinkExternal from "@components/LinkExternal.astro"
-import LinkInternal from "@components/LinkInternal.astro"
+import LinkExternal from '@components/LinkExternal.astro'
+import LinkInternal from '@components/LinkInternal.astro'
 
 const props = Astro.props
 
@@ -15,9 +15,9 @@ const domainRegex = /^http[s]*:\/\/[www.]*agingdeveloper\.(com|net)[/]?/
 
 let to = props.href
 if (domainRegex.test(to)) {
-  to = to.replace(domainRegex, "/")
+  to = to.replace(domainRegex, '/')
 }
-const isInternal = to.startsWith("/") || to.startsWith("#") || to.startsWith("?")
+const isInternal = to.startsWith('/') || to.startsWith('#') || to.startsWith('?')
 ---
 
 {
@@ -25,7 +25,7 @@ const isInternal = to.startsWith("/") || to.startsWith("#") || to.startsWith("?"
     <LinkInternal to={to} {...props}>
       <slot />
     </LinkInternal>
-  ) : !to.startsWith("http") ? (
+  ) : !to.startsWith('http') ? (
     <a data-link="other" href={to} {...props}>
       <slot />
     </a>

@@ -8,16 +8,16 @@
  * @example
  * <ScrollTop />
  */
-import { Icon } from "astro-icon/components"
+import { Icon } from 'astro-icon/components'
 ---
 
-<scroll-top class:list={["fixed bottom-8 right-8"]}>
+<scroll-top class:list={['fixed bottom-8 right-8']}>
   <button
     class:list={[
-      "rounded-full bg-secondary-main p-2 text-secondary-contrast opacity-0 shadow-xl hover:bg-secondary-dark",
+      'rounded-full bg-secondary-main p-2 text-secondary-contrast opacity-0 shadow-xl hover:bg-secondary-dark',
     ]}
   >
-    <Icon title="Scroll to Top" name="mdi:keyboard-arrow-up" class:list={["h-6 w-6 "]} />
+    <Icon title="Scroll to Top" name="mdi:keyboard-arrow-up" class:list={['h-6 w-6 ']} />
   </button>
 </scroll-top>
 
@@ -28,21 +28,21 @@ import { Icon } from "astro-icon/components"
       super()
 
       let timer: number
-      const button = this.querySelector("button")
-      button?.addEventListener("click", () => {
+      const button = this.querySelector('button')
+      button?.addEventListener('click', () => {
         window.clearTimeout(timer)
-        window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
       })
 
       const showButton = () => {
         window.clearTimeout(timer)
         timer = window.setTimeout(() => {
           if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-            button?.classList.remove("fade-out")
-            button?.classList.add("fade-in")
+            button?.classList.remove('fade-out')
+            button?.classList.add('fade-in')
           } else {
-            button?.classList.remove("fade-in")
-            button?.classList.add("fade-out")
+            button?.classList.remove('fade-in')
+            button?.classList.add('fade-out')
           }
         }, 2.5)
       }
@@ -54,5 +54,5 @@ import { Icon } from "astro-icon/components"
   }
 
   // Tell the browser to use our AstroHeart class for <astro-heart> elements.
-  customElements.define("scroll-top", ScrollTop)
+  customElements.define('scroll-top', ScrollTop)
 </script>

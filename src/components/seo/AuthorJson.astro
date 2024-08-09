@@ -8,11 +8,11 @@
  * @example
  * <AuthorJson author={author} writeCount={16} />
  */
-import slugify from "@sindresorhus/slugify"
-import type { CollectionEntry } from "astro:content"
+import slugify from '@sindresorhus/slugify'
+import type { CollectionEntry } from 'astro:content'
 
 interface Props {
-  author: CollectionEntry<"author">
+  author: CollectionEntry<'author'>
   writeCount: number
 }
 
@@ -27,21 +27,21 @@ const socials = author.data.socials || []
   is:inline
   type="application/ld+json"
   set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "ProfilePage",
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
     dateCreated: author.data.published.toISOString(),
     dateModified: modifiedDate.toISOString(),
     mainEntity: {
-      "@type": "Person",
+      '@type': 'Person',
       name: author.data.name,
       identifier: slugify(author.id),
       agentInteractionStatistic: {
-        "@type": "InteractionCounter",
-        interactionType: "https://schema.org/WriteAction",
+        '@type': 'InteractionCounter',
+        interactionType: 'https://schema.org/WriteAction',
         userInteractionCount: writeCount,
       },
       description: author.data.tagline,
-      image: `${baseUrl}${author.data.avatar.src.split("?")[0]}`,
+      image: `${baseUrl}${author.data.avatar.src.split('?')[0]}`,
       sameAs: socials.map((social: any) => {
         return social.url
       }),

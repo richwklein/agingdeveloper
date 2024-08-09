@@ -9,28 +9,28 @@
  * @example
  * <ArticleCard article={entry} />
  */
-import { Image } from "astro:assets"
-import type { CollectionEntry } from "astro:content"
-import LinkInternal from "@components/LinkInternal.astro"
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+import LinkInternal from '@components/LinkInternal.astro'
 
 interface Props {
-  article: CollectionEntry<"article">
+  article: CollectionEntry<'article'>
   lazy?: boolean
   class?: string
 }
 
 const { article, lazy, class: className } = Astro.props
 const { remarkPluginFrontmatter: frontmatter } = await article.render()
-const loading = lazy ? "lazy" : "eager"
+const loading = lazy ? 'lazy' : 'eager'
 ---
 
 <LinkInternal to={`/article/${article.slug}`}>
   <article
     class:list={[
-      "overflow-hidden rounded-md border border-stone-300 bg-white",
-      "xl:flex xl:max-h-60 xl:flex-row-reverse",
-      "hover:bg-stone-100/85 hover:shadow-sm",
-      "focus:bg-stone-100/85 focus:shadow-sm",
+      'overflow-hidden rounded-md border border-stone-300 bg-white',
+      'xl:flex xl:max-h-60 xl:flex-row-reverse',
+      'hover:bg-stone-100/85 hover:shadow-sm',
+      'focus:bg-stone-100/85 focus:shadow-sm',
       className,
     ]}
   >
@@ -47,27 +47,27 @@ const loading = lazy ? "lazy" : "eager"
       `}
       loading={loading}
       class:list={[
-        "object-cover object-center",
-        "aspect-square sm:aspect-video md:aspect-[21/9] xl:aspect-[3/4]",
-        "w-full xs:w-[420px] sm:w-[640px] md:w-[768px] lg:w-[500px] xl:w-[180px]",
+        'object-cover object-center',
+        'aspect-square sm:aspect-video md:aspect-[21/9] xl:aspect-[3/4]',
+        'w-full xs:w-[420px] sm:w-[640px] md:w-[768px] lg:w-[500px] xl:w-[180px]',
       ]}
     />
-    <div class:list={["px-4 pb-2 pt-3"]}>
-      <h4 class:list={["text-lg font-medium leading-snug text-stone-900"]}>
+    <div class:list={['px-4 pb-2 pt-3']}>
+      <h4 class:list={['text-lg font-medium leading-snug text-stone-900']}>
         {article.data.title}
       </h4>
-      <small class:list={["text-sm text-stone-600"]}>
+      <small class:list={['text-sm text-stone-600']}>
         <time datetime={article.data.published.toISOString()}>
           {
-            article.data.published.toLocaleDateString("en-us", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
+            article.data.published.toLocaleDateString('en-us', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
             })
           }
         </time>
       </small>
-      <p class:list={["text-md mt-2 leading-relaxed text-stone-700"]}>
+      <p class:list={['text-md mt-2 leading-relaxed text-stone-700']}>
         {frontmatter.excerpt}&hellip;
       </p>
     </div>

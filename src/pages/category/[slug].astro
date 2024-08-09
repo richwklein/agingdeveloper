@@ -2,22 +2,22 @@
 /**
  * A page for a single category with the latest articles for that category.
  */
-import Layout from "@layouts/Layout.astro"
-import slugify from "@sindresorhus/slugify"
-import BreadcrumbHeader from "@components/BreadcrumbHeader.astro"
-import { getCategories, getArticlesByCategory } from "@utils/article"
-import DisplayLimitAlert from "@components/DisplayLimitAlert.astro"
-import BackLink from "@components/BackLink.astro"
-import ArticleGrid from "@components/ArticleGrid.astro"
-import { getSite, getSiteAuthor } from "@utils/site"
-import type { CollectionEntry } from "astro:content"
-import SeoBasic from "@components/seo/SeoBasic.astro"
-import BreadcrumbJson from "@components/seo/BreadcrumbJson.astro"
+import Layout from '@layouts/Layout.astro'
+import slugify from '@sindresorhus/slugify'
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import { getCategories, getArticlesByCategory } from '@utils/article'
+import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
+import BackLink from '@components/BackLink.astro'
+import ArticleGrid from '@components/ArticleGrid.astro'
+import { getSite, getSiteAuthor } from '@utils/site'
+import type { CollectionEntry } from 'astro:content'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 
 interface Props {
   category: string
-  site: CollectionEntry<"site">
-  siteAuthor: CollectionEntry<"author">
+  site: CollectionEntry<'site'>
+  siteAuthor: CollectionEntry<'author'>
 }
 
 export async function getStaticPaths() {
@@ -51,17 +51,17 @@ const categoryPath = Astro.url.pathname
     <BreadcrumbJson
       site={site}
       crumbs={[
-        { name: "Categories", path: "/category" },
+        { name: 'Categories', path: '/category' },
         { name: category, path: categoryPath },
       ]}
     />
   </Fragment>
   <BreadcrumbHeader
-    head={{ name: "Categories", path: "/category" }}
+    head={{ name: 'Categories', path: '/category' }}
     tail={category}
-    class:list={["mb-4"]}
+    class:list={['mb-4']}
   />
-  <ArticleGrid articles={entries} class:list={["mt-4"]} />
-  <DisplayLimitAlert displayed={entries.length} total={total} class:list={["mt-4"]} />
-  <BackLink class:list={["mt-4"]} name={"categories"} to={"/category"} />
+  <ArticleGrid articles={entries} class:list={['mt-4']} />
+  <DisplayLimitAlert displayed={entries.length} total={total} class:list={['mt-4']} />
+  <BackLink class:list={['mt-4']} name={'categories'} to={'/category'} />
 </Layout>

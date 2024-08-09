@@ -9,8 +9,8 @@
  * @example
  * <PaginationLink link={"/article/archive-1"} icon="mdi:chevron-left" />
  */
-import { Icon } from "astro-icon/components"
-import LinkInternal from "@components/LinkInternal.astro"
+import { Icon } from 'astro-icon/components'
+import LinkInternal from '@components/LinkInternal.astro'
 
 interface Props {
   link: string | undefined
@@ -20,7 +20,7 @@ interface Props {
 }
 
 const { link, icon, title, class: className } = Astro.props
-const path = link ?? "#"
+const path = link ?? '#'
 ---
 
 {
@@ -28,24 +28,24 @@ const path = link ?? "#"
     <LinkInternal
       to={path}
       class:list={[
-        "block inline-flex h-10 w-10 items-center justify-center",
-        "rounded-full bg-inherit text-primary-dark",
-        "focus:bg-primary-light focus:text-primary-contrast",
-        "hover:bg-primary-light hover:text-primary-contrast",
+        'block inline-flex h-10 w-10 items-center justify-center',
+        'rounded-full bg-inherit text-primary-dark',
+        'focus:bg-primary-light focus:text-primary-contrast',
+        'hover:bg-primary-light hover:text-primary-contrast',
         className,
       ]}
     >
-      <Icon name={icon} title={title} class:list={["h-8 w-8"]} />
+      <Icon name={icon} title={title} class:list={['h-8 w-8']} />
     </LinkInternal>
   ) : (
     <div
       class:list={[
-        "block inline-flex h-10 w-10 items-center justify-center",
-        "rounded-full bg-inherit text-primary-dark/25",
+        'block inline-flex h-10 w-10 items-center justify-center',
+        'rounded-full bg-inherit text-primary-dark/25',
         className,
       ]}
     >
-      <Icon name={icon} class:list={["h-8 w-8"]} />
+      <Icon name={icon} class:list={['h-8 w-8']} />
     </div>
   )
 }

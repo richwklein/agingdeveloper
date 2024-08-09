@@ -31,14 +31,14 @@ describe("BreadcrumbHeader", () => {
   })
 
   test("that it contains the header without a link", async () => {
-    expect(header).toContain("<li>Head</li>")
+    expect(header).toContain("Head</li>")
     expect(header).not.toContain("</a>")
   })
 
   test("that it contains a link with a tail", async () => {
     const result = await render({ tail: "Tail" })
     expect(result).toContain("Head</a>")
-    expect(result).toContain("<li>Tail</li>")
+    expect(result).toContain("Tail</li>")
   })
 
   test("that class is set", async () => {

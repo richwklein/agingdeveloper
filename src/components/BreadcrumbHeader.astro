@@ -11,7 +11,7 @@
  * @example
  * <BreadcrumbBlock head={{name: "Archive", path="/article"}} tail="1" />
  */
-import LinkInternal from "@components/LinkInternal.astro"
+import LinkInternal from '@components/LinkInternal.astro'
 
 interface Props {
   head: {
@@ -25,15 +25,15 @@ interface Props {
 const { head, tail, class: className } = Astro.props
 ---
 
-<header class:list={["flex w-full items-center", className]}>
-  <span class:list={["mr-2 h-px flex-grow rounded bg-stone-300"]}></span>
-  <ol class:list={["inline-flex items-center space-x-0 md:space-x-3", "capitalize text-stone-900"]}>
+<header class:list={['flex w-full items-center', className]}>
+  <span class:list={['mr-2 h-px flex-grow rounded bg-stone-300']}></span>
+  <ol class:list={['inline-flex items-center space-x-0 md:space-x-3', 'capitalize text-stone-900']}>
     {
       tail == null ? (
         <li>{head.name}</li>
       ) : (
         <li class:list={["after:mx-1 after:text-stone-300 after:content-['/']"]}>
-          <LinkInternal to={head.path} class:list={["hover:underline", "text-inherit"]}>
+          <LinkInternal to={head.path} class:list={['hover:underline', 'text-inherit']}>
             {head.name}
           </LinkInternal>
         </li>
@@ -41,5 +41,5 @@ const { head, tail, class: className } = Astro.props
     }
     {tail ? <li>{tail}</li> : null}
   </ol>
-  <span class:list={["ml-2 h-px flex-grow rounded bg-stone-300"]}></span>
+  <span class:list={['ml-2 h-px flex-grow rounded bg-stone-300']}></span>
 </header>

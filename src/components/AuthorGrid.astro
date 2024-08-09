@@ -9,11 +9,11 @@
  * @example
  * <AuthorGrid authors={authors} />
  */
-import AuthorCard from "@components/AuthorCard.astro"
-import type { CollectionEntry } from "astro:content"
+import AuthorCard from '@components/AuthorCard.astro'
+import type { CollectionEntry } from 'astro:content'
 
 interface Props {
-  authors: CollectionEntry<"author">[]
+  authors: CollectionEntry<'author'>[]
   foldCount?: number
   class?: string
 }
@@ -21,7 +21,7 @@ interface Props {
 const { authors, foldCount = 10, class: className } = Astro.props
 ---
 
-<ol class:list={["grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3", className]}>
+<ol class:list={['grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3', className]}>
   {
     authors.map((author, index) => (
       <li>

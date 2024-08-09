@@ -2,18 +2,18 @@
 /**
  * The home page with a lead article and most recent.
  */
-import ArticleGrid from "@components/ArticleGrid.astro"
-import BackLink from "@components/BackLink.astro"
-import ArticleCardLead from "@components/ArticleCardLead.astro"
-import Layout from "@layouts/Layout.astro"
-import { getArticles } from "@utils/article"
-import { getSite, getSiteAuthor } from "@utils/site"
-import BreadcrumbJson from "@components/seo/BreadcrumbJson.astro"
-import SeoBasic from "@components/seo/SeoBasic.astro"
-import SiteJson from "@components/seo/SiteJson.astro"
-import OpenGraphCore from "@components/seo/OpenGraphCore.astro"
-import OpenGraphImage from "@components/seo/OpenGraphImage.astro"
-import TwitterCard from "@components/seo/TwitterCard.astro"
+import ArticleGrid from '@components/ArticleGrid.astro'
+import BackLink from '@components/BackLink.astro'
+import ArticleCardLead from '@components/ArticleCardLead.astro'
+import Layout from '@layouts/Layout.astro'
+import { getArticles } from '@utils/article'
+import { getSite, getSiteAuthor } from '@utils/site'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import SiteJson from '@components/seo/SiteJson.astro'
+import OpenGraphCore from '@components/seo/OpenGraphCore.astro'
+import OpenGraphImage from '@components/seo/OpenGraphImage.astro'
+import TwitterCard from '@components/seo/TwitterCard.astro'
 
 // get the articles and sort them in decending published date
 const articles = await getArticles(9)
@@ -40,6 +40,6 @@ const lead = articles.shift()
     <SiteJson site={site} />
   </Fragment>
   {lead ? <ArticleCardLead article={lead} /> : null}
-  <ArticleGrid articles={articles} foldCount={4} class:list={["mt-4"]} />
-  <BackLink name="articles" to={"/article"} class:list={["mt-4"]} />
+  <ArticleGrid articles={articles} foldCount={4} class:list={['mt-4']} />
+  <BackLink name="articles" to={'/article'} class:list={['mt-4']} />
 </Layout>

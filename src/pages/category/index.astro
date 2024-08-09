@@ -2,13 +2,13 @@
 /**
  * A page of all the categories on the site.
  */
-import Layout from "@layouts/Layout.astro"
-import BreadcrumbHeader from "@components/BreadcrumbHeader.astro"
-import { getCategoriesWithCount } from "@utils/article"
-import TagGrid from "@components/TagGrid.astro"
-import { getSite, getSiteAuthor } from "@utils/site"
-import SeoBasic from "@components/seo/SeoBasic.astro"
-import BreadcrumbJson from "@components/seo/BreadcrumbJson.astro"
+import Layout from '@layouts/Layout.astro'
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import { getCategoriesWithCount } from '@utils/article'
+import TagGrid from '@components/TagGrid.astro'
+import { getSite, getSiteAuthor } from '@utils/site'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 
 const site = await getSite()
 const siteAuthor = await getSiteAuthor()
@@ -24,8 +24,8 @@ const categoriesPath = Astro.url.pathname
       path={categoriesPath}
       author={siteAuthor}
     />
-    <BreadcrumbJson site={site} crumbs={[{ name: "Categories", path: categoriesPath }]} />
+    <BreadcrumbJson site={site} crumbs={[{ name: 'Categories', path: categoriesPath }]} />
   </Fragment>
-  <BreadcrumbHeader head={{ name: "Categories", path: categoriesPath }} class:list={["mb-4"]} />
+  <BreadcrumbHeader head={{ name: 'Categories', path: categoriesPath }} class:list={['mb-4']} />
   <TagGrid tags={categories} total={total} isCategory={true} />
 </Layout>

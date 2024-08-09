@@ -8,12 +8,12 @@
  * @example
  * <ArticleJson article={article} author={author} wordCount={frontmatter.wordCount} />
  */
-import slugify from "@sindresorhus/slugify"
-import type { CollectionEntry } from "astro:content"
+import slugify from '@sindresorhus/slugify'
+import type { CollectionEntry } from 'astro:content'
 
 interface Props {
-  article: CollectionEntry<"article">
-  author: CollectionEntry<"author">
+  article: CollectionEntry<'article'>
+  author: CollectionEntry<'author'>
   wordCount: number
 }
 
@@ -26,17 +26,17 @@ const modifiedDate = article.data.modified ? article.data.modified : article.dat
   is:inline
   type="application/ld+json"
   set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
     headline: article.data.title,
     description: article.data.description,
-    image: [`${baseUrl}${article.data.featured.image.src.split("?")[0]}`],
+    image: [`${baseUrl}${article.data.featured.image.src.split('?')[0]}`],
     dateCreated: article.data.published.toISOString(),
     datePublished: article.data.published.toISOString(),
     dateModified: modifiedDate.toISOString(),
     author: [
       {
-        "@type": "Person",
+        '@type': 'Person',
         name: author.data.name,
         url: `${baseUrl}/author/${slugify(author.id)}`,
       },

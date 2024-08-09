@@ -9,28 +9,28 @@
  * @example
  * <AuthorCard autor={entry} />
  */
-import { Image } from "astro:assets"
-import type { CollectionEntry } from "astro:content"
-import LinkInternal from "@components/LinkInternal.astro"
-import slugify from "@sindresorhus/slugify"
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+import LinkInternal from '@components/LinkInternal.astro'
+import slugify from '@sindresorhus/slugify'
 
 interface Props {
-  author: CollectionEntry<"author">
+  author: CollectionEntry<'author'>
   lazy?: boolean
   class?: string
 }
 
 const { author, lazy, class: className } = Astro.props
-const loading = lazy ? "lazy" : "eager"
+const loading = lazy ? 'lazy' : 'eager'
 ---
 
 <LinkInternal to={`/author/${slugify(author.id)}`}>
   <div
     class:list={[
-      "overflow-hidden rounded-md border border-stone-300 bg-white",
-      "flex max-h-[120px]",
-      "hover:bg-stone-100/85 hover:shadow-sm",
-      "focus:bg-stone-100/85 focus:shadow-sm",
+      'overflow-hidden rounded-md border border-stone-300 bg-white',
+      'flex max-h-[120px]',
+      'hover:bg-stone-100/85 hover:shadow-sm',
+      'focus:bg-stone-100/85 focus:shadow-sm',
       className,
     ]}
   >
@@ -39,13 +39,13 @@ const loading = lazy ? "lazy" : "eager"
       alt={author.data.name}
       width={90}
       loading={loading}
-      class:list={["object-cover object-center", "aspect-[3/4] w-[90px] xl:min-w-[90px]"]}
+      class:list={['object-cover object-center', 'aspect-[3/4] w-[90px] xl:min-w-[90px]']}
     />
-    <div class:list={["px-4 pb-2 pt-3"]}>
-      <h4 class:list={["text-lg font-medium leading-snug text-stone-900"]}>
+    <div class:list={['px-4 pb-2 pt-3']}>
+      <h4 class:list={['text-lg font-medium leading-snug text-stone-900']}>
         {author.data.name}
       </h4>
-      <p class:list={["text-md leading-relaxed text-stone-600 md:text-lg"]}>
+      <p class:list={['text-md leading-relaxed text-stone-600 md:text-lg']}>
         {author.data.tagline}
       </p>
     </div>

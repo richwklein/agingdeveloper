@@ -1,8 +1,8 @@
-import { capitalize } from "@utils/misc"
-import { z, defineCollection, reference } from "astro:content"
+import { capitalize } from '@utils/misc'
+import { z, defineCollection, reference } from 'astro:content'
 
 const article = defineCollection({
-  type: "content",
+  type: 'content',
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -10,7 +10,7 @@ const article = defineCollection({
       featured: z.object({
         image: image().refine(
           (val) => val.width <= 1920,
-          "Featured image width must be less than 1920 pixels."
+          'Featured image width must be less than 1920 pixels.'
         ),
         author: z
           .object({
@@ -34,17 +34,17 @@ const article = defineCollection({
         .date()
         .transform((val) => new Date(val))
         .optional(),
-      author: reference("author"),
+      author: reference('author'),
       category: z
         .string()
-        .default("uncategorized")
+        .default('uncategorized')
         .transform((val) => capitalize(val)),
       tags: z.array(z.string().transform((val) => capitalize(val))),
     }),
 })
 
 const author = defineCollection({
-  type: "data",
+  type: 'data',
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -76,14 +76,14 @@ const author = defineCollection({
 })
 
 const site = defineCollection({
-  type: "data",
+  type: 'data',
   schema: ({ image }) =>
     z.object({
       title: z.string(),
       tagline: z.string(),
       category: z.string(),
       repository: z.string(),
-      author: reference("author"),
+      author: reference('author'),
       lang: z.string(),
       avatar: image(),
       icon: image(),

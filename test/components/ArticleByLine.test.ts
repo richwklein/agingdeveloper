@@ -1,17 +1,17 @@
-import ArticleByLine from "@components/ArticleByLine.astro"
-import { experimental_AstroContainer as AstroContainer } from "astro/container"
-import { getEntry, type CollectionEntry } from "astro:content"
-import { beforeAll, describe, expect, test } from "vitest"
+import ArticleByLine from '@components/ArticleByLine.astro'
+import { experimental_AstroContainer as AstroContainer } from 'astro/container'
+import { getEntry, type CollectionEntry } from 'astro:content'
+import { beforeAll, describe, expect, test } from 'vitest'
 
 type RenderOptions = { className?: string }
 
-describe("ArticleByLine", () => {
+describe('ArticleByLine', () => {
   const published = new Date()
   let byLine: string
-  let author: CollectionEntry<"author">
+  let author: CollectionEntry<'author'>
 
   beforeAll(async () => {
-    author = await getEntry("author", "richwklein")
+    author = await getEntry('author', 'richwklein')
     byLine = await render()
   })
 
@@ -26,20 +26,20 @@ describe("ArticleByLine", () => {
     })
   }
 
-  test("that it is an address element", async () => {
+  test('that it is an address element', async () => {
     expect(byLine).toContain('<address id="article-byline"')
   })
 
-  test("that it links to the author", async () => {
+  test('that it links to the author', async () => {
     expect(byLine).toContain(`href="/author/${author.id}"`)
   })
 
-  test("that the date is correct", async () => {
+  test('that the date is correct', async () => {
     expect(byLine).toContain(`<time datetime="${published.toISOString()}"`)
   })
 
-  test("that class is set", async () => {
-    const result = await render({ className: "test-class" })
-    expect(result).toContain("test-class")
+  test('that class is set', async () => {
+    const result = await render({ className: 'test-class' })
+    expect(result).toContain('test-class')
   })
 })
