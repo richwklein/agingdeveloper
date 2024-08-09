@@ -9,7 +9,7 @@ jobs:
       matrix:
         branch:
           - ${{ github.head_ref }}
-          - "main"
+          # TODO add main branch once this is merged - "main"
 
     permissions:
       contents: read
