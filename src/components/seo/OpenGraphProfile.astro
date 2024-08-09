@@ -10,7 +10,7 @@
  */
 import slugify from "@sindresorhus/slugify"
 import type { CollectionEntry } from "astro:content"
-import OpenGraphBasic from "./OpenGraphBasic.astro"
+import OpenGraphCore from "./OpenGraphCore.astro"
 import OpenGraphImage from "./OpenGraphImage.astro"
 
 interface Props {
@@ -22,7 +22,7 @@ const { author, site } = Astro.props
 const baseUrl = import.meta.env.SITE
 ---
 
-<OpenGraphBasic
+<OpenGraphCore
   title={author.data.name}
   description={author.data.tagline}
   path={`${baseUrl}/author/${slugify(author.id)}`}

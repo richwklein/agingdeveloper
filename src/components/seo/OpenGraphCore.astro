@@ -1,22 +1,22 @@
 ---
 /**
- * @name OpenGraphBasic
+ * @name OpenGraphCore
  * Component used to build out the basic open graph meta tags.
  *
  * @return {Function} an Astro component factory function.
  *
  * @example
- * <OpenGraphBasic title={article.title} description={article.description} ... />
+ * <OpenGraphCore title={article.title} description={article.description} ... />
  */
 import type { CollectionEntry } from "astro:content"
 
 export type OpenGraphType = "website" | "article" | "profile"
 
 interface Props {
+  type: OpenGraphType
   title: string
   description: string
   path?: string
-  type: OpenGraphType
   site: CollectionEntry<"site">
 }
 
@@ -28,6 +28,6 @@ const fullUrl = path ? `${baseUrl}${path}` : baseUrl
 <meta property="og:type" content={type} />
 <meta property="og:url" content={fullUrl} />
 <meta property="og:title" content={title} />
-<meta property="og:description" name="description" content={description} />
+<meta property="og:description" content={description} />
 <meta property="og:site_name" content={site.data.title} />
 <meta property="og:locale" content={site.data.lang} />
