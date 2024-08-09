@@ -5,14 +5,13 @@
 import Layout from '@layouts/Layout.astro'
 import { getCollection } from 'astro:content'
 import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
-import { getSite, getSiteAuthor } from '@utils/site'
+import { getSite } from '@utils/site'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 import AuthorGrid from '@components/AuthorGrid.astro'
 
 const authors = await getCollection('author')
 const site = await getSite()
-const siteAuthor = await getSiteAuthor()
 const authorsPath = Astro.url.pathname
 ---
 
@@ -22,7 +21,6 @@ const authorsPath = Astro.url.pathname
       title="Meet Our Authors"
       description="Meet Our Authors: Discover the Voices Behind Our Content."
       path={authorsPath}
-      author={siteAuthor}
     />
     <BreadcrumbJson site={site} crumbs={[{ name: 'Authors', path: authorsPath }]} />
   </Fragment>

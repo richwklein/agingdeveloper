@@ -6,10 +6,8 @@
  * @return {Function} an Astro component factory function.
  *
  * @example
- * <SeoBasic title={article.data.title} description={article.data.description} author={author.data.name} />
+ * <SeoBasic title={article.data.title} description={article.data.description} />
  */
-import type { CollectionEntry } from 'astro:content'
-
 interface Props {
   title: string
   description: string

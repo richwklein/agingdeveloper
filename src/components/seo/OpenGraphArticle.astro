@@ -15,10 +15,9 @@ import OpenGraphImage from './OpenGraphImage.astro'
 
 interface Props {
   article: CollectionEntry<'article'>
-  site: CollectionEntry<'site'>
 }
 
-const { article, site } = Astro.props
+const { article } = Astro.props
 const modifiedDate = article.data.modified || article.data.published
 const baseUrl = import.meta.env.SITE
 ---
@@ -28,7 +27,6 @@ const baseUrl = import.meta.env.SITE
   description={article.data.description}
   path={`${baseUrl}/article/${article.slug}`}
   type={'article'}
-  site={site}
 />
 <OpenGraphImage
   image={article.data.featured.image}

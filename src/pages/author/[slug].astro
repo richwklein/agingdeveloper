@@ -22,7 +22,6 @@ import AuthorJson from '@components/seo/AuthorJson.astro'
 interface Props {
   author: CollectionEntry<'author'>
   site: CollectionEntry<'site'>
-  siteAuthor: CollectionEntry<'author'>
 }
 
 export async function getStaticPaths() {
@@ -39,7 +38,7 @@ export async function getStaticPaths() {
   return pages
 }
 
-const { site, author, siteAuthor } = Astro.props
+const { site, author } = Astro.props
 const limit = site.data.displayLimit
 const data = author.data
 const { entries: articleEntries, total } = await getArticlesByAuthor(author.id, limit)
@@ -52,7 +51,6 @@ const authorPath = Astro.url.pathname
       title={`Articles by ${data.name}: Perspective & Expertise`}
       description={`Explore the latest articles from ${data.name}. Dive into a collection of their work, showcasing their expertise, unique perspective, and contributions to our site.`}
       path={authorPath}
-      author={siteAuthor}
     />
     <BreadcrumbJson
       site={site}

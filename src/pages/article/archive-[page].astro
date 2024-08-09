@@ -7,7 +7,7 @@ import type { Page } from 'astro'
 import { getArticles } from '@utils/article'
 import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
 import Pagniation from '@components/Pagniation.astro'
-import { getSite, getSiteAuthor } from '@utils/site'
+import { getSite } from '@utils/site'
 import type { CollectionEntry } from 'astro:content'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
@@ -16,19 +16,17 @@ import ArticleGrid from '@components/ArticleGrid.astro'
 interface Props {
   page: Page<CollectionEntry<'article'>>
   site: CollectionEntry<'site'>
-  siteAuthor: CollectionEntry<'author'>
 }
 
 export async function getStaticPaths({ paginate }: any) {
   const site = await getSite()
-  const siteAuthor = await getSiteAuthor()
   const limit = site.data.displayLimit
 
   const entries = await getArticles()
-  return paginate(entries, { pageSize: limit, props: { site, siteAuthor } })
+  return paginate(entries, { pageSize: limit, props: { site } })
 }
 
-const { page, site, siteAuthor } = Astro.props
+const { page, site } = Astro.props
 const archivePath = Astro.url.pathname
 ---
 
@@ -38,7 +36,6 @@ const archivePath = Astro.url.pathname
       title={`Article Archive ${page.currentPage}: Explore All Our Content`}
       description={`Browse our comprehensive archive of articles. Discover every article published on ${site.data.title}, all in one place.`}
       path={archivePath}
-      author={siteAuthor}
     />
     <BreadcrumbJson
       site={site}

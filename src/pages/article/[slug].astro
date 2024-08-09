@@ -46,12 +46,7 @@ const { Content, remarkPluginFrontmatter: frontmatter } = await article.render()
 
 <Layout site={site}>
   <Fragment slot="seo">
-    <SeoBasic
-      title={data.title}
-      description={data.description}
-      path={articlePath}
-      author={author}
-    />
+    <SeoBasic title={data.title} description={data.description} path={articlePath} />
     <BreadcrumbJson
       site={site}
       crumbs={[
@@ -59,7 +54,7 @@ const { Content, remarkPluginFrontmatter: frontmatter } = await article.render()
         { name: data.title, path: articlePath },
       ]}
     />
-    <OpenGraphArticle article={article} site={site} />
+    <OpenGraphArticle article={article} />
     <ArticleJson article={article} author={author} wordCount={frontmatter.readingTime.words} />
   </Fragment>
   <article>
