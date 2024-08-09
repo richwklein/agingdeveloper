@@ -28,6 +28,7 @@ jobs:
         uses: actions/setup-node@v4.0.3
         with:
           node-version-file: ".tool-versions"
+          cache: "npm"
 
       - name: "Install dependencies"
         run: npm install
@@ -36,11 +37,12 @@ jobs:
         run: npm run coverage
 
       - name: "Upload coverage report"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.3.6
         with:
           name: coverage-${{ matrix.branch }}
-          path: coverage
+          path: test/coverage
 
+      # TODO move reporting to a separate workflow
       - name: "Report coverage on pull request"
         id: "coverage"
         uses: "ArtiomTr/jest-coverage-report-action@v2.3.0"
