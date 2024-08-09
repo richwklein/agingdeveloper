@@ -9,7 +9,7 @@ import { getCategories, getArticlesByCategory } from '@utils/article'
 import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
 import BackLink from '@components/BackLink.astro'
 import ArticleGrid from '@components/ArticleGrid.astro'
-import { getSite, getSiteAuthor } from '@utils/site'
+import { getSite } from '@utils/site'
 import type { CollectionEntry } from 'astro:content'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
@@ -22,19 +22,18 @@ interface Props {
 
 export async function getStaticPaths() {
   const site = await getSite()
-  const siteAuthor = await getSiteAuthor()
   const categories = await getCategories()
   const pages = categories.map((category) => {
     return {
       params: { slug: slugify(category) },
-      props: { category, site, siteAuthor },
+      props: { category, site },
     }
   })
 
   return pages
 }
 
-const { category, site, siteAuthor } = Astro.props
+const { category, site } = Astro.props
 const limit = site.data.displayLimit
 const { entries, total } = await getArticlesByCategory(category, limit)
 const categoryPath = Astro.url.pathname
@@ -46,7 +45,6 @@ const categoryPath = Astro.url.pathname
       title={`Latest ${category} Articles: Expert Insights & Tips`}
       description={`Explore our selection of ${category} articles, offering valuable insights, practical tips, and up-to-date trends.`}
       path={categoryPath}
-      author={siteAuthor}
     />
     <BreadcrumbJson
       site={site}

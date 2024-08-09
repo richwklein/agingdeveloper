@@ -83,8 +83,6 @@ const site = defineCollection({
       tagline: z.string(),
       category: z.string(),
       repository: z.string(),
-      author: reference('author'),
-      lang: z.string(),
       avatar: image(),
       icon: image(),
       background: z.string(),

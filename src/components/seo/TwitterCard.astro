@@ -15,10 +15,9 @@ interface Props {
   description: string
   image?: ImageMetadata
   imageAlt?: string
-  siteAuthor: CollectionEntry<'author'>
-  contentAuthor: CollectionEntry<'author'>
+  author?: CollectionEntry<'author'>
 }
-const { title, description, image, imageAlt, siteAuthor, contentAuthor } = Astro.props
+const { title, description, image, imageAlt, author } = Astro.props
 ---
 
 <meta name="twitter:card" content="summary_large_image" />
@@ -26,9 +25,4 @@ const { title, description, image, imageAlt, siteAuthor, contentAuthor } = Astro
 <meta name="twitter:description" content={description} />
 {image ? <meta name="twitter:image" content={image.src.split('?')[0]} /> : null}
 {image ? <meta name="twitter:image:alt" content={imageAlt || title} /> : null}
-{siteAuthor ? <meta name="twitter:site" content={siteAuthor.data.twitterUsername} /> : null}
-{
-  contentAuthor ? (
-    <meta name="twitter:creator" content={contentAuthor.data.twitterUsername} />
-  ) : null
-}
+{author ? <meta name="twitter:creator" content={author.data.twitterUsername} /> : null}

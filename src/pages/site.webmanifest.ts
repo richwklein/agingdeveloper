@@ -17,7 +17,6 @@ const manifest = {
   display: 'browser',
   background_color: site.data.background,
   theme_color: site.data.theme,
-  lang: site.data.lang,
   scope: baseUrl,
   icons: [
     { src: '/icons/favicon.ico', sizes: '48x48', type: 'image/x-icon' },

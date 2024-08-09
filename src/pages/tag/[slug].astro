@@ -9,7 +9,7 @@ import { getTags, getArticlesByTag } from '@utils/article'
 import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
 import BackLink from '@components/BackLink.astro'
 import ArticleGrid from '@components/ArticleGrid.astro'
-import { getSite, getSiteAuthor } from '@utils/site'
+import { getSite } from '@utils/site'
 import type { CollectionEntry } from 'astro:content'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
@@ -22,21 +22,19 @@ interface Props {
 
 export async function getStaticPaths() {
   const site = await getSite()
-  const siteAuthor = await getSiteAuthor()
-
   const tags = await getTags()
 
   const pages = tags.map((tag) => {
     return {
       params: { slug: slugify(tag) },
-      props: { tag, site, siteAuthor },
+      props: { tag, site },
     }
   })
 
   return pages
 }
 
-const { tag, site, siteAuthor } = Astro.props
+const { tag, site } = Astro.props
 const limit = site.data.displayLimit
 const { entries, total } = await getArticlesByTag(tag, limit)
 const tagPath = Astro.url.pathname
@@ -48,7 +46,6 @@ const tagPath = Astro.url.pathname
       title={`Tagged Articles: Explore Content on ${tag}`}
       description={`Discover all articles tagged with ${tag}. Dive into a collection of posts that share a common theme.`}
       path={tagPath}
-      author={siteAuthor}
     />
     <BreadcrumbJson
       site={site}

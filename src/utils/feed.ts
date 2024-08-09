@@ -26,7 +26,6 @@ export const getFeed = async () => {
     description: site.data.tagline,
     id: baseUrl,
     link: baseUrl,
-    language: site.data.lang,
     image: `${baseUrl}${site.data.avatar.src.split('?')[0]}`,
     favicon: `${baseUrl}${site.data.icon.src.split('?')[0]}`,
     feedLinks: new Map(feedInfo.map(({ id, path }) => [id, `${baseUrl}${path}`])),

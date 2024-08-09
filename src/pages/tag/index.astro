@@ -6,12 +6,11 @@ import Layout from '@layouts/Layout.astro'
 import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
 import { getTagsWithCount } from '@utils/article'
 import TagGrid from '@components/TagGrid.astro'
-import { getSite, getSiteAuthor } from '@utils/site'
+import { getSite } from '@utils/site'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 
 const site = await getSite()
-const siteAuthor = await getSiteAuthor()
 const { tags, total } = await getTagsWithCount()
 const tagsPath = Astro.url.pathname
 ---
@@ -22,7 +21,6 @@ const tagsPath = Astro.url.pathname
       title="Browse Our Tags: Find Articles by Topic"
       description="Explore our comprehensive list of article tags. Each tag represents a unique topic or theme, making it easy to find and explore content related to your interests. Discover how our posts are categorized and dive deeper into the subjects that matter most to you."
       path={tagsPath}
-      author={siteAuthor}
     />
     <BreadcrumbJson site={site} crumbs={[{ name: 'Tags', path: tagsPath }]} />
   </Fragment>

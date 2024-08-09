@@ -14,15 +14,13 @@ interface Props {
   title: string
   description: string
   path?: string
-  author: CollectionEntry<'author'>
 }
 
-const { title, description, author, path } = Astro.props
+const { title, description, path } = Astro.props
 const baseUrl = import.meta.env.SITE
 const fullUrl = path ? `${baseUrl}${path}` : baseUrl
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
-{author ? <meta name="author" content={author.data.name} /> : null}
 <link rel="canonical" href={fullUrl} />

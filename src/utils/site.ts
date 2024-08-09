@@ -8,8 +8,3 @@ export const getSite = async () => {
   }
   return site
 }
-
-export const getSiteAuthor = async () => {
-  const site = await getSite()
-  return await getEntry(site.data.author)
-}

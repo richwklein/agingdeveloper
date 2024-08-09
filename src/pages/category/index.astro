@@ -6,12 +6,11 @@ import Layout from '@layouts/Layout.astro'
 import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
 import { getCategoriesWithCount } from '@utils/article'
 import TagGrid from '@components/TagGrid.astro'
-import { getSite, getSiteAuthor } from '@utils/site'
+import { getSite } from '@utils/site'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 
 const site = await getSite()
-const siteAuthor = await getSiteAuthor()
 const { categories, total } = await getCategoriesWithCount()
 const categoriesPath = Astro.url.pathname
 ---
@@ -22,7 +21,6 @@ const categoriesPath = Astro.url.pathname
       title="Explore Our Categories: Discover Content by Topic"
       description="Navigate through all our content by category. Find articles organized by topic to easily explore the subjects that interest you most."
       path={categoriesPath}
-      author={siteAuthor}
     />
     <BreadcrumbJson site={site} crumbs={[{ name: 'Categories', path: categoriesPath }]} />
   </Fragment>

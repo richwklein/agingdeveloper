@@ -15,10 +15,9 @@ import OpenGraphImage from './OpenGraphImage.astro'
 
 interface Props {
   author: CollectionEntry<'author'>
-  site: CollectionEntry<'site'>
 }
 
-const { author, site } = Astro.props
+const { author } = Astro.props
 const baseUrl = import.meta.env.SITE
 ---
 
@@ -27,8 +26,8 @@ const baseUrl = import.meta.env.SITE
   description={author.data.tagline}
   path={`${baseUrl}/author/${slugify(author.id)}`}
   type={'profile'}
-  site={site}
 />
+
 <OpenGraphImage image={author.data.avatar} imageAlt={author.data.name} />
 <meta property="profile:first_name" content={author.data.givenName} />
 <meta property="profile:last_name" content={author.data.familyName} />

@@ -1,3 +1,5 @@
+import slugify from '@sindresorhus/slugify'
+
 /**
  * Calculates a font weight between 300 and 900 rounding up to the nearest 100.
  *
@@ -22,4 +24,17 @@ export const capitalize = (value: string) => {
     .split(/\s+/)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
+}
+
+type AbsoluteUrlOptions = { path?: string; id?: string; clean?: boolean }
+export const absoluteUrl = async ({ path, id, clean = false }: AbsoluteUrlOptions = {}) => {
+  const slug = id == null ? null : clean ? slugify(id) : id
+  const siteUrl = import.meta.env.SITE
+  const parts = [siteUrl, path, slug]
+
+  // remove any null values, strip trailing slashes, then join with slash
+  return parts
+    .filter((part) => part != null)
+    .map((part) => (part.endsWith('/') ? part.substring(-1) : part))
+    .join('/')
 }

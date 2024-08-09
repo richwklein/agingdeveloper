@@ -7,10 +7,7 @@
  * @return {React.ReactElement} - The react component
  *
  * @example
- * <ArticleTimeToRead
- *   minutes={timeToRead.minutes}
- *   words={timeToRead.words}
- *   lang={lang} />
+ * <ArticleTimeToRead minutes={timeToRead.minutes} words={timeToRead.words}  />
  */
 import { Icon } from 'astro-icon/components'
 
@@ -21,7 +18,7 @@ interface Props {
 }
 
 const { minutes, words, class: className } = Astro.props
-const wordFormat = new Intl.NumberFormat('en-US').format(words)
+const wordFormat = new Intl.NumberFormat('en-us').format(words)
 const readTemplate = `${Math.ceil(minutes)} min read`
 const wordsTemplate = `${wordFormat} words`
 ---

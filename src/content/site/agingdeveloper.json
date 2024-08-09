@@ -3,10 +3,8 @@
   "tagline": "for growing old in the software development community",
   "category": "Technology",
   "repository": "https://github.com/richwklein/agingdeveloper",
-  "lang": "en-US",
   "avatar": "../image/wizard.jpg",
   "icon": "../image/favicon.jpg",
-  "author": "richwklein",
   "background": "#ffffff",
   "theme": "#37474f",
   "displayLimit": 15

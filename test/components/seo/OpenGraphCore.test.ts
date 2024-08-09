@@ -1,17 +1,13 @@
 import OpenGraphCore from '@components/seo/OpenGraphCore.astro'
-import { getSite } from '@utils/site'
 import { experimental_AstroContainer as AstroContainer } from 'astro/container'
-import type { CollectionEntry } from 'astro:content'
 import { beforeAll, describe, expect, test } from 'vitest'
 
 type RenderOptions = { type?: string; path?: string }
 
 describe('OpenGraphCore', () => {
-  let site: CollectionEntry<'site'>
   let headers: string | undefined
 
   beforeAll(async () => {
-    site = await getSite()
     headers = await render()
   })
 
@@ -23,7 +19,6 @@ describe('OpenGraphCore', () => {
         description: 'Description',
         path: path,
         type: type,
-        site: site,
       },
     })
   }
@@ -43,14 +38,6 @@ describe('OpenGraphCore', () => {
 
   test('that it contains an open graph description', async () => {
     expect(headers).toContain('meta property="og:description" content="Description"')
-  })
-
-  test('that it contains an open graph site_name', async () => {
-    expect(headers).toContain(`meta property="og:site_name" content="${site.data.title}"`)
-  })
-
-  test('that it contains an open graph locale', async () => {
-    expect(headers).toContain(`meta property="og:locale" content="${site.data.lang}"`)
   })
 
   test('that it can take an article type', async () => {

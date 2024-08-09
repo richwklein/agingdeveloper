@@ -1,7 +1,7 @@
 ---
 import ArticleImage from '@components/ArticleImage.astro'
 import Layout from '@layouts/Layout.astro'
-import { getSite, getSiteAuthor } from '@utils/site'
+import { getSite } from '@utils/site'
 import image from '../content/image/lachlan-donald-eaTHXNIUsYM-unsplash.jpg'
 import BackLink from '@components/BackLink.astro'
 import SeoBasic from '@components/seo/SeoBasic.astro'
@@ -12,7 +12,6 @@ import LinkInternal from '@components/LinkInternal.astro'
  */
 
 const site = await getSite()
-const siteAuthor = await getSiteAuthor()
 const featured = {
   image: image,
   author: {
@@ -31,7 +30,6 @@ const featured = {
     <SeoBasic
       title={`Oops! Page Not Found - ${site.data.title}`}
       description={`Sorry, the page you're looking for doesn't exist. Visit our homepage to find what you need. Explore more at ${site.data.title} for great content and resources.`}
-      author={siteAuthor}
     />
   </Fragment>
   <ArticleImage featured={featured} />
