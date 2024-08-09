@@ -37,4 +37,9 @@ describe("ArticleByLine", () => {
   test("that the date is correct", async () => {
     expect(byLine).toContain(`<time datetime="${published.toISOString()}"`)
   })
+
+  test("that class is set", async () => {
+    const result = await render({ className: "test-class" })
+    expect(result).toContain("test-class")
+  })
 })

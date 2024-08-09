@@ -15,8 +15,8 @@ import LinkInternal from "@components/LinkInternal.astro"
 interface Props {
   name: string
   to: string
-  class?: string
   useViewText?: boolean
+  class?: string
 }
 
 const { name, to, class: className, useViewText = true } = Astro.props

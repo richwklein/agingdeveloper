@@ -55,7 +55,7 @@ describe("LinkInternal", () => {
   })
 
   test("that class is set", async () => {
-    const result = await render({ className: "px-4 py-2" })
-    expect(result).toContain('class="px-4 py-2"')
+    const result = await render({ className: "test-class" })
+    expect(result).toContain("test-class")
   })
 })
