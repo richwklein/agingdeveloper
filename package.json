@@ -44,7 +44,9 @@
     "typescript": "^5.4.5",
     "vitest": "^2.0.5"
   },
-  "resolutions": {
-    "cheerio": "1.0.0-rc.12"
+  "overrides": {
+    "astro-icon": {
+      "cheerio": "1.0.0-rc.12"
+    }
   }
 }
