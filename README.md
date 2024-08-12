@@ -12,6 +12,7 @@ This is the personal site of Richard Klein. It is a static site built using [typ
   - [Create a production build.](#create-a-production-build)
   - [Serve the production build locally.](#serve-the-production-build-locally)
 - [VSCode settings](#vscode-settings)
+- [Images](#images)
 - [Testing](#testing)
 
 ## License
@@ -24,7 +25,7 @@ This is the personal site of Richard Klein. It is a static site built using [typ
 
 ## Content vs Source Code
 
-Both the source code for the site and the content that is hosted on the site are stored in this repository. With the exception of some top level files the majority of the source code is located in the `src` folder. The content hosted on the site is located in the `content` folder. The content is then symlinked into the `src` folder.
+Both the source code for the site and the content that is hosted on the site are stored in this repository. The content hosted on the site is located in the `content` folder within the `src` folder. I would like to move this outside of the `src` folder, but using a symlink did not work well when moving from device to device. I'm subscribed to the [content layer improvements RFD](https://github.com/withastro/roadmap/pull/982), which should allow for this.
 
 ## Start local development
 
@@ -70,7 +71,7 @@ VSCode is the main editor that is used on this site. ESLint is used for linting 
 
 ## Images
 
-Several different size and aspect ratios are used for the cover images on the site. The article cards can have hd video, 3/4, or square aspect ratios depending on the breakpoint. The images are used raw in social media previews, because of that the images should be sized to _1920px_.
+Several different size and aspect ratios are used for the cover images on the site. The article cards can have hd video, 3/4, or square aspect ratios depending on the breakpoint. The images are used raw in social media previews, because of that the images should be sized to _1920px_. The icons used on the site are [Material Design Icons](https://icon-sets.iconify.design/mdi/) from iconify.
 
 ## Testing
 
