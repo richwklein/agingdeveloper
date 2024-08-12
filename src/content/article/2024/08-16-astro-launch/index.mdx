@@ -1,0 +1,35 @@
+---
+slug: 2024-08-16-astro-launch
+title: Houston, We Have Liftoff
+description: 'The seemingly annual process of reworking this site in another framework.'
+author: richwklein
+featured:
+  image: spacex-6SbFGnQTE8s-unsplash.jpg
+  author:
+    name: SpaceX
+    url: https://unsplash.com/@spacex?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
+  site:
+    name: Unsplash
+    url: https://unsplash.com/photos/horizon-during-dusk-6SbFGnQTE8s?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
+tags:
+  - astro
+  - astrojs
+  - typescript
+  - tailwind
+  - test
+  - rebuild
+category: code
+published: '2024-08-16'
+---
+
+A few years ago, I started eyeing the framework [Astro](https://astro.build/), and it immediately caught my attention. When I refreshed the site last year by updating to a new version of [Gatsby](https://www.gatsbyjs.com/), I considered making the switch to Astro at that time. However, I decided against it, as it would require learning a new toolset, and I believed that Gatsby would offer an easier upgrade path and simpler long-term maintenance to keep the site running smoothly.
+
+## Gatsby Concerns
+
+I believe it's important to carefully manage any changes that could disrupt existing systems. However, I've become increasingly concerned about the future of the Gatsby framework. According to their [long term support policy](https://www.gatsbyjs.com/docs/reference/release-notes/gatsby-version-support/) for Gatsby versions is one year. , each version of Gatsby is only supported for one year. The latest major version was released on November 8th, 2022, and since then, there hasn't been any significant feature development. In fact, there's an ongoing discussion within the Gatsby community questioning whether the project has been discontinued. Jared Scott, a member of the community, provided a detailed [analysis](https://github.com/gatsbyjs/gatsby/issues/38696#issuecomment-2103823965) of recent commits, showing that no substantial updates have been made.
+
+Additionally, Gatsby was [acquired](https://www.netlify.com/press/netlify-acquires-gatsby-inc-to-accelerate-adoption-of-composable-web-architectures/) by Netlify in February 2023. Shortly after, Netlify experienced a [round of layoffs](https://www.netlify.com/blog/ceo-announcement-to-the-netlify-team/) in July 2023, which adds to the uncertainty surrounding Gatsby's future.
+
+## Astro Exploration
+
+Given my concerns about Gatsby, I began exploring Astro as an alternative about three weeks ago. Since then, I've made significant changes behind the scenes: transitioning from JavaScript to TypeScript, replacing React components with Astro components, and switching from Material UI to Tailwind for styling. I'll dive deeper into these changes throughout this article. Today, I'm excited to celebrate the launch of The Aging Developer, now completely rewritten using the Astro framework.

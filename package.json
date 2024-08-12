@@ -46,7 +46,7 @@
   },
   "overrides": {
     "astro-icon": {
-      "cheerio": "1.0.0-rc.12"
+      "@iconify/tools": "^4.0.0"
     }
   }
 }
