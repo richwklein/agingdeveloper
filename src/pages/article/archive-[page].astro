@@ -2,16 +2,16 @@
 /**
  * An archive page of all articles on the site.
  */
-import Layout from '@layouts/Layout.astro'
-import type { Page } from 'astro'
-import { getArticles } from '@utils/article'
+import ArticleGrid from '@components/ArticleGrid.astro'
 import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
 import Pagniation from '@components/Pagniation.astro'
-import { getSite } from '@utils/site'
-import type { CollectionEntry } from 'astro:content'
-import SeoBasic from '@components/seo/SeoBasic.astro'
 import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
-import ArticleGrid from '@components/ArticleGrid.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import Layout from '@layouts/Layout.astro'
+import { getArticles } from '@utils/article'
+import { getSite } from '@utils/site'
+import type { Page } from 'astro'
+import type { CollectionEntry } from 'astro:content'
 
 interface Props {
   page: Page<CollectionEntry<'article'>>

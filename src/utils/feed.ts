@@ -1,10 +1,11 @@
-import { getCollection } from 'astro:content'
-import { getSite } from './site'
-import { Feed } from 'feed'
 import slugify from '@sindresorhus/slugify'
-import sanitizeHtml from 'sanitize-html'
+import { getCollection } from 'astro:content'
+import { Feed } from 'feed'
 import MarkdownIt from 'markdown-it'
+import sanitizeHtml from 'sanitize-html'
+
 import { getArticles } from './article'
+import { getSite } from './site'
 
 const parser = new MarkdownIt()
 

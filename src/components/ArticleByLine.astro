@@ -9,9 +9,9 @@
  * @example
  * <ArticleByLine author={author} published={published} />
  */
-import type { CollectionEntry } from 'astro:content'
 import LinkInternal from '@components/LinkInternal.astro'
 import slugify from '@sindresorhus/slugify'
+import type { CollectionEntry } from 'astro:content'
 
 interface Props {
   author: CollectionEntry<'author'>

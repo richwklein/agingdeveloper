@@ -1,37 +1,34 @@
-import ArticleTitle from '@components/ArticleTitle.astro'
+import ArticleTimeToRead from '@components/ArticleTimeToRead.astro'
 import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import { beforeAll, expect, test } from 'vitest'
 
 type RenderOptions = { className?: string }
-
-let title: string
+let ttr: string
 
 beforeAll(async () => {
-  title = await render()
+  ttr = await render()
 })
 
 const render = async ({ className }: RenderOptions = {}) => {
   const container = await AstroContainer.create()
-  return await container.renderToString(ArticleTitle, {
+  return await container.renderToString(ArticleTimeToRead, {
     props: {
-      title: 'Title',
-      description: 'Description',
+      minutes: 10,
+      words: 100,
       class: className,
     },
   })
 }
-test('that it contains correct tags', async () => {
-  expect(title).toContain('<hgroup')
-  expect(title).toContain('<h2')
-  expect(title).toContain('<h3')
+test('that it contains small tags', async () => {
+  expect(ttr).toContain('<small')
 })
 
-test('that it contains the title', async () => {
-  expect(title).toContain('>Title</h2>')
+test('that it contains the time to read', async () => {
+  expect(ttr).toContain('>10 min read<')
 })
 
 test('that it contains the number of words', async () => {
-  expect(title).toContain('>Description</h3>')
+  expect(ttr).toContain('>100 words<')
 })
 
 test('that class is set', async () => {

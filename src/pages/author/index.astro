@@ -2,13 +2,13 @@
 /**
  * A page of all the authors on the site.
  */
-import Layout from '@layouts/Layout.astro'
-import { getCollection } from 'astro:content'
-import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
-import { getSite } from '@utils/site'
-import SeoBasic from '@components/seo/SeoBasic.astro'
-import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 import AuthorGrid from '@components/AuthorGrid.astro'
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import Layout from '@layouts/Layout.astro'
+import { getSite } from '@utils/site'
+import { getCollection } from 'astro:content'
 
 const authors = await getCollection('author')
 const site = await getSite()

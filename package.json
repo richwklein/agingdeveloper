@@ -5,12 +5,15 @@
   "version": "3.0.0-alpha1",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "format": "prettier --write  \"**/*.{js,mjs,cjs,jsx,ts,tsx,astro}\"",
-    "test": "vitest run",
-    "coverage": "vitest run --coverage"
+    "dev": "npx astro dev",
+    "build": "npx astro check && npx astro build",
+    "preview": "npx astro preview",
+    "lint": "npx eslint \"**/*.{js,mjs,cjs,ts,astro}\"",
+    "lint:fix": "npx eslint --fix \"**/*.{js,mjs,cjs,ts,astro}\"",
+    "format": "npx prettier --check \"**/*.{js,mjs,cjs,ts,astro}\"",
+    "format:fix": "npx prettier --write \"**/*.{js,mjs,cjs,ts,astro}\"",
+    "test": "npx vitest run",
+    "coverage": "npx vitest run --coverage"
   },
   "dependencies": {
     "@astrojs/check": "^0.8.2",
@@ -35,18 +38,29 @@
     "tailwindcss": "^3.4.3"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.1.1",
+    "@eslint/js": "^9.9.0",
     "@types/markdown-it": "^14.1.2",
     "@types/sanitize-html": "^2.11.0",
+    "@typescript-eslint/parser": "^8.1.0",
     "@vitest/coverage-v8": "^2.0.3",
+    "eslint": "^9.9.0",
+    "eslint-plugin-astro": "^1.2.3",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-vitest": "^0.5.4",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "typescript": "^5.4.5",
+    "typescript-eslint": "^8.1.0",
     "vitest": "^2.0.5"
   },
   "overrides": {
     "astro-icon": {
       "@iconify/tools": "^4.0.0"
+    },
+    "@typescript-eslint/utils": {
+      "eslint": "^9.9.0"
     }
   }
 }

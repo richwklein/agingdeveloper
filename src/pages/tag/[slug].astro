@@ -2,17 +2,17 @@
 /**
  * A single tag page with the latest articles for that tag.
  */
+import ArticleGrid from '@components/ArticleGrid.astro'
+import BackLink from '@components/BackLink.astro'
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
 import Layout from '@layouts/Layout.astro'
 import slugify from '@sindresorhus/slugify'
-import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
-import { getTags, getArticlesByTag } from '@utils/article'
-import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
-import BackLink from '@components/BackLink.astro'
-import ArticleGrid from '@components/ArticleGrid.astro'
+import { getArticlesByTag, getTags } from '@utils/article'
 import { getSite } from '@utils/site'
 import type { CollectionEntry } from 'astro:content'
-import SeoBasic from '@components/seo/SeoBasic.astro'
-import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 
 interface Props {
   tag: string

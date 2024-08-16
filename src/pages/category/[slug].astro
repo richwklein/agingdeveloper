@@ -2,17 +2,17 @@
 /**
  * A page for a single category with the latest articles for that category.
  */
+import ArticleGrid from '@components/ArticleGrid.astro'
+import BackLink from '@components/BackLink.astro'
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
 import Layout from '@layouts/Layout.astro'
 import slugify from '@sindresorhus/slugify'
-import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
-import { getCategories, getArticlesByCategory } from '@utils/article'
-import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
-import BackLink from '@components/BackLink.astro'
-import ArticleGrid from '@components/ArticleGrid.astro'
+import { getArticlesByCategory, getCategories } from '@utils/article'
 import { getSite } from '@utils/site'
 import type { CollectionEntry } from 'astro:content'
-import SeoBasic from '@components/seo/SeoBasic.astro'
-import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 
 interface Props {
   category: string

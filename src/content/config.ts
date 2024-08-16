@@ -1,5 +1,5 @@
 import { capitalize } from '@utils/misc'
-import { z, defineCollection, reference } from 'astro:content'
+import { defineCollection, reference, z } from 'astro:content'
 
 const article = defineCollection({
   type: 'content',

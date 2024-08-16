@@ -1,6 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content'
-
-let articles: Array<CollectionEntry<'article'>>
+import { getCollection } from 'astro:content'
 
 /**
  * Get a list of categories.
@@ -62,9 +60,7 @@ export const getTagsWithCount = async () => {
  * Get a list of article collection entries.
  */
 export const getArticles = async (limit?: number) => {
-  if (articles == null) {
-    articles = await getCollection('article')
-  }
+  const articles = await getCollection('article')
   return articles
     .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
     .slice(0, limit)

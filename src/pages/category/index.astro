@@ -2,13 +2,13 @@
 /**
  * A page of all the categories on the site.
  */
-import Layout from '@layouts/Layout.astro'
 import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
-import { getCategoriesWithCount } from '@utils/article'
-import TagGrid from '@components/TagGrid.astro'
-import { getSite } from '@utils/site'
-import SeoBasic from '@components/seo/SeoBasic.astro'
 import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import TagGrid from '@components/TagGrid.astro'
+import Layout from '@layouts/Layout.astro'
+import { getCategoriesWithCount } from '@utils/article'
+import { getSite } from '@utils/site'
 
 const site = await getSite()
 const { categories, total } = await getCategoriesWithCount()

@@ -9,9 +9,9 @@
  * @example
  * <ArticleCard article={entry} />
  */
+import LinkInternal from '@components/LinkInternal.astro'
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
-import LinkInternal from '@components/LinkInternal.astro'
 
 interface Props {
   article: CollectionEntry<'article'>

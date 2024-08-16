@@ -9,8 +9,8 @@
  * @example
  * <ArticleImage featured={featured} />
  */
-import type { ImageMetadata } from 'astro'
 import LinkExternal from '@components/LinkExternal.astro'
+import type { ImageMetadata } from 'astro'
 import { Image } from 'astro:assets'
 
 interface Props {
@@ -54,7 +54,7 @@ const alt = author ? author.name : 'unknown'
       />
     </div>
     {
-      author && site ? (
+      author || site ? (
         <figcaption>
           <small class:list={['mt-1 text-sm text-stone-700/85']}>
             {author ? (

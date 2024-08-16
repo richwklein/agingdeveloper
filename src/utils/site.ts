@@ -1,10 +1,5 @@
-import { getEntry, type CollectionEntry } from 'astro:content'
-
-let site: CollectionEntry<'site'>
+import { getEntry } from 'astro:content'
 
 export const getSite = async () => {
-  if (site == null) {
-    site = await getEntry('site', 'agingdeveloper')
-  }
-  return site
+  return await getEntry('site', 'agingdeveloper')
 }

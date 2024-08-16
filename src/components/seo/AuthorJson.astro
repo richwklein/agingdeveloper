@@ -42,7 +42,7 @@ const socials = author.data.socials || []
       },
       description: author.data.tagline,
       image: `${baseUrl}${author.data.avatar.src.split('?')[0]}`,
-      sameAs: socials.map((social: any) => {
+      sameAs: socials.map((social) => {
         return social.url
       }),
     },

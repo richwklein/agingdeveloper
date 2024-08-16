@@ -2,22 +2,22 @@
 /**
  * A page for a single author and the latest articles from that author.
  */
-import Layout from '@layouts/Layout.astro'
-import { getCollection } from 'astro:content'
-import slugify from '@sindresorhus/slugify'
-import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
-import { getArticlesByAuthor } from '@utils/article'
-import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
-import type { CollectionEntry } from 'astro:content'
-import BackLink from '@components/BackLink.astro'
 import ArticleGrid from '@components/ArticleGrid.astro'
-import { getSite } from '@utils/site'
-import SocialBar from '@components/SocialBar.astro'
-import { Image } from 'astro:assets'
-import SeoBasic from '@components/seo/SeoBasic.astro'
+import BackLink from '@components/BackLink.astro'
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
+import AuthorJson from '@components/seo/AuthorJson.astro'
 import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 import OpenGraphProfile from '@components/seo/OpenGraphProfile.astro'
-import AuthorJson from '@components/seo/AuthorJson.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import SocialBar from '@components/SocialBar.astro'
+import Layout from '@layouts/Layout.astro'
+import slugify from '@sindresorhus/slugify'
+import { getArticlesByAuthor } from '@utils/article'
+import { getSite } from '@utils/site'
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
 
 interface Props {
   author: CollectionEntry<'author'>

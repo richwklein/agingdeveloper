@@ -33,3 +33,35 @@ Additionally, Gatsby was [acquired](https://www.netlify.com/press/netlify-acquir
 ## Astro Exploration
 
 Given my concerns about Gatsby, I began exploring Astro as an alternative about three weeks ago. Since then, I've made significant changes behind the scenes: transitioning from JavaScript to TypeScript, replacing React components with Astro components, and switching from Material UI to Tailwind for styling. I'll dive deeper into these changes throughout this article. Today, I'm excited to celebrate the launch of The Aging Developer, now completely rewritten using the Astro framework.
+
+## Typescript
+
+TypeScript is a version of JavaScript that includes extra features to help developers write more reliable code. One of its key benefits is adding "types" to variables, which means the code can check for certain errors before it even runs. I’ve attempted to switch my site to TypeScript a few times in the past, but it required a lot of setup, and I could never get it quite right. What’s great about Astro is that it comes with built-in TypeScript support, making the transition much smoother. The documentation provided clear instructions, and I was able to get everything set up without much hassle. Previously, with Gatsby, I used a package called `prop-types` to define the types for my components. Now, with TypeScript, I can easily do this using an interface, which is both simpler and more powerful.
+
+```ts
+interface Props {
+  image: ImageMetadata
+  imageAlt?: string
+  site: CollectionEntry<'site'>
+}
+```
+
+Astro includes a handy [check](https://docs.astro.build/en/guides/typescript/#type-checking) function that automatically scans your code for errors, such as type mismatches, ensuring everything works smoothly before building the site.
+
+## Good
+
+- fast (vite) less than 1 second to start the dev server
+- styling is via css so less inline styles
+- truly builds static html & css
+- client side scripts done via web components
+- typing via typescript
+- easy non-component pages via the server endpoints apis
+- typed methods for getting content collections vs graphql
+
+## Bad
+
+- hard to manipulate image sizes outisde of pages
+- lost the easier image placeholds with gatsby
+- astro components do not really support jsdocs
+- need to use an experimental feature to unit test components
+  import type ts from "typescript"

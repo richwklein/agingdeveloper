@@ -1,13 +1,14 @@
 ---
+import '@styles/main.css'
+import '@fontsource/noto-serif-georgian'
+import '@fontsource/noto-sans-georgian'
+import '@fontsource/fira-code'
+
 import PageFooter from '@components/PageFooter.astro'
 import PageHeader from '@components/PageHeader.astro'
 import ScrollTop from '@components/ScrollTop.astro'
 import { feedInfo } from '@utils/feed'
 import type { CollectionEntry } from 'astro:content'
-import '@fontsource/noto-serif-georgian'
-import '@fontsource/noto-sans-georgian'
-import '@fontsource/fira-code'
-import '@styles/main.css'
 
 interface Props {
   site: CollectionEntry<'site'>
@@ -16,6 +17,7 @@ interface Props {
 const { site } = Astro.props
 const data = site.data
 const baseUrl = import.meta.env.SITE
+const analyticsId = import.meta.env.ANALYTICS_TRACKING_ID
 ---
 
 <!doctype html>
@@ -43,6 +45,17 @@ const baseUrl = import.meta.env.SITE
     }
     <meta name="generator" content={Astro.generator} />
     <slot name="seo" />
+    <script is:inline async src=`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`
+    ></script>
+    <script is:inline define:vars={{ analyticsId }}>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        // eslint-disable-next-line prefer-rest-params
+        window.dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', analyticsId)
+    </script>
   </head>
   <body>
     <PageHeader site={site} class:list={['mb-8']} />
