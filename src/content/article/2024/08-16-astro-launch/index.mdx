@@ -48,20 +48,78 @@ interface Props {
 
 Astro includes a handy [check](https://docs.astro.build/en/guides/typescript/#type-checking) function that automatically scans your code for errors, such as type mismatches, ensuring everything works smoothly before building the site.
 
-## Good
+## Components
 
-- fast (vite) less than 1 second to start the dev server
-- styling is via css so less inline styles
-- truly builds static html & css
-- client side scripts done via web components
-- typing via typescript
-- easy non-component pages via the server endpoints apis
-- typed methods for getting content collections vs graphql
+Astro components are made up of two main parts. The first part, known as the "frontmatter," contains the component’s script, which runs during the website's build process. The second part is the HTML template, which uses a mix of standard HTML and JSX-like syntax to structure the content. If you need to add interactivity on the client side (like responding to user clicks), you can do this with script tags within the component. Since I only need a small amount of client-side interaction, I opted to use **web components** for those tasks. For example, I created a component that displays a floating action button (FAB) that lets users quickly scroll back to the top of the page.
 
-## Bad
+```tsx
+<scroll-top class:list={['fixed bottom-8 right-8']}>
+  <button
+    class:list={[
+      'rounded-full bg-secondary-main p-2 text-secondary-contrast opacity-0 shadow-xl',
+      'hover:bg-secondary-dark focus:bg-secondary-dark'
+    ]}
+  >
+    <Icon title="Scroll to Top" name="mdi:keyboard-arrow-up" class:list={['h-6 w-6 ']} />
+  </button>
+</scroll-top>
 
-- hard to manipulate image sizes outisde of pages
-- lost the easier image placeholds with gatsby
-- astro components do not really support jsdocs
-- need to use an experimental feature to unit test components
-  import type ts from "typescript"
+<script>
+  // Define the behaviour for our new type of HTML element.
+  class ScrollTop extends HTMLElement {
+    constructor() {
+      super()
+
+      let timer: number
+      const button = this.querySelector('button')
+      button?.addEventListener('click', () => {
+        window.clearTimeout(timer)
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+      })
+
+      const showButton = () => {
+        window.clearTimeout(timer)
+        timer = window.setTimeout(() => {
+          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            button?.classList.remove('fade-out')
+            button?.classList.add('fade-in')
+          } else {
+            button?.classList.remove('fade-in')
+            button?.classList.add('fade-out')
+          }
+        }, 2.5)
+      }
+
+      window.onscroll = () => {
+        showButton()
+      }
+    }
+  }
+
+  // Tell the browser to use our ScrollTop class for <scroll-top> elements.
+  customElements.define('scroll-top', ScrollTop)
+</script>
+```
+
+Astro is compatible with various component libraries, including React, Vue, Svelte, and more. This site initially used [React](https://react.dev/) components along with the (Material UI component library](https://mui.com/material-ui/).
+
+However, as I transitioned to Astro components, I decided to replace the React components entirely. Since Material UI is specifically designed for React, I needed a new approach to styling. I opted for [Tailwind CSS](https://tailwindcss.com/), a utility-first CSS framework. Tailwind doesn’t provide pre-made components like Material UI, but it is great in building custom designs. I used [TailwindFlex](https://tailwindflex.com/), as a valuable guide for creating the components for the site. The ScrollTop component above demonstrates how Tailwind CSS can be used to achieve the desired look.
+
+```tsx
+  <button
+    class:list={[
+      'rounded-full bg-secondary-main p-2 text-secondary-contrast opacity-0 shadow-xl',
+      'hover:bg-secondary-dark focus:bg-secondary-dark'
+    ]}
+  >
+```
+
+## Issues
+
+I've encountered a few challenges and limitations. Manipulating image sizes has been difficult when working with endpoint APIs compared to standard pages. Additionally, the site has lost the blurred image placeholders that were easily implemented in Gatsby. Since Astro uses [Sharp](https://sharp.pixelplumbing.com/) as its default image service, I believe these issues can be resolved, but they do require some additional effort.
+
+Astro components currently fall short in terms of documentation support, though this is on the roadmap for future updates. Another challenge has been the need to rely on an experimental feature to write unit tests for my components, which isn’t ideal for stability or long-term maintenance.
+
+## Impressions
+
+Overall, I have a positive impression of the framework. The speed at which the development server runs and builds is impressive. I can build the entire site with image optimizations from a cold start in under 30 seconds—a significant improvement over the previous setup, where just starting the dev server took longer. Astro delivers the static HTML and CSS generation I had been hoping for, making it a strong choice for content focused projects.

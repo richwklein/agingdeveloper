@@ -14,7 +14,8 @@ import { Icon } from 'astro-icon/components'
 <scroll-top class:list={['fixed bottom-8 right-8']}>
   <button
     class:list={[
-      'rounded-full bg-secondary-main p-2 text-secondary-contrast opacity-0 shadow-xl hover:bg-secondary-dark',
+      'rounded-full bg-secondary-main p-2 text-secondary-contrast opacity-0 shadow-xl',
+      'hover:bg-secondary-dark focus:bg-secondary-dark',
     ]}
   >
     <Icon title="Scroll to Top" name="mdi:keyboard-arrow-up" class:list={['h-6 w-6 ']} />
@@ -53,6 +54,6 @@ import { Icon } from 'astro-icon/components'
     }
   }
 
-  // Tell the browser to use our AstroHeart class for <astro-heart> elements.
+  // Tell the browser to use our ScrollTop class for <scroll-top> elements.
   customElements.define('scroll-top', ScrollTop)
 </script>
