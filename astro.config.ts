@@ -1,11 +1,12 @@
-import { defineConfig } from 'astro/config'
-import tailwind from '@astrojs/tailwind'
-import icon from 'astro-icon'
-import { remarkReadingTime } from './src/utils/readTime.ts'
-import { remarkExcerpt } from './src/utils/excerpt.ts'
 import mdx from '@astrojs/mdx'
-import sitemap from '@astrojs/sitemap'
 import netlify from '@astrojs/netlify'
+import sitemap from '@astrojs/sitemap'
+import tailwind from '@astrojs/tailwind'
+import { defineConfig } from 'astro/config'
+import icon from 'astro-icon'
+
+import { remarkExcerpt } from './src/utils/excerpt.ts'
+import { remarkReadingTime } from './src/utils/readTime.ts'
 
 const { URL: SITE_URL, DEPLOY_PRIME_URL: DEPLOY_URL, CONTEXT: DEPLOY_CONTEXT = 'dev' } = process.env
 const siteUrl =
