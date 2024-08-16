@@ -16,11 +16,13 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.ref }}
+
       - name: "Automatic GitHub Release"
         id: "release"
         uses: "justincy/github-action-npm-release@2.0.2"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: "Output Step"
         env:
           RELEASE_TAG: ${{ steps.release.outputs.release_tag }}
