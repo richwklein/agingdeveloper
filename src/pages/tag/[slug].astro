@@ -1,0 +1,62 @@
+---
+/**
+ * A single tag page with the latest articles for that tag.
+ */
+import ArticleGrid from '@components/ArticleGrid.astro'
+import BackLink from '@components/BackLink.astro'
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import Layout from '@layouts/Layout.astro'
+import slugify from '@sindresorhus/slugify'
+import { getArticlesByTag, getTags } from '@utils/article'
+import { getSite } from '@utils/site'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  tag: string
+  site: CollectionEntry<'site'>
+  siteAuthor: CollectionEntry<'author'>
+}
+
+export async function getStaticPaths() {
+  const site = await getSite()
+  const tags = await getTags()
+
+  const pages = tags.map((tag) => {
+    return {
+      params: { slug: slugify(tag) },
+      props: { tag, site },
+    }
+  })
+
+  return pages
+}
+
+const { tag, site } = Astro.props
+const limit = site.data.displayLimit
+const { entries, total } = await getArticlesByTag(tag, limit)
+const tagPath = Astro.url.pathname
+---
+
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic
+      title={`Tagged Articles: Explore Content on ${tag}`}
+      description={`Discover all articles tagged with ${tag}. Dive into a collection of posts that share a common theme.`}
+      path={tagPath}
+    />
+    <BreadcrumbJson
+      site={site}
+      crumbs={[
+        { name: 'Tags', path: '/tag' },
+        { name: tag, path: tagPath },
+      ]}
+    />
+  </Fragment>
+  <BreadcrumbHeader head={{ name: 'Tags', path: '/tag' }} tail={tag} class:list={['mb-4']} />
+  <ArticleGrid articles={entries} class:list={['mt-4']} />
+  <DisplayLimitAlert displayed={entries.length} total={total} class:list={['mt-4']} />
+  <BackLink class:list={['mt-4']} name={'tags'} to={'/tag'} />
+</Layout>

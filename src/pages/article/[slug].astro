@@ -1,0 +1,77 @@
+---
+/**
+ * A single article page.
+ */
+import ArticleByLine from '@components/ArticleByLine.astro'
+import ArticleImage from '@components/ArticleImage.astro'
+import ArticleTagGrid from '@components/ArticleTagGrid.astro'
+import ArticleTimeToRead from '@components/ArticleTimeToRead.astro'
+import ArticleTitle from '@components/ArticleTitle.astro'
+import LinkMDX from '@components/LinkMDX.astro'
+import ArticleJson from '@components/seo/ArticleJson.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import OpenGraphArticle from '@components/seo/OpenGraphArticle.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import Layout from '@layouts/Layout.astro'
+import { getArticles } from '@utils/article'
+import { getSite } from '@utils/site'
+import type { CollectionEntry } from 'astro:content'
+import { getEntry } from 'astro:content'
+
+interface Props {
+  article: CollectionEntry<'article'>
+  site: CollectionEntry<'site'>
+}
+
+export async function getStaticPaths() {
+  const site = await getSite()
+
+  const articles = await getArticles()
+  const pages = articles.map((article) => {
+    return {
+      params: { slug: article.slug },
+      props: { article, site },
+    }
+  })
+
+  return pages
+}
+
+const { site, article } = Astro.props
+const data = article.data
+const author = await getEntry(data.author)
+const articlePath = Astro.url.pathname
+const { Content, remarkPluginFrontmatter: frontmatter } = await article.render()
+---
+
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic title={data.title} description={data.description} path={articlePath} />
+    <BreadcrumbJson
+      site={site}
+      crumbs={[
+        { name: 'Articles', path: '/article' },
+        { name: data.title, path: articlePath },
+      ]}
+    />
+    <OpenGraphArticle article={article} />
+    <ArticleJson article={article} author={author} wordCount={frontmatter.readingTime.words} />
+  </Fragment>
+  <article>
+    <ArticleByLine author={author} published={data.published} />
+    <ArticleTitle title={data.title} description={data.description} class:list={['mt-4']} />
+    <ArticleImage featured={data.featured} class:list={['mt-4']} />
+    <section class:list={['mt-4 grid grid-flow-row grid-cols-5 gap-x-4']}>
+      <div class:list={['prose col-span-4 max-w-none md:prose-lg lg:prose-xl']}>
+        <Content components={{ a: LinkMDX }} />
+      </div>
+      <aside>
+        <ArticleTimeToRead
+          minutes={frontmatter.readingTime.minutes}
+          words={frontmatter.readingTime.words}
+        />
+      </aside>
+    </section>
+    <ArticleTagGrid category={data.category} tags={data.tags} class:list={['mt-4']} />
+  </article>
+</Layout>

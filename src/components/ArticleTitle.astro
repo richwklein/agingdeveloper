@@ -1,0 +1,24 @@
+---
+/**
+ * @name ArticleTitle
+ * Component used for rendering the title and description for an article.
+ *
+ * @param {Props} props - The properties.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <ArticleTitle title={title} description={description} />
+ */
+interface Props {
+  title: string
+  description: string
+  class?: string
+}
+
+const { title, description, class: className } = Astro.props
+---
+
+<hgroup id="article-title" class:list={[className]}>
+  <h2 class:list={['text-5xl leading-snug']}>{title}</h2>
+  <h3 class:list={['text-lg leading-tight']}>{description}</h3>
+</hgroup>

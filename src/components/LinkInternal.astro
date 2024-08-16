@@ -1,0 +1,29 @@
+---
+/**
+ * @name LinkInternal
+ * Component used to render a link internal to the site.
+ *
+ * @param {Props} props - The properties of the link.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <LinkInternal to={"/tag"}>Tags</LinkInternal>
+ */
+
+interface Props {
+  to: string
+  title?: string
+  class?: string
+}
+
+const { to, title, class: className } = Astro.props
+---
+
+<a
+  data-link="internal"
+  data-astro-prefetch="hover"
+  target="_self"
+  href={to}
+  class:list={[className]}
+  title={title}><slot /></a
+>

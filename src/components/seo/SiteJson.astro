@@ -1,0 +1,30 @@
+---
+/**
+ * @name ArticleJson
+ * Component used to build out an ld+json website header.
+ *
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <SiteJson site={site} />
+ */
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  site: CollectionEntry<'site'>
+}
+
+const baseUrl = import.meta.env.SITE
+const { site } = Astro.props
+---
+
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: site.data.title,
+    url: baseUrl,
+  })}
+/>

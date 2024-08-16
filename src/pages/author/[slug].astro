@@ -1,0 +1,98 @@
+---
+/**
+ * A page for a single author and the latest articles from that author.
+ */
+import ArticleGrid from '@components/ArticleGrid.astro'
+import BackLink from '@components/BackLink.astro'
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
+import AuthorJson from '@components/seo/AuthorJson.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import OpenGraphProfile from '@components/seo/OpenGraphProfile.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import SocialBar from '@components/SocialBar.astro'
+import Layout from '@layouts/Layout.astro'
+import slugify from '@sindresorhus/slugify'
+import { getArticlesByAuthor } from '@utils/article'
+import { getSite } from '@utils/site'
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+
+interface Props {
+  author: CollectionEntry<'author'>
+  site: CollectionEntry<'site'>
+}
+
+export async function getStaticPaths() {
+  const site = await getSite()
+  const authors = await getCollection('author')
+
+  const pages = authors.map((author) => {
+    return {
+      params: { slug: slugify(author.id) },
+      props: { author, site },
+    }
+  })
+
+  return pages
+}
+
+const { site, author } = Astro.props
+const limit = site.data.displayLimit
+const data = author.data
+const { entries: articleEntries, total } = await getArticlesByAuthor(author.id, limit)
+const authorPath = Astro.url.pathname
+---
+
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic
+      title={`Articles by ${data.name}: Perspective & Expertise`}
+      description={`Explore the latest articles from ${data.name}. Dive into a collection of their work, showcasing their expertise, unique perspective, and contributions to our site.`}
+      path={authorPath}
+    />
+    <BreadcrumbJson
+      site={site}
+      crumbs={[
+        { name: 'Authors', path: '/author' },
+        { name: data.name, path: authorPath },
+      ]}
+    />
+    <OpenGraphProfile author={author} />
+    <AuthorJson author={author} writeCount={total} />
+  </Fragment>
+  <BreadcrumbHeader
+    head={{ name: 'Authors', path: '/author' }}
+    tail={data.name}
+    class:list={['mb-4']}
+  />
+  <header class:list={['flex items-start']}>
+    <div
+      class:list={[
+        'mb-2 mr-4',
+        'w-[150px] min-w-[150px] overflow-hidden rounded-lg ring-2 ring-secondary-light',
+      ]}
+    >
+      <Image
+        src={data.avatar}
+        alt={data.name}
+        loading={'eager'}
+        fetchpriority={'high'}
+        width={150}
+        class:list={['aspect-[3/4] object-cover object-center']}
+      />
+    </div>
+    <hgroup class:list={['flex flex-col']}>
+      <h3 class:list={['text-3xl leading-snug text-stone-900', 'md:text-5xl']}>{data.name}</h3>
+      <h4 class:list={['text-sm text-stone-600']}>
+        {author.data.tagline}
+      </h4>
+      <p class:list={['text-md grow leading-tight', 'xl:text-lg']}>{data.bio}</p>
+      <SocialBar socials={data.socials} class:list={['mt-1: md:mt-2']} />
+    </hgroup>
+  </header>
+  <ArticleGrid articles={articleEntries} class:list={['mt-4']} />
+  <DisplayLimitAlert displayed={articleEntries.length} total={total} class:list={['mt-4']} />
+  <BackLink class:list={['mt-4']} name={'authors'} to={'/author'} />
+</Layout>

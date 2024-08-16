@@ -1,0 +1,65 @@
+---
+/**
+ * A page for a single category with the latest articles for that category.
+ */
+import ArticleGrid from '@components/ArticleGrid.astro'
+import BackLink from '@components/BackLink.astro'
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import Layout from '@layouts/Layout.astro'
+import slugify from '@sindresorhus/slugify'
+import { getArticlesByCategory, getCategories } from '@utils/article'
+import { getSite } from '@utils/site'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  category: string
+  site: CollectionEntry<'site'>
+  siteAuthor: CollectionEntry<'author'>
+}
+
+export async function getStaticPaths() {
+  const site = await getSite()
+  const categories = await getCategories()
+  const pages = categories.map((category) => {
+    return {
+      params: { slug: slugify(category) },
+      props: { category, site },
+    }
+  })
+
+  return pages
+}
+
+const { category, site } = Astro.props
+const limit = site.data.displayLimit
+const { entries, total } = await getArticlesByCategory(category, limit)
+const categoryPath = Astro.url.pathname
+---
+
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic
+      title={`Latest ${category} Articles: Expert Insights & Tips`}
+      description={`Explore our selection of ${category} articles, offering valuable insights, practical tips, and up-to-date trends.`}
+      path={categoryPath}
+    />
+    <BreadcrumbJson
+      site={site}
+      crumbs={[
+        { name: 'Categories', path: '/category' },
+        { name: category, path: categoryPath },
+      ]}
+    />
+  </Fragment>
+  <BreadcrumbHeader
+    head={{ name: 'Categories', path: '/category' }}
+    tail={category}
+    class:list={['mb-4']}
+  />
+  <ArticleGrid articles={entries} class:list={['mt-4']} />
+  <DisplayLimitAlert displayed={entries.length} total={total} class:list={['mt-4']} />
+  <BackLink class:list={['mt-4']} name={'categories'} to={'/category'} />
+</Layout>

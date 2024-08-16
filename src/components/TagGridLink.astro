@@ -1,0 +1,52 @@
+---
+/**
+ * @name TagGridLink
+ * Component used for rendering a link to either a tag or a category for
+ * use in a grid on a page.
+ *
+ * @param {Props} props - The properties of the link.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <TagGridLink name={"gatsby"} weight={350} />
+ */
+import LinkInternal from '@components/LinkInternal.astro'
+import slugify from '@sindresorhus/slugify'
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  name: string
+  weight?: number
+  isCategory?: boolean
+  class?: string
+}
+
+const { name, weight = 300, isCategory = false, class: className } = Astro.props
+const cssNames = new Map<number, string>([
+  [100, 'font-thin'],
+  [200, 'font-extralight'],
+  [300, 'font-light'],
+  [400, 'font-normal'],
+  [500, 'font-medium'],
+  [600, 'font-semibold'],
+  [700, 'font-bold'],
+  [800, 'font-extrabold'],
+  [900, 'font-black'],
+])
+const iconName = isCategory ? 'mdi:label-outline' : 'mdi:hashtag'
+const pathPrefix = isCategory ? '/category' : '/tag'
+---
+
+<LinkInternal
+  to={`${pathPrefix}/${slugify(name)}`}
+  class:list={[
+    'justify-left m-0 inline-flex items-center px-2 py-1',
+    'capitalize text-stone-900',
+    'hover:underline focus:underline',
+    cssNames.get(weight),
+    className,
+  ]}
+>
+  <Icon name={iconName} class:list={['mr-1']} />
+  {name.trim()}
+</LinkInternal>

@@ -1,0 +1,81 @@
+---
+/**
+ * @name ArticleImage
+ * Component used for rendering the featured image for an article
+ *
+ * @param {Props} props - The properties of the featured image.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <ArticleImage featured={featured} />
+ */
+import LinkExternal from '@components/LinkExternal.astro'
+import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
+
+interface Props {
+  featured: {
+    image: ImageMetadata
+    author?: {
+      name: string
+      url: string
+    }
+    site?: {
+      name: string
+      url: string
+    }
+  }
+  class?: string
+}
+const {
+  featured: { image, author, site },
+  class: className,
+} = Astro.props
+const alt = author ? author.name : 'unknown'
+---
+
+<section id="article-featured" class:list={[className]}>
+  <figure>
+    <div class:list={['overflow-hidden rounded-md']}>
+      <Image
+        class:list={['aspect-square object-cover object-center sm:aspect-video md:aspect-[21/9]']}
+        src={image}
+        alt={alt}
+        loading={'eager'}
+        fetchpriority={'high'}
+        sizes={`
+          (min-width: 1280px) 1280px,
+          (min-width: 1024px) 1024px,
+          (min-width: 768px) 768px,
+          (min-width: 640px) 640px,
+          420px
+        `}
+        widths={[420, 640, 768, 1024, 1280]}
+      />
+    </div>
+    {
+      author || site ? (
+        <figcaption>
+          <small class:list={['mt-1 text-sm text-stone-700/85']}>
+            {author ? (
+              <>
+                {'Image by '}
+                <LinkExternal class:list={['underline']} to={author.url}>
+                  {author.name}
+                </LinkExternal>
+              </>
+            ) : null}
+            {site ? (
+              <>
+                {' on '}
+                <LinkExternal class:list={['underline']} to={site.url}>
+                  {site.name}
+                </LinkExternal>
+              </>
+            ) : null}
+          </small>
+        </figcaption>
+      ) : null
+    }
+  </figure>
+</section>

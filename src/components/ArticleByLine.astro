@@ -1,0 +1,37 @@
+---
+/**
+ * @name ArticleByLine
+ * Component used for rendering the by-lines of a single article.
+ *
+ * @param {Props} props - The properties of the by-line
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <ArticleByLine author={author} published={published} />
+ */
+import LinkInternal from '@components/LinkInternal.astro'
+import slugify from '@sindresorhus/slugify'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  author: CollectionEntry<'author'>
+  published: Date
+  class?: string
+}
+const { author, published, class: className } = Astro.props
+---
+
+<address id="article-byline" class:list={['text-base text-stone-900/85', className]}>
+  <LinkInternal to={`/author/${slugify(author.id)}`} class:list={['mr-2 inline-block underline']}>
+    {author.data.name}
+  </LinkInternal>
+  <time datetime={published.toISOString()}>
+    {
+      published.toLocaleDateString('en-us', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    }
+  </time>
+</address>

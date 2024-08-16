@@ -1,0 +1,28 @@
+---
+/**
+ * @name OpenGraphCore
+ * Component used to build out the basic open graph meta tags.
+ *
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <OpenGraphCore type={"website"} title={article.title} description={article.description} />
+ */
+export type OpenGraphType = 'website' | 'article' | 'profile'
+
+interface Props {
+  type: OpenGraphType
+  title: string
+  description: string
+  path?: string
+}
+
+const { type, title, description, path } = Astro.props
+const baseUrl = import.meta.env.SITE
+const fullUrl = path ? `${baseUrl}${path}` : baseUrl
+---
+
+<meta property="og:type" content={type} />
+<meta property="og:url" content={fullUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />

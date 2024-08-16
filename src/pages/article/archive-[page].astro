@@ -1,0 +1,55 @@
+---
+/**
+ * An archive page of all articles on the site.
+ */
+import ArticleGrid from '@components/ArticleGrid.astro'
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import Pagniation from '@components/Pagniation.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import Layout from '@layouts/Layout.astro'
+import { getArticles } from '@utils/article'
+import { getSite } from '@utils/site'
+import type { Page } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  page: Page<CollectionEntry<'article'>>
+  site: CollectionEntry<'site'>
+}
+
+export async function getStaticPaths({ paginate }: any) {
+  const site = await getSite()
+  const limit = site.data.displayLimit
+
+  const entries = await getArticles()
+  return paginate(entries, { pageSize: limit, props: { site } })
+}
+
+const { page, site } = Astro.props
+const archivePath = Astro.url.pathname
+---
+
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic
+      title={`Article Archive ${page.currentPage}: Explore All Our Content`}
+      description={`Browse our comprehensive archive of articles. Discover every article published on ${site.data.title}, all in one place.`}
+      path={archivePath}
+    />
+    <BreadcrumbJson
+      site={site}
+      crumbs={[
+        { name: 'Articles', path: '/article' },
+        { name: `Archive ${page.currentPage}`, path: archivePath },
+      ]}
+    />
+  </Fragment>
+  <BreadcrumbHeader
+    head={{ name: 'Archive', path: '/article' }}
+    class:list={['mb-4']}
+    tail={page.currentPage.toString()}
+  />
+  <ArticleGrid articles={page.data} />
+  <Pagniation page={page} class:list={['mt-4']} />
+</Layout>

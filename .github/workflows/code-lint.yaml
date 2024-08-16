@@ -1,24 +1,28 @@
-name: "Lint"
+name: 'Format and Lint'
 on:
-    pull_request:
-        branches:
-            - main
+  pull_request:
 
 jobs:
   lint:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Checkout source code"
-        uses: "actions/checkout@v4.1.7"
+      - name: 'Checkout source code'
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ github.ref }}
 
-      - name: Install Dependencies
+      - name: 'Setup Node.js environment'
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.tool-versions'
+
+      - name: 'Install dependencies'
         run: npm install
 
-      - name: Run Lint
-        run: npm run lint
+      - name: 'Check formatting'
+        run: npm run format
 
-      
+      - name: 'Check lint'
+        run: npm run lint

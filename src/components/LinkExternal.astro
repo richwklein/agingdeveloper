@@ -1,0 +1,28 @@
+---
+/**
+ * @name LinkExternal
+ * Component used to render a link to an external site.
+ *
+ * @param {Props} props - The properties of the link.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <LinkExternal to={"https://github.com/richwklein"}>Github</LinkExternal>
+ */
+interface Props {
+  to: string
+  title?: string
+  class?: string
+}
+
+const { to, title, class: className } = Astro.props
+---
+
+<a
+  data-link="external"
+  target="_blank"
+  rel="noopener noreferrer"
+  href={to}
+  class:list={[className]}
+  title={title}><slot /></a
+>

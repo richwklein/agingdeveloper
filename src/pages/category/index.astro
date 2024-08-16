@@ -1,0 +1,29 @@
+---
+/**
+ * A page of all the categories on the site.
+ */
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import TagGrid from '@components/TagGrid.astro'
+import Layout from '@layouts/Layout.astro'
+import { getCategoriesWithCount } from '@utils/article'
+import { getSite } from '@utils/site'
+
+const site = await getSite()
+const { categories, total } = await getCategoriesWithCount()
+const categoriesPath = Astro.url.pathname
+---
+
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic
+      title="Explore Our Categories: Discover Content by Topic"
+      description="Navigate through all our content by category. Find articles organized by topic to easily explore the subjects that interest you most."
+      path={categoriesPath}
+    />
+    <BreadcrumbJson site={site} crumbs={[{ name: 'Categories', path: categoriesPath }]} />
+  </Fragment>
+  <BreadcrumbHeader head={{ name: 'Categories', path: categoriesPath }} class:list={['mb-4']} />
+  <TagGrid tags={categories} total={total} isCategory={true} />
+</Layout>

@@ -1,0 +1,56 @@
+---
+/**
+ * @name PageHeader
+ * Component used to render the page header.
+ *
+ * @param {Props} props - The properties of the page footer.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <PageHeader />
+ */
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  site: CollectionEntry<'site'>
+  class?: string
+}
+
+const { site, class: className } = Astro.props
+---
+
+<header
+  class:list={[
+    'sticky left-0 top-0 z-10',
+    'bg-primary-dark px-4 py-4 text-primary-contrast shadow-lg',
+    className,
+  ]}
+>
+  <div class:list={['container mx-auto px-4 xl:max-w-screen-xl']}>
+    <a href="/" class:list={['flex justify-start bg-transparent text-inherit']}>
+      <div
+        class:list={[
+          'mb-2 mr-4 aspect-square h-12 min-h-12 w-12 min-w-12 sm:mb-0 md:h-20 md:w-20',
+          'overflow-hidden rounded-lg ring-2 ring-secondary-light',
+        ]}
+      >
+        <Image
+          src={site.data.avatar}
+          alt={site.data.title}
+          loading={'eager'}
+          fetchpriority={'high'}
+          widths={[48, 80]}
+          sizes={`(min-width: 768px) 80x, 48px`}
+          class:list={['h-full w-full object-cover object-center']}
+        />
+      </div>
+      <div class:list={['flex flex-col justify-center']}>
+        <h1 class:list={['mb-2 text-base xs:text-3xl sm:text-4xl']}>{site.data.title}</h1>
+        <p class:list={['hidden text-base sm:block']}>
+          {site.data.tagline}
+        </p>
+      </div>
+    </a>
+  </div>
+</header>

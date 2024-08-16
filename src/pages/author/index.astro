@@ -1,0 +1,29 @@
+---
+/**
+ * A page of all the authors on the site.
+ */
+import AuthorGrid from '@components/AuthorGrid.astro'
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import Layout from '@layouts/Layout.astro'
+import { getSite } from '@utils/site'
+import { getCollection } from 'astro:content'
+
+const authors = await getCollection('author')
+const site = await getSite()
+const authorsPath = Astro.url.pathname
+---
+
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic
+      title="Meet Our Authors"
+      description="Meet Our Authors: Discover the Voices Behind Our Content."
+      path={authorsPath}
+    />
+    <BreadcrumbJson site={site} crumbs={[{ name: 'Authors', path: authorsPath }]} />
+  </Fragment>
+  <BreadcrumbHeader head={{ name: 'Authors', path: authorsPath }} class:list={['mb-4']} />
+  <AuthorGrid authors={authors} />
+</Layout>

@@ -1,0 +1,29 @@
+---
+/**
+ * A page of all the tags used on the site.
+ */
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import TagGrid from '@components/TagGrid.astro'
+import Layout from '@layouts/Layout.astro'
+import { getTagsWithCount } from '@utils/article'
+import { getSite } from '@utils/site'
+
+const site = await getSite()
+const { tags, total } = await getTagsWithCount()
+const tagsPath = Astro.url.pathname
+---
+
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic
+      title="Browse Our Tags: Find Articles by Topic"
+      description="Explore our comprehensive list of article tags. Each tag represents a unique topic or theme, making it easy to find and explore content related to your interests. Discover how our posts are categorized and dive deeper into the subjects that matter most to you."
+      path={tagsPath}
+    />
+    <BreadcrumbJson site={site} crumbs={[{ name: 'Tags', path: tagsPath }]} />
+  </Fragment>
+  <BreadcrumbHeader head={{ name: 'Tags', path: tagsPath }} class:list={['mb-4']} />
+  <TagGrid tags={tags} total={total} isCategory={false} />
+</Layout>

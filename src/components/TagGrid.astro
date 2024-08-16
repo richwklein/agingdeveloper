@@ -1,0 +1,40 @@
+---
+/**
+ * @name TagGrid
+ * Component used for rendering a grid of either tags or categories for use on
+ * a page. The tags should be a map of tag names to their counts.
+ *
+ * @param {Props} props - The properties of the tag grid.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <TagGrid tags={tags} isCategory={true} />
+ */
+import TagGridLink from '@components/TagGridLink.astro'
+import { calculateWeight } from '@utils/misc'
+
+interface Props {
+  tags: Map<string, number>
+  total: number
+  isCategory?: boolean
+  class?: string
+}
+
+const { tags, total, isCategory = false, class: className } = Astro.props
+---
+
+<nav class:list={[className]}>
+  <ul
+    class:list={[
+      'grid grid-flow-row grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6',
+    ]}
+  >
+    {
+      Array.from(tags).map(([name, count]) => (
+        <li>
+          <TagGridLink name={name} weight={calculateWeight(count, total)} isCategory={isCategory} />
+        </li>
+      ))
+    }
+  </ul>
+</nav>

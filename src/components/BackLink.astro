@@ -1,0 +1,38 @@
+---
+/**
+ * @name BackLink
+ * Component used for rendering a link as a button back to another page.
+ *
+ * @param {Props} props - The properties of the link.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <BackLink name={"authors"} to={"/author"}} />
+ */
+import LinkInternal from '@components/LinkInternal.astro'
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  name: string
+  to: string
+  useViewText?: boolean
+  class?: string
+}
+
+const { name, to, class: className, useViewText = true } = Astro.props
+const text = useViewText ? `view all ${name}` : name
+---
+
+<LinkInternal
+  to={to}
+  class:list={[
+    'inline-flex min-w-16 items-center justify-center py-2 pl-3 pr-4',
+    'rounded-md bg-secondary-main capitalize text-secondary-contrast',
+    'hover:bg-secondary-dark hover:text-secondary-contrast',
+    'focus:bg-secondary-dark focus:text-secondary-contrast',
+    className,
+  ]}
+>
+  <Icon name="mdi:chevron-left" class:list={['mr-1']} />
+  {text}
+</LinkInternal>

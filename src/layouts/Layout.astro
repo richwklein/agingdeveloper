@@ -1,0 +1,68 @@
+---
+import '@styles/main.css'
+import '@fontsource/noto-serif-georgian'
+import '@fontsource/noto-sans-georgian'
+import '@fontsource/fira-code'
+
+import PageFooter from '@components/PageFooter.astro'
+import PageHeader from '@components/PageHeader.astro'
+import ScrollTop from '@components/ScrollTop.astro'
+import { feedInfo } from '@utils/feed'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  site: CollectionEntry<'site'>
+  children: any
+}
+const { site } = Astro.props
+const data = site.data
+const baseUrl = import.meta.env.SITE
+const analyticsId = import.meta.env.ANALYTICS_TRACKING_ID
+---
+
+<!doctype html>
+<html lang={'en'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/icons/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icons/android-chrome-512x512.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {
+      feedInfo.map(({ id, type, path }) => (
+        <link
+          rel="alternate"
+          type={type}
+          title={`${data.title} - ${id.toUpperCase()}`}
+          href={`${baseUrl}${path}`}
+        />
+      ))
+    }
+    <meta name="generator" content={Astro.generator} />
+    <slot name="seo" />
+    <script is:inline async src=`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`
+    ></script>
+    <script is:inline define:vars={{ analyticsId }}>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        // eslint-disable-next-line prefer-rest-params
+        window.dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', analyticsId)
+    </script>
+  </head>
+  <body>
+    <PageHeader site={site} class:list={['mb-8']} />
+    <main class:list={['container mx-auto px-4 xl:max-w-screen-xl']}>
+      <slot />
+    </main>
+    <PageFooter site={site} class:list={['mb-4', 'mt-8']} />
+    <ScrollTop />
+  </body>
+</html>
