@@ -26,7 +26,7 @@ A few years ago, I started eyeing the framework [Astro](https://astro.build/), a
 
 ## Gatsby Concerns
 
-I believe it's important to carefully manage any changes that could disrupt existing systems. However, I've become increasingly concerned about the future of the Gatsby framework. According to their [long term support policy](https://www.gatsbyjs.com/docs/reference/release-notes/gatsby-version-support/) for Gatsby versions is one year. , each version of Gatsby is only supported for one year. The latest major version was released on November 8th, 2022, and since then, there hasn't been any significant feature development. In fact, there's an ongoing discussion within the Gatsby community questioning whether the project has been discontinued. Jared Scott, a member of the community, provided a detailed [analysis](https://github.com/gatsbyjs/gatsby/issues/38696#issuecomment-2103823965) of recent commits, showing that no substantial updates have been made.
+I believe it's important to carefully manage any changes that could disrupt existing systems. However, I've become increasingly concerned about the future of the Gatsby framework. According to their [long term support policy](https://www.gatsbyjs.com/docs/reference/release-notes/gatsby-version-support/), each version of Gatsby is only supported for one year. The latest major version was released on November 8th, 2022, and since then, there hasn't been any significant feature development. In fact, there's an ongoing discussion within the Gatsby community questioning whether the project has been discontinued. Jared Scott, a member of the community, provided a detailed [analysis](https://github.com/gatsbyjs/gatsby/issues/38696#issuecomment-2103823965) of recent commits, showing that no substantial updates have been made.
 
 Additionally, Gatsby was [acquired](https://www.netlify.com/press/netlify-acquires-gatsby-inc-to-accelerate-adoption-of-composable-web-architectures/) by Netlify in February 2023. Shortly after, Netlify experienced a [round of layoffs](https://www.netlify.com/blog/ceo-announcement-to-the-netlify-team/) in July 2023, which adds to the uncertainty surrounding Gatsby's future.
 
@@ -101,7 +101,7 @@ Astro components are made up of two main parts. The first part, known as the "fr
 </script>
 ```
 
-Astro is compatible with various component libraries, including React, Vue, Svelte, and more. This site initially used [React](https://react.dev/) components along with the (Material UI component library](https://mui.com/material-ui/).
+Astro is compatible with various component libraries, including React, Vue, Svelte, and more. This site initially used [React](https://react.dev/) components along with the [Material UI component library](https://mui.com/material-ui/).
 
 However, as I transitioned to Astro components, I decided to replace the React components entirely. Since Material UI is specifically designed for React, I needed a new approach to styling. I opted for [Tailwind CSS](https://tailwindcss.com/), a utility-first CSS framework. Tailwind doesn’t provide pre-made components like Material UI, but it is great in building custom designs. I used [TailwindFlex](https://tailwindflex.com/), as a valuable guide for creating the components for the site. The ScrollTop component above demonstrates how Tailwind CSS can be used to achieve the desired look.
 
@@ -115,7 +115,7 @@ However, as I transitioned to Astro components, I decided to replace the React c
 ```
 
 ## Content
-While Gatsby uses [GraphQL](https://graphql.org/) to provide data for generating pages, Astro takes a different approach. In Astro, content collections are defined in a configuration file, with [Zod](https://zod.dev/)used to define the schema for each collection.
+While Gatsby uses [GraphQL](https://graphql.org/) to provide data for generating pages, Astro takes a different approach. In Astro, content collections are defined in a configuration file, with [Zod](https://zod.dev/) used to define the schema for each collection.
 
 ```ts
 const site = defineCollection({
@@ -161,5 +161,4 @@ Astro components currently fall short in terms of documentation support, though 
 ## Impressions
 
 Overall, I have a positive impression of the framework. The speed at which the development server runs and builds is impressive. I can build the entire site with image optimizations from a cold start in under 30 seconds—a significant improvement over the previous setup, where just starting the dev server took longer. Astro delivers the static HTML and CSS generation I had been hoping for, making it a strong choice for content focused projects.
-import type ts from "typescript"
 
