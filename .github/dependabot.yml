@@ -22,10 +22,17 @@ updates:
           - 'eslint'
           - 'eslint-*'
           - '@eslint/*'
+          - 'typescript-eslint'
+          - '@typescript-eslint/*'
       prettier:
         patterns:
           - 'prettier'
           - 'prettier-*'
+      vitest:
+        patterns:
+          - 'vitest'
+          - 'vitest-*'
+          - '@vitest/*'
     schedule:
       interval: daily
     open-pull-requests-limit: 20
