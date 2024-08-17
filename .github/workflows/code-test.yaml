@@ -1,22 +1,16 @@
-name: "Test"
+name: 'Test'
 on:
   pull_request:
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        branch:
-          - ${{ github.head_ref }}
-          # TODO add main branch once this is merged - "main"
 
     permissions:
       contents: read
-      pull-requests: write
 
     steps:
-      - name: "Checkout source code"
+      - name: 'Checkout source code'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -27,20 +21,14 @@ jobs:
         with:
           node-version-file: '.tool-versions'
 
-      - name: "Install dependencies"
+      - name: 'Install dependencies'
         run: npm install
 
-      - name: "Run unit tests with coverage"
+      - name: 'Run unit tests with coverage'
         run: npm run coverage
 
-      - name: "Upload coverage report"
+      - name: 'Upload coverage report'
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-${{ matrix.branch }}
+          name: coverag
           path: coverage
-
-      # TODO move reporting to a separate workflow (see https://github.com/marketplace/actions/vitest-coverage-report#working-with-pull-requests-from-forks)
-      - name: "Report coverage on pull request"
-        id: "coverage"
-        if: always()
-        uses: davelosert/vitest-coverage-report-action@v2
