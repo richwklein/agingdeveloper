@@ -16,8 +16,8 @@
 }
 
 html {
-  /* show scrollbar to prevent page jump */
-  overflow-y: scroll;
+  /* prevent page jump */
+  scrollbar-gutter: stable;
   min-height: 100vh;
 }
 
