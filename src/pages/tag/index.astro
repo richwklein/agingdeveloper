@@ -7,8 +7,8 @@ import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import TagGrid from '@components/TagGrid.astro'
 import Layout from '@layouts/Layout.astro'
-import { getTagsWithCount } from '@utils/article'
 import { getSite } from '@utils/site'
+import { getTagsWithCount } from '@utils/tag'
 
 const site = await getSite()
 const { tags, total } = await getTagsWithCount()

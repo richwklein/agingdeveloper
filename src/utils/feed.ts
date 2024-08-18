@@ -1,5 +1,5 @@
 import slugify from '@sindresorhus/slugify'
-import { getCollection } from 'astro:content'
+import { type CollectionEntry, getCollection } from 'astro:content'
 import { Feed } from 'feed'
 import MarkdownIt from 'markdown-it'
 import sanitizeHtml from 'sanitize-html'
@@ -36,7 +36,7 @@ export const getFeed = async () => {
   feed.addCategory(site.data.category)
 
   // add the authors as contributors
-  authors.map(({ id, data: { name, email } }) => {
+  authors.map(({ id, data: { name, email } }: CollectionEntry<'author'>) => {
     return feed.addContributor({
       name: name,
       email: email,
@@ -46,7 +46,9 @@ export const getFeed = async () => {
 
   // add an item for each article
   articles.map((article) => {
-    const author = authors.filter((author) => author.id == article.data.author.id)[0]
+    const author = authors.filter(
+      (author: CollectionEntry<'author'>) => author.id == article.data.author.id
+    )[0]
 
     return feed.addItem({
       title: article.data.title,

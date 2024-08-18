@@ -28,7 +28,7 @@ export async function getStaticPaths() {
   const site = await getSite()
   const authors = await getCollection('author')
 
-  const pages = authors.map((author) => {
+  const pages = authors.map((author: CollectionEntry<'author'>) => {
     return {
       params: { slug: slugify(author.id) },
       props: { author, site },
@@ -41,7 +41,7 @@ export async function getStaticPaths() {
 const { site, author } = Astro.props
 const limit = site.data.displayLimit
 const data = author.data
-const { entries: articleEntries, total } = await getArticlesByAuthor(author.id, limit)
+const { articles, total } = await getArticlesByAuthor(author.id, limit)
 const authorPath = Astro.url.pathname
 ---
 
@@ -92,7 +92,7 @@ const authorPath = Astro.url.pathname
       <SocialBar socials={data.socials} class:list={['mt-1: md:mt-2']} />
     </hgroup>
   </header>
-  <ArticleGrid articles={articleEntries} class:list={['mt-4']} />
-  <DisplayLimitAlert displayed={articleEntries.length} total={total} class:list={['mt-4']} />
+  <ArticleGrid articles={articles} class:list={['mt-4']} />
+  <DisplayLimitAlert displayed={articles.length} total={total} class:list={['mt-4']} />
   <BackLink class:list={['mt-4']} name={'authors'} to={'/author'} />
 </Layout>

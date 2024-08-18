@@ -10,8 +10,9 @@ import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import Layout from '@layouts/Layout.astro'
 import slugify from '@sindresorhus/slugify'
-import { getArticlesByTag, getTags } from '@utils/article'
+import { getArticlesByTag } from '@utils/article'
 import { getSite } from '@utils/site'
+import { getTags } from '@utils/tag'
 import type { CollectionEntry } from 'astro:content'
 
 interface Props {
@@ -36,7 +37,7 @@ export async function getStaticPaths() {
 
 const { tag, site } = Astro.props
 const limit = site.data.displayLimit
-const { entries, total } = await getArticlesByTag(tag, limit)
+const { articles, total } = await getArticlesByTag(tag, limit)
 const tagPath = Astro.url.pathname
 ---
 
@@ -56,7 +57,7 @@ const tagPath = Astro.url.pathname
     />
   </Fragment>
   <BreadcrumbHeader head={{ name: 'Tags', path: '/tag' }} tail={tag} class:list={['mb-4']} />
-  <ArticleGrid articles={entries} class:list={['mt-4']} />
-  <DisplayLimitAlert displayed={entries.length} total={total} class:list={['mt-4']} />
+  <ArticleGrid articles={articles} class:list={['mt-4']} />
+  <DisplayLimitAlert displayed={articles.length} total={total} class:list={['mt-4']} />
   <BackLink class:list={['mt-4']} name={'tags'} to={'/tag'} />
 </Layout>

@@ -10,8 +10,9 @@ import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import Layout from '@layouts/Layout.astro'
 import slugify from '@sindresorhus/slugify'
-import { getArticlesByCategory, getCategories } from '@utils/article'
+import { getArticlesByCategory } from '@utils/article'
 import { getSite } from '@utils/site'
+import { getCategories } from '@utils/tag'
 import type { CollectionEntry } from 'astro:content'
 
 interface Props {
@@ -35,7 +36,7 @@ export async function getStaticPaths() {
 
 const { category, site } = Astro.props
 const limit = site.data.displayLimit
-const { entries, total } = await getArticlesByCategory(category, limit)
+const { articles, total } = await getArticlesByCategory(category, limit)
 const categoryPath = Astro.url.pathname
 ---
 
@@ -59,7 +60,7 @@ const categoryPath = Astro.url.pathname
     tail={category}
     class:list={['mb-4']}
   />
-  <ArticleGrid articles={entries} class:list={['mt-4']} />
-  <DisplayLimitAlert displayed={entries.length} total={total} class:list={['mt-4']} />
+  <ArticleGrid articles={articles} class:list={['mt-4']} />
+  <DisplayLimitAlert displayed={articles.length} total={total} class:list={['mt-4']} />
   <BackLink class:list={['mt-4']} name={'categories'} to={'/category'} />
 </Layout>
