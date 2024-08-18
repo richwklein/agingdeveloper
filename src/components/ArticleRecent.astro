@@ -1,0 +1,52 @@
+---
+/**
+ * @name ArticleRecent
+ * Component for showing the most recent articles.
+ *
+ * @param {Props} props - The properties.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <ArticleRecent  />
+ */
+import LinkInternal from '@components/LinkInternal.astro'
+import { getArticles } from '@utils/article'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  article: CollectionEntry<'article'>
+  class?: string
+}
+
+const { article, class: className } = Astro.props
+const related = await getArticles(6, article.slug)
+---
+
+{
+  related.length == 0 ? null : (
+    <aside class:list={['min-w-36 p-2', className]} aria-labelledby="recent-articles">
+      <h4
+        id="recent-articles"
+        class:list={[
+          'block border-b-[1px] border-stone-500 pb-1',
+          'text-md font-bold leading-relaxed',
+        ]}
+      >
+        Recent
+      </h4>
+      <nav>
+        <ol>
+          {related.map((matched) => (
+            <li>
+              <article class:list={['text-md']}>
+                <LinkInternal to={`/article/${matched.slug}`} class:list={['hover:underline']}>
+                  <h5 class:list={['text-md my-2 block']}>{matched.data.title}</h5>
+                </LinkInternal>
+              </article>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </aside>
+  )
+}

@@ -4,6 +4,7 @@
  */
 import ArticleByLine from '@components/ArticleByLine.astro'
 import ArticleImage from '@components/ArticleImage.astro'
+import ArticleRecent from '@components/ArticleRecent.astro'
 import ArticleRelated from '@components/ArticleRelated.astro'
 import ArticleTagGrid from '@components/ArticleTagGrid.astro'
 import ArticleTimeToRead from '@components/ArticleTimeToRead.astro'
@@ -71,7 +72,8 @@ const { Content, remarkPluginFrontmatter: frontmatter } = await article.render()
           minutes={frontmatter.readingTime.minutes}
           words={frontmatter.readingTime.words}
         />
-        <ArticleRelated article={article} class:list={['mt-8']} />
+        <ArticleRelated article={article} class:list={['mt-10']} />
+        <ArticleRecent article={article} class:list={['mt-8']} />
       </div>
     </section>
     <ArticleTagGrid category={data.category} tags={data.tags} class:list={['mt-4']} />

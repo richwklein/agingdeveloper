@@ -25,9 +25,10 @@ export type ArticlesWithCountResponse = Promise<{
  * @param limit - Optional limit to the number of articles to return
  * @returns - The list of articles
  */
-export const getArticles = async (limit?: number): ArticlesResponse => {
+export const getArticles = async (limit?: number, exclude?: string): ArticlesResponse => {
   const articles = await getCollection('article')
   return articles
+    .filter((article: CollectionEntry<'article'>) => article.slug != exclude)
     .sort(
       (a: CollectionEntry<'article'>, b: CollectionEntry<'article'>) =>
         b.data.published.valueOf() - a.data.published.valueOf()
