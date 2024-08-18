@@ -1,3 +1,9 @@
+/**
+ * The page used to create the keybase.txt file.
+ */
+import type { APIRoute } from 'astro'
+
+const keybaseTxt = `
 ==================================================================
 https://keybase.io/richwklein
 --------------------------------------------------------------------
@@ -73,3 +79,12 @@ appending to this document.
 View my publicly-auditable identity here: https://keybase.io/richwklein
 
 ==================================================================
+`.trim()
+
+export const GET: APIRoute = () => {
+  return new Response(keybaseTxt, {
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+    },
+  })
+}
