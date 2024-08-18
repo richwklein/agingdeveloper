@@ -12,7 +12,6 @@
 import LinkInternal from '@components/LinkInternal.astro'
 import { getRelatedArticles } from '@utils/article'
 import type { CollectionEntry } from 'astro:content'
-import { Icon } from 'astro-icon/components'
 
 interface Props {
   article: CollectionEntry<'article'>
@@ -20,34 +19,32 @@ interface Props {
 }
 
 const { article, class: className } = Astro.props
-const related = await getRelatedArticles(article, 5)
+const related = await getRelatedArticles(article, 4)
 ---
 
 {
   related.length == 0 ? null : (
-    <aside
-      class:list={['min-w-36 p-2', 'rounded-md border border-stone-500 p-2', className]}
-      aria-labelledby="related-articles"
-    >
-      <div class:list={['flex flex-row items-center gap-x-1']}>
-        <Icon class:list={['h-6 w-6']} name="mdi:link" />
-        <h4 id="related-articles" class:list={['text-md leading-relaxed']}>
-          Related Articles
-        </h4>
-      </div>
-      <nav>
-        <ol>
-          {related.map((matched) => (
-            <li>
-              <article class:list={['text-md pl-7']}>
-                <LinkInternal to={`/article/${matched.slug}`} class:list={['hover:underline']}>
-                  <h5 class:list={['text-md my-1 block']}>{matched.data.title}</h5>
-                </LinkInternal>
-              </article>
-            </li>
-          ))}
-        </ol>
-      </nav>
+    <aside class:list={['min-w-36 p-2', className]} aria-labelledby="related-articles">
+      <h4
+        id="related-articles"
+        class:list={[
+          'block border-b-[1px] border-stone-500 pb-1',
+          'text-md font-bold leading-relaxed',
+        ]}
+      >
+        Related
+      </h4>
+      <ol>
+        {related.map((matched) => (
+          <li>
+            <article class:list={['text-md']}>
+              <LinkInternal to={`/article/${matched.slug}`} class:list={['hover:underline']}>
+                <h5 class:list={['text-md my-2 block']}>{matched.data.title}</h5>
+              </LinkInternal>
+            </article>
+          </li>
+        ))}
+      </ol>
     </aside>
   )
 }
