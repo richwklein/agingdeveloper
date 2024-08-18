@@ -1,0 +1,53 @@
+---
+/**
+ * @name ArticleRelated
+ * Component for showing the articles we consider related to the current one.
+ *
+ * @param {Props} props - The properties.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <ArticleRelated article={article}  />
+ */
+import LinkInternal from '@components/LinkInternal.astro'
+import { getRelatedArticles } from '@utils/article'
+import type { CollectionEntry } from 'astro:content'
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  article: CollectionEntry<'article'>
+  class?: string
+}
+
+const { article, class: className } = Astro.props
+const related = await getRelatedArticles(article, 5)
+---
+
+{
+  related.length == 0 ? null : (
+    <aside
+      class:list={['min-w-36 p-2', 'rounded-md border border-stone-500 p-2', className]}
+      aria-labelledby="related-articles"
+    >
+      <div class:list={['flex flex-row items-center gap-x-1']}>
+        <Icon class:list={['h-6 w-6']} name="mdi:link" />
+        <h4 id="related-articles" class:list={['text-md leading-relaxed']}>
+          Related Articles
+        </h4>
+      </div>
+      <nav>
+        <ol>
+          {related.map((matched) => (
+            <li>
+              <article class:list={['text-md pl-7']}>
+                <LinkInternal to={`/article/${matched.slug}`} class:list={['hover:underline']}>
+                  <h5 class:list={['text-md my-1 block']}>{matched.data.title}</h5>
+                </LinkInternal>
+              </article>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </aside>
+  )
+}

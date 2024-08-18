@@ -1,105 +1,128 @@
-import { getCollection } from 'astro:content'
+import { type CollectionEntry, getCollection } from 'astro:content'
+
+import { intersection } from './misc'
 
 /**
- * Get a list of categories.
+ * @type ArticlesResponse
+ * The response from a request for a list of articles.
  */
-export const getCategories = async () => {
-  const articles = await getArticles()
-  const categories = new Set<string>(articles.map((article) => article.data.category))
-  return Array.from(categories)
-}
+export type ArticlesResponse = Promise<Array<CollectionEntry<'article'>>>
 
 /**
- * Get a map of categories with the number of times they have occurred.
- * Includes the total number of categories.
+ * @type ArticlesWithCountResponse
+ * The response from a request for a list of articles.
  */
-export const getCategoriesWithCount = async () => {
-  const articles = await getArticles()
-  const categories = new Map()
-  let total = 0
-  articles.forEach((article) => {
-    const category = article.data.category
-    const value = (categories.get(category) || 0) + 1
-    categories.set(category, value)
-    total += value
-  })
-  return { categories, total }
-}
+export type ArticlesWithCountResponse = Promise<{
+  articles: Array<CollectionEntry<'article'>>
+  total: number
+}>
 
 /**
- * Get a list of tags.
+ * @name getArticles
+ *
+ * Get a list of article collection entries sorted in decending published order.
+ *
+ * @param limit - Optional limit to the number of articles to return
+ * @returns - The list of articles
  */
-export const getTags = async () => {
-  const articles = await getArticles()
-  const tags = new Set<string>(
-    articles.flatMap((article) => article.data.tags.map((tag: string) => tag))
-  )
-
-  return Array.from(tags)
-}
-
-/**
- * Get a map of tags with the number of times they have occurred.
- * Includes the total number of tags.
- */
-export const getTagsWithCount = async () => {
-  const articles = await getArticles()
-  const tags = new Map()
-  let total = 0
-  articles.forEach((article) => {
-    article.data.tags.forEach((tag: string) => {
-      const value = (tags.get(tag) || 0) + 1
-      tags.set(tag, value)
-      total += value
-    })
-  })
-  return { tags, total }
-}
-
-/**
- * Get a list of article collection entries.
- */
-export const getArticles = async (limit?: number) => {
+export const getArticles = async (limit?: number): ArticlesResponse => {
   const articles = await getCollection('article')
   return articles
-    .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
+    .sort(
+      (a: CollectionEntry<'article'>, b: CollectionEntry<'article'>) =>
+        b.data.published.valueOf() - a.data.published.valueOf()
+    )
     .slice(0, limit)
 }
 
 /**
- * Get a list of article collection entries by author id.
+ * @name getArticlesByAuthor
+ *
+ * Get articles written by a given author
+ *
+ * @param author - The author to get the articles for
+ * @param limit - Optional limit to the number of articles to return
+ * @returns - The list of articles along with the total number of articles
  */
-export const getArticlesByAuthor = async (authorId: string, limit?: number) => {
+export const getArticlesByAuthor = async (
+  authorId: string,
+  limit?: number
+): ArticlesWithCountResponse => {
   const articles = await getArticles()
   const filtered = articles.filter((article) => article.data.author.id == authorId)
   return {
-    entries: filtered.slice(0, limit),
+    articles: filtered.slice(0, limit),
     total: filtered.length,
   }
 }
 
 /**
- * Get a list of article collection entries by category.
+ * @name getArticlesByCategory
+ *
+ * Get articles that are in a given category
+ *
+ * @param category - The category to get the articles for
+ * @param limit - Optional limit to the number of articles to return
+ * @returns - The list of articles along with the total number of articles
  */
-export const getArticlesByCategory = async (category: string, limit?: number) => {
+export const getArticlesByCategory = async (
+  category: string,
+  limit?: number
+): ArticlesWithCountResponse => {
   const articles = await getArticles()
   const filtered = articles.filter((article) => article.data.category == category)
   return {
-    entries: filtered.slice(0, limit),
+    articles: filtered.slice(0, limit),
     total: filtered.length,
   }
 }
 
 /**
- * Get a list of article collection entries by tag.
+ * @name getArticlesByTag
+ *
+ * Get articles that contain the given tag
+ *
+ * @param tag - The tag to get the articles for
+ * @param limit - Optional limit to the number of articles to return
+ * @returns - The list of articles along with the total number of articles
  */
-export const getArticlesByTag = async (tag: string, limit?: number) => {
+export const getArticlesByTag = async (tag: string, limit?: number): ArticlesWithCountResponse => {
   const articles = await getArticles()
   const filtered = articles.filter((article) => {
     return article.data.tags.some((articleTag: string) => articleTag == tag)
   })
   return {
-    entries: filtered.slice(0, limit),
+    articles: filtered.slice(0, limit),
     total: filtered.length,
   }
+}
+
+/**
+ * @name getRelatedArticles
+ *
+ * Get articles that relate to the current article. An article is considered related when
+ * it is in the same category and has at least two tags in common.
+ *
+ * @param current - The current article that we are looking for relationship with
+ * @param limit - Optional limit to the number of articles to return
+ * @returns - The list of articles in closest match order
+ */
+export const getRelatedArticles = async (
+  current: CollectionEntry<'article'>,
+  limit?: number
+): ArticlesResponse => {
+  const articles = await getArticles()
+  return articles
+    .filter((article) => article.slug != current.slug) // exclude current
+    .filter((article) => article.data.category == current.data.category) // same category
+    .map((article) => {
+      return {
+        article: article,
+        match: intersection(article.data.tags, current.data.tags).size, // get a count of tags in common
+      }
+    })
+    .filter((related) => related.match >= 2) // only articles with at least two tags in common
+    .sort((a, b) => b.match - a.match) // sort by number of matches
+    .map((related) => related.article)
+    .slice(0, limit)
 }
