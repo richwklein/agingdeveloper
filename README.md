@@ -61,10 +61,14 @@ VSCode is the main editor that is used on this site. ESLint is used for linting 
   "editor.tabCompletion": "on",
   "editor.rulers": [80, 100, 120],
   "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.configPath": "prettier.config.mjs",
+  "prettier.documentSelectors": ["**/*.{js,mjs,cjs,jsx,ts,tsx,md,mdx,astro}"],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "always"
   },
-  "eslint.format.enable": true,
+  "eslint.format.enable": false,
   "eslint.lintTask.enable": true
 }
 ```

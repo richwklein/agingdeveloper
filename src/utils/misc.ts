@@ -1,5 +1,3 @@
-import slugify from '@sindresorhus/slugify'
-
 /**
  * Calculates a font weight between 300 and 900 rounding up to the nearest 100.
  *
@@ -19,22 +17,19 @@ export const calculateWeight = (value: number, total: number): number => {
  *
  * @param value - the string to capitalize.
  */
-export const capitalize = (value: string) => {
+export const capitalize = (value: string): string => {
   return value
     .split(/\s+/)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
 }
 
-type AbsoluteUrlOptions = { path?: string; id?: string; clean?: boolean }
-export const absoluteUrl = async ({ path, id, clean = false }: AbsoluteUrlOptions = {}) => {
-  const slug = id == null ? null : clean ? slugify(id) : id
-  const siteUrl = import.meta.env.SITE
-  const parts = [siteUrl, path, slug]
-
-  // remove any null values, strip trailing slashes, then join with slash
-  return parts
-    .filter((part) => part != null)
-    .map((part) => (part.endsWith('/') ? part.substring(-1) : part))
-    .join('/')
+/**
+ * Get the intersection of two string arrays as a set.
+ *
+ * @param first - the first array to compare.
+ * @param second - the second array to compare.
+ */
+export const intersection = (first: Array<string>, second: Array<string>): Set<string> => {
+  return new Set<string>(second.filter((val) => first.includes(val)))
 }
