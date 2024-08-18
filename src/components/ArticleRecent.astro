@@ -19,7 +19,7 @@ interface Props {
 }
 
 const { article, class: className } = Astro.props
-const related = await getArticles(4, article.slug)
+const related = await getArticles(6, article.slug)
 ---
 
 {
