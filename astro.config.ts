@@ -35,7 +35,6 @@ export default defineConfig({
   ],
   redirects: {
     '/article': { destination: '/article/archive-1', status: 308 },
-    '/article/': { destination: '/article/archive-1', status: 308 },
     '/article/rss-dead-long-live-rss': {
       destination: '/article/2021-05-17-rss-dead-long-live-rss',
       status: 308,
@@ -57,15 +56,10 @@ export default defineConfig({
       status: 308,
     },
     '/article/2020/07/21/intro': { destination: '/article/2020-07-21-intro', status: 308 },
-
-    // trailing slash redirects (only works deployed)
-    '/tag/': { destination: '/tag', status: 308 },
-    '/tag/[slug]/': { destination: '/tag/[slug]', status: 308 },
-    '/category/': { destination: '/category', status: 308 },
-    '/category/[slug]/': { destination: '/category/[slug]', status: 308 },
-    '/author/': { destination: '/author', status: 308 },
-    '/author/[slug]/': { destination: '/author/[slug]', status: 308 },
   },
   site: siteUrl,
   trailingSlash: 'never',
+  build: {
+    format: 'file',
+  },
 })
