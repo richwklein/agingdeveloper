@@ -1,7 +1,7 @@
 ---
 slug: 2024-02-11-gopro-dates
 title: GoPro Timeline Fix
-description: "How I fix created date information in GoPro videos to correctly locate the media in my library timelines."
+description: 'How I fix created date information in GoPro videos to correctly locate the media in my library timelines.'
 author: richwklein
 featured:
   image: jakob-owens-PJziurStmac-unsplash.jpg
@@ -17,9 +17,9 @@ tags:
   - media
   - library
   - code
-
 category: code
-published: "2024-02-11"
+popular: true
+published: '2024-02-11'
 ---
 
 When we started to travel more extensively as a family I wanted to get a GoPro. I thought that it would be worthwhile for capturing moments we normally couldn't get with a regular camera or phone. I ended up purchasing the [Hero 6 Black](https://www.amazon.com/GoPro-HERO6-Black-Waterproof-Digital/dp/B074X5WPC5) which was the newest model at the time. I've used it on several of our vacations and we've got a trip coming in the fall where I'll likely use it again. It is especially handy while in the water. I've captured some really great moments like the one below.
@@ -38,7 +38,7 @@ When we started to travel more extensively as a family I wanted to get a GoPro. 
 
 I've had an annoying issue with my GoPro though. Any time a camera isn't used for an extended period of time the date and time can get off. If I haven't used my GoPro in a while and then use it before either manually setting the time or syncing the camera with my phone then the date embedded in the video are off. The date on the camera and the recorded video is something like _January 1, 2016 at 12:00 PM_.
 
-![Date Warning](./date-warning.png "GoPro Quick date warning")
+![Date Warning](./date-warning.png 'GoPro Quick date warning')
 
 This happens with lots of different cameras not just this brand. A lot of people probably just live with it or aren't bothered by it. When I go back to look at vacations we've taken, those videos are not listed with the others making them hard to find.
 
@@ -48,7 +48,7 @@ When I first realized I had some files with this problem I started searching for
 
 All modern devices that take photos or video embed metadata in the those files. That metadata is in a format called EXIF which stands for "Exchangeable image file format". The metadata that is embedded usually includes things like: the camera model, lens, resolution, geolocation, and created timestamp.
 
-![EXIF Data](./exif-data.png "EXIF data display in Mac Photos")
+![EXIF Data](./exif-data.png 'EXIF data display in Mac Photos')
 
 Changing those embedded dates is the only way I've found that fixes where these videos show up in timelines across all our media libraries.
 
@@ -77,7 +77,7 @@ python exif_dates.py "/Users/richard/copy" --date="2024-01-10" --delta=240
 
 The output of the script lists the file being changed along with the old timestamp and the new timestamp.
 
-![Script Output](./script-output.png "exif-date python script output")
+![Script Output](./script-output.png 'exif-date python script output')
 
 The `exif-dates` script has a `dry` argument that you can be used to see what will be changed without actually making the change.
 

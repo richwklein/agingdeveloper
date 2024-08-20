@@ -1,7 +1,7 @@
 ---
 /**
- * @name ArticleRelated
- * Component for showing the articles we consider related to the current one.
+ * @name ArticlePopular
+ * Component for showing the articles we consider popular.
  *
  * @param {Props} props - The properties.
  * @return {Function} an Astro component factory function.
@@ -10,20 +10,18 @@
  * <ArticleRelated article={article}  />
  */
 import LinkInternal from '@components/LinkInternal.astro'
-import { getRelatedArticles } from '@utils/article'
-import type { CollectionEntry } from 'astro:content'
+import { getPopularArticles } from '@utils/article'
 
 interface Props {
-  article: CollectionEntry<'article'>
   class?: string
 }
 
-const { article, class: className } = Astro.props
-const related = await getRelatedArticles(article, 4)
+const { class: className } = Astro.props
+const popular = await getPopularArticles(4)
 ---
 
 {
-  related.length == 0 ? null : (
+  popular.length == 0 ? null : (
     <aside class:list={['min-w-72 p-2', className]} aria-labelledby="related-articles">
       <h4
         id="related-articles"
@@ -32,14 +30,14 @@ const related = await getRelatedArticles(article, 4)
           'text-md font-bold leading-relaxed',
         ]}
       >
-        Related
+        Popular
       </h4>
       <ol>
-        {related.map((matched) => (
+        {popular.map((article) => (
           <li>
             <article class:list={['text-md']}>
-              <LinkInternal to={`/article/${matched.slug}`} class:list={['hover:underline']}>
-                <h5 class:list={['text-md my-2 block']}>{matched.data.title}</h5>
+              <LinkInternal to={`/article/${article.slug}`} class:list={['hover:underline']}>
+                <h5 class:list={['text-md my-2 block']}>{article.data.title}</h5>
               </LinkInternal>
             </article>
           </li>

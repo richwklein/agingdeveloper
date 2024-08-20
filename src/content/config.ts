@@ -35,6 +35,7 @@ const article = defineCollection({
         .transform((val) => new Date(val))
         .optional(),
       author: reference('author'),
+      popular: z.boolean().optional(),
       category: z
         .string()
         .default('uncategorized')

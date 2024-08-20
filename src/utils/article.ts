@@ -23,7 +23,7 @@ export type ArticlesWithCountResponse = Promise<{
  * Get a list of article collection entries sorted in decending published order.
  *
  * @param limit - Optional limit to the number of articles to return
- * @returns - The list of articles
+ * @returns The list of articles
  */
 export const getArticles = async (limit?: number, exclude?: string): ArticlesResponse => {
   const articles = await getCollection('article')
@@ -43,7 +43,7 @@ export const getArticles = async (limit?: number, exclude?: string): ArticlesRes
  *
  * @param author - The author to get the articles for
  * @param limit - Optional limit to the number of articles to return
- * @returns - The list of articles along with the total number of articles
+ * @returns The list of articles along with the total number of articles
  */
 export const getArticlesByAuthor = async (
   authorId: string,
@@ -64,7 +64,7 @@ export const getArticlesByAuthor = async (
  *
  * @param category - The category to get the articles for
  * @param limit - Optional limit to the number of articles to return
- * @returns - The list of articles along with the total number of articles
+ * @returns The list of articles along with the total number of articles
  */
 export const getArticlesByCategory = async (
   category: string,
@@ -85,7 +85,7 @@ export const getArticlesByCategory = async (
  *
  * @param tag - The tag to get the articles for
  * @param limit - Optional limit to the number of articles to return
- * @returns - The list of articles along with the total number of articles
+ * @returns The list of articles along with the total number of articles
  */
 export const getArticlesByTag = async (tag: string, limit?: number): ArticlesWithCountResponse => {
   const articles = await getArticles()
@@ -106,7 +106,7 @@ export const getArticlesByTag = async (tag: string, limit?: number): ArticlesWit
  *
  * @param current - The current article that we are looking for relationship with
  * @param limit - Optional limit to the number of articles to return
- * @returns - The list of articles in closest match order
+ * @returns The list of articles in closest match order
  */
 export const getRelatedArticles = async (
   current: CollectionEntry<'article'>,
@@ -126,4 +126,17 @@ export const getRelatedArticles = async (
     .sort((a, b) => b.match - a.match) // sort by number of matches
     .map((related) => related.article)
     .slice(0, limit)
+}
+
+/**
+ * @name getPopularArticles
+ *
+ * Get articles that are considered to be popular.
+ *
+ * @param limit - Optional limit to the number of articles to return
+ * @returns The list of articles that are marked as popular
+ */
+export const getPopularArticles = async (limit?: number): ArticlesResponse => {
+  const articles = await getArticles()
+  return articles.filter((article) => article.data.popular).slice(0, limit)
 }
