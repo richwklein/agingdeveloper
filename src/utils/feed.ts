@@ -25,7 +25,7 @@ export const feedInfo = [
  * @param baseUrl - The base url to construct absolute urls from.
  * @returns the feed object
  */
-export const getFeed = async (baseUrl?: URL) => {
+export const getFeed = async () => {
   const site = await getSite()
   const authors = await getCollection('author')
   const articles = await getArticles()
@@ -34,11 +34,11 @@ export const getFeed = async (baseUrl?: URL) => {
   const feed = new Feed({
     title: site.data.title,
     description: site.data.tagline,
-    id: createAbsoluteUrl('/', baseUrl),
-    link: createAbsoluteUrl('/', baseUrl),
-    image: createAbsoluteUrl(site.data.avatar.src.split('?')[0], baseUrl),
-    favicon: createAbsoluteUrl(site.data.icon.src.split('?')[0], baseUrl),
-    feedLinks: new Map(feedInfo.map(({ id, path }) => [id, createAbsoluteUrl(path, baseUrl)])),
+    id: createAbsoluteUrl('/'),
+    link: createAbsoluteUrl('/'),
+    image: createAbsoluteUrl(site.data.avatar.src.split('?')[0]),
+    favicon: createAbsoluteUrl(site.data.icon.src.split('?')[0]),
+    feedLinks: new Map(feedInfo.map(({ id, path }) => [id, createAbsoluteUrl(path)])),
     copyright: new Date().toISOString(),
   })
 
@@ -49,7 +49,7 @@ export const getFeed = async (baseUrl?: URL) => {
     return feed.addContributor({
       name: name,
       email: email,
-      link: createAbsoluteUrl(`/author/${slugify(id)}`, baseUrl),
+      link: createAbsoluteUrl(`/author/${slugify(id)}`),
     })
   })
 
@@ -59,7 +59,7 @@ export const getFeed = async (baseUrl?: URL) => {
       (author: CollectionEntry<'author'>) => author.id == article.data.author.id
     )[0]
 
-    const articleUrl = createAbsoluteUrl(`/article/${article.slug}`, baseUrl)
+    const articleUrl = createAbsoluteUrl(`/article/${article.slug}`)
 
     return feed.addItem({
       title: article.data.title,
@@ -72,11 +72,11 @@ export const getFeed = async (baseUrl?: URL) => {
         {
           name: author.data.name,
           email: author.data.email,
-          link: createAbsoluteUrl(`/author/${slugify(author.id)}`, baseUrl),
+          link: createAbsoluteUrl(`/author/${slugify(author.id)}`),
         },
       ],
       image: {
-        url: createAbsoluteUrl(article.data.featured.image.src.split('?')[0], baseUrl),
+        url: createAbsoluteUrl(article.data.featured.image.src.split('?')[0]),
       },
       content: sanitizeHtml(parser.render(article.body), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),

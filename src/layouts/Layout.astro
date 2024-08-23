@@ -8,6 +8,7 @@ import PageFooter from '@components/PageFooter.astro'
 import PageHeader from '@components/PageHeader.astro'
 import ScrollTop from '@components/ScrollTop.astro'
 import { feedInfo } from '@utils/feed'
+import { createAbsoluteUrl } from '@utils/misc'
 import type { CollectionEntry } from 'astro:content'
 
 interface Props {
@@ -38,7 +39,7 @@ const analyticsId = import.meta.env.ANALYTICS_TRACKING_ID
           rel="alternate"
           type={type}
           title={`${data.title} - ${id.toUpperCase()}`}
-          href={new URL(path, Astro.site)}
+          href={createAbsoluteUrl(path)}
         />
       ))
     }

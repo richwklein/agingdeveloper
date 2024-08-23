@@ -1,4 +1,6 @@
 ---
+import { createAbsoluteUrl } from '@utils/misc'
+
 /**
  * @name OpenGraphCore
  * Component used to build out the basic open graph meta tags.
@@ -21,6 +23,6 @@ const { type, title, description, path = '/' } = Astro.props
 ---
 
 <meta property="og:type" content={type} />
-<meta property="og:url" content={new URL(path, Astro.site)} />
+<meta property="og:url" content={createAbsoluteUrl(path)} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />

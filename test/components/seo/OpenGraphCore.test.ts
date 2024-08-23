@@ -27,7 +27,7 @@ test('that it contains an open graph type', async () => {
 
 test('that it contains an open graph url', async () => {
   const baseUrl = import.meta.env.SITE
-  expect(headers).toContain(`meta property="og:url" content="${baseUrl}"`)
+  expect(headers).toContain(`meta property="og:url" content="${baseUrl}/"`)
 })
 
 test('that it contains an open graph title', async () => {

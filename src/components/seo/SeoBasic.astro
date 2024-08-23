@@ -1,4 +1,6 @@
 ---
+import { createAbsoluteUrl } from '@utils/misc'
+
 /**
  * @name SeoBasic
  * Component used to build out all the basic seo related head elements.
@@ -19,4 +21,4 @@ const { title, description, path = '/' } = Astro.props
 
 <title>{title}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={new URL(path, Astro.site)} />
+<link rel="canonical" href={createAbsoluteUrl(path)} />

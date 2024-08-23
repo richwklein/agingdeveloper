@@ -9,6 +9,7 @@
  * <OpenGraphArticle published={article.published} modified={article.modified} authorId={article.author.id} ... />
  */
 import slugify from '@sindresorhus/slugify'
+import { createAbsoluteUrl } from '@utils/misc'
 import type { CollectionEntry } from 'astro:content'
 
 import OpenGraphCore from './OpenGraphCore.astro'
@@ -36,7 +37,7 @@ const modifiedDate = article.data.modified || article.data.published
 <meta property="article:modified_time" content={modifiedDate.toISOString()} />
 <meta
   property="article:author"
-  content={new URL(`/author/${slugify(article.data.author.id)}`, Astro.site)}
+  content={createAbsoluteUrl(`/author/${slugify(article.data.author.id)}`)}
 />
 <meta property="article:section" content={article.data.category} />
 {article.data.tags.map((tag: string) => <meta property="article:tag" content={tag} />)}

@@ -1,3 +1,5 @@
+const baseUrl = import.meta.env.SITE
+
 /**
  * Calculates a font weight between 300 and 900 rounding up to the nearest 100.
  *
@@ -41,6 +43,6 @@ export const intersection = (first: Array<string>, second: Array<string>): Set<s
  * @param baseUrl - the base url or undefined.
  * @returns the full url.
  */
-export const createAbsoluteUrl = (path: string, baseUrl?: URL) => {
+export const createAbsoluteUrl = (path: string) => {
   return new URL(path, baseUrl).href
 }

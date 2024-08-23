@@ -9,6 +9,7 @@
  * <ArticleJson article={article} author={author} wordCount={frontmatter.wordCount} />
  */
 import slugify from '@sindresorhus/slugify'
+import { createAbsoluteUrl } from '@utils/misc'
 import type { CollectionEntry } from 'astro:content'
 
 interface Props {
@@ -29,7 +30,7 @@ const modifiedDate = article.data.modified ? article.data.modified : article.dat
     '@type': 'BlogPosting',
     headline: article.data.title,
     description: article.data.description,
-    image: [new URL(article.data.featured.image.src.split('?')[0], Astro.site)],
+    image: [createAbsoluteUrl(article.data.featured.image.src.split('?')[0])],
     dateCreated: article.data.published.toISOString(),
     datePublished: article.data.published.toISOString(),
     dateModified: modifiedDate.toISOString(),
@@ -37,7 +38,7 @@ const modifiedDate = article.data.modified ? article.data.modified : article.dat
       {
         '@type': 'Person',
         name: author.data.name,
-        url: new URL(`/author/${slugify(author.id)}`, Astro.site),
+        url: createAbsoluteUrl(`/author/${slugify(author.id)}`),
       },
     ],
     wordCount: wordCount,

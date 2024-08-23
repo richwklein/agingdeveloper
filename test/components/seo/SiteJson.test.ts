@@ -9,6 +9,7 @@ let siteJson: string
 beforeAll(async () => {
   site = await getSite()
   siteJson = await render()
+  console.log(siteJson)
 })
 
 const render = async () => {
@@ -33,5 +34,5 @@ test('that it contains the site name', async () => {
 })
 
 test('that it contains the site url', async () => {
-  expect(siteJson).toContain('"url":"http://localhost:4321"')
+  expect(siteJson).toContain('"url":"http://localhost:4321/"')
 })

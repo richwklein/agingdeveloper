@@ -8,6 +8,7 @@
  * @example
  * <OpenGraphImage image={article.featured.image} />
  */
+import { createAbsoluteUrl } from '@utils/misc'
 import type { ImageMetadata } from 'astro'
 import mime from 'mime'
 
@@ -19,7 +20,7 @@ interface Props {
 const { image, imageAlt } = Astro.props
 ---
 
-<meta property="og:image" content={new URL(image.src, Astro.site)} />
+<meta property="og:image" content={createAbsoluteUrl(image.src)} />
 <meta property="og:image:type" content={mime.getType(image.src.split('?')[0])} />
 <meta property="og:image:width" content={image.width.toString()} />
 <meta property="og:image:height" content={image.height.toString()} />

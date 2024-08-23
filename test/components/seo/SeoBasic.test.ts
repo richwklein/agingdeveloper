@@ -29,7 +29,7 @@ test('that it contains the description', async () => {
 })
 
 test('that it contains a canonical url without a path', async () => {
-  expect(seo).toContain('<link rel="canonical" href="http://localhost:4321">')
+  expect(seo).toContain('<link rel="canonical" href="http://localhost:4321/">')
 })
 
 test('that canonical will be created with a path', async () => {

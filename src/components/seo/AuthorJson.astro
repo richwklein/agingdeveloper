@@ -9,6 +9,7 @@
  * <AuthorJson author={author} writeCount={16} />
  */
 import slugify from '@sindresorhus/slugify'
+import { createAbsoluteUrl } from '@utils/misc'
 import type { CollectionEntry } from 'astro:content'
 
 interface Props {
@@ -40,7 +41,7 @@ const socials = author.data.socials || []
         userInteractionCount: writeCount,
       },
       description: author.data.tagline,
-      image: new URL(author.data.avatar.src.split('?')[0], Astro.site),
+      image: createAbsoluteUrl(author.data.avatar.src.split('?')[0]),
       sameAs: socials.map((social) => {
         return social.url
       }),
