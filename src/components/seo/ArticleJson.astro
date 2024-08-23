@@ -17,7 +17,6 @@ interface Props {
   wordCount: number
 }
 
-const baseUrl = import.meta.env.SITE
 const { article, author, wordCount } = Astro.props
 const modifiedDate = article.data.modified ? article.data.modified : article.data.published
 ---
@@ -30,7 +29,7 @@ const modifiedDate = article.data.modified ? article.data.modified : article.dat
     '@type': 'BlogPosting',
     headline: article.data.title,
     description: article.data.description,
-    image: [`${baseUrl}${article.data.featured.image.src.split('?')[0]}`],
+    image: [new URL(article.data.featured.image.src.split('?')[0], Astro.site)],
     dateCreated: article.data.published.toISOString(),
     datePublished: article.data.published.toISOString(),
     dateModified: modifiedDate.toISOString(),
@@ -38,7 +37,7 @@ const modifiedDate = article.data.modified ? article.data.modified : article.dat
       {
         '@type': 'Person',
         name: author.data.name,
-        url: `${baseUrl}/author/${slugify(author.id)}`,
+        url: new URL(`/author/${slugify(author.id)}`, Astro.site),
       },
     ],
     wordCount: wordCount,

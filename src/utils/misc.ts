@@ -33,3 +33,14 @@ export const capitalize = (value: string): string => {
 export const intersection = (first: Array<string>, second: Array<string>): Set<string> => {
   return new Set<string>(second.filter((val) => first.includes(val)))
 }
+
+/**
+ * Create an absolute url for the given path.
+ *
+ * @param path - the path to construct the url for.
+ * @param baseUrl - the base url or undefined.
+ * @returns the full url.
+ */
+export const createAbsoluteUrl = (path: string, baseUrl?: URL) => {
+  return new URL(path, baseUrl).href
+}

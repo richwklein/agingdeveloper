@@ -12,7 +12,7 @@ import { getCollection } from 'astro:content'
 
 const authors = await getCollection('author')
 const site = await getSite()
-const authorsPath = Astro.url.pathname
+const path = '/author'
 ---
 
 <Layout site={site}>
@@ -20,10 +20,10 @@ const authorsPath = Astro.url.pathname
     <SeoBasic
       title="Meet Our Authors"
       description="Meet Our Authors: Discover the Voices Behind Our Content."
-      path={authorsPath}
+      path={path}
     />
-    <BreadcrumbJson site={site} crumbs={[{ name: 'Authors', path: authorsPath }]} />
+    <BreadcrumbJson site={site} crumbs={[{ name: 'Authors', path: path }]} />
   </Fragment>
-  <BreadcrumbHeader head={{ name: 'Authors', path: authorsPath }} class:list={['mb-4']} />
+  <BreadcrumbHeader head={{ name: 'Authors', path: path }} class:list={['mb-4']} />
   <AuthorGrid authors={authors} />
 </Layout>

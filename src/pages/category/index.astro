@@ -11,8 +11,9 @@ import { getSite } from '@utils/site'
 import { getCategoriesWithCount } from '@utils/tag'
 
 const site = await getSite()
+const path = '/category'
+
 const { tags: categories, total } = await getCategoriesWithCount()
-const categoriesPath = Astro.url.pathname
 ---
 
 <Layout site={site}>
@@ -20,10 +21,10 @@ const categoriesPath = Astro.url.pathname
     <SeoBasic
       title="Explore Our Categories: Discover Content by Topic"
       description="Navigate through all our content by category. Find articles organized by topic to easily explore the subjects that interest you most."
-      path={categoriesPath}
+      path={path}
     />
-    <BreadcrumbJson site={site} crumbs={[{ name: 'Categories', path: categoriesPath }]} />
+    <BreadcrumbJson site={site} crumbs={[{ name: 'Categories', path: path }]} />
   </Fragment>
-  <BreadcrumbHeader head={{ name: 'Categories', path: categoriesPath }} class:list={['mb-4']} />
+  <BreadcrumbHeader head={{ name: 'Categories', path: path }} class:list={['mb-4']} />
   <TagGrid tags={categories} total={total} isCategory={true} />
 </Layout>

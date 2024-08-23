@@ -20,8 +20,7 @@ interface Props {
 
 const { crumbs = [], site } = Astro.props
 
-const baseUrl = import.meta.env.SITE
-crumbs.unshift({ name: site.data.title, path: '' })
+crumbs.unshift({ name: site.data.title, path: '/' })
 ---
 
 <script
@@ -35,7 +34,7 @@ crumbs.unshift({ name: site.data.title, path: '' })
         '@type': 'ListItem',
         position: index + 1,
         name: crumb.name,
-        item: `${baseUrl}${crumb.path}`,
+        item: new URL(crumb.path, Astro.site),
       }
     }),
   })}

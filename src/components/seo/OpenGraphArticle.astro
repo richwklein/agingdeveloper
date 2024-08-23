@@ -20,13 +20,12 @@ interface Props {
 
 const { article } = Astro.props
 const modifiedDate = article.data.modified || article.data.published
-const baseUrl = import.meta.env.SITE
 ---
 
 <OpenGraphCore
   title={article.data.title}
   description={article.data.description}
-  path={`${baseUrl}/article/${article.slug}`}
+  path={`/article/${article.slug}`}
   type={'article'}
 />
 <OpenGraphImage
@@ -35,6 +34,9 @@ const baseUrl = import.meta.env.SITE
 />
 <meta property="article:published_time" content={article.data.published.toISOString()} />
 <meta property="article:modified_time" content={modifiedDate.toISOString()} />
-<meta property="article:author" content={`${baseUrl}/author/${slugify(article.data.author.id)}`} />
+<meta
+  property="article:author"
+  content={new URL(`/author/${slugify(article.data.author.id)}`, Astro.site)}
+/>
 <meta property="article:section" content={article.data.category} />
 {article.data.tags.map((tag: string) => <meta property="article:tag" content={tag} />)}

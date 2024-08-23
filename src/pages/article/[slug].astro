@@ -43,18 +43,19 @@ export async function getStaticPaths() {
 const { site, article } = Astro.props
 const data = article.data
 const author = await getEntry(data.author)
-const articlePath = Astro.url.pathname
+const path = `/article/${article.slug}`
+
 const { Content, remarkPluginFrontmatter: frontmatter } = await article.render()
 ---
 
 <Layout site={site}>
   <Fragment slot="seo">
-    <SeoBasic title={data.title} description={data.description} path={articlePath} />
+    <SeoBasic title={data.title} description={data.description} path={path} />
     <BreadcrumbJson
       site={site}
       crumbs={[
         { name: 'Articles', path: '/article' },
-        { name: data.title, path: articlePath },
+        { name: data.title, path: path },
       ]}
     />
     <OpenGraphArticle article={article} />

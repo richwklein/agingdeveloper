@@ -14,11 +14,9 @@ interface Props {
   path?: string
 }
 
-const { title, description, path } = Astro.props
-const baseUrl = import.meta.env.SITE
-const fullUrl = path ? `${baseUrl}${path}` : baseUrl
+const { title, description, path = '/' } = Astro.props
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={fullUrl} />
+<link rel="canonical" href={new URL(path, Astro.site)} />

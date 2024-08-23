@@ -16,7 +16,6 @@ interface Props {
 }
 const { site } = Astro.props
 const data = site.data
-const baseUrl = import.meta.env.SITE
 const analyticsId = import.meta.env.ANALYTICS_TRACKING_ID
 ---
 
@@ -39,7 +38,7 @@ const analyticsId = import.meta.env.ANALYTICS_TRACKING_ID
           rel="alternate"
           type={type}
           title={`${data.title} - ${id.toUpperCase()}`}
-          href={`${baseUrl}${path}`}
+          href={new URL(path, Astro.site)}
         />
       ))
     }

@@ -19,13 +19,12 @@ interface Props {
 }
 
 const { author } = Astro.props
-const baseUrl = import.meta.env.SITE
 ---
 
 <OpenGraphCore
   title={author.data.name}
   description={author.data.tagline}
-  path={`${baseUrl}/author/${slugify(author.id)}`}
+  path={`/author/${slugify(author.id)}`}
   type={'profile'}
 />
 

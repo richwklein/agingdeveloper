@@ -4,9 +4,8 @@
 import { getFeed } from '@utils/feed'
 import type { APIRoute } from 'astro'
 
-const feed = await getFeed()
-
-export const GET: APIRoute = () => {
+export const GET: APIRoute = async ({ site }) => {
+  const feed = await getFeed(site)
   return new Response(feed.atom1(), {
     headers: {
       'Content-Type': 'application/atom+xml; charset=utf-8',
