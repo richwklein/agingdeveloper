@@ -1,8 +1,10 @@
 import OpenGraphCore from '@components/seo/OpenGraphCore.astro'
+import { getSite } from '@utils/site'
 import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import { beforeAll, expect, test } from 'vitest'
 
 type RenderOptions = { type?: string; path?: string }
+const site = await getSite()
 let headers: string | undefined
 
 beforeAll(async () => {
@@ -13,6 +15,7 @@ const render = async ({ type = 'website', path }: RenderOptions = {}) => {
   const container = await AstroContainer.create()
   return await container.renderToString(OpenGraphCore, {
     props: {
+      site: site,
       title: 'Title',
       description: 'Description',
       path: path,
@@ -26,7 +29,7 @@ test('that it contains an open graph type', async () => {
 })
 
 test('that it contains an open graph url', async () => {
-  const baseUrl = import.meta.env.SITE
+  const baseUrl = new URL('', import.meta.env.SITE)
   expect(headers).toContain(`meta property="og:url" content="${baseUrl}"`)
 })
 

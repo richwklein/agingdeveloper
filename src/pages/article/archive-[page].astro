@@ -27,7 +27,7 @@ export async function getStaticPaths({ paginate }: any) {
 }
 
 const { page, site } = Astro.props
-const archivePath = Astro.url.pathname
+const path = `/article/archive-${page.currentPage}`
 ---
 
 <Layout site={site}>
@@ -35,13 +35,14 @@ const archivePath = Astro.url.pathname
     <SeoBasic
       title={`Article Archive ${page.currentPage}: Explore All Our Content`}
       description={`Browse our comprehensive archive of articles. Discover every article published on ${site.data.title}, all in one place.`}
-      path={archivePath}
+      path={path}
+      site={site}
     />
     <BreadcrumbJson
       site={site}
       crumbs={[
         { name: 'Articles', path: '/article' },
-        { name: `Archive ${page.currentPage}`, path: archivePath },
+        { name: `Archive ${page.currentPage}`, path: path },
       ]}
     />
   </Fragment>

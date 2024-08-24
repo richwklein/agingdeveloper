@@ -41,8 +41,9 @@ export async function getStaticPaths() {
 const { site, author } = Astro.props
 const limit = site.data.displayLimit
 const data = author.data
+const path = `/author/${slugify(author.id)}`
+
 const { articles, total } = await getArticlesByAuthor(author.id, limit)
-const authorPath = Astro.url.pathname
 ---
 
 <Layout site={site}>
@@ -50,17 +51,18 @@ const authorPath = Astro.url.pathname
     <SeoBasic
       title={`Articles by ${data.name}: Perspective & Expertise`}
       description={`Explore the latest articles from ${data.name}. Dive into a collection of their work, showcasing their expertise, unique perspective, and contributions to our site.`}
-      path={authorPath}
+      path={path}
+      site={site}
     />
+    <OpenGraphProfile author={author} site={site} />
+    <AuthorJson author={author} writeCount={total} site={site} />
     <BreadcrumbJson
       site={site}
       crumbs={[
         { name: 'Authors', path: '/author' },
-        { name: data.name, path: authorPath },
+        { name: data.name, path: path },
       ]}
     />
-    <OpenGraphProfile author={author} />
-    <AuthorJson author={author} writeCount={total} />
   </Fragment>
   <BreadcrumbHeader
     head={{ name: 'Authors', path: '/author' }}

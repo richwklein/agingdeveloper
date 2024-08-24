@@ -2,22 +2,31 @@ import slugify from '@sindresorhus/slugify'
 import { type CollectionEntry, getCollection } from 'astro:content'
 import { Feed } from 'feed'
 import MarkdownIt from 'markdown-it'
+import mime from 'mime'
 import sanitizeHtml from 'sanitize-html'
 
 import { getArticles } from './article'
+import { buildUrl } from './misc'
 import { getSite } from './site'
 
 const parser = new MarkdownIt()
 
+/**
+ * Information about the various feeds the site supports
+ */
 export const feedInfo = [
   { id: 'rss', type: 'application/xml', path: '/rss.xml' },
   { id: 'atom', type: 'application/atom+xml', path: '/atom.xml' },
   { id: 'feed', type: 'application/json', path: '/feed.json' },
 ]
 
+/**
+ * Function for constructing a feed object to then render.
+ *
+ * @returns the feed object
+ */
 export const getFeed = async () => {
   const site = await getSite()
-  const baseUrl = import.meta.env.SITE
   const authors = await getCollection('author')
   const articles = await getArticles()
 
@@ -25,11 +34,11 @@ export const getFeed = async () => {
   const feed = new Feed({
     title: site.data.title,
     description: site.data.tagline,
-    id: baseUrl,
-    link: baseUrl,
-    image: `${baseUrl}${site.data.avatar.src.split('?')[0]}`,
-    favicon: `${baseUrl}${site.data.icon.src.split('?')[0]}`,
-    feedLinks: new Map(feedInfo.map(({ id, path }) => [id, `${baseUrl}${path}`])),
+    id: buildUrl('', site.data.origin).href,
+    link: buildUrl('', site.data.origin).href,
+    image: buildUrl(site.data.avatar.src, site.data.origin).href,
+    favicon: buildUrl(site.data.icon.src, site.data.origin).href,
+    feedLinks: new Map(feedInfo.map(({ id, path }) => [id, buildUrl(path, site.data.origin).href])),
     copyright: new Date().toISOString(),
   })
 
@@ -40,7 +49,7 @@ export const getFeed = async () => {
     return feed.addContributor({
       name: name,
       email: email,
-      link: `${baseUrl}/author/${slugify(id)}`,
+      link: buildUrl(`/author/${slugify(id)}`, site.data.origin).href,
     })
   })
 
@@ -50,10 +59,11 @@ export const getFeed = async () => {
       (author: CollectionEntry<'author'>) => author.id == article.data.author.id
     )[0]
 
+    const articleUrl = buildUrl(`/article/${article.slug}`, site.data.origin).href
     return feed.addItem({
       title: article.data.title,
-      id: `${baseUrl}/article/${article.slug}`,
-      link: `${baseUrl}/article/${article.slug}`,
+      id: articleUrl,
+      link: articleUrl,
       description: article.data.description,
       date: article.data.modified || article.data.published,
       published: article.data.published,
@@ -61,11 +71,12 @@ export const getFeed = async () => {
         {
           name: author.data.name,
           email: author.data.email,
-          link: `${baseUrl}/author/${slugify(author.id)}`,
+          link: buildUrl(`/author/${slugify(author.id)}`, site.data.origin).href,
         },
       ],
       image: {
-        url: `${baseUrl}${article.data.featured.image.src.split('?')[0]}`,
+        url: escapeXmlAttr(buildUrl(article.data.featured.image.src, site.data.origin).href),
+        type: mime.getType(article.data.featured.image.src.split('?')[0]) || undefined,
       },
       content: sanitizeHtml(parser.render(article.body), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
@@ -74,4 +85,29 @@ export const getFeed = async () => {
   })
 
   return feed
+}
+
+/**
+ * Method to escape xml attributes. This is needed for the image enclosure on the feed.
+ *
+ * @param unsafe - The unsafe string to escape.
+ * @returns the escaped string.
+ */
+const escapeXmlAttr = (unsafe: string) => {
+  return unsafe.replace(/[<>&'"]/g, (c: string) => {
+    switch (c) {
+      case '<':
+        return '&lt;'
+      case '>':
+        return '&gt;'
+      case '&':
+        return '&amp;'
+      case "'":
+        return '&apos;'
+      case '"':
+        return '&quot;'
+      default:
+        return c
+    }
+  })
 }

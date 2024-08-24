@@ -37,8 +37,9 @@ export async function getStaticPaths() {
 
 const { tag, site } = Astro.props
 const limit = site.data.displayLimit
+const path = `/tag/${slugify(tag)}`
+
 const { articles, total } = await getArticlesByTag(tag, limit)
-const tagPath = Astro.url.pathname
 ---
 
 <Layout site={site}>
@@ -46,13 +47,14 @@ const tagPath = Astro.url.pathname
     <SeoBasic
       title={`Tagged Articles: Explore Content on ${tag}`}
       description={`Discover all articles tagged with ${tag}. Dive into a collection of posts that share a common theme.`}
-      path={tagPath}
+      path={path}
+      site={site}
     />
     <BreadcrumbJson
       site={site}
       crumbs={[
         { name: 'Tags', path: '/tag' },
-        { name: tag, path: tagPath },
+        { name: tag, path: path },
       ]}
     />
   </Fragment>

@@ -6,7 +6,7 @@ import type { APIRoute } from 'astro'
 
 const feed = await getFeed()
 
-export const GET: APIRoute = () => {
+export const GET: APIRoute = async () => {
   return new Response(feed.rss2(), {
     headers: {
       'Content-Type': 'application/xml; charset=utf-8',

@@ -35,7 +35,6 @@ export default defineConfig({
   ],
   redirects: {
     '/article': { destination: '/article/archive-1', status: 308 },
-    '/article/': { destination: '/article/archive-1', status: 308 },
     '/article/rss-dead-long-live-rss': {
       destination: '/article/2021-05-17-rss-dead-long-live-rss',
       status: 308,
@@ -59,4 +58,8 @@ export default defineConfig({
     '/article/2020/07/21/intro': { destination: '/article/2020-07-21-intro', status: 308 },
   },
   site: siteUrl,
+  trailingSlash: 'ignore',
+  build: {
+    format: 'file',
+  },
 })

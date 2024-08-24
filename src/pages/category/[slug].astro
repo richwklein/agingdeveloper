@@ -36,8 +36,9 @@ export async function getStaticPaths() {
 
 const { category, site } = Astro.props
 const limit = site.data.displayLimit
+const path = `/category/${slugify(category)}`
+
 const { articles, total } = await getArticlesByCategory(category, limit)
-const categoryPath = Astro.url.pathname
 ---
 
 <Layout site={site}>
@@ -45,13 +46,14 @@ const categoryPath = Astro.url.pathname
     <SeoBasic
       title={`Latest ${category} Articles: Expert Insights & Tips`}
       description={`Explore our selection of ${category} articles, offering valuable insights, practical tips, and up-to-date trends.`}
-      path={categoryPath}
+      path={path}
+      site={site}
     />
     <BreadcrumbJson
       site={site}
       crumbs={[
         { name: 'Categories', path: '/category' },
-        { name: category, path: categoryPath },
+        { name: category, path: path },
       ]}
     />
   </Fragment>

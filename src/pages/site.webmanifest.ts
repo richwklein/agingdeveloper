@@ -1,11 +1,11 @@
 /**
  * The page used to create the webmanifest file.
  */
+import { buildUrl } from '@utils/misc'
 import { getSite } from '@utils/site'
 import type { APIRoute } from 'astro'
 
 const site = await getSite()
-const baseUrl = import.meta.env.SITE
 
 const manifest = {
   id: site.id,
@@ -13,11 +13,11 @@ const manifest = {
   short_name: site.data.title,
   description: site.data.tagline,
   categories: [site.data.category],
-  start_url: baseUrl,
+  start_url: buildUrl('', site.data.origin),
   display: 'browser',
   background_color: site.data.background,
   theme_color: site.data.theme,
-  scope: baseUrl,
+  scope: buildUrl('', site.data.origin),
   icons: [
     { src: '/icons/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
     { src: '/icons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -30,7 +30,7 @@ const manifest = {
 
 const webmanifest = JSON.stringify(manifest, null, 2)
 
-export const GET: APIRoute = () => {
+export const GET: APIRoute = async () => {
   return new Response(webmanifest, {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',

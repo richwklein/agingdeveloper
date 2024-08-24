@@ -1,7 +1,9 @@
 import OpenGraphImage from '@components/seo/OpenGraphImage.astro'
+import { getSite } from '@utils/site'
 import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import { beforeAll, expect, test } from 'vitest'
 
+const site = await getSite()
 let headers: string | undefined
 
 beforeAll(async () => {
@@ -18,6 +20,7 @@ const render = async () => {
   const container = await AstroContainer.create()
   return await container.renderToString(OpenGraphImage, {
     props: {
+      site: site,
       image: image,
       imageAlt: 'Image',
     },
