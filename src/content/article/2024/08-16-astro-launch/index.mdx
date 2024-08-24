@@ -118,6 +118,7 @@ However, as I transitioned to Astro components, I decided to replace the React c
 ```
 
 ## Content
+
 While Gatsby uses [GraphQL](https://graphql.org/) to provide data for generating pages, Astro takes a different approach. In Astro, content collections are defined in a configuration file, with [Zod](https://zod.dev/) used to define the schema for each collection.
 
 ```ts
@@ -140,13 +141,13 @@ const site = defineCollection({
 
 JSON files in the src/content/site directory are then converted into entries in the collection, which can be retrieved by the filename as their ID:
 
-```ts 
+```ts
 const site = await getEntry('site', 'agingdeveloper')
 ```
 
 Alternatively, a collection can be iterated over as a whole:
 
-```ts 
+```ts
 export const getArticles = async (limit?: number) => {
   const articles = await getCollection('article')
   return articles
@@ -164,4 +165,3 @@ Astro components currently fall short in terms of documentation support, though 
 ## Impressions
 
 Overall, I have a positive impression of the framework. The speed at which the development server runs and builds is impressive. I can build the entire site with image optimizations from a cold start in under 30 seconds—a significant improvement over the previous setup, where just starting the dev server took longer. Astro delivers the static HTML and CSS generation I had been hoping for, making it a strong choice for content focused projects.
-
