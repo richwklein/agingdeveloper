@@ -42,7 +42,7 @@ const socials = author.data.socials || []
         userInteractionCount: writeCount,
       },
       description: author.data.tagline,
-      image: buildUrl(author.data.avatar.src.split('?')[0], site.data.origin),
+      image: buildUrl(author.data.avatar.src, site.data.origin),
       sameAs: socials.map((social) => {
         return social.url
       }),

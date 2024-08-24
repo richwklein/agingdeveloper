@@ -11,7 +11,7 @@ const url = buildUrl('sitemap-index.xml', site.data.origin)
 const robotsTxt = `
 User-agent: *
 Allow: /
-Sitemap: ${url}
+Sitemap: ${url.href}
 Host: ${url.host}
 `.trim()
 

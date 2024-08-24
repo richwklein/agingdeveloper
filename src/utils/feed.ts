@@ -2,6 +2,7 @@ import slugify from '@sindresorhus/slugify'
 import { type CollectionEntry, getCollection } from 'astro:content'
 import { Feed } from 'feed'
 import MarkdownIt from 'markdown-it'
+import mime from 'mime'
 import sanitizeHtml from 'sanitize-html'
 
 import { getArticles } from './article'
@@ -35,8 +36,8 @@ export const getFeed = async () => {
     description: site.data.tagline,
     id: buildUrl('', site.data.origin).href,
     link: buildUrl('', site.data.origin).href,
-    image: buildUrl(site.data.avatar.src.split('?')[0], site.data.origin).href,
-    favicon: buildUrl(site.data.icon.src.split('?')[0], site.data.origin).href,
+    image: buildUrl(site.data.avatar.src, site.data.origin).href,
+    favicon: buildUrl(site.data.icon.src, site.data.origin).href,
     feedLinks: new Map(feedInfo.map(({ id, path }) => [id, buildUrl(path, site.data.origin).href])),
     copyright: new Date().toISOString(),
   })
@@ -59,7 +60,6 @@ export const getFeed = async () => {
     )[0]
 
     const articleUrl = buildUrl(`/article/${article.slug}`, site.data.origin).href
-
     return feed.addItem({
       title: article.data.title,
       id: articleUrl,
@@ -75,7 +75,8 @@ export const getFeed = async () => {
         },
       ],
       image: {
-        url: buildUrl(article.data.featured.image.src.split('?')[0], site.data.origin).href,
+        url: escapeXmlAttr(buildUrl(article.data.featured.image.src, site.data.origin).href),
+        type: mime.getType(article.data.featured.image.src.split('?')[0]) || undefined,
       },
       content: sanitizeHtml(parser.render(article.body), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
@@ -84,4 +85,29 @@ export const getFeed = async () => {
   })
 
   return feed
+}
+
+/**
+ * Method to escape xml attributes. This is needed for the image enclosure on the feed.
+ *
+ * @param unsafe - The unsafe string to escape.
+ * @returns the escaped string.
+ */
+const escapeXmlAttr = (unsafe: string) => {
+  return unsafe.replace(/[<>&'"]/g, (c: string) => {
+    switch (c) {
+      case '<':
+        return '&lt;'
+      case '>':
+        return '&gt;'
+      case '&':
+        return '&amp;'
+      case "'":
+        return '&apos;'
+      case '"':
+        return '&quot;'
+      default:
+        return c
+    }
+  })
 }
