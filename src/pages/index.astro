@@ -24,14 +24,15 @@ const lead = articles.shift()
 
 <Layout site={site}>
   <Fragment slot="seo">
-    <SeoBasic title={data.title} description={data.tagline} />
-    <OpenGraphCore title={data.title} description={data.tagline} type="website" />
-    <OpenGraphImage image={data.avatar} imageAlt={data.title} />
+    <SeoBasic title={data.title} description={data.tagline} site={site} />
+    <OpenGraphCore site={site} title={data.title} description={data.tagline} type="website" />
+    <OpenGraphImage site={site} image={data.avatar} imageAlt={data.title} />
     <TwitterCard
       title={data.title}
       description={data.tagline}
       image={data.avatar}
       imageAlt={data.title}
+      site={site}
     />
     <BreadcrumbJson site={site} />
     <SiteJson site={site} />

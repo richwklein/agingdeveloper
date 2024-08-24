@@ -22,6 +22,7 @@ const { tags: categories, total } = await getCategoriesWithCount()
       title="Explore Our Categories: Discover Content by Topic"
       description="Navigate through all our content by category. Find articles organized by topic to easily explore the subjects that interest you most."
       path={path}
+      site={site}
     />
     <BreadcrumbJson site={site} crumbs={[{ name: 'Categories', path: path }]} />
   </Fragment>

@@ -52,7 +52,10 @@ const { articles, total } = await getArticlesByAuthor(author.id, limit)
       title={`Articles by ${data.name}: Perspective & Expertise`}
       description={`Explore the latest articles from ${data.name}. Dive into a collection of their work, showcasing their expertise, unique perspective, and contributions to our site.`}
       path={path}
+      site={site}
     />
+    <OpenGraphProfile author={author} site={site} />
+    <AuthorJson author={author} writeCount={total} site={site} />
     <BreadcrumbJson
       site={site}
       crumbs={[
@@ -60,8 +63,6 @@ const { articles, total } = await getArticlesByAuthor(author.id, limit)
         { name: data.name, path: path },
       ]}
     />
-    <OpenGraphProfile author={author} />
-    <AuthorJson author={author} writeCount={total} />
   </Fragment>
   <BreadcrumbHeader
     head={{ name: 'Authors', path: '/author' }}

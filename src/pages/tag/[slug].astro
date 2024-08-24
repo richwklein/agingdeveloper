@@ -48,6 +48,7 @@ const { articles, total } = await getArticlesByTag(tag, limit)
       title={`Tagged Articles: Explore Content on ${tag}`}
       description={`Discover all articles tagged with ${tag}. Dive into a collection of posts that share a common theme.`}
       path={path}
+      site={site}
     />
     <BreadcrumbJson
       site={site}

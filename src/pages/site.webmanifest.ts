@@ -1,10 +1,11 @@
 /**
  * The page used to create the webmanifest file.
  */
+import { buildUrl } from '@utils/misc'
 import { getSite } from '@utils/site'
 import type { APIRoute } from 'astro'
 
-export const GET: APIRoute = async ({ site: baseUrl }) => {
+export const GET: APIRoute = async () => {
   const site = await getSite()
 
   const manifest = {
@@ -13,11 +14,11 @@ export const GET: APIRoute = async ({ site: baseUrl }) => {
     short_name: site.data.title,
     description: site.data.tagline,
     categories: [site.data.category],
-    start_url: baseUrl,
+    start_url: buildUrl('', site.data.origin),
     display: 'browser',
     background_color: site.data.background,
     theme_color: site.data.theme,
-    scope: baseUrl,
+    scope: buildUrl('', site.data.origin),
     icons: [
       { src: '/icons/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
       { src: '/icons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },

@@ -1,5 +1,6 @@
 ---
-import { createAbsoluteUrl } from '@utils/misc'
+import { buildUrl } from '@utils/misc'
+import type { CollectionEntry } from 'astro:content'
 
 /**
  * @name OpenGraphCore
@@ -13,16 +14,17 @@ import { createAbsoluteUrl } from '@utils/misc'
 export type OpenGraphType = 'website' | 'article' | 'profile'
 
 interface Props {
+  site: CollectionEntry<'site'>
   type: OpenGraphType
   title: string
   description: string
   path?: string
 }
 
-const { type, title, description, path = '/' } = Astro.props
+const { site, type, title, description, path = '' } = Astro.props
 ---
 
 <meta property="og:type" content={type} />
-<meta property="og:url" content={createAbsoluteUrl(path)} />
+<meta property="og:url" content={buildUrl(path, site.data.origin)} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />

@@ -1,15 +1,18 @@
 /**
  * The page used to create the robots.txt file.
  */
-import { createAbsoluteUrl } from '@utils/misc'
+import { buildUrl } from '@utils/misc'
+import { getSite } from '@utils/site'
 import type { APIRoute } from 'astro'
 
-const url = createAbsoluteUrl('sitemap-index.xml')
+const site = await getSite()
+const url = buildUrl('sitemap-index.xml', site.data.origin)
 
 const robotsTxt = `
 User-agent: *
 Allow: /
 Sitemap: ${url}
+Host: ${url.host}
 `.trim()
 
 export const GET: APIRoute = async () => {

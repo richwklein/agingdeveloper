@@ -9,15 +9,16 @@
  * <AuthorJson author={author} writeCount={16} />
  */
 import slugify from '@sindresorhus/slugify'
-import { createAbsoluteUrl } from '@utils/misc'
+import { buildUrl } from '@utils/misc'
 import type { CollectionEntry } from 'astro:content'
 
 interface Props {
   author: CollectionEntry<'author'>
+  site: CollectionEntry<'site'>
   writeCount: number
 }
 
-const { author, writeCount } = Astro.props
+const { author, site, writeCount } = Astro.props
 
 const modifiedDate = author.data.modified || author.data.published
 const socials = author.data.socials || []
@@ -41,7 +42,7 @@ const socials = author.data.socials || []
         userInteractionCount: writeCount,
       },
       description: author.data.tagline,
-      image: createAbsoluteUrl(author.data.avatar.src.split('?')[0]),
+      image: buildUrl(author.data.avatar.src.split('?')[0], site.data.origin),
       sameAs: socials.map((social) => {
         return social.url
       }),

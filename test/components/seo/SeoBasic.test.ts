@@ -1,8 +1,10 @@
 import SeoBasic from '@components/seo/SeoBasic.astro'
+import { getSite } from '@utils/site'
 import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import { beforeAll, expect, test } from 'vitest'
 
 type RenderOptions = { path?: string }
+const site = await getSite()
 let seo: string
 
 beforeAll(async () => {
@@ -13,6 +15,7 @@ const render = async ({ path }: RenderOptions = {}) => {
   const container = await AstroContainer.create()
   return await container.renderToString(SeoBasic, {
     props: {
+      site: site,
       title: 'Title',
       description: 'Description',
       path: path,

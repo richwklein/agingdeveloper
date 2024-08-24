@@ -1,5 +1,6 @@
 ---
-import { createAbsoluteUrl } from '@utils/misc'
+import { buildUrl } from '@utils/misc'
+import type { CollectionEntry } from 'astro:content'
 
 /**
  * @name SeoBasic
@@ -11,14 +12,15 @@ import { createAbsoluteUrl } from '@utils/misc'
  * <SeoBasic title={article.data.title} description={article.data.description} />
  */
 interface Props {
+  site: CollectionEntry<'site'>
   title: string
   description: string
   path?: string
 }
 
-const { title, description, path = '/' } = Astro.props
+const { title, description, path = '', site } = Astro.props
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={createAbsoluteUrl(path)} />
+<link rel="canonical" href={buildUrl(path, site.data.origin)} />

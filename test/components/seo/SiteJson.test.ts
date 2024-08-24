@@ -9,7 +9,6 @@ let siteJson: string
 beforeAll(async () => {
   site = await getSite()
   siteJson = await render()
-  console.log(siteJson)
 })
 
 const render = async () => {

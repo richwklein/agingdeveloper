@@ -9,7 +9,7 @@
  * <OpenGraphArticle published={article.published} modified={article.modified} authorId={article.author.id} ... />
  */
 import slugify from '@sindresorhus/slugify'
-import { createAbsoluteUrl } from '@utils/misc'
+import { buildUrl } from '@utils/misc'
 import type { CollectionEntry } from 'astro:content'
 
 import OpenGraphCore from './OpenGraphCore.astro'
@@ -17,19 +17,22 @@ import OpenGraphImage from './OpenGraphImage.astro'
 
 interface Props {
   article: CollectionEntry<'article'>
+  site: CollectionEntry<'site'>
 }
 
-const { article } = Astro.props
+const { article, site } = Astro.props
 const modifiedDate = article.data.modified || article.data.published
 ---
 
 <OpenGraphCore
+  site={site}
   title={article.data.title}
   description={article.data.description}
   path={`/article/${article.slug}`}
   type={'article'}
 />
 <OpenGraphImage
+  site={site}
   image={article.data.featured.image}
   imageAlt={article.data.featured.author ? article.data.featured.author.name : 'unknown'}
 />
@@ -37,7 +40,7 @@ const modifiedDate = article.data.modified || article.data.published
 <meta property="article:modified_time" content={modifiedDate.toISOString()} />
 <meta
   property="article:author"
-  content={createAbsoluteUrl(`/author/${slugify(article.data.author.id)}`)}
+  content={buildUrl(`/author/${slugify(article.data.author.id)}`, site.data.origin)}
 />
 <meta property="article:section" content={article.data.category} />
 {article.data.tags.map((tag: string) => <meta property="article:tag" content={tag} />)}

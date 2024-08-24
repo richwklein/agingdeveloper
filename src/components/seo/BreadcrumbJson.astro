@@ -8,7 +8,7 @@
  * @example
  * <BreadcrumbJson crumbs=[{name: "Articles", path: "/article"}] />
  */
-import { createAbsoluteUrl } from '@utils/misc'
+import { buildUrl } from '@utils/misc'
 import type { CollectionEntry } from 'astro:content'
 
 interface Props {
@@ -21,7 +21,7 @@ interface Props {
 
 const { crumbs = [], site } = Astro.props
 
-crumbs.unshift({ name: site.data.title, path: '/' })
+crumbs.unshift({ name: site.data.title, path: '' })
 ---
 
 <script
@@ -35,7 +35,7 @@ crumbs.unshift({ name: site.data.title, path: '/' })
         '@type': 'ListItem',
         position: index + 1,
         name: crumb.name,
-        item: createAbsoluteUrl(crumb.path),
+        item: buildUrl(crumb.path, site.data.origin),
       }
     }),
   })}

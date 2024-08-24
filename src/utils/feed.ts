@@ -5,7 +5,7 @@ import MarkdownIt from 'markdown-it'
 import sanitizeHtml from 'sanitize-html'
 
 import { getArticles } from './article'
-import { createAbsoluteUrl } from './misc'
+import { buildUrl } from './misc'
 import { getSite } from './site'
 
 const parser = new MarkdownIt()
@@ -22,7 +22,6 @@ export const feedInfo = [
 /**
  * Function for constructing a feed object to then render.
  *
- * @param baseUrl - The base url to construct absolute urls from.
  * @returns the feed object
  */
 export const getFeed = async () => {
@@ -34,11 +33,11 @@ export const getFeed = async () => {
   const feed = new Feed({
     title: site.data.title,
     description: site.data.tagline,
-    id: createAbsoluteUrl('/'),
-    link: createAbsoluteUrl('/'),
-    image: createAbsoluteUrl(site.data.avatar.src.split('?')[0]),
-    favicon: createAbsoluteUrl(site.data.icon.src.split('?')[0]),
-    feedLinks: new Map(feedInfo.map(({ id, path }) => [id, createAbsoluteUrl(path)])),
+    id: buildUrl('', site.data.origin).href,
+    link: buildUrl('', site.data.origin).href,
+    image: buildUrl(site.data.avatar.src.split('?')[0], site.data.origin).href,
+    favicon: buildUrl(site.data.icon.src.split('?')[0], site.data.origin).href,
+    feedLinks: new Map(feedInfo.map(({ id, path }) => [id, buildUrl(path, site.data.origin).href])),
     copyright: new Date().toISOString(),
   })
 
@@ -49,7 +48,7 @@ export const getFeed = async () => {
     return feed.addContributor({
       name: name,
       email: email,
-      link: createAbsoluteUrl(`/author/${slugify(id)}`),
+      link: buildUrl(`/author/${slugify(id)}`, site.data.origin).href,
     })
   })
 
@@ -59,7 +58,7 @@ export const getFeed = async () => {
       (author: CollectionEntry<'author'>) => author.id == article.data.author.id
     )[0]
 
-    const articleUrl = createAbsoluteUrl(`/article/${article.slug}`)
+    const articleUrl = buildUrl(`/article/${article.slug}`, site.data.origin).href
 
     return feed.addItem({
       title: article.data.title,
@@ -72,11 +71,11 @@ export const getFeed = async () => {
         {
           name: author.data.name,
           email: author.data.email,
-          link: createAbsoluteUrl(`/author/${slugify(author.id)}`),
+          link: buildUrl(`/author/${slugify(author.id)}`, site.data.origin).href,
         },
       ],
       image: {
-        url: createAbsoluteUrl(article.data.featured.image.src.split('?')[0]),
+        url: buildUrl(article.data.featured.image.src.split('?')[0], site.data.origin).href,
       },
       content: sanitizeHtml(parser.render(article.body), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),

@@ -1,5 +1,3 @@
-const baseUrl = import.meta.env.SITE
-
 /**
  * Calculates a font weight between 300 and 900 rounding up to the nearest 100.
  *
@@ -37,12 +35,12 @@ export const intersection = (first: Array<string>, second: Array<string>): Set<s
 }
 
 /**
- * Create an absolute url for the given path.
+ * Build an absolute url for the given path and origin.
  *
  * @param path - the path to construct the url for.
- * @param baseUrl - the base url or undefined.
+ * @param base - the origin.
  * @returns the full url.
  */
-export const createAbsoluteUrl = (path: string) => {
-  return new URL(path, baseUrl).href
+export const buildUrl = (path: string, origin: URL | string | undefined) => {
+  return new URL(path, origin)
 }
