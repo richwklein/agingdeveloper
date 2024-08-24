@@ -58,7 +58,7 @@ export default defineConfig({
     '/article/2020/07/21/intro': { destination: '/article/2020-07-21-intro', status: 308 },
   },
   site: siteUrl,
-  trailingSlash: 'never',
+  trailingSlash: 'ignore',
   build: {
     format: 'file',
   },
