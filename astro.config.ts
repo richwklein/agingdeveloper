@@ -48,7 +48,7 @@ export default defineConfig({
       status: 308,
     },
     '/article/2020/08/08/custom-domain': {
-      destination: '/article/22020-08-08-custom-domain',
+      destination: '/article/2020-08-08-custom-domain',
       status: 308,
     },
     '/article/2020/07/26/false-start': {
