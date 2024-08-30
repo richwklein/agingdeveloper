@@ -40,6 +40,7 @@ const { site, class: className } = Astro.props
           alt={site.data.title}
           loading={'eager'}
           fetchpriority={'high'}
+          width={80}
           widths={[48, 80]}
           sizes={`(min-width: 768px) 80x, 48px`}
           class:list={['h-full w-full object-cover object-center']}

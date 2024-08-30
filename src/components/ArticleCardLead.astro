@@ -33,7 +33,8 @@ const { remarkPluginFrontmatter: frontmatter } = await article.render()
     <Image
       src={article.data.featured.image}
       alt={article.data.title}
-      class:list={['aspect-square object-cover object-center sm:aspect-video md:aspect-[21/9]']}
+      class:list={['spect-video object-cover object-center md:aspect-[21/9]']}
+      width={1280}
       widths={[420, 640, 768, 1024, 1280]}
       sizes={`
         (min-width: 1280px) 180px,
