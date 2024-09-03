@@ -1,3 +1,9 @@
+import { readFile } from 'node:fs/promises'
+
+import type { ImageMetadata } from 'astro'
+import path from 'path'
+import sharp from 'sharp'
+
 /**
  * Calculates a font weight between 300 and 900 rounding up to the nearest 100.
  *
@@ -43,4 +49,46 @@ export const intersection = (first: Array<string>, second: Array<string>): Set<s
  */
 export const buildUrl = (path: string, origin: URL | string | undefined) => {
   return new URL(path, origin)
+}
+
+/**
+ * Calculate a height value for a given width and aspect ratio.
+ *
+ * @param width - The width to use
+ * @param aspect - The aspect ratio
+ * @returns the calculated height
+ */
+export const calculateHeight = (width: number, aspect: string) => {
+  const aspectRatio = aspect == 'square' ? '1/1' : aspect == 'video' ? '16/9' : aspect
+  const [ratioWidth, ratioHeight] = aspectRatio.split('/').map(Number)
+  const height = Math.floor((width * ratioHeight) / ratioWidth)
+
+  return height
+}
+
+/**
+ * Create a data url for a placeholder image.
+ *
+ * @param image - The image to create a placeholder for.
+ * @param width - The width of the image to use.
+ * @returns a blurred image as a base64 data url.
+ */
+export const createPlaceholderUrl = async (image: ImageMetadata, width: number) => {
+  let srcPath: string
+  if (import.meta.env.MODE === 'development') {
+    srcPath = image.src.replace('/@fs', '').split('?')[0]
+  } else {
+    const cwd = process.cwd()
+    // We need to resolve /_astro to <process.cwd>/dist/_astro
+    const location = path.join(cwd, 'dist', image.src)
+    srcPath = location
+  }
+
+  const { buffer } = await readFile(srcPath)
+  const blurred = await sharp(buffer)
+    .resize({ width: width, fit: sharp.fit.cover, position: sharp.gravity.northwest })
+    .blur(20)
+    .toBuffer()
+
+  return `data:image/${image.format};base64,${blurred.toString('base64')}`
 }
