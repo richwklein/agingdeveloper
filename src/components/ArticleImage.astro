@@ -10,8 +10,8 @@
  * <ArticleImage featured={featured} />
  */
 import LinkExternal from '@components/LinkExternal.astro'
+import ResponsiveImage from '@components/ResponsiveImage.astro'
 import type { ImageMetadata } from 'astro'
-import { Image } from 'astro:assets'
 
 interface Props {
   featured: {
@@ -37,20 +37,20 @@ const alt = author ? author.name : 'unknown'
 <section id="article-featured" class:list={[className]}>
   <figure>
     <div class:list={['overflow-hidden rounded-md']}>
-      <Image
-        class:list={['aspect-square object-cover object-center sm:aspect-video md:aspect-[21/9]']}
-        src={image}
+      <ResponsiveImage
+        class:list={['aspect-video object-cover object-center md:aspect-[21/9]']}
+        image={image}
         alt={alt}
         loading={'eager'}
         fetchpriority={'high'}
-        sizes={`
-          (min-width: 1280px) 1280px,
-          (min-width: 1024px) 1024px,
-          (min-width: 768px) 768px,
-          (min-width: 640px) 640px,
-          420px
-        `}
-        widths={[420, 640, 768, 1024, 1280]}
+        aspect={'21/9'}
+        sizes={new Map([
+          [null, 420],
+          [640, 640],
+          [768, 768],
+          [1024, 1024],
+          [1280, 1280],
+        ])}
       />
     </div>
     {

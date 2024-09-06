@@ -1,0 +1,94 @@
+---
+import { calculateHeight, createPlaceholderUrl } from '@utils/misc'
+import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
+
+interface Props {
+  image: ImageMetadata
+  alt: string
+  sizes: Map<number | null, number>
+  aspect: 'square' | 'video' | '21/9' | '16/9' | '3/4' | '4/3'
+  loading?: 'eager' | 'lazy'
+  fetchpriority?: 'low' | 'high'
+  decoding?: 'async' | 'auto' | 'sync'
+  class?: string
+}
+
+const {
+  image,
+  alt,
+  sizes,
+  aspect,
+  loading = 'lazy',
+  fetchpriority = 'low',
+  decoding = 'async',
+  class: className,
+} = Astro.props
+/*
+        sizes={`
+          (min-width: 1280px) 1280px,
+          (min-width: 1024px) 1024px,
+          (min-width: 768px) 768px,
+          (min-width: 640px) 640px,
+          420px
+        `}
+        */
+
+// get the widths and sort ascending size
+const widths = Array.from(sizes.values())
+widths.sort((a, b) => a - b)
+
+const maxWidth = widths.at(-1) || 1280
+const maxHeight = calculateHeight(maxWidth, aspect)
+const placeholder = await createPlaceholderUrl(image, maxWidth)
+
+let defaultWidth = widths.at(0)
+if (sizes.has(null)) {
+  defaultWidth = sizes.get(null)
+  sizes.delete(null)
+}
+
+const sizeAttrs = Array.from(sizes, ([key, value]) => `(max-width: ${key}px) ${value}px`)
+sizeAttrs.push(`${defaultWidth}px`)
+const sizeAttr = sizeAttrs.join(', ')
+---
+
+<responsive-image>
+  <Image
+    src={image}
+    alt={alt}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding={decoding}
+    class:list={['bg-cover bg-center bg-no-repeat', className]}
+    width={maxWidth}
+    height={maxHeight}
+    widths={widths}
+    sizes={sizeAttr}
+    style={{ backgroundImage: `url(${placeholder})` }}
+  />
+</responsive-image>
+
+<script>
+  class ResponsiveImage extends HTMLElement {
+    constructor() {
+      super()
+
+      const clearPlaceholder = (image?: HTMLImageElement) => {
+        image?.style.removeProperty('background-image')
+      }
+
+      const image = this.querySelector('img') as HTMLImageElement
+      image?.addEventListener('load', () => {
+        clearPlaceholder(image)
+      })
+
+      if (image?.complete) {
+        clearPlaceholder(image)
+      }
+    }
+  }
+
+  // Tell the browser to use our ResponsiveImage class for <responsive-image> elements.
+  customElements.define('responsive-image', ResponsiveImage)
+</script>
