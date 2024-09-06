@@ -7,6 +7,7 @@ import astroLint from 'eslint-plugin-astro'
 import sortLint from 'eslint-plugin-simple-import-sort'
 import vitestLint from 'eslint-plugin-vitest'
 import tsLint from 'typescript-eslint'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 const gitignorePath = path.resolve(dirname, '.gitignore')
@@ -19,6 +20,7 @@ export default [
   jsLint.configs.recommended,
   ...tsLint.configs.recommended,
   ...astroLint.configs.recommended,
+  ...astroLint.configs['jsx-a11y-recommended'],
   {
     plugins: {
       'simple-import-sort': sortLint,

@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "type": "module",
   "scripts": {
     "dev": "npx astro dev",
@@ -46,6 +46,7 @@
     "@vitest/coverage-v8": "^2.0.3",
     "eslint": "^9.9.0",
     "eslint-plugin-astro": "^1.2.3",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-vitest": "^0.5.4",
     "prettier": "^3.2.5",
