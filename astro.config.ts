@@ -3,11 +3,11 @@ import netlify from '@astrojs/netlify'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import { defineConfig } from 'astro/config'
+import fuse from 'astro-fuse'
 import icon from 'astro-icon'
 
 import { remarkExcerpt } from './src/utils/excerpt.ts'
 import { remarkReadingTime } from './src/utils/readTime.ts'
-
 const { URL: SITE_URL, DEPLOY_PRIME_URL: DEPLOY_URL, CONTEXT: DEPLOY_CONTEXT = 'dev' } = process.env
 const siteUrl =
   DEPLOY_CONTEXT === 'dev'
@@ -27,6 +27,7 @@ export default defineConfig({
   image: {},
   integrations: [
     icon(),
+    fuse(['content', 'frontmatter.title', 'frontmatter.description'], { basedOn: 'source' }),
     mdx(),
     sitemap(),
     tailwind({
@@ -34,7 +35,10 @@ export default defineConfig({
     }),
   ],
   redirects: {
-    '/article': { destination: '/article/archive-1', status: 308 },
+    '/article': {
+      destination: '/article/archive-1',
+      status: 308,
+    },
     '/article/rss-dead-long-live-rss': {
       destination: '/article/2021-05-17-rss-dead-long-live-rss',
       status: 308,
@@ -55,7 +59,10 @@ export default defineConfig({
       destination: '/article/2020-07-26-false-start',
       status: 308,
     },
-    '/article/2020/07/21/intro': { destination: '/article/2020-07-21-intro', status: 308 },
+    '/article/2020/07/21/intro': {
+      destination: '/article/2020-07-21-intro',
+      status: 308,
+    },
   },
   site: siteUrl,
   trailingSlash: 'ignore',

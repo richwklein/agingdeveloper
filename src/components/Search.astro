@@ -1,0 +1,134 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<!-- Search.astro -->
+<custom-search>
+  <div>
+    <button
+      data-search-button
+      type="button"
+      data-collapse-toggle="navbar-search"
+      aria-controls="navbar-search"
+      aria-expanded="false"
+      class="mr-1 rounded-lg p-2.5 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 lg:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+    >
+      <svg
+        class="h-5 w-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 20 20"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"></path>
+      </svg>
+      <span class="sr-only">Search</span>
+    </button>
+    <div
+      data-search-container
+      class:list={['relative hidden', 'lg:block lg:w-72 xl:w-96', className]}
+    >
+      <input
+        data-search-input
+        type="text"
+        placeholder="Search..."
+        class:list={[
+          'w-full appearance-none rounded-md border-2 px-3 py-2 pl-10',
+          'border-primary-dark bg-primary-light leading-tight text-primary-contrast',
+          'focus:shadow-outline focus:border-secondary-main focus:outline-none focus:ring-secondary-main',
+        ]}
+      />
+      <div class="absolute inset-y-0 left-0 flex items-center">
+        <Icon
+          class:list={['pointer-events-none text-stone-400', 'ml-3 h-6 w-6']}
+          name="mdi:search"
+        />
+      </div>
+      <ul
+        data-search-result
+        class:list={[
+          'absolute left-0 top-9 hidden w-full rounded-b-md px-0 py-2',
+          'border-x-2 border-b-2 border-secondary-main bg-primary-light leading-tight text-stone-200',
+        ]}
+      >
+      </ul>
+    </div>
+  </div>
+
+  <ul data-search-result></ul>
+
+  <script>
+    import type { OutputBaseSearchable } from 'astro-fuse'
+
+    class CustomSearch extends HTMLElement {
+      list = this.querySelector<HTMLUListElement>('[data-search-result]')
+
+      constructor() {
+        super()
+
+        const input = this.querySelector<HTMLInputElement>('[data-search-input]')
+        const button = this.querySelector<HTMLButtonElement>('[data-search-button]')
+        const container = this.querySelector<HTMLDivElement>('[data-search-container]')
+
+        input?.addEventListener('input', this.onInput.bind(this))
+        // TODO on loss of focus hide menu input?.addEventListener('focusout', this.onFocusOut.bind(this))
+        button?.addEventListener('click', function () {
+          container?.classList.toggle('hidden')
+        })
+      }
+
+      async onFocusOut(e: Event) {
+        const input = e.target as HTMLInputElement
+        const { list } = this
+        input.value = ''
+
+        if (!list) {
+          return
+        }
+
+        list.innerHTML = ''
+        list.classList.add('hidden')
+      }
+
+      async onInput(e: Event) {
+        const { list } = this
+
+        if (!list) {
+          return
+        }
+
+        // create fuse instance from index
+        const { loadFuse } = await import('astro-fuse/client')
+        const fuse = await loadFuse()
+
+        const results = fuse.search<OutputBaseSearchable>(
+          (e.target as HTMLInputElement).value.trim()
+        )
+        if (results.length <= 0) {
+          list.classList.add('hidden')
+        } else {
+          list.innerHTML = results
+            .map(
+              ({ item }) =>
+                `<li><a class="m-0 px-3 py-1 block hover:bg-primary-dark hover:text-primary-contrast  focus:bg-primary-dark focus:text-primary-contrast" href="${item.pathname}">${item.frontmatter.title}</a></li>`
+            )
+            .join('')
+          list.classList.remove('hidden')
+        }
+      }
+    }
+
+    customElements.define('custom-search', CustomSearch)
+  </script>
+</custom-search>

@@ -9,6 +9,7 @@
  * @example
  * <PageHeader />
  */
+import Search from '@components/Search.astro'
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 
@@ -27,7 +28,7 @@ const { site, class: className } = Astro.props
     className,
   ]}
 >
-  <div class:list={['container mx-auto px-4 xl:max-w-screen-xl']}>
+  <div class:list={['container mx-auto flex items-center px-4 xl:max-w-screen-xl']}>
     <a href="/" class:list={['flex justify-start bg-transparent text-inherit']}>
       <div
         class:list={[
@@ -47,10 +48,12 @@ const { site, class: className } = Astro.props
       </div>
       <div class:list={['flex flex-col justify-center']}>
         <h1 class:list={['mb-2 text-base xs:text-3xl sm:text-4xl']}>{site.data.title}</h1>
-        <p class:list={['hidden text-base sm:block']}>
+        <p class:list={['hidden text-base md:block']}>
           {site.data.tagline}
         </p>
       </div>
     </a>
+    <div class:list={['flex-grow']}></div>
+    <Search class:list={['']} />
   </div>
 </header>
