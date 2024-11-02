@@ -1,0 +1,756 @@
+Step 2: Integrate Casbin for Authorization
+
+Now that authentication is set up, let's configure Casbin for authorization.
+2.1 Add Casbin Dependency
+
+Include the Casbin Java library in your pom.xml:
+
+xml
+
+<dependency>
+  <groupId>org.casbin</groupId>
+  <artifactId>jcasbin</artifactId>
+  <version>1.16.0</version>
+</dependency>
+
+2.2 Define Casbin Authorization Model
+
+Casbin uses a model file to define the logic for ACL and RBAC. Create an auth_model.conf file in src/main/resources:
+
+ini
+
+[request_definition]
+r = sub, obj, act
+
+[policy_definition]
+p = sub, obj, act
+
+[role_definition]
+g = _, _
+
+[policy_effect]
+e = some(where (p.eft == allow))
+
+[matchers]
+m = g(r.sub, p.sub) && r.obj == p.obj && r.act == p.act
+
+This model defines:
+
+    r: The request format (subject, object, action).
+    p: The policy rules (subject, object, action).
+    g: The RBAC role hierarchy.
+    m: The matcher that combines ACL and RBAC to enforce access control.
+
+2.3 Define Authorization Policies
+
+Next, create a policy.csv file in the src/main/resources directory:
+
+csv
+
+p, admin, /admin, GET
+p, user, /user, GET
+p, user, /user, POST
+
+g, alice, admin
+g, bob, user
+
+Here:
+
+    admin has permission to access the /admin endpoint with GET requests.
+    user has access to /user for GET and POST requests.
+    alice is assigned the admin role, and bob is assigned the user role.
+
+2.4 Implement AuthorizationManager
+
+Spring Security’s AuthorizationManager can be used to enforce custom authorization logic at the method or endpoint level. We'll use it to check Casbin policies dynamically.
+2.4.1 Create CasbinAuthorizationManager
+
+Define a class that implements AuthorizationManager to evaluate Casbin rules.
+
+java
+
+import org.casbin.jcasbin.main.Enforcer;
+import org.springframework.security.access.AuthorizationDecision;
+import org.springframework.security.access.AuthorizationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
+import org.springframework.stereotype.Component;
+
+import java.util.function.Supplier;
+
+@Component
+public class CasbinAuthorizationManager implements AuthorizationManager<RequestAuthorizationContext> {
+
+    private final Enforcer enforcer;
+
+    public CasbinAuthorizationManager(Enforcer enforcer) {
+        this.enforcer = enforcer;
+    }
+
+    @Override
+    public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext context) {
+        Authentication auth = authentication.get();
+        String username = auth.getName();
+        String requestURI = context.getRequest().getRequestURI();
+        String method = context.getRequest().getMethod();
+
+        // Enforce Casbin authorization
+        boolean allowed = enforcer.enforce(username, requestURI, method);
+
+        return new AuthorizationDecision(allowed);
+    }
+
+}
+
+This CasbinAuthorizationManager class implements Spring Security’s AuthorizationManager interface. It checks if the authenticated user is allowed to access the requested resource based on Casbin policies.
+2.4.2 Configure Casbin Enforcer
+
+Next, create a CasbinConfig class to load the Casbin model and policies.
+
+java
+
+import org.casbin.jcasbin.main.Enforcer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class CasbinConfig {
+
+    @Bean
+    public Enforcer casbinEnforcer() {
+        return new Enforcer("classpath:auth_model.conf", "classpath:policy.csv");
+    }
+
+}
+
+2.5 Configure Spring Security to Use CasbinAuthorizationManager
+
+We will now configure Spring Security to use the CasbinAuthorizationManager for authorization at the method or endpoint level. Create a SecurityConfig class as follows:
+
+java
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableMethodSecurity
+public class SecurityConfig {
+
+    private final CasbinAuthorizationManager casbinAuthorizationManager;
+
+    public SecurityConfig(CasbinAuthorizationManager casbinAuthorizationManager) {
+        this.casbinAuthorizationManager = casbinAuthorizationManager;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(authz -> authz
+                .requestMatchers("/admin").access(casbinAuthorizationManager)
+                .requestMatchers("/user").access(casbinAuthorizationManager)
+                .anyRequest().authenticated()
+            )
+            .oauth2Login();
+
+        return http.build();
+    }
+
+}
+
+In this configuration:
+
+    We apply the CasbinAuthorizationManager to specific endpoints such as /admin and /user.
+    Spring Security’s authorizeHttpRequests method allows us to secure individual endpoints by passing the custom AuthorizationManager.
+
+Step 3: Securing Methods with CasbinAuthorizationManager
+
+The AuthorizationManager can also be used at the method level in Spring services or controllers by enabling method security with @PreAuthorize and custom expressions.
+
+For example, in a controller:
+
+java
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class SecureController {
+
+    @GetMapping("/admin")
+    public String adminAccess() {
+        return "Admin content";
+    }
+
+    @GetMapping("/user")
+    public String userAccess() {
+        return "User content";
+    }
+
+    @PostMapping("/user")
+    public String userPostAccess() {
+        return "User post content";
+    }
+
+}
+
+In this case, we don't need to annotate each method individually because the AuthorizationManager handles endpoint-level access control dynamically through the Spring Security configuration.
+Step 4: Testing the Secured Application
+
+Now that authentication (Okta) and authorization (Casbin) are configured, you can test your application:
+
+    Authentication: When users try to access secured endpoints, they will be redirected to the Okta login page.
+    Authorization: Once authenticated, Casbin will enforce access control based on the defined ACL and RBAC policies.
+
+Conclusion
+
+In this tutorial, we secured a Spring Boot service using Okta for authentication and Casbin for authorization, using Spring Security’s AuthorizationManager. This approach allows for flexible, dynamic, and scalable authorization without the need for custom annotations. You can now easily extend this setup to handle more complex access control scenarios based on roles and resource permissions.
+You said:
+Make the application one to submit research papers
+ChatGPT said:
+ChatGPT
+How to Build a Research Paper Submission Application with Okta Authentication and Casbin Authorization (ACL + RBAC) Using Spring Security
+
+In this guide, we will extend our previous example to create a Research Paper Submission application. We will continue using Okta for authentication, Casbin for authorization, and Spring Security for securing both the submission and review processes.
+
+The application will have the following roles and capabilities:
+
+    Authors can submit and edit their research papers.
+    Reviewers can review papers assigned to them.
+    Admins can manage all submissions and assign papers to reviewers.
+
+Overview
+
+    Authentication: Okta (OAuth2)
+    Authorization: Casbin (ACL + RBAC)
+    Security: Spring Security’s AuthorizationManager
+    Functionality:
+        Authors submit papers.
+        Reviewers are assigned papers and can approve or reject them.
+        Admins manage the entire process.
+
+Step 2: Define Casbin Authorization Model
+2.1 Casbin Model
+
+In the src/main/resources folder, create an auth_model.conf file to define your Casbin model:
+
+ini
+
+[request_definition]
+r = sub, obj, act
+
+[policy_definition]
+p = sub, obj, act
+
+[role_definition]
+g = _, _
+
+[policy_effect]
+e = some(where (p.eft == allow))
+
+[matchers]
+m = g(r.sub, p.sub) && r.obj == p.obj && r.act == p.act
+
+This configuration enforces ACL and RBAC-based policies, where:
+
+    r: Subject (user), object (resource), action (method).
+    g: Role hierarchy for RBAC.
+
+2.2 Define Policies for Paper Submission
+
+In the src/main/resources folder, create a policy.csv file to define access control policies:
+
+csv
+
+p, author, /papers/submit, POST
+p, author, /papers/edit, PUT
+p, reviewer, /papers/review, POST
+p, admin, /papers/manage, GET
+p, admin, /papers/assign, POST
+
+g, alice, author
+g, bob, reviewer
+g, charlie, admin
+
+    Authors can POST papers and PUT to edit their papers.
+    Reviewers can POST reviews for assigned papers.
+    Admins can manage submissions and assign papers to reviewers.
+
+
+Step 4: Implement Casbin AuthorizationManager
+4.1 Create the CasbinAuthorizationManager
+
+Define the CasbinAuthorizationManager as explained before to enforce access control based on Casbin policies:
+
+java
+
+@Component
+public class CasbinAuthorizationManager implements AuthorizationManager<RequestAuthorizationContext> {
+
+    private final Enforcer enforcer;
+
+    public CasbinAuthorizationManager(Enforcer enforcer) {
+        this.enforcer = enforcer;
+    }
+
+    @Override
+    public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext context) {
+        Authentication auth = authentication.get();
+        String username = auth.getName();
+        String requestURI = context.getRequest().getRequestURI();
+        String method = context.getRequest().getMethod();
+
+        boolean allowed = enforcer.enforce(username, requestURI, method);
+        return new AuthorizationDecision(allowed);
+    }
+
+}
+
+4.2 Configure Security for Paper Submission
+
+In SecurityConfig.java, configure Spring Security to use the CasbinAuthorizationManager for paper-related routes.
+
+java
+
+@Configuration
+@EnableMethodSecurity
+public class SecurityConfig {
+
+    private final CasbinAuthorizationManager casbinAuthorizationManager;
+
+    public SecurityConfig(CasbinAuthorizationManager casbinAuthorizationManager) {
+        this.casbinAuthorizationManager = casbinAuthorizationManager;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(authz -> authz
+                .requestMatchers("/papers/submit").access(casbinAuthorizationManager)
+                .requestMatchers("/papers/edit").access(casbinAuthorizationManager)
+                .requestMatchers("/papers/review").access(casbinAuthorizationManager)
+                .requestMatchers("/papers/manage").access(casbinAuthorizationManager)
+                .anyRequest().authenticated()
+            )
+            .oauth2Login();
+
+        return http.build();
+    }
+
+}
+
+Step 5: Implement Paper Submission Controller
+
+Create a PaperController to manage paper submission and review functionality.
+
+java
+
+@RestController
+@RequestMapping("/papers")
+public class PaperController {
+
+    private final PaperService paperService;
+
+    public PaperController(PaperService paperService) {
+        this.paperService = paperService;
+    }
+
+    @PostMapping("/submit")
+    public ResponseEntity<String> submitPaper(@RequestBody Paper paper, Authentication auth) {
+        paperService.submitPaper(paper, auth.getName());
+        return ResponseEntity.ok("Paper submitted successfully");
+    }
+
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<String> editPaper(@PathVariable Long id, @RequestBody Paper paper, Authentication auth) {
+        paperService.editPaper(id, paper, auth.getName());
+        return ResponseEntity.ok("Paper updated successfully");
+    }
+
+    @PostMapping("/review/{id}")
+    public ResponseEntity<String> reviewPaper(@PathVariable Long id, @RequestBody Review review, Authentication auth) {
+        paperService.reviewPaper(id, review, auth.getName());
+        return ResponseEntity.ok("Review submitted");
+    }
+
+    @GetMapping("/manage")
+    public List<Paper> managePapers() {
+        return paperService.getAllPapers();
+    }
+
+    @PostMapping("/assign/{paperId}")
+    public ResponseEntity<String> assignReviewer(@PathVariable Long paperId, @RequestParam String reviewer) {
+        paperService.assignReviewer(paperId, reviewer);
+        return ResponseEntity.ok("Reviewer assigned");
+    }
+
+}
+
+Step 6: Implement Paper Service Logic
+
+In PaperService, implement the logic for paper submission, editing, reviewing, and assigning.
+
+java
+
+@Service
+public class PaperService {
+
+    private final PaperRepository paperRepository;
+    private final ReviewRepository reviewRepository;
+
+    public PaperService(PaperRepository paperRepository, ReviewRepository reviewRepository) {
+        this.paperRepository = paperRepository;
+        this.reviewRepository = reviewRepository;
+    }
+
+    public void submitPaper(Paper paper, String author) {
+        // Save paper with author and "Submitted" status
+    }
+
+    public void editPaper(Long id, Paper paper, String author) {
+        // Allow author to edit their paper if it hasn't been reviewed
+    }
+
+    public void reviewPaper(Long id, Review review, String reviewer) {
+        // Allow reviewers to review assigned papers
+    }
+
+    public List<Paper> getAllPapers() {
+        // Admins can view all papers
+        return paperRepository.findAll();
+    }
+
+    public void assignReviewer(Long paperId, String reviewer) {
+        // Admins can assign reviewers to papers
+    }
+
+}
+
+Step 7: Testing the Application
+
+You now have a basic research paper submission system where:
+
+    Authors can submit and edit their papers.
+    Reviewers can review assigned papers.
+    Admins manage the entire process, including assigning reviewers and viewing all submissions.
+
+Conclusion
+
+This tutorial shows how to build a research paper submission system using Okta for authentication, Casbin for authorization, and Spring Security with an AuthorizationManager. By defining ACL and RBAC rules in Casbin, we ensure fine-grained control over who can submit, review, and manage papers.
+
+Step 3: Configure JDBC Adapter for Casbin
+
+We will now configure Casbin to use the JDBC adapter for policy storage. In the CasbinConfig class, load the policies from the database instead of a file.
+3.1 Define Casbin Configuration with JDBC Adapter
+
+Create or update the CasbinConfig class to initialize the Casbin enforcer with the JDBC adapter:
+
+java
+
+import org.casbin.jcasbin.main.Enforcer;
+import org.casbin.jcasbin.persist.adapter.JDBCAdapter;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
+
+@Configuration
+public class CasbinConfig {
+
+    private final DataSource dataSource;
+
+    public CasbinConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    @Bean
+    public Enforcer casbinEnforcer() {
+        // Initialize JDBCAdapter with the MySQL DataSource
+        JDBCAdapter jdbcAdapter = new JDBCAdapter(dataSource);
+
+        // Load Casbin enforcer with model configuration and JDBC adapter for policies
+        return new Enforcer("classpath:auth_model.conf", jdbcAdapter);
+    }
+
+}
+
+This configuration does the following:
+
+    Loads the Casbin model from auth_model.conf.
+    Uses the JDBCAdapter to load policies from the casbin_rule table.
+
+Step 4: Define the Casbin Model
+
+Create the Casbin model configuration auth_model.conf in the src/main/resources directory as before. No changes are needed for the model itself.
+
+ini
+
+[request_definition]
+r = sub, obj, act
+
+[policy_definition]
+p = sub, obj, act
+
+[role_definition]
+g = _, _
+
+[policy_effect]
+e = some(where (p.eft == allow))
+
+[matchers]
+m = g(r.sub, p.sub) && r.obj == p.obj && r.act == p.act
+
+Step 5: Update Security Configuration
+
+In the SecurityConfig.java, use AuthorizationManager as before to dynamically secure the endpoints based on the policies loaded from the database.
+
+java
+
+@Configuration
+@EnableMethodSecurity
+public class SecurityConfig {
+
+    private final CasbinAuthorizationManager casbinAuthorizationManager;
+
+    public SecurityConfig(CasbinAuthorizationManager casbinAuthorizationManager) {
+        this.casbinAuthorizationManager = casbinAuthorizationManager;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(authz -> authz
+                .requestMatchers("/papers/submit").access(casbinAuthorizationManager)
+                .requestMatchers("/papers/edit").access(casbinAuthorizationManager)
+                .requestMatchers("/papers/review").access(casbinAuthorizationManager)
+                .requestMatchers("/papers/manage").access(casbinAuthorizationManager)
+                .anyRequest().authenticated()
+            )
+            .oauth2Login();
+
+        return http.build();
+    }
+
+}
+
+Step 6: Manage Policies via Casbin
+
+Policies for roles and permissions are now stored in the MySQL database. You can use Casbin's API to manage these policies dynamically.
+6.1 Adding Policies
+
+You can add or remove policies via Casbin's enforcer at runtime:
+
+java
+
+import org.casbin.jcasbin.main.Enforcer;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PolicyService {
+
+    private final Enforcer enforcer;
+
+    public PolicyService(Enforcer enforcer) {
+        this.enforcer = enforcer;
+    }
+
+    public void addPolicy(String role, String resource, String action) {
+        enforcer.addPolicy(role, resource, action);
+    }
+
+    public void addRoleForUser(String username, String role) {
+        enforcer.addRoleForUser(username, role);
+    }
+
+    public void deletePolicy(String role, String resource, String action) {
+        enforcer.removePolicy(role, resource, action);
+    }
+
+}
+
+For example, you could assign a reviewer to a specific paper dynamically in the service:
+
+java
+
+public void assignReviewer(Long paperId, String reviewer) {
+Paper paper = paperRepository.findById(paperId).orElseThrow(() -> new RuntimeException("Paper not found"));
+enforcer.addPolicy(reviewer, "/papers/review/" + paperId, "POST");
+}
+
+This dynamically assigns the reviewer to review a specific paper by adding a policy to the database.
+Step 7: Test the Application
+
+Once the application is running, the Casbin policies will be stored and enforced from the MySQL database. You can now:
+
+    Manage policies directly from the database.
+    Add or remove roles and permissions dynamically via the Casbin enforcer API.
+
+For instance:
+
+    Authors can submit and edit their papers.
+    Reviewers can review assigned papers.
+    Admins can manage all papers and assign reviewers.
+
+Conclusion
+
+By switching to Casbin with a JDBC adapter, we have created a scalable and flexible research paper submission system where access control policies are stored in a database. This allows dynamic updates and fine-grained control over who can access which resources without needing to modify configuration files. You can extend this setup further by integrating administrative interfaces to manage roles and permissions directly within the application.
+2/2
+
+use h2 as the database
+
+To switch to H2 as the database for storing Casbin policies in your Spring Boot research paper submission application, follow these steps. H2 is an in-memory database that simplifies setup and is great for development and testing purposes.
+Updated Guide: Using H2 with Casbin's JDBC Adapter for Policy Storage
+
+In this guide, we’ll update our research paper submission system to store Casbin policies in an H2 in-memory database, allowing for fast setup and portability.
+Step 1: Add Dependencies
+
+Ensure that you include the H2 dependency in your pom.xml in addition to the Casbin JDBC adapter and other necessary libraries:
+
+xml
+
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-oauth2-client</artifactId>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<dependency>
+  <groupId>org.casbin</groupId>
+  <artifactId>jcasbin</artifactId>
+  <version>1.16.0</version>
+</dependency>
+<dependency>
+  <groupId>org.casbin</groupId>
+  <artifactId>jcasbin-persistence</artifactId>
+  <version>1.2.0</version>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+  <groupId>com.h2database</groupId>
+  <artifactId>h2</artifactId>
+  <scope>runtime</scope>
+</dependency>
+
+In the CasbinConfig class, you’ll use the JDBC adapter to integrate Casbin with H2. This allows Casbin to read and store policies in the casbin_rule table.
+4.1 Define Casbin Configuration
+
+Create or update the CasbinConfig class to initialize the Casbin enforcer with the JDBC adapter and H2 as the data source:
+
+java
+
+import org.casbin.jcasbin.main.Enforcer;
+import org.casbin.jcasbin.persist.adapter.JDBCAdapter;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
+
+@Configuration
+public class CasbinConfig {
+
+    private final DataSource dataSource;
+
+    public CasbinConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    @Bean
+    public Enforcer casbinEnforcer() {
+        // Initialize JDBCAdapter with the H2 DataSource
+        JDBCAdapter jdbcAdapter = new JDBCAdapter(dataSource);
+
+        // Load Casbin enforcer with model configuration and JDBC adapter for policies
+        return new Enforcer("classpath:auth_model.conf", jdbcAdapter);
+    }
+
+}
+
+Step 5: Define Casbin Model
+
+The Casbin model configuration remains the same. Place this model file in the src/main/resources directory as auth_model.conf:
+
+ini
+
+[request_definition]
+r = sub, obj, act
+
+[policy_definition]
+p = sub, obj, act
+
+[role_definition]
+g = _, _
+
+[policy_effect]
+e = some(where (p.eft == allow))
+
+[matchers]
+m = g(r.sub, p.sub) && r.obj == p.obj && r.act == p.act
+
+Step 6: Update Security Configuration
+
+Next, configure Spring Security to enforce Casbin’s policies using AuthorizationManager as we did before.
+
+java
+
+@Configuration
+@EnableMethodSecurity
+public class SecurityConfig {
+
+    private final CasbinAuthorizationManager casbinAuthorizationManager;
+
+    public SecurityConfig(CasbinAuthorizationManager casbinAuthorizationManager) {
+        this.casbinAuthorizationManager = casbinAuthorizationManager;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(authz -> authz
+                .requestMatchers("/papers/submit").access(casbinAuthorizationManager)
+                .requestMatchers("/papers/edit").access(casbinAuthorizationManager)
+                .requestMatchers("/papers/review").access(casbinAuthorizationManager)
+                .requestMatchers("/papers/manage").access(casbinAuthorizationManager)
+                .anyRequest().authenticated()
+            )
+            .oauth2Login();
+
+        return http.build();
+    }
+
+}
+
+Step 7: Manage Policies in H2
+
+Policies are now stored in the H2 in-memory database. You can dynamically add, remove, or modify policies using Casbin’s API as described before.
+
+For example, to assign a reviewer dynamically:
+
+java
+
+public void assignReviewer(Long paperId, String reviewer) {
+Paper paper = paperRepository.findById(paperId).orElseThrow(() -> new RuntimeException("Paper not found"));
+enforcer.addPolicy(reviewer, "/papers/review/" + paperId, "POST");
+}
+
+This will add a policy in the casbin_rule table for the reviewer to review the specific paper.
+Step 8: Testing the Application
+
+You can now test the application. When it starts, the H2 database will be initialized with the casbin_rule table. Policies will be stored in H2, allowing Casbin to dynamically enforce access controls for paper submission and review.
+
+You can access the H2 console at http://localhost:8080/h2-console using the following configuration:
+
+    JDBC URL: jdbc:h2:mem:testdb
+    Username: sa
+    Password: password
+
+Conclusion
+
+By using H2 as the database for storing Casbin policies, we’ve created a fast, lightweight, and dynamic solution for managing access control in our research paper submission application. The use of the JDBC adapter with H2 makes this setup particularly suitable for development and testing environments.
