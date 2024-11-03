@@ -23,7 +23,7 @@ const { remarkPluginFrontmatter: frontmatter } = await article.render()
 ---
 
 <LinkInternal to={`/article/${article.slug}`}>
-  <div
+  <article
     class:list={[
       'relative overflow-hidden rounded-md border border-stone-300 bg-white',
       'focus:shadown-sm hover:shadow-sm',
@@ -33,28 +33,29 @@ const { remarkPluginFrontmatter: frontmatter } = await article.render()
     <Image
       src={article.data.featured.image}
       alt={article.data.title}
-      class:list={['aspect-square object-cover object-center sm:aspect-video md:aspect-[21/9]']}
+      class:list={['aspect-video object-cover object-center', 'md:aspect-[21/9]']}
+      width={1280}
       widths={[420, 640, 768, 1024, 1280]}
       sizes={`
-        (min-width: 1280px) 180px,
-        (min-width: 1024px) 500px,
+        (min-width: 1280px) 1280px,
+        (min-width: 1024px) 1024px,
         (min-width: 768px) 768px,
         (min-width: 640px) 640px,
         420px
       `}
       loading={'eager'}
     />
-    <div
-      class:list={[
-        'absolute left-0 top-0 h-full w-full',
-        'bg-primary-main/40 text-primary-contrast backdrop-blur-sm',
-      ]}
-    >
-      <div class:list={['w-full p-3 text-primary-contrast/75', 'md:p-8 lg:w-3/5']}>
-        <h4 class:list={['text-2xl leading-snug', 'md:text-5xl']}>
+    <div class:list={['left-0 top-0 h-full w-full', 'md:absolute md:bg-primary-main/40']}>
+      <div class:list={['w-full px-4 pb-2 pt-3', 'md:p-8', 'lg:w-3/5']}>
+        <h4
+          class:list={[
+            'text-lg font-medium leading-snug text-stone-900',
+            'md:text-5xl md:text-primary-contrast/75',
+          ]}
+        >
           {article.data.title}
         </h4>
-        <small class:list={['block leading-snug', 'md:text-lg']}>
+        <small class:list={['text-sm text-stone-600', 'md:text-lg md:text-primary-contrast/75']}>
           <time datetime={article.data.published.toISOString()}>
             {
               article.data.published.toLocaleDateString('en-us', {
@@ -65,13 +66,16 @@ const { remarkPluginFrontmatter: frontmatter } = await article.render()
             }
           </time>
         </small>
-        <p class:list={['mt-4 text-lg leading-relaxed', 'md:mt-6 lg:mt-8']}>
+        <p
+          class:list={[
+            'text-md mt-2 leading-relaxed text-stone-700',
+            'md:mt-6 md:text-lg md:text-primary-contrast/75',
+            'lg:mt-8',
+          ]}
+        >
           {frontmatter.excerpt}&hellip;
         </p>
-        <small class:list={['mt-2 block text-xs', 'md:mt-6 md:text-sm lg:mt-8']}>
-          {'Continue Reading'}&hellip;
-        </small>
       </div>
     </div>
-  </div>
+  </article>
 </LinkInternal>
