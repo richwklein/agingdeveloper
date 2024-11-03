@@ -21,6 +21,7 @@ import { getArticles } from '@utils/article'
 import { getSite } from '@utils/site'
 import type { CollectionEntry } from 'astro:content'
 import { getEntry } from 'astro:content'
+import { render } from 'astro:content'
 
 interface Props {
   article: CollectionEntry<'article'>
@@ -33,7 +34,7 @@ export async function getStaticPaths() {
   const articles = await getArticles()
   const pages = articles.map((article) => {
     return {
-      params: { slug: article.slug },
+      params: { id: article.id },
       props: { article, site },
     }
   })
@@ -42,12 +43,12 @@ export async function getStaticPaths() {
 }
 
 const { site, article } = Astro.props
-const path = `/article/${article.slug}`
+const path = `/article/${article.id}`
 
 const data = article.data
 const author = await getEntry(data.author)
 
-const { Content, remarkPluginFrontmatter: frontmatter } = await article.render()
+const { Content, remarkPluginFrontmatter: frontmatter } = await render(article)
 ---
 
 <Layout site={site}>

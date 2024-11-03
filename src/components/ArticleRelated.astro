@@ -38,7 +38,7 @@ const related = await getRelatedArticles(article, 4)
         {related.map((matched) => (
           <li>
             <article class:list={['text-md']}>
-              <LinkInternal to={`/article/${matched.slug}`} class:list={['hover:underline']}>
+              <LinkInternal to={`/article/${matched.id}`} class:list={['hover:underline']}>
                 <h5 class:list={['text-md my-2 block']}>{matched.data.title}</h5>
               </LinkInternal>
             </article>

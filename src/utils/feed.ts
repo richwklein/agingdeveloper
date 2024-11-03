@@ -1,4 +1,3 @@
-import slugify from '@sindresorhus/slugify'
 import { type CollectionEntry, getCollection } from 'astro:content'
 import { Feed } from 'feed'
 import MarkdownIt from 'markdown-it'
@@ -49,7 +48,7 @@ export const getFeed = async () => {
     return feed.addContributor({
       name: name,
       email: email,
-      link: buildUrl(`/author/${slugify(id)}`, site.data.origin).href,
+      link: buildUrl(`/author/${id}`, site.data.origin).href,
     })
   })
 
@@ -59,7 +58,7 @@ export const getFeed = async () => {
       (author: CollectionEntry<'author'>) => author.id == article.data.author.id
     )[0]
 
-    const articleUrl = buildUrl(`/article/${article.slug}`, site.data.origin).href
+    const articleUrl = buildUrl(`/article/${article.id}`, site.data.origin).href
     return feed.addItem({
       title: article.data.title,
       id: articleUrl,
@@ -71,7 +70,7 @@ export const getFeed = async () => {
         {
           name: author.data.name,
           email: author.data.email,
-          link: buildUrl(`/author/${slugify(author.id)}`, site.data.origin).href,
+          link: buildUrl(`/author/${author.id}`, site.data.origin).href,
         },
       ],
       image: {

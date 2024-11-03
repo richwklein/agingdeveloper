@@ -12,6 +12,7 @@
 import LinkInternal from '@components/LinkInternal.astro'
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
+import { render } from 'astro:content'
 
 interface Props {
   article: CollectionEntry<'article'>
@@ -19,10 +20,10 @@ interface Props {
 }
 
 const { article, class: className } = Astro.props
-const { remarkPluginFrontmatter: frontmatter } = await article.render()
+const { remarkPluginFrontmatter: frontmatter } = await render(article)
 ---
 
-<LinkInternal to={`/article/${article.slug}`}>
+<LinkInternal to={`/article/${article.id}`}>
   <div
     class:list={[
       'relative overflow-hidden rounded-md border border-stone-300 bg-white',
