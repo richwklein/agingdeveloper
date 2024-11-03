@@ -50,12 +50,12 @@ const { remarkPluginFrontmatter: frontmatter } = await article.render()
         <h4
           class:list={[
             'text-lg font-medium leading-snug text-stone-900',
-            'md:text-5xl md:text-primary-contrast/75',
+            'md:text-5xl md:text-primary-contrast/80',
           ]}
         >
           {article.data.title}
         </h4>
-        <small class:list={['text-sm text-stone-600', 'md:text-lg md:text-primary-contrast/75']}>
+        <small class:list={['text-sm text-stone-600', 'md:text-lg md:text-primary-contrast/80']}>
           <time datetime={article.data.published.toISOString()}>
             {
               article.data.published.toLocaleDateString('en-us', {
@@ -69,7 +69,7 @@ const { remarkPluginFrontmatter: frontmatter } = await article.render()
         <p
           class:list={[
             'text-md mt-2 leading-relaxed text-stone-700',
-            'md:mt-6 md:text-lg md:text-primary-contrast/75',
+            'md:mt-6 md:text-lg md:text-primary-contrast',
             'lg:mt-8',
           ]}
         >
