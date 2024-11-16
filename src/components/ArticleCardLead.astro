@@ -33,7 +33,7 @@ const { remarkPluginFrontmatter: frontmatter } = await article.render()
     <Image
       src={article.data.featured.image}
       alt={article.data.title}
-      class:list={['aspect-video object-cover object-center', 'md:aspect-[21/9]']}
+      class:list={['aspect-ultrawide w-full object-cover object-center']}
       width={1280}
       widths={[420, 640, 768, 1024, 1280]}
       sizes={`
@@ -45,17 +45,17 @@ const { remarkPluginFrontmatter: frontmatter } = await article.render()
       `}
       loading={'eager'}
     />
-    <div class:list={['left-0 top-0 h-full w-full', 'md:absolute md:bg-primary-main/40']}>
-      <div class:list={['w-full px-4 pb-2 pt-3', 'md:p-8', 'lg:w-3/5']}>
+    <div class:list={['left-0 top-0 h-full w-full', 'lg:absolute lg:bg-primary-main/40']}>
+      <div class:list={['w-full px-4 pb-2 pt-3', 'lg:p-8', 'lg:w-3/5']}>
         <h4
           class:list={[
             'text-lg font-medium leading-snug text-stone-900',
-            'md:text-5xl md:text-primary-contrast/80',
+            'lg:text-5xl lg:text-primary-contrast/80',
           ]}
         >
           {article.data.title}
         </h4>
-        <small class:list={['text-sm text-stone-600', 'md:text-lg md:text-primary-contrast/80']}>
+        <small class:list={['text-sm text-stone-600', 'lg:text-lg lg:text-primary-contrast/80']}>
           <time datetime={article.data.published.toISOString()}>
             {
               article.data.published.toLocaleDateString('en-us', {
@@ -69,7 +69,7 @@ const { remarkPluginFrontmatter: frontmatter } = await article.render()
         <p
           class:list={[
             'text-md mt-2 leading-relaxed text-stone-700',
-            'md:mt-6 md:text-lg md:text-primary-contrast',
+            'lg:mt-6 lg:text-lg lg:text-primary-contrast',
             'lg:mt-8',
           ]}
         >
