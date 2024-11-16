@@ -1,11 +1,11 @@
-import { getEntry } from 'astro:content'
+import { type CollectionEntry, getEntry } from 'astro:content'
 
 /**
  * Get the data about this site.
  *
  * @returns the site metadata
  */
-export const getSite = async () => {
+export const getSite = async (): Promise<CollectionEntry<'site'>> => {
   const site = await getEntry('site', 'agingdeveloper')
 
   // replace the origin when not in production mode
