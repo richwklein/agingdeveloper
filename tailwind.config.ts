@@ -28,6 +28,9 @@ export default {
       screens: {
         xs: '420px',
       },
+      aspectRatio: {
+        ultrawide: '21 / 9',
+      },
     },
   },
   plugins: [typography],

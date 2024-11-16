@@ -24,7 +24,7 @@ export const feedInfo = [
  *
  * @returns the feed object
  */
-export const getFeed = async () => {
+export const getFeed = async (): Promise<Feed> => {
   const site = await getSite()
   const authors = await getCollection('author')
   const articles = await getArticles()
