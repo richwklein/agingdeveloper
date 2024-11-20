@@ -10,6 +10,7 @@
  * <ArticleCardLead article={entry} />
  */
 import LinkInternal from '@components/LinkInternal.astro'
+import { formatDate } from '@utils/misc'
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import { render } from 'astro:content'
@@ -58,13 +59,7 @@ const { remarkPluginFrontmatter: frontmatter } = await render(article)
         </h4>
         <small class:list={['text-sm text-stone-600', 'lg:text-lg lg:text-primary-contrast/80']}>
           <time datetime={article.data.published.toISOString()}>
-            {
-              article.data.published.toLocaleDateString('en-us', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })
-            }
+            {formatDate(article.data.published)}
           </time>
         </small>
         <p

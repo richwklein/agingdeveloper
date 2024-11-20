@@ -1,0 +1,47 @@
+---
+/**
+ * @name QuoteCardLead
+ * Component used for rendering a card of a single quote as a chalkboard on the home page.
+ *
+ * @param {Props} props - The properties of the quote.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <QuoteCardLead quote={entry} class:list={['mt-4']} />
+ */
+import { formatDate } from '@utils/misc'
+import type { CollectionEntry } from 'astro:content'
+
+import LinkInternal from './LinkInternal.astro'
+
+interface Props {
+  quote: CollectionEntry<'quote'>
+  more?: boolean
+  class?: string
+}
+
+const { quote, class: className } = Astro.props
+---
+
+<LinkInternal to={'/quote'}>
+  <div
+    class:list={[
+      'bg-black bg-[url("../content/image/chalkboard.jpg")] bg-cover bg-left-top',
+      'font-chalk text-base text-slate-300',
+      'rounded-md border-4 border-yellow-600',
+      'flex h-full min-h-40 flex-col justify-between p-4',
+      className,
+    ]}
+  >
+    <figure>
+      <blockquote class:list={['text-3xl tracking-wide']}>
+        {quote.data.text}
+      </blockquote>
+      <figcaption>&mdash;&nbsp;{quote.data.author}</figcaption>
+    </figure>
+
+    <time datetime={quote.data.chalked.toISOString()} class:list={['mt-4 block']}>
+      {formatDate(quote.data.chalked)}
+    </time>
+  </div>
+</LinkInternal>

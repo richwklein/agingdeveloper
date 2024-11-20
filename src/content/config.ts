@@ -91,4 +91,17 @@ const site = defineCollection({
     }),
 })
 
-export const collections = { article, author, site }
+const quote = defineCollection({
+  loader: file('src/content/data/quote.json'),
+  schema: () =>
+    z.object({
+      text: z.string().min(1, 'Quote text cannot be empty'),
+      author: z.string().min(1, 'Author name cannot be empty').default('Anonymous'),
+      chalked: z
+        .string()
+        .date()
+        .transform((val) => new Date(val)),
+    }),
+})
+
+export const collections = { article, author, site, quote }

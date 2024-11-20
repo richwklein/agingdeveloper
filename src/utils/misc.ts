@@ -46,3 +46,18 @@ export const intersection = (first: Array<string>, second: Array<string>): Set<s
 export const buildUrl = (path: string, origin: URL | string): URL => {
   return new URL(path, origin)
 }
+
+/**
+ * Return a date in long locale date string.
+ *
+ * @param date - the date to convert.
+ * @return the formatted date string.
+ */
+export const formatDate = (input: Date): string => {
+  return input.toLocaleDateString('en-us', {
+    timeZone: 'UTC',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+}

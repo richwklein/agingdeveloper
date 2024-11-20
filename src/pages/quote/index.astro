@@ -1,0 +1,37 @@
+---
+/**
+ * A page of all the quotes on the site.
+ */
+import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
+import QuoteGrid from '@components/QuoteGrid.astro'
+import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import SeoBasic from '@components/seo/SeoBasic.astro'
+import Layout from '@layouts/Layout.astro'
+import { getQuotes } from '@utils/quote'
+import { getSite } from '@utils/site'
+
+const site = await getSite()
+const quotes = await getQuotes()
+const path = '/quote'
+---
+
+<Layout site={site}>
+  <Fragment slot="seo">
+    <SeoBasic
+      title="Inspiration for Every Day: Timeless Quotes to Uplift and Motivate"
+      description="Discover a curated collection of inspirational quotes designed to uplift your spirit, ignite your passion, and provide a fresh perspective on life."
+      path={path}
+      site={site}
+    />
+    <BreadcrumbJson site={site} crumbs={[{ name: 'Quotes', path: path }]} />
+  </Fragment>
+  <BreadcrumbHeader head={{ name: 'Quotes', path: path }} class:list={['mb-4']} />
+  <article>
+    <div class:list={['prose max-w-none', 'md:prose-lg lg:prose-xl']}>
+      {
+        "When Rachel first hung a chalkboard in our kitchen, it quickly became my favorite canvas. Before long, I took on the task of updating it, sharing a new quote at the start of each week. Each message reflects a moment in time—what we've recently experienced or what's just around the corner for our family. This virtual chalkboard is a collection of those quotes, capturing the essence of our journey together."
+      }
+    </div>
+    <QuoteGrid quotes={quotes} class:list={['mt-4']} />
+  </article>
+</Layout>
