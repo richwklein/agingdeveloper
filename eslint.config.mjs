@@ -31,13 +31,6 @@ export default [
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
       '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unused-expressions': [
-        'error',
-        {
-          allowShortCircuit: false,
-          allowTernary: false,
-        },
-      ], // TODO remove once eslint bug is fixed
       ...vitestLint.configs.recommended.rules,
       'vitest/prefer-lowercase-title': 'error',
     },
