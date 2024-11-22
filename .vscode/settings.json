@@ -29,5 +29,8 @@
     "tsconfigs",
     "uncategorized",
     "vitest"
-  ]
+  ],
+  "[snippets]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }
