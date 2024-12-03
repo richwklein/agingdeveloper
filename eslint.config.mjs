@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url'
 
 import { includeIgnoreFile } from '@eslint/compat'
 import jsLint from '@eslint/js'
-import vitestLint from "@vitest/eslint-plugin"
+import vitestLint from '@vitest/eslint-plugin'
 import astroLint from 'eslint-plugin-astro'
 import sortLint from 'eslint-plugin-simple-import-sort'
 import tsLint from 'typescript-eslint'
