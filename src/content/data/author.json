@@ -1,0 +1,32 @@
+[
+  {
+    "id": "richwklein",
+    "name": "Richard Klein",
+    "givenName": "Richard",
+    "familyName": "Klein",
+    "email": "richwklein@gmail.com",
+    "avatar": "../image/richwklein.jpg",
+    "tagline": "Site creator and maintainer",
+    "bio": "As a self-taught principal software engineer, I specialize in developing the management and access controls of consumer grade enterprise software. I guide and mentor the team on executing software that follow industry standards while listening to customers and providing the experiences that they desired.",
+    "twitterUsername": "@richwklein",
+    "socials": [
+      {
+        "name": "Twitter",
+        "url": "https://twitter.com/richwklein"
+      },
+      {
+        "name": "Facebook",
+        "url": "https://www.facebook.com/richwklein"
+      },
+      {
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/in/richwklein/"
+      },
+      {
+        "name": "Github",
+        "url": "https://github.com/richwklein"
+      }
+    ],
+    "published": "2020-01-27"
+  }
+]

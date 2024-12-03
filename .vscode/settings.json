@@ -1,4 +1,5 @@
 {
+  "astro.content-intellisense": true,
   "files.exclude": {
     ".git/": true
   },
@@ -28,5 +29,8 @@
     "tsconfigs",
     "uncategorized",
     "vitest"
-  ]
+  ],
+  "[snippets]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }

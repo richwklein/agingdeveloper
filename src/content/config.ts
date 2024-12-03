@@ -1,17 +1,15 @@
 import { capitalize } from '@utils/misc'
+import { file, glob } from 'astro/loaders' // Not available with legacy API
 import { defineCollection, reference, z } from 'astro:content'
 
 const article = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.mdx', base: 'src/content/article' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
       description: z.string(),
       featured: z.object({
-        image: image().refine(
-          (val) => val.width <= 1920,
-          'Featured image width must be less than 1920 pixels.'
-        ),
+        image: image(),
         author: z
           .object({
             name: z.string(),
@@ -45,7 +43,7 @@ const article = defineCollection({
 })
 
 const author = defineCollection({
-  type: 'data',
+  loader: file('src/content/data/author.json'),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -77,7 +75,7 @@ const author = defineCollection({
 })
 
 const site = defineCollection({
-  type: 'data',
+  loader: file('src/content/data/site.json'),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -93,4 +91,17 @@ const site = defineCollection({
     }),
 })
 
-export const collections = { article, author, site }
+const quote = defineCollection({
+  loader: file('src/content/data/quote.json'),
+  schema: () =>
+    z.object({
+      text: z.string().min(1, 'Quote text cannot be empty'),
+      author: z.string().min(1, 'Author name cannot be empty').default('Anonymous'),
+      chalked: z
+        .string()
+        .date()
+        .transform((val) => new Date(val)),
+    }),
+})
+
+export const collections = { article, author, site, quote }

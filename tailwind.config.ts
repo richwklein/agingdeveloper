@@ -24,6 +24,7 @@ export default {
         mono: ['Fira Code', ...defaultTheme.fontFamily.mono],
         serif: ['Noto Serif Georgian', ...defaultTheme.fontFamily.serif],
         sans: ['Noto Sans Georgian', ...defaultTheme.fontFamily.sans],
+        chalk: ['Walter Turncoat', ...defaultTheme.fontFamily.sans],
       },
       screens: {
         xs: '420px',

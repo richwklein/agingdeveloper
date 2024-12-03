@@ -27,7 +27,7 @@ export async function getStaticPaths() {
 
   const pages = tags.map((tag) => {
     return {
-      params: { slug: slugify(tag) },
+      params: { id: slugify(tag) },
       props: { tag, site },
     }
   })
