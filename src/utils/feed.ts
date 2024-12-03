@@ -77,7 +77,7 @@ export const getFeed = async (): Promise<Feed> => {
         url: escapeXmlAttr(buildUrl(article.data.featured.image.src, site.data.origin).href),
         type: mime.getType(article.data.featured.image.src.split('?')[0]) || undefined,
       },
-      content: sanitizeHtml(parser.render(article.body), {
+      content: sanitizeHtml(parser.render(article.body || ''), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
       }),
     })
