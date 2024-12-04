@@ -11,7 +11,11 @@ describe('articleByLine', () => {
   let byLine: string
 
   beforeAll(async () => {
-    author = await getEntry('author', 'richwklein')
+    const entry = await getEntry('author', 'richwklein')
+    if (!entry) {
+      throw new Error('Author richwklein is required')
+    }
+    author = entry
     byLine = await render()
   })
 
