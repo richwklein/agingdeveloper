@@ -9,14 +9,15 @@ jobs:
     steps:
       - name: 'Checkout source code'
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.ref }}
+
+      - name: 'Delete package-lock.json'
+        run: rm -f package-lock.json
 
       - name: 'Setup Node.js environment'
         uses: actions/setup-node@v4
         with:
           node-version-file: '.tool-versions'
+          cache: 'npm'
 
       - name: 'Install dependencies'
         run: npm install
