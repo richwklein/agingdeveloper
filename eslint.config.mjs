@@ -3,9 +3,9 @@ import { fileURLToPath } from 'node:url'
 
 import { includeIgnoreFile } from '@eslint/compat'
 import jsLint from '@eslint/js'
+import vitestLint from '@vitest/eslint-plugin'
 import astroLint from 'eslint-plugin-astro'
 import sortLint from 'eslint-plugin-simple-import-sort'
-import vitestLint from 'eslint-plugin-vitest'
 import tsLint from 'typescript-eslint'
 
 const filename = fileURLToPath(import.meta.url)

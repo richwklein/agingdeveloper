@@ -8,7 +8,6 @@
  * @example
  * <AuthorJson author={author} writeCount={16} />
  */
-import slugify from '@sindresorhus/slugify'
 import { buildUrl } from '@utils/misc'
 import type { CollectionEntry } from 'astro:content'
 
@@ -35,7 +34,7 @@ const socials = author.data.socials || []
     mainEntity: {
       '@type': 'Person',
       name: author.data.name,
-      identifier: slugify(author.id),
+      identifier: author.id,
       agentInteractionStatistic: {
         '@type': 'InteractionCounter',
         interactionType: 'https://schema.org/WriteAction',

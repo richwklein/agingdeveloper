@@ -28,7 +28,7 @@ export type ArticlesWithCountResponse = Promise<{
 export const getArticles = async (limit?: number, exclude?: string): ArticlesResponse => {
   const articles = await getCollection('article')
   return articles
-    .filter((article: CollectionEntry<'article'>) => article.slug != exclude)
+    .filter((article: CollectionEntry<'article'>) => article.id != exclude)
     .sort(
       (a: CollectionEntry<'article'>, b: CollectionEntry<'article'>) =>
         b.data.published.valueOf() - a.data.published.valueOf()
@@ -114,7 +114,7 @@ export const getRelatedArticles = async (
 ): ArticlesResponse => {
   const articles = await getArticles()
   return articles
-    .filter((article) => article.slug != current.slug) // exclude current
+    .filter((article) => article.id != current.id) // exclude current
     .filter((article) => article.data.category == current.data.category) // same category
     .map((article) => {
       return {

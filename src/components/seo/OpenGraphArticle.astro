@@ -8,7 +8,6 @@
  * @example
  * <OpenGraphArticle published={article.published} modified={article.modified} authorId={article.author.id} ... />
  */
-import slugify from '@sindresorhus/slugify'
 import { buildUrl } from '@utils/misc'
 import type { CollectionEntry } from 'astro:content'
 
@@ -28,7 +27,7 @@ const modifiedDate = article.data.modified || article.data.published
   site={site}
   title={article.data.title}
   description={article.data.description}
-  path={`/article/${article.slug}`}
+  path={`/article/${article.id}`}
   type={'article'}
 />
 <OpenGraphImage
@@ -40,7 +39,7 @@ const modifiedDate = article.data.modified || article.data.published
 <meta property="article:modified_time" content={modifiedDate.toISOString()} />
 <meta
   property="article:author"
-  content={buildUrl(`/author/${slugify(article.data.author.id)}`, site.data.origin)}
+  content={buildUrl(`/author/${article.data.author.id}`, site.data.origin)}
 />
 <meta property="article:section" content={article.data.category} />
 {article.data.tags.map((tag: string) => <meta property="article:tag" content={tag} />)}

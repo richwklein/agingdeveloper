@@ -12,9 +12,9 @@ jobs:
     steps:
       - name: 'Checkout source code'
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.ref }}
+
+      - name: 'Delete package-lock.json'
+        run: rm -f package-lock.json
 
       - name: 'Setup Node.js environment'
         uses: actions/setup-node@v4
@@ -28,6 +28,7 @@ jobs:
         run: npm run coverage
 
       - name: 'Upload coverage report'
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: coverage

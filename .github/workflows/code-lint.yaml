@@ -9,9 +9,9 @@ jobs:
     steps:
       - name: 'Checkout source code'
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.ref }}
+
+      - name: 'Delete package-lock.json'
+        run: rm -f package-lock.json
 
       - name: 'Setup Node.js environment'
         uses: actions/setup-node@v4
@@ -22,7 +22,9 @@ jobs:
         run: npm install
 
       - name: 'Check formatting'
+        if: always()
         run: npm run format
 
       - name: 'Check lint'
+        if: always()
         run: npm run lint
