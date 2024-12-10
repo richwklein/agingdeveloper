@@ -20,7 +20,7 @@ export type ArticlesWithCountResponse = Promise<{
 /**
  * @name getArticles
  *
- * Get a list of article collection entries sorted in decending published order.
+ * Get a list of article collection entries sorted in descending published order.
  *
  * @param limit - Optional limit to the number of articles to return
  * @returns The list of articles

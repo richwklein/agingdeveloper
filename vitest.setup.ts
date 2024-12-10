@@ -12,11 +12,13 @@ vi.mock('astro:content', () => {
       if (collection === 'site' && id === DEFAULT_SITE_ID) {
         return {
           id: DEFAULT_SITE_ID,
+          collection: 'site',
           data: siteData.find((entry) => entry.id == DEFAULT_SITE_ID),
         }
       } else if (collection == 'author' && id == DEFAULT_AUTHOR_ID) {
         return {
-          id: DEFAULT_SITE_ID,
+          id: DEFAULT_AUTHOR_ID,
+          collection: 'author',
           data: authorData.find((entry) => entry.id == DEFAULT_AUTHOR_ID),
         }
       }
