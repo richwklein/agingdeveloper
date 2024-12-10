@@ -20,6 +20,7 @@ describe('alert', () => {
       },
     })
   }
+
   test('that it contains alert role', async () => {
     expect(alert).toContain('role="alert"')
   })
