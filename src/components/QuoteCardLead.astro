@@ -34,8 +34,8 @@ const { quote, class: className } = Astro.props
     ]}
   >
     <figure>
-      <blockquote class:list={['text-3xl tracking-wide']}>
-        {quote.data.text}
+      <blockquote>
+        <p class:list={['text-3xl tracking-wide']}>{quote.data.text}</p>
       </blockquote>
       <figcaption>&mdash;&nbsp;{quote.data.author}</figcaption>
     </figure>
