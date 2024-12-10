@@ -36,7 +36,7 @@ const popular = await getPopularArticles(4)
         {popular.map((article) => (
           <li>
             <article class:list={['text-md']}>
-              <LinkInternal to={`/article/${article.slug}`} class:list={['hover:underline']}>
+              <LinkInternal to={`/article/${article.id}`} class:list={['hover:underline']}>
                 <h5 class:list={['text-md my-2 block']}>{article.data.title}</h5>
               </LinkInternal>
             </article>

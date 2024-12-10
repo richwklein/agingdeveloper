@@ -9,7 +9,7 @@ import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import Layout from '@layouts/Layout.astro'
 import { getArticles } from '@utils/article'
-import { getSite } from '@utils/site'
+import { getDefaultSite } from '@utils/site'
 import type { Page } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export async function getStaticPaths({ paginate }: any) {
-  const site = await getSite()
+  const site = await getDefaultSite()
   const limit = site.data.displayLimit
 
   const entries = await getArticles()

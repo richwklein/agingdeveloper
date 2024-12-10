@@ -1,5 +1,5 @@
 import OpenGraphImage from '@components/seo/OpenGraphImage.astro'
-import { getSite } from '@utils/site'
+import { getDefaultSite } from '@utils/site'
 import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import type { CollectionEntry } from 'astro:content'
 import { beforeAll, describe, expect, test } from 'vitest'
@@ -9,7 +9,7 @@ describe('openGraphImage', () => {
   let headers: string | undefined
 
   beforeAll(async () => {
-    site = await getSite()
+    site = await getDefaultSite()
     headers = await render()
   })
 

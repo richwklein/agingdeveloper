@@ -10,7 +10,6 @@
  * <AuthorCard autor={entry} />
  */
 import LinkInternal from '@components/LinkInternal.astro'
-import slugify from '@sindresorhus/slugify'
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 
@@ -24,7 +23,7 @@ const { author, lazy, class: className } = Astro.props
 const loading = lazy ? 'lazy' : 'eager'
 ---
 
-<LinkInternal to={`/author/${slugify(author.id)}`}>
+<LinkInternal to={`/author/${author.id}`}>
   <div
     class:list={[
       'overflow-hidden rounded-md border border-stone-300 bg-white',
