@@ -15,11 +15,11 @@ import TwitterCard from '@components/seo/TwitterCard.astro'
 import Layout from '@layouts/Layout.astro'
 import { getArticles } from '@utils/article'
 import { getLatestQuote } from '@utils/quote'
-import { getSite } from '@utils/site'
+import { getDefaultSite } from '@utils/site'
 
 // get the articles and sort them in decending published date
 const articles = await getArticles(9)
-const site = await getSite()
+const site = await getDefaultSite()
 const data = site.data
 const lead = articles.shift()
 const latest = await getLatestQuote()

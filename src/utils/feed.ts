@@ -6,7 +6,7 @@ import sanitizeHtml from 'sanitize-html'
 
 import { getArticles } from './article'
 import { buildUrl } from './misc'
-import { getSite } from './site'
+import { getDefaultSite } from './site'
 
 const parser = new MarkdownIt()
 
@@ -25,7 +25,7 @@ export const feedInfo = [
  * @returns the feed object
  */
 export const getFeed = async (): Promise<Feed> => {
-  const site = await getSite()
+  const site = await getDefaultSite()
   const authors = await getCollection('author')
   const articles = await getArticles()
 
@@ -77,7 +77,7 @@ export const getFeed = async (): Promise<Feed> => {
         url: escapeXmlAttr(buildUrl(article.data.featured.image.src, site.data.origin).href),
         type: mime.getType(article.data.featured.image.src.split('?')[0]) || undefined,
       },
-      content: sanitizeHtml(parser.render(article.body), {
+      content: sanitizeHtml(parser.render(article.body || ''), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
       }),
     })

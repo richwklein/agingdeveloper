@@ -19,7 +19,7 @@ import SeoBasic from '@components/seo/SeoBasic.astro'
 import TwitterCard from '@components/seo/TwitterCard.astro'
 import Layout from '@layouts/Layout.astro'
 import { getArticles } from '@utils/article'
-import { getSite } from '@utils/site'
+import { getDefaultSite } from '@utils/site'
 import type { CollectionEntry } from 'astro:content'
 import { getEntry } from 'astro:content'
 import { render } from 'astro:content'
@@ -30,7 +30,7 @@ interface Props {
 }
 
 export async function getStaticPaths() {
-  const site = await getSite()
+  const site = await getDefaultSite()
 
   const articles = await getArticles()
   const pages = articles.map((article) => {
