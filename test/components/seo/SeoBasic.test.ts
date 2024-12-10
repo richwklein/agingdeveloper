@@ -1,5 +1,5 @@
 import SeoBasic from '@components/seo/SeoBasic.astro'
-import { getSite } from '@utils/site'
+import { getDefaultSite } from '@utils/site'
 import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import type { CollectionEntry } from 'astro:content'
 import { beforeAll, describe, expect, test } from 'vitest'
@@ -10,7 +10,7 @@ describe('seoBasic', () => {
   let seo: string
 
   beforeAll(async () => {
-    site = await getSite()
+    site = await getDefaultSite()
     seo = await render()
   })
 

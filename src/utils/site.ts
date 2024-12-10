@@ -1,16 +1,26 @@
 import { type CollectionEntry, getEntry } from 'astro:content'
 
-const SITE_ID = 'agingdeveloper'
+export const DEFAULT_SITE_ID = 'agingdeveloper'
 
 /**
- * Get the data about this site.
+ * Get the data about the default site.
  *
  * @returns the site metadata
  */
-export const getSite = async (): Promise<CollectionEntry<'site'>> => {
-  const site = await getEntry('site', SITE_ID)
+export const getDefaultSite = async (): Promise<CollectionEntry<'site'>> => {
+  return getSite(DEFAULT_SITE_ID)
+}
+
+/**
+ * Get the data about a specific site.
+ *
+ * @param {number} id - The id of the site
+ * @returns the site metadata
+ */
+export const getSite = async (id: string): Promise<CollectionEntry<'site'>> => {
+  const site = await getEntry('site', id)
   if (!site) {
-    throw new Error(`Site ${SITE_ID} is required`)
+    throw new Error(`Site ${id} is required`)
   }
 
   // replace the origin when not in production mode

@@ -1,5 +1,5 @@
 import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
-import { getSite } from '@utils/site'
+import { getDefaultSite } from '@utils/site'
 import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import type { CollectionEntry } from 'astro:content'
 import { beforeAll, describe, expect, test } from 'vitest'
@@ -9,7 +9,7 @@ describe('breadcrumbJson', () => {
   let breadcrumb: string
 
   beforeAll(async () => {
-    site = await getSite()
+    site = await getDefaultSite()
     breadcrumb = await render()
   })
 

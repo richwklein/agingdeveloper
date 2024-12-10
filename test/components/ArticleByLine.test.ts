@@ -1,6 +1,7 @@
 import ArticleByLine from '@components/ArticleByLine.astro'
+import { getDefaultAuthor } from '@utils/author'
 import { experimental_AstroContainer as AstroContainer } from 'astro/container'
-import { type CollectionEntry, getEntry } from 'astro:content'
+import { type CollectionEntry } from 'astro:content'
 import { beforeAll, describe, expect, test } from 'vitest'
 
 describe('articleByLine', () => {
@@ -11,11 +12,7 @@ describe('articleByLine', () => {
   let byLine: string
 
   beforeAll(async () => {
-    const entry = await getEntry('author', 'richwklein')
-    if (!entry) {
-      throw new Error('Author richwklein is required')
-    }
-    author = entry
+    author = await getDefaultAuthor()
     byLine = await render()
   })
 
