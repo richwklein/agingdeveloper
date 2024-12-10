@@ -16,7 +16,7 @@ vi.mock('astro:content', () => {
         }
       } else if (collection == 'author' && id == DEFAULT_AUTHOR_ID) {
         return {
-          id: DEFAULT_SITE_ID,
+          id: DEFAULT_AUTHOR_ID,
           data: authorData.find((entry) => entry.id == DEFAULT_AUTHOR_ID),
         }
       }
