@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "type": "module",
   "scripts": {
     "clean": "rm -rf .astro dist node_modules package-lock.json",
@@ -27,6 +27,7 @@
     "@fontsource/fira-code": "^5.0.18",
     "@fontsource/noto-sans-georgian": "^5.0.22",
     "@fontsource/noto-serif-georgian": "^5.0.20",
+    "@fontsource/walter-turncoat": "^5.1.0",
     "@iconify-json/mdi": "^1.1.66",
     "@sindresorhus/slugify": "^2.2.1",
     "@tailwindcss/typography": "^0.5.13",

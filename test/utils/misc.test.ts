@@ -1,4 +1,4 @@
-import { buildUrl, calculateWeight, capitalize, intersection } from '@utils/misc'
+import { buildUrl, calculateWeight, capitalize, formatDate, intersection } from '@utils/misc'
 import { describe, expect, test } from 'vitest'
 
 describe('calculateWeight', () => {
@@ -89,5 +89,19 @@ describe('buildUrl', () => {
 
   test('that it can handle an empty path', () => {
     expect(buildUrl('', origin).href).toEqual(origin + '/')
+  })
+})
+
+describe('formatDate', () => {
+  test('that it generates the expected date string', () => {
+    const chalked = new Date()
+    expect(formatDate(chalked)).toEqual(
+      chalked.toLocaleDateString('en-us', {
+        timeZone: 'UTC',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    )
   })
 })

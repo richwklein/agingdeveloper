@@ -1,0 +1,37 @@
+---
+/**
+ * @name QuoteCard
+ * Component used for rendering a card of a single quote.
+ *
+ * @param {Props} props - The properties of the quote.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <QuoteCard quote={entry} />
+ */
+import { formatDate } from '@utils/misc'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  quote: CollectionEntry<'quote'>
+  class?: string
+}
+
+const { quote, class: className } = Astro.props
+---
+
+<div
+  class:list={[
+    'rounded-md border border-stone-300 bg-gray-50 text-stone-900',
+    'flex h-full min-h-40 flex-col justify-between p-6',
+    className,
+  ]}
+>
+  <figure>
+    <blockquote class:list={['text-2xl leading-tight']}>{quote.data.text}</blockquote>
+    <figcaption>&mdash;&nbsp;{quote.data.author}</figcaption>
+  </figure>
+  <time datetime={quote.data.chalked.toISOString()} class:list={['mt-4 block']}>
+    {formatDate(quote.data.chalked)}
+  </time>
+</div>

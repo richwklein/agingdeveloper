@@ -1,0 +1,32 @@
+---
+/**
+ * @name QuoteCard
+ * Component used for rendering a card of a single quote.
+ *
+ * @param {Props} props - The properties of the quote.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <QuoteCard quote={entry} />
+ */
+import type { CollectionEntry } from 'astro:content'
+
+import QuoteCard from './QuoteCard.astro'
+
+interface Props {
+  quotes: CollectionEntry<'quote'>[]
+  class?: string
+}
+
+const { quotes, class: className } = Astro.props
+---
+
+<ol class:list={['grid grid-cols-1 gap-4', 'lg:grid-cols-2', className]}>
+  {
+    quotes.map((quote) => (
+      <li>
+        <QuoteCard quote={quote} />
+      </li>
+    ))
+  }
+</ol>
