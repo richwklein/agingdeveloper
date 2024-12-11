@@ -28,9 +28,7 @@ const { quote, class: className } = Astro.props
   ]}
 >
   <figure>
-    <blockquote>
-      <p class:list={['text-2xl leading-tight']}>{quote.data.text}</p>
-    </blockquote>
+    <blockquote class:list={['text-2xl leading-tight']}>{quote.data.text}</blockquote>
     <figcaption>&mdash;&nbsp;{quote.data.author}</figcaption>
   </figure>
   <time datetime={quote.data.chalked.toISOString()} class:list={['mt-4 block']}>

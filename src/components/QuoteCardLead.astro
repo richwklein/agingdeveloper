@@ -24,6 +24,7 @@ const { quote, class: className } = Astro.props
 
 <LinkInternal to={'/quote'}>
   <div
+    id="quote-card-lead"
     class:list={[
       'bg-black bg-[url("../content/image/chalkboard.jpg")] bg-cover bg-left-top',
       'font-chalk text-base text-slate-300',
@@ -33,9 +34,7 @@ const { quote, class: className } = Astro.props
     ]}
   >
     <figure>
-      <blockquote>
-        <p class:list={['text-3xl tracking-wide']}>{quote.data.text}</p>
-      </blockquote>
+      <blockquote class:list={['text-3xl tracking-wide']}>{quote.data.text}</blockquote>
       <figcaption>&mdash;&nbsp;{quote.data.author}</figcaption>
     </figure>
 

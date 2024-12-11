@@ -38,7 +38,7 @@ describe('quoteCard', () => {
   })
 
   test('that the card contains the text', async () => {
-    expect(card).toContain(`${quote.data.text}</p> </blockquote>`)
+    expect(card).toContain(`${quote.data.text}</blockquote>`)
   })
 
   test('that the card contains the author', async () => {

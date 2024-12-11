@@ -26,6 +26,7 @@ const { remarkPluginFrontmatter: frontmatter } = await render(article)
 
 <LinkInternal to={`/article/${article.id}`}>
   <article
+    id="article-card-lead"
     class:list={[
       'relative overflow-hidden rounded-md border border-stone-300 bg-white',
       'focus:shadown-sm hover:shadow-sm',
