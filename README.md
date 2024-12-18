@@ -17,8 +17,8 @@ This is the personal site of Richard Klein. It is a static site built using [typ
 
 ## License
 
-- The site code is [MIT](/LICENSE) licensed
-- The libraries the site is based upon are MIT licensed where feasible.
+- The site code is [MIT](/LICENSE) licensed.
+- The libraries the site is based upon are MIT, OFL-1.1, or Apache-2.0 licensed.
 - Content hosted on the site is
 - [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/)
   licensed unless otherwise noted.
