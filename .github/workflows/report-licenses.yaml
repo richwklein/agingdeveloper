@@ -1,0 +1,55 @@
+name: 'Report Licenses'
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  license-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout source code'
+        uses: actions/checkout@v4
+
+      - name: 'Delete package-lock.json'
+        run: rm -f package-lock.json
+
+      - name: 'Setup Node.js environment'
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.tool-versions'
+
+      - name: 'Install dependencies'
+        run: npm install
+
+      - name: 'Generate license report'
+        id: generate-report
+        run: |
+          OUTPUT=$(npx license-report --config license-report.config.json)
+          echo "LICENSE_REPORT<<EOF" >> $GITHUB_ENV
+          echo "$OUTPUT" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: 'Save license report to file'
+        run: echo "${{ env.LICENSE_REPORT }}" > license-report.md
+
+      - name: 'Upload license report artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: license-report
+          path: license-report.md
+
+      - name: 'Report licenses'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: license
+          message: |
+            A license report has been generated:
+
+            ```
+            ${{ env.LICENSE_REPORT }}
+            ```
+
+            You can also download the report as an artifact:
+            [License Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})

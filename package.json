@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "type": "module",
   "scripts": {
     "clean": "rm -rf .astro dist node_modules package-lock.json",
@@ -35,6 +35,7 @@
     "astro-icon": "^1.1.1",
     "feed": "^4.2.2",
     "install": "^0.13.0",
+    "license-report": "^6.7.1",
     "markdown-it": "^14.1.0",
     "mdast-util-to-string": "^4.0.0",
     "mime": "^4.0.4",
