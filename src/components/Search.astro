@@ -115,6 +115,8 @@ const { class: className } = Astro.props
         const results = fuse.search<OutputBaseSearchable>(
           (e.target as HTMLInputElement).value.trim()
         )
+        console.log(results)
+
         if (results.length <= 0) {
           list.classList.add('hidden')
         } else {

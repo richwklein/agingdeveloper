@@ -30,7 +30,9 @@ export default defineConfig({
   image: {},
   integrations: [
     icon(),
-    fuse(['content', 'frontmatter.title', 'frontmatter.description'], { basedOn: 'source' }),
+    fuse(['content', 'frontmatter.title', 'frontmatter.description', 'frontmatter.category'], {
+      basedOn: 'source',
+    }),
     mdx(),
     sitemap(),
     tailwind({
