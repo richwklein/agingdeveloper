@@ -1,4 +1,4 @@
-name: 'Report Licenses'
+name: 'Report Dependencies Licenses'
 
 on:
   pull_request:
