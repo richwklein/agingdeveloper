@@ -46,7 +46,7 @@ jobs:
         with:
           header: license
           message: |
-            Here is a summary of the license report:
+            A license report has been generated.
 
             <details>
               <summary>Click to expand the full report</summary>
