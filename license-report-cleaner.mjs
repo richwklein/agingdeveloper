@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import sanitizeHtml from 'sanitize-html';
 
 async function sanitizeHtmlInput() {
