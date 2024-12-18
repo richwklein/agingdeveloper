@@ -1,4 +1,4 @@
-name: 'Report Coverage'
+name: 'Report Test Coverage'
 
 on:
   workflow_run:
@@ -23,5 +23,5 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
 
-      - name: 'Report test coverage'
+      - name: 'Report test coverage on pull request'
         uses: davelosert/vitest-coverage-report-action@v2

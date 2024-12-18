@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "type": "module",
   "scripts": {
     "clean": "rm -rf .astro dist node_modules package-lock.json",
@@ -16,7 +16,9 @@
     "format:fix": "npx prettier --write \"**/*.{js,mjs,cjs,ts,astro,md,mdx}\"",
     "test": "npx vitest run",
     "test:verbose": "npx vitest run --reporter=verbose",
-    "test:coverage": "npx vitest run --coverage"
+    "test:coverage": "npx vitest run --coverage",
+    "licenses": "npx license-report --output=table",
+    "licenses:html": "npx license-report --output=html > license-report.html"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -35,10 +37,10 @@
     "astro-icon": "^1.1.1",
     "feed": "^4.2.2",
     "install": "^0.13.0",
+    "license-report": "^6.7.1",
     "markdown-it": "^14.1.0",
     "mdast-util-to-string": "^4.0.0",
     "mime": "^4.0.4",
-    "npm": "^10.9.1",
     "reading-time": "^1.5.0",
     "sanitize-html": "^2.13.0",
     "tailwindcss": "^3.4.3"
