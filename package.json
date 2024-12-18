@@ -17,8 +17,8 @@
     "test": "npx vitest run",
     "test:verbose": "npx vitest run --reporter=verbose",
     "test:coverage": "npx vitest run --coverage",
-    "license": "npx license-report --config license-report.config.json",
-    "license:html": "npx license-report --config license-report.config.json > ./reports/license-report.html"
+    "licenses": "npx license-report --output=table",
+    "licenses:html": "npx license-report --output=html > ./license-report.html"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

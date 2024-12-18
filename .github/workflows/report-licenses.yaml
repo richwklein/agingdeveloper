@@ -25,25 +25,24 @@ jobs:
 
       - name: 'Generate license report'
         id: generate-report
-        run: |
-          OUTPUT=$(npx license-report --config license-report.config.json)
-          echo "LICENSE_REPORT<<EOF" >> $GITHUB_ENV
-          echo "$OUTPUT" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
-      - name: 'Make reports directory'
-        run: mkdir -p ./reports
-
-      - name: 'Save license report to file'
-        run: echo "${{ env.LICENSE_REPORT }}" > reports/license-report.html
+        run: npm run licenses:html
 
       - name: 'Upload license report artifact'
         uses: actions/upload-artifact@v4
         with:
           name: license-report
-          path: reports/license-report.html
+          path: license-report.html
 
-      - name: 'Report licenses'
+      - name: 'Clean up report html'
+        id: clean-html
+        run: |
+          HTML_CONTENT=$(cat license-report.html)
+          LICENSE_REPORT=$(echo "$HTML_CONTENT" | sed -E 's/<style[^>]*>.*?<\\/style>//g')
+          echo "LICENSE_REPORT<<EOF" >> $GITHUB_ENV
+          echo "$LICENSE_REPORT" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: 'Report licenses on pull request'
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: license

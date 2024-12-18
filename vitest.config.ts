@@ -9,7 +9,7 @@ export default getViteConfig({
       include: ['**/src/**'],
       extension: ['.js', '.cjs', '.mjs', '.ts', '.astro'],
       reporter: ['text', 'json-summary', 'json'],
-      reportsDirectory: './reports/coverage',
+      reportsDirectory: './coverage',
       reportOnFailure: true,
       /** TODO re-enable thresholds once we reach them
       thresholds: {

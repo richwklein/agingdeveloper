@@ -1,5 +1,4 @@
 {
-  "output": "html",
   "fields": ["name", "licenseType", "installedVersion", "author"],
   "tablemarkOptions": {
     "columns": [
