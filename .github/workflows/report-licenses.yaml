@@ -50,8 +50,8 @@ jobs:
 
             <details>
               <summary>Click to expand the full report</summary>
+              
               ${{ env.LICENSE_REPORT }}
             </details>
 
-            You can also download the report as an artifact:
-            [License Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            You can also download the report as an artifact from the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}).
