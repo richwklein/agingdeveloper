@@ -1,30 +1,28 @@
 /* eslint-disable no-undef */
-import sanitizeHtml from 'sanitize-html'
+import fs from 'fs';
+import sanitizeHtml from 'sanitize-html';
 
-async function sanitizeHtmlInput() {
-  try {
-    let htmlContent = ''
+const inputFile = process.argv[2]; // Take input file as a command-line argument
 
-    // Read from stdin
-    process.stdin.on('data', (chunk) => {
-      htmlContent += chunk
-    })
-
-    process.stdin.on('end', () => {
-      // Sanitize the HTML
-      const cleanedHtml = sanitizeHtml(htmlContent, {
-        allowedTags: sanitizeHtml.defaults.allowedTags.filter((tag) => tag !== 'style'), // Remove <style> tags
-        allowedAttributes: false, // Remove all attributes (optional, customize as needed)
-      }).trim()
-
-      // Write cleaned HTML to stdout
-      process.stdout.write(cleanedHtml)
-    })
-  } catch (error) {
-    console.error('Error sanitizing HTML input:', error)
-    process.exit(1)
-  }
+if (!inputFile) {
+  console.error('Error: Input file not specified.');
+  process.exit(1);
 }
 
-// Run the sanitization process
-sanitizeHtmlInput()
+try {
+  // Read the HTML content from the input file
+  const htmlContent = fs.readFileSync(inputFile, 'utf8');
+
+  // Sanitize the HTML
+  const cleanedHtml = sanitizeHtml(htmlContent, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.filter(tag => tag !== 'style'), // Remove <style> tags
+    allowedAttributes: false, // Remove all attributes
+  }).trim();
+
+  // Output the sanitized HTML to stdout
+  console.log(cleanedHtml);
+} catch (error) {
+  console.error('Error processing file:', error.message);
+  process.exit(1);
+}
+
