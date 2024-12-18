@@ -25,30 +25,13 @@ jobs:
 
       - name: 'Generate license report'
         id: generate-report
-        run: npm run licenses:html
+        run: npm run licenses:ci
 
       - name: 'Upload license report artifact'
         uses: actions/upload-artifact@v4
         with:
           name: license-report
           path: license-report.html
-
-      - name: 'Clean up report html'
-        id: clean-html
-        run: |
-          # Use Python to remove <style> tags
-          LICENSE_REPORT=$(python -c "
-            import re
-            with open('license-report.html', 'r') as f:
-                content = f.read()
-            cleaned_content = re.sub(r'<style[^>]*>.*?</style>', '', content, flags=re.DOTALL)
-            print(cleaned_content)
-                ")
-
-          # Save the cleaned HTML to an environment variable
-          echo "LICENSE_REPORT<<EOF" >> $GITHUB_ENV
-          echo \"$LICENSE_REPORT\" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
 
       - name: 'Report licenses on pull request'
         uses: marocchino/sticky-pull-request-comment@v2

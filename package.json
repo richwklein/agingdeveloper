@@ -18,7 +18,8 @@
     "test:verbose": "npx vitest run --reporter=verbose",
     "test:coverage": "npx vitest run --coverage",
     "licenses": "npx license-report --output=table",
-    "licenses:html": "npx license-report --output=html > ./license-report.html"
+    "licenses:html": "npx license-report --output=html > license-report.html",
+    "licenses:ci": "npx license-report --output=html | node license-report-cleaner.mjs > license-report.html"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
