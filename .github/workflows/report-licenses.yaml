@@ -47,7 +47,10 @@ jobs:
           message: |
             A license report has been generated:
 
-            ${{ env.LICENSE_REPORT }}
+            <details>
+              <summary>License Report</summary>
+              ${{ env.LICENSE_REPORT }}
+            </details>
 
             You can also download the report as an artifact:
             [License Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
