@@ -16,7 +16,9 @@
     "format:fix": "npx prettier --write \"**/*.{js,mjs,cjs,ts,astro,md,mdx}\"",
     "test": "npx vitest run",
     "test:verbose": "npx vitest run --reporter=verbose",
-    "test:coverage": "npx vitest run --coverage"
+    "test:coverage": "npx vitest run --coverage",
+    "license": "npx license-report --config license-report.config.json",
+    "license:html": "npx license-report --config license-report.config.json > ./reports/license-report.html"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

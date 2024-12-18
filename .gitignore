@@ -16,8 +16,7 @@ yarn-error.log*
 pnpm-debug.log*
 
 # coverage files
-coverage/
-license-report.md
+reports/
 
 # environment variables
 .env
