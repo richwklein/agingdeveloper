@@ -34,11 +34,11 @@ const {
 const alt = author ? author.name : 'unknown'
 ---
 
-<section id="article-featured" class:list={[className]}>
+<div id="article-featured" class:list={[className]}>
   <figure>
     <div class:list={['overflow-hidden rounded-md']}>
       <Image
-        class:list={['aspect-square object-cover object-center sm:aspect-video md:aspect-[21/9]']}
+        class:list={['aspect-ultrawide object-cover object-center']}
         src={image}
         alt={alt}
         loading={'eager'}
@@ -50,6 +50,7 @@ const alt = author ? author.name : 'unknown'
           (min-width: 640px) 640px,
           420px
         `}
+        width={1280}
         widths={[420, 640, 768, 1024, 1280]}
       />
     </div>
@@ -78,4 +79,4 @@ const alt = author ? author.name : 'unknown'
       ) : null
     }
   </figure>
-</section>
+</div>

@@ -2,10 +2,10 @@
  * The page used to create the robots.txt file.
  */
 import { buildUrl } from '@utils/misc'
-import { getSite } from '@utils/site'
+import { getDefaultSite } from '@utils/site'
 import type { APIRoute } from 'astro'
 
-const site = await getSite()
+const site = await getDefaultSite()
 const url = buildUrl('sitemap-index.xml', site.data.origin)
 
 const robotsTxt = `

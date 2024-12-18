@@ -12,9 +12,8 @@ import OpenGraphProfile from '@components/seo/OpenGraphProfile.astro'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import SocialBar from '@components/SocialBar.astro'
 import Layout from '@layouts/Layout.astro'
-import slugify from '@sindresorhus/slugify'
 import { getArticlesByAuthor } from '@utils/article'
-import { getSite } from '@utils/site'
+import { getDefaultSite } from '@utils/site'
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
@@ -25,12 +24,12 @@ interface Props {
 }
 
 export async function getStaticPaths() {
-  const site = await getSite()
+  const site = await getDefaultSite()
   const authors = await getCollection('author')
 
   const pages = authors.map((author: CollectionEntry<'author'>) => {
     return {
-      params: { slug: slugify(author.id) },
+      params: { id: author.id },
       props: { author, site },
     }
   })
@@ -41,7 +40,7 @@ export async function getStaticPaths() {
 const { site, author } = Astro.props
 const limit = site.data.displayLimit
 const data = author.data
-const path = `/author/${slugify(author.id)}`
+const path = `/author/${author.id}`
 
 const { articles, total } = await getArticlesByAuthor(author.id, limit)
 ---

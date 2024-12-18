@@ -10,8 +10,10 @@
  * <ArticleCard article={entry} />
  */
 import LinkInternal from '@components/LinkInternal.astro'
+import { formatDate } from '@utils/misc'
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
+import { render } from 'astro:content'
 
 interface Props {
   article: CollectionEntry<'article'>
@@ -20,11 +22,11 @@ interface Props {
 }
 
 const { article, lazy, class: className } = Astro.props
-const { remarkPluginFrontmatter: frontmatter } = await article.render()
+const { remarkPluginFrontmatter: frontmatter } = await render(article)
 const loading = lazy ? 'lazy' : 'eager'
 ---
 
-<LinkInternal to={`/article/${article.slug}`}>
+<LinkInternal to={`/article/${article.id}`}>
   <article
     class:list={[
       'overflow-hidden rounded-md border border-stone-300 bg-white',
@@ -37,6 +39,7 @@ const loading = lazy ? 'lazy' : 'eager'
     <Image
       src={article.data.featured.image}
       alt={article.data.title}
+      width={768}
       widths={[180, 420, 500, 640, 768]}
       sizes={`
         (min-width: 1280px) 180px,
@@ -47,9 +50,12 @@ const loading = lazy ? 'lazy' : 'eager'
       `}
       loading={loading}
       class:list={[
-        'object-cover object-center',
-        'aspect-square sm:aspect-video md:aspect-[21/9] xl:aspect-[3/4]',
-        'w-full xs:w-[420px] sm:w-[640px] md:w-[768px] lg:w-[500px] xl:w-[180px]',
+        'aspect-ultrawide w-full object-cover object-center',
+        'xs:w-[420px]',
+        'sm:w-[640px]',
+        'md:w-[768px]',
+        'lg:w-[500px]',
+        'xl:aspect-[3/4] xl:w-[180px]',
       ]}
     />
     <div class:list={['px-4 pb-2 pt-3']}>
@@ -58,13 +64,7 @@ const loading = lazy ? 'lazy' : 'eager'
       </h4>
       <small class:list={['text-sm text-stone-600']}>
         <time datetime={article.data.published.toISOString()}>
-          {
-            article.data.published.toLocaleDateString('en-us', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })
-          }
+          {formatDate(article.data.published)}
         </time>
       </small>
       <p class:list={['text-md mt-2 leading-relaxed text-stone-700']}>

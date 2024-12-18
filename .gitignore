@@ -17,6 +17,7 @@ pnpm-debug.log*
 
 # coverage files
 coverage/
+license-report.html
 
 # environment variables
 .env

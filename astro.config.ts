@@ -19,6 +19,9 @@ const siteUrl =
 // https://astro.build/config
 export default defineConfig({
   adapter: netlify(),
+  experimental: {
+    contentIntellisense: true,
+  },
   markdown: {
     remarkPlugins: [remarkReadingTime, remarkExcerpt],
   },

@@ -6,6 +6,8 @@
  * @return - a new value in the range between 300 and 900.
  */
 export const calculateWeight = (value: number, total: number): number => {
+  if (value <= 0) throw new Error(`Invalid value: ${value}. Value must be a positive number.`)
+  if (total <= 0) throw new Error(`Invalid total: ${total}. Total must be a positive number.`)
   const zeroBased = value - 1
   const normalized = zeroBased / (total - 1)
   const shifted = normalized * (900 - 300) + 300
@@ -41,6 +43,21 @@ export const intersection = (first: Array<string>, second: Array<string>): Set<s
  * @param base - the origin.
  * @returns the full url.
  */
-export const buildUrl = (path: string, origin: URL | string | undefined) => {
+export const buildUrl = (path: string, origin: URL | string): URL => {
   return new URL(path, origin)
+}
+
+/**
+ * Return a date in long locale date string.
+ *
+ * @param date - the date to convert.
+ * @return the formatted date string.
+ */
+export const formatDate = (input: Date): string => {
+  return input.toLocaleDateString('en-us', {
+    timeZone: 'UTC',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 }

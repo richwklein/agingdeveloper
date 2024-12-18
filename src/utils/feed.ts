@@ -1,4 +1,3 @@
-import slugify from '@sindresorhus/slugify'
 import { type CollectionEntry, getCollection } from 'astro:content'
 import { Feed } from 'feed'
 import MarkdownIt from 'markdown-it'
@@ -7,7 +6,7 @@ import sanitizeHtml from 'sanitize-html'
 
 import { getArticles } from './article'
 import { buildUrl } from './misc'
-import { getSite } from './site'
+import { getDefaultSite } from './site'
 
 const parser = new MarkdownIt()
 
@@ -25,8 +24,8 @@ export const feedInfo = [
  *
  * @returns the feed object
  */
-export const getFeed = async () => {
-  const site = await getSite()
+export const getFeed = async (): Promise<Feed> => {
+  const site = await getDefaultSite()
   const authors = await getCollection('author')
   const articles = await getArticles()
 
@@ -49,7 +48,7 @@ export const getFeed = async () => {
     return feed.addContributor({
       name: name,
       email: email,
-      link: buildUrl(`/author/${slugify(id)}`, site.data.origin).href,
+      link: buildUrl(`/author/${id}`, site.data.origin).href,
     })
   })
 
@@ -59,7 +58,7 @@ export const getFeed = async () => {
       (author: CollectionEntry<'author'>) => author.id == article.data.author.id
     )[0]
 
-    const articleUrl = buildUrl(`/article/${article.slug}`, site.data.origin).href
+    const articleUrl = buildUrl(`/article/${article.id}`, site.data.origin).href
     return feed.addItem({
       title: article.data.title,
       id: articleUrl,
@@ -71,14 +70,14 @@ export const getFeed = async () => {
         {
           name: author.data.name,
           email: author.data.email,
-          link: buildUrl(`/author/${slugify(author.id)}`, site.data.origin).href,
+          link: buildUrl(`/author/${author.id}`, site.data.origin).href,
         },
       ],
       image: {
         url: escapeXmlAttr(buildUrl(article.data.featured.image.src, site.data.origin).href),
         type: mime.getType(article.data.featured.image.src.split('?')[0]) || undefined,
       },
-      content: sanitizeHtml(parser.render(article.body), {
+      content: sanitizeHtml(parser.render(article.body || ''), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
       }),
     })

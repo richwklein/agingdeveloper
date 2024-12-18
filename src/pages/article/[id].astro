@@ -2,6 +2,7 @@
 /**
  * A single article page.
  */
+import Alert from '@components/Alert.astro'
 import ArticleByLine from '@components/ArticleByLine.astro'
 import ArticleImage from '@components/ArticleImage.astro'
 import ArticlePopular from '@components/ArticlePopular.astro'
@@ -18,9 +19,10 @@ import SeoBasic from '@components/seo/SeoBasic.astro'
 import TwitterCard from '@components/seo/TwitterCard.astro'
 import Layout from '@layouts/Layout.astro'
 import { getArticles } from '@utils/article'
-import { getSite } from '@utils/site'
+import { getDefaultSite } from '@utils/site'
 import type { CollectionEntry } from 'astro:content'
 import { getEntry } from 'astro:content'
+import { render } from 'astro:content'
 
 interface Props {
   article: CollectionEntry<'article'>
@@ -28,12 +30,12 @@ interface Props {
 }
 
 export async function getStaticPaths() {
-  const site = await getSite()
+  const site = await getDefaultSite()
 
   const articles = await getArticles()
   const pages = articles.map((article) => {
     return {
-      params: { slug: article.slug },
+      params: { id: article.id },
       props: { article, site },
     }
   })
@@ -42,12 +44,12 @@ export async function getStaticPaths() {
 }
 
 const { site, article } = Astro.props
-const path = `/article/${article.slug}`
+const path = `/article/${article.id}`
 
 const data = article.data
 const author = await getEntry(data.author)
 
-const { Content, remarkPluginFrontmatter: frontmatter } = await article.render()
+const { Content, remarkPluginFrontmatter: frontmatter } = await render(article)
 ---
 
 <Layout site={site}>
@@ -80,9 +82,9 @@ const { Content, remarkPluginFrontmatter: frontmatter } = await article.render()
     <ArticleByLine author={author} published={data.published} />
     <ArticleTitle title={data.title} description={data.description} class:list={['mt-4']} />
     <ArticleImage featured={data.featured} class:list={['mt-4']} />
-    <section class:list={['mt-4 grid grid-cols-6 gap-x-4']}>
+    <div class:list={['mt-4 grid grid-cols-6 gap-x-4']}>
       <div class:list={['prose col-span-6 max-w-none', 'md:prose-lg lg:prose-xl lg:col-span-4']}>
-        <Content components={{ a: LinkMDX }} />
+        <Content components={{ a: LinkMDX, Alert: Alert }} />
       </div>
       <div class:list={['hidden lg:col-span-2 lg:block']}>
         <ArticleTimeToRead
@@ -93,7 +95,7 @@ const { Content, remarkPluginFrontmatter: frontmatter } = await article.render()
         <ArticlePopular class:list={['mt-8']} />
         <ArticleRecent article={article} class:list={['mt-8']} />
       </div>
-    </section>
+    </div>
     <ArticleTagGrid category={data.category} tags={data.tags} class:list={['mt-4']} />
   </article>
 </Layout>
