@@ -36,8 +36,13 @@ jobs:
       - name: 'Clean up report html'
         id: clean-html
         run: |
+          # Read the HTML file
           HTML_CONTENT=$(cat license-report.html)
-          LICENSE_REPORT=$(echo "$HTML_CONTENT" | sed -E 's/<style[^>]*>.*?<\\/style>//g')
+
+          # Remove everything between <style> and </style>
+          LICENSE_REPORT=$(echo "$HTML_CONTENT" | sed -E 's/<style[^>]*>.*?<\/style>//g')
+
+          # Save the cleaned HTML into an environment variable
           echo "LICENSE_REPORT<<EOF" >> $GITHUB_ENV
           echo "$LICENSE_REPORT" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
