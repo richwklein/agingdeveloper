@@ -36,15 +36,18 @@ jobs:
       - name: 'Clean up report html'
         id: clean-html
         run: |
-          # Read the HTML file
-          HTML_CONTENT=$(cat license-report.html)
+          # Use Python to remove <style> tags
+          LICENSE_REPORT=$(python -c "
+            import re
+            with open('license-report.html', 'r') as f:
+                content = f.read()
+            cleaned_content = re.sub(r'<style[^>]*>.*?</style>', '', content, flags=re.DOTALL)
+            print(cleaned_content)
+                ")
 
-          # Remove everything between <style> and </style>
-          LICENSE_REPORT=$(echo "$HTML_CONTENT" | sed -E 's/<style[^>]*>.*?<\/style>//g')
-
-          # Save the cleaned HTML into an environment variable
+          # Save the cleaned HTML to an environment variable
           echo "LICENSE_REPORT<<EOF" >> $GITHUB_ENV
-          echo "$LICENSE_REPORT" >> $GITHUB_ENV
+          echo \"$LICENSE_REPORT\" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
       - name: 'Report licenses on pull request'
@@ -52,10 +55,10 @@ jobs:
         with:
           header: license
           message: |
-            A license report has been generated:
+            Here is a summary of the license report:
 
             <details>
-              <summary>License Report</summary>
+              <summary>Click to expand the full report</summary>
               ${{ env.LICENSE_REPORT }}
             </details>
 
