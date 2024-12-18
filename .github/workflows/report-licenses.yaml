@@ -1,4 +1,4 @@
-name: 'Report Dependencies Licenses'
+name: 'Report Licenses'
 
 on:
   pull_request:
@@ -47,9 +47,7 @@ jobs:
           message: |
             A license report has been generated:
 
-            ```
             ${{ env.LICENSE_REPORT }}
-            ```
 
             You can also download the report as an artifact:
             [License Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
