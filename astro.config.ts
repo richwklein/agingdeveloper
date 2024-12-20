@@ -3,6 +3,7 @@ import netlify from '@astrojs/netlify'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import { defineConfig } from 'astro/config'
+import fuse from 'astro-fuse'
 import icon from 'astro-icon'
 
 import { remarkExcerpt } from './src/utils/excerpt.ts'
@@ -30,6 +31,24 @@ export default defineConfig({
   image: {},
   integrations: [
     icon(),
+    fuse(['content', 'frontmatter.title', 'frontmatter.description', 'frontmatter.keywords'], {
+      filter: (path) => /^\/article\/(?!archive).*/.test(path),
+      extractContentFromHTML: ($) => $('.prose'),
+      extractFrontmatterFromHTML: ($) => {
+        const frontmatter: Record<string, any> = {}
+        const ld = $('script[type="application/ld+json"]').html() ?? '{}'
+        const ldJson = JSON.parse(ld)
+
+        // TODO update this when BlogPosting moves to the mainEntity
+        if (ldJson['@type'] === 'BlogPosting') {
+          frontmatter.title = ldJson.headline
+          frontmatter.description = ldJson.description
+          frontmatter.keywords = ldJson.keywords
+        }
+
+        return frontmatter
+      },
+    }),
     mdx(),
     sitemap(),
     tailwind({

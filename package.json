@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "4.1.2",
+  "version": "4.2.0",
   "type": "module",
   "scripts": {
     "clean": "rm -rf .astro dist node_modules package-lock.json",
@@ -34,8 +34,10 @@
     "@sindresorhus/slugify": "^2.2.1",
     "@tailwindcss/typography": "^0.5.13",
     "astro": "^5.0.4",
+    "astro-fuse": "^1.0.1",
     "astro-icon": "^1.1.1",
     "feed": "^4.2.2",
+    "fuse.js": "^7.0.0",
     "install": "^0.13.0",
     "license-report": "^6.7.1",
     "markdown-it": "^14.1.0",
@@ -68,6 +70,9 @@
     "vite": "^6.0.1",
     "@typescript-eslint/utils": {
       "eslint": "^9.9.0"
+    },
+    "astro-fuse": {
+      "astro": "^5.0.4"
     }
   }
 }

@@ -1,0 +1,122 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<typeahead-search>
+  <div data-search-container class:list={['relative', className]}>
+    <input
+      type="text"
+      data-search-input
+      placeholder={'Search...'}
+      class:list={[
+        'w-full rounded-md border border-gray-300 px-3 py-2 pl-10',
+        'focus:outline-none focus:ring-2 focus:ring-blue-500',
+      ]}
+    />
+    <div class="absolute inset-y-0 left-0 flex items-center">
+      <Icon class:list={['pointer-events-none text-stone-400', 'ml-3 h-6 w-6']} name="mdi:search" />
+    </div>
+    <ul
+      data-search-result
+      class:list={[
+        'absolute z-10 hidden max-h-48 w-full overflow-y-auto rounded-md border border-stone-300 bg-white shadow-lg',
+      ]}
+    >
+    </ul>
+  </div>
+</typeahead-search>
+
+<script>
+  import type { OutputBaseSearchable } from 'astro-fuse'
+
+  class TypeaheadSearch extends HTMLElement {
+    list: HTMLUListElement | null = null
+    input: HTMLInputElement | null = null
+    blurTimeout: number | null = null
+
+    constructor() {
+      super()
+
+      this.list = this.querySelector<HTMLUListElement>('[data-search-result]')
+      this.input = this.querySelector<HTMLInputElement>('[data-search-input]')
+
+      if (this.input) {
+        this.input.addEventListener('input', this.onInput.bind(this))
+        this.input.addEventListener('focus', this.onFocus.bind(this))
+        this.input.addEventListener('blur', this.onBlur.bind(this))
+      }
+
+      if (this.list) {
+        this.list.addEventListener('mousedown', (e) => e.preventDefault())
+        this.list.addEventListener('focus', this.onListFocus.bind(this))
+        this.list.addEventListener('blur', this.onListBlur.bind(this))
+      }
+    }
+
+    async onInput(e: Event) {
+      const { list } = this
+      if (!list) {
+        return
+      }
+
+      const { loadFuse } = await import('astro-fuse/client')
+      const fuse = await loadFuse()
+      const query = (e.target as HTMLInputElement).value.trim()
+
+      const results = fuse.search<OutputBaseSearchable>(query)
+
+      if (results.length <= 0) {
+        list.innerHTML = ''
+        list.classList.add('hidden')
+      } else {
+        list.innerHTML = results
+          .map(
+            ({ item }) =>
+              `<li><a class="block w-full px-4 py-1 hover:bg-stone-100 focus:bg-stone-100 focus:outline-none" data-link="internal" data-astro-prefetch="hover" target="_self" href="${item.pathname}">${item.frontmatter.title}</a></li>`
+          )
+          .join('')
+        list.classList.remove('hidden')
+      }
+    }
+
+    onFocus(e: FocusEvent) {
+      this.cancelTimeout()
+      this.onInput(e)
+    }
+
+    onBlur() {
+      const { list } = this
+      this.blurTimeout = window.setTimeout(() => {
+        if (list) {
+          list.classList.add('hidden')
+        }
+      }, 100)
+    }
+
+    onListFocus() {
+      this.cancelTimeout()
+    }
+
+    onListBlur(e: FocusEvent) {
+      if (this.list?.contains(e.relatedTarget as Node)) {
+        return // Prevent hiding if the focus moves to an anchor inside the list
+      }
+      this.onBlur()
+    }
+
+    cancelTimeout() {
+      if (this.blurTimeout) {
+        clearTimeout(this.blurTimeout)
+        this.blurTimeout = null
+      }
+    }
+  }
+
+  customElements.define('typeahead-search', TypeaheadSearch)
+</script>
