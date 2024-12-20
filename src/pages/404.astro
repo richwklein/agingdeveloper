@@ -3,6 +3,7 @@ import ArticleImage from '@components/ArticleImage.astro'
 import BackLink from '@components/BackLink.astro'
 import LinkInternal from '@components/LinkInternal.astro'
 import SeoBasic from '@components/seo/SeoBasic.astro'
+import TypeaheadSearch from '@components/TypeaheadSearch.astro'
 import Layout from '@layouts/Layout.astro'
 import { getDefaultSite } from '@utils/site'
 
@@ -51,7 +52,7 @@ const featured = {
     <li>
       Go back to our <LinkInternal class:list={['underline']} to={'/'}>Homepage</LinkInternal>.
     </li>
-    <!--<li>Use the search bar below to find what you need.</li> -->
+    <li>Use the search bar below to find what you need.</li>
     <li>
       Explore our popular sections like
       <LinkInternal to={'/author'} class:list={['underline']}>Authors</LinkInternal>{', '}
@@ -59,8 +60,12 @@ const featured = {
       <LinkInternal to={'/tag'} class:list={['underline']}>Tags</LinkInternal>{'.'}
     </li>
   </ul>
+
+  <TypeaheadSearch class:list={['mt-4']} />
+
   <p class:list={['mt-4']}>
     {"We're sorry for the inconvenience!"}
   </p>
+
   <BackLink name={'Home'} to={'/'} useViewText={false} class:list={['mt-8']} />
 </Layout>

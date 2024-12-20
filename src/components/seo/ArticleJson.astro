@@ -42,5 +42,6 @@ const modifiedDate = article.data.modified ? article.data.modified : article.dat
       },
     ],
     wordCount: wordCount,
+    keywords: [article.data.category, author.id, ...article.data.tags],
   })}
 />
