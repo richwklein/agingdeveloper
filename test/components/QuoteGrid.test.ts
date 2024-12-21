@@ -52,7 +52,7 @@ describe('quoteGrid', () => {
   }
 
   test('that the grid is an ordered list', async () => {
-    expect(grid).toContain('<ol>')
+    expect(grid).toContain('<ol class="grid grid-cols-1')
   })
 
   test('that the grid contains the quotes', async () => {
