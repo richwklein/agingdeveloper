@@ -31,24 +31,34 @@ export default defineConfig({
   image: {},
   integrations: [
     icon(),
-    fuse(['content', 'frontmatter.title', 'frontmatter.description', 'frontmatter.keywords'], {
-      filter: (path) => /^\/article\/(?!archive).*/.test(path),
-      extractContentFromHTML: ($) => $('.prose'),
-      extractFrontmatterFromHTML: ($) => {
-        const frontmatter: Record<string, any> = {}
-        const ld = $('script[type="application/ld+json"]').html() ?? '{}'
-        const ldJson = JSON.parse(ld)
+    fuse(
+      [
+        'content',
+        'frontmatter.title',
+        'frontmatter.description',
+        'frontmatter.category',
+        'frontmatter.tags',
+      ],
+      {
+        filter: (path) => /^\/article\/(?!archive).*/.test(path),
+        extractContentFromHTML: ($) => $('.prose'),
+        extractFrontmatterFromHTML: ($) => {
+          const frontmatter: Record<string, any> = {}
+          const ld = $('script[type="application/ld+json"]').html() ?? '{}'
+          const ldJson = JSON.parse(ld)
 
-        // TODO update this when BlogPosting moves to the mainEntity
-        if (ldJson['@type'] === 'BlogPosting') {
-          frontmatter.title = ldJson.headline
-          frontmatter.description = ldJson.description
-          frontmatter.keywords = ldJson.keywords
-        }
+          // TODO update this when BlogPosting moves to the mainEntity
+          if (ldJson['@type'] === 'BlogPosting') {
+            frontmatter.title = ldJson.headline
+            frontmatter.description = ldJson.description
+            frontmatter.category = ldJson.articleSection
+            frontmatter.tags = ldJson.keywords
+          }
 
-        return frontmatter
-      },
-    }),
+          return frontmatter
+        },
+      }
+    ),
     mdx(),
     sitemap(),
     tailwind({

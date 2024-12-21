@@ -1,4 +1,4 @@
-import { type CollectionEntry, getCollection } from 'astro:content'
+import { type CollectionEntry, getCollection, getEntry } from 'astro:content'
 
 import { intersection } from './misc'
 
@@ -34,6 +34,20 @@ export const getArticles = async (limit?: number, exclude?: string): ArticlesRes
         b.data.published.valueOf() - a.data.published.valueOf()
     )
     .slice(0, limit)
+}
+
+/**
+ * @name getArticleById
+ *
+ * Get a single article entry based on the id.
+ *
+ * @param id - The ide of the article to return.
+ * @returns The article to return
+ */
+export const getArticleById = async (
+  id: string
+): Promise<CollectionEntry<'article'> | undefined> => {
+  return getEntry('article', id)
 }
 
 /**
