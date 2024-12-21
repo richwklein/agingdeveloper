@@ -37,10 +37,13 @@ const modifiedDate = article.data.modified ? article.data.modified : article.dat
     author: [
       {
         '@type': 'Person',
+        identifier: author.id,
         name: author.data.name,
         url: buildUrl(`/author/${author.id}`, site.data.origin),
       },
     ],
     wordCount: wordCount,
+    articleSection: article.data.category,
+    keywords: article.data.tags,
   })}
 />

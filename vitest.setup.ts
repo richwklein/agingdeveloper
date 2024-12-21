@@ -21,6 +21,48 @@ vi.mock('astro:content', () => {
           collection: 'author',
           data: authorData.find((entry) => entry.id == DEFAULT_AUTHOR_ID),
         }
+      } else if (collection == 'article') {
+        switch (id) {
+          case 'mock-article-1':
+            return {
+              id: `${id}`,
+              collection: 'article',
+              data: {
+                title: 'Mock Article 1',
+                description: 'Mock article 1 description',
+                featured: {
+                  image: {
+                    src: 'mock-article-image.jpg',
+                  },
+                },
+                published: new Date(),
+                category: 'mock-category',
+                tags: ['mock-tag'],
+              },
+            }
+
+          case 'mock-article-with-modified':
+            return {
+              id: `${id}`,
+              collection: 'article',
+              data: {
+                title: 'Mock Article with Modified',
+                description: 'Mock article with modified description',
+                featured: {
+                  image: {
+                    src: 'mock-article-image.jpg',
+                  },
+                },
+                published: new Date(),
+                modified: new Date(),
+                category: 'mock-category',
+                tags: ['mock-tag'],
+              },
+            }
+
+          default:
+            return null // Simulate no entry found
+        }
       }
       return null // Simulate no entry found
     }),
