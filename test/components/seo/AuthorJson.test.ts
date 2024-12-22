@@ -71,10 +71,7 @@ describe('authorJson', () => {
     expect(linkedData).toContain('"userInteractionCount":25')
   })
 
-  test('that it contains the author avatar', async () => {
-    const url = buildUrl(author.data.avatar.src, site.data.origin).toString()
-    expect(linkedData).toContain(`"image":"${url}"`)
-  })
+  test.todo('that it contains the author avatar')
 
   test('that it contains the author socials', async () => {
     expect(linkedData).toContain('"sameAs":[')

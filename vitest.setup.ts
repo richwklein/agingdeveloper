@@ -23,6 +23,35 @@ const getJson = (id: string, source: Array<Record<string, any>>): Record<string,
   return data
 }
 
+const MockArticles = [
+  {
+    id: 'mock-article-1',
+    title: 'Mock Article 1',
+    description: 'Mock article 1 description',
+    featured: {
+      image: {
+        src: 'mock-article-image.jpg',
+      },
+    },
+    published: new Date(),
+    category: 'mock-category',
+    tags: ['mock-tag'],
+  },
+  {
+    id: 'mock-article-with-modified',
+    title: 'Mock Article with Modified',
+    description: 'Mock article with modified description',
+    featured: {
+      image: {
+        src: 'mock-article-image.jpg',
+      },
+    },
+    published: new Date(),
+    modified: new Date(),
+    category: 'mock-category',
+    tags: ['mock-tag'],
+  },
+]
 // Mock astro:content module
 vi.mock('astro:content', () => {
   return {
@@ -31,57 +60,21 @@ vi.mock('astro:content', () => {
         case 'site':
           return {
             id: id,
-            collection: 'site',
+            collection: collection,
             data: getJson(id, siteData),
           }
         case 'author':
           return {
             id: id,
-            collection: 'author',
+            collection: collection,
             data: getJson(id, authorData),
           }
 
         case 'article':
-          switch (id) {
-            case 'mock-article-1':
-              return {
-                id: `${id}`,
-                collection: 'article',
-                data: {
-                  title: 'Mock Article 1',
-                  description: 'Mock article 1 description',
-                  featured: {
-                    image: {
-                      src: 'mock-article-image.jpg',
-                    },
-                  },
-                  published: new Date(),
-                  category: 'mock-category',
-                  tags: ['mock-tag'],
-                },
-              }
-
-            case 'mock-article-with-modified':
-              return {
-                id: `${id}`,
-                collection: 'article',
-                data: {
-                  title: 'Mock Article with Modified',
-                  description: 'Mock article with modified description',
-                  featured: {
-                    image: {
-                      src: 'mock-article-image.jpg',
-                    },
-                  },
-                  published: new Date(),
-                  modified: new Date(),
-                  category: 'mock-category',
-                  tags: ['mock-tag'],
-                },
-              }
-
-            default:
-              return null // Simulate no entry found
+          return {
+            id: id,
+            collection: collection,
+            data: getJson(id, MockArticles),
           }
         default:
           return null // Simulate no entry found
