@@ -31,6 +31,11 @@ describe('getArticles', () => {
     expect(articles[1].id).toBe('mock-article-2')
   })
 
+  test('that an invalid id does not exclude anything', async () => {
+    const articles = await getArticles(undefined, 'nonexistent')
+    expect(articles).toHaveLength(5)
+  })
+
   test('that the articles are limited to the limit provided', async () => {
     const articles = await getArticles(2)
     expect(articles).toHaveLength(2)
@@ -44,9 +49,8 @@ describe('getArticleById', () => {
     expect(article?.id).toBe('mock-article-1')
   })
 
-  test('that it returns undefined for an article that does not exist', async () => {
-    const article = await getArticleById('does-not-exist')
-    expect(article).toBeUndefined()
+  test('that it throws if article is not found', async () => {
+    await expect(getArticleById('nonexistent')).rejects.toThrow('Article nonexistent is required')
   })
 })
 

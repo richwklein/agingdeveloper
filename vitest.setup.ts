@@ -19,7 +19,7 @@ const cleanEntry = (entry: Record<string, any>): Record<string, any> => {
   return entry
 }
 
-const MockSites: Array<Record<string, any>> = [
+const MockSites: Record<string, any>[] = [
   {
     id: 'mock-site-1',
     title: 'Mock site 1 title',
@@ -61,7 +61,7 @@ const MockSites: Array<Record<string, any>> = [
   },
 ]
 
-const MockAuthors: Array<Record<string, any>> = [
+const MockAuthors: Record<string, any>[] = [
   {
     id: 'mock-author-1',
     name: 'Mock Name 1',
@@ -126,7 +126,7 @@ const MockAuthors: Array<Record<string, any>> = [
   },
 ]
 
-const MockArticles: Array<Record<string, any>> = [
+const MockArticles: Record<string, any>[] = [
   {
     id: 'mock-article-1',
     title: 'Mock Article 1',
@@ -139,7 +139,7 @@ const MockArticles: Array<Record<string, any>> = [
     popular: false,
     published: '2023-10-19',
     author: { id: 'mock-author-1' },
-    category: 'mock-category-1',
+    category: 'mock-category-3',
     tags: ['mock-tag-1', 'mock-tag-2', 'mock-tag-3', 'mock-tag-4'],
   },
   {
@@ -201,7 +201,7 @@ const MockArticles: Array<Record<string, any>> = [
     modified: '2024-12-21',
     category: 'mock-category-3',
     author: { id: 'mock-author-2' },
-    tags: ['mock-tag-5'],
+    tags: ['mock-tag-4'],
   },
 ]
 
@@ -209,7 +209,7 @@ const MockArticles: Array<Record<string, any>> = [
 vi.mock('astro:content', () => {
   return {
     getEntry: vi.fn(async (collection, id) => {
-      let source: Array<Record<string, any>> | undefined = undefined
+      let source: Record<string, any>[] | undefined = undefined
 
       switch (collection) {
         case 'site':
@@ -244,7 +244,7 @@ vi.mock('astro:content', () => {
       }
     }),
     getCollection: vi.fn(async (collection) => {
-      let source: Array<Record<string, any>> | undefined = undefined
+      let source: Record<string, any>[] | undefined = undefined
 
       switch (collection) {
         case 'site':
