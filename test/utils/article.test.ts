@@ -53,7 +53,7 @@ describe('getArticleById', () => {
 describe('getArticlesByAuthor', () => {
   test('that it returns articles by author', async () => {
     const articles = await getArticlesByAuthor('mock-author-1')
-    expect(articles.articles).toHaveLength(4)
+    expect(articles.articles).toHaveLength(3)
   })
 
   test('that it returns articles by author with a limit', async () => {

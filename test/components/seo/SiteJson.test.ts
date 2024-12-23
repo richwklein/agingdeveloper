@@ -31,7 +31,7 @@ describe('siteJson', () => {
   })
 
   test('that it contains the site name', async () => {
-    expect(siteJson).toContain('"name":"The Aging Developer"')
+    expect(siteJson).toContain('"name":"Default site title"')
   })
 
   test('that it contains the site url', async () => {

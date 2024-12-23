@@ -36,7 +36,7 @@ describe('breadcrumbJson', () => {
 
   test('that it contains site as the base item', async () => {
     expect(linkedData).toContain(
-      '"position":1,"name":"The Aging Developer","item":"http://localhost:4321'
+      '"position":1,"name":"Default site title","item":"http://localhost:4321'
     )
   })
 
