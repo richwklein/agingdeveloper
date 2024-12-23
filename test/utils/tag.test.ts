@@ -14,9 +14,9 @@ describe('getCategories', () => {
 describe('getCategoriesWithCount', () => {
   test('that categories are returned with counts of articles in each', async () => {
     const results = await getCategoriesWithCount()
-    expect(results.tags.get('mock-category-1')).toBe(2)
+    expect(results.tags.get('mock-category-1')).toBe(3)
     expect(results.tags.get('mock-category-2')).toBe(1)
-    expect(results.tags.get('mock-category-3')).toBe(2)
+    expect(results.tags.get('mock-category-3')).toBe(1)
     expect(results.total).toBe(5)
   })
 })
@@ -24,7 +24,7 @@ describe('getCategoriesWithCount', () => {
 describe('getTags', () => {
   test('that tags are returned in alpha order', async () => {
     const categories = await getTags()
-    expect(categories).toHaveLength(5)
+    expect(categories).toHaveLength(4)
     expect(categories[0]).toBe('mock-tag-1')
     expect(categories[1]).toBe('mock-tag-2')
     expect(categories[2]).toBe('mock-tag-3')

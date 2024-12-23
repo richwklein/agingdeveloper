@@ -139,7 +139,7 @@ const MockArticles: Record<string, any>[] = [
     popular: false,
     published: '2023-10-19',
     author: { id: 'mock-author-1' },
-    category: 'mock-category-3',
+    category: 'mock-category-1',
     tags: ['mock-tag-1', 'mock-tag-2', 'mock-tag-3', 'mock-tag-4'],
   },
   {
