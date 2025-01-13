@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "4.2.4",
+  "version": "4.2.5",
   "type": "module",
   "scripts": {
     "clean": "rm -rf .astro dist node_modules package-lock.json",
