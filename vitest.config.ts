@@ -11,13 +11,12 @@ export default getViteConfig({
       reporter: ['text', 'json-summary', 'json'],
       reportsDirectory: './coverage',
       reportOnFailure: true,
-      /** TODO re-enable thresholds once we reach them
       thresholds: {
         lines: 60,
-        branches: 60,
+        branches: 70,
         functions: 60,
         statements: 60,
-      }, */
+      },
     },
   },
 })
