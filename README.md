@@ -39,8 +39,8 @@ Once you have asdf installed you can use that to install node & npm. These are s
 
 ```shell
 asdf plugin add nodejs
-asdf install nodejs 18.9.1
-asdf global nodejs 18.9.1
+asdf install nodejs 20.16.0
+asdf global nodejs 20.16.0
 ```
 
 2. **Install dependencies**
