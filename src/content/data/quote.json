@@ -1,5 +1,65 @@
 [
   {
+    "id": "8af4a52c-84a9-4265-8e71-4645ba57ff64",
+    "text": "I can be changed by what happens to me. But I refuse to be reduced by it.",
+    "author": "Maya Angelou",
+    "chalked": "2025-01-29"
+  },
+  {
+    "id": "3c6cf5bd-ad2e-45a7-9496-f2a25e29eea2",
+    "text": "It is always the right time to do the right thing.",
+    "author": "Martin Luther King Jr.",
+    "chalked": "2025-01-19"
+  },
+  {
+    "id": "2ba179bc-35cf-4216-8e58-ea73bd4b888b",
+    "text": "Feeling a little blue in January is normal.",
+    "author": "Marilu Henner",
+    "chalked": "2025-01-13"
+  },
+  {
+    "id": "d5860945-574e-46ed-827b-48edf2f605ee",
+    "text": "Perfectionism is the enemy of progress.",
+    "author": "Winston Churchill",
+    "chalked": "2025-01-06"
+  },
+  {
+    "id": "6a5f91be-f1a5-4b9a-87dd-360b4d083ab5",
+    "text": "Don't watch the clock; do what it does. Keep going.",
+    "author": "Sam Levenson",
+    "chalked": "2024-12-30"
+  },
+  {
+    "id": "7bf902cc-daaf-42b4-837f-54c55fb84847",
+    "text": "Chill December brings the sleet, Blazing fire and Christmas Treat.",
+    "author": "Sara Coleridge",
+    "chalked": "2024-12-23"
+  },
+  {
+    "id": "e62f21b8-d9cf-4666-9d04-97d1e9734d1f",
+    "text": "Christmas, children, is not a date. It is a state of mind.",
+    "author": "Mary Ellen Chase",
+    "chalked": "2024-12-16"
+  },
+  {
+    "id": "bc98a363-7f45-4018-a3a1-570400493f2d",
+    "text": "Health is not valued till sickness comes.",
+    "author": "Thomas Fuller",
+    "chalked": "2024-12-09"
+  },
+  {
+    "id": "bddc1c1d-7186-4d81-826a-334caece9c85",
+    "text": "Little by little, one travels far",
+    "author": "J.R.R. Tolkien",
+    "chalked": "2024-12-02"
+  },
+  {
+    "id": "0e65e6d0-948b-455d-801a-40af422800b4",
+    "text": "I wanted freedom, open air and adventure. I found it on the sea.",
+    "author": "Alain Gerbault",
+    "chalked": "2024-11-22"
+  },
+  {
     "id": "501a7af6-7766-456a-863b-009a1953d10a",
     "text": "Do not be angry with the rain; it simply does not know how to fall upwards.",
     "author": "Vladimir Nabokov",
@@ -280,59 +340,5 @@
     "text": "If there ever comes a day we can't be together - hold me in your heart I'll Stay there forever!",
     "author": "Winnie",
     "chalked": "2022-04-26"
-  },
-  {
-    "id": "0e65e6d0-948b-455d-801a-40af422800b4",
-    "text": "I wanted freedom, open air and adventure. I found it on the sea.",
-    "author": "Alain Gerbault",
-    "chalked": "2024-11-22"
-  },
-  {
-    "id": "bddc1c1d-7186-4d81-826a-334caece9c85",
-    "text": "Little by little, one travels far",
-    "author": "J.R.R. Tolkien",
-    "chalked": "2024-12-02"
-  },
-  {
-    "id": "bc98a363-7f45-4018-a3a1-570400493f2d",
-    "text": "Health is not valued till sickness comes.",
-    "author": "Thomas Fuller",
-    "chalked": "2024-12-09"
-  },
-  {
-    "id": "e62f21b8-d9cf-4666-9d04-97d1e9734d1f",
-    "text": "Christmas, children, is not a date. It is a state of mind.",
-    "author": "Mary Ellen Chase",
-    "chalked": "2024-12-16"
-  },
-  {
-    "id": "7bf902cc-daaf-42b4-837f-54c55fb84847",
-    "text": "Chill December brings the sleet, Blazing fire and Christmas Treat.",
-    "author": "Sara Coleridge",
-    "chalked": "2024-12-23"
-  },
-  {
-    "id": "6a5f91be-f1a5-4b9a-87dd-360b4d083ab5",
-    "text": "Don't watch the clock; do what it does. Keep going.",
-    "author": "Sam Levenson",
-    "chalked": "2024-12-30"
-  },
-  {
-    "id": "d5860945-574e-46ed-827b-48edf2f605ee",
-    "text": "Perfectionism is the enemy of progress.",
-    "author": "Winston Churchill",
-    "chalked": "2025-01-06"
-  },
-  {
-    "id": "2ba179bc-35cf-4216-8e58-ea73bd4b888b",
-    "text": "Feeling a little blue in January is normal.",
-    "author": "Marilu Henner",
-    "chalked": "2025-01-13"
-  },
-  {
-    "id": "3c6cf5bd-ad2e-45a7-9496-f2a25e29eea2",
-    "text": "It is always the right time to do the right thing.",
-    "author": "Martin Luther King Jr.",
-    "chalked": "2025-01-19"
   }
 ]
