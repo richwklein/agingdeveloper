@@ -6,14 +6,14 @@ import { intersection } from './misc'
  * @type ArticlesResponse
  * The response from a request for a list of articles.
  */
-export type ArticlesResponse = Promise<Array<CollectionEntry<'article'>>>
+export type ArticlesResponse = Promise<CollectionEntry<'article'>[]>
 
 /**
  * @type ArticlesWithCountResponse
  * The response from a request for a list of articles.
  */
 export type ArticlesWithCountResponse = Promise<{
-  articles: Array<CollectionEntry<'article'>>
+  articles: CollectionEntry<'article'>[]
   total: number
 }>
 
@@ -23,6 +23,7 @@ export type ArticlesWithCountResponse = Promise<{
  * Get a list of article collection entries sorted in descending published order.
  *
  * @param limit - Optional limit to the number of articles to return
+ * @param exclude - Optional id to exclude from the results
  * @returns The list of articles
  */
 export const getArticles = async (limit?: number, exclude?: string): ArticlesResponse => {
@@ -47,7 +48,12 @@ export const getArticles = async (limit?: number, exclude?: string): ArticlesRes
 export const getArticleById = async (
   id: string
 ): Promise<CollectionEntry<'article'> | undefined> => {
-  return getEntry('article', id)
+  const entry = await getEntry('article', id)
+  if (!entry) {
+    throw new Error(`Article ${id} is required`)
+  }
+
+  return entry
 }
 
 /**
