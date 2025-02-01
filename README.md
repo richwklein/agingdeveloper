@@ -14,6 +14,7 @@ This is the personal site of Richard Klein. It is a static site built using [typ
 - [VSCode settings](#vscode-settings)
 - [Images](#images)
 - [Testing](#testing)
+- [Disclaimers](#disclaimers)
 
 ## License
 
@@ -25,7 +26,7 @@ This is the personal site of Richard Klein. It is a static site built using [typ
 
 ## Content vs Source Code
 
-Both the source code for the site and the content that is hosted on the site are stored in this repository. The content hosted on the site is located in the `content` folder within the `src` folder. I would like to move this outside of the `src` folder, but using a symlink did not work well when moving from device to device. I'm subscribed to the [content layer improvements RFD](https://github.com/withastro/roadmap/pull/982), which should allow for this.
+Both the source code for the site and the content that is hosted on the site are stored in this repository. The content hosted on the site is located in the `content` folder within the `src` folder. I would like to move this outside of the `src` folder, but using a symlink did not work well when moving from device to device.
 
 ## Start local development
 
@@ -80,3 +81,7 @@ Several different size and aspect ratios are used for the cover images on the si
 ## Testing
 
 Tests are built using `vitest`. Any new components should have unit tests for it. A [snapshot test](https://vitest.dev/guide/snapshot.html) is the minimum to include. Any logic branches should have individual unit tests around them.
+
+## Disclaimer
+
+This code has been cleaned up and improved using Large Language Models (LLMs) to ensure better readability, maintainability, and functionality. Please review the code and test it in your environment before using it in production.
