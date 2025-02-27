@@ -1,17 +1,46 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --color-primary-light: rgb(98, 114, 123);
+  --color-primary-main: rgb(55, 71, 79);
+  --color-primary-dark: rgb(16, 32, 39);
+  --color-primary-contrast: rgb(255, 255, 255);
+
+  --color-secondary-light: rgb(190, 246, 122);
+  --color-secondary-main: rgb(139, 195, 74);
+  --color-secondary-dark: rgb(90, 146, 22);
+  --color-secondary-contrast: rgb(46, 46, 46);
+
+  --font-mono: Fira Code, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  --font-serif: Noto Serif Georgian, ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-sans: Noto Sans Georgian, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-chalk: Walter Turncoat, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --breakpoint-xs: 420px;
+
+  --aspect-ultrawide: 21 / 9;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
 @layer base {
-  :root {
-    --color-primary-light: 98 114 123;
-    --color-primary-main: 55 71 79;
-    --color-primary-dark: 16 32 39;
-    --color-primary-contrast: 255 255 255;
-    --color-secondary-light: 190 246 122;
-    --color-secondary-main: 139 195 74;
-    --color-secondary-dark: 90 146 22;
-    --color-secondary-contrast: 46 46 46;
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
   }
 }
 

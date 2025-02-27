@@ -29,7 +29,7 @@ const { page, class: className } = Astro.props
       <PaginationLink link={page.url.prev} icon="mdi:chevron-left" title="Previous" />
     </li>
     <li>
-      <div class:list={['text-md bg-inherit px-10 text-primary-dark']}>
+      <div class:list={['text-md text-primary-dark bg-inherit px-10']}>
         {`Page ${page.currentPage} of ${page.lastPage}`}
       </div>
     </li>

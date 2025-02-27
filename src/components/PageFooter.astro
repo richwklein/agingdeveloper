@@ -22,7 +22,7 @@ const { site, class: className } = Astro.props
 const year = new Date().getFullYear()
 ---
 
-<footer class:list={['container mx-auto grid-rows-3 p-4 xl:max-w-screen-xl', className]}>
+<footer class:list={['container mx-auto grid-rows-3 p-4 xl:max-w-(--breakpoint-xl)', className]}>
   <div>
     <ol class:list={['flex items-center gap-1']}>
       <li>
@@ -34,7 +34,7 @@ const year = new Date().getFullYear()
           <Icon
             name="mdi:rss-feed"
             title={`${site.data.title} - RSS`}
-            class:list={['h-6 w-6 text-primary-main']}
+            class:list={['text-primary-main h-6 w-6']}
           />
         </LinkExternal>
       </li>
@@ -47,7 +47,7 @@ const year = new Date().getFullYear()
           <Icon
             name="mdi:github"
             title={`${site.data.title} - Repository`}
-            class:list={['h-6 w-6 text-primary-main']}
+            class:list={['text-primary-main h-6 w-6']}
           />
         </LinkExternal>
       </li>
