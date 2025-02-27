@@ -22,8 +22,8 @@ const { site, class: className } = Astro.props
 
 <header
   class:list={[
-    'sticky left-0 top-0 z-10',
-    'bg-primary-dark px-4 py-4 text-primary-contrast shadow-lg',
+    'sticky top-0 left-0 z-10',
+    'bg-primary-dark text-primary-contrast px-4 py-4 shadow-lg',
     className,
   ]}
 >
@@ -31,8 +31,8 @@ const { site, class: className } = Astro.props
     <a href="/" class:list={['flex justify-start bg-transparent text-inherit']}>
       <div
         class:list={[
-          'mb-2 mr-4 aspect-square h-12 min-h-12 w-12 min-w-12 sm:mb-0 md:h-20 md:w-20',
-          'overflow-hidden rounded-lg ring-2 ring-secondary-light',
+          'mr-4 mb-2 aspect-square h-12 min-h-12 w-12 min-w-12 sm:mb-0 md:h-20 md:w-20',
+          'ring-secondary-light overflow-hidden rounded-lg ring-2',
         ]}
       >
         <Image
@@ -47,7 +47,7 @@ const { site, class: className } = Astro.props
         />
       </div>
       <div class:list={['flex flex-col justify-center']}>
-        <h1 class:list={['mb-2 text-base xs:text-3xl sm:text-4xl']}>{site.data.title}</h1>
+        <h1 class:list={['xs:text-3xl mb-2 text-base sm:text-4xl']}>{site.data.title}</h1>
         <p class:list={['hidden text-base sm:block']}>
           {site.data.tagline}
         </p>

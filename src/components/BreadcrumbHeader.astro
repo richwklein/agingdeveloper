@@ -27,7 +27,7 @@ const { head, tail, class: className } = Astro.props
 
 <header class:list={['flex w-full items-center', className]}>
   <span class:list={['mr-2 h-px grow rounded-sm bg-stone-300']}></span>
-  <ol class:list={['inline-flex items-center space-x-0 md:space-x-3', 'capitalize text-stone-900']}>
+  <ol class:list={['inline-flex items-center space-x-0 md:space-x-3', 'text-stone-900 capitalize']}>
     {
       tail == null ? (
         <li>{head.name}</li>
