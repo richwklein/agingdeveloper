@@ -22,7 +22,7 @@ const { site, class: className } = Astro.props
 const year = new Date().getFullYear()
 ---
 
-<footer class:list={['container mx-auto grid-rows-3 p-4 xl:max-w-screen-xl', className]}>
+<footer class:list={['container mx-auto grid-rows-3 p-4 xl:max-w-(--breakpoint-xl)', className]}>
   <div>
     <ol class:list={['flex items-center gap-1']}>
       <li>

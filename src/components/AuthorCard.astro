@@ -28,8 +28,8 @@ const loading = lazy ? 'lazy' : 'eager'
     class:list={[
       'overflow-hidden rounded-md border border-stone-300 bg-white',
       'flex max-h-[120px]',
-      'hover:bg-stone-100/85 hover:shadow-sm',
-      'focus:bg-stone-100/85 focus:shadow-sm',
+      'hover:bg-stone-100/85 hover:shadow-xs',
+      'focus:bg-stone-100/85 focus:shadow-xs',
       className,
     ]}
   >
@@ -38,7 +38,7 @@ const loading = lazy ? 'lazy' : 'eager'
       alt={author.data.name}
       width={90}
       loading={loading}
-      class:list={['object-cover object-center', 'aspect-[3/4] w-[90px] xl:min-w-[90px]']}
+      class:list={['object-cover object-center', 'aspect-3/4 w-[90px] xl:min-w-[90px]']}
     />
     <div class:list={['px-4 pb-2 pt-3']}>
       <h4 class:list={['text-lg font-medium leading-snug text-stone-900']}>

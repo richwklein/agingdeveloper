@@ -27,7 +27,7 @@ const { site, class: className } = Astro.props
     className,
   ]}
 >
-  <div class:list={['container mx-auto px-4 xl:max-w-screen-xl']}>
+  <div class:list={['container mx-auto px-4 xl:max-w-(--breakpoint-xl)']}>
     <a href="/" class:list={['flex justify-start bg-transparent text-inherit']}>
       <div
         class:list={[
