@@ -49,13 +49,13 @@ const { class: className } = Astro.props
       if (this.input) {
         this.input.addEventListener('input', this.onInput.bind(this))
         this.input.addEventListener('focus', this.onFocus.bind(this))
-        this.input.addEventListener('blur-sm', this.onBlur.bind(this))
+        this.input.addEventListener('blur', this.onBlur.bind(this))
       }
 
       if (this.list) {
         this.list.addEventListener('mousedown', (e) => e.preventDefault())
         this.list.addEventListener('focus', this.onListFocus.bind(this))
-        this.list.addEventListener('blur-sm', this.onListBlur.bind(this))
+        this.list.addEventListener('blur', this.onListBlur.bind(this))
       }
     }
 
