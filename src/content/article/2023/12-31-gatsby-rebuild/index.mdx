@@ -136,7 +136,7 @@ export const createSchemaCustomization = ({ actions, schema }) => {
             return context.nodeModel.findOne({
               type: 'AuthorYaml',
               query: {
-                filter: {
+                filter: { slug: { eq: source.author } },
               },
             })
           },
