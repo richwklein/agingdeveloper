@@ -38,6 +38,7 @@ const article = defineCollection({
         .string()
         .default('uncategorized')
         .transform((val) => capitalize(val)),
+      enhanced: z.boolean().optional().default(true),
       tags: z.array(z.string().transform((val) => capitalize(val))),
     }),
 })
