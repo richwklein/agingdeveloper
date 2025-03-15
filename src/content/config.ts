@@ -3,11 +3,19 @@ import { file, glob } from 'astro/loaders' // Not available with legacy API
 import { defineCollection, reference, z } from 'astro:content'
 
 const article = defineCollection({
-  loader: glob({ pattern: '**/*.mdx', base: 'src/content/article' }),
+  loader: glob({
+    pattern: '**/*.mdx',
+    base: 'src/content/article',
+    generateId: ({ entry }) => {
+      // remove the index.mdx and replace slashes with dashes
+      return entry.replace(/\/index\.mdx$/, '').replace(/\//g, '-')
+    },
+  }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
       description: z.string(),
+      author: reference('author'),
       featured: z.object({
         image: image(),
         author: z
@@ -23,6 +31,13 @@ const article = defineCollection({
           })
           .optional(),
       }),
+      popular: z.boolean().optional(),
+      enhanced: z.boolean().optional().default(true),
+      tags: z.array(z.string().transform((val) => capitalize(val))),
+      category: z
+        .string()
+        .default('uncategorized')
+        .transform((val) => capitalize(val)),
       published: z
         .string()
         .date()
@@ -32,14 +47,6 @@ const article = defineCollection({
         .date()
         .transform((val) => new Date(val))
         .optional(),
-      author: reference('author'),
-      popular: z.boolean().optional(),
-      category: z
-        .string()
-        .default('uncategorized')
-        .transform((val) => capitalize(val)),
-      enhanced: z.boolean().optional().default(true),
-      tags: z.array(z.string().transform((val) => capitalize(val))),
     }),
 })
 

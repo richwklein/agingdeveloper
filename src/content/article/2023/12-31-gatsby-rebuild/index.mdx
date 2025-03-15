@@ -1,5 +1,4 @@
 ---
-slug: 2023-12-31-gatsby-rebuild
 title: Rebuilding with Gatsby
 description: 'The journey to bring this site back to life through a rebuild on the latest major releases.'
 author: richwklein
@@ -137,7 +136,7 @@ export const createSchemaCustomization = ({ actions, schema }) => {
             return context.nodeModel.findOne({
               type: 'AuthorYaml',
               query: {
-                filter: { slug: { eq: source.author } },
+                filter: {
               },
             })
           },
