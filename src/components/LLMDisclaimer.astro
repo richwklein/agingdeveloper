@@ -1,0 +1,28 @@
+---
+import Alert from './Alert.astro'
+
+/**
+ * @name LLMDisclaimer
+ * Component used to disclaim that the article may have been enhanced.
+ *
+ * @param {Props} props - The classes.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <LLMDisclaimer />
+ *
+ */
+
+interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<aside class:list={['disclaimer', className]}>
+  <Alert severity={'info'}>
+    <strong>Disclaimer:</strong> This article has been refined and improved using Large Language Models
+    (LLMs) to enhance clarity, readability, and overall tone.
+  </Alert>
+</aside>
