@@ -41,7 +41,7 @@ const pathPrefix = isCategory ? '/category' : '/tag'
   to={`${pathPrefix}/${slugify(name)}`}
   class:list={[
     'justify-left m-0 inline-flex items-center px-2 py-1',
-    'capitalize text-stone-900',
+    'text-stone-900 capitalize',
     'hover:underline focus:underline',
     cssNames.get(weight),
     className,

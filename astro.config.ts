@@ -1,7 +1,7 @@
 import mdx from '@astrojs/mdx'
 import netlify from '@astrojs/netlify'
 import sitemap from '@astrojs/sitemap'
-import tailwind from '@astrojs/tailwind'
+import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
 import fuse from 'astro-fuse'
 import icon from 'astro-icon'
@@ -20,12 +20,9 @@ const siteUrl =
 // https://astro.build/config
 export default defineConfig({
   adapter: netlify(),
-  experimental: {
-    contentIntellisense: true,
-  },
-  markdown: {
-    remarkPlugins: [remarkReadingTime, remarkExcerpt],
-  },
+  build: { format: 'file' },
+  experimental: { contentIntellisense: true },
+  markdown: { remarkPlugins: [remarkReadingTime, remarkExcerpt] },
   output: 'static',
   prefetch: true,
   image: {},
@@ -61,9 +58,6 @@ export default defineConfig({
     ),
     mdx(),
     sitemap(),
-    tailwind({
-      applyBaseStyles: false,
-    }),
   ],
   redirects: {
     '/article': { destination: '/article/archive-1', status: 308 },
@@ -91,7 +85,5 @@ export default defineConfig({
   },
   site: siteUrl,
   trailingSlash: 'ignore',
-  build: {
-    format: 'file',
-  },
+  vite: { plugins: [tailwindcss()] },
 })

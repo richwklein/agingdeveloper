@@ -1,0 +1,99 @@
+---
+title: 'Keeping Your Git Working Directories Clean'
+description: 'Tired of messy Git working directories? The git-cleanup script can help you keep your directories organized with ease.'
+author: richwklein
+featured:
+  image: jennifer-burk-wP9yLk_VKI8-unsplash.jpg
+  author:
+    name: Jennifer Burk
+    url: https://unsplash.com/@jenandjoon?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
+  site:
+    name: Unsplash
+    url: https://unsplash.com/photos/brown-wooden-bucket-wP9yLk_VKI8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
+tags:
+  - git
+  - bash
+  - script
+  - clean
+  - repository
+  - messy
+category: code
+published: '2025-02-01'
+---
+
+## The Power and Messiness of Git
+
+Git is the backbone of modern software development, providing a powerful way to track, manage, and collaborate on code. Whether you're working solo on a passion project, contributing to open-source, or juggling multiple enterprise repositories, Git keeps everything versioned and organized. Like many developers, I use Git both at work and for personal projects. This site is developed using Git and hosted on [github.com](https://github.com/richwklein/agingdeveloper).
+
+But let's be honest—Git repositories can get messy. Old stashes, merged-but-forgotten branches, and lingering references accumulate, making it harder to navigate and manage your work efficiently.
+
+To tackle this problem, I built [git-cleanup](http://github.com/richwklein/git-cleanup), a lightweight _bash_ script designed to keep your repositories neat and clutter-free. It automates the removal of outdated references, so you can focus on writing great code instead of cleaning up after yourself.
+
+---
+
+## Why Git Repositories Get Messy
+
+Over time, repositories accumulate digital debris that can slow you down. Here's what typically happens:
+
+- **Forgotten Stashes**: Stashed changes often get left behind, creating unnecessary clutter.
+- **Merged but Undeleted Branches**: Once a branch is merged, it's easy to forget about it.
+- **Detached References**: Temporary commit references linger longer than they should.
+- **Multiple Repositories**: If you manage multiple projects, keeping everything tidy can be overwhelming.
+
+If you're like me, all your repositories probably live in a single `projects` directory, and manually cleaning them up is not how you want to spend your time.
+
+---
+
+## Automating the Cleanup Process
+
+The `git-cleanup` script automates this tedious process by removing unnecessary references in your Git repositories. It will:
+
+- Fetch updates from remote repositories and prunes any remote-tracking references that no longer exist on the remote.
+- Remove local branches that have been deleted on the remote.
+- Remove local branches that have been merged into the main branch.
+- Prune orphaned objects from the local repository.
+- Check for old stashes and notifies if any are found.
+- Optionally removes any untracked branches.
+
+## How to Use It
+
+You can run the script with the following options:
+
+```sh
+Usage: ./git_cleanup.sh [-d directory] [-u]
+```
+
+- -d directory: Specify the directory to clean up. Defaults to the current directory (.).
+- -u: Removes untracked branches.
+
+If the specified directory contains a _.git_ file, the script will clean up just that directory. This is useful when working in a specific project and you notice things have gotten unwieldy. Otherwise, the script will recurse into child directories to find and clean up any Git repositories.
+
+---
+
+## Making it easier with an Alias
+
+Since I run this cleanup regularly, I made it even simpler with a shell alias. Adding this to your `.bashrc` or `.zshrc` file saves even more time:
+
+```sh
+alias cleanup="sh $PROJECTS/git-cleanup/git_cleanup.sh -d $PROJECTS"
+```
+
+The `$PROJECTS` is an environment variable that I have set to the directory containing all my projects. This alias will run the _git_cleanup.sh_ script from its checked-out location against the directory specified by `$PROJECTS`.
+
+Now, cleaning all repositories is just one command away:
+
+```sh
+> cleanup
+```
+
+---
+
+## Why I’m Sharing This
+
+I know many developers have their own Git cleanup scripts, but I wanted to share mine in a structured, reusable format. \*git-cleanup\*\* is open-source, free to use, and available for anyone to enhance.
+
+If you find it useful, give it a try and let me know how it works for you. You can also contribute improvements or suggestions on the [git-cleanup repository](http://github.com/richwklein/git-cleanup).
+
+Keeping your Git environment clean doesn't have to be a hassle. Automate it once, and spend more time writing code instead of managing clutter.
+
+Happy coding!

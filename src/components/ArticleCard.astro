@@ -31,8 +31,8 @@ const loading = lazy ? 'lazy' : 'eager'
     class:list={[
       'overflow-hidden rounded-md border border-stone-300 bg-white',
       'xl:flex xl:max-h-60 xl:flex-row-reverse',
-      'hover:bg-stone-100/85 hover:shadow-sm',
-      'focus:bg-stone-100/85 focus:shadow-sm',
+      'hover:bg-stone-100/85 hover:shadow-xs',
+      'focus:bg-stone-100/85 focus:shadow-xs',
       className,
     ]}
   >
@@ -55,11 +55,11 @@ const loading = lazy ? 'lazy' : 'eager'
         'sm:w-[640px]',
         'md:w-[768px]',
         'lg:w-[500px]',
-        'xl:aspect-[3/4] xl:w-[180px]',
+        'xl:aspect-3/4 xl:w-[180px]',
       ]}
     />
-    <div class:list={['px-4 pb-2 pt-3']}>
-      <h4 class:list={['text-lg font-medium leading-snug text-stone-900']}>
+    <div class:list={['px-4 pt-3 pb-2']}>
+      <h4 class:list={['text-lg leading-snug font-medium text-stone-900']}>
         {article.data.title}
       </h4>
       <small class:list={['text-sm text-stone-600']}>
