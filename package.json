@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "type": "module",
   "scripts": {
     "clean": "rm -rf .astro dist node_modules package-lock.json",
@@ -18,6 +18,7 @@
     "test": "npx vitest run",
     "test:verbose": "npx vitest run --reporter=verbose",
     "test:coverage": "npx vitest run --coverage",
+    "verify": "npm run lint && npm run format && npm run test",
     "licenses": "npx license-report --output=table",
     "licenses:html": "npx license-report --output=html > license-report.html"
   },
