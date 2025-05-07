@@ -47,9 +47,6 @@ export const intersection = (first: Array<string>, second: Array<string>): Set<s
  * @returns the full url.
  */
 export const buildUrl = (path: string, origin: URL | string): URL => {
-  if (path.startsWith('http')) {
-    return new URL(path)
-  }
   return new URL(path, origin)
 }
 
