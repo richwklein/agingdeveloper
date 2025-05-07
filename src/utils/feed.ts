@@ -81,25 +81,22 @@ export const getFeed = async (): Promise<Feed> => {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
         transformTags: {
           img: (tagName, attribs) => {
-            const { src, alt } = attribs
+            const { src } = attribs
             return {
-              tagName: 'img',
+              tagName,
               attribs: {
-                src: buildUrl(src, site.data.origin).href,
-                alt: alt,
-                class: 'w-full h-auto',
+                ...attribs,
+                src: buildUrl(src, articleUrl).href,
               },
             }
           },
           a: (tagName, attribs) => {
-            const { href, title } = attribs
+            const { href } = attribs
             return {
-              tagName: 'a',
+              tagName,
               attribs: {
-                href: buildUrl(href, site.data.origin).href,
-                title: title,
-                target: '_blank',
-                rel: 'noopener noreferrer',
+                ...attribs,
+                href: buildUrl(href, articleUrl).href,
               },
             }
           },
