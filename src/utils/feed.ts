@@ -72,7 +72,6 @@ export const getFeed = async (): Promise<Feed> => {
         return `${year}-${rest}`
       })
     const imageSrc = imageUrls.get(imagePath) || article.data.featured.image.src
-    console.log('imageSrc', imageSrc)
 
     return feed.addItem({
       title: article.data.title,
@@ -90,7 +89,7 @@ export const getFeed = async (): Promise<Feed> => {
       ],
       image: {
         url: escapeXmlAttr(buildUrl(imageSrc, site.data.origin).href),
-        type: mime.getType(imageSrc.split('?')[0]) || undefined,
+        type: mime.getType(imageSrc) || undefined,
       },
       content: sanitizeHtml(parser.render(article.body || ''), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
