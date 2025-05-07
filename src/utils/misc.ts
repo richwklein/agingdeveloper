@@ -39,11 +39,17 @@ export const intersection = (first: Array<string>, second: Array<string>): Set<s
 /**
  * Build an absolute url for the given path and origin.
  *
+ * If the path is already an absolute url, it will be returned as is. Otherwise,
+ * the path will be combined with the origin to create a new url.
+ *
  * @param path - the path to construct the url for.
  * @param base - the origin.
  * @returns the full url.
  */
 export const buildUrl = (path: string, origin: URL | string): URL => {
+  if (path.startsWith('http')) {
+    return new URL(path)
+  }
   return new URL(path, origin)
 }
 

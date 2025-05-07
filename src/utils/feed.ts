@@ -79,6 +79,31 @@ export const getFeed = async (): Promise<Feed> => {
       },
       content: sanitizeHtml(parser.render(article.body || ''), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+        transformTags: {
+          img: (tagName, attribs) => {
+            const { src, alt } = attribs
+            return {
+              tagName: 'img',
+              attribs: {
+                src: buildUrl(src, site.data.origin).href,
+                alt: alt,
+                class: 'w-full h-auto',
+              },
+            }
+          },
+          a: (tagName, attribs) => {
+            const { href, title } = attribs
+            return {
+              tagName: 'a',
+              attribs: {
+                href: buildUrl(href, site.data.origin).href,
+                title: title,
+                target: '_blank',
+                rel: 'noopener noreferrer',
+              },
+            }
+          },
+        },
       }),
     })
   })
