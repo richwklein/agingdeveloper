@@ -38,7 +38,7 @@
     "astro": "^5.4.0",
     "astro-fuse": "^1.0.1",
     "astro-icon": "^1.1.1",
-    "feed": "^4.2.2",
+    "feed": "^5.0.0",
     "fuse.js": "^7.0.0",
     "install": "^0.13.0",
     "license-report": "^6.7.1",
