@@ -1,3 +1,4 @@
+import type { GetImageResult } from 'astro'
 import { getImage } from 'astro:assets'
 import { type CollectionEntry, getCollection } from 'astro:content'
 import { Feed } from 'feed'
@@ -30,14 +31,17 @@ export const getFeed = async (): Promise<Feed> => {
   const authors = await getCollection('author')
   const articles = await getArticles()
 
-  // setup basic feed structure
-  const feed = new Feed({
+  // load the images for the feed
+  const imageCollection = new FeedImageCollection(site)
+  await imageCollection.loadImages()
+
+  const feed: Feed = new Feed({
     title: site.data.title,
     description: site.data.tagline,
     id: buildUrl('', site.data.origin).href,
     link: buildUrl('', site.data.origin).href,
-    image: buildUrl(site.data.avatar.src, site.data.origin).href,
-    favicon: buildUrl(site.data.icon.src, site.data.origin).href,
+    image: imageCollection.getImageSrc(site.data.avatar.src),
+    favicon: imageCollection.getImageSrc(site.data.icon.src),
     feedLinks: new Map(feedInfo.map(({ id, path }) => [id, buildUrl(path, site.data.origin).href])),
     copyright: new Date().toISOString(),
   })
@@ -53,25 +57,14 @@ export const getFeed = async (): Promise<Feed> => {
     })
   })
 
-  // map of image urls that can be replaced in the content
-  const imageUrls = await buildImageUrls()
-
   // add an item for each article
   articles.map((article) => {
     const author = authors.filter(
       (author: CollectionEntry<'author'>) => author.id == article.data.author.id
     )[0]
 
-    const articleUrl = buildUrl(`/article/${article.id}`, site.data.origin).href
-
-    // convert the image path to something that can be looked up in the imageUrls map
-    const imagePath = article.data.featured.image.src
-      .split('/article/')[1]
-      .split('?')[0]
-      .replace(/^(\d{4})\/([^/]+)/, (_, year, rest) => {
-        return `${year}-${rest}`
-      })
-    const imageSrc = imageUrls.get(imagePath) || article.data.featured.image.src
+    const articlePath = `/article/${article.id}`
+    const articleUrl = buildUrl(articlePath, site.data.origin).href
 
     return feed.addItem({
       title: article.data.title,
@@ -88,27 +81,24 @@ export const getFeed = async (): Promise<Feed> => {
         },
       ],
       image: {
-        url: escapeXmlAttr(buildUrl(imageSrc, site.data.origin).href),
-        type: mime.getType(imageSrc) || undefined,
+        url: escapeXmlAttr(
+          imageCollection.getArticleImageSrc(article.data.featured.image.src, articlePath)
+        ),
+        type: mime.getType(article.data.featured.image.src.split('?')[0]) || undefined,
       },
       content: sanitizeHtml(parser.render(article.body || ''), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
         transformTags: {
           img: (tagName, attribs) => {
             const { src } = attribs
-            let imageSrc = src
-            if (!src.startsWith('./')) {
-              const imagePath = `${article.id}/${src.replace(/^\.\//, '')}`
-              imageSrc = imageUrls.get(imagePath) || src
-            }
-
-            return {
+            const result = {
               tagName,
               attribs: {
                 ...attribs,
-                src: buildUrl(imageSrc, site.data.origin).href,
+                src: imageCollection.getArticleImageSrc(src, articlePath),
               },
             }
+            return result
           },
           a: (tagName, attribs) => {
             const { href } = attribs
@@ -129,42 +119,12 @@ export const getFeed = async (): Promise<Feed> => {
 }
 
 /**
- * Build a map of Image Urls
- *
- * This function will build a map of image urls for all images in the content directory.
- * The keys will be the relative file path to the image starting after the article folder,
- * and the values will be the relative url to the image.
- *
- * @returns a Map of image urls
- */
-const buildImageUrls = async (): Promise<Map<string, string>> => {
-  const imageGlobs = import.meta.glob<{ default: ImageMetadata }>(
-    `/src/content/article/**/*.{jpeg,jpg,png,gif,svg,webp}`
-  )
-
-  const images: Map<string, string> = new Map()
-  for (const key of Object.keys(imageGlobs)) {
-    const src = key
-      .split('?')[0]
-      .replace(/^\/?src\/content\/article\//, '')
-      .replace(/^(\d{4})\/([^/]+)/, (_, year, rest) => {
-        return `${year}-${rest}`
-      })
-    const metadata = await imageGlobs[key]().then((result) => result.default)
-    const image = await getImage({ src: metadata })
-    console.log('image', image)
-    images.set(src, image.src)
-  }
-  return images
-}
-
-/**
  * Method to escape xml attributes. This is needed for the image enclosure on the feed.
  *
  * @param unsafe - The unsafe string to escape.
  * @returns the escaped string.
  */
-const escapeXmlAttr = (unsafe: string) => {
+const escapeXmlAttr = (unsafe: string): string => {
   return unsafe.replace(/[<>&'"]/g, (c: string) => {
     switch (c) {
       case '<':
@@ -181,4 +141,109 @@ const escapeXmlAttr = (unsafe: string) => {
         return c
     }
   })
+}
+
+/**
+ * Class to load and store images for the feed.
+ *
+ * This class will load all images from the content directory and the site entry.
+ * The images will be stored in a map that can be looked up based on the src supplied.
+ */
+class FeedImageCollection {
+  private images: Map<string, GetImageResult> = new Map()
+  private site: CollectionEntry<'site'>
+  private cwd: string
+
+  constructor(site: CollectionEntry<'site'>) {
+    this.site = site
+    this.cwd = process.cwd()
+  }
+
+  /**
+   * Load the images for later retrieval.
+   */
+  async loadImages() {
+    const imageGlobs = import.meta.glob<{ default: ImageMetadata }>(
+      '/src/content/article/**/*.{jpeg,jpg,png,gif,svg,webp}'
+    )
+
+    // first load the images from the site entry
+    let image = await getImage({ src: this.site.data.avatar })
+    this.images.set(this.trimKey(this.site.data.avatar.src), image)
+    image = await getImage({ src: this.site.data.icon })
+    this.images.set(this.trimKey(this.site.data.icon.src), image)
+
+    // load all the images that are in the article directory
+    for (const key of Object.keys(imageGlobs)) {
+      const src = this.trimKey(key)
+      const metadata = await imageGlobs[key]().then((result) => result.default)
+      image = await getImage({ src: metadata })
+      this.images.set(src, image)
+    }
+  }
+
+  /**
+   * Get the absolute image src for an image referenced by an article.
+   *
+   * This will return the image url for the given src. If the image isn't found the
+   * original src is returned.
+   *
+   * @param src - The src to lookup.
+   * @param articlePath - The path to the article
+   * @returns The image url or empty if not found.
+   */
+  getArticleImageSrc(src: string, articlePath: string): string {
+    const isAbsolute = src.startsWith('http') || src.startsWith('https')
+    if (isAbsolute) {
+      return src
+    }
+
+    let key = this.trimKey(src).replace(/^.\//, '')
+    key = key.startsWith(articlePath) ? key : `${articlePath}/${key}`
+    const image = this.images.get(key)
+    if (image) {
+      return buildUrl(image.src, this.site.data.origin).href
+    } else if (src.startsWith('/_astro/')) {
+      return buildUrl(src, this.site.data.origin).href
+    }
+    return src
+  }
+
+  /**
+   * Get the absolute image src for the given src.
+   *
+   * This will return the image url for the given src. If the image is not found, it will
+   * return the original src.
+   *
+   * @param src - The src to lookup.
+   * @returns The image url or empty if not found.
+   */
+  getImageSrc(src: string): string {
+    const key = this.trimKey(src)
+    const image = this.images.get(key)
+    if (image) {
+      return buildUrl(image.src, this.site.data.origin).href
+    }
+    return src
+  }
+
+  /**
+   * Normalize the key to be used in the image map.
+   *
+   * This will remove the leading `/@fs`, working directory, and /src/content as well as
+   *  the trailing ?v=1234.
+   *
+   * @param key the key to normalize
+   * @returns The normalized key
+   */
+  private trimKey(key: string): string {
+    return key
+      .split('?')[0]
+      .replace('/@fs', '')
+      .replace(this.cwd, '')
+      .replace(/^\/src\/content/, '')
+      .replace(/^\/article\/(\d{4})\/([^/]+)/, (_, year, rest) => {
+        return `/article/${year}-${rest}`
+      })
+  }
 }
