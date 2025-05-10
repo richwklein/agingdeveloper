@@ -144,10 +144,11 @@ const escapeXmlAttr = (unsafe: string): string => {
 }
 
 /**
- * Class to load and store images for the feed.
+ * Class to access images for the feed.
  *
- * This class will load all images from the content directory and the site entry.
- * The images will be stored in a map that can be looked up based on the src supplied.
+ * This class will load all images from the content/article directory and the site entry.
+ * The images will be stored in a map with a normalized key that can be looked up based
+ * on the src supplied.
  */
 class FeedImageCollection {
   private images: Map<string, GetImageResult> = new Map()
@@ -168,17 +169,19 @@ class FeedImageCollection {
     )
 
     // first load the images from the site entry
-    let image = await getImage({ src: this.site.data.avatar })
-    this.images.set(this.normalizeKey(this.site.data.avatar.src), image)
-    image = await getImage({ src: this.site.data.icon })
-    this.images.set(this.normalizeKey(this.site.data.icon.src), image)
+    this.images.set(
+      this.normalizeKey(this.site.data.avatar.src),
+      await getImage({ src: this.site.data.avatar })
+    )
+    this.images.set(
+      this.normalizeKey(this.site.data.icon.src),
+      await getImage({ src: this.site.data.icon })
+    )
 
     // load all the images that are in the article directory
     for (const key of Object.keys(imageGlobs)) {
-      const src = this.normalizeKey(key)
       const metadata = await imageGlobs[key]().then((result) => result.default)
-      image = await getImage({ src: metadata })
-      this.images.set(src, image)
+      this.images.set(this.normalizeKey(key), await getImage({ src: metadata }))
     }
   }
 
@@ -193,8 +196,7 @@ class FeedImageCollection {
    * @returns The image url or empty if not found.
    */
   getArticleImageSrc(src: string, articlePath: string): string {
-    const isAbsolute = src.startsWith('http') || src.startsWith('https')
-    if (isAbsolute) {
+    if (src.startsWith('http') || src.startsWith('https')) {
       return src
     }
 
