@@ -169,13 +169,13 @@ class FeedImageCollection {
 
     // first load the images from the site entry
     let image = await getImage({ src: this.site.data.avatar })
-    this.images.set(this.trimKey(this.site.data.avatar.src), image)
+    this.images.set(this.normalizeKey(this.site.data.avatar.src), image)
     image = await getImage({ src: this.site.data.icon })
-    this.images.set(this.trimKey(this.site.data.icon.src), image)
+    this.images.set(this.normalizeKey(this.site.data.icon.src), image)
 
     // load all the images that are in the article directory
     for (const key of Object.keys(imageGlobs)) {
-      const src = this.trimKey(key)
+      const src = this.normalizeKey(key)
       const metadata = await imageGlobs[key]().then((result) => result.default)
       image = await getImage({ src: metadata })
       this.images.set(src, image)
@@ -198,7 +198,7 @@ class FeedImageCollection {
       return src
     }
 
-    let key = this.trimKey(src).replace(/^.\//, '')
+    let key = this.normalizeKey(src).replace(/^.\//, '')
     key = key.startsWith(articlePath) ? key : `${articlePath}/${key}`
     const image = this.images.get(key)
     if (image) {
@@ -219,7 +219,7 @@ class FeedImageCollection {
    * @returns The image url or empty if not found.
    */
   getImageSrc(src: string): string {
-    const key = this.trimKey(src)
+    const key = this.normalizeKey(src)
     const image = this.images.get(key)
     if (image) {
       return buildUrl(image.src, this.site.data.origin).href
@@ -236,7 +236,7 @@ class FeedImageCollection {
    * @param key the key to normalize
    * @returns The normalized key
    */
-  private trimKey(key: string): string {
+  private normalizeKey(key: string): string {
     return key
       .split('?')[0]
       .replace('/@fs', '')
