@@ -196,7 +196,7 @@ class FeedImageCollection {
    * @returns The image url or empty if not found.
    */
   getArticleImageSrc(src: string, articlePath: string): string {
-    if (src.startsWith('http') || src.startsWith('https')) {
+    if (src.startsWith('http') || src.startsWith('data')) {
       return src
     }
 
