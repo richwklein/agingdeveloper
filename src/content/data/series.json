@@ -1,0 +1,12 @@
+[
+  {
+    "id": "distributed-authorization",
+    "title": "Distributed Authorization",
+    "description": "A deep dive into the essential principles, cutting-edge practices, and proven patterns of authorization in distributed applications. This series equips readers with practical strategies and technical insights for designing secure, reliable, and scalable authorization frameworks that protect resources, streamline access control, and adapt seamlessly across complex, distributed environments."
+  },
+  {
+    "id": "the-rgb-way",
+    "title": "Fighting for Change, Together",
+    "description": "Fight for the things that you care about, but do it in a way that will lead others to join you. Inspired by Ruth Bader Ginsburg's powerful advice, this series explores practical pathways toward a more just and inclusive democracy. Each article highlights critical societal issues and presents a vision of change rooted in collaboration and unity, rather than division and confrontation. By embracing the RBG Way, readers are encouraged to become thoughtful advocates who inspire others to join them in shaping a brighter political future."
+  }
+]
