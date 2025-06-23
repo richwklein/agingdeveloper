@@ -18,6 +18,7 @@ import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 import OpenGraphArticle from '@components/seo/OpenGraphArticle.astro'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import TwitterCard from '@components/seo/TwitterCard.astro'
+import SeriesBanner from '@components/SeriesBanner.astro'
 import Layout from '@layouts/Layout.astro'
 import { getArticles } from '@utils/article'
 import { getDefaultSite } from '@utils/site'
@@ -50,6 +51,7 @@ const path = `/article/${article.id}`
 const data = article.data
 const author = await getEntry(data.author)
 
+const series = data.series ? await getEntry(data.series) : null
 const { Content, remarkPluginFrontmatter: frontmatter } = await render(article)
 ---
 
@@ -80,6 +82,14 @@ const { Content, remarkPluginFrontmatter: frontmatter } = await render(article)
     />
   </Fragment>
   <article>
+    <SeriesBanner
+      seriesTitle={series?.data.title || ''}
+      seriesDescription={series?.data.description || ''}
+      current={0}
+      total={1}
+      prevUrl={''}
+      nextUrl={''}
+    />
     <ArticleByLine author={author} published={data.published} />
     <ArticleTitle title={data.title} description={data.description} class:list={['mt-4']} />
     <ArticleImage featured={data.featured} class:list={['mt-4']} />

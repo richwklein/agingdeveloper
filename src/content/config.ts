@@ -31,6 +31,7 @@ const article = defineCollection({
           })
           .optional(),
       }),
+      series: reference('series').optional(),
       popular: z.boolean().optional(),
       enhanced: z.boolean().optional().default(true),
       tags: z.array(z.string().transform((val) => capitalize(val))),
@@ -99,6 +100,15 @@ const site = defineCollection({
     }),
 })
 
+const series = defineCollection({
+  loader: file('src/content/data/series.json'),
+  schema: () =>
+    z.object({
+      title: z.string().min(1, 'Series title cannot be empty'),
+      description: z.string().min(1, 'Series description cannot be empty'),
+    }),
+})
+
 const quote = defineCollection({
   loader: file('src/content/data/quote.json'),
   schema: () =>
@@ -112,4 +122,4 @@ const quote = defineCollection({
     }),
 })
 
-export const collections = { article, author, site, quote }
+export const collections = { article, author, site, series, quote }
