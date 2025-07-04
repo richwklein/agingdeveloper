@@ -90,6 +90,11 @@ describe('buildUrl', () => {
   test('that it can handle an empty path', () => {
     expect(buildUrl('', origin).href).toEqual(origin + '/')
   })
+
+  test('that it can handle a full url', () => {
+    const fullUrl: string = 'http://example.com/article/2024-11-11-article'
+    expect(buildUrl(fullUrl, origin).href).toEqual(fullUrl)
+  })
 })
 
 describe('formatDate', () => {

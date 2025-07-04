@@ -39,6 +39,9 @@ export const intersection = (first: string[], second: string[]): Set<string> => 
 /**
  * Build an absolute url for the given path and origin.
  *
+ * If the path is already an absolute url, it will be returned as is. Otherwise,
+ * the path will be combined with the origin to create a new url.
+ *
  * @param path - the path to construct the url for.
  * @param base - the origin.
  * @returns the full url.
