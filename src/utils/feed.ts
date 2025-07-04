@@ -22,6 +22,8 @@ export const feedInfo = [
 ]
 
 /**
+ * @name getFeed
+ *
  * Function for constructing a feed object to then render.
  *
  * @returns the feed object

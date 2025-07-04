@@ -3,6 +3,8 @@ import { type CollectionEntry, getEntry } from 'astro:content'
 export const DEFAULT_AUTHOR_ID = 'richwklein'
 
 /**
+ * @name getDefaultAuthor
+ *
  * Get the data about the default author.
  *
  * @returns the author metadata
@@ -12,6 +14,8 @@ export const getDefaultAuthor = async (): Promise<CollectionEntry<'author'>> => 
 }
 
 /**
+ * @name getAuthor
+ *
  * Get the data about a specific author.
  *
  * @returns the author metadata

@@ -1,4 +1,6 @@
 /**
+ * @name calculateWeight
+ *
  * Calculates a font weight between 300 and 900 rounding up to the nearest 100.
  *
  * @param value - the number of a given object.
@@ -15,6 +17,8 @@ export const calculateWeight = (value: number, total: number): number => {
 }
 
 /**
+ * @name capitalize
+ *
  * Capitalize each word in a string.
  *
  * @param value - the string to capitalize.
@@ -27,6 +31,8 @@ export const capitalize = (value: string): string => {
 }
 
 /**
+ * @name intersection
+ *
  * Get the intersection of two string arrays as a set.
  *
  * @param first - the first array to compare.
@@ -37,6 +43,8 @@ export const intersection = (first: Array<string>, second: Array<string>): Set<s
 }
 
 /**
+ * @name buildUrl
+ *
  * Build an absolute url for the given path and origin.
  *
  * If the path is already an absolute url, it will be returned as is. Otherwise,
@@ -51,6 +59,8 @@ export const buildUrl = (path: string, origin: URL | string): URL => {
 }
 
 /**
+ * @name formatDate
+ *
  * Return a date in long locale date string.
  *
  * @param date - the date to convert.

@@ -3,6 +3,8 @@ import { type CollectionEntry, getEntry } from 'astro:content'
 export const DEFAULT_SITE_ID = 'agingdeveloper'
 
 /**
+ * @name getDefaultSite
+ *
  * Get the data about the default site.
  *
  * @returns the site metadata
@@ -12,6 +14,8 @@ export const getDefaultSite = async (): Promise<CollectionEntry<'site'>> => {
 }
 
 /**
+ * @name getSite
+ *
  * Get the data about a specific site.
  *
  * @param {number} id - The id of the site

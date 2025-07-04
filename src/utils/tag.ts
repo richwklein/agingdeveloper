@@ -22,6 +22,8 @@ export const getCategories = async (): TagsResponse => {
 }
 
 /**
+ * @name getCategoriesWithCount
+ *
  * Get a map of categories with the number of times they have occurred.
  * Includes the total number of categories.
  */
@@ -39,6 +41,8 @@ export const getCategoriesWithCount = async (): TagsWithCountResponse => {
 }
 
 /**
+ * @name getTags
+ *
  * Get a list of tags.
  */
 export const getTags = async (): TagsResponse => {
@@ -51,6 +55,8 @@ export const getTags = async (): TagsResponse => {
 }
 
 /**
+ * @name getTagsWithCount
+ *
  * Get a map of tags with the number of times they have occurred.
  * Includes the total number of tags.
  */

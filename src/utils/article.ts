@@ -113,6 +113,27 @@ export const getArticlesByTag = async (tag: string, limit?: number): ArticlesWit
 }
 
 /**
+ * @name getArticlesBySeries
+ *
+ * Get articles that are part of a given series
+ *
+ * @param seriesId - The id of the series to get the articles for
+ * @param limit - Optional limit to the number of articles to return
+ * @returns The list of articles along with the total number of articles
+ */
+export const getArticlesBySeries = async (
+  seriesId: string,
+  limit?: number
+): ArticlesWithCountResponse => {
+  const articles = await getArticles()
+  const filtered = articles.filter((article) => article.data.series?.id == seriesId)
+  return {
+    articles: filtered.slice(0, limit),
+    total: filtered.length,
+  }
+}
+
+/**
  * @name getRelatedArticles
  *
  * Get articles that relate to the current article. An article is considered related when
