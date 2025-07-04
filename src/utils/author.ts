@@ -8,7 +8,7 @@ export const DEFAULT_AUTHOR_ID = 'richwklein'
  * @returns the author metadata
  */
 export const getDefaultAuthor = async (): Promise<CollectionEntry<'author'>> => {
-  return getAuthor(DEFAULT_AUTHOR_ID)
+  return getAuthorById(DEFAULT_AUTHOR_ID)
 }
 
 /**
@@ -16,7 +16,7 @@ export const getDefaultAuthor = async (): Promise<CollectionEntry<'author'>> => 
  *
  * @returns the author metadata
  */
-export const getAuthor = async (id: string): Promise<CollectionEntry<'author'>> => {
+export const getAuthorById = async (id: string): Promise<CollectionEntry<'author'>> => {
   const author = await getEntry('author', id)
   if (!author) {
     throw new Error(`Author ${id} is required`)
