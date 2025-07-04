@@ -4,7 +4,7 @@ import { type CollectionEntry, getCollection } from 'astro:content'
  * @type QuoteResponse
  * The response from a request for a list of quotes.
  */
-export type QuotesResponse = Promise<Array<CollectionEntry<'quote'>>>
+export type QuotesResponse = Promise<CollectionEntry<'quote'>[]>
 
 /**
  * @name getQuotes

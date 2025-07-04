@@ -4,7 +4,7 @@ import { DEFAULT_SITE_ID } from '@utils/site'
 import { vi } from 'vitest'
 
 const cleanEntry = (entry: Record<string, any>): Record<string, any> => {
-  const dateKeys = ['published', 'modified', 'created']
+  const dateKeys = ['published', 'modified', 'created', 'chalked']
   dateKeys.forEach((key) => {
     if (key in entry) {
       entry[key] = new Date(entry[key])
@@ -205,6 +205,33 @@ const MockArticles: Record<string, any>[] = [
   },
 ]
 
+const MockQuotes: Record<string, any>[] = [
+  {
+    id: 'mock-quote-1',
+    text: 'The only way to do great work is to love what you do.',
+    author: 'Steve Jobs',
+    chalked: '2024-07-02',
+  },
+  {
+    id: 'mock-quote-2',
+    text: 'Success is not final, failure is not fatal: It is the courage to continue that counts.',
+    author: 'Winston Churchill',
+    chalked: '2024-07-01',
+  },
+  {
+    id: 'mock-quote-3',
+    text: 'Do not wait to strike till the iron is hot; but make it hot by striking.',
+    author: 'William Butler Yeats',
+    chalked: '2024-07-04',
+  },
+  {
+    id: 'mock-quote-4',
+    text: 'What you do today can improve all your tomorrows.',
+    author: 'Ralph Marston',
+    chalked: '2024-07-03',
+  },
+]
+
 // Mock astro:content module
 vi.mock('astro:content', () => {
   return {
@@ -222,6 +249,10 @@ vi.mock('astro:content', () => {
 
         case 'article':
           source = MockArticles
+          break
+
+        case 'quote':
+          source = MockQuotes
           break
 
         default:
@@ -257,6 +288,10 @@ vi.mock('astro:content', () => {
 
         case 'article':
           source = MockArticles
+          break
+
+        case 'quote':
+          source = MockQuotes
           break
 
         default:
