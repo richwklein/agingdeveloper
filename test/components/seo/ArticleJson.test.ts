@@ -64,7 +64,7 @@ describe('articleJson', () => {
     }
 
     const imageUrl = buildUrl(article?.data.featured.image.src, site.data.origin)
-    expect(linkedData).toContain(`"image":["${imageUrl.toString()}"]`)
+    expect(linkedData).toContain(`"image":["${imageUrl.href}"]`)
   })
 
   test('that it contains the date published', async () => {

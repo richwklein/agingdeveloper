@@ -7,7 +7,7 @@ import fuse from 'astro-fuse'
 import icon from 'astro-icon'
 
 import { remarkExcerpt } from './src/utils/excerpt.ts'
-import { remarkReadingTime } from './src/utils/readTime.ts'
+import { remarkReadTime } from './src/utils/readTime.ts'
 
 const { URL: SITE_URL, DEPLOY_PRIME_URL: DEPLOY_URL, CONTEXT: DEPLOY_CONTEXT = 'dev' } = process.env
 const siteUrl =
@@ -22,7 +22,7 @@ export default defineConfig({
   adapter: netlify(),
   build: { format: 'file' },
   experimental: { contentIntellisense: true },
-  markdown: { remarkPlugins: [remarkReadingTime, remarkExcerpt] },
+  markdown: { remarkPlugins: [remarkReadTime, remarkExcerpt] },
   output: 'static',
   prefetch: true,
   image: {},

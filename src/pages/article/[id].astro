@@ -70,7 +70,7 @@ const { Content, remarkPluginFrontmatter: frontmatter } = await render(article)
     <ArticleJson
       article={article}
       author={author}
-      wordCount={frontmatter.readingTime.words}
+      wordCount={frontmatter.readTime.words}
       site={site}
     />
     <BreadcrumbJson
@@ -100,8 +100,8 @@ const { Content, remarkPluginFrontmatter: frontmatter } = await render(article)
       </div>
       <div class:list={['hidden lg:col-span-2 lg:block']}>
         <ArticleTimeToRead
-          minutes={frontmatter.readingTime.minutes}
-          words={frontmatter.readingTime.words}
+          minutes={frontmatter.readTime.minutes}
+          words={frontmatter.readTime.words}
         />
         <ArticleRelated article={article} class:list={['mt-10']} />
         <ArticlePopular class:list={['mt-8']} />
