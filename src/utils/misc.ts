@@ -32,7 +32,7 @@ export const capitalize = (value: string): string => {
  * @param first - the first array to compare.
  * @param second - the second array to compare.
  */
-export const intersection = (first: Array<string>, second: Array<string>): Set<string> => {
+export const intersection = (first: string[], second: string[]): Set<string> => {
   return new Set<string>(second.filter((val) => first.includes(val)))
 }
 
