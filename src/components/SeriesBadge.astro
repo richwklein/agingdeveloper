@@ -1,0 +1,26 @@
+---
+interface Props {
+  title?: string
+  current: number
+  total: number
+  class?: string
+}
+
+const { title, current, total, class: className } = Astro.props
+
+// calculate percentage of completion
+//const percentage = ((current - 1) / total) * 100
+---
+
+<aside class:list={['series-badge', className]}>
+  <div class:list={['border-gray-300 bg-slate-100 p-2']}>
+    <div class="mb-1 flex justify-between">
+      <h4 class="font-semibold text-gray-700">
+        {`${title}: ${current} of ${total}`}
+      </h4>
+    </div>
+    <div class:list={['h-2 overflow-hidden rounded-full bg-gray-300']}>
+      <div class:list={['h-full rounded-full bg-orange-600', 'w-[75%]']}></div>
+    </div>
+  </div>
+</aside>
