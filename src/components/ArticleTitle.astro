@@ -1,4 +1,6 @@
 ---
+import { getSeriesPage } from '@utils/series'
+
 /**
  * @name ArticleTitle
  * Component used for rendering the title and description for an article.
@@ -10,15 +12,27 @@
  * <ArticleTitle title={title} description={description} />
  */
 interface Props {
+  id: string
   title: string
   description: string
+  seriesId?: string
   class?: string
 }
 
-const { title, description, class: className } = Astro.props
+const { id, title, description, seriesId, class: className } = Astro.props
+
+const hasSeries = seriesId !== undefined && seriesId !== ''
+const page = hasSeries ? await getSeriesPage(seriesId, id) : undefined
 ---
 
 <hgroup id="article-title" class:list={[className]}>
   <h2 class:list={['text-5xl leading-snug']}>{title}</h2>
   <h3 class:list={['text-lg leading-tight']}>{description}</h3>
+  {
+    page === undefined ? null : (
+      <h3 class:list={['font-semibold text-gray-700']}>
+        {`${page.series.data.title}: ${page?.current} of ${page?.total}`}
+      </h3>
+    )
+  }
 </hgroup>

@@ -18,9 +18,10 @@ import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 import OpenGraphArticle from '@components/seo/OpenGraphArticle.astro'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import TwitterCard from '@components/seo/TwitterCard.astro'
-import SeriesBanner from '@components/SeriesBanner.astro'
+import SeriesBadge from '@components/SeriesBadge.astro'
 import Layout from '@layouts/Layout.astro'
 import { getArticles } from '@utils/article'
+import { getAuthorById } from '@utils/author'
 import { getDefaultSite } from '@utils/site'
 import type { CollectionEntry } from 'astro:content'
 import { getEntry } from 'astro:content'
@@ -49,8 +50,7 @@ const { site, article } = Astro.props
 const path = `/article/${article.id}`
 
 const data = article.data
-const author = await getEntry(data.author)
-
+const author = await getAuthorById(data.author.id)
 const series = data.series ? await getEntry(data.series) : null
 const { Content, remarkPluginFrontmatter: frontmatter } = await render(article)
 ---
@@ -82,16 +82,15 @@ const { Content, remarkPluginFrontmatter: frontmatter } = await render(article)
     />
   </Fragment>
   <article>
-    <SeriesBanner
-      seriesTitle={series?.data.title || ''}
-      seriesDescription={series?.data.description || ''}
-      current={0}
-      total={1}
-      prevUrl={''}
-      nextUrl={''}
-    />
+    <SeriesBadge title={series?.data.title || ''} current={1} total={1} />
     <ArticleByLine author={author} published={data.published} />
-    <ArticleTitle title={data.title} description={data.description} class:list={['mt-4']} />
+    <ArticleTitle
+      id={article.id}
+      title={data.title}
+      description={data.description}
+      seriesId={data.series?.id}
+      class:list={['mt-4']}
+    />
     <ArticleImage featured={data.featured} class:list={['mt-4']} />
     {data.enhanced && <LLMDisclaimer class:list={['mt-4']} />}
     <div class:list={['mt-4 grid grid-cols-6 gap-x-4']}>

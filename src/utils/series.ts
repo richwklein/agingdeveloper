@@ -24,6 +24,7 @@ export const getSeries = async (id: string): Promise<CollectionEntry<'series'>> 
  * Represents the series paging information for an article.
  *
  * @property {CollectionEntry<'series'>} series - The series metadata
+ * @property {CollectionEntry<'article'>[]} articles - The list of articles in the series
  * @property {number} current - The current article number in the series
  * @property {number} total - The total number of articles in the series
  * @property {string} [previous] - The id of the previous article in the series, if any
@@ -31,6 +32,7 @@ export const getSeries = async (id: string): Promise<CollectionEntry<'series'>> 
  */
 export type SeriesPage = {
   series: CollectionEntry<'series'>
+  articles: CollectionEntry<'article'>[]
   current: number
   total: number
   previous?: string
@@ -57,6 +59,7 @@ export const getSeriesPage = async (seriesId: string, articleId: string): Promis
 
   return {
     series,
+    articles,
     current: current + 1, // +1 to make it 1-indexed
     total,
     previous: current > 0 ? articles[current - 1].id : undefined,
