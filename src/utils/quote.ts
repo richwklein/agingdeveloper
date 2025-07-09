@@ -34,5 +34,6 @@ export const getQuotes = async (limit?: number, exclude?: string): QuotesRespons
  */
 export const getLatestQuote = async (): Promise<CollectionEntry<'quote'>> => {
   const [latest] = await getQuotes(1)
+
   return latest
 }

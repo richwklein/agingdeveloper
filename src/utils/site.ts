@@ -27,5 +27,6 @@ export const getSiteById = async (id: string): Promise<CollectionEntry<'site'>> 
   if (!import.meta.env.PROD) {
     site.data.origin = import.meta.env.SITE
   }
+
   return site
 }
