@@ -64,8 +64,9 @@ main {
   flex-grow: 1;
 }
 
-pre {
-  white-space: pre-wrap; /* Wrap long lines */
+/* Wrap long lines in code blocks */
+.astro-code {
+  white-space: pre-wrap;
   word-break: break-word;
 }
 
