@@ -13,13 +13,16 @@
   --color-secondary-dark: rgb(90, 146, 22);
   --color-secondary-contrast: rgb(46, 46, 46);
 
-  --font-mono: Fira Code, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+  --font-mono:
+    Fira Code, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
     'Courier New', monospace;
   --font-serif: Noto Serif Georgian, ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-sans: Noto Sans Georgian, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-chalk: Walter Turncoat, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-sans:
+    Noto Sans Georgian, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-chalk:
+    Walter Turncoat, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
 
   --breakpoint-xs: 420px;
 
@@ -59,6 +62,12 @@ body {
 
 main {
   flex-grow: 1;
+}
+
+/* Wrap long lines in code blocks */
+.astro-code {
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 /* fade animations */
