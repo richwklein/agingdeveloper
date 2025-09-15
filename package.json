@@ -32,7 +32,7 @@
     "@fontsource/noto-serif-georgian": "^5.0.20",
     "@fontsource/walter-turncoat": "^5.1.0",
     "@iconify-json/mdi": "^1.1.66",
-    "@sindresorhus/slugify": "^2.2.1",
+    "@sindresorhus/slugify": "^3.0.0",
     "@tailwindcss/typography": "^0.5.13",
     "@tailwindcss/vite": "^4.1.12",
     "astro": "^5.13.2",
