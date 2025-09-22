@@ -23,5 +23,10 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
 
+      - name: List downloaded files
+        run: |
+          ls -R coverage
+          cat coverage/coverage-summary.json || echo "No summary file"
+
       - name: 'Report test coverage on pull request'
         uses: davelosert/vitest-coverage-report-action@v2
