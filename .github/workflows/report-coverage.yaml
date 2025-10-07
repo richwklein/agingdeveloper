@@ -1,8 +1,8 @@
-name: 'Report Test Coverage'
+name: "Report Test Coverage"
 
 on:
   workflow_run:
-    workflows: ['Test']
+    workflows: ["Test"]
     types:
       - completed
 
@@ -14,14 +14,14 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: 'Checkout source code'
+      - name: "Checkout source code"
         uses: actions/checkout@v5
 
-      - name: 'Download test coverage'
+      - name: "Download test coverage"
         uses: actions/download-artifact@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
 
-      - name: 'Report test coverage on pull request'
+      - name: "Report test coverage on pull request"
         uses: davelosert/vitest-coverage-report-action@v2

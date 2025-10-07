@@ -2,15 +2,21 @@ version: 2
 updates:
   - package-ecosystem: github-actions
     directory: '/'
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 20
     groups:
       github-actions:
         patterns:
           - '*'
-    schedule:
-      interval: daily
-    open-pull-requests-limit: 20
   - package-ecosystem: npm
     directory: '/'
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 20
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-patch']
     groups:
       astro:
         patterns:
@@ -47,6 +53,3 @@ updates:
           - 'vitest'
           - 'vitest-*'
           - '@vitest/*'
-    schedule:
-      interval: daily
-    open-pull-requests-limit: 20
