@@ -38,11 +38,36 @@ describe('quoteCard', () => {
   })
 
   test('that the card contains the author', async () => {
-    expect(card).toContain(`&mdash;&nbsp;${quote.data.author}</figcaption>`)
+    expect(card).toContain(`&mdash;&nbsp;${quote.data.author}`)
   })
 
   test('that the card contains the chalked date', async () => {
     expect(card).toContain(`<time datetime="${quote.data.chalked.toISOString()}"`)
+  })
+
+  test('that the card does not include source when absent', async () => {
+    expect(card).not.toContain('from')
+  })
+
+  test('that the card contains source title and type when provided', async () => {
+    const sourceQuote: CollectionEntry<'quote'> = {
+      ...quote,
+      data: {
+        ...quote.data,
+        source: {
+          title: 'Garden Spells',
+          type: 'book',
+        },
+      },
+    }
+
+    const container = await AstroContainer.create()
+    const html = await container.renderToString(QuoteCard, {
+      props: { quote: sourceQuote },
+    })
+
+    expect(html).toContain('from')
+    expect(html).toContain('Garden Spells')
   })
 
   test('that class is set', async () => {

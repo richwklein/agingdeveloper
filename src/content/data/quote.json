@@ -1,5 +1,16 @@
 [
   {
+    "id": "8ec0a042-9d3b-4ef1-b0f4-77115b614b7f",
+    "text": "I'm so glad I live in a world where there are Octobers.",
+    "author": "L.M. Montgomery",
+    "chalked": "2025-10-13",
+    "source": {
+      "title": "Anne of Green Gables",
+      "type": "book",
+      "year": 1908
+    }
+  },
+  {
     "id": "94c05919-32ad-44b2-b08c-a28c126701e0",
     "text": "It looked like the world was covered in a cobbler crust of brown sugar and cinnamon.",
     "author": "Sarah Addison Allen",
