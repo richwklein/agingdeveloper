@@ -3,9 +3,9 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import { describe, expect, test } from 'vitest'
 
 describe('quoteSourceIcon', () => {
-  const render = async (type: string) => {
+  const render = async (type: string, className?: string) => {
     const container = await AstroContainer.create()
-    return await container.renderToString(QuoteSourceIcon, { props: { type } })
+    return await container.renderToString(QuoteSourceIcon, { props: { type, class: className } })
   }
 
   test('renders the correct icon for book', async () => {
@@ -37,5 +37,10 @@ describe('quoteSourceIcon', () => {
   test('falls back to the "other" icon for unknown types', async () => {
     const html = await render('unknown-type')
     expect(html).toContain('mdi:star-four-points-outline')
+  })
+
+  test('that class is set', async () => {
+    const result = await render('book', 'test-class')
+    expect(result).toContain('test-class')
   })
 })

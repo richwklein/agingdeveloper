@@ -13,9 +13,10 @@ import { Icon } from 'astro-icon/components'
 
 interface Props {
   type: string
+  class?: string
 }
 
-const { type } = Astro.props
+const { type, class: className } = Astro.props
 
 // Map your known source types to MDI icon names
 const iconMap: Record<string, string> = {
@@ -28,4 +29,4 @@ const iconMap: Record<string, string> = {
 }
 ---
 
-<Icon name={iconMap[type] ?? iconMap.other} class="inline-block h-4 w-4" />
+<Icon name={iconMap[type] ?? iconMap.other} class:list={['inline-block h-4 w-4', className]} />
