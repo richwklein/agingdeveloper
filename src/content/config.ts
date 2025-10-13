@@ -109,6 +109,13 @@ const quote = defineCollection({
         .string()
         .date()
         .transform((val) => new Date(val)),
+      source: z
+        .object({
+          title: z.string(),
+          type: z.enum(['book', 'movie', 'song', 'speech', 'show', 'other']),
+          year: z.number().optional(),
+        })
+        .optional(),
     }),
 })
 

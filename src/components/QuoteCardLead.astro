@@ -13,6 +13,7 @@ import { formatDate } from '@utils/misc'
 import type { CollectionEntry } from 'astro:content'
 
 import LinkInternal from './LinkInternal.astro'
+import QuoteSourceIcon from './QuoteSourceIcon.astro'
 
 interface Props {
   quote: CollectionEntry<'quote'>
@@ -20,6 +21,7 @@ interface Props {
 }
 
 const { quote, class: className } = Astro.props
+const source = quote.data.source
 ---
 
 <LinkInternal to={'/quote'}>
@@ -35,7 +37,17 @@ const { quote, class: className } = Astro.props
   >
     <figure>
       <blockquote class:list={['text-3xl tracking-wide']}>{quote.data.text}</blockquote>
-      <figcaption>&mdash;&nbsp;{quote.data.author}</figcaption>
+      <figcaption>
+        &mdash;&nbsp;{quote.data.author}{
+          source && (
+            <span>
+              &nbsp;from&nbsp;
+              <em>{source.title}</em>
+              <QuoteSourceIcon type={source.type} />
+            </span>
+          )
+        }
+      </figcaption>
     </figure>
 
     <time datetime={quote.data.chalked.toISOString()} class:list={['mt-4 block']}>
