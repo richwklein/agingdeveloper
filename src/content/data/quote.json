@@ -1,5 +1,16 @@
 [
   {
+    "id": "c23715a7-6e6d-4e97-adbb-972d80ef14e7",
+    "text": "What's your favorite scary movie?",
+    "author": "Ghostface",
+    "chalked": "2025-10-27",
+    "source": {
+      "title": "Scream",
+      "type": "movie",
+      "year": 1996
+    }
+  },
+  {
     "id": "8ec0a042-9d3b-4ef1-b0f4-77115b614b7f",
     "text": "I'm so glad I live in a world where there are Octobers.",
     "author": "L.M. Montgomery",
