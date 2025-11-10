@@ -1,5 +1,16 @@
 [
   {
+    "id": "62ada5b8-f8dd-4f18-a0dc-6424d2dfea36",
+    "text": "Every mile is two in the winter.",
+    "author": "George Herbert",
+    "chalked": "2025-11-10",
+    "source": {
+      "title": "Outlandish Proverbs",
+      "type": "book",
+      "year": 1640
+    }
+  },
+  {
     "id": "6cbd5f8a-da91-4c1a-bcc6-ee830e06040b",
     "text": "We cannot always build the future for our youth, but we can build our youth for the future.",
     "author": "Franklin D. Roosevelt",
