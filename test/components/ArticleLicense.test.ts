@@ -35,6 +35,19 @@ describe('articleLicense', () => {
     expect(html).toContain('title="MIT"')
   })
 
+  test('hides icon and divider when custom license has no icon', async () => {
+    const html = await render({
+      license: {
+        name: 'BSD License',
+        short: 'BSD',
+        url: 'https://opensource.org/license/bsd-3-clause/',
+      },
+    })
+
+    expect(html).not.toContain('mdi:')
+    expect(html).not.toContain('w-px')
+  })
+
   test('applies custom class names', async () => {
     const html = await render({ class: 'my-class' })
     expect(html).toContain('my-class')
