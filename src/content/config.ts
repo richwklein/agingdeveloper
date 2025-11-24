@@ -47,6 +47,14 @@ const article = defineCollection({
         .date()
         .transform((val) => new Date(val))
         .optional(),
+      license: z
+        .object({
+          name: z.string(),
+          url: z.string().url(),
+          short: z.string().optional(),
+          icon: z.string().optional(),
+        })
+        .optional(),
     }),
 })
 

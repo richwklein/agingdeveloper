@@ -5,6 +5,7 @@
 import Alert from '@components/Alert.astro'
 import ArticleByLine from '@components/ArticleByLine.astro'
 import ArticleImage from '@components/ArticleImage.astro'
+import ArticleLicense from '@components/ArticleLicense.astro'
 import ArticlePopular from '@components/ArticlePopular.astro'
 import ArticleRecent from '@components/ArticleRecent.astro'
 import ArticleRelated from '@components/ArticleRelated.astro'
@@ -99,5 +100,6 @@ const { Content, remarkPluginFrontmatter: frontmatter } = await render(article)
       </div>
     </div>
     <ArticleTagGrid category={data.category} tags={data.tags} class:list={['mt-4']} />
+    <ArticleLicense license={data.license} class:list={['mt-4']} />
   </article>
 </Layout>

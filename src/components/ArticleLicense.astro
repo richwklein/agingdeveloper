@@ -1,0 +1,51 @@
+---
+import { Icon } from 'astro-icon/components'
+
+import LinkExternal from './LinkExternal.astro'
+
+interface License {
+  name: string
+  url: string
+  short?: string
+  icon?: string
+}
+
+interface Props {
+  license?: License
+  class?: string
+}
+
+const { license: providedLicense, class: className } = Astro.props
+
+const defaultLicense: License = {
+  name: 'Creative Commons Attribution-ShareAlike 4.0 International',
+  short: 'CC BY-SA 4.0',
+  url: 'https://creativecommons.org/licenses/by-sa/4.0/',
+  icon: 'mdi:creative-commons',
+}
+
+const license = providedLicense ?? defaultLicense
+const licenseLabel = license.short ?? license.name
+const iconName = license.icon ?? defaultLicense.icon
+---
+
+<div
+  class:list={[
+    'rounded-md border border-stone-500',
+    'px-3 py-2',
+    'flex items-center gap-3',
+    className,
+  ]}
+>
+  <div class="flex h-10 w-8 items-center justify-center">
+    <Icon name={iconName} class="h-5 w-5" title={licenseLabel} aria-label={licenseLabel} />
+  </div>
+  <div class="h-10 w-px bg-stone-200" aria-hidden="true"></div>
+  <div class="text-sm">
+    {'This article is licensed under'}&nbsp;
+    <LinkExternal to={license.url} title={licenseLabel} class:list={['text-stone-700 underline']}
+      >{license.name}</LinkExternal
+    >
+    {'.'}
+  </div>
+</div>
