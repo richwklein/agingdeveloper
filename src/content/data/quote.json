@@ -1,5 +1,94 @@
 [
   {
+    "id": "37018c6f-44e7-4082-a711-a069d7f57b58",
+    "text": "Thanksgiving is a time of togetherness and gratitude.",
+    "author": "Nigel Hamilton",
+    "chalked": "2025-11-24"
+  },
+  {
+    "id": "c6953873-f8a5-4ef9-bfc1-5f256038d1ca",
+    "text": "When life gets you down, you know what you gotta do? Just keep Swimming!",
+    "author": "Dory",
+    "chalked": "2025-11-17",
+    "source": {
+      "title": "Finding Nemo",
+      "type": "movie",
+      "year": 2003
+    }
+  },
+  {
+    "id": "62ada5b8-f8dd-4f18-a0dc-6424d2dfea36",
+    "text": "Every mile is two in the winter.",
+    "author": "George Herbert",
+    "chalked": "2025-11-10",
+    "source": {
+      "title": "Outlandish Proverbs",
+      "type": "book",
+      "year": 1640
+    }
+  },
+  {
+    "id": "6cbd5f8a-da91-4c1a-bcc6-ee830e06040b",
+    "text": "We cannot always build the future for our youth, but we can build our youth for the future.",
+    "author": "Franklin D. Roosevelt",
+    "chalked": "2025-11-04",
+    "source": {
+      "title": "Address at the University of Pennsylvania",
+      "type": "speech",
+      "year": 1940
+    }
+  },
+  {
+    "id": "c23715a7-6e6d-4e97-adbb-972d80ef14e7",
+    "text": "What's your favorite scary movie?",
+    "author": "Ghostface",
+    "chalked": "2025-10-27",
+    "source": {
+      "title": "Scream",
+      "type": "movie",
+      "year": 1996
+    }
+  },
+  {
+    "id": "8ec0a042-9d3b-4ef1-b0f4-77115b614b7f",
+    "text": "I'm so glad I live in a world where there are Octobers.",
+    "author": "L.M. Montgomery",
+    "chalked": "2025-10-13",
+    "source": {
+      "title": "Anne of Green Gables",
+      "type": "book",
+      "year": 1908
+    }
+  },
+  {
+    "id": "94c05919-32ad-44b2-b08c-a28c126701e0",
+    "text": "It looked like the world was covered in a cobbler crust of brown sugar and cinnamon.",
+    "author": "Sarah Addison Allen",
+    "chalked": "2025-10-06",
+    "source": {
+      "title": "First Frost",
+      "type": "book",
+      "year": 2015
+    }
+  },
+  {
+    "id": "ac14add2-4dc7-4130-9702-17b9cd05516e",
+    "text": "Out, damned spot! Out, I say!",
+    "author": "William Shakespeare",
+    "chalked": "2025-09-29",
+    "source": {
+      "title": "Macbeth",
+      "type": "play",
+      "year": 1623
+    }
+  },
+  {
+    "id": "1cc6cad8-3ecf-490e-86d2-a54b670994d7",
+    "text": "My household is, in a nice way, very busy.",
+    "author": "Ann Brashares",
+    "chalked": "2025-09-22"
+  },
+  {
     "id": "d17c7357-d816-4e8a-a8ce-7d0aa63f178b",
     "text": "When I asked God for strength, He gave me difficult situations to face.",
     "author": "Swami Vivekananda",
@@ -27,7 +116,12 @@
     "id": "ad06fd19-f36d-4d03-9009-9fe4594c111f",
     "text": "Transitions are almost always signs of growth, but they can bring feelings of loss. To get somewhere new, we may have to leave somewhere else behind.",
     "author": "Fred Rogers",
-    "chalked": "2025-08-18"
+    "chalked": "2025-08-18",
+    "source": {
+      "title": "You Are Special",
+      "type": "book",
+      "year": 1995
+    }
   },
   {
     "id": "38d06b17-1b6c-4a25-abb0-c49ca9344eec",
@@ -38,13 +132,23 @@
     "id": "9c329e87-5dcc-4648-850d-fddbe1926582",
     "text": "I was rich, if not in money, in sunny hours and summer days.",
     "author": "Henry David Thoreau",
-    "chalked": "2025-07-28"
+    "chalked": "2025-07-28",
+    "source": {
+      "title": "Walden",
+      "type": "book",
+      "year": 1854
+    }
   },
   {
     "id": "ac5325c1-6dcf-46c5-b843-be2af1e24214",
     "text": "I'm a greater believer in luck, and I find the harder I work the more I have of it.",
-    "author": "Thomas Jefferson",
-    "chalked": "2025-07-21"
+    "author": "Coleman Cox",
+    "chalked": "2025-07-21",
+    "source": {
+      "title": "Listen to This",
+      "type": "book",
+      "year": 1922
+    }
   },
   {
     "id": "297def9a-f07d-4841-9281-355bf3cdff95",
@@ -62,7 +166,12 @@
     "id": "a47d8774-e43c-4e4c-82a5-7a3cebc2c381",
     "text": "Those who deny freedom to others, deserve it not for themselves.",
     "author": "Abraham Lincoln",
-    "chalked": "2025-06-30"
+    "chalked": "2025-06-30",
+    "source": {
+      "title": "Letter to Henry L. Pierce and Others",
+      "type": "letter",
+      "year": 1859
+    }
   },
   {
     "id": "8b2c6ea5-fc80-46c3-9516-4d2ee10089c8",
@@ -74,25 +183,45 @@
     "id": "200acf39-2814-439f-878b-4bab762c1174",
     "text": "Good news is rare these days, and every glittering ounce of it should be cherished and hoarded and worshipped and fondled like a priceless diamond.",
     "author": "Hunter S. Thompson",
-    "chalked": "2025-06-09"
+    "chalked": "2025-06-09",
+    "source": {
+      "title": "Hey Rube: 'Back in the day …'",
+      "type": "other",
+      "year": 2003
+    }
   },
   {
     "id": "afba4b8e-d440-4040-a3ad-d277d2116c92",
     "text": "I wonder what it would be like to live in a world where it was always June.",
     "author": "L.M. Montgomery",
-    "chalked": "2025-06-02"
+    "chalked": "2025-06-02",
+    "source": {
+      "title": "Anne of the Island",
+      "type": "book",
+      "year": 1915
+    }
   },
   {
     "id": "322823ae-2efd-47a2-9281-ea4d81f3afe9",
     "text": "Freedom makes a huge requirement of every human being. With freedom comes responsibility.",
     "author": "Eleanor Roosevelt",
-    "chalked": "2025-05-26"
+    "chalked": "2025-05-26",
+    "source": {
+      "title": "You Learn by Living",
+      "type": "book",
+      "year": 1961
+    }
   },
   {
     "id": "ccf0810c-e090-44c9-a2cb-9d18d4e5283c",
     "text": "You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose.",
     "author": "Dr. Seuss",
-    "chalked": "2025-05-20"
+    "chalked": "2025-05-20",
+    "source": {
+      "title": "Oh, the Places You’ll Go!",
+      "type": "book",
+      "year": 1990
+    }
   },
   {
     "id": "c3c0f414-75ba-44c2-b07a-30166b009f5b",
@@ -121,13 +250,23 @@
     "id": "61872fb7-44ba-4169-939e-8270032e982e",
     "text": "Spring is the time of plans and projects.",
     "author": "Leo Tolstoy",
-    "chalked": "2025-03-26"
+    "chalked": "2025-03-26",
+    "source": {
+      "title": "Anna Karenina",
+      "type": "book",
+      "year": 1878
+    }
   },
   {
     "id": "29e7613c-ada7-4102-a084-b7e29f5743ae",
     "text": "Fight for the things that you care about, but do it in a way that will lead others to join you.",
     "author": "Ruth Bader Ginsburg",
-    "chalked": "2025-03-17"
+    "chalked": "2025-03-17",
+    "source": {
+      "title": "Radcliffe Medal acceptance speech",
+      "type": "speech",
+      "year": 2015
+    }
   },
   {
     "id": "b9090884-b94b-4523-80ef-c0c0276e0a13",
@@ -139,13 +278,23 @@
     "id": "deb9d7ab-2205-4b6c-866e-29c1e0ab22c3",
     "text": "It is in your moments of decision that your destiny is shaped.",
     "author": "Tony Robbins",
-    "chalked": "2025-02-24"
+    "chalked": "2025-02-24",
+    "source": {
+      "title": "Awaken the Giant Within",
+      "type": "book",
+      "year": 1991
+    }
   },
   {
     "id": "8c93e2e6-ed96-46c4-8ad0-1ec2f9cd43d1",
     "text": "Change will not come if we wait for some other person or some other time. We are the ones we've been waiting for. We are the change that we seek.",
     "author": "Barack Obama",
-    "chalked": "2025-02-17"
+    "chalked": "2025-02-17",
+    "source": {
+      "title": "Super Tuesday victory speech, Chicago",
+      "type": "speech",
+      "year": 2008
+    }
   },
   {
     "id": "0d17d50e-d09d-4792-a2f6-57e8369b6ac7",
@@ -157,13 +306,23 @@
     "id": "8af4a52c-84a9-4265-8e71-4645ba57ff64",
     "text": "I can be changed by what happens to me. But I refuse to be reduced by it.",
     "author": "Maya Angelou",
-    "chalked": "2025-01-29"
+    "chalked": "2025-01-29",
+    "source": {
+      "title": "Letter to My Daughter",
+      "type": "book",
+      "year": 2008
+    }
   },
   {
     "id": "3c6cf5bd-ad2e-45a7-9496-f2a25e29eea2",
     "text": "It is always the right time to do the right thing.",
     "author": "Martin Luther King Jr.",
-    "chalked": "2025-01-19"
+    "chalked": "2025-01-19",
+    "source": {
+      "title": "Remaining Awake Through a Great Revolution (Oberlin College commencement address)",
+      "type": "speech",
+      "year": 1965
+    }
   },
   {
     "id": "2ba179bc-35cf-4216-8e58-ea73bd4b888b",
@@ -181,13 +340,23 @@
     "id": "6a5f91be-f1a5-4b9a-87dd-360b4d083ab5",
     "text": "Don't watch the clock; do what it does. Keep going.",
     "author": "Sam Levenson",
-    "chalked": "2024-12-30"
+    "chalked": "2024-12-30",
+    "source": {
+      "title": "In One Era and Out the Other",
+      "type": "book",
+      "year": 1973
+    }
   },
   {
     "id": "7bf902cc-daaf-42b4-837f-54c55fb84847",
     "text": "Chill December brings the sleet, Blazing fire and Christmas Treat.",
     "author": "Sara Coleridge",
-    "chalked": "2024-12-23"
+    "chalked": "2024-12-23",
+    "source": {
+      "title": "Pretty Lessons in Verse for Good Children (\"The Months\")",
+      "type": "book",
+      "year": 1834
+    }
   },
   {
     "id": "e62f21b8-d9cf-4666-9d04-97d1e9734d1f",
@@ -199,7 +368,12 @@
     "id": "bc98a363-7f45-4018-a3a1-570400493f2d",
     "text": "Health is not valued till sickness comes.",
     "author": "Thomas Fuller",
-    "chalked": "2024-12-09"
+    "chalked": "2024-12-09",
+    "source": {
+      "title": "Gnomologia: Adagies and Proverbs; Wise Sentences and Witty Sayings, Ancient and Modern",
+      "type": "book",
+      "year": 1732
+    }
   },
   {
     "id": "bddc1c1d-7186-4d81-826a-334caece9c85",
@@ -223,13 +397,23 @@
     "id": "ec6bdc06-d536-4ba7-8b64-e2b6288c6bb4",
     "text": "In November you begin to know how long the winter will be.",
     "author": "Martha Gellhorn",
-    "chalked": "2024-11-11"
+    "chalked": "2024-11-11",
+    "source": {
+      "title": "The Heart of Another (\"November Afternoon\")",
+      "type": "book",
+      "year": 1941
+    }
   },
   {
     "id": "70dabc8f-387a-4a91-8e52-9a1cb82a8c50",
     "text": "What's your favorite scary movie?",
     "author": "Ghostface",
-    "chalked": "2024-10-28"
+    "chalked": "2024-10-28",
+    "source": {
+      "title": "Scream",
+      "type": "movie",
+      "year": 1996
+    }
   },
   {
     "id": "f0ddedde-1243-4886-80da-1cae8f5ca353",
@@ -241,7 +425,12 @@
     "id": "081f3fc5-e1b4-47bb-9bf5-0b488f165b89",
     "text": "How bravely Autumn paints upon the sky the gorgeous fame of summer which is fled!",
     "author": "Thomas Hood",
-    "chalked": "2024-10-16"
+    "chalked": "2024-10-16",
+    "source": {
+      "title": "The Plea of the Midsummer Fairies, Hero and Leander, Lycus the Centaur and Other Poems",
+      "type": "book",
+      "year": 1827
+    }
   },
   {
     "id": "daee9842-ee6d-4eec-aa65-c2eeb530b842",
@@ -253,7 +442,12 @@
     "id": "5ad153c1-9fe4-40c5-8fae-c617cd849081",
     "text": "Give the one you love wings to fly, roots to come back and reasons to stay.",
     "author": "The Dalai Lama",
-    "chalked": "2024-09-30"
+    "chalked": "2024-09-30",
+    "source": {
+      "title": "The Art of Happiness",
+      "type": "book",
+      "year": 1998
+    }
   },
   {
     "id": "9597d5a8-0fde-45b8-b59d-79db58885154",
@@ -265,13 +459,23 @@
     "id": "dade8a1a-dcd4-4618-aa95-8d3d3460e50b",
     "text": "Home is where one starts from.",
     "author": "T.S. Eliot",
-    "chalked": "2024-08-17"
+    "chalked": "2024-08-17",
+    "source": {
+      "title": "Four Quartets: \"East Coker\"",
+      "type": "book",
+      "year": 1940
+    }
   },
   {
     "id": "92c79f2e-a910-4cdb-a67b-0d5217059685",
     "text": "The morning had dawned clear and cold, with a crispness that hinted at the end of summer.",
     "author": "George R. R. Martin",
-    "chalked": "2024-09-09"
+    "chalked": "2024-09-09",
+    "source": {
+      "title": "A Game of Thrones",
+      "type": "book",
+      "year": 1996
+    }
   },
   {
     "id": "e75242d6-4afd-46c4-bcd3-b5a0e6ce58cc",
@@ -289,7 +493,12 @@
     "id": "fd3f11e0-6d9b-4e2e-ab4c-2eaee1cb4e08",
     "text": "Not many people have had as much bad luck as I have, but not many people have had as much good luck, either.",
     "author": "Tig Notaro",
-    "chalked": "2024-07-22"
+    "chalked": "2024-07-22",
+    "source": {
+      "title": "\"Very Funny\" (Elle magazine profile)",
+      "type": "other",
+      "year": 2013
+    }
   },
   {
     "id": "1d89d4b9-8df5-43c1-92ef-3bdf936d0235",
@@ -311,15 +520,25 @@
   },
   {
     "id": "1ca76fe2-b934-4f1e-97d2-ba78b0d01ec9",
-    "text": "The world is a bock, and those who do not travel read only one page.",
+    "text": "The world is a book, and those who do not travel read only one page.",
     "author": "Unknown",
-    "chalked": "2024-06-24"
+    "chalked": "2024-06-24",
+    "source": {
+      "title": "Select Proverbs of All Nations",
+      "type": "book",
+      "year": 1824
+    }
   },
   {
     "id": "a1039985-7758-4bf0-9667-912f03705f27",
     "text": "It's summer and time for wandering...",
     "author": "Kellie Elmore",
-    "chalked": "2024-06-17"
+    "chalked": "2024-06-17",
+    "source": {
+      "title": "Magic in the Backyard",
+      "type": "book",
+      "year": 2012
+    }
   },
   {
     "id": "79819db6-db11-4eea-9bc0-47306d33a9e0",
@@ -337,7 +556,12 @@
     "id": "e14a4273-942f-42b9-81bb-02c06333b8dd",
     "text": "Wherever you fly, you'll be the best of the best. Wherever you go, you will top all the rest.",
     "author": "Dr. Seuss",
-    "chalked": "2024-05-20"
+    "chalked": "2024-05-20",
+    "source": {
+      "title": "Oh, the Places You'll Go!",
+      "type": "book",
+      "year": 1990
+    }
   },
   {
     "id": "f52efd9a-6b4f-48ed-89df-6bbc172e8549",
@@ -385,7 +609,12 @@
     "id": "403a046f-cfab-48d1-90eb-c46a673e1458",
     "text": "For most of history, Anonymous was a woman.",
     "author": "Virginia Woolf",
-    "chalked": "2024-03-04"
+    "chalked": "2024-03-04",
+    "source": {
+      "title": "A Room of One's Own",
+      "type": "book",
+      "year": 1929
+    }
   },
   {
     "id": "ff9632b7-8d36-45ad-9be3-8418835da752",
@@ -415,19 +644,34 @@
     "id": "8e371557-ea77-4d69-a9bb-eb00e7134605",
     "text": "Some days are like that. Even in Australia.",
     "author": "Judith Viorst",
-    "chalked": "2024-01-23"
+    "chalked": "2024-01-23",
+    "source": {
+      "title": "Alexander and the Terrible, Horrible, No Good, Very Bad Day",
+      "type": "book",
+      "year": 1972
+    }
   },
   {
     "id": "efc143b5-5251-4d1f-8101-a542609ee37e",
     "text": "Darkness Cannot drive Out darkness. Only light can do that. Hate Cannot drive out hate. Only LOVE can do that.",
     "author": "Martin Luther King Jr.",
-    "chalked": "2024-01-15"
+    "chalked": "2024-01-15",
+    "source": {
+      "title": "Strength to Love",
+      "type": "book",
+      "year": 1963
+    }
   },
   {
     "id": "4236647a-4ca0-4f35-a5e1-b69c54d44d44",
     "text": "And now welcome the new year. Full of of things that have never been.",
     "author": "Rainer Marie Rilke",
-    "chalked": "2023-12-26"
+    "chalked": "2023-12-26",
+    "source": {
+      "title": "Letters to a Young Poet",
+      "type": "book",
+      "year": 1929
+    }
   },
   {
     "id": "f1f34312-bc82-4500-af91-5beb6d7176fc",
@@ -457,25 +701,45 @@
     "id": "e892701a-7b04-4777-859b-22af95d17965",
     "text": "Love the trees until their leaves fall off, then encourage them to try again next year.",
     "author": "Chad Sugg",
-    "chalked": "2023-11-13"
+    "chalked": "2023-11-13",
+    "source": {
+      "title": "Monsters Under Your Head",
+      "type": "book",
+      "year": 2010
+    }
   },
   {
     "id": "6c62cedf-58e4-45f2-9bb3-7a87bc74de8a",
     "text": "The only way to make sense out of change is to plunge into it, move with it, and join the dance.",
     "author": "Alan Watts",
-    "chalked": "2023-11-07"
+    "chalked": "2023-11-07",
+    "source": {
+      "title": "The Wisdom of Insecurity",
+      "type": "book",
+      "year": 1951
+    }
   },
   {
     "id": "3bdc0514-2a72-4d61-8db1-19f2494a6639",
     "text": "Always thrown spilled salt over your left shoulder. Keep rosemary buy your garden gate. Plant lavender for luck and fall in love whenever you can.",
     "author": "Sally Owen, Practical Magic",
-    "chalked": "2023-10-23"
+    "chalked": "2023-10-23",
+    "source": {
+      "title": "Practical Magic",
+      "type": "movie",
+      "year": 1998
+    }
   },
   {
     "id": "4b9074c0-1514-4237-8d53-ea6e97c16d90",
     "text": "Autumn is a second spring when every leaf is a flower.",
     "author": "Albert Camus",
-    "chalked": "2023-10-16"
+    "chalked": "2023-10-16",
+    "source": {
+      "title": "Return to Tipasa (in \"Summer\")",
+      "type": "book",
+      "year": 1954
+    }
   },
   {
     "id": "57bcf2e3-e8ec-4fad-aecb-fb7e76b173ec",

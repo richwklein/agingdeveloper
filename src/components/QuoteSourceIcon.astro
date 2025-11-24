@@ -1,0 +1,41 @@
+---
+/**
+ * @name QuoteSourceIcon
+ * Component used for rendering an icon for the source of a quote.
+ *
+ * @param {Props} props - The properties of the source.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <QuoteSourceIcon type={book} />
+ */
+import { capitalize } from '@utils/misc'
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  type: string
+  class?: string
+}
+
+const { type, class: className } = Astro.props
+const label = capitalize(type)
+
+// Map your known source types to MDI icon names
+const iconMap: Record<string, string> = {
+  book: 'mdi:book-open-variant-outline',
+  movie: 'mdi:movie-open-outline',
+  song: 'mdi:music-note-outline',
+  speech: 'mdi:microphone-outline',
+  letter: 'mdi:email-open-outline',
+  show: 'mdi:television-classic',
+  play: 'mdi:comedy',
+  other: 'mdi:star-four-points-outline',
+}
+---
+
+<Icon
+  name={iconMap[type] ?? iconMap.other}
+  aria-label={label}
+  title={label}
+  class:list={['inline-block h-4 w-4', className]}
+/>

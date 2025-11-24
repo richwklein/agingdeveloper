@@ -47,6 +47,14 @@ const article = defineCollection({
         .date()
         .transform((val) => new Date(val))
         .optional(),
+      license: z
+        .object({
+          name: z.string(),
+          url: z.string().url(),
+          short: z.string().optional(),
+          icon: z.string().optional(),
+        })
+        .optional(),
     }),
 })
 
@@ -109,6 +117,13 @@ const quote = defineCollection({
         .string()
         .date()
         .transform((val) => new Date(val)),
+      source: z
+        .object({
+          title: z.string(),
+          type: z.enum(['book', 'movie', 'song', 'speech', 'letter', 'show', 'play', 'other']),
+          year: z.number().optional(),
+        })
+        .optional(),
     }),
 })
 

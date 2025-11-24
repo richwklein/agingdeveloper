@@ -12,12 +12,15 @@
 import { formatDate } from '@utils/misc'
 import type { CollectionEntry } from 'astro:content'
 
+import QuoteSourceIcon from './QuoteSourceIcon.astro'
+
 interface Props {
   quote: CollectionEntry<'quote'>
   class?: string
 }
 
 const { quote, class: className } = Astro.props
+const source = quote.data.source
 ---
 
 <div
@@ -29,7 +32,29 @@ const { quote, class: className } = Astro.props
 >
   <figure>
     <blockquote class:list={['text-2xl leading-tight']}>{quote.data.text}</blockquote>
-    <figcaption>&mdash;&nbsp;{quote.data.author}</figcaption>
+    <figcaption class="mt-3 text-sm text-stone-700">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-base text-stone-800">
+          &mdash;&nbsp;{quote.data.author}
+          {
+            source && (
+              <span>
+                {' from '}
+                <em>{source.title}</em>
+              </span>
+            )
+          }
+        </span>
+        {
+          source && (
+            <span class="inline-flex items-center gap-1 rounded-full bg-stone-200 px-3 py-1 text-[11px] font-semibold tracking-wide text-stone-700 uppercase">
+              <QuoteSourceIcon type={source.type} />
+              {source.year ?? '—'}
+            </span>
+          )
+        }
+      </div>
+    </figcaption>
   </figure>
   <time datetime={quote.data.chalked.toISOString()} class:list={['mt-4 block']}>
     {formatDate(quote.data.chalked)}

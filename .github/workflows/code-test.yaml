@@ -1,4 +1,4 @@
-name: 'Test'
+name: "Test"
 on:
   pull_request:
 
@@ -11,30 +11,26 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: 'Checkout source code'
-        uses: actions/checkout@v5
+      - name: "Checkout source code"
+        uses: actions/checkout@v6
 
-      - name: 'Delete package-lock.json'
+      - name: "Delete package-lock.json"
         run: rm -f package-lock.json
 
-      - name: 'Setup Node.js environment'
-        uses: actions/setup-node@v4
+      - name: "Setup Node.js environment"
+        uses: actions/setup-node@v6
         with:
-          node-version-file: '.tool-versions'
+          node-version-file: ".tool-versions"
 
-      - name: 'Install dependencies'
+      - name: "Install dependencies"
         run: npm install
 
-      - name: 'Run unit tests with coverage'
+      - name: "Run unit tests with coverage"
         run: npm run test:coverage
 
-      - name: 'Report Coverage'
+      - name: "Upload coverage report"
         if: always()
-        uses: davelosert/vitest-coverage-report-action@v2
-
-      - name: 'Upload coverage report'
-        if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: coverage
           path: coverage

@@ -1,8 +1,8 @@
-name: 'Report Test Coverage'
+name: "Report Test Coverage"
 
 on:
   workflow_run:
-    workflows: ['Test']
+    workflows: ["Test"]
     types:
       - completed
 
@@ -12,21 +12,17 @@ jobs:
 
     permissions:
       pull-requests: write
+      actions: read
 
     steps:
-      - name: 'Checkout source code'
-        uses: actions/checkout@v5
+      - name: "Checkout source code"
+        uses: actions/checkout@v6
 
-      - name: 'Download test coverage'
-        uses: actions/download-artifact@v5
+      - name: "Download test coverage"
+        uses: actions/download-artifact@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
 
-      - name: List downloaded files
-        run: |
-          ls -R coverage
-          cat coverage/coverage-summary.json || echo "No summary file"
-
-      - name: 'Report test coverage on pull request'
+      - name: "Report test coverage on pull request"
         uses: davelosert/vitest-coverage-report-action@v2
