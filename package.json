@@ -18,7 +18,7 @@
     "test": "npx vitest run",
     "test:verbose": "npx vitest run --reporter=verbose",
     "test:coverage": "npx vitest run --coverage",
-    "verify": "npm run lint && npm run format && npm run test",
+    "verify": "npm run lint && npm run format && npm run test && npm run build",
     "licenses": "npx license-report --output=table",
     "licenses:html": "npx license-report --output=html > license-report.html"
   },
