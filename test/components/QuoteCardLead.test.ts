@@ -61,6 +61,7 @@ describe('quoteCard', () => {
         source: {
           title: 'Garden Spells',
           type: 'book',
+          year: 2007,
         },
       },
     }
@@ -72,6 +73,7 @@ describe('quoteCard', () => {
 
     expect(html).toContain('from')
     expect(html).toContain('Garden Spells')
+    expect(html).toContain('2007')
   })
 
   test('that class is set', async () => {

@@ -29,9 +29,19 @@ describe('quoteSourceIcon', () => {
     expect(html).toContain('mdi:microphone-outline')
   })
 
+  test('renders the correct icon for letter', async () => {
+    const html = await render('letter')
+    expect(html).toContain('mdi:email-open-outline')
+  })
+
   test('renders the correct icon for show', async () => {
     const html = await render('show')
     expect(html).toContain('mdi:television-classic')
+  })
+
+  test('renders the correct icon for play', async () => {
+    const html = await render('play')
+    expect(html).toContain('mdi:comedy')
   })
 
   test('falls back to the "other" icon for unknown types', async () => {
