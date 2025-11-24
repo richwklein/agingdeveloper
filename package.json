@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "5.4.11",
+  "version": "5.5.0",
   "type": "module",
   "scripts": {
     "clean": "rm -rf .astro dist node_modules package-lock.json",
@@ -23,10 +23,10 @@
     "licenses:html": "npx license-report --output=html > license-report.html"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^4.3.4",
-    "@astrojs/netlify": "^6.5.7",
-    "@astrojs/sitemap": "^3.5.0",
+    "@astrojs/check": "^0.9.5",
+    "@astrojs/mdx": "^4.3.12",
+    "@astrojs/netlify": "^6.6.2",
+    "@astrojs/sitemap": "^3.6.0",
     "@fontsource/fira-code": "^5.0.18",
     "@fontsource/noto-sans-georgian": "^5.0.22",
     "@fontsource/noto-serif-georgian": "^5.0.20",
@@ -35,7 +35,7 @@
     "@sindresorhus/slugify": "^3.0.0",
     "@tailwindcss/typography": "^0.5.13",
     "@tailwindcss/vite": "^4.1.12",
-    "astro": "^5.13.2",
+    "astro": "^5.16.0",
     "astro-fuse": "^1.0.1",
     "astro-icon": "^1.1.1",
     "feed": "^5.0.0",
