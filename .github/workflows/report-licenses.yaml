@@ -11,13 +11,13 @@ jobs:
 
     steps:
       - name: "Checkout source code"
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: "Delete package-lock.json"
         run: rm -f package-lock.json
 
       - name: "Setup Node.js environment"
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version-file: ".tool-versions"
 
@@ -29,7 +29,7 @@ jobs:
         run: npm run licenses:html
 
       - name: "Upload license report artifact"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: license-report
           path: license-report.html
