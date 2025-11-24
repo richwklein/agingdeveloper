@@ -26,7 +26,6 @@ const defaultLicense: License = {
 
 const license = providedLicense ?? defaultLicense
 const licenseLabel = license.short ?? license.name
-const iconName = license.icon ?? defaultLicense.icon
 ---
 
 <div
@@ -37,10 +36,21 @@ const iconName = license.icon ?? defaultLicense.icon
     className,
   ]}
 >
-  <div class="flex h-10 w-8 items-center justify-center">
-    <Icon name={iconName} class="h-5 w-5" title={licenseLabel} aria-label={licenseLabel} />
-  </div>
-  <div class="h-10 w-px bg-stone-200" aria-hidden="true"></div>
+  {
+    license.icon && (
+      <>
+        <div class="flex h-10 w-8 items-center justify-center">
+          <Icon
+            name={license.icon}
+            class="h-5 w-5"
+            title={licenseLabel}
+            aria-label={licenseLabel}
+          />
+        </div>
+        <div class="h-10 w-px bg-stone-200" aria-hidden="true" />
+      </>
+    )
+  }
   <div class="text-sm">
     {'This article is licensed under '}
     <LinkExternal to={license.url} title={licenseLabel} class:list={['text-stone-700 underline']}
