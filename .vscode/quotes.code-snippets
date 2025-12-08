@@ -5,10 +5,10 @@
     "description": "Insert a quote object without a source.",
     "body": [
       "{",
-      "  \"id\": \"${1:${UUID}}\",",
-      "  \"text\": \"${2:Quote text}\",",
-      "  \"author\": \"${3:Author}\",",
-      "  \"chalked\": \"${4:${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}}\"",
+      "  \"id\": \"${UUID}\",",
+      "  \"text\": \"${1:Quote text}\",",
+      "  \"author\": \"${2:Author}\",",
+      "  \"chalked\": \"${3:${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}}\"",
       "},"
     ]
   },
@@ -18,14 +18,14 @@
     "description": "Insert a quote object including a `source` object (title/type/year).",
     "body": [
       "{",
-      "  \"id\": \"${1:${UUID}}\",",
-      "  \"text\": \"${2:Quote text}\",",
-      "  \"author\": \"${3:Author}\",",
-      "  \"chalked\": \"${4:${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}}\",",
+      "  \"id\": \"${UUID}\",",
+      "  \"text\": \"${1:Quote text}\",",
+      "  \"author\": \"${2:Author}\",",
+      "  \"chalked\": \"${3:${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}}\",",
       "  \"source\": {",
-      "    \"title\": \"${5:Source title}\",",
-      "    \"type\": \"${6:book|movie|speech|other}\",",
-      "    \"year\": ${7:2025}",
+      "    \"title\": \"${4:Source title}\",",
+      "    \"type\": \"${5:book|movie|speech|other}\",",
+      "    \"year\": ${6:2025}",
       "  }",
       "},"
     ]
