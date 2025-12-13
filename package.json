@@ -23,9 +23,9 @@
     "licenses:html": "npx license-report --output=html > license-report.html"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.5",
-    "@astrojs/mdx": "^4.3.12",
-    "@astrojs/netlify": "^6.6.2",
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/netlify": "^6.6.3",
     "@astrojs/sitemap": "^3.6.0",
     "@fontsource/fira-code": "^5.0.18",
     "@fontsource/noto-sans-georgian": "^5.0.22",
@@ -35,7 +35,7 @@
     "@sindresorhus/slugify": "^3.0.0",
     "@tailwindcss/typography": "^0.5.13",
     "@tailwindcss/vite": "^4.1.17",
-    "astro": "^5.16.0",
+    "astro": "^5.16.5",
     "astro-fuse": "^1.0.1",
     "astro-icon": "^1.1.1",
     "feed": "^5.0.0",
