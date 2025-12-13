@@ -1,0 +1,33 @@
+{
+  "Insert Quote": {
+    "scope": "json,jsonc",
+    "prefix": "quote",
+    "description": "Insert a quote object without a source.",
+    "body": [
+      "{",
+      "  \"id\": \"${UUID}\",",
+      "  \"text\": \"${1:Quote text}\",",
+      "  \"author\": \"${2:Author}\",",
+      "  \"chalked\": \"${3:${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}}\"",
+      "},"
+    ]
+  },
+  "Insert Quote with Source": {
+    "scope": "json,jsonc",
+    "prefix": "quote-source",
+    "description": "Insert a quote object including a `source` object (title/type/year).",
+    "body": [
+      "{",
+      "  \"id\": \"${UUID}\",",
+      "  \"text\": \"${1:Quote text}\",",
+      "  \"author\": \"${2:Author}\",",
+      "  \"chalked\": \"${3:${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}}\",",
+      "  \"source\": {",
+      "    \"title\": \"${4:Source title}\",",
+      "    \"type\": \"${5:book|movie|speech|other}\",",
+      "    \"year\": ${6:2025}",
+      "  }",
+      "},"
+    ]
+  }
+}
