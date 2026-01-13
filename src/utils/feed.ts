@@ -42,7 +42,9 @@ export const getFeed = async (): Promise<Feed> => {
     link: buildUrl('', site.data.origin).href,
     image: imageCollection.getImageSrc(site.data.avatar.src),
     favicon: imageCollection.getImageSrc(site.data.icon.src),
-    feedLinks: new Map(feedInfo.map(({ id, path }) => [id, buildUrl(path, site.data.origin).href])),
+    feedLinks: Object.fromEntries(
+      feedInfo.map(({ id, path }) => [id, buildUrl(path, site.data.origin).href])
+    ),
     copyright: new Date().toISOString(),
   })
 
