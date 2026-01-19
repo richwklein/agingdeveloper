@@ -1,5 +1,16 @@
 [
   {
+    "id": "4aafdfd4-0525-4e1a-b7c3-3cd86a615a55",
+    "text": "Injustice anywhere is a threat to justice everywhere.",
+    "author": "Martin Luther King Jr.",
+    "chalked": "2026-01-19",
+    "source": {
+      "title": "Letter from Birmingham Jail",
+      "type": "letter",
+      "year": 1963
+    }
+  },
+  {
     "id": "2df4bd56-6766-4e8c-a44c-e7c4639ab013",
     "text": "Acting is behaving truthfully under imaginary circumstances.",
     "author": "Sanford Meisner",
