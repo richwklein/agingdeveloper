@@ -81,7 +81,14 @@ export default defineConfig({
       destination: '/article/2020-07-26-false-start',
       status: 308,
     },
-    '/article/2020/07/21/intro': { destination: '/article/2020-07-21-intro', status: 308 },
+    '/article/2020/07/21/intro': {
+      destination: '/article/2020-07-21-intro',
+      status: 308,
+    },
+    'article/2026-2026-01-11-breaking-bias': {
+      destination: 'article/2026-01-11-breaking-bias',
+      status: 308,
+    },
   },
   site: siteUrl,
   trailingSlash: 'ignore',
