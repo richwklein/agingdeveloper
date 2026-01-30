@@ -1,5 +1,49 @@
 [
   {
+    "id": "b3cb8dbf-6d82-4163-9bb3-da88e86e70e3",
+    "text": "Do not lose heart. We were made for these times.",
+    "author": "Clarissa Pinkola Estés",
+    "chalked": "2026-01-26",
+    "source": {
+      "title": "We Were Made for These Times",
+      "type": "letter",
+      "year": 2020
+    }
+  },
+  {
+    "id": "4aafdfd4-0525-4e1a-b7c3-3cd86a615a55",
+    "text": "Injustice anywhere is a threat to justice everywhere.",
+    "author": "Martin Luther King Jr.",
+    "chalked": "2026-01-19",
+    "source": {
+      "title": "Letter from Birmingham Jail",
+      "type": "letter",
+      "year": 1963
+    }
+  },
+  {
+    "id": "2df4bd56-6766-4e8c-a44c-e7c4639ab013",
+    "text": "Acting is behaving truthfully under imaginary circumstances.",
+    "author": "Sanford Meisner",
+    "chalked": "2026-01-13",
+    "source": {
+      "title": "Sanford Meisner on Acting",
+      "type": "book",
+      "year": 1987
+    }
+  },
+  {
+    "id": "ed5bb780-cc7b-4155-ad7b-f726d9113efa",
+    "text": "Hope smiles from the threshold of the year to come.",
+    "author": "Alfred, Lord Tennyson",
+    "chalked": "2026-01-05",
+    "source": {
+      "title": "Robin Hood and Maid Marian",
+      "type": "play",
+      "year": 1892
+    }
+  },
+  {
     "id": "43b027aa-71a8-4b7f-b344-c20338ea6cd0",
     "text": "Cheers to a gracious New Year. May we uphold the fullness of God's grace, goodness, and goodwill.",
     "author": "Lailah Gifty Akita",
