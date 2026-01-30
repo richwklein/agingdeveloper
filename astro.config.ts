@@ -85,8 +85,8 @@ export default defineConfig({
       destination: '/article/2020-07-21-intro',
       status: 308,
     },
-    'article/2026-2026-01-11-breaking-bias': {
-      destination: 'article/2026-01-11-breaking-bias',
+    '/article/2026-2026-01-11-breaking-bias': {
+      destination: '/article/2026-01-11-breaking-bias',
       status: 308,
     },
   },
