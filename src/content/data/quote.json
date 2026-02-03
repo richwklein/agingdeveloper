@@ -1,5 +1,16 @@
 [
   {
+    "id": "90e65946-883d-48d8-9a08-a2ae99bb204a",
+    "text": "While it is February, one can taste the full joys of anticipation. Spring stands at the gate with her finger on the latch.",
+    "author": "Patience Strong",
+    "chalked": "2026-02-02",
+    "source": {
+      "title": "The Glory of the Garden",
+      "type": "book",
+      "year": 1947
+    }
+  },
+  {
     "id": "b3cb8dbf-6d82-4163-9bb3-da88e86e70e3",
     "text": "Do not lose heart. We were made for these times.",
     "author": "Clarissa Pinkola Estés",
@@ -714,7 +725,12 @@
     "id": "ff9632b7-8d36-45ad-9be3-8418835da752",
     "text": "While it is February, one can taste the full joys of anticipation. Spring stands at the gate with her finger on the latch.",
     "author": "Patience Strong",
-    "chalked": "2024-02-19"
+    "chalked": "2024-02-19",
+    "source": {
+      "title": "The Glory of the Garden",
+      "type": "book",
+      "year": 1947
+    }
   },
   {
     "id": "ec3902ed-22ef-4bc0-b446-a6d5ab161a42",
