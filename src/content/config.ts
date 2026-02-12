@@ -120,7 +120,17 @@ const quote = defineCollection({
       source: z
         .object({
           title: z.string(),
-          type: z.enum(['book', 'movie', 'song', 'speech', 'letter', 'show', 'play', 'other']),
+          type: z.enum([
+            'book',
+            'movie',
+            'song',
+            'speech',
+            'letter',
+            'show',
+            'play',
+            'magazine',
+            'other',
+          ]),
           year: z.number().optional(),
         })
         .optional(),
