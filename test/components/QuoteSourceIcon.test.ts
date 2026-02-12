@@ -44,6 +44,11 @@ describe('quoteSourceIcon', () => {
     expect(html).toContain('mdi:comedy')
   })
 
+  test('renders the correct icon for magazine', async () => {
+    const html = await render('magazine')
+    expect(html).toContain('mdi:book-open-page-variant-outline')
+  })
+
   test('falls back to the "other" icon for unknown types', async () => {
     const html = await render('unknown-type')
     expect(html).toContain('mdi:star-four-points-outline')
