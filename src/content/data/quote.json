@@ -1,5 +1,17 @@
 [
   {
+    "id": "2f6b7c2a-4b4d-4c1d-9f6e-3a2b9d8e5f41",
+    "text": "The great thing about getting older is that you don't lose all the other ages you've been.",
+    "author": "Madeleine L'Engle",
+    "chalked": "2026-02-16",
+    "source": {
+      "title": "Walking on Water: Reflections on Faith and Art",
+      "type": "book",
+      "year": 1980
+    }
+  },
+
+  {
     "id": "3c6f9b21-7e4a-4d5b-9c2f-8a1d6e7b5f42",
     "text": "Hold fast to dreams, for if dreams die, life is a broken-winged bird that cannot fly.",
     "author": "Langston Hughes",
