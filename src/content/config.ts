@@ -129,6 +129,7 @@ const quote = defineCollection({
             'show',
             'play',
             'magazine',
+            'newspaper',
             'other',
           ]),
           year: z.number().optional(),
