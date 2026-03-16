@@ -1,5 +1,16 @@
 [
   {
+    "id": "1209c8d2-4651-41d4-b340-96950217190b",
+    "text": "If we had no winter, the spring would not be so pleasant.",
+    "author": "Anne Bradstreet",
+    "chalked": "2026-03-16",
+    "source": {
+      "title": "Meditations Divine and Moral",
+      "type": "book",
+      "year": 1655
+    }
+  },
+  {
     "id": "0d6a0d1e-7c2e-4b9c-8e3f-9a5b2e0e6c9d",
     "text": "You will never find anybody who can give you a clear and compelling reason why we observe Daylight Saving Time.",
     "author": "Dave Barry",
