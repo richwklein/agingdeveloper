@@ -35,8 +35,10 @@ jobs:
       - name: 'Checkout source code'
         uses: actions/checkout@v6
 
-      - name: 'Setup tools and dependencies'
+      - name: 'Setup tools'
         uses: ./.github/actions/setup-tools
+        with:
+          install-dependencies: 'false'
 
       - name: 'Download build artifact'
         uses: actions/download-artifact@v6
@@ -53,7 +55,7 @@ jobs:
           set -euo pipefail
 
           alias="pr-${PR_NUMBER}"
-          deploy_json="$(npx netlify deploy \
+          deploy_json="$(pnpm dlx netlify deploy \
             --auth "$NETLIFY_API_TOKEN" \
             --site "$NETLIFY_SITE_ID" \
             --dir dist \

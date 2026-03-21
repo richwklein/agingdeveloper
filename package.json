@@ -2,25 +2,26 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "5.7.7",
+  "version": "5.8.0",
   "type": "module",
+  "packageManager": "pnpm@10.24.0",
   "scripts": {
-    "clean": "rm -rf .astro dist node_modules package-lock.json",
-    "upgrade:astro": "npx @astrojs/upgrade",
-    "upgrade:tailwind": " npx @tailwindcss/upgrade",
-    "dev": "npx astro dev",
-    "build": "npx astro check && npx astro build",
-    "preview": "npx astro preview",
-    "lint": "npx eslint \"**/*.{js,mjs,cjs,ts,astro}\"",
-    "lint:fix": "npx eslint --fix \"**/*.{js,mjs,cjs,ts,astro}\"",
-    "format": "npx prettier --check \"**/*.{js,mjs,cjs,ts,astro,md,mdx}\"",
-    "format:fix": "npx prettier --write \"**/*.{js,mjs,cjs,ts,astro,md,mdx}\"",
-    "test": "npx vitest run",
-    "test:verbose": "npx vitest run --reporter=verbose",
-    "test:coverage": "npx vitest run --coverage",
-    "verify": "npm run lint && npm run format && npm run test && npm run build",
-    "licenses": "npx license-report --output=table",
-    "licenses:html": "npx license-report --output=html > license-report.html"
+    "clean": "rm -rf .astro dist node_modules",
+    "upgrade:astro": "pnpm dlx @astrojs/upgrade",
+    "upgrade:tailwind": "pnpm dlx @tailwindcss/upgrade",
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "lint": "eslint \"**/*.{js,mjs,cjs,ts,astro}\"",
+    "lint:fix": "eslint --fix \"**/*.{js,mjs,cjs,ts,astro}\"",
+    "format": "prettier --check \"**/*.{js,mjs,cjs,ts,astro,md,mdx}\"",
+    "format:fix": "prettier --write \"**/*.{js,mjs,cjs,ts,astro,md,mdx}\"",
+    "test": "vitest run",
+    "test:verbose": "vitest run --reporter=verbose",
+    "test:coverage": "vitest run --coverage",
+    "verify": "pnpm run lint && pnpm run format && pnpm run test && pnpm run build",
+    "licenses": "license-report --output=table",
+    "licenses:html": "license-report --output=html > license-report.html"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
@@ -61,7 +62,6 @@
     "eslint-plugin-astro": "^1.2.3",
     "eslint-plugin-jsx-a11y": "^6.10.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "netlify": "^24.4.0",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
@@ -69,13 +69,11 @@
     "typescript-eslint": "^8.15.0",
     "vitest": "^3.0.1"
   },
-  "overrides": {
-    "vite": "^6.0.1",
-    "@typescript-eslint/utils": {
-      "eslint": "^9.9.0"
-    },
-    "astro-fuse": {
-      "astro": "^5.0.4"
+  "pnpm": {
+    "overrides": {
+      "vite": "^6.0.1",
+      "@typescript-eslint/utils>eslint": "^9.9.0",
+      "astro-fuse>astro": "^5.0.4"
     }
   }
 }

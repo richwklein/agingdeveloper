@@ -15,8 +15,8 @@ jobs:
 
       - name: "Check formatting"
         if: always()
-        run: npm run format
+        run: pnpm run format
 
       - name: "Check lint"
         if: always()
-        run: npm run lint
+        run: pnpm run lint
