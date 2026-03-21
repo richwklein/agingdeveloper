@@ -30,7 +30,7 @@ updates:
           - 'astro'
           - 'astro-*'
           - '@astro/*'
-      tools:
+      eslint:
         patterns:
           - 'eslint'
           - 'eslint-*'
