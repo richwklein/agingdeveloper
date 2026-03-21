@@ -30,7 +30,7 @@ updates:
           - 'astro'
           - 'astro-*'
           - '@astro/*'
-      eslint:
+      tools:
         patterns:
           - 'eslint'
           - 'eslint-*'
@@ -60,3 +60,6 @@ updates:
           - 'vitest'
           - 'vitest-*'
           - '@vitest/*'
+      other-dependencies:
+        patterns:
+          - '*'
