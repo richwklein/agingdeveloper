@@ -14,13 +14,8 @@ jobs:
       - name: "Checkout source code"
         uses: actions/checkout@v6
 
-      - name: "Setup Node.js environment"
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: ".tool-versions"
-
-      - name: "Install dependencies"
-        run: npm ci
+      - name: "Setup tools and dependencies"
+        uses: ./.github/actions/setup-tools
 
       - name: "Run unit tests with coverage"
         run: npm run test:coverage
