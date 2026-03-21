@@ -6,10 +6,10 @@ inputs:
     description: 'File used by actions/setup-node to determine the Node.js version'
     default: '.tool-versions'
   install-dependencies:
-    description: 'Whether to run npm install'
+    description: 'Whether to install npm dependencies'
     default: 'true'
   working-directory:
-    description: 'Directory to run npm install from'
+    description: 'Directory to run the npm install command from'
     default: '.'
 
 runs:
@@ -25,4 +25,4 @@ runs:
       if: ${{ inputs.install-dependencies != 'false' }}
       shell: bash
       working-directory: ${{ inputs.working-directory }}
-      run: npm install --no-fund --no-audit
+      run: npm ci --no-fund --no-audit
