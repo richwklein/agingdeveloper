@@ -64,18 +64,23 @@ jobs:
 
           echo "$deploy_json"
 
-          deploy_id="$(echo "$deploy_json" | jq -r '.id')"
-          deploy_url="$(echo "$deploy_json" | jq -r '.deploy_url // .deploy_ssl_url // .url // .ssl_url')"
-          admin_url="$(echo "$deploy_json" | jq -r '.admin_url // empty')"
+          deploy_id="$(echo "$deploy_json" | jq -r '.deploy_id // empty')"
+          deploy_url="$(echo "$deploy_json" | jq -r '.deploy_url // .url // empty')"
+          logs_url="$(echo "$deploy_json" | jq -r '.logs // empty')"
 
           if [ -z "$deploy_url" ] || [ "$deploy_url" = "null" ]; then
             echo "Netlify deploy did not return a preview URL" >&2
             exit 1
           fi
 
+          if [ -z "$deploy_id" ] || [ "$deploy_id" = "null" ]; then
+            echo "Netlify deploy did not return a deploy ID" >&2
+            exit 1
+          fi
+
           echo "deploy_id=$deploy_id" >> "$GITHUB_OUTPUT"
           echo "deploy_url=$deploy_url" >> "$GITHUB_OUTPUT"
-          echo "admin_url=$admin_url" >> "$GITHUB_OUTPUT"
+          echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT"
 
       - name: 'Comment preview URL on pull request'
         uses: marocchino/sticky-pull-request-comment@v2
@@ -86,7 +91,7 @@ jobs:
 
             - Preview: ${{ steps.deploy.outputs.deploy_url }}
             - Deploy ID: `${{ steps.deploy.outputs.deploy_id }}`
-            - Admin: ${{ steps.deploy.outputs.admin_url || 'n/a' }}
+            - Logs: ${{ steps.deploy.outputs.logs_url || 'n/a' }}
             - Workflow: [#${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
             - Commit: [`${{ env.COMMIT_SHA }}`](https://github.com/${{ github.repository }}/commit/${{ env.COMMIT_SHA }})
 
