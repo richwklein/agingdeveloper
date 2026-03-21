@@ -18,7 +18,7 @@ jobs:
         uses: ./.github/actions/setup-tools
 
       - name: "Run unit tests with coverage"
-        run: npm run test:coverage
+        run: pnpm run test:coverage
 
       - name: "Upload coverage report"
         if: always()

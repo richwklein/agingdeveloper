@@ -45,7 +45,7 @@ jobs:
         uses: ./.github/actions/setup-tools
 
       - name: 'Build project'
-        run: npm run build
+        run: pnpm run build
 
       - name: 'Record artifact metadata'
         id: artifact

@@ -92,7 +92,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          npx netlify deploy \
+          pnpm exec netlify deploy \
             --auth "$NETLIFY_API_TOKEN" \
             --site "$NETLIFY_SITE_ID" \
             --dir dist \

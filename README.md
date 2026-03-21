@@ -30,28 +30,28 @@ Both the source code for the site and the content that is hosted on the site are
 
 ## Start local development
 
-Most Typescript developers will likely already have the tools installed, but here is a quick rundown of setting things up just in case you do not. I'm using asdf-vm here to allow multiple versions of tools to be installed at the same time.
+Most Typescript developers will likely already have the tools installed, but here is a quick rundown of setting things up just in case you do not. I'm using asdf-vm here to allow multiple versions of tools to be installed at the same time. The pinned local tool versions live in `.tool-versions`.
 
 1. **Install dev tools**
 
 I use _asdf_ to install dev tools. Use the [getting started](https://asdf-vm.com/guide/getting-started.html) page to make sure it is installed and set up correctly.
 
-Once you have asdf installed you can use that to install node & npm. These are setup as being the global versions, but with asdf you could just use the version locally.
+Once you have asdf installed you can use that to install the versions of `nodejs` and `pnpm` defined in this repository.
 
 ```shell
 asdf plugin add nodejs
-asdf install nodejs 18.9.1
-asdf global nodejs 18.9.1
+asdf plugin add pnpm
+asdf install
 ```
 
 2. **Install dependencies**
 
 ```shell
 cd agingdeveloper/
-npm install
+pnpm install
 ```
 
-This will install local npm dependencies.
+This will install the local project dependencies using `pnpm`.
 
 ## VSCode Settings
 

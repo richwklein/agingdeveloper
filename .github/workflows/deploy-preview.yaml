@@ -53,7 +53,7 @@ jobs:
           set -euo pipefail
 
           alias="pr-${PR_NUMBER}"
-          deploy_json="$(npx netlify deploy \
+          deploy_json="$(pnpm exec netlify deploy \
             --auth "$NETLIFY_API_TOKEN" \
             --site "$NETLIFY_SITE_ID" \
             --dir dist \
