@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "5.7.5",
+  "version": "5.7.6",
   "type": "module",
   "scripts": {
     "clean": "rm -rf .astro dist node_modules package-lock.json",
@@ -61,6 +61,7 @@
     "eslint-plugin-astro": "^1.2.3",
     "eslint-plugin-jsx-a11y": "^6.10.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
+    "netlify": "^24.4.0",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.2",

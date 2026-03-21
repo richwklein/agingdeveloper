@@ -17,16 +17,13 @@ jobs:
       - name: "Checkout source code"
         uses: actions/checkout@v6
 
-      - name: "Delete package-lock.json"
-        run: rm -f package-lock.json
-
       - name: "Setup Node.js environment"
         uses: actions/setup-node@v6
         with:
           node-version-file: ".tool-versions"
 
       - name: "Install dependencies"
-        run: npm install
+        run: npm ci
 
       - name: "Generate license report"
         id: generate-report

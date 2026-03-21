@@ -6,7 +6,6 @@ dist/
 
 # dependencies & cache
 node_modules/
-package-lock.json
 .netlify/
 
 # logs

@@ -5,10 +5,17 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   tag-release:
     name: 'Tag on Release'
     runs-on: ubuntu-latest
+    outputs:
+      released: ${{ steps.release.outputs.released }}
+      release_tag: ${{ steps.release.outputs.release_tag }}
+      release_name: ${{ steps.release.outputs.release_name }}
 
     steps:
       - name: 'Checkout source code'
@@ -25,6 +32,71 @@ jobs:
 
       - name: 'Output new tag'
         env:
+          RELEASED: ${{ steps.release.outputs.released }}
           RELEASE_TAG: ${{ steps.release.outputs.release_tag }}
           RELEASE_NAME: ${{ steps.release.outputs.release_name }}
-        run: echo "new tag $RELEASE_TAG ($RELEASE_NAME)"
+        run: echo "released=$RELEASED tag=$RELEASE_TAG ($RELEASE_NAME)"
+
+  code-build:
+    needs: tag-release
+    if: needs.tag-release.outputs.released == 'true'
+    uses: ./.github/workflows/code-build.yaml
+    with:
+      artifact-name: release-build
+
+  publish-release:
+    name: 'Publish Release Artifact and Deploy'
+    needs:
+      - tag-release
+      - code-build
+    if: needs.tag-release.outputs.released == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout source code'
+        uses: actions/checkout@v6
+
+      - name: 'Setup deploy tools'
+        uses: ./.github/actions/setup-tools
+
+      - name: 'Download build artifact'
+        uses: actions/download-artifact@v6
+        with:
+          name: ${{ needs.code-build.outputs.artifact-name }}
+          path: dist
+
+      - name: 'Archive build artifact'
+        id: archive
+        env:
+          RELEASE_TAG: ${{ needs.tag-release.outputs.release_tag }}
+        run: |
+          set -euo pipefail
+
+          archive_name="agingdeveloper-${RELEASE_TAG#v}.tar.gz"
+          tar -czf "$archive_name" -C dist .
+
+          echo "archive_name=$archive_name" >> "$GITHUB_OUTPUT"
+
+      - name: 'Upload release asset'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.tag-release.outputs.release_tag }}
+          files: ${{ steps.archive.outputs.archive_name }}
+          overwrite_files: true
+
+      - name: 'Deploy production to Netlify'
+        env:
+          NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          RELEASE_TAG: ${{ needs.tag-release.outputs.release_tag }}
+        run: |
+          set -euo pipefail
+
+          npx netlify deploy \
+            --auth "$NETLIFY_API_TOKEN" \
+            --site "$NETLIFY_SITE_ID" \
+            --dir dist \
+            --message "Release $RELEASE_TAG" \
+            --json \
+            --no-build \
+            --prod

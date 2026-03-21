@@ -1,0 +1,28 @@
+name: 'Setup Tools'
+description: 'Setup Node.js and optionally install npm dependencies'
+
+inputs:
+  node-version-file:
+    description: 'File used by actions/setup-node to determine the Node.js version'
+    default: '.tool-versions'
+  install-dependencies:
+    description: 'Whether to install npm dependencies'
+    default: 'true'
+  working-directory:
+    description: 'Directory to run the npm install command from'
+    default: '.'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Setup Node.js environment'
+      uses: actions/setup-node@v6
+      with:
+        node-version-file: ${{ inputs.node-version-file }}
+        cache: 'npm'
+
+    - name: 'Install dependencies'
+      if: ${{ inputs.install-dependencies != 'false' }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: npm ci --no-fund --no-audit
