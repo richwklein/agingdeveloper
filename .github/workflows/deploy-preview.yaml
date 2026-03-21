@@ -57,7 +57,6 @@ jobs:
             --auth "$NETLIFY_API_TOKEN" \
             --site "$NETLIFY_SITE_ID" \
             --dir dist \
-            --context deploy-preview \
             --alias "$alias" \
             --message "Pull request #${PR_NUMBER}" \
             --json \
