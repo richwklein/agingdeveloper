@@ -13,11 +13,21 @@ on:
         required: false
         type: string
         default: 'dist'
+      checkout-ref:
+        description: 'Git ref or SHA to checkout before building'
+        required: false
+        type: string
+        default: ''
       retention-days:
         description: 'Days to retain the uploaded artifact'
         required: false
         type: number
         default: 7
+      deploy-context:
+        description: 'Deploy context used by the app to enable production-only behavior'
+        required: false
+        type: string
+        default: 'deploy-preview'
     outputs:
       artifact-name:
         description: 'Uploaded artifact name'
@@ -33,6 +43,10 @@ jobs:
   build:
     name: 'Build'
     runs-on: ubuntu-latest
+    env:
+      ANALYTICS_TRACKING_ID: ${{ vars.ANALYTICS_TRACKING_ID }}
+      DEPLOY_CONTEXT: ${{ inputs.deploy-context }}
+      SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
     outputs:
       artifact-name: ${{ steps.artifact.outputs.artifact_name }}
       artifact-path: ${{ steps.artifact.outputs.artifact_path }}
@@ -40,6 +54,8 @@ jobs:
     steps:
       - name: 'Checkout source code'
         uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.checkout-ref != '' && inputs.checkout-ref || github.sha }}
 
       - name: 'Setup build tools'
         uses: ./.github/actions/setup-tools

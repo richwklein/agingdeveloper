@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          ref: ${{ github.ref }}
+          ref: ${{ github.sha }}
 
       - name: 'Create GitHub release'
         id: 'release'
@@ -43,6 +43,8 @@ jobs:
     uses: ./.github/workflows/code-build.yaml
     with:
       artifact-name: release-build
+      deploy-context: production
+      checkout-ref: ${{ github.sha }}
 
   publish-release:
     name: 'Deploy Release'
@@ -55,6 +57,8 @@ jobs:
     steps:
       - name: 'Checkout source code'
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
 
       - name: 'Setup deploy tools'
         uses: ./.github/actions/setup-tools

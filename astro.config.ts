@@ -2,25 +2,42 @@ import mdx from '@astrojs/mdx'
 import netlify from '@astrojs/netlify'
 import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite'
-import { defineConfig } from 'astro/config'
+import { defineConfig, envField } from 'astro/config'
 import fuse from 'astro-fuse'
 import icon from 'astro-icon'
 
 import { remarkExcerpt } from './src/utils/excerpt.ts'
 import { remarkReadTime } from './src/utils/readTime.ts'
 
-const { URL: SITE_URL, DEPLOY_PRIME_URL: DEPLOY_URL, CONTEXT: DEPLOY_CONTEXT = 'dev' } = process.env
 const siteUrl =
-  DEPLOY_CONTEXT === 'dev'
-    ? 'http://localhost:4321'
-    : DEPLOY_CONTEXT == 'production'
-      ? SITE_URL
-      : DEPLOY_URL
+  process.env.SITE_ORIGIN ??
+  (process.env.DEPLOY_CONTEXT === 'production'
+    ? 'https://agingdeveloper.com'
+    : 'http://localhost:4321')
 
 // https://astro.build/config
 export default defineConfig({
   adapter: netlify(),
   build: { format: 'file' },
+  env: {
+    schema: {
+      DEPLOY_CONTEXT: envField.string({
+        access: 'public',
+        context: 'server',
+        default: 'dev',
+      }),
+      SITE_ORIGIN: envField.string({
+        access: 'public',
+        context: 'server',
+        default: siteUrl,
+      }),
+      ANALYTICS_TRACKING_ID: envField.string({
+        access: 'public',
+        context: 'client',
+        optional: true,
+      }),
+    },
+  },
   experimental: { contentIntellisense: true },
   markdown: { remarkPlugins: [remarkReadTime, remarkExcerpt] },
   output: 'static',
