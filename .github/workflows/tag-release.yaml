@@ -5,13 +5,12 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
-
 jobs:
   tag-release:
     name: 'Tag on Release'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     outputs:
       released: ${{ steps.release.outputs.released }}
       release_tag: ${{ steps.release.outputs.release_tag }}
@@ -40,6 +39,8 @@ jobs:
   code-build:
     needs: tag-release
     if: needs.tag-release.outputs.released == 'true'
+    permissions:
+      contents: read
     uses: ./.github/workflows/code-build.yaml
     with:
       artifact-name: release-build
@@ -53,6 +54,8 @@ jobs:
       - code-build
     if: needs.tag-release.outputs.released == 'true'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: 'Checkout source code'

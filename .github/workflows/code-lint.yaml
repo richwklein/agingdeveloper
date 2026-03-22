@@ -1,22 +1,25 @@
-name: "Format and Lint"
+name: 'Format and Lint'
 on:
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   lint:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Checkout source code"
+      - name: 'Checkout source code'
         uses: actions/checkout@v6
 
-      - name: "Setup tools and dependencies"
+      - name: 'Setup tools and dependencies'
         uses: ./.github/actions/setup-tools
 
-      - name: "Check formatting"
+      - name: 'Check formatting'
         if: always()
         run: pnpm run format
 
-      - name: "Check lint"
+      - name: 'Check lint'
         if: always()
         run: pnpm run lint

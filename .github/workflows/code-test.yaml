@@ -1,26 +1,25 @@
-name: "Test"
+name: 'Test'
 on:
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: read
-      pull-requests: write
-
     steps:
-      - name: "Checkout source code"
+      - name: 'Checkout source code'
         uses: actions/checkout@v6
 
-      - name: "Setup tools and dependencies"
+      - name: 'Setup tools and dependencies'
         uses: ./.github/actions/setup-tools
 
-      - name: "Run unit tests with coverage"
+      - name: 'Run unit tests with coverage'
         run: pnpm run test:coverage
 
-      - name: "Upload coverage report"
+      - name: 'Upload coverage report'
         if: always()
         uses: actions/upload-artifact@v5
         with:
