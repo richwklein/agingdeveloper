@@ -58,12 +58,13 @@ const analyticsId = DEPLOY_CONTEXT === 'production' ? ANALYTICS_TRACKING_ID : ''
             src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}
           />
           <script is:inline define:vars={{ analyticsId }}>
-            window.dataLayer = window.dataLayer || [] function gtag(){' '}
-            {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
               // eslint-disable-next-line prefer-rest-params
-              window.dataLayer.push(arguments)
+              window.dataLayer.push(arguments);
             }
-            gtag('js', new Date()) gtag('config', analyticsId)
+            gtag('js', new Date());
+            gtag('config', analyticsId);
           </script>
         </>
       ) : null
