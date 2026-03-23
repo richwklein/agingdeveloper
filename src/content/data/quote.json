@@ -1,5 +1,16 @@
 [
   {
+    "id": "b3c2a9e4-1f6a-4a8c-9d7b-2e5f8c1a7d90",
+    "text": "It is spring again. The earth is like a child that knows poems by heart.",
+    "author": "Rainer Maria Rilke",
+    "chalked": "2026-03-23",
+    "source": {
+      "title": "Letters on Life",
+      "type": "book",
+      "year": 2006
+    }
+  },
+  {
     "id": "1209c8d2-4651-41d4-b340-96950217190b",
     "text": "If we had no winter, the spring would not be so pleasant.",
     "author": "Anne Bradstreet",
