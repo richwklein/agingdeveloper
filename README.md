@@ -11,6 +11,7 @@ This is the personal site of Richard Klein. It is a static site built using [typ
 - [Start local development](#start-local-development)
   - [Create a production build.](#create-a-production-build)
   - [Serve the production build locally.](#serve-the-production-build-locally)
+- [Build Variables](#build-variables)
 - [VSCode settings](#vscode-settings)
 - [Images](#images)
 - [Testing](#testing)
@@ -52,6 +53,36 @@ pnpm install
 ```
 
 This will install the local project dependencies using `pnpm`.
+
+## Build Variables
+
+The workflows use two GitHub Actions repository variables:
+
+- `SITE_ORIGIN`: Canonical site origin used for Astro's `site` setting, sitemap generation, and other absolute URLs.
+- `ANALYTICS_TRACKING_ID`: Analytics tracking id made available to the build.
+
+The reusable build workflow at [.github/workflows/code-build.yaml](./.github/workflows/code-build.yaml) also accepts a `deploy-context` input. That input controls production-only behavior in the app:
+
+- [.github/workflows/deploy-preview.yaml](./.github/workflows/deploy-preview.yaml) builds with `deploy-context: deploy-preview`
+- [.github/workflows/tag-release.yaml](./.github/workflows/tag-release.yaml) builds with `deploy-context: production`
+
+The analytics script is only injected when the deploy context is `production`. Preview deploys still receive the analytics id in the build environment, but the script is not rendered.
+
+The Netlify deploy workflows also require two GitHub Actions repository secrets:
+
+- `NETLIFY_API_TOKEN`: Token used by the Netlify CLI to create preview and production deploys.
+- `NETLIFY_SITE_ID`: Netlify site identifier for the target site.
+
+These secrets are used by [.github/workflows/deploy-preview.yaml](./.github/workflows/deploy-preview.yaml) and [.github/workflows/tag-release.yaml](./.github/workflows/tag-release.yaml).
+
+For local runs, the site origin falls back to `http://localhost:4321` and the deploy context falls back to `dev`. To build locally with production-only behavior enabled:
+
+```shell
+SITE_ORIGIN=https://agingdeveloper.com \
+ANALYTICS_TRACKING_ID=G-XXXXXXXXXX \
+DEPLOY_CONTEXT=production \
+pnpm run build
+```
 
 ## VSCode Settings
 

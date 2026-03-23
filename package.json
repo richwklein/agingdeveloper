@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "5.8.1",
+  "version": "5.8.2",
   "type": "module",
   "packageManager": "pnpm@10.24.0",
   "scripts": {
@@ -41,7 +41,6 @@
     "astro-icon": "^1.1.1",
     "feed": "^5.0.0",
     "fuse.js": "^7.0.0",
-    "install": "^0.13.0",
     "license-report": "^6.7.1",
     "markdown-it": "^14.1.0",
     "mdast-util-to-string": "^4.0.0",

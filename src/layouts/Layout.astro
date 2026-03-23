@@ -11,6 +11,8 @@ import ScrollTop from '@components/ScrollTop.astro'
 import { feedInfo } from '@utils/feed'
 import { buildUrl } from '@utils/misc'
 import type { CollectionEntry } from 'astro:content'
+import { ANALYTICS_TRACKING_ID } from 'astro:env/client'
+import { DEPLOY_CONTEXT } from 'astro:env/server'
 
 interface Props {
   site: CollectionEntry<'site'>
@@ -18,7 +20,7 @@ interface Props {
 }
 const { site } = Astro.props
 const data = site.data
-const analyticsId = import.meta.env.ANALYTICS_TRACKING_ID
+const analyticsId = DEPLOY_CONTEXT === 'production' ? ANALYTICS_TRACKING_ID : ''
 ---
 
 <!doctype html>
@@ -47,17 +49,24 @@ const analyticsId = import.meta.env.ANALYTICS_TRACKING_ID
     }
     <meta name="generator" content={Astro.generator} />
     <slot name="seo" />
-    <script is:inline async src=`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`
-    ></script>
-    <script is:inline define:vars={{ analyticsId }}>
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        // eslint-disable-next-line prefer-rest-params
-        window.dataLayer.push(arguments)
-      }
-      gtag('js', new Date())
-      gtag('config', analyticsId)
-    </script>
+    {
+      analyticsId ? (
+        <>
+          <script
+            is:inline
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}
+          />
+          <script
+            is:inline
+            set:html={`window.dataLayer = window.dataLayer || [];
+function gtag(){window.dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', ${JSON.stringify(analyticsId)});`}
+          />
+        </>
+      ) : null
+    }
   </head>
   <body>
     <PageHeader site={site} class:list={['mb-8']} />
