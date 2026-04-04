@@ -25,7 +25,7 @@ jobs:
         run: pnpm run licenses:html
 
       - name: 'Upload license report artifact'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: license-report
           path: license-report.html
@@ -39,7 +39,7 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
 
       - name: 'Report licenses on pull request'
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: license
           message: |
