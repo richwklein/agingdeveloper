@@ -69,7 +69,7 @@ jobs:
           install-dependencies: 'false'
 
       - name: 'Download build artifact'
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           name: ${{ needs.code-build.outputs.artifact-name }}
           path: dist
