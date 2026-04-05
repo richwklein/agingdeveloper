@@ -1,0 +1,13 @@
+{
+  "config": {
+    "MD013": false,
+    "MD029": false,
+  },
+  "ignores": [
+    "dist/**",
+    ".astro/**",
+    "node_modules/**",
+    ".netlify/**",
+    "src/content/article/2022/06-18-distributed-authorization/index.mdx",
+  ],
+}
