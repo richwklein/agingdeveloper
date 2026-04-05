@@ -33,15 +33,43 @@ const { class: className } = Astro.props
 </typeahead-search>
 
 <script>
-  import type { OutputBaseSearchable } from 'astro-fuse'
+  import type { SearchableArticle, SearchIndexPayload } from '@utils/searchTypes'
+  import { searchKeys } from '@utils/searchTypes'
+  import Fuse from 'fuse.js'
+
+  let fusePromise: Promise<Fuse<SearchableArticle>> | undefined
+
+  const loadFuse = async () => {
+    if (!fusePromise) {
+      fusePromise = fetch('/fuse.json')
+        .then(async (response) => {
+          if (!response.ok) {
+            throw new Error(`Unable to load search index: ${response.status}`)
+          }
+
+          const payload = (await response.json()) as SearchIndexPayload
+          const index = Fuse.parseIndex<SearchableArticle>(payload.index)
+          return new Fuse(payload.list, { keys: searchKeys }, index)
+        })
+        .catch((error) => {
+          fusePromise = undefined
+          throw error
+        })
+    }
+
+    return fusePromise
+  }
 
   class TypeaheadSearch extends HTMLElement {
     list: HTMLUListElement | null = null
     input: HTMLInputElement | null = null
     blurTimeout: number | null = null
+    fusePromise: Promise<Fuse<SearchableArticle>>
 
     constructor() {
       super()
+
+      this.fusePromise = loadFuse()
 
       this.list = this.querySelector<HTMLUListElement>('[data-search-result]')
       this.input = this.querySelector<HTMLInputElement>('[data-search-input]')
@@ -65,11 +93,10 @@ const { class: className } = Astro.props
         return
       }
 
-      const { loadFuse } = await import('astro-fuse/client')
-      const fuse = await loadFuse()
+      const fuse = await this.fusePromise
       const query = (e.target as HTMLInputElement).value.trim()
 
-      const results = fuse.search<OutputBaseSearchable>(query)
+      const results = fuse.search(query)
 
       if (results.length <= 0) {
         list.innerHTML = ''
