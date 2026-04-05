@@ -54,6 +54,22 @@ pnpm install
 
 This will install the local project dependencies using `pnpm`.
 
+### Create a production build
+
+Use the standard build script to generate the static site into `dist/`.
+
+```shell
+pnpm run build
+```
+
+### Serve the production build locally
+
+After building the site, use Astro's preview server to serve the production output locally.
+
+```shell
+pnpm run preview
+```
+
 ## Build Variables
 
 The workflows use two GitHub Actions repository variables:
@@ -113,6 +129,6 @@ Several different size and aspect ratios are used for the cover images on the si
 
 Tests are built using `vitest`. Any new components should have unit tests for it. A [snapshot test](https://vitest.dev/guide/snapshot.html) is the minimum to include. Any logic branches should have individual unit tests around them.
 
-## Disclaimer
+## Disclaimers
 
 This code has been cleaned up and improved using Large Language Models (LLMs) to ensure better readability, maintainability, and functionality. Please review the code and test it in your environment before using it in production.
