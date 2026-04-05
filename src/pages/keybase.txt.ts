@@ -1,6 +1,7 @@
 /**
  * The page used to create the keybase.txt file.
  */
+import { getStaticCacheControl } from '@utils/cache'
 import type { APIRoute } from 'astro'
 
 const keybaseTxt = `
@@ -84,6 +85,7 @@ View my publicly-auditable identity here: https://keybase.io/richwklein
 export const GET: APIRoute = () => {
   return new Response(keybaseTxt, {
     headers: {
+      'Cache-Control': getStaticCacheControl(),
       'Content-Type': 'text/plain; charset=utf-8',
     },
   })
