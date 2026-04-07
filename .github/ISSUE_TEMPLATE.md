@@ -1,4 +1,4 @@
-<!-- markdownlint-disable MD041 -->
+# Issue
 
 Before you open an issue, please check if a similar issue already exists or has been closed before.
 

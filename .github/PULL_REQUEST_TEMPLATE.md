@@ -1,4 +1,4 @@
-<!-- markdownlint-disable MD041 -->
+# Pull Request
 
 ## Proposed changes
 

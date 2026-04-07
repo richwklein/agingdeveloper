@@ -40,8 +40,6 @@ jobs:
 
       - name: 'Setup tools'
         uses: ./.github/actions/setup-tools
-        with:
-          install-dependencies: 'false'
 
       - name: 'Download build artifact'
         uses: actions/download-artifact@v8
@@ -58,7 +56,7 @@ jobs:
           set -euo pipefail
 
           alias="pr-${PR_NUMBER}"
-          deploy_json="$(pnpm dlx netlify deploy \
+          deploy_json="$(pnpm exec netlify deploy \
             --auth "$NETLIFY_API_TOKEN" \
             --site "$NETLIFY_SITE_ID" \
             --dir dist \
