@@ -80,6 +80,7 @@ export const getFeed = async (): Promise<Feed> => {
         imageUrl: featuredImageUrl,
       },
     })
+    const descriptionHtml = `<p>${escapeHtml(article.data.description)}</p>`
 
     feed.addItem({
       title: article.data.title,
@@ -100,6 +101,7 @@ export const getFeed = async (): Promise<Feed> => {
         type: mime.getType(article.data.featured.image.src.split('?')[0]) || undefined,
       },
       content:
+        descriptionHtml +
         featuredImageHtml +
         sanitizeHtml(parser.render(article.body || ''), {
           allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
@@ -154,6 +156,27 @@ const escapeXmlAttr = (unsafe: string): string => {
         return '&quot;'
       default:
         return c
+    }
+  })
+}
+
+/**
+ * Escape HTML content for text nodes.
+ *
+ * @param unsafe - The unsafe string to escape.
+ * @returns The escaped string.
+ */
+const escapeHtml = (unsafe: string): string => {
+  return unsafe.replace(/[<>&]/g, (char: string) => {
+    switch (char) {
+      case '<':
+        return '&lt;'
+      case '>':
+        return '&gt;'
+      case '&':
+        return '&amp;'
+      default:
+        return char
     }
   })
 }
