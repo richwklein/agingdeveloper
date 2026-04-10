@@ -1,13 +1,14 @@
 import { capitalize } from '@utils/misc'
-import { file, glob } from 'astro/loaders' // Not available with legacy API
-import { defineCollection, reference, z } from 'astro:content'
+import { file, glob } from 'astro/loaders'
+import { z } from 'astro/zod'
+import { defineCollection, reference } from 'astro:content'
 
 const article = defineCollection({
   loader: glob({
     pattern: '**/*.mdx',
     base: 'src/content/article',
     generateId: ({ entry }) => {
-      // remove the index.mdx and replace slashes with dashes
+      // Remove index filenames and flatten the directory path into an id.
       return entry.replace(/\/index\.mdx$/, '').replace(/\//g, '-')
     },
   }),
@@ -21,13 +22,13 @@ const article = defineCollection({
         author: z
           .object({
             name: z.string(),
-            url: z.string(),
+            url: z.url(),
           })
           .optional(),
         site: z
           .object({
             name: z.string(),
-            url: z.string(),
+            url: z.url(),
           })
           .optional(),
       }),
@@ -38,19 +39,15 @@ const article = defineCollection({
         .string()
         .default('uncategorized')
         .transform((val) => capitalize(val)),
-      published: z
-        .string()
-        .date()
-        .transform((val) => new Date(val)),
-      modified: z
-        .string()
+      published: z.iso.date().transform((val) => new Date(val)),
+      modified: z.iso
         .date()
         .transform((val) => new Date(val))
         .optional(),
       license: z
         .object({
           name: z.string(),
-          url: z.string().url(),
+          url: z.url(),
           short: z.string().optional(),
           icon: z.string().optional(),
         })
@@ -65,7 +62,7 @@ const author = defineCollection({
       name: z.string(),
       givenName: z.string(),
       familyName: z.string(),
-      email: z.string().email(),
+      email: z.email(),
       avatar: image(),
       tagline: z.string(),
       bio: z.string(),
@@ -74,16 +71,12 @@ const author = defineCollection({
         .array(
           z.object({
             name: z.string(),
-            url: z.string().url(),
+            url: z.url(),
           })
         )
         .optional(),
-      published: z
-        .string()
-        .date()
-        .transform((val) => new Date(val)),
-      modified: z
-        .string()
+      published: z.iso.date().transform((val) => new Date(val)),
+      modified: z.iso
         .date()
         .transform((val) => new Date(val))
         .optional(),
@@ -113,10 +106,7 @@ const quote = defineCollection({
     z.object({
       text: z.string().min(1, 'Quote text cannot be empty'),
       author: z.string().min(1, 'Author name cannot be empty').default('Anonymous'),
-      chalked: z
-        .string()
-        .date()
-        .transform((val) => new Date(val)),
+      chalked: z.iso.date().transform((val) => new Date(val)),
       source: z
         .object({
           title: z.string(),

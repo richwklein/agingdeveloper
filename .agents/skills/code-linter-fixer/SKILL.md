@@ -1,9 +1,9 @@
 ---
 name: code-linter-fixer
-description: Run the repository's lint and formatting fix scripts after changing any JavaScript, TypeScript, or Astro-based source file. Use this whenever edits touch files such as .js, .mjs, .cjs, .ts, or .astro.
+description: Run the repository's lint and formatting fix scripts after changing JavaScript, TypeScript, Astro, Markdown, or MDX source files. Use this whenever edits touch files such as .js, .mjs, .cjs, .ts, .astro, .md, or .mdx.
 ---
 
-# JS/TS Post-Edit Fixers
+# Source Post-Edit Fixers
 
 When your changes modify any of these file types, run both fix scripts before finishing:
 
@@ -12,6 +12,8 @@ When your changes modify any of these file types, run both fix scripts before fi
 - `.cjs`
 - `.ts`
 - `.astro`
+- `.md`
+- `.mdx`
 
 Use the repository scripts exactly as defined in `package.json`:
 
@@ -27,4 +29,4 @@ Workflow:
 3. Then run `pnpm run format:fix`.
 4. If either command fails, surface the failure clearly in the final response.
 
-Do not run these scripts for edits that only touch non-code files such as Markdown unless a matching source file also changed.
+For Markdown and MDX edits, Prettier is the source of truth. Do not run a separate Markdown linter or Markdown auto-fixer.
