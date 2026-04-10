@@ -20,9 +20,8 @@ describe('feedTitle', () => {
   }
 
   test('that it contains correct tags', async () => {
-    expect(title).toContain('<hgroup')
     expect(title).toContain('<h2')
-    expect(title).toContain('<h3')
+    expect(title).toContain('<p')
   })
 
   test('that it contains the title', async () => {
@@ -30,7 +29,7 @@ describe('feedTitle', () => {
   })
 
   test('that it contains the description', async () => {
-    expect(title).toContain('>Description</h3>')
+    expect(title).toContain('>Description</p>')
   })
 
   test('that it does not include article title presentation classes', async () => {

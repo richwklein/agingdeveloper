@@ -21,26 +21,26 @@ const { featured, imageUrl } = Astro.props
 const alt = featured.author?.name || 'unknown'
 ---
 
-<figure>
+<p>
   <img src={imageUrl} alt={alt} />
-  {
-    featured.author || featured.site ? (
-      <figcaption>
-        <small>
-          {featured.author ? (
-            <>
-              {'Image by '}
-              <LinkExternal to={featured.author.url}>{featured.author.name}</LinkExternal>
-            </>
-          ) : null}
-          {featured.site ? (
-            <>
-              {' on '}
-              <LinkExternal to={featured.site.url}>{featured.site.name}</LinkExternal>
-            </>
-          ) : null}
-        </small>
-      </figcaption>
-    ) : null
-  }
-</figure>
+</p>
+{
+  featured.author || featured.site ? (
+    <p>
+      <small>
+        {featured.author ? (
+          <>
+            {'Image by '}
+            <LinkExternal to={featured.author.url}>{featured.author.name}</LinkExternal>
+          </>
+        ) : null}
+        {featured.site ? (
+          <>
+            {' on '}
+            <LinkExternal to={featured.site.url}>{featured.site.name}</LinkExternal>
+          </>
+        ) : null}
+      </small>
+    </p>
+  ) : null
+}

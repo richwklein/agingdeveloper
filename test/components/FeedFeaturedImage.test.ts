@@ -29,7 +29,7 @@ describe('feedFeaturedImage', () => {
       },
     })
 
-    expect(html).toContain('<figure')
+    expect(html).toContain('<p')
     expect(html).toContain('src="https://example.com/image.jpg"')
     expect(html).toContain('alt="Jane Photographer"')
     expect(html).toContain('Image by')
@@ -44,9 +44,8 @@ describe('feedFeaturedImage', () => {
       image: { src: './featured.jpg' },
     })
 
-    expect(html).toContain('<figure')
+    expect(html).toContain('<p')
     expect(html).toContain('alt="unknown"')
-    expect(html).not.toContain('<figcaption')
     expect(html).not.toContain('Image by')
   })
 })

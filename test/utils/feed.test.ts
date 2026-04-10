@@ -78,10 +78,10 @@ describe('getFeed', () => {
     const json = JSON.parse(feed.json1())
     const item = json.items[0]
 
-    expect(item.content_html).toContain('<hgroup')
+    expect(item.content_html).toContain('<h2')
     expect(item.content_html).toContain('>Mock Feed Article<')
     expect(item.content_html).toContain('>Mock feed description<')
-    expect(item.content_html).toContain('<figure')
+    expect(item.content_html).toContain('<img')
     expect(item.content_html).toContain('src="https://feed.example.com/_astro/featured-image.jpg"')
     expect(item.content_html).toContain('alt="Jane Photographer"')
     expect(item.content_html).toContain('Image by')
@@ -89,13 +89,15 @@ describe('getFeed', () => {
     expect(item.content_html).toContain('>Example Photos<')
     expect(item.content_html).toContain('<p>Intro paragraph.</p>')
 
-    const titleIndex = item.content_html.indexOf('<hgroup')
-    const figureIndex = item.content_html.indexOf('<figure')
+    const titleIndex = item.content_html.indexOf('<h2')
+    const imageIndex = item.content_html.indexOf(
+      'src="https://feed.example.com/_astro/featured-image.jpg"'
+    )
     const bodyIndex = item.content_html.indexOf('<p>Intro paragraph.</p>')
 
     expect(titleIndex).toBeGreaterThanOrEqual(0)
-    expect(figureIndex).toBeGreaterThan(titleIndex)
-    expect(bodyIndex).toBeGreaterThan(figureIndex)
+    expect(imageIndex).toBeGreaterThan(titleIndex)
+    expect(bodyIndex).toBeGreaterThan(imageIndex)
   })
 
   test('keeps inline markdown links and images absolute in feed content', async () => {
