@@ -73,14 +73,11 @@ describe('getFeed', () => {
     ])
   })
 
-  test('prepends the title block and featured image block to feed content', async () => {
+  test('prepends the featured image block to feed content', async () => {
     const feed = await getFeed()
     const json = JSON.parse(feed.json1())
     const item = json.items[0]
 
-    expect(item.content_html).toContain('<h2')
-    expect(item.content_html).toContain('>Mock Feed Article<')
-    expect(item.content_html).toContain('>Mock feed description<')
     expect(item.content_html).toContain('<img')
     expect(item.content_html).toContain('src="https://feed.example.com/_astro/featured-image.jpg"')
     expect(item.content_html).toContain('alt="Jane Photographer"')
@@ -89,14 +86,12 @@ describe('getFeed', () => {
     expect(item.content_html).toContain('>Example Photos<')
     expect(item.content_html).toContain('<p>Intro paragraph.</p>')
 
-    const titleIndex = item.content_html.indexOf('<h2')
     const imageIndex = item.content_html.indexOf(
       'src="https://feed.example.com/_astro/featured-image.jpg"'
     )
     const bodyIndex = item.content_html.indexOf('<p>Intro paragraph.</p>')
 
-    expect(titleIndex).toBeGreaterThanOrEqual(0)
-    expect(imageIndex).toBeGreaterThan(titleIndex)
+    expect(imageIndex).toBeGreaterThanOrEqual(0)
     expect(bodyIndex).toBeGreaterThan(imageIndex)
   })
 
