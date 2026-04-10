@@ -1,40 +1,27 @@
-name: "Test"
+name: 'Test'
 on:
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: read
-      pull-requests: write
-
     steps:
-      - name: "Checkout source code"
+      - name: 'Checkout source code'
         uses: actions/checkout@v6
 
-      - name: "Delete package-lock.json"
-        run: rm -f package-lock.json
+      - name: 'Setup tools and dependencies'
+        uses: ./.github/actions/setup-tools
 
-      - name: "Setup Node.js environment"
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: ".tool-versions"
+      - name: 'Run unit tests with coverage'
+        run: pnpm run test:coverage
 
-      - name: "Install dependencies"
-        run: npm install
-
-      - name: "Run unit tests with coverage"
-        run: npm run test:coverage
-
-      - name: "Report Coverage"
+      - name: 'Upload coverage report'
         if: always()
-        uses: davelosert/vitest-coverage-report-action@v2
-
-      - name: "Upload coverage report"
-        if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: coverage
           path: coverage

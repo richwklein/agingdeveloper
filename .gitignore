@@ -6,8 +6,8 @@ dist/
 
 # dependencies & cache
 node_modules/
-package-lock.json
 .netlify/
+deno.lock
 
 # logs
 npm-debug.log*

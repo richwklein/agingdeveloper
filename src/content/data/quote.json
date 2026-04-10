@@ -1,5 +1,182 @@
 [
   {
+    "id": "684d509a-1ffe-40c5-ae03-383e96c2c2a7",
+    "text": "Making the decision to have a child—it is momentous. It is to decide forever to have your heart go walking around outside your body.",
+    "author": "Elizabeth Stone",
+    "chalked": "2026-04-06",
+    "source": {
+      "title": "A Boy I Once Knew: What a Teacher Learned from Her Student",
+      "type": "book",
+      "year": 2002
+    }
+  },
+  {
+    "id": "b3c2a9e4-1f6a-4a8c-9d7b-2e5f8c1a7d90",
+    "text": "It is spring again. The earth is like a child that knows poems by heart.",
+    "author": "Rainer Maria Rilke",
+    "chalked": "2026-03-23",
+    "source": {
+      "title": "Letters on Life",
+      "type": "book",
+      "year": 2006
+    }
+  },
+  {
+    "id": "1209c8d2-4651-41d4-b340-96950217190b",
+    "text": "If we had no winter, the spring would not be so pleasant.",
+    "author": "Anne Bradstreet",
+    "chalked": "2026-03-16",
+    "source": {
+      "title": "Meditations Divine and Moral",
+      "type": "book",
+      "year": 1655
+    }
+  },
+  {
+    "id": "0d6a0d1e-7c2e-4b9c-8e3f-9a5b2e0e6c9d",
+    "text": "You will never find anybody who can give you a clear and compelling reason why we observe Daylight Saving Time.",
+    "author": "Dave Barry",
+    "chalked": "2026-03-09",
+    "source": {
+      "title": "25 Things I Have Learned in 50 Years",
+      "type": "newspaper",
+      "year": 1998
+    }
+  },
+  {
+    "id": "9f3c2c6e-5c3d-4e9b-9c9e-1a7d2a4f8b21",
+    "text": "Time moves slowly, but passes quickly.",
+    "author": "Alice Walker",
+    "chalked": "2026-03-02",
+    "source": {
+      "title": "The Color Purple",
+      "type": "book",
+      "year": 1982
+    }
+  },
+  {
+    "id": "5e33f20c-83dc-4f31-8c3a-5d5df4b88f1c",
+    "text": "Your children are not your children. They are the sons and daughters of Life's longing for itself.",
+    "author": "Kaklil Gibran",
+    "chalked": "2026-02-23",
+    "source": {
+      "title": "The Prophet",
+      "type": "book",
+      "year": 1923
+    }
+  },
+  {
+    "id": "2f6b7c2a-4b4d-4c1d-9f6e-3a2b9d8e5f41",
+    "text": "The great thing about getting older is that you don't lose all the other ages you've been.",
+    "author": "Madeleine L'Engle",
+    "chalked": "2026-02-16",
+    "source": {
+      "title": "Walking on Water: Reflections on Faith and Art",
+      "type": "book",
+      "year": 1980
+    }
+  },
+
+  {
+    "id": "3c6f9b21-7e4a-4d5b-9c2f-8a1d6e7b5f42",
+    "text": "Hold fast to dreams, for if dreams die, life is a broken-winged bird that cannot fly.",
+    "author": "Langston Hughes",
+    "chalked": "2026-02-12",
+    "source": {
+      "title": "The World Tomorrow",
+      "type": "magazine",
+      "year": 1922
+    }
+  },
+  {
+    "id": "90e65946-883d-48d8-9a08-a2ae99bb204a",
+    "text": "While it is February, one can taste the full joys of anticipation. Spring stands at the gate with her finger on the latch.",
+    "author": "Patience Strong",
+    "chalked": "2026-02-02",
+    "source": {
+      "title": "The Glory of the Garden",
+      "type": "book",
+      "year": 1947
+    }
+  },
+  {
+    "id": "b3cb8dbf-6d82-4163-9bb3-da88e86e70e3",
+    "text": "Do not lose heart. We were made for these times.",
+    "author": "Clarissa Pinkola Estés",
+    "chalked": "2026-01-26",
+    "source": {
+      "title": "We Were Made for These Times",
+      "type": "letter",
+      "year": 2020
+    }
+  },
+  {
+    "id": "4aafdfd4-0525-4e1a-b7c3-3cd86a615a55",
+    "text": "Injustice anywhere is a threat to justice everywhere.",
+    "author": "Martin Luther King Jr.",
+    "chalked": "2026-01-19",
+    "source": {
+      "title": "Letter from Birmingham Jail",
+      "type": "letter",
+      "year": 1963
+    }
+  },
+  {
+    "id": "2df4bd56-6766-4e8c-a44c-e7c4639ab013",
+    "text": "Acting is behaving truthfully under imaginary circumstances.",
+    "author": "Sanford Meisner",
+    "chalked": "2026-01-13",
+    "source": {
+      "title": "Sanford Meisner on Acting",
+      "type": "book",
+      "year": 1987
+    }
+  },
+  {
+    "id": "ed5bb780-cc7b-4155-ad7b-f726d9113efa",
+    "text": "Hope smiles from the threshold of the year to come.",
+    "author": "Alfred, Lord Tennyson",
+    "chalked": "2026-01-05",
+    "source": {
+      "title": "Robin Hood and Maid Marian",
+      "type": "play",
+      "year": 1892
+    }
+  },
+  {
+    "id": "43b027aa-71a8-4b7f-b344-c20338ea6cd0",
+    "text": "Cheers to a gracious New Year. May we uphold the fullness of God's grace, goodness, and goodwill.",
+    "author": "Lailah Gifty Akita",
+    "chalked": "2025-12-29",
+    "source": {
+      "title": "Pearls of Wisdom: Great mind",
+      "type": "book",
+      "year": 2015
+    }
+  },
+  {
+    "id": "83d69b89-8692-457e-96b3-6b219c450b0f",
+    "text": "Let there be peace on earth, and it begin with me!",
+    "author": "Jill Jackson-Miller (lyrics) and Sy Miller (music)",
+    "chalked": "2025-12-22",
+    "source": {
+      "title": "Let There Be Peace on Earth",
+      "type": "song",
+      "year": 1955
+    }
+  },
+  {
+    "id": "db34d866-6382-4d55-ade5-d20458cab73f",
+    "text": "Have yourself a merry little Christmas. Let your heart be light.",
+    "author": "Judy Garland",
+    "chalked": "2025-12-15",
+    "source": {
+      "title": "Have Yourself a Merry Little Christmas",
+      "type": "song",
+      "year": 1947
+    }
+  },
+  {
     "id": "a1f2165f-309f-4e0f-88ec-9aee9ead4351",
     "text": "Life has to end. Love doesn't.",
     "author": "Mitch Albom",
@@ -637,7 +814,12 @@
     "id": "ff9632b7-8d36-45ad-9be3-8418835da752",
     "text": "While it is February, one can taste the full joys of anticipation. Spring stands at the gate with her finger on the latch.",
     "author": "Patience Strong",
-    "chalked": "2024-02-19"
+    "chalked": "2024-02-19",
+    "source": {
+      "title": "The Glory of the Garden",
+      "type": "book",
+      "year": 1947
+    }
   },
   {
     "id": "ec3902ed-22ef-4bc0-b446-a6d5ab161a42",

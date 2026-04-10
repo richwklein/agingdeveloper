@@ -48,24 +48,36 @@ const { remarkPluginFrontmatter: frontmatter } = await render(article)
       `}
       loading={'eager'}
     />
-    <div class:list={['top-0 left-0 h-full w-full', 'lg:bg-primary-main/40 lg:absolute']}>
+    <div
+      class:list={[
+        'top-0 left-0 h-full w-full',
+        'from-primary-main/75 via-primary-main/60 to-primary-main/45 bg-linear-to-r',
+        'lg:from-primary-main/75 lg:via-primary-main/60 lg:bg-linear-to-r lg:to-transparent',
+        'absolute',
+      ]}
+    >
       <div class:list={['w-full px-4 pt-3 pb-2', 'lg:p-8', 'lg:w-3/5']}>
         <h4
           class:list={[
-            'text-lg leading-snug font-medium text-stone-900',
-            'lg:text-primary-contrast/80 lg:text-5xl',
+            'text-lg leading-snug font-medium text-stone-100 drop-shadow-lg',
+            'lg:text-primary-contrast lg:text-5xl',
           ]}
         >
           {article.data.title}
         </h4>
-        <small class:list={['text-sm text-stone-600', 'lg:text-primary-contrast/80 lg:text-lg']}>
+        <small
+          class:list={[
+            'text-sm text-stone-100 drop-shadow-md',
+            'lg:text-primary-contrast lg:text-lg',
+          ]}
+        >
           <time datetime={article.data.published.toISOString()}>
             {formatDate(article.data.published)}
           </time>
         </small>
         <p
           class:list={[
-            'text-md mt-2 leading-relaxed text-stone-700',
+            'text-md mt-2 leading-relaxed text-stone-100 drop-shadow-md',
             'lg:text-primary-contrast lg:mt-6 lg:text-lg',
             'lg:mt-8',
           ]}

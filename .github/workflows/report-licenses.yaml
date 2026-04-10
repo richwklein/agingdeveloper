@@ -1,8 +1,12 @@
-name: "Report Licenses"
+name: 'Report Licenses'
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
   license-report:
@@ -10,31 +14,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Checkout source code"
+      - name: 'Checkout source code'
         uses: actions/checkout@v6
 
-      - name: "Delete package-lock.json"
-        run: rm -f package-lock.json
+      - name: 'Setup tools and dependencies'
+        uses: ./.github/actions/setup-tools
 
-      - name: "Setup Node.js environment"
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: ".tool-versions"
-
-      - name: "Install dependencies"
-        run: npm install
-
-      - name: "Generate license report"
+      - name: 'Generate license report'
         id: generate-report
-        run: npm run licenses:html
+        run: pnpm run licenses:html
 
-      - name: "Upload license report artifact"
-        uses: actions/upload-artifact@v5
+      - name: 'Upload license report artifact'
+        uses: actions/upload-artifact@v7
         with:
           name: license-report
           path: license-report.html
 
-      - name: "Sanitize license report"
+      - name: 'Sanitize license report'
         id: sanitize-report
         run: |
           LICENSE_REPORT=$(node license-report-cleaner.mjs license-report.html)
@@ -42,8 +38,8 @@ jobs:
           echo "$LICENSE_REPORT" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
-      - name: "Report licenses on pull request"
-        uses: marocchino/sticky-pull-request-comment@v2
+      - name: 'Report licenses on pull request'
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: license
           message: |

@@ -23,6 +23,7 @@ tags:
 category: site
 enhanced: false
 published: '2021-05-17'
+modified: '2026-04-05'
 ---
 
 ## What is RSS?
@@ -76,7 +77,7 @@ npm install --save feed
 
 Code in the **gatsby-node.js** file is run as part of the process of building the site. At the end of the production build
 process the `onPostBuild` method is called. This is the callback I used to create the feed files.
-You can see the full implementation [here](https://github.com/richwklein/agingdeveloper/blob/1381c628fff2e674e5a84345bd21bb8617cb0b17/gatsby-node.js#L142-L308).
+You can see the [full `gatsby-node.js feed implementation](https://github.com/richwklein/agingdeveloper/blob/1381c628fff2e674e5a84345bd21bb8617cb0b17/gatsby-node.js#L142-L308).
 
 The posts are sorted in the graphql by date then title.
 

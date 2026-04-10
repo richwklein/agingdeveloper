@@ -11,6 +11,7 @@ This is the personal site of Richard Klein. It is a static site built using [typ
 - [Start local development](#start-local-development)
   - [Create a production build.](#create-a-production-build)
   - [Serve the production build locally.](#serve-the-production-build-locally)
+- [Build Variables](#build-variables)
 - [VSCode settings](#vscode-settings)
 - [Images](#images)
 - [Testing](#testing)
@@ -30,28 +31,74 @@ Both the source code for the site and the content that is hosted on the site are
 
 ## Start local development
 
-Most Typescript developers will likely already have the tools installed, but here is a quick rundown of setting things up just in case you do not. I'm using asdf-vm here to allow multiple versions of tools to be installed at the same time.
+Most Typescript developers will likely already have the tools installed, but here is a quick rundown of setting things up just in case you do not. I'm using asdf-vm here to allow multiple versions of tools to be installed at the same time. The pinned local tool versions live in `.tool-versions`.
 
 1. **Install dev tools**
 
 I use _asdf_ to install dev tools. Use the [getting started](https://asdf-vm.com/guide/getting-started.html) page to make sure it is installed and set up correctly.
 
-Once you have asdf installed you can use that to install node & npm. These are setup as being the global versions, but with asdf you could just use the version locally.
+Once you have asdf installed you can use that to install the versions of `nodejs` and `pnpm` defined in this repository.
 
 ```shell
 asdf plugin add nodejs
-asdf install nodejs 18.9.1
-asdf global nodejs 18.9.1
+asdf plugin add pnpm
+asdf install
 ```
 
 2. **Install dependencies**
 
 ```shell
 cd agingdeveloper/
-npm install
+pnpm install
 ```
 
-This will install local npm dependencies.
+This will install the local project dependencies using `pnpm`.
+
+### Create a production build
+
+Use the standard build script to generate the static site into `dist/`.
+
+```shell
+pnpm run build
+```
+
+### Serve the production build locally
+
+After building the site, use Astro's preview server to serve the production output locally.
+
+```shell
+pnpm run preview
+```
+
+## Build Variables
+
+The workflows use two GitHub Actions repository variables:
+
+- `SITE_ORIGIN`: Canonical site origin used for Astro's `site` setting, sitemap generation, and other absolute URLs.
+- `ANALYTICS_TRACKING_ID`: Analytics tracking id made available to the build.
+
+The reusable build workflow at [.github/workflows/code-build.yaml](./.github/workflows/code-build.yaml) also accepts a `deploy-context` input. That input controls production-only behavior in the app:
+
+- [.github/workflows/deploy-preview.yaml](./.github/workflows/deploy-preview.yaml) builds with `deploy-context: deploy-preview`
+- [.github/workflows/tag-release.yaml](./.github/workflows/tag-release.yaml) builds with `deploy-context: production`
+
+The analytics script is only injected when the deploy context is `production`. Preview deploys still receive the analytics id in the build environment, but the script is not rendered.
+
+The Netlify deploy workflows also require two GitHub Actions repository secrets:
+
+- `NETLIFY_API_TOKEN`: Token used by the Netlify CLI to create preview and production deploys.
+- `NETLIFY_SITE_ID`: Netlify site identifier for the target site.
+
+These secrets are used by [.github/workflows/deploy-preview.yaml](./.github/workflows/deploy-preview.yaml) and [.github/workflows/tag-release.yaml](./.github/workflows/tag-release.yaml).
+
+For local runs, the site origin falls back to `http://localhost:4321` and the deploy context falls back to `dev`. To build locally with production-only behavior enabled:
+
+```shell
+SITE_ORIGIN=https://agingdeveloper.com \
+ANALYTICS_TRACKING_ID=G-XXXXXXXXXX \
+DEPLOY_CONTEXT=production \
+pnpm run build
+```
 
 ## VSCode Settings
 
@@ -82,6 +129,6 @@ Several different size and aspect ratios are used for the cover images on the si
 
 Tests are built using `vitest`. Any new components should have unit tests for it. A [snapshot test](https://vitest.dev/guide/snapshot.html) is the minimum to include. Any logic branches should have individual unit tests around them.
 
-## Disclaimer
+## Disclaimers
 
 This code has been cleaned up and improved using Large Language Models (LLMs) to ensure better readability, maintainability, and functionality. Please review the code and test it in your environment before using it in production.

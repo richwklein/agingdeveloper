@@ -1,6 +1,7 @@
 /**
  * The page used to create the robots.txt file.
  */
+import { getStaticCacheControl } from '@utils/cache'
 import { buildUrl } from '@utils/misc'
 import { getDefaultSite } from '@utils/site'
 import type { APIRoute } from 'astro'
@@ -18,6 +19,7 @@ Host: ${url.host}
 export const GET: APIRoute = async () => {
   return new Response(robotsTxt, {
     headers: {
+      'Cache-Control': getStaticCacheControl(),
       'Content-Type': 'text/plain; charset=utf-8',
     },
   })

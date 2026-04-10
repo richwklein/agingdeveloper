@@ -60,3 +60,6 @@ updates:
           - 'vitest'
           - 'vitest-*'
           - '@vitest/*'
+      other-dependencies:
+        patterns:
+          - '*'

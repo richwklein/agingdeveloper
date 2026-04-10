@@ -1,30 +1,25 @@
-name: "Format and Lint"
+name: 'Format and Lint'
 on:
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   lint:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Checkout source code"
+      - name: 'Checkout source code'
         uses: actions/checkout@v6
 
-      - name: "Delete package-lock.json"
-        run: rm -f package-lock.json
+      - name: 'Setup tools and dependencies'
+        uses: ./.github/actions/setup-tools
 
-      - name: "Setup Node.js environment"
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: ".tool-versions"
-
-      - name: "Install dependencies"
-        run: npm install
-
-      - name: "Check formatting"
+      - name: 'Check formatting'
         if: always()
-        run: npm run format
+        run: pnpm run format
 
-      - name: "Check lint"
+      - name: 'Check lint'
         if: always()
-        run: npm run lint
+        run: pnpm run lint
