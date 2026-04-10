@@ -1,3 +1,3 @@
-display_name: JS/TS Post-Edit Fixers
-short_description: Runs lint and format fixers after JS/TS/Astro edits.
-default_prompt: Run lint:fix and format:fix whenever this task changes JavaScript, TypeScript, or Astro files.
+display_name: Source Post-Edit Fixers
+short_description: Runs lint and format fixers after JS/TS/Astro/Markdown edits.
+default_prompt: Run lint:fix and format:fix whenever this task changes JavaScript, TypeScript, Astro, Markdown, or MDX files.
