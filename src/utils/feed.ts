@@ -1,4 +1,5 @@
 import FeedFeaturedImage from '@components/FeedFeaturedImage.astro'
+import FeedTitle from '@components/FeedTitle.astro'
 import type { GetImageResult } from 'astro'
 import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import { getImage } from 'astro:assets'
@@ -74,6 +75,12 @@ export const getFeed = async (): Promise<Feed> => {
       article.data.featured.image.src,
       articlePath
     )
+    const articleTitleHtml = await container.renderToString(FeedTitle, {
+      props: {
+        title: article.data.title,
+        description: article.data.description,
+      },
+    })
     const featuredImageHtml = await container.renderToString(FeedFeaturedImage, {
       props: {
         featured: article.data.featured,
@@ -100,6 +107,7 @@ export const getFeed = async (): Promise<Feed> => {
         type: mime.getType(article.data.featured.image.src.split('?')[0]) || undefined,
       },
       content:
+        articleTitleHtml +
         featuredImageHtml +
         sanitizeHtml(parser.render(article.body || ''), {
           allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),

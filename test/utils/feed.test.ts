@@ -73,11 +73,14 @@ describe('getFeed', () => {
     ])
   })
 
-  test('prepends the rendered featured image block to feed content', async () => {
+  test('prepends the title block and featured image block to feed content', async () => {
     const feed = await getFeed()
     const json = JSON.parse(feed.json1())
     const item = json.items[0]
 
+    expect(item.content_html).toContain('<hgroup')
+    expect(item.content_html).toContain('>Mock Feed Article<')
+    expect(item.content_html).toContain('>Mock feed description<')
     expect(item.content_html).toContain('<figure')
     expect(item.content_html).toContain('src="https://feed.example.com/_astro/featured-image.jpg"')
     expect(item.content_html).toContain('alt="Jane Photographer"')
@@ -85,6 +88,14 @@ describe('getFeed', () => {
     expect(item.content_html).toContain('href="https://images.example.com/jane"')
     expect(item.content_html).toContain('>Example Photos<')
     expect(item.content_html).toContain('<p>Intro paragraph.</p>')
+
+    const titleIndex = item.content_html.indexOf('<hgroup')
+    const figureIndex = item.content_html.indexOf('<figure')
+    const bodyIndex = item.content_html.indexOf('<p>Intro paragraph.</p>')
+
+    expect(titleIndex).toBeGreaterThanOrEqual(0)
+    expect(figureIndex).toBeGreaterThan(titleIndex)
+    expect(bodyIndex).toBeGreaterThan(figureIndex)
   })
 
   test('keeps inline markdown links and images absolute in feed content', async () => {
