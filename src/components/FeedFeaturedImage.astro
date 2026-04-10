@@ -1,0 +1,46 @@
+---
+/**
+ * @name FeedFeaturedImage
+ * Component used for rendering the featured image block at the top of a feed item
+ *
+ * @param {Props} props - The properties of the featured image.
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <FeedFeaturedImage featured={featured} imageUrl={'https://example.com/image.jpg'} />
+ */
+import LinkExternal from '@components/LinkExternal.astro'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  featured: CollectionEntry<'article'>['data']['featured']
+  imageUrl: string
+}
+
+const { featured, imageUrl } = Astro.props
+const alt = featured.author?.name || 'unknown'
+---
+
+<figure>
+  <img src={imageUrl} alt={alt} />
+  {
+    featured.author || featured.site ? (
+      <figcaption>
+        <small>
+          {featured.author ? (
+            <>
+              {'Image by '}
+              <LinkExternal to={featured.author.url}>{featured.author.name}</LinkExternal>
+            </>
+          ) : null}
+          {featured.site ? (
+            <>
+              {' on '}
+              <LinkExternal to={featured.site.url}>{featured.site.name}</LinkExternal>
+            </>
+          ) : null}
+        </small>
+      </figcaption>
+    ) : null
+  }
+</figure>
