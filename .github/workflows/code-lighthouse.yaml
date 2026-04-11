@@ -9,6 +9,7 @@ on:
         type: string
       pr-number:
         description: 'Pull request number to comment on'
+        type: string
         required: true
       checkout-ref:
         description: 'Git ref or SHA that was deployed'
