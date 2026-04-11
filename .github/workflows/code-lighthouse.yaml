@@ -42,32 +42,44 @@ jobs:
         with:
           install-dependencies: 'true'
 
-      - name: Collect Lighthouse data
+      - name: 'Collect Lighthouse data'
         env:
           LIGHTHOUSE_BASE_URL: ${{ inputs.base-url }}
+          LIGHTHOUSE_NUMBER_OF_RUNS: ${{ inputs.number-of-runs }}
         run: |
           pnpm exec lhci collect --config=.lighthouserc.cjs
 
-      - name: Assert Lighthouse scores
+      - name: 'Assert Lighthouse scores'
         run: |
           pnpm exec lhci assert --config=.lighthouserc.cjs
 
-      - name: Upload public reports
-        if: always()
+      - name: 'Upload public reports'
         run: |
           pnpm exec lhci upload --config=.lighthouserc.cjs --target=temporary-public-storage | tee lhci-public.txt
 
-      - name: Upload filesystem reports
-        if: always()
+      - name: 'Upload filesystem reports'
         run: |
           rm -rf ./lhci
           mkdir -p ./lhci
           pnpm exec lhci upload --config=.lighthouserc.cjs --target=filesystem --outputDir=./lhci
 
-      - name: Upload Lighthouse artifact
-        if: always()
-        uses: actions/upload-artifact@v4
+      - name: 'Upload Lighthouse artifact'
+        uses: actions/upload-artifact@v7
         with:
           name: lighthouse-results-pr-${{ inputs.pr-number }}
           path: ./lhci
           retention-days: 7
+
+      - name: 'Build Lighthouse comment'
+        env:
+          LIGHTHOUSE_BASE_URL: ${{ inputs.deploy-url }}
+          LIGHTHOUSE_NUMBER_OF_RUNS: ${{ inputs.number-of-runs }}
+          COMMIT_SHA: ${{ inputs.checkout-ref }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_SERVER_URL: ${{ github.server_url }}
+        run: |
+          LIGHTHOUSE_COMMENT="$(node ./scripts/lighthouse-report-cleaner.mjs ./lhci/manifest.json ./lhci-public.txt)"
+          echo "LIGHTHOUSE_COMMENT<<EOF" >> "$GITHUB_ENV"
+          echo "$LIGHTHOUSE_COMMENT" >> "$GITHUB_ENV"
+          echo "EOF" >> "$GITHUB_ENV"

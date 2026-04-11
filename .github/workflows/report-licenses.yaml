@@ -33,7 +33,7 @@ jobs:
       - name: 'Sanitize license report'
         id: sanitize-report
         run: |
-          LICENSE_REPORT=$(node license-report-cleaner.mjs license-report.html)
+          LICENSE_REPORT=$(node ./scripts/license-report-cleaner.mjs license-report.html)
           echo "LICENSE_REPORT<<EOF" >> $GITHUB_ENV
           echo "$LICENSE_REPORT" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
