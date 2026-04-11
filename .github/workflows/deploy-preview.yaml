@@ -108,7 +108,7 @@ jobs:
     name: Lighthouse
     needs: deploy
     if: needs.deploy.result == 'success'
-    uses: ./.github/workflows/lighthouse.yml
+    uses: ./.github/workflows/code-lighthouse.yml
     with:
       deploy-url: ${{ needs.deploy.outputs.deploy_url }}
       pr-number: ${{ github.event.pull_request.number }}
