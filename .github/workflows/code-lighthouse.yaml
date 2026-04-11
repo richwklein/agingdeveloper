@@ -55,7 +55,7 @@ jobs:
       - name: Upload public reports
         if: always()
         run: |
-          pnpm exec lhci upload --config=.lighthouserc.cjs --target=temporary-public-storage | tee pnpm exec lhci-public.txt
+          pnpm exec lhci upload --config=.lighthouserc.cjs --target=temporary-public-storage | tee lhci-public.txt
 
       - name: Upload filesystem reports
         if: always()
