@@ -27,9 +27,12 @@ jobs:
     name: 'Deploy Preview'
     needs: build
     runs-on: ubuntu-latest
+    outputs:
+      deploy_id: ${{ steps.deploy.outputs.deploy_id }}
+      deploy_url: ${{ steps.deploy.outputs.deploy_url }}
+      logs_url: ${{ steps.deploy.outputs.logs_url }}
     permissions:
       contents: read
-      pull-requests: write
     env:
       COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
       PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -85,17 +88,61 @@ jobs:
           echo "deploy_url=$deploy_url" >> "$GITHUB_OUTPUT"
           echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT"
 
+  lighthouse:
+    if: github.event.pull_request.head.repo.fork == false && github.actor != 'dependabot[bot]'
+    name: 'Lighthouse Preview'
+    needs: deploy
+    continue-on-error: true
+    uses: ./.github/workflows/lighthouse-audit.yaml
+    with:
+      base-url: ${{ needs.deploy.outputs.deploy_url }}
+      number-of-runs: 1
+
+  comment:
+    if: |
+      always() &&
+      github.event.pull_request.head.repo.fork == false &&
+      github.actor != 'dependabot[bot]'
+    name: 'Comment Preview Status'
+    needs:
+      - deploy
+      - lighthouse
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: 'Build Lighthouse status text'
+        id: lighthouse-status
+        env:
+          LIGHTHOUSE_RESULT: ${{ needs.lighthouse.result }}
+        run: |
+          case "$LIGHTHOUSE_RESULT" in
+            success)
+              echo "status=passed" >> "$GITHUB_OUTPUT"
+              ;;
+            failure)
+              echo "status=workflow failed" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "status=not available" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
+
       - name: 'Comment preview URL on pull request'
         uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: deploy-preview
           message: |
-            Preview deploy is ready for pull request #${{ env.PR_NUMBER }}.
+            Preview deploy is ready for pull request #${{ github.event.pull_request.number }}.
 
-            - Preview: ${{ steps.deploy.outputs.deploy_url }}
-            - Deploy ID: `${{ steps.deploy.outputs.deploy_id }}`
-            - Logs: ${{ steps.deploy.outputs.logs_url || 'n/a' }}
+            - Preview: ${{ needs.deploy.outputs.deploy_url }}
+            - Deploy ID: `${{ needs.deploy.outputs.deploy_id }}`
+            - Logs: ${{ needs.deploy.outputs.logs_url || 'n/a' }}
             - Workflow: [#${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            - Commit: [`${{ env.COMMIT_SHA }}`](https://github.com/${{ github.repository }}/commit/${{ env.COMMIT_SHA }})
+            - Commit: [`${{ github.event.pull_request.head.sha }}`](https://github.com/${{ github.repository }}/commit/${{ github.event.pull_request.head.sha }})
+            - Lighthouse preview audit: ${{ steps.lighthouse-status.outputs.status }}
+            - Lighthouse details: review the Lighthouse Preview job output for audited URLs and report links
 
             This is a preview deployment and may be replaced by later pushes to this pull request.
