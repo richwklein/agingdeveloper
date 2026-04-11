@@ -11,6 +11,9 @@
  */
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
+import { Icon } from 'astro-icon/components'
+
+import TypeaheadSearch from './TypeaheadSearch.astro'
 
 interface Props {
   site: CollectionEntry<'site'>
@@ -28,30 +31,59 @@ const { site, class: className } = Astro.props
   ]}
 >
   <div class:list={['container mx-auto px-4 xl:max-w-(--breakpoint-xl)']}>
-    <a href="/" class:list={['flex justify-start bg-transparent text-inherit']}>
-      <div
-        class:list={[
-          'mr-4 mb-2 aspect-square h-12 min-h-12 w-12 min-w-12 sm:mb-0 md:h-20 md:w-20',
-          'ring-secondary-light overflow-hidden rounded-lg ring-2',
-        ]}
-      >
-        <Image
-          src={site.data.avatar}
-          alt={site.data.title}
-          loading={'eager'}
-          fetchpriority={'high'}
-          width={80}
-          widths={[48, 80]}
-          sizes={`(min-width: 768px) 80px, 48px`}
-          class:list={['h-full w-full object-cover object-center']}
-        />
+    <div class:list={['flex items-center']}>
+      <div class:list={['flex min-w-0 flex-1 items-center']}>
+        <a href="/" class:list={['min-w-0 flex-1 bg-transparent text-inherit']}>
+          <div class:list={['flex justify-start']}>
+            <div
+              class:list={[
+                'mr-4 mb-2 aspect-square h-12 min-h-12 w-12 min-w-12 sm:mb-0 md:h-20 md:w-20',
+                'ring-secondary-light overflow-hidden rounded-lg ring-2',
+              ]}
+            >
+              <Image
+                src={site.data.avatar}
+                alt={site.data.title}
+                loading={'eager'}
+                fetchpriority={'high'}
+                width={80}
+                widths={[48, 80]}
+                sizes={`(min-width: 768px) 80px, 48px`}
+                class:list={['h-full w-full object-cover object-center']}
+              />
+            </div>
+            <div class:list={['flex min-w-0 flex-col justify-center']}>
+              <h1 class:list={['xs:text-3xl mb-2 text-base sm:text-4xl']}>{site.data.title}</h1>
+              <p class:list={['hidden text-base sm:block']}>
+                {site.data.tagline}
+              </p>
+            </div>
+          </div>
+        </a>
+
+        <details class:list={['relative ml-auto lg:hidden']}>
+          <summary
+            aria-label="Open search"
+            class:list={[
+              'ring-secondary-light text-primary-contrast flex cursor-pointer list-none items-center justify-center rounded-lg border border-white/20 bg-white/10 p-3 shadow-inner backdrop-blur-xs',
+              'focus:ring-secondary-light/60 focus:ring-2 focus:outline-hidden [&::-webkit-details-marker]:hidden',
+            ]}
+          >
+            <Icon class:list={['h-6 w-6']} name="mdi:menu" />
+          </summary>
+          <div
+            class:list={[
+              'bg-primary-main absolute top-full right-0 z-20 mt-3 w-[min(20rem,calc(100vw-2rem))] rounded-lg border border-white/15 p-3 shadow-xl',
+            ]}
+          >
+            <TypeaheadSearch variant="header" class:list={['w-full']} />
+          </div>
+        </details>
       </div>
-      <div class:list={['flex flex-col justify-center']}>
-        <h1 class:list={['xs:text-3xl mb-2 text-base sm:text-4xl']}>{site.data.title}</h1>
-        <p class:list={['hidden text-base sm:block']}>
-          {site.data.tagline}
-        </p>
+
+      <div class:list={['ml-auto hidden self-center lg:block lg:w-80 lg:shrink-0 xl:w-[28rem]']}>
+        <TypeaheadSearch variant="header" class:list={['w-full']} />
       </div>
-    </a>
+    </div>
   </div>
 </header>
