@@ -1,9 +1,9 @@
-name: 'Lighthouse Audit'
+name: 'lighthouse'
 
 on:
   workflow_call:
     inputs:
-      deploy-url:
+      base-url:
         description: 'Deployed site URL to audit'
         required: true
         type: string
@@ -13,11 +13,6 @@ on:
         required: true
       checkout-ref:
         description: 'Git ref or SHA that was deployed'
-        required: false
-        type: string
-        default: ''
-      assert-presets:
-        description: 'Optional pnpm exec lhci assert preset to enforce'
         required: false
         type: string
         default: ''
@@ -35,7 +30,7 @@ jobs:
       contents: read
       pull-requests: write
     env:
-      LIGHTHOUSE_BASE_URL: ${{ inputs.deploy-url }}
+      LIGHTHOUSE_BASE_URL: ${{ inputs.base-url }}
       LIGHTHOUSE_NUMBER_OF_RUNS: ${{ inputs.number-of-runs }}
 
     steps:
@@ -49,7 +44,7 @@ jobs:
 
       - name: Collect Lighthouse data
         env:
-          LIGHTHOUSE_BASE_URL: ${{ inputs.deploy_url }}
+          LIGHTHOUSE_BASE_URL: ${{ inputs.base-url }}
         run: |
           pnpm exec lhci collect --config=.lighthouserc.cjs
 
