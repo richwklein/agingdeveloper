@@ -6,7 +6,7 @@ import { defineCollection, reference } from 'astro:content'
 const article = defineCollection({
   loader: glob({
     pattern: '**/*.mdx',
-    base: 'src/content/article',
+    base: 'content/article',
     generateId: ({ entry }) => {
       // Remove index filenames and flatten the directory path into an id.
       return entry.replace(/\/index\.mdx$/, '').replace(/\//g, '-')
@@ -56,7 +56,7 @@ const article = defineCollection({
 })
 
 const author = defineCollection({
-  loader: file('src/content/data/author.json'),
+  loader: file('content/data/author.json'),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -84,7 +84,7 @@ const author = defineCollection({
 })
 
 const site = defineCollection({
-  loader: file('src/content/data/site.json'),
+  loader: file('content/data/site.json'),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -101,7 +101,7 @@ const site = defineCollection({
 })
 
 const quote = defineCollection({
-  loader: file('src/content/data/quote.json'),
+  loader: file('content/data/quote.json'),
   schema: () =>
     z.object({
       text: z.string().min(1, 'Quote text cannot be empty'),

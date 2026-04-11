@@ -138,7 +138,7 @@ const site = defineCollection({
 })
 ```
 
-JSON files in the src/content/site directory are then converted into entries in the collection, which can be retrieved by the filename as their ID:
+JSON files in the `content/data` directory are then converted into entries in the collection, which can be retrieved by the filename as their ID:
 
 ```ts
 const site = await getEntry('site', 'agingdeveloper')
