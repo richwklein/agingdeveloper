@@ -54,6 +54,10 @@ jobs:
       - code-build
     if: needs.tag-release.outputs.released == 'true'
     runs-on: ubuntu-latest
+    outputs:
+      deploy_id: ${{ steps.deploy.outputs.deploy_id }}
+      deploy_url: ${{ steps.deploy.outputs.deploy_url }}
+      logs_url: ${{ steps.deploy.outputs.logs_url }}
     permissions:
       contents: read
 
@@ -73,6 +77,7 @@ jobs:
           path: dist
 
       - name: 'Deploy production to Netlify'
+        id: deploy
         env:
           NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -80,11 +85,39 @@ jobs:
         run: |
           set -euo pipefail
 
-          pnpm exec netlify deploy \
+          deploy_json="$(pnpm exec netlify deploy \
             --auth "$NETLIFY_API_TOKEN" \
             --site "$NETLIFY_SITE_ID" \
             --dir dist \
             --message "Release $RELEASE_TAG" \
             --json \
             --no-build \
-            --prod
+            --prod)"
+
+          echo "$deploy_json"
+
+          deploy_url="$(echo "$deploy_json" | jq -r '.deploy_url // .url // empty')"
+          logs_url="$(echo "$deploy_json" | jq -r '.logs // empty')"
+
+          if [ -z "$deploy_url" ] || [ "$deploy_url" = "null" ]; then
+            echo "Netlify production deploy did not return a deploy URL" >&2
+            exit 1
+          fi
+
+          echo "deploy_id=$deploy_id" >> "$GITHUB_OUTPUT"
+          echo "deploy_url=$deploy_url" >> "$GITHUB_OUTPUT"
+          echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT
+
+  lighthouse:
+    name: Lighthouse
+    needs: publish-release
+    permissions:
+      contents: read
+      pull-requests: write
+    if: needs.deploy.result == 'success'
+    uses: ./.github/workflows/code-lighthouse.yaml
+    with:
+      base-url: ${{ needs.deploy.outputs.deploy_url }}
+      pr-number: ${{ github.event.pull_request.number }}
+      checkout-ref: ${{ github.event.pull_request.head.sha }}
+      number-of-runs: 3
