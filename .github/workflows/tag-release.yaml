@@ -55,8 +55,9 @@ jobs:
     if: needs.tag-release.outputs.released == 'true'
     runs-on: ubuntu-latest
     outputs:
+      deploy_id: ${{ steps.deploy.outputs.deploy_id }}
       deploy_url: ${{ steps.deploy.outputs.deploy_url }}
-      deploy_logs_url: ${{ steps.deploy.outputs.logs_url }}
+      logs_url: ${{ steps.deploy.outputs.logs_url }}
     permissions:
       contents: read
 
@@ -103,14 +104,16 @@ jobs:
             exit 1
           fi
 
+          echo "deploy_id=$deploy_id" >> "$GITHUB_OUTPUT"
           echo "deploy_url=$deploy_url" >> "$GITHUB_OUTPUT"
-          echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT"
-
-this pull request.
+          echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT
 
   lighthouse:
     name: Lighthouse
     needs: deploy
+    permissions:
+      contents: read
+      pull-requests: write
     if: needs.deploy.result == 'success'
     uses: ./.github/workflows/code-lighthouse.yaml
     with:
@@ -118,4 +121,3 @@ this pull request.
       pr-number: ${{ github.event.pull_request.number }}
       checkout-ref: ${{ github.event.pull_request.head.sha }}
       number-of-runs: 3
-

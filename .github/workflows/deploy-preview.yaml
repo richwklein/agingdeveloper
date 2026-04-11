@@ -24,7 +24,6 @@ jobs:
 
   deploy:
     if: github.event.pull_request.head.repo.fork == false && github.actor != 'dependabot[bot]'
-    name: 'Deploy'
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -107,9 +106,12 @@ jobs:
   lighthouse:
     name: Lighthouse
     needs: deploy
+    permissions:
+      contents: read
+      pull-requests: write
     if: needs.deploy.result == 'success'
     uses: ./.github/workflows/code-lighthouse.yaml
     with:
       deploy-url: ${{ needs.deploy.outputs.deploy_url }}
       pr-number: ${{ github.event.pull_request.number }}
-      checkout-ref: ${{ github.event.pull_request.head.sha }}
+      checkout-ref: ${{ github.sha }}
