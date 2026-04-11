@@ -1,4 +1,4 @@
-name: 'lighthouse'
+name: 'Lighthouse'
 
 on:
   workflow_call:
@@ -60,14 +60,14 @@ jobs:
       - name: Upload filesystem reports
         if: always()
         run: |
-          rm -rf ./pnpm exec lhci
-          mkdir -p ./pnpm exec lhci
-          pnpm exec lhci upload --config=.lighthouserc.cjs --target=filesystem --outputDir=./pnpm exec lhci
+          rm -rf ./lhci
+          mkdir -p ./lhci
+          pnpm exec lhci upload --config=.lighthouserc.cjs --target=filesystem --outputDir=./lhci
 
       - name: Upload Lighthouse artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-results-pr-${{ inputs.pr-number }}
-          path: ./pnpm exec lhci
+          path: ./lhci
           retention-days: 7
