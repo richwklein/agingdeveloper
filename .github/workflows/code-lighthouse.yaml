@@ -1,0 +1,77 @@
+name: 'Lighthouse Audit'
+
+on:
+  workflow_call:
+    inputs:
+      deploy-url:
+        description: 'Deployed site URL to audit'
+        required: true
+        type: string
+      pr-number:
+        description: 'Pull request number to comment on'
+        required: true
+      checkout-ref:
+        description: 'Git ref or SHA that was deployed'
+        required: false
+        type: string
+        default: ''
+      assert-presets:
+        description: 'Optional pnpm exec lhci assert preset to enforce'
+        required: false
+        type: string
+        default: ''
+      number-of-runs:
+        description: 'How many Lighthouse runs to execute per URL'
+        required: false
+        type: number
+        default: 1
+
+jobs:
+  lighthouse:
+    name: 'Lighthouse'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      LIGHTHOUSE_BASE_URL: ${{ inputs.deploy-url }}
+      LIGHTHOUSE_NUMBER_OF_RUNS: ${{ inputs.number-of-runs }}
+
+    steps:
+      - name: 'Checkout source code'
+        uses: actions/checkout@v6
+
+      - name: 'Setup tools'
+        uses: ./.github/actions/setup-tools
+        with:
+          install-dependencies: 'true'
+
+      - name: Collect Lighthouse data
+        env:
+          LIGHTHOUSE_BASE_URL: ${{ inputs.deploy_url }}
+        run: |
+          pnpm exec lhci collect --config=.lighthouserc.cjs
+
+      - name: Assert Lighthouse scores
+        run: |
+          pnpm exec lhci assert --config=.lighthouserc.cjs
+
+      - name: Upload public reports
+        if: always()
+        run: |
+          pnpm exec lhci upload --config=.lighthouserc.cjs --target=temporary-public-storage | tee pnpm exec lhci-public.txt
+
+      - name: Upload filesystem reports
+        if: always()
+        run: |
+          rm -rf ./pnpm exec lhci
+          mkdir -p ./pnpm exec lhci
+          pnpm exec lhci upload --config=.lighthouserc.cjs --target=filesystem --outputDir=./pnpm exec lhci
+
+      - name: Upload Lighthouse artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results-pr-${{ inputs.pr-number }}
+          path: ./pnpm exec lhci
+          retention-days: 7

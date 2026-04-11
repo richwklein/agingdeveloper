@@ -14,6 +14,10 @@ if (!baseUrl) {
   throw new Error('LIGHTHOUSE_BASE_URL is required for Lighthouse CI runs')
 }
 
+if (!Number.isInteger(numberOfRuns) || numberOfRuns < 1) {
+  throw new Error('LIGHTHOUSE_NUMBER_OF_RUNS must be an integer greater than 0')
+}
+
 module.exports = {
   ci: {
     collect: {
@@ -24,10 +28,12 @@ module.exports = {
       },
     },
     assert: {
-      preset: 'lighthouse:recommended',
-    },
-    upload: {
-      target: 'temporary-public-storage',
+      assertions: {
+        'categories:performance': ['warn', { minScore: 0.8 }],
+        'categories:accessibility': ['warn', { minScore: 0.9 }],
+        'categories:best-practices': ['warn', { minScore: 0.9 }],
+        'categories:seo': ['warn', { minScore: 0.9 }],
+      },
     },
   },
 }

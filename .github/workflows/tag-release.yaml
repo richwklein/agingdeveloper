@@ -106,11 +106,16 @@ jobs:
           echo "deploy_url=$deploy_url" >> "$GITHUB_OUTPUT"
           echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT"
 
+this pull request.
+
   lighthouse:
-    name: 'Lighthouse Production'
-    needs: publish-release
-    if: needs.publish-release.result == 'success'
-    uses: ./.github/workflows/lighthouse-audit.yaml
+    name: Lighthouse
+    needs: deploy
+    if: needs.deploy.result == 'success'
+    uses: ./.github/workflows/lighthouse.yml
     with:
-      base-url: ${{ needs.publish-release.outputs.deploy_url }}
+      deploy-url: ${{ needs.deploy.outputs.deploy_url }}
+      pr-number: ${{ github.event.pull_request.number }}
+      checkout-ref: ${{ github.event.pull_request.head.sha }}
       number-of-runs: 3
+
