@@ -92,7 +92,6 @@ jobs:
     if: github.event.pull_request.head.repo.fork == false && github.actor != 'dependabot[bot]'
     name: 'Lighthouse Preview'
     needs: deploy
-    continue-on-error: true
     uses: ./.github/workflows/lighthouse-audit.yaml
     with:
       base-url: ${{ needs.deploy.outputs.deploy_url }}
