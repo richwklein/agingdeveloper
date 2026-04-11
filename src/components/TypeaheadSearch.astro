@@ -3,29 +3,62 @@ import { Icon } from 'astro-icon/components'
 
 interface Props {
   class?: string
+  variant?: 'default' | 'header'
+  placeholder?: string
+  ariaLabel?: string
 }
 
-const { class: className } = Astro.props
+const {
+  class: className,
+  variant = 'default',
+  placeholder = 'Search...',
+  ariaLabel = 'Search articles',
+} = Astro.props
+
+const isHeader = variant === 'header'
 ---
 
 <typeahead-search>
-  <div data-search-container class:list={['relative', className]}>
+  <div
+    data-search-container
+    role="search"
+    aria-label={ariaLabel}
+    class:list={['relative', className]}
+  >
     <input
       type="text"
       data-search-input
-      placeholder={'Search...'}
+      placeholder={placeholder}
+      aria-label={ariaLabel}
       class:list={[
-        'w-full rounded-md border border-gray-300 px-3 py-2 pl-10',
-        'focus:ring-2 focus:ring-blue-500 focus:outline-hidden',
+        'w-full pl-10',
+        isHeader
+          ? [
+              'text-primary-contrast rounded-lg border border-white/20 bg-white/10 px-3 py-2.5 text-sm shadow-inner backdrop-blur-xs',
+              'focus:border-secondary-light focus:ring-secondary-light/60 placeholder:text-white/65 focus:ring-2 focus:outline-hidden',
+            ]
+          : [
+              'rounded-md border border-gray-300 px-3 py-2',
+              'focus:ring-2 focus:ring-blue-500 focus:outline-hidden',
+            ],
       ]}
     />
     <div class="absolute inset-y-0 left-0 flex items-center">
-      <Icon class:list={['pointer-events-none text-stone-400', 'ml-3 h-6 w-6']} name="mdi:search" />
+      <Icon
+        class:list={[
+          'pointer-events-none ml-3 h-5 w-5',
+          isHeader ? 'text-white/70' : 'text-stone-400',
+        ]}
+        name="mdi:search"
+      />
     </div>
     <ul
       data-search-result
       class:list={[
-        'absolute z-10 hidden max-h-48 w-full overflow-y-auto rounded-md border border-stone-300 bg-white shadow-lg',
+        'absolute inset-x-0 top-full z-10 mt-2 hidden w-full overflow-y-auto',
+        isHeader
+          ? 'text-primary-dark max-h-72 rounded-lg border border-stone-300 bg-white shadow-xl'
+          : 'max-h-48 rounded-md border border-stone-300 bg-white shadow-lg',
       ]}
     >
     </ul>
@@ -89,8 +122,15 @@ const { class: className } = Astro.props
         return
       }
 
-      const fuse = await this.loadFuse()
       const query = (e.target as HTMLInputElement).value.trim()
+
+      if (!query) {
+        list.innerHTML = ''
+        list.classList.add('hidden')
+        return
+      }
+
+      const fuse = await this.loadFuse()
 
       const results = fuse.search(query)
 
