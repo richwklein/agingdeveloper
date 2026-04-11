@@ -26,7 +26,7 @@ const publicLinks = [
   ...publicText.matchAll(/https:\/\/storage\.googleapis\.com\/lhci[^\s)]+/g),
 ].map((match) => match[0])
 
-let body = '## Lighthouse CI\n\n'
+let body = '## Lighthouse Results\n\n'
 body += `- Preview: ${previewUrl}\n`
 body += `- Commit: \`${commitSha}\`\n`
 body += `- Runs per URL: ${runs}\n`

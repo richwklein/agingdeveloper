@@ -83,3 +83,10 @@ jobs:
           echo "LIGHTHOUSE_COMMENT<<EOF" >> "$GITHUB_ENV"
           echo "$LIGHTHOUSE_COMMENT" >> "$GITHUB_ENV"
           echo "EOF" >> "$GITHUB_ENV"
+
+      - name: 'Comment results on pull reuqest'
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: lighthouse-report
+          message: |
+            ${{ env.LIGHTHOUSE_COMMENT }}

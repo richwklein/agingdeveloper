@@ -110,7 +110,7 @@ jobs:
 
   lighthouse:
     name: Lighthouse
-    needs: deploy
+    needs: publish-release
     permissions:
       contents: read
       pull-requests: write
