@@ -60,7 +60,7 @@ describe('alert', () => {
   })
 
   test('that invalid severity throws an error', async () => {
-    await expect(render({ severity: 'invalid' })).rejects.toThrowError(
+    await expect(render({ severity: 'invalid' })).rejects.toThrow(
       /Invalid severity value: "invalid"/
     )
   })

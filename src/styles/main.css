@@ -13,20 +13,23 @@
   --color-secondary-dark: rgb(90, 146, 22);
   --color-secondary-contrast: rgb(46, 46, 46);
 
-  --font-mono:
-    Fira Code, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace;
-  --font-serif: Noto Serif Georgian, ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-sans:
-    Noto Sans Georgian, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-chalk:
-    Walter Turncoat, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
-
   --breakpoint-xs: 420px;
 
   --aspect-ultrawide: 21 / 9;
+}
+
+@theme inline {
+  --font-mono:
+    var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  --font-serif:
+    var(--font-noto-serif-georgian), ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-sans:
+    var(--font-noto-sans-georgian), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-chalk:
+    var(--font-walter-turncoat), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 /*
