@@ -43,6 +43,8 @@ jobs:
         with:
           header: license
           message: |
+            ## License Report
+
             A license report has been generated.
 
             <details>

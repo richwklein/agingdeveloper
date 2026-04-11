@@ -55,7 +55,7 @@ jobs:
 
       - name: 'Upload public reports'
         run: |
-          pnpm exec lhci upload --config=.lighthouserc.cjs --target=temporary-public-storage | tee lhci-public.txt
+          pnpm exec lhci upload --config=.lighthouserc.cjs --target=temporary-public-storage | tee ./lhci-public.txt
 
       - name: 'Upload filesystem reports'
         run: |
@@ -72,14 +72,14 @@ jobs:
 
       - name: 'Build Lighthouse comment'
         env:
-          LIGHTHOUSE_BASE_URL: ${{ inputs.deploy-url }}
+          LIGHTHOUSE_BASE_URL: ${{ inputs.base-url }}
           LIGHTHOUSE_NUMBER_OF_RUNS: ${{ inputs.number-of-runs }}
           COMMIT_SHA: ${{ inputs.checkout-ref }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_RUN_ID: ${{ github.run_id }}
           GITHUB_SERVER_URL: ${{ github.server_url }}
         run: |
-          LIGHTHOUSE_COMMENT="$(node ./scripts/lighthouse-report-cleaner.mjs ./lhci/manifest.json ./lhci-public.txt)"
+          LIGHTHOUSE_COMMENT="$(node ./scripts/lighthouse-report-builder.mjs ./lhci/manifest.json ./lhci-public.txt)"
           echo "LIGHTHOUSE_COMMENT<<EOF" >> "$GITHUB_ENV"
           echo "$LIGHTHOUSE_COMMENT" >> "$GITHUB_ENV"
           echo "EOF" >> "$GITHUB_ENV"
@@ -89,4 +89,12 @@ jobs:
         with:
           header: lighthouse-report
           message: |
+            ## Lighthouse Report
+
+            - Preview: ${{ inputs.base-url }}
+            - Commit: ${{ inputs.checkout-ref }}
+            - Runs per URL: ${{ inputs.number-of-runs }}
+
             ${{ env.LIGHTHOUSE_COMMENT }}
+
+            You can also download the report as an artifact from the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}).

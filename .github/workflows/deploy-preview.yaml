@@ -93,6 +93,8 @@ jobs:
         with:
           header: deploy-preview
           message: |
+            ## Deploy Results
+
             Preview deploy is ready for pull request #${{ env.PR_NUMBER }}.
 
             - Preview: ${{ steps.deploy.outputs.deploy_url }}
