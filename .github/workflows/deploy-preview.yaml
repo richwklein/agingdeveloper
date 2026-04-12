@@ -23,7 +23,10 @@ jobs:
       checkout-ref: ${{ github.sha }}
 
   deploy:
-    if: github.event.pull_request.head.repo.fork == false && github.actor != 'dependabot[bot]'
+    if: >
+      github.event.pull_request.head.repo.fork == false &&
+      github.actor != 'dependabot[bot]' &&
+      !contains(github.event.pull_request.labels.*.name, 'no-deploy')
     needs: build
     runs-on: ubuntu-latest
     permissions:
