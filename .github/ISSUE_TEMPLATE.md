@@ -1,5 +1,3 @@
-# Issue
-
 Before you open an issue, please check if a similar issue already exists or has been closed before.
 
 ### When reporting a bug, please be sure to include the following
@@ -16,3 +14,8 @@ Before you open an issue, please check if a similar issue already exists or has 
 - [ ] A description of the problem you're trying to solve, including _why_ you think this is a problem
 - [ ] An overview of the suggested solution
 - [ ] If the feature changes current behavior, reasons why your solution is better
+- [ ] What is in scope for this issue
+- [ ] What is out of scope for this issue
+- [ ] Acceptance criteria
+- [ ] How the change should be validated or tested
+- [ ] Related issues, links, or references
