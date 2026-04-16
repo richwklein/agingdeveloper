@@ -109,6 +109,42 @@ describe('getFeed', () => {
     expect(item.image.url).toBe('https://feed.example.com/_astro/featured-image.jpg')
     expect(item.author.name).toBe('Mock Name 1')
   })
+
+  test('preserves query strings in feed image URLs while keeping MIME type accurate', async () => {
+    mockGetArticles.mockResolvedValue([
+      {
+        id: 'mock-feed-article-query',
+        body: '![Inline image](/_astro/inline-image.jpg?v=999)',
+        data: {
+          title: 'Mock Feed Article Query',
+          description: 'Mock feed description with query image',
+          published: new Date('2026-04-11'),
+          author: { id: 'mock-author-1' },
+          featured: {
+            image: { src: '/_astro/featured-image.jpg?v=123' },
+            author: {
+              name: 'Jane Photographer',
+              url: 'https://images.example.com/jane',
+            },
+            site: {
+              name: 'Example Photos',
+              url: 'https://images.example.com',
+            },
+          },
+        },
+      },
+    ])
+
+    const feed = await getFeed()
+    const json = JSON.parse(feed.json1())
+    const item = json.items[0]
+
+    expect(item.image.url).toBe('https://feed.example.com/_astro/featured-image.jpg?v=123')
+    expect(item.image.type).toBe('image/jpeg')
+    expect(item.content_html).toContain(
+      'src="https://feed.example.com/_astro/inline-image.jpg?v=999"'
+    )
+  })
 })
 
 describe('feedInfo', () => {

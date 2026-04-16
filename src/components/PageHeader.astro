@@ -9,10 +9,10 @@
  * @example
  * <PageHeader />
  */
-import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import { Icon } from 'astro-icon/components'
 
+import ResponsiveImage from './ResponsiveImage.astro'
 import TypeaheadSearch from './TypeaheadSearch.astro'
 
 interface Props {
@@ -41,9 +41,9 @@ const { site, class: className } = Astro.props
                 'ring-secondary-light overflow-hidden rounded-lg ring-2',
               ]}
             >
-              <Image
-                src={site.data.avatar}
-                alt=""
+              <ResponsiveImage
+                image={site.data.avatar}
+                alt={site.data.title}
                 loading={'eager'}
                 fetchpriority={'high'}
                 width={80}
