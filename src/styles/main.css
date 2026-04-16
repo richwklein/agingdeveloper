@@ -20,8 +20,8 @@
 
 @theme inline {
   --font-mono:
-    var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace;
+    var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
   --font-serif:
     var(--font-noto-serif-georgian), ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-sans:

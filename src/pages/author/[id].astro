@@ -6,6 +6,7 @@ import ArticleGrid from '@components/ArticleGrid.astro'
 import BackLink from '@components/BackLink.astro'
 import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
 import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
+import ResponsiveImage from '@components/ResponsiveImage.astro'
 import AuthorJson from '@components/seo/AuthorJson.astro'
 import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
 import OpenGraphProfile from '@components/seo/OpenGraphProfile.astro'
@@ -14,7 +15,6 @@ import SocialBar from '@components/SocialBar.astro'
 import Layout from '@layouts/Layout.astro'
 import { getArticlesByAuthor } from '@utils/article'
 import { getDefaultSite } from '@utils/site'
-import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
 
@@ -75,8 +75,8 @@ const { articles, total } = await getArticlesByAuthor(author.id, limit)
         'ring-secondary-light w-[150px] min-w-[150px] overflow-hidden rounded-lg ring-2',
       ]}
     >
-      <Image
-        src={data.avatar}
+      <ResponsiveImage
+        image={data.avatar}
         alt={data.name}
         loading={'eager'}
         fetchpriority={'high'}

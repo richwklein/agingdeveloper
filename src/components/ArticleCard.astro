@@ -10,8 +10,8 @@
  * <ArticleCard article={entry} />
  */
 import LinkInternal from '@components/LinkInternal.astro'
+import ResponsiveImage from '@components/ResponsiveImage.astro'
 import { formatDate } from '@utils/misc'
-import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import { render } from 'astro:content'
 
@@ -36,8 +36,8 @@ const loading = lazy ? 'lazy' : 'eager'
       className,
     ]}
   >
-    <Image
-      src={article.data.featured.image}
+    <ResponsiveImage
+      image={article.data.featured.image}
       alt={article.data.title}
       width={768}
       widths={[180, 420, 500, 640, 768]}

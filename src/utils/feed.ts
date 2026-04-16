@@ -9,6 +9,7 @@ import mime from 'mime'
 import sanitizeHtml from 'sanitize-html'
 
 import { getArticles } from './article'
+import { normalizeImageKey } from './image'
 import { buildUrl } from './misc'
 import { getDefaultSite } from './site'
 
@@ -277,9 +278,7 @@ class FeedImageCollection {
    * @returns The normalized key
    */
   private normalizeKey(key: string): string {
-    return key
-      .split('?')[0]
-      .replace('/@fs', '')
+    return normalizeImageKey(key)
       .replace(this.cwd, '')
       .replace(/^\/src\/content/, '')
       .replace(/^\/article\/(\d{4})\/([^/]+)/, (_, year, rest) => {
