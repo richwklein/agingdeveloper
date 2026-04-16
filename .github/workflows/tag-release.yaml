@@ -96,8 +96,14 @@ jobs:
 
           echo "$deploy_json"
 
+          deploy_id="$(echo "$deploy_json" | jq -r '.deploy_id // .id // empty')"
           deploy_url="$(echo "$deploy_json" | jq -r '.deploy_url // .url // empty')"
           logs_url="$(echo "$deploy_json" | jq -r '.logs // empty')"
+
+          if [ -z "$deploy_id" ] || [ "$deploy_id" = "null" ]; then
+            echo "Netlify production deploy did not return a deploy ID" >&2
+            exit 1
+          fi
 
           if [ -z "$deploy_url" ] || [ "$deploy_url" = "null" ]; then
             echo "Netlify production deploy did not return a deploy URL" >&2
@@ -106,7 +112,7 @@ jobs:
 
           echo "deploy_id=$deploy_id" >> "$GITHUB_OUTPUT"
           echo "deploy_url=$deploy_url" >> "$GITHUB_OUTPUT"
-          echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT
+          echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT"
 
   lighthouse:
     name: Lighthouse
@@ -114,10 +120,10 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    if: needs.deploy.result == 'success'
+    if: needs.publish-release.result == 'success'
     uses: ./.github/workflows/code-lighthouse.yaml
     with:
-      base-url: ${{ needs.deploy.outputs.deploy_url }}
+      base-url: ${{ needs.publish-release.outputs.deploy_url }}
       pr-number: ${{ github.event.pull_request.number }}
       checkout-ref: ${{ github.event.pull_request.head.sha }}
       number-of-runs: 3
