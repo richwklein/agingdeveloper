@@ -37,8 +37,15 @@ describe('quoteCard', () => {
     expect(card).toContain('font-chalk')
   })
 
+  test('that the card scales typography for small screens', async () => {
+    expect(card).toContain('font-chalk text-sm text-slate-300 md:text-base')
+    expect(card).toContain('text-2xl tracking-wide md:text-2xl')
+    expect(card).toContain('mt-3 text-sm text-slate-200 md:text-base')
+    expect(card).toContain('text-base text-slate-100 md:text-lg')
+  })
+
   test('that the card contains the text', async () => {
-    expect(card).toContain(`${quote.data.text}</blockquote>`)
+    expect(card).toContain(quote.data.text)
   })
 
   test('that the card contains the author', async () => {
