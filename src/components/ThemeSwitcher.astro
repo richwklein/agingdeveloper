@@ -1,0 +1,138 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<theme-switcher>
+  <div class="relative">
+    <div class="pointer-events-none absolute top-1/2 left-3 z-10 -translate-y-1/2">
+      <Icon
+        name="mdi:monitor"
+        data-theme-icon="system"
+        class:list={['h-5 w-5 text-stone-500 dark:text-white/70']}
+      />
+      <Icon
+        name="mdi:white-balance-sunny"
+        data-theme-icon="light"
+        class:list={['hidden h-5 w-5 text-stone-500 dark:text-white/70']}
+      />
+      <Icon
+        name="mdi:moon-waning-crescent"
+        data-theme-icon="dark"
+        class:list={['hidden h-5 w-5 text-stone-500 dark:text-white/70']}
+      />
+    </div>
+    <select
+      data-theme-select
+      aria-label="Theme"
+      class:list={[
+        'appearance-none rounded-lg border px-3 py-2.5 pr-9 pl-10 text-sm shadow-inner',
+        'focus:border-stone-400 focus:ring-2 focus:ring-stone-300/70 focus:outline-hidden',
+        'text-primary-main border-stone-300 bg-white',
+        'dark:text-primary-contrast dark:border-white/20 dark:bg-white/10 dark:backdrop-blur-xs',
+        'dark:focus:border-primary-light/70 dark:focus:ring-primary-light/30',
+      ]}
+    >
+      <option value="system">System</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+    <Icon
+      name="mdi:chevron-down"
+      class:list={[
+        'pointer-events-none absolute top-1/2 right-3 z-10 h-5 w-5 -translate-y-1/2',
+        'text-stone-500 dark:text-white/70',
+      ]}
+    />
+  </div>
+</theme-switcher>
+
+<script>
+  type ThemeOption = 'light' | 'dark' | 'system'
+
+  class ThemeSwitcher extends HTMLElement {
+    select: HTMLSelectElement | null = null
+    themeIcons: Element[] = []
+    mediaQuery: MediaQueryList
+    onChangeHandler: (event: Event) => void
+    onSystemThemeChangeHandler: () => void
+
+    constructor() {
+      super()
+      this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      this.onChangeHandler = this.onChange.bind(this)
+      this.onSystemThemeChangeHandler = this.onSystemThemeChange.bind(this)
+    }
+
+    connectedCallback() {
+      this.select = this.querySelector<HTMLSelectElement>('select[data-theme-select]')
+      this.themeIcons = Array.from(this.querySelectorAll('[data-theme-icon]'))
+      if (this.select) {
+        this.select.addEventListener('change', this.onChangeHandler)
+      }
+
+      this.mediaQuery.addEventListener('change', this.onSystemThemeChangeHandler)
+      this.syncUi(this.getSelectedTheme())
+      this.applyTheme(this.getSelectedTheme())
+    }
+
+    disconnectedCallback() {
+      if (this.select) {
+        this.select.removeEventListener('change', this.onChangeHandler)
+      }
+
+      this.mediaQuery.removeEventListener('change', this.onSystemThemeChangeHandler)
+    }
+
+    getSelectedTheme(): ThemeOption {
+      const stored = localStorage.getItem('theme')
+      if (stored === 'light' || stored === 'dark') {
+        return stored
+      }
+
+      return 'system'
+    }
+
+    onChange(event: Event) {
+      const selected = (event.currentTarget as HTMLSelectElement).value as ThemeOption
+      if (!['system', 'light', 'dark'].includes(selected)) {
+        return
+      }
+
+      if (selected === 'system') {
+        localStorage.removeItem('theme')
+      } else {
+        localStorage.setItem('theme', selected)
+      }
+
+      this.applyTheme(selected)
+      this.syncUi(selected)
+    }
+
+    onSystemThemeChange() {
+      if (this.getSelectedTheme() === 'system') {
+        this.applyTheme('system')
+      }
+    }
+
+    applyTheme(theme: ThemeOption) {
+      const useDark = theme === 'dark' || (theme === 'system' && this.mediaQuery.matches)
+
+      document.documentElement.classList.toggle('dark', useDark)
+    }
+
+    syncUi(theme: ThemeOption) {
+      if (this.select) {
+        this.select.value = theme
+      }
+
+      for (const icon of this.themeIcons) {
+        const iconTheme = icon.getAttribute('data-theme-icon')
+        icon.classList.toggle('hidden', iconTheme !== theme)
+      }
+    }
+  }
+
+  if (!customElements.get('theme-switcher')) {
+    customElements.define('theme-switcher', ThemeSwitcher)
+  }
+</script>

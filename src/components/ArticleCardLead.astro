@@ -28,10 +28,12 @@ const { remarkPluginFrontmatter: frontmatter } = await render(article)
   <article
     id="article-card-lead"
     class:list={[
-      'overflow-hidden rounded-md border border-stone-300 bg-white',
+      'dark:border-primary-light/35 dark:bg-primary-main/35 overflow-hidden rounded-md border border-stone-300 bg-white',
       'hover:bg-stone-100/85 hover:shadow-xs',
+      'dark:hover:bg-primary-main/55',
       'focus:bg-stone-100/85 focus:shadow-xs',
-      'lg:relative lg:bg-white',
+      'dark:focus:bg-primary-main/55',
+      'dark:lg:bg-primary-main/35 lg:relative lg:bg-white',
       className,
     ]}
   >
@@ -53,7 +55,7 @@ const { remarkPluginFrontmatter: frontmatter } = await render(article)
     />
     <div
       class:list={[
-        'w-full bg-white lg:bg-transparent',
+        'dark:bg-primary-main/35 w-full bg-white lg:bg-transparent dark:lg:bg-transparent',
         'lg:absolute lg:top-0 lg:left-0 lg:h-full',
         'lg:from-primary-main/75 lg:via-primary-main/60 lg:bg-linear-to-r lg:to-transparent',
       ]}
@@ -61,7 +63,7 @@ const { remarkPluginFrontmatter: frontmatter } = await render(article)
       <div class:list={['w-full px-4 pt-3 pb-2', 'lg:p-8', 'lg:w-3/5']}>
         <h4
           class:list={[
-            'text-lg leading-snug font-medium text-stone-900',
+            'text-lg leading-snug font-medium text-stone-900 dark:text-stone-100',
             'lg:text-primary-contrast lg:text-4xl',
             'lg:drop-shadow-lg',
           ]}
@@ -70,7 +72,7 @@ const { remarkPluginFrontmatter: frontmatter } = await render(article)
         </h4>
         <small
           class:list={[
-            'text-sm text-stone-600',
+            'text-sm text-stone-600 dark:text-stone-300',
             'lg:text-primary-contrast lg:text-lg',
             'lg:drop-shadow-md',
           ]}
@@ -81,7 +83,7 @@ const { remarkPluginFrontmatter: frontmatter } = await render(article)
         </small>
         <p
           class:list={[
-            'text-md mt-2 leading-relaxed text-stone-700',
+            'text-md mt-2 leading-relaxed text-stone-700 dark:text-stone-200',
             'lg:text-primary-contrast lg:mt-6 lg:text-lg',
             'lg:mt-8',
             'lg:drop-shadow-md',
