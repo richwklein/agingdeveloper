@@ -52,7 +52,7 @@ describe('layout', () => {
   test('renders the layout shell and named slots', async () => {
     const html = await render()
 
-    expect(html).toContain('<html lang="en">')
+    expect(html).toContain('<html lang="en" class="scheme-light dark:scheme-dark">')
     expect(html).toContain(`<meta name="theme-color" content="${site.data.theme}">`)
     expect(html).toContain('<link rel="manifest" href="/site.webmanifest">')
     expect(html).toContain('<link rel="sitemap" href="/sitemap-index.xml">')

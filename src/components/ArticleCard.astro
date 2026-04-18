@@ -29,10 +29,10 @@ const loading = lazy ? 'lazy' : 'eager'
 <LinkInternal to={`/article/${article.id}`}>
   <article
     class:list={[
-      'overflow-hidden rounded-md border border-stone-300 bg-white',
+      'border-stroke-light bg-card-light overflow-hidden rounded-md border',
       'xl:flex xl:max-h-60 xl:flex-row-reverse',
-      'hover:bg-stone-100/85 hover:shadow-xs',
-      'focus:bg-stone-100/85 focus:shadow-xs',
+      'hover:bg-card-main hover:shadow-xs',
+      'focus:bg-card-main focus:shadow-xs',
       className,
     ]}
   >
@@ -59,15 +59,15 @@ const loading = lazy ? 'lazy' : 'eager'
       ]}
     />
     <div class:list={['px-4 pt-3 pb-2']}>
-      <h4 class:list={['text-lg leading-snug font-medium text-stone-900']}>
+      <h4 class:list={['text-fg-light text-lg leading-snug font-medium']}>
         {article.data.title}
       </h4>
-      <small class:list={['text-sm text-stone-600']}>
+      <small class:list={['text-fg-main text-sm']}>
         <time datetime={article.data.published.toISOString()}>
           {formatDate(article.data.published)}
         </time>
       </small>
-      <p class:list={['text-md mt-2 leading-relaxed text-stone-700']}>
+      <p class:list={['text-md text-fg-dark mt-2 leading-relaxed']}>
         {frontmatter.excerpt}&hellip;
       </p>
     </div>

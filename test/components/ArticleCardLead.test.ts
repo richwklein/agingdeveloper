@@ -52,10 +52,10 @@ describe('articleCardLead', () => {
     const html = await renderCard()
 
     expect(html).toContain('fetchpriority="high"')
-    expect(html).toContain('w-full bg-white')
-    expect(html).toContain('text-lg leading-snug font-medium text-stone-900')
-    expect(html).toContain('text-sm text-stone-600')
-    expect(html).toContain('text-md mt-2 leading-relaxed text-stone-700')
+    expect(html).toContain('bg-card-light w-full')
+    expect(html).toContain('text-fg-light')
+    expect(html).toContain('text-fg-main')
+    expect(html).toContain('text-fg-dark')
   })
 
   test('keeps overlay treatment for large screens', async () => {

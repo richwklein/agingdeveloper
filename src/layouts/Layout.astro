@@ -21,7 +21,7 @@ const analyticsId = DEPLOY_CONTEXT === 'production' ? ANALYTICS_TRACKING_ID : ''
 ---
 
 <!doctype html>
-<html lang={'en'}>
+<html lang={'en'} class="scheme-light dark:scheme-dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -49,6 +49,15 @@ const analyticsId = DEPLOY_CONTEXT === 'production' ? ANALYTICS_TRACKING_ID : ''
       ))
     }
     <meta name="generator" content={Astro.generator} />
+    <script
+      is:inline
+      set:html={`(() => {
+  const persistedTheme = localStorage.getItem('theme')
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  const useDark = persistedTheme === 'dark' || (!persistedTheme && prefersDark)
+  document.documentElement.classList.toggle('dark', useDark)
+})()`}
+    />
     <slot name="seo" />
     {
       analyticsId ? (
@@ -69,7 +78,7 @@ gtag('config', ${JSON.stringify(analyticsId)});`}
       ) : null
     }
   </head>
-  <body>
+  <body class="bg-primary-contrast text-fg-light dark:bg-primary-dark dark:text-fg-light">
     <PageHeader site={site} class:list={['mb-8']} />
     <main class:list={['container mx-auto px-4 xl:max-w-(--breakpoint-xl)']}>
       <slot />

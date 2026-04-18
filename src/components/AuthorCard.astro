@@ -26,10 +26,10 @@ const loading = lazy ? 'lazy' : 'eager'
 <LinkInternal to={`/author/${author.id}`}>
   <div
     class:list={[
-      'overflow-hidden rounded-md border border-stone-300 bg-white',
+      'border-stroke-light bg-card-light overflow-hidden rounded-md border',
       'flex max-h-[120px]',
-      'hover:bg-stone-100/85 hover:shadow-xs',
-      'focus:bg-stone-100/85 focus:shadow-xs',
+      'hover:bg-card-main hover:shadow-xs',
+      'focus:bg-card-main focus:shadow-xs',
       className,
     ]}
   >
@@ -41,10 +41,10 @@ const loading = lazy ? 'lazy' : 'eager'
       class:list={['object-cover object-center', 'aspect-3/4 w-[90px] xl:min-w-[90px]']}
     />
     <div class:list={['px-4 pt-3 pb-2']}>
-      <h4 class:list={['text-lg leading-snug font-medium text-stone-900']}>
+      <h4 class:list={['text-fg-light text-lg leading-snug font-medium']}>
         {author.data.name}
       </h4>
-      <p class:list={['text-md leading-relaxed text-stone-600 md:text-lg']}>
+      <p class:list={['text-md text-fg-main leading-relaxed md:text-lg']}>
         {author.data.tagline}
       </p>
     </div>
