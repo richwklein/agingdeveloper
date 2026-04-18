@@ -7,7 +7,7 @@ settings:
 importers:
 
   .:
-    dependencies:
+    devDependencies:
       '@astrojs/check':
         specifier: 0.9.8
         version: 0.9.8(prettier-plugin-astro@0.14.1)(prettier@3.8.1)(typescript@5.9.3)
@@ -20,6 +20,12 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.7.2
         version: 3.7.2
+      '@eslint/compat':
+        specifier: ^2.0.0
+        version: 2.0.3(eslint@10.2.0(jiti@2.6.1))
+      '@eslint/js':
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@10.2.0(jiti@2.6.1))
       '@fontsource/fira-code':
         specifier: ^5.0.18
         version: 5.2.7
@@ -35,6 +41,9 @@ importers:
       '@iconify-json/mdi':
         specifier: ^1.1.66
         version: 1.2.3
+      '@lhci/cli':
+        specifier: ^0.15.1
+        version: 0.15.1
       '@sindresorhus/slugify':
         specifier: ^3.0.0
         version: 3.0.0
@@ -44,15 +53,39 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.1.18
         version: 4.2.2(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.3))
+      '@types/markdown-it':
+        specifier: ^14.1.2
+        version: 14.1.2
+      '@types/sanitize-html':
+        specifier: ^2.11.0
+        version: 2.16.1
+      '@typescript-eslint/parser':
+        specifier: ^8.58.0
+        version: 8.58.0(eslint@10.2.0(jiti@2.6.1))(typescript@5.9.3)
+      '@vitest/coverage-v8':
+        specifier: ^4.0.18
+        version: 4.1.3(vitest@4.1.3)
+      '@vitest/eslint-plugin':
+        specifier: ^1.1.14
+        version: 1.6.12(eslint@10.2.0(jiti@2.6.1))(typescript@5.9.3)(vitest@4.1.3)
       astro:
         specifier: ^6.1.3
         version: 6.1.3(@netlify/blobs@10.7.0)(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.59.1)(typescript@5.9.3)(yaml@2.8.3)
-      astro-fuse:
-        specifier: ^1.0.1
-        version: 1.0.4(astro@6.1.3(@netlify/blobs@10.7.0)(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.59.1)(typescript@5.9.3)(yaml@2.8.3))(fuse.js@7.3.0)
       astro-icon:
         specifier: ^1.1.1
         version: 1.1.5
+      eslint:
+        specifier: ^10.2.0
+        version: 10.2.0(jiti@2.6.1)
+      eslint-plugin-astro:
+        specifier: ^1.7.0
+        version: 1.7.0(eslint@10.2.0(jiti@2.6.1))
+      eslint-plugin-jsx-a11y:
+        specifier: ^6.10.0
+        version: 6.10.2(eslint@10.2.0(jiti@2.6.1))
+      eslint-plugin-simple-import-sort:
+        specifier: ^12.1.1
+        version: 12.1.1(eslint@10.2.0(jiti@2.6.1))
       feed:
         specifier: ^5.0.0
         version: 5.2.0
@@ -71,55 +104,9 @@ importers:
       mime:
         specifier: ^4.0.4
         version: 4.1.0
-      reading-time:
-        specifier: ^1.5.0
-        version: 1.5.0
-      sanitize-html:
-        specifier: ^2.17.3
-        version: 2.17.3
-      tailwindcss:
-        specifier: ^4.1.18
-        version: 4.2.2
-    devDependencies:
-      '@eslint/compat':
-        specifier: ^2.0.0
-        version: 2.0.3(eslint@10.2.0(jiti@2.6.1))
-      '@eslint/js':
-        specifier: ^10.0.1
-        version: 10.0.1(eslint@10.2.0(jiti@2.6.1))
-      '@lhci/cli':
-        specifier: ^0.15.1
-        version: 0.15.1
-      '@types/markdown-it':
-        specifier: ^14.1.2
-        version: 14.1.2
-      '@types/sanitize-html':
-        specifier: ^2.11.0
-        version: 2.16.1
-      '@typescript-eslint/parser':
-        specifier: ^8.58.0
-        version: 8.58.0(eslint@10.2.0(jiti@2.6.1))(typescript@5.9.3)
-      '@vitest/coverage-v8':
-        specifier: ^4.0.18
-        version: 4.1.3(vitest@4.1.3)
-      '@vitest/eslint-plugin':
-        specifier: ^1.1.14
-        version: 1.6.12(eslint@10.2.0(jiti@2.6.1))(typescript@5.9.3)(vitest@4.1.3)
-      eslint:
-        specifier: ^10.2.0
-        version: 10.2.0(jiti@2.6.1)
-      eslint-plugin-astro:
-        specifier: ^1.7.0
-        version: 1.7.0(eslint@10.2.0(jiti@2.6.1))
-      eslint-plugin-jsx-a11y:
-        specifier: ^6.10.0
-        version: 6.10.2(eslint@10.2.0(jiti@2.6.1))
-      eslint-plugin-simple-import-sort:
-        specifier: ^12.1.1
-        version: 12.1.1(eslint@10.2.0(jiti@2.6.1))
       netlify-cli:
         specifier: ^24.3.0
-        version: 24.3.0(@types/node@25.6.0)(picomatch@4.0.3)(rollup@4.59.1)
+        version: 24.3.0(@types/node@25.6.0)(picomatch@4.0.4)(rollup@4.59.1)
       prettier:
         specifier: ^3.2.5
         version: 3.8.1
@@ -129,12 +116,18 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.7.2
         version: 0.7.2(prettier-plugin-astro@0.14.1)(prettier@3.8.1)
+      reading-time:
+        specifier: ^1.5.0
+        version: 1.5.0
+      sanitize-html:
+        specifier: ^2.17.3
+        version: 2.17.3
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
-      skills:
-        specifier: ^1.4.8
-        version: 1.4.8
+      tailwindcss:
+        specifier: ^4.1.18
+        version: 4.2.2
       typescript:
         specifier: ^5.4.5
         version: 5.9.3
@@ -1685,9 +1678,6 @@ packages:
   '@sec-ant/readable-stream@0.4.1':
     resolution: {integrity: sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg==}
 
-  '@selderee/plugin-htmlparser2@0.11.0':
-    resolution: {integrity: sha512-P33hHGdldxGabLFjPPpaTxVolMrzrcegejx+0GxjrIb9Zv48D8yAIA/QTDR2dFl7Uz7urX8aX6+5bCZslr+gWQ==}
-
   '@sentry-internal/tracing@7.120.4':
     resolution: {integrity: sha512-Fz5+4XCg3akeoFK+K7g+d7HqGMjmnLoY2eJlpONJmaeT9pXY7yfUyXKZMmMajdE2LxxKJgQ2YKvSCaGVamTjHw==}
     engines: {node: '>=8'}
@@ -2434,12 +2424,6 @@ packages:
     resolution: {integrity: sha512-+QDcgc7e+au6EZ0YjMmRRjNoQo5bDMlaR45aWDoFsuxQTCM9qmCHRoiKJPELgckJ8Wmr7vcfpa9eCDHBFh6G4w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  astro-fuse@1.0.4:
-    resolution: {integrity: sha512-nfX2l5/oUILD24qXWsARkuoAl2ow9V+j/ljlhyQ6bDsUm5WTAZcH+W7ZzU8KINaAbgw9FqwHmw1ivyKSa63/zA==}
-    peerDependencies:
-      astro: '>=4.8.0'
-      fuse.js: ^7.0.0
-
   astro-icon@1.1.5:
     resolution: {integrity: sha512-CJYS5nWOw9jz4RpGWmzNQY7D0y2ZZacH7atL2K9DeJXJVaz7/5WrxeyIxO8KASk1jCM96Q4LjRx/F3R+InjJrw==}
 
@@ -2732,10 +2716,6 @@ packages:
 
   cheerio-select@2.1.0:
     resolution: {integrity: sha512-9v9kG0LvzrlcungtnJtpGNxY+fzECQKhK4EGJX2vByejiMX84MFNQw4UxPJl3bFbTMw+Dfs37XaIkCwTZfLh4g==}
-
-  cheerio@1.0.0-rc.12:
-    resolution: {integrity: sha512-VqR8m68vM46BNnuZ5NtnGBKIE/DfN0cRIzg9n40EIq9NOv90ayxLBXA8fXC5gquFRGJSTRqBq25Jt2ECLR431Q==}
-    engines: {node: '>= 6'}
 
   cheerio@1.2.0:
     resolution: {integrity: sha512-WDrybc/gKFpTYQutKIK6UvfcuxijIZfMfXaYm8NMsPQxSYvf+13fXUJ4rztGGbJcBQ/GF55gvrZ0Bc0bj/mqvg==}
@@ -4102,18 +4082,11 @@ packages:
   html-escaper@3.0.3:
     resolution: {integrity: sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==}
 
-  html-to-text@9.0.5:
-    resolution: {integrity: sha512-qY60FjREgVZL03vJU6IfMV4GDjGBIoOyvuFdpBDIX9yTlDw0TjxVBQp+P8NvpdIXNJvfWBTNul7fsAQJq2FNpg==}
-    engines: {node: '>=14'}
-
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
 
   htmlparser2@10.1.0:
     resolution: {integrity: sha512-VTZkM9GWRAtEpveh7MSF6SjjrpNVNNVJfFup7xTY3UpFtm67foy9HDVXneLtFVt4pMz5kZtgNcvCniNFb1hlEQ==}
-
-  htmlparser2@8.0.2:
-    resolution: {integrity: sha512-GYdjWKDkbRLkZ5geuHs5NY1puJ+PXwP7+fHPRz06Eirsb9ugf6d8kkXav6ADhcODhFFPMIXyxkxSuMf3D6NCFA==}
 
   http-cache-semantics@4.2.0:
     resolution: {integrity: sha512-dTxcvPXqPvXBQpq5dUr6mEMJX4oIEFv6bwom3FDwKRDsuIjjJGANqhBuoAn9c1RQJIdAKav33ED65E2ys+87QQ==}
@@ -4681,9 +4654,6 @@ packages:
     resolution: {integrity: sha512-b94GiNHQNy6JNTrt5w6zNyffMrNkXZb3KTkCZJb2V1xaEGCk093vkZ2jk3tpaeP33/OiXC+WvK9AxUebnf5nbw==}
     engines: {node: '>= 0.6.3'}
 
-  leac@0.6.0:
-    resolution: {integrity: sha512-y+SqErxb8h7nE/fiEX07jsbuhrpO9lL8eca7/Y1nuWV2moNlXhyd59iDGcRf6moVyDMbmTNzL40SUyrFU/yDpg==}
-
   legacy-javascript@0.0.1:
     resolution: {integrity: sha512-lPyntS4/aS7jpuvOlitZDFifBCb4W8L/3QU0PLbUTUj+zYah8rfVjYic88yG7ZKTxhS5h9iz7duT8oUXKszLhg==}
 
@@ -4822,9 +4792,6 @@ packages:
 
   lodash-es@4.18.1:
     resolution: {integrity: sha512-J8xewKD/Gk22OZbhpOVSwcs60zhd95ESDwezOFuA3/099925PdHJ7OFHNTGtajL3AlZkykD32HykiMo+BIBI8A==}
-
-  lodash.debounce@4.0.8:
-    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
 
   lodash.includes@4.3.0:
     resolution: {integrity: sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==}
@@ -5674,9 +5641,6 @@ packages:
   parse5@7.3.0:
     resolution: {integrity: sha512-IInvU7fabl34qmi9gY8XOVxhYyMyuH2xUNpb2q8/Y+7552KlejkRvqvD19nMoUW/uQGGbqNpA6Tufu5FL5BZgw==}
 
-  parseley@0.12.1:
-    resolution: {integrity: sha512-e6qHKe3a9HWr0oMRVDTRhKce+bRO8VGQR3NyVwcjwrbhMmFCX9KszEV35+rn4AdilFAq9VPxP/Fe1wC9Qjd2lw==}
-
   parseurl@1.3.3:
     resolution: {integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==}
     engines: {node: '>= 0.8'}
@@ -5730,9 +5694,6 @@ packages:
 
   pathe@2.0.3:
     resolution: {integrity: sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w==}
-
-  peberminta@0.9.0:
-    resolution: {integrity: sha512-XIxfHpEuSJbITd1H3EeQwpcZbTLHc+VVr8ANI9t5sit565tsI4/xK3KWTUFE2e6QiangUkh3B0jihzmGnNrRsQ==}
 
   pend@1.2.0:
     resolution: {integrity: sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==}
@@ -6350,9 +6311,6 @@ packages:
   secure-json-parse@4.1.0:
     resolution: {integrity: sha512-l4KnYfEyqYJxDwlNVyRfO2E4NTHfMKAWdUuA8J0yve2Dz/E/PdBepY03RvyJpssIpRFwJoCD55wA+mEDs6ByWA==}
 
-  selderee@0.11.0:
-    resolution: {integrity: sha512-5TF+l7p4+OsnP8BCCvSyZiSPc4x4//p5uPwK8TCnVPJYRmU2aYKMpOXvw8zM5a5JvuuCGN1jmsMwuU2W02ukfA==}
-
   semver@5.7.2:
     resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
     hasBin: true
@@ -6460,11 +6418,6 @@ packages:
   sitemap@9.0.1:
     resolution: {integrity: sha512-S6hzjGJSG3d6if0YoF5kTyeRJvia6FSTBroE5fQ0bu1QNxyJqhhinfUsXi9fH3MgtXODWvwo2BDyQSnhPQ88uQ==}
     engines: {node: '>=20.19.5', npm: '>=10.8.2'}
-    hasBin: true
-
-  skills@1.4.8:
-    resolution: {integrity: sha512-qPpHj339Bbm2IxIzOiq+xQOFekmnEBrxTApDgh9dBsZnpyz5RjX/ChjgMlowXctCM0sKGrMiPIeddKqpdqhMEg==}
-    engines: {node: '>=18'}
     hasBin: true
 
   slash@5.1.0:
@@ -8602,7 +8555,7 @@ snapshots:
       yaml: 2.8.3
       yargs: 17.7.2
 
-  '@netlify/build@35.8.9(@opentelemetry/api@1.8.0)(@types/node@25.6.0)(picomatch@4.0.3)(rollup@4.59.1)':
+  '@netlify/build@35.8.9(@opentelemetry/api@1.8.0)(@types/node@25.6.0)(picomatch@4.0.4)(rollup@4.59.1)':
     dependencies:
       '@bugsnag/js': 8.9.0
       '@netlify/blobs': 10.7.0(supports-color@10.2.2)
@@ -8621,7 +8574,7 @@ snapshots:
       ansis: 4.2.0
       clean-stack: 5.3.0
       execa: 8.0.1
-      fdir: 6.5.0(picomatch@4.0.3)
+      fdir: 6.5.0(picomatch@4.0.4)
       figures: 6.1.0
       filter-obj: 6.1.0
       hot-shots: 11.4.0
@@ -9726,11 +9679,6 @@ snapshots:
 
   '@sec-ant/readable-stream@0.4.1': {}
 
-  '@selderee/plugin-htmlparser2@0.11.0':
-    dependencies:
-      domhandler: 5.0.3
-      selderee: 0.11.0
-
   '@sentry-internal/tracing@7.120.4':
     dependencies:
       '@sentry/core': 7.120.4
@@ -10627,15 +10575,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  astro-fuse@1.0.4(astro@6.1.3(@netlify/blobs@10.7.0)(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.59.1)(typescript@5.9.3)(yaml@2.8.3))(fuse.js@7.3.0):
-    dependencies:
-      astro: 6.1.3(@netlify/blobs@10.7.0)(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.59.1)(typescript@5.9.3)(yaml@2.8.3)
-      cheerio: 1.0.0-rc.12
-      fuse.js: 7.3.0
-      html-to-text: 9.0.5
-      js-yaml: 4.1.1
-      lodash.debounce: 4.0.8
-
   astro-icon@1.1.5:
     dependencies:
       '@iconify/tools': 4.2.0
@@ -11031,16 +10970,6 @@ snapshots:
       domelementtype: 2.3.0
       domhandler: 5.0.3
       domutils: 3.2.2
-
-  cheerio@1.0.0-rc.12:
-    dependencies:
-      cheerio-select: 2.1.0
-      dom-serializer: 2.0.0
-      domhandler: 5.0.3
-      domutils: 3.2.2
-      htmlparser2: 8.0.2
-      parse5: 7.3.0
-      parse5-htmlparser2-tree-adapter: 7.1.0
 
   cheerio@1.2.0:
     dependencies:
@@ -12721,14 +12650,6 @@ snapshots:
 
   html-escaper@3.0.3: {}
 
-  html-to-text@9.0.5:
-    dependencies:
-      '@selderee/plugin-htmlparser2': 0.11.0
-      deepmerge: 4.3.1
-      dom-serializer: 2.0.0
-      htmlparser2: 8.0.2
-      selderee: 0.11.0
-
   html-void-elements@3.0.0: {}
 
   htmlparser2@10.1.0:
@@ -12737,13 +12658,6 @@ snapshots:
       domhandler: 5.0.3
       domutils: 3.2.2
       entities: 7.0.1
-
-  htmlparser2@8.0.2:
-    dependencies:
-      domelementtype: 2.3.0
-      domhandler: 5.0.3
-      domutils: 3.2.2
-      entities: 4.5.0
 
   http-cache-semantics@4.2.0: {}
 
@@ -13411,8 +13325,6 @@ snapshots:
     dependencies:
       readable-stream: 2.3.8
 
-  leac@0.6.0: {}
-
   legacy-javascript@0.0.1: {}
 
   leven@3.1.0: {}
@@ -13605,8 +13517,6 @@ snapshots:
       p-locate: 6.0.0
 
   lodash-es@4.18.1: {}
-
-  lodash.debounce@4.0.8: {}
 
   lodash.includes@4.3.0: {}
 
@@ -14311,13 +14221,13 @@ snapshots:
 
   neotraverse@0.6.18: {}
 
-  netlify-cli@24.3.0(@types/node@25.6.0)(picomatch@4.0.3)(rollup@4.59.1):
+  netlify-cli@24.3.0(@types/node@25.6.0)(picomatch@4.0.4)(rollup@4.59.1):
     dependencies:
       '@fastify/static': 9.0.0
       '@netlify/ai': 0.4.1
       '@netlify/api': 14.0.18
       '@netlify/blobs': 10.7.0(supports-color@10.2.2)
-      '@netlify/build': 35.8.9(@opentelemetry/api@1.8.0)(@types/node@25.6.0)(picomatch@4.0.3)(rollup@4.59.1)
+      '@netlify/build': 35.8.9(@opentelemetry/api@1.8.0)(@types/node@25.6.0)(picomatch@4.0.4)(rollup@4.59.1)
       '@netlify/build-info': 10.4.0
       '@netlify/config': 24.4.3
       '@netlify/dev': 4.16.2(rollup@4.59.1)
@@ -14832,11 +14742,6 @@ snapshots:
     dependencies:
       entities: 6.0.1
 
-  parseley@0.12.1:
-    dependencies:
-      leac: 0.6.0
-      peberminta: 0.9.0
-
   parseurl@1.3.3: {}
 
   path-browserify@1.0.1: {}
@@ -14872,8 +14777,6 @@ snapshots:
   pathe@1.1.2: {}
 
   pathe@2.0.3: {}
-
-  peberminta@0.9.0: {}
 
   pend@1.2.0: {}
 
@@ -15589,10 +15492,6 @@ snapshots:
 
   secure-json-parse@4.1.0: {}
 
-  selderee@0.11.0:
-    dependencies:
-      parseley: 0.12.1
-
   semver@5.7.2: {}
 
   semver@6.3.1: {}
@@ -15775,10 +15674,6 @@ snapshots:
       '@types/sax': 1.2.7
       arg: 5.0.2
       sax: 1.6.0
-
-  skills@1.4.8:
-    dependencies:
-      yaml: 2.8.3
 
   slash@5.1.0: {}
 
