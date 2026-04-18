@@ -5,20 +5,16 @@ import { Icon } from 'astro-icon/components'
 <theme-switcher>
   <div class="relative">
     <div class="pointer-events-none absolute top-1/2 left-3 z-10 -translate-y-1/2">
-      <Icon
-        name="mdi:monitor"
-        data-theme-icon="system"
-        class:list={['h-5 w-5 text-stone-500 dark:text-white/70']}
-      />
+      <Icon name="mdi:monitor" data-theme-icon="system" class:list={['text-icon-muted h-5 w-5']} />
       <Icon
         name="mdi:white-balance-sunny"
         data-theme-icon="light"
-        class:list={['hidden h-5 w-5 text-stone-500 dark:text-white/70']}
+        class:list={['text-icon-muted hidden h-5 w-5']}
       />
       <Icon
         name="mdi:moon-waning-crescent"
         data-theme-icon="dark"
-        class:list={['hidden h-5 w-5 text-stone-500 dark:text-white/70']}
+        class:list={['text-icon-muted hidden h-5 w-5']}
       />
     </div>
     <select
@@ -26,10 +22,8 @@ import { Icon } from 'astro-icon/components'
       aria-label="Theme"
       class:list={[
         'appearance-none rounded-lg border px-3 py-2.5 pr-9 pl-10 text-sm shadow-inner',
-        'focus:border-stone-400 focus:ring-2 focus:ring-stone-300/70 focus:outline-hidden',
-        'text-primary-main border-stone-300 bg-white',
-        'dark:text-primary-contrast dark:border-white/20 dark:bg-white/10 dark:backdrop-blur-xs',
-        'dark:focus:border-primary-light/70 dark:focus:ring-primary-light/30',
+        'focus:border-border-main focus:ring-border-light/70 focus:ring-2 focus:outline-hidden',
+        'text-fg-light border-border-light bg-card-light backdrop-blur-xs',
       ]}
     >
       <option value="system">System</option>
@@ -40,7 +34,7 @@ import { Icon } from 'astro-icon/components'
       name="mdi:chevron-down"
       class:list={[
         'pointer-events-none absolute top-1/2 right-3 z-10 h-5 w-5 -translate-y-1/2',
-        'text-stone-500 dark:text-white/70',
+        'text-icon-muted',
       ]}
     />
   </div>

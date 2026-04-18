@@ -21,15 +21,10 @@ interface Props {
 const { author, published, class: className } = Astro.props
 ---
 
-<address
-  id="article-byline"
-  class:list={['text-base text-stone-900/85 dark:text-stone-300', className]}
->
+<address id="article-byline" class:list={['text-fg-dark/85 text-base', className]}>
   <LinkInternal
     to={`/author/${author.id}`}
-    class:list={[
-      'mr-2 inline-block text-inherit underline hover:text-stone-900 dark:hover:text-stone-100',
-    ]}
+    class:list={['hover:text-fg-light mr-2 inline-block text-inherit underline']}
   >
     {author.data.name}
   </LinkInternal>

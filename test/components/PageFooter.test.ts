@@ -26,7 +26,7 @@ describe('pageFooter', () => {
     expect(html).toContain(`title="${site.data.title} - RSS"`)
     expect(html).toContain(`title="${site.data.title} - Repository"`)
     expect(html).toContain('class="block rounded-full p-2')
-    expect(html).toContain('dark:hover:bg-primary-main/70 dark:focus:bg-primary-main')
+    expect(html).toContain('hover:bg-card-main focus:bg-card-dark')
     expect(html).toContain('mdi:rss-feed')
     expect(html).toContain('mdi:github')
   })

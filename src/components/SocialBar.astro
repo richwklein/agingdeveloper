@@ -32,16 +32,12 @@ const { socials, class: className } = Astro.props
           <LinkExternal
             to={social.url}
             title={social.name}
-            class:list={[
-              'block rounded-full p-2',
-              'hover:bg-stone-100 focus:bg-stone-300',
-              'dark:hover:bg-primary-main/70 dark:focus:bg-primary-main',
-            ]}
+            class:list={['block rounded-full p-2', 'hover:bg-card-main focus:bg-card-dark']}
           >
             <Icon
               name={`mdi:${social.name.toLowerCase()}`}
               title={social.name}
-              class:list={['text-primary-main dark:text-primary-contrast h-6 w-6']}
+              class:list={['text-icon-main h-6 w-6']}
             />
           </LinkExternal>
         </li>

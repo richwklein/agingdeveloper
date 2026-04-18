@@ -57,11 +57,11 @@ const alt = author ? author.name : 'unknown'
     {
       author || site ? (
         <figcaption>
-          <small class:list={['mt-1 text-sm text-stone-700/85 dark:text-stone-300']}>
+          <small class:list={['text-fg-dark/85 mt-1 text-sm']}>
             {author ? (
               <>
                 {'Image by '}
-                <LinkExternal class:list={['underline dark:text-stone-100']} to={author.url}>
+                <LinkExternal class:list={['text-fg-light underline']} to={author.url}>
                   {author.name}
                 </LinkExternal>
               </>
@@ -69,7 +69,7 @@ const alt = author ? author.name : 'unknown'
             {site ? (
               <>
                 {' on '}
-                <LinkExternal class:list={['underline dark:text-stone-100']} to={site.url}>
+                <LinkExternal class:list={['text-fg-light underline']} to={site.url}>
                   {site.name}
                 </LinkExternal>
               </>
