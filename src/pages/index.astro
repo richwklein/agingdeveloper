@@ -28,7 +28,7 @@ const latest = await getLatestQuote()
 ---
 
 <Layout site={site}>
-  <link rel="preload" as="image" href={chalkboard.src} slot="preload" />
+  <link rel="preload" as="image" href={chalkboard.src} fetchpriority="high" slot="preload" />
   <Fragment slot="seo">
     <SeoBasic title={data.title} description={data.tagline} site={site} />
     <OpenGraphCore site={site} title={data.title} description={data.tagline} type="website" />
