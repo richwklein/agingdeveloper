@@ -17,6 +17,8 @@ import { getArticles } from '@utils/article'
 import { getLatestQuote } from '@utils/quote'
 import { getDefaultSite } from '@utils/site'
 
+import chalkboard from '../content/image/chalkboard.jpg'
+
 // get the articles and sort them in decending published date
 const articles = await getArticles(9)
 const site = await getDefaultSite()
@@ -26,6 +28,7 @@ const latest = await getLatestQuote()
 ---
 
 <Layout site={site}>
+  <link rel="preload" as="image" href={chalkboard.src} slot="preload" />
   <Fragment slot="seo">
     <SeoBasic title={data.title} description={data.tagline} site={site} />
     <OpenGraphCore site={site} title={data.title} description={data.tagline} type="website" />
