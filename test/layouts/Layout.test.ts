@@ -7,6 +7,7 @@ describe('layout', () => {
   type RenderOptions = {
     deployContext?: string
     analyticsTrackingId?: string
+    preloadSlot?: string
     seoSlot?: string
     defaultSlot?: string
   }
@@ -26,6 +27,7 @@ describe('layout', () => {
   const render = async ({
     deployContext = 'dev',
     analyticsTrackingId = '',
+    preloadSlot,
     seoSlot = '<meta name="description" content="SEO slot description" />',
     defaultSlot = '<p>Layout body content</p>',
   }: RenderOptions = {}) => {
@@ -43,6 +45,7 @@ describe('layout', () => {
     return await container.renderToString(Layout, {
       props: { site },
       slots: {
+        ...(preloadSlot ? { preload: preloadSlot } : {}),
         seo: seoSlot,
         default: defaultSlot,
       },
@@ -60,9 +63,18 @@ describe('layout', () => {
     expect(html).toContain('href="http://localhost:4321/rss.xml"')
     expect(html).toContain('href="http://localhost:4321/atom.xml"')
     expect(html).toContain('href="http://localhost:4321/feed.json"')
+    expect(html).not.toContain('href="/_astro/chalkboard.jpg"')
     expect(html).toContain('<meta name="description" content="SEO slot description" />')
     expect(html).toContain('<main class="container mx-auto px-4 xl:max-w-(--breakpoint-xl)"')
     expect(html).toContain('<p>Layout body content</p>')
+  })
+
+  test('renders preload slot content in head when provided', async () => {
+    const html = await render({
+      preloadSlot: '<link rel="preload" as="image" href="/_astro/chalkboard.jpg" />',
+    })
+
+    expect(html).toContain('<link rel="preload" as="image" href="/_astro/chalkboard.jpg" />')
   })
 
   test('does not inject analytics when deploy context is not production', async () => {

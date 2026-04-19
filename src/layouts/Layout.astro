@@ -58,6 +58,7 @@ const analyticsId = DEPLOY_CONTEXT === 'production' ? ANALYTICS_TRACKING_ID : ''
   document.documentElement.classList.toggle('dark', useDark)
 })()`}
     />
+    <slot name="preload" />
     <slot name="seo" />
     {
       analyticsId ? (
