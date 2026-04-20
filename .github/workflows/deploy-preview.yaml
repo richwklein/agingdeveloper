@@ -91,38 +91,35 @@ jobs:
           echo "deploy_url=$deploy_url" >> "$GITHUB_OUTPUT"
           echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT"
 
-      - name: 'Write deploy summary'
+      - name: 'Build deploy report body'
         run: |
           {
-            echo "## Deploy Results"
-            echo
-            echo "Preview deploy is ready for pull request #${{ env.PR_NUMBER }}."
-            echo
-            echo "- Preview: ${{ steps.deploy.outputs.deploy_url }}"
-            echo "- Deploy ID: \`${{ steps.deploy.outputs.deploy_id }}\`"
-            echo "- Logs: ${{ steps.deploy.outputs.logs_url || 'n/a' }}"
-            echo "- Workflow: [#${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
-            echo "- Commit: [\`${{ env.COMMIT_SHA }}\`](https://github.com/${{ github.repository }}/commit/${{ env.COMMIT_SHA }})"
-            echo
-            echo "This is a preview deployment and may be replaced by later pushes to this pull request."
-          } >> "$GITHUB_STEP_SUMMARY"
-
-      - name: 'Comment preview URL on pull request'
-        uses: marocchino/sticky-pull-request-comment@v3
-        with:
-          header: deploy-preview
-          message: |
+            echo "DEPLOY_REPORT<<EOF"
+            cat <<MARKDOWN
             ## Deploy Results
 
             Preview deploy is ready for pull request #${{ env.PR_NUMBER }}.
 
             - Preview: ${{ steps.deploy.outputs.deploy_url }}
-            - Deploy ID: `${{ steps.deploy.outputs.deploy_id }}`
+            - Deploy ID: \`${{ steps.deploy.outputs.deploy_id }}\`
             - Logs: ${{ steps.deploy.outputs.logs_url || 'n/a' }}
             - Workflow: [#${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            - Commit: [`${{ env.COMMIT_SHA }}`](https://github.com/${{ github.repository }}/commit/${{ env.COMMIT_SHA }})
+            - Commit: [\`${{ env.COMMIT_SHA }}\`](https://github.com/${{ github.repository }}/commit/${{ env.COMMIT_SHA }})
 
             This is a preview deployment and may be replaced by later pushes to this pull request.
+            MARKDOWN
+            echo "EOF"
+          } >> "$GITHUB_ENV"
+
+      - name: 'Write deploy summary'
+        run: |
+          echo "${{ env.DEPLOY_REPORT }}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 'Comment preview URL on pull request'
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: deploy-preview
+          message: ${{ env.DEPLOY_REPORT }}
 
   lighthouse:
     name: Lighthouse

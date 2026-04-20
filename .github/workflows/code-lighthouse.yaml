@@ -37,6 +37,7 @@ jobs:
       LIGHTHOUSE_BASE_URL: ${{ inputs.base-url }}
       LIGHTHOUSE_NUMBER_OF_RUNS: ${{ inputs.number-of-runs }}
       LIGHTHOUSE_FORM_FACTOR: ${{ matrix.profile }}
+      LIGHTHOUSE_ARTIFACT_NAME: ${{ inputs.pr-number != '' && format('lighthouse-results-pr-{0}-{1}', inputs.pr-number, matrix.profile) || format('lighthouse-results-run-{0}-{1}', github.run_id, matrix.profile) }}
 
     steps:
       - name: 'Checkout source code'
@@ -72,11 +73,11 @@ jobs:
       - name: 'Upload Lighthouse artifact'
         uses: actions/upload-artifact@v7
         with:
-          name: lighthouse-results-${{ inputs.pr-number != '' && format('pr-{0}', inputs.pr-number) || format('run-{0}', github.run_id) }}-${{ matrix.profile }}
+          name: ${{ env.LIGHTHOUSE_ARTIFACT_NAME }}
           path: ./lhci-${{ matrix.profile }}
           retention-days: 7
 
-      - name: 'Build Lighthouse report'
+      - name: 'Build Lighthouse report body'
         env:
           LIGHTHOUSE_BASE_URL: ${{ inputs.base-url }}
           LIGHTHOUSE_NUMBER_OF_RUNS: ${{ inputs.number-of-runs }}
@@ -87,38 +88,31 @@ jobs:
           GITHUB_SERVER_URL: ${{ github.server_url }}
         run: |
           LIGHTHOUSE_REPORT="$(node ./scripts/lighthouse-report-builder.mjs ./lhci-${{ matrix.profile }}/manifest.json ./lhci-public-${{ matrix.profile }}.txt)"
-          echo "LIGHTHOUSE_REPORT<<EOF" >> "$GITHUB_ENV"
-          echo "$LIGHTHOUSE_REPORT" >> "$GITHUB_ENV"
-          echo "EOF" >> "$GITHUB_ENV"
-
-      - name: 'Write Lighthouse summary'
-        run: |
           {
-            echo "## Lighthouse Report (${{ matrix.profile }})"
-            echo
-            echo "- Preview: ${{ inputs.base-url }}"
-            echo "- Commit: ${{ inputs.checkout-ref }}"
-            echo "- Runs per URL: ${{ inputs.number-of-runs }}"
-            echo "- Profile: ${{ matrix.profile }}"
-            echo "- Artifact: lighthouse-results-${{ inputs.pr-number != '' && format('pr-{0}', inputs.pr-number) || format('run-{0}', github.run_id) }}-${{ matrix.profile }}"
-            echo
-            echo "${{ env.LIGHTHOUSE_REPORT }}"
-            echo
-          } >> "$GITHUB_STEP_SUMMARY"
-
-      - name: 'Comment results on pull reuqest'
-        if: inputs.pr-number != ''
-        uses: marocchino/sticky-pull-request-comment@v3
-        with:
-          header: lighthouse-report-${{ matrix.profile }}
-          message: |
+            echo "LIGHTHOUSE_REPORT_BODY<<EOF"
+            cat <<MARKDOWN
             ## Lighthouse Report (${{ matrix.profile }})
 
             - Preview: ${{ inputs.base-url }}
             - Commit: ${{ inputs.checkout-ref }}
             - Runs per URL: ${{ inputs.number-of-runs }}
             - Profile: ${{ matrix.profile }}
+            - Artifact: ${{ env.LIGHTHOUSE_ARTIFACT_NAME }}
 
-            ${{ env.LIGHTHOUSE_REPORT }}
+            $LIGHTHOUSE_REPORT
 
             You can also download the report as an artifact from the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+            MARKDOWN
+            echo "EOF"
+          } >> "$GITHUB_ENV"
+
+      - name: 'Write Lighthouse summary'
+        run: |
+          echo "${{ env.LIGHTHOUSE_REPORT_BODY }}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 'Comment results on pull reuqest'
+        if: inputs.pr-number != ''
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: lighthouse-report-${{ matrix.profile }}
+          message: ${{ env.LIGHTHOUSE_REPORT_BODY }}

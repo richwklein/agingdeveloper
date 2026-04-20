@@ -38,35 +38,32 @@ jobs:
           echo "$LICENSE_REPORT" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
-      - name: 'Write license summary'
+      - name: 'Build license report body'
         run: |
           {
-            echo "## License Report"
-            echo
-            echo "A license report has been generated."
-            echo
-            echo "<details>"
-            echo "  <summary>Click to expand the full report</summary>"
-            echo
-            echo "${{ env.LICENSE_REPORT }}"
-            echo "</details>"
-            echo
-            echo "You can also download the report as an artifact from the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})."
-          } >> "$GITHUB_STEP_SUMMARY"
-
-      - name: 'Report licenses on pull request'
-        uses: marocchino/sticky-pull-request-comment@v3
-        with:
-          header: license
-          message: |
+            echo "LICENSE_REPORT_BODY<<EOF"
+            cat <<MARKDOWN
             ## License Report
 
             A license report has been generated.
 
             <details>
               <summary>Click to expand the full report</summary>
-              
+
               ${{ env.LICENSE_REPORT }}
             </details>
 
             You can also download the report as an artifact from the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+            MARKDOWN
+            echo "EOF"
+          } >> "$GITHUB_ENV"
+
+      - name: 'Write license summary'
+        run: |
+          echo "${{ env.LICENSE_REPORT_BODY }}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 'Report licenses on pull request'
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: license
+          message: ${{ env.LICENSE_REPORT_BODY }}
