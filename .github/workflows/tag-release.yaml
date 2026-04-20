@@ -119,11 +119,9 @@ jobs:
     needs: publish-release
     permissions:
       contents: read
-      pull-requests: write
     if: needs.publish-release.result == 'success'
     uses: ./.github/workflows/code-lighthouse.yaml
     with:
       base-url: ${{ needs.publish-release.outputs.deploy_url }}
-      pr-number: ${{ github.event.pull_request.number }}
-      checkout-ref: ${{ github.event.pull_request.head.sha }}
+      checkout-ref: ${{ github.sha }}
       number-of-runs: 3
