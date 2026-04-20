@@ -91,6 +91,22 @@ jobs:
           echo "deploy_url=$deploy_url" >> "$GITHUB_OUTPUT"
           echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT"
 
+      - name: 'Write deploy summary'
+        run: |
+          {
+            echo "## Deploy Results"
+            echo
+            echo "Preview deploy is ready for pull request #${{ env.PR_NUMBER }}."
+            echo
+            echo "- Preview: ${{ steps.deploy.outputs.deploy_url }}"
+            echo "- Deploy ID: \`${{ steps.deploy.outputs.deploy_id }}\`"
+            echo "- Logs: ${{ steps.deploy.outputs.logs_url || 'n/a' }}"
+            echo "- Workflow: [#${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+            echo "- Commit: [\`${{ env.COMMIT_SHA }}\`](https://github.com/${{ github.repository }}/commit/${{ env.COMMIT_SHA }})"
+            echo
+            echo "This is a preview deployment and may be replaced by later pushes to this pull request."
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: 'Comment preview URL on pull request'
         uses: marocchino/sticky-pull-request-comment@v3
         with:

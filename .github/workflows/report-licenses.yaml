@@ -38,6 +38,22 @@ jobs:
           echo "$LICENSE_REPORT" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
+      - name: 'Write license summary'
+        run: |
+          {
+            echo "## License Report"
+            echo
+            echo "A license report has been generated."
+            echo
+            echo "<details>"
+            echo "  <summary>Click to expand the full report</summary>"
+            echo
+            echo "${{ env.LICENSE_REPORT }}"
+            echo "</details>"
+            echo
+            echo "You can also download the report as an artifact from the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: 'Report licenses on pull request'
         uses: marocchino/sticky-pull-request-comment@v3
         with:
