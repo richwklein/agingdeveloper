@@ -10,7 +10,8 @@ on:
       pr-number:
         description: 'Pull request number to comment on'
         type: string
-        required: true
+        required: false
+        default: ''
       checkout-ref:
         description: 'Git ref or SHA that was deployed'
         required: false
@@ -24,14 +25,21 @@ on:
 
 jobs:
   lighthouse:
-    name: 'Lighthouse'
+    name: Lighthouse (${{ matrix.profile }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        profile:
+          - mobile
+          - desktop
     permissions:
       contents: read
       pull-requests: write
     env:
       LIGHTHOUSE_BASE_URL: ${{ inputs.base-url }}
       LIGHTHOUSE_NUMBER_OF_RUNS: ${{ inputs.number-of-runs }}
+      LIGHTHOUSE_FORM_FACTOR: ${{ matrix.profile }}
 
     steps:
       - name: 'Checkout source code'
@@ -46,6 +54,7 @@ jobs:
         env:
           LIGHTHOUSE_BASE_URL: ${{ inputs.base-url }}
           LIGHTHOUSE_NUMBER_OF_RUNS: ${{ inputs.number-of-runs }}
+          LIGHTHOUSE_FORM_FACTOR: ${{ matrix.profile }}
         run: |
           pnpm exec lhci collect --config=.lighthouserc.cjs
 
@@ -55,46 +64,64 @@ jobs:
 
       - name: 'Upload public reports'
         run: |
-          pnpm exec lhci upload --config=.lighthouserc.cjs --target=temporary-public-storage | tee ./lhci-public.txt
+          pnpm exec lhci upload --config=.lighthouserc.cjs --target=temporary-public-storage | tee ./lhci-public-${{ matrix.profile }}.txt
 
       - name: 'Upload filesystem reports'
         run: |
-          rm -rf ./lhci
-          mkdir -p ./lhci
-          pnpm exec lhci upload --config=.lighthouserc.cjs --target=filesystem --outputDir=./lhci
+          rm -rf ./lhci-${{ matrix.profile }}
+          mkdir -p ./lhci-${{ matrix.profile }}
+          pnpm exec lhci upload --config=.lighthouserc.cjs --target=filesystem --outputDir=./lhci-${{ matrix.profile }}
 
       - name: 'Upload Lighthouse artifact'
         uses: actions/upload-artifact@v7
         with:
-          name: lighthouse-results-pr-${{ inputs.pr-number }}
-          path: ./lhci
+          name: lighthouse-results-${{ inputs.pr-number != '' && format('pr-{0}', inputs.pr-number) || format('run-{0}', github.run_id) }}-${{ matrix.profile }}
+          path: ./lhci-${{ matrix.profile }}
           retention-days: 7
 
-      - name: 'Build Lighthouse comment'
+      - name: 'Build Lighthouse report'
         env:
           LIGHTHOUSE_BASE_URL: ${{ inputs.base-url }}
           LIGHTHOUSE_NUMBER_OF_RUNS: ${{ inputs.number-of-runs }}
+          LIGHTHOUSE_FORM_FACTOR: ${{ matrix.profile }}
           COMMIT_SHA: ${{ inputs.checkout-ref }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_RUN_ID: ${{ github.run_id }}
           GITHUB_SERVER_URL: ${{ github.server_url }}
         run: |
-          LIGHTHOUSE_COMMENT="$(node ./scripts/lighthouse-report-builder.mjs ./lhci/manifest.json ./lhci-public.txt)"
-          echo "LIGHTHOUSE_COMMENT<<EOF" >> "$GITHUB_ENV"
-          echo "$LIGHTHOUSE_COMMENT" >> "$GITHUB_ENV"
+          LIGHTHOUSE_REPORT="$(node ./scripts/lighthouse-report-builder.mjs ./lhci-${{ matrix.profile }}/manifest.json ./lhci-public-${{ matrix.profile }}.txt)"
+          echo "LIGHTHOUSE_REPORT<<EOF" >> "$GITHUB_ENV"
+          echo "$LIGHTHOUSE_REPORT" >> "$GITHUB_ENV"
           echo "EOF" >> "$GITHUB_ENV"
 
+      - name: 'Write Lighthouse summary'
+        run: |
+          {
+            echo "## Lighthouse Report (${{ matrix.profile }})"
+            echo
+            echo "- Preview: ${{ inputs.base-url }}"
+            echo "- Commit: ${{ inputs.checkout-ref }}"
+            echo "- Runs per URL: ${{ inputs.number-of-runs }}"
+            echo "- Profile: ${{ matrix.profile }}"
+            echo "- Artifact: lighthouse-results-${{ inputs.pr-number != '' && format('pr-{0}', inputs.pr-number) || format('run-{0}', github.run_id) }}-${{ matrix.profile }}"
+            echo
+            echo "${{ env.LIGHTHOUSE_REPORT }}"
+            echo
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: 'Comment results on pull reuqest'
+        if: inputs.pr-number != ''
         uses: marocchino/sticky-pull-request-comment@v3
         with:
-          header: lighthouse-report
+          header: lighthouse-report-${{ matrix.profile }}
           message: |
-            ## Lighthouse Report
+            ## Lighthouse Report (${{ matrix.profile }})
 
             - Preview: ${{ inputs.base-url }}
             - Commit: ${{ inputs.checkout-ref }}
             - Runs per URL: ${{ inputs.number-of-runs }}
+            - Profile: ${{ matrix.profile }}
 
-            ${{ env.LIGHTHOUSE_COMMENT }}
+            ${{ env.LIGHTHOUSE_REPORT }}
 
             You can also download the report as an artifact from the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}).
