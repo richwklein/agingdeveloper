@@ -33,9 +33,6 @@ jobs:
         profile:
           - mobile
           - desktop
-    permissions:
-      contents: read
-      pull-requests: write
     env:
       LIGHTHOUSE_BASE_URL: ${{ inputs.base-url }}
       LIGHTHOUSE_NUMBER_OF_RUNS: ${{ inputs.number-of-runs }}
