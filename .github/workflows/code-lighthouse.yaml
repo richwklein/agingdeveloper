@@ -90,19 +90,17 @@ jobs:
           LIGHTHOUSE_REPORT="$(node ./scripts/lighthouse-report-builder.mjs ./lhci-${{ matrix.profile }}/manifest.json ./lhci-public-${{ matrix.profile }}.txt)"
           {
             echo "LIGHTHOUSE_REPORT_BODY<<EOF"
-            cat <<MARKDOWN
-            ## Lighthouse Report (${{ matrix.profile }})
-
-            - Preview: ${{ inputs.base-url }}
-            - Commit: ${{ inputs.checkout-ref }}
-            - Runs per URL: ${{ inputs.number-of-runs }}
-            - Profile: ${{ matrix.profile }}
-            - Artifact: ${{ env.LIGHTHOUSE_ARTIFACT_NAME }}
-
-            $LIGHTHOUSE_REPORT
-
-            You can also download the report as an artifact from the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}).
-            MARKDOWN
+            echo "## Lighthouse Report (${{ matrix.profile }})"
+            echo
+            echo "- Preview: ${{ inputs.base-url }}"
+            echo "- Commit: ${{ inputs.checkout-ref }}"
+            echo "- Runs per URL: ${{ inputs.number-of-runs }}"
+            echo "- Profile: ${{ matrix.profile }}"
+            echo "- Artifact: ${{ env.LIGHTHOUSE_ARTIFACT_NAME }}"
+            echo
+            echo "$LIGHTHOUSE_REPORT"
+            echo
+            echo "You can also download the report as an artifact from the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})."
             echo "EOF"
           } >> "$GITHUB_ENV"
 

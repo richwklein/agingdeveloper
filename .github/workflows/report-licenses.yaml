@@ -42,19 +42,17 @@ jobs:
         run: |
           {
             echo "LICENSE_REPORT_BODY<<EOF"
-            cat <<MARKDOWN
-            ## License Report
-
-            A license report has been generated.
-
-            <details>
-              <summary>Click to expand the full report</summary>
-
-              ${{ env.LICENSE_REPORT }}
-            </details>
-
-            You can also download the report as an artifact from the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}).
-            MARKDOWN
+            echo "## License Report"
+            echo
+            echo "A license report has been generated."
+            echo
+            echo "<details>"
+            echo "  <summary>Click to expand the full report</summary>"
+            echo
+            echo "${{ env.LICENSE_REPORT }}"
+            echo "</details>"
+            echo
+            echo "You can also download the report as an artifact from the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})."
             echo "EOF"
           } >> "$GITHUB_ENV"
 
