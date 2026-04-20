@@ -14,6 +14,7 @@ interface Props {
   loading?: 'eager' | 'lazy'
   fetchpriority?: 'auto' | 'high' | 'low'
   decoding?: 'async' | 'auto' | 'sync'
+  quality?: number
   class?: string
 }
 
@@ -28,6 +29,7 @@ const {
   loading = 'lazy',
   fetchpriority = 'low',
   decoding = 'async',
+  quality,
   class: className,
 } = Astro.props
 
@@ -48,6 +50,7 @@ const clearPlaceholderStyles =
   loading={loading}
   fetchpriority={fetchpriority}
   decoding={decoding}
+  quality={quality}
   class:list={['bg-cover bg-center bg-no-repeat', className]}
   style={style}
   onload={placeholder ? clearPlaceholderStyles : undefined}

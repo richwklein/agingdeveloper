@@ -58,6 +58,7 @@ describe('articleCard', () => {
     expect(html).toContain('w=420&#38;h=')
     expect(html).toContain('w=640&#38;h=')
     expect(html).toContain('w=768&#38;h=')
+    expect(html).toContain('&#38;q=60')
     expect(html).toContain('(min-width: 1280px) 180px')
     expect(html).toContain('(min-width: 1024px) 384px')
   })

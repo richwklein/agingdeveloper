@@ -23,7 +23,7 @@ describe('responsiveImage', () => {
     vi.clearAllMocks()
   })
 
-  const render = async () => {
+  const render = async (quality?: number) => {
     const container = await AstroContainer.create()
     return await container.renderToString(ResponsiveImage, {
       props: {
@@ -31,6 +31,7 @@ describe('responsiveImage', () => {
         alt: 'Mock image',
         width: 640,
         loading: 'lazy',
+        quality,
       },
     })
   }
@@ -60,5 +61,13 @@ describe('responsiveImage', () => {
     expect(html).not.toContain('onload="')
     expect(html).not.toContain('onerror="')
     expect(html).not.toContain("removeProperty('background-image')")
+  })
+
+  test('passes quality through to the transformed image request when provided', async () => {
+    mockCreateBlurDataUrl.mockResolvedValue(null)
+
+    const html = await render(60)
+
+    expect(html).toContain('&#38;q=60')
   })
 })

@@ -45,6 +45,6 @@ const latest = await getLatestQuote()
   </Fragment>
   {lead ? <ArticleCardLead article={lead} /> : null}
   <QuoteCardLead quote={latest} class:list={['mt-4']} />
-  <ArticleGrid articles={articles} foldCount={4} class:list={['mt-4']} />
+  <ArticleGrid articles={articles} foldCount={2} class:list={['mt-4']} />
   <BackLink name="articles" to={'/article/archive-1'} class:list={['mt-4']} />
 </Layout>
