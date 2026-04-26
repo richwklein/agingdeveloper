@@ -1,15 +1,7 @@
 import ArticleCard from '@components/ArticleCard.astro'
 import { experimental_AstroContainer as AstroContainer } from 'astro/container'
-import type { CollectionEntry } from 'astro:content'
+import { type CollectionEntry, render } from 'astro:content'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
-
-const { mockRender } = vi.hoisted(() => ({
-  mockRender: vi.fn(),
-}))
-
-vi.mock('astro:content', () => ({
-  render: mockRender,
-}))
 
 describe('articleCard', () => {
   const article = {
@@ -43,12 +35,12 @@ describe('articleCard', () => {
   }
 
   beforeEach(() => {
-    mockRender.mockReset()
-    mockRender.mockResolvedValue({
+    vi.mocked(render).mockReset()
+    vi.mocked(render).mockResolvedValue({
       remarkPluginFrontmatter: {
         excerpt: 'A readable article card excerpt',
       },
-    })
+    } as any)
   })
 
   test('renders the article title, date, and excerpt', async () => {

@@ -235,6 +235,7 @@ const MockQuotes: Record<string, any>[] = [
 // Mock astro:content module
 vi.mock('astro:content', () => {
   return {
+    render: vi.fn(),
     getEntry: vi.fn(async (collection, id) => {
       let source: Record<string, any>[] | undefined = undefined
 
