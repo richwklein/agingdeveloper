@@ -26,11 +26,11 @@ const { remarkPluginFrontmatter: frontmatter } = await render(article)
 const loading = lazy ? 'lazy' : 'eager'
 ---
 
-<LinkInternal to={`/article/${article.id}`}>
+<LinkInternal to={`/article/${article.id}`} class="block h-full">
   <article
     class:list={[
-      'border-stroke-light bg-card-light overflow-hidden rounded-md border',
-      'xl:flex xl:max-h-60 xl:flex-row-reverse',
+      'border-stroke-light bg-card-light flex h-full flex-col overflow-hidden rounded-md border',
+      'xl:max-h-60 xl:flex-row-reverse',
       'hover:bg-card-main hover:shadow-xs',
       'focus:bg-card-main focus:shadow-xs',
       className,
@@ -58,7 +58,7 @@ const loading = lazy ? 'lazy' : 'eager'
         'xl:aspect-3/4 xl:w-[180px]',
       ]}
     />
-    <div class:list={['px-4 pt-3 pb-2']}>
+    <div class:list={['flex-1 px-4 pt-3 pb-2']}>
       <h4 class:list={['text-fg-light text-lg leading-snug font-medium']}>
         {article.data.title}
       </h4>
