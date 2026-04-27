@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "6.6.4",
+  "version": "6.6.6",
   "type": "module",
   "packageManager": "pnpm@10.24.0",
   "scripts": {
