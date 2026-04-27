@@ -1,0 +1,5 @@
+{
+  "permissions": {
+    "allow": ["WebSearch", "Bash(node .claude/scripts/gen-uuid.js)"]
+  }
+}
