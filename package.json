@@ -2,7 +2,7 @@
   "name": "agingdeveloper",
   "private": true,
   "description": "The personal site of Richard Klein",
-  "version": "6.6.7",
+  "version": "6.7.0",
   "type": "module",
   "packageManager": "pnpm@10.24.0",
   "scripts": {
@@ -66,8 +66,8 @@
     "sanitize-html": "^2.17.3",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.1.18",
-    "typescript": "^5.4.5",
-    "typescript-eslint": "^8.58.0",
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.59.1",
     "vitest": "^4.0.18"
   }
 }
