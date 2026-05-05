@@ -10,16 +10,18 @@ $ARGUMENTS
 
 ## Step 1 — Find a quote
 
-Read `src/content/data/quote.json` to understand the existing quote style and to avoid suggesting duplicates.
+Read `src/content/data/quote.json` to understand the existing quote style and to check for duplicates.
 
-Then search the web for quotes that fit the theme above. Suggest **3–5 candidates**, each on its own numbered line in this format:
+Then search the web for quotes that fit the theme above. Prefer **shorter quotes** that are easy to write on a chalkboard. Favor quotes with verifiable citation sources, though a source is not required.
+
+Suggest **3–5 candidates** that have not already appeared in `quote.json`, each on its own numbered line in this format:
 
 ```
 1. "Quote text" — Author (Source title, year) [if known]
 2. ...
 ```
 
-Ask the user to pick a number, paste their own quote, or request more options before continuing.
+Ask the user to pick a number, paste their own quote, or request more options. If no quote is selected, restart this step with fresh candidates.
 
 ## Step 2 — Collect details
 
@@ -27,7 +29,7 @@ Once a quote is chosen, confirm with the user:
 
 - **text** — exact quote text
 - **author** — full name (use `"Unknown"` if truly anonymous)
-- **source** (optional) — title, type (`book` | `movie` | `play` | `speech` | `letter` | `song` | `magazine` | `newspaper` | `other`), and year
+- **source** (optional) — title, type (`book` | `movie` | `show` | `play` | `speech` | `letter` | `song` | `magazine` | `newspaper` | `other`), and year
 
 Do not invent source details. If uncertain, ask or omit the source object.
 
@@ -64,7 +66,7 @@ With source:
   "chalked": "<YYYY-MM-DD>",
   "source": {
     "title": "<title>",
-    "type": "<type>",
+    "type": "<book|movie|show|play|speech|letter|song|magazine|newspaper|other>",
     "year": <year>
   }
 }
