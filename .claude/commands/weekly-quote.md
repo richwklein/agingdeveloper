@@ -39,7 +39,7 @@ Generate a UUID v4 for the `id` field using:
 node .claude/scripts/gen-uuid.js
 ```
 
-Set `chalked` to the Monday of the current week in `YYYY-MM-DD` format.
+Set `chalked` to the current day in `YYYY-MM-DD` format.
 
 Build the entry using the appropriate shape:
 
