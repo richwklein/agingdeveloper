@@ -16,6 +16,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# worktrees
+.worktrees/
+
 # coverage files
 coverage/
 license-report.html
@@ -27,3 +30,4 @@ license-report.html
 # macOS-specific files
 .DS_Store
 Icon?
+.gitignore
