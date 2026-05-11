@@ -1,6 +1,7 @@
 ---
 name: code-linter-fixer
 description: Run the repository's lint and formatting fix scripts after changing JavaScript, TypeScript, Astro, Markdown, or MDX source files. Use this whenever edits touch files such as .js, .mjs, .cjs, .ts, .astro, .md, or .mdx.
+allowed-tools: Bash(pnpm run lint:fix) Bash(pnpm run format:fix)
 ---
 
 # Source Post-Edit Fixers
