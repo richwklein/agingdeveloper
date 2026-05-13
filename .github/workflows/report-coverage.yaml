@@ -33,4 +33,4 @@ jobs:
           cat coverage/coverage-summary.json || echo "No summary file"
 
       - name: 'Report test coverage on pull request'
-        uses: davelosert/vitest-coverage-report-action@v2
+        uses: davelosert/vitest-coverage-report-action@v2.11.2
