@@ -85,9 +85,9 @@ Increment the patch segment of `version` in `package.json` (e.g. `6.6.4` → `6.
 Run the repository fix and verify scripts:
 
 ```bash
-pnpm run lint:fix
-pnpm run format:fix
-pnpm run verify
+npm run lint:fix
+npm run format:fix
+npm run verify
 ```
 
 Surface any failures clearly before finishing.

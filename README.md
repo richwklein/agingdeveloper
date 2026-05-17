@@ -37,11 +37,10 @@ Most Typescript developers will likely already have the tools installed, but her
 
 I use _asdf_ to install dev tools. Use the [getting started](https://asdf-vm.com/guide/getting-started.html) page to make sure it is installed and set up correctly.
 
-Once you have asdf installed you can use that to install the versions of `nodejs` and `pnpm` defined in this repository.
+Once you have asdf installed you can use that to install the version of `nodejs` defined in this repository.
 
 ```shell
 asdf plugin add nodejs
-asdf plugin add pnpm
 asdf install
 ```
 
@@ -49,17 +48,17 @@ asdf install
 
 ```shell
 cd agingdeveloper/
-pnpm install
+npm install
 ```
 
-This will install the local project dependencies using `pnpm`.
+This will install the local project dependencies using `npm`.
 
 ### Create a production build
 
 Use the standard build script to generate the static site into `dist/`.
 
 ```shell
-pnpm run build
+npm run build
 ```
 
 ### Serve the production build locally
@@ -67,7 +66,7 @@ pnpm run build
 After building the site, use Astro's preview server to serve the production output locally.
 
 ```shell
-pnpm run preview
+npm run preview
 ```
 
 ## Build Variables
@@ -97,7 +96,7 @@ For local runs, the site origin falls back to `http://localhost:4321` and the de
 SITE_ORIGIN=https://agingdeveloper.com \
 ANALYTICS_TRACKING_ID=G-XXXXXXXXXX \
 DEPLOY_CONTEXT=production \
-pnpm run build
+npm run build
 ```
 
 ## VSCode Settings
