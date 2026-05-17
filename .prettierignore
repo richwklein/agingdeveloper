@@ -1,0 +1,8 @@
+# Canonical Contributor Covenant text — never reformat or it diverges from upstream.
+CODE_OF_CONDUCT.md
+
+# Generated / build / cache directories
+.astro/
+dist/
+coverage/
+node_modules/
