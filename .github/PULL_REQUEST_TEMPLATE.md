@@ -26,7 +26,7 @@ _Put an `x` in the boxes that apply._
 
 - [ ] Preview deploy is useful for reviewing this change
 - [ ] Safe to label `no-deploy`
-- [ ] This PR intentionally updates the version in `package.json`
+- [ ] This PR intentionally updates the version
 
 ## Validation
 
