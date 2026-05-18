@@ -6,39 +6,33 @@ on:
       - main
 
 jobs:
-  tag-release:
-    name: 'Tag on Release'
+  release-please:
+    name: 'Run release-please'
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     outputs:
-      released: ${{ steps.release.outputs.released }}
-      release_tag: ${{ steps.release.outputs.release_tag }}
-      release_name: ${{ steps.release.outputs.release_name }}
+      released: ${{ steps.release.outputs.release_created }}
+      release_tag: ${{ steps.release.outputs.tag_name }}
 
     steps:
-      - name: 'Checkout source code'
-        uses: actions/checkout@v6
+      - name: 'Run release-please'
+        id: release
+        uses: googleapis/release-please-action@v4
         with:
-          fetch-depth: 0
-          ref: ${{ github.sha }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
 
-      - name: 'Create GitHub release'
-        id: 'release'
-        uses: 'justincy/github-action-npm-release@2.0.2'
+      - name: 'Output release info'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 'Output new tag'
-        env:
-          RELEASED: ${{ steps.release.outputs.released }}
-          RELEASE_TAG: ${{ steps.release.outputs.release_tag }}
-          RELEASE_NAME: ${{ steps.release.outputs.release_name }}
-        run: echo "released=$RELEASED tag=$RELEASE_TAG ($RELEASE_NAME)"
+          RELEASED: ${{ steps.release.outputs.release_created }}
+          RELEASE_TAG: ${{ steps.release.outputs.tag_name }}
+        run: echo "released=$RELEASED tag=$RELEASE_TAG"
 
   code-build:
-    needs: tag-release
-    if: needs.tag-release.outputs.released == 'true'
+    needs: release-please
+    if: needs.release-please.outputs.released == 'true'
     permissions:
       contents: read
     uses: ./.github/workflows/code-build.yaml
@@ -50,9 +44,9 @@ jobs:
   publish-release:
     name: 'Deploy Release'
     needs:
-      - tag-release
+      - release-please
       - code-build
-    if: needs.tag-release.outputs.released == 'true'
+    if: needs.release-please.outputs.released == 'true'
     runs-on: ubuntu-latest
     outputs:
       deploy_id: ${{ steps.deploy.outputs.deploy_id }}
@@ -81,7 +75,7 @@ jobs:
         env:
           NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          RELEASE_TAG: ${{ needs.tag-release.outputs.release_tag }}
+          RELEASE_TAG: ${{ needs.release-please.outputs.release_tag }}
         run: |
           set -euo pipefail
 
