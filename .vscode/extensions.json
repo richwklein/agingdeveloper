@@ -1,11 +1,15 @@
 {
   "recommendations": [
+    "editorconfig.editorconfig",
+    "davidanson.vscode-markdownlint",
+    "github.vscode-github-actions",
+    "streetsidesoftware.code-spell-checker",
     "astro-build.astro-vscode",
     "unifiedjs.vscode-mdx",
-    "vitest.explorer",
     "bradlc.vscode-tailwindcss",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "vitest.explorer"
   ],
   "unwantedRecommendations": []
 }

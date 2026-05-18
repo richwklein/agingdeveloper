@@ -1,15 +1,15 @@
 # Repository Instructions
 
+These instructions apply to any agent (Claude Code, Copilot, etc.) working in repositories generated from `repo-template-astro`.
+
 ## Toolchain
 
-This repository uses:
+- Node.js (version pinned in `.tool-versions`)
+- npm as the package manager and script runner
 
-- Node.js for runtime and scripts
-- `npm` as the package manager and script runner
+## After editing source
 
-Use the local skill at `.agents/skills/code-linter-fixer` whenever a task changes any `.js`, `.mjs`, `.cjs`, `.ts`, `.astro`, `.md`, or `.mdx` file in this repository.
-
-After those edits, run these scripts before finishing:
+When a task changes any `.js`, `.mjs`, `.cjs`, `.ts`, `.astro`, `.md`, or `.mdx` file, run these scripts before finishing:
 
 ```bash
 npm run lint:fix
@@ -22,8 +22,36 @@ For larger changes, dependency changes, CI changes, or changes that may affect b
 npm run verify
 ```
 
-## Release Versioning
+`verify` runs lint, format-check, tests, and build — the same checks CI runs.
 
-`package.json` is the release version source of truth.
-A new release is indicated by bumping the `version` field in `package.json`.
-Do not change the version unless the work is intended to produce a release.
+## Commits
+
+Use [Conventional Commits](https://www.conventionalcommits.org/) for commit messages. release-please parses these to generate changelogs and version bumps.
+
+Allowed types: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `build`, `ci`, `perf`, `style`.
+
+Breaking changes: append `!` (e.g., `feat!: rename public API`) or include a `BREAKING CHANGE:` footer.
+
+## Release versioning
+
+`package.json` is the version source of truth, owned by release-please. **Do not manually edit the `version` field** — release-please opens a release PR that bumps it. Merging the release PR cuts the tag + GitHub Release.
+
+## Branching
+
+- `main` is the default branch and is protected by a ruleset.
+- All work happens in feature branches merged via pull request.
+- Squash merges only — no merge commits, no rebase merges.
+- Branches must be up to date with `main` before merging (strict status checks).
+- Commits must be signed.
+
+## Required gates before merge
+
+- `lint` (eslint + prettier)
+- `test` (vitest with coverage)
+- `build` (astro check + astro build)
+- `analyze (actions)` (CodeQL workflow analysis)
+- `analyze (javascript-typescript)` (CodeQL source analysis)
+
+## Drift audit
+
+Run `/repo-template-audit` from this repo's directory to check that template-tracked files and GitHub repo settings still match canonical sources.
