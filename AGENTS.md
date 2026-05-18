@@ -5,21 +5,21 @@
 This repository uses:
 
 - Node.js for runtime and scripts
-- `pnpm` as the package manager and script runner
+- `npm` as the package manager and script runner
 
 Use the local skill at `.agents/skills/code-linter-fixer` whenever a task changes any `.js`, `.mjs`, `.cjs`, `.ts`, `.astro`, `.md`, or `.mdx` file in this repository.
 
 After those edits, run these scripts before finishing:
 
 ```bash
-pnpm run lint:fix
-pnpm run format:fix
+npm run lint:fix
+npm run format:fix
 ```
 
 For larger changes, dependency changes, CI changes, or changes that may affect build/runtime behavior, also run:
 
 ```bash
-pnpm run verify
+npm run verify
 ```
 
 ## Release Versioning

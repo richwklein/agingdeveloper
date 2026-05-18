@@ -22,7 +22,7 @@ jobs:
 
       - name: 'Generate license report'
         id: generate-report
-        run: pnpm run licenses:html
+        run: npm run licenses:html
 
       - name: 'Upload license report artifact'
         uses: actions/upload-artifact@v7

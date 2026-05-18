@@ -54,21 +54,21 @@ jobs:
           LIGHTHOUSE_NUMBER_OF_RUNS: ${{ inputs.number-of-runs }}
           LIGHTHOUSE_FORM_FACTOR: ${{ matrix.profile }}
         run: |
-          pnpm exec lhci collect --config=.lighthouserc.cjs
+          npx lhci collect --config=.lighthouserc.cjs
 
       - name: 'Assert Lighthouse scores'
         run: |
-          pnpm exec lhci assert --config=.lighthouserc.cjs
+          npx lhci assert --config=.lighthouserc.cjs
 
       - name: 'Upload public reports'
         run: |
-          pnpm exec lhci upload --config=.lighthouserc.cjs --target=temporary-public-storage | tee ./lhci-public-${{ matrix.profile }}.txt
+          npx lhci upload --config=.lighthouserc.cjs --target=temporary-public-storage | tee ./lhci-public-${{ matrix.profile }}.txt
 
       - name: 'Upload filesystem reports'
         run: |
           rm -rf ./lhci-${{ matrix.profile }}
           mkdir -p ./lhci-${{ matrix.profile }}
-          pnpm exec lhci upload --config=.lighthouserc.cjs --target=filesystem --outputDir=./lhci-${{ matrix.profile }}
+          npx lhci upload --config=.lighthouserc.cjs --target=filesystem --outputDir=./lhci-${{ matrix.profile }}
 
       - name: 'Upload Lighthouse artifact'
         uses: actions/upload-artifact@v7
