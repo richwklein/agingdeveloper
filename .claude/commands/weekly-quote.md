@@ -1,5 +1,5 @@
 ---
-description: Add the weekly chalkboard quote to quote.json and cut a patch release
+description: Add the weekly chalkboard quote to quote.json (release-please cuts the patch release from the commit)
 ---
 
 You are helping add the weekly chalkboard quote for the agingdeveloper site.
@@ -76,11 +76,7 @@ With source:
 
 Insert the new entry as the **first element** of the array in `src/content/data/quote.json`.
 
-## Step 5 — Bump the patch version
-
-Increment the patch segment of `version` in `package.json` (e.g. `6.6.4` → `6.6.5`).
-
-## Step 6 — Lint and format
+## Step 5 — Lint and format
 
 Run the repository fix and verify scripts:
 
@@ -91,3 +87,17 @@ npm run verify
 ```
 
 Surface any failures clearly before finishing.
+
+## Step 6 — Commit message
+
+**Do not bump `package.json` manually.** release-please owns versioning and will open a release PR based on the commit message.
+
+Suggest a [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/) message in this form so release-please cuts a patch release:
+
+```
+fix(quote): add weekly quote for <Month D, YYYY>
+```
+
+Example: `fix(quote): add weekly quote for May 18, 2026`
+
+Do not commit unless the user asks.
