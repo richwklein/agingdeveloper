@@ -13,10 +13,7 @@ const dirname = path.dirname(filename)
 const gitignorePath = path.resolve(dirname, '.gitignore')
 
 export default [
-  // ignore files in .gitignore
   includeIgnoreFile(gitignorePath),
-
-  // add more generic rule sets here, such as:
   jsLint.configs.recommended,
   ...tsLint.configs.recommended,
   ...astroLint.configs.recommended,
