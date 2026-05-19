@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.8.2](https://github.com/richwklein/agingdeveloper/compare/6.8.1...6.8.2) (2026-05-19)
+
+
+### Bug Fixes
+
+* **quote:** publish weekly quote for May 18, 2026 ([#920](https://github.com/richwklein/agingdeveloper/issues/920)) ([6bf6c10](https://github.com/richwklein/agingdeveloper/commit/6bf6c101fcfd0cfe460917a1308002a909a3ad39))
+
 ## [6.8.1](https://github.com/richwklein/agingdeveloper/compare/6.8.0...6.8.1) (2026-05-11)
 
 ### Miscellaneous Changes
