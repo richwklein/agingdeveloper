@@ -1,6 +1,10 @@
 # Canonical Contributor Covenant text — never reformat or it diverges from upstream.
 CODE_OF_CONDUCT.md
 
+# Release-please writes these in its own format; do not let prettier touch them.
+CHANGELOG.md
+.release-please-manifest.json
+
 # Generated / build / cache directories
 .astro/
 dist/
