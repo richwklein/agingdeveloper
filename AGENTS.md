@@ -54,4 +54,6 @@ Breaking changes: append `!` (e.g., `feat!: rename public API`) or include a `BR
 
 ## Drift audit
 
-Run `/repo-template-audit` from this repo's directory to check that template-tracked files and GitHub repo settings still match canonical sources.
+Install the audit skill: `npx skills add richwklein/skills`
+
+Run `/repo-template-audit richwklein/repo-template-astro` to check that template-tracked files and GitHub repo settings still match the template.
