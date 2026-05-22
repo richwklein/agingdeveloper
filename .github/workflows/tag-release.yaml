@@ -17,10 +17,18 @@ jobs:
       release_tag: ${{ steps.release.outputs.tag_name }}
 
     steps:
+      - name: 'Generate App token'
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.RELEASE_BOT_APP_ID }}
+          private-key: ${{ secrets.RELEASE_BOT_PRIVATE_KEY }}
+
       - name: 'Run release-please'
         id: release
         uses: googleapis/release-please-action@v4
         with:
+          token: ${{ steps.app-token.outputs.token }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
 
