@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.9.0](https://github.com/richwklein/agingdeveloper/compare/6.8.2...6.9.0) (2026-05-22)
+
+
+### Features
+
+* **codeql:** switch matrix to include-style with per-language runner ([#926](https://github.com/richwklein/agingdeveloper/issues/926)) ([1d5187e](https://github.com/richwklein/agingdeveloper/commit/1d5187ec57f89e6d5e8c06a72c20f89df467802a))
+* **release:** use GitHub App token in tag-release.yaml ([#929](https://github.com/richwklein/agingdeveloper/issues/929)) ([971ead6](https://github.com/richwklein/agingdeveloper/commit/971ead664c1e111068f31c1a75d727dae514c105))
+
 ## [6.8.2](https://github.com/richwklein/agingdeveloper/compare/6.8.1...6.8.2) (2026-05-19)
 
 
