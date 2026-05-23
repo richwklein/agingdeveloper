@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.10.0](https://github.com/richwklein/agingdeveloper/compare/6.9.0...6.10.0) (2026-05-23)
+
+
+### Features
+
+* **content:** add article on repo template standardization experience ([#933](https://github.com/richwklein/agingdeveloper/issues/933)) ([abd63b0](https://github.com/richwklein/agingdeveloper/commit/abd63b05a01ce9cdaa0fa1bbdfb8c93fae2b1252))
+
 ## [6.9.0](https://github.com/richwklein/agingdeveloper/compare/6.8.2...6.9.0) (2026-05-22)
 
 
