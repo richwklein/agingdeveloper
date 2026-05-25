@@ -27,4 +27,4 @@ jobs:
           path: coverage
 
       - name: 'Report test coverage on pull request'
-        uses: davelosert/vitest-coverage-report-action@v2.11.2
+        uses: davelosert/vitest-coverage-report-action@v2.12.0
