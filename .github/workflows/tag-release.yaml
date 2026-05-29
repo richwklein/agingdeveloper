@@ -1,3 +1,5 @@
+# Supersedes repo-template-astro's release-please.yaml: runs release-please then
+# chains build → Netlify production deploy → Lighthouse on every release.
 name: 'Tag Release'
 
 on:
