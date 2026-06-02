@@ -1,5 +1,16 @@
 [
   {
+    "id": "bdf23111-ef3a-40c2-8f7c-bf3cc291a3b9",
+    "text": "It was June, and the world smelled of roses.",
+    "author": "Maud Hart Lovelace",
+    "chalked": "2026-06-01",
+    "source": {
+      "title": "Betsy-Tacy and Tib",
+      "type": "book",
+      "year": 1941
+    }
+  },
+  {
     "id": "8ff716e6-c718-4cc8-8af7-d4038406cb77",
     "text": "A hero is someone who has given his or her life to something bigger than oneself.",
     "author": "Joseph Campbell",
