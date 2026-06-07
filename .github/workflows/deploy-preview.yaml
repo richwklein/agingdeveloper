@@ -12,8 +12,25 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      relevant: ${{ steps.changes.outputs.relevant }}
+    steps:
+      - name: 'Checkout source code'
+        uses: actions/checkout@v6.0.2
+
+      - name: 'Detect relevant changes'
+        id: changes
+        uses: ./.github/actions/detect-relevant-changes
+
   build:
-    if: github.event.pull_request.head.repo.fork == false && github.actor != 'dependabot[bot]'
+    if: >
+      github.event.pull_request.head.repo.fork == false &&
+      github.actor != 'dependabot[bot]'
     permissions:
       contents: read
     uses: ./.github/workflows/code-build.yaml
@@ -26,8 +43,9 @@ jobs:
     if: >
       github.event.pull_request.head.repo.fork == false &&
       github.actor != 'dependabot[bot]' &&
-      !contains(github.event.pull_request.labels.*.name, 'no-deploy')
-    needs: build
+      !contains(github.event.pull_request.labels.*.name, 'no-deploy') &&
+      needs.detect-changes.outputs.relevant == 'true'
+    needs: [detect-changes, build]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -42,7 +60,7 @@ jobs:
 
     steps:
       - name: 'Checkout source code'
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
 
       - name: 'Setup tools'
         uses: ./.github/actions/setup-tools
