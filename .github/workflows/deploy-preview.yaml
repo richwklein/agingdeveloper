@@ -28,9 +28,7 @@ jobs:
         uses: ./.github/actions/detect-relevant-changes
 
   build:
-    if: >
-      github.event.pull_request.head.repo.fork == false &&
-      github.actor != 'dependabot[bot]'
+    if: github.event.pull_request.head.repo.fork == false
     permissions:
       contents: read
     uses: ./.github/workflows/code-build.yaml
