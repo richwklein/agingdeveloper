@@ -16,9 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout source code'
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
 
       - name: 'Download test coverage'
+        id: download
+        continue-on-error: true
         uses: actions/download-artifact@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -26,5 +28,10 @@ jobs:
           name: coverage
           path: coverage
 
+      - name: 'No coverage artifact'
+        if: steps.download.outcome != 'success'
+        run: echo "::notice::No coverage artifact found; nothing to report."
+
       - name: 'Report test coverage on pull request'
+        if: steps.download.outcome == 'success'
         uses: davelosert/vitest-coverage-report-action@v2.12.0
