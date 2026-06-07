@@ -9,8 +9,29 @@ permissions:
   pull-requests: write
 
 jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      relevant: ${{ steps.changes.outputs.relevant }}
+    steps:
+      - name: 'Checkout source code'
+        uses: actions/checkout@v6.0.2
+
+      - name: 'Detect relevant changes'
+        id: changes
+        uses: ./.github/actions/detect-relevant-changes
+        with:
+          patterns: |
+            ^package(-lock)?\.json$
+
   license-report:
-    if: github.event.pull_request.head.repo.fork == false
+    needs: detect-changes
+    if: >
+      github.event.pull_request.head.repo.fork == false &&
+      needs.detect-changes.outputs.relevant == 'true'
     runs-on: ubuntu-latest
 
     steps:

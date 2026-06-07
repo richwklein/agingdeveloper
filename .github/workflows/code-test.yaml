@@ -4,6 +4,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   test:
@@ -12,14 +13,20 @@ jobs:
       - name: 'Checkout source code'
         uses: actions/checkout@v6.0.2
 
+      - name: 'Detect relevant changes'
+        id: changes
+        uses: ./.github/actions/detect-relevant-changes
+
       - name: 'Setup tools and dependencies'
+        if: steps.changes.outputs.relevant == 'true'
         uses: ./.github/actions/setup-tools
 
       - name: 'Run unit tests with coverage'
+        if: steps.changes.outputs.relevant == 'true'
         run: npm run test:coverage
 
       - name: 'Upload coverage report'
-        if: always()
+        if: always() && steps.changes.outputs.relevant == 'true'
         uses: actions/upload-artifact@v7
         with:
           name: coverage

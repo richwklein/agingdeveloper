@@ -11,6 +11,7 @@ on:
 permissions:
   actions: read
   contents: read
+  pull-requests: read
   security-events: write
 
 jobs:
@@ -31,11 +32,24 @@ jobs:
         #
         # COMPILED LANGUAGES (swift, c-cpp, java-kotlin, csharp) require a
         # build step BEFORE 'Perform CodeQL analysis' so the extractor can
-        # observe source compilation.
+        # observe source compilation. Example for Swift:
+        #
+        #   - name: Build (Swift)
+        #     if: matrix.language == 'swift'
+        #     run: |
+        #       sudo xcode-select -s /Applications/Xcode_16.3.app
+        #       xcodebuild build -project Your.xcodeproj -scheme Your \
+        #         -configuration Debug -destination 'platform=macOS' \
+        #         CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
         #
         # Each include entry registers its own status check, named
         # `analyze (<language>, <runner>)`. Update branch protection
-        # rulesets to require those exact contexts.
+        # rulesets to require those exact contexts. Keep this matrix
+        # free of extra keys — anything added here becomes part of the
+        # status check name and would break the required-check contexts.
+        # Per-language inputs to other steps (e.g. detect-relevant-
+        # changes patterns) are selected via `matrix.language` in those
+        # steps' expressions.
         include:
           - language: actions
             runner: ubuntu-latest
@@ -45,12 +59,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6.0.2
 
+      - name: Detect relevant changes
+        id: changes
+        uses: ./.github/actions/detect-relevant-changes
+        with:
+          # 'actions' language only cares about workflow/action edits;
+          # 'javascript-typescript' falls back to the action's default
+          # JS/TS pattern set by passing an empty value.
+          patterns: ${{ matrix.language == 'actions' && '^\.github/(workflows|actions)/' || '' }}
+
       - name: Initialize CodeQL
+        if: steps.changes.outputs.relevant == 'true'
         uses: github/codeql-action/init@v4.36.0
         with:
           languages: ${{ matrix.language }}
 
       - name: Perform CodeQL analysis
+        if: steps.changes.outputs.relevant == 'true'
         uses: github/codeql-action/analyze@v4.36.0
         with:
           category: '/language:${{ matrix.language }}'
