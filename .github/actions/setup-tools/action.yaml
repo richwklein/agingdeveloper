@@ -1,5 +1,5 @@
 name: 'Setup Tools'
-description: 'Setup Node.js and optionally install project dependencies via npm'
+description: 'Setup Node.js and pnpm (via corepack), and optionally install project dependencies'
 
 inputs:
   node-version-file:
@@ -9,21 +9,25 @@ inputs:
     description: 'Whether to install project dependencies'
     default: 'true'
   working-directory:
-    description: 'Directory to run npm ci from'
+    description: 'Directory to run pnpm install from'
     default: '.'
 
 runs:
   using: 'composite'
   steps:
+    - name: 'Enable corepack'
+      shell: bash
+      run: corepack enable
+
     - name: 'Setup Node.js environment'
       uses: actions/setup-node@v6
       with:
         node-version-file: ${{ inputs.node-version-file }}
-        cache: 'npm'
-        cache-dependency-path: ${{ inputs.working-directory }}/package-lock.json
+        cache: 'pnpm'
+        cache-dependency-path: ${{ inputs.working-directory }}/pnpm-lock.yaml
 
     - name: 'Install dependencies'
       if: ${{ inputs.install-dependencies != 'false' }}
       shell: bash
       working-directory: ${{ inputs.working-directory }}
-      run: npm ci
+      run: pnpm install --frozen-lockfile

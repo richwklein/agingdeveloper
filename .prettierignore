@@ -5,6 +5,9 @@ CODE_OF_CONDUCT.md
 CHANGELOG.md
 .release-please-manifest.json
 
+# Lockfiles are managed by their tool; do not reformat.
+pnpm-lock.yaml
+
 # Generated / build / cache directories
 .astro/
 dist/
