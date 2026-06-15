@@ -10,7 +10,7 @@
     },
     {
       "name": "Preview server",
-      "command": "pnpm run build && pnpm run preview",
+      "command": "pnpm run preview:build",
       "request": "launch",
       "type": "node-terminal",
       "cwd": "${workspaceFolder}"
