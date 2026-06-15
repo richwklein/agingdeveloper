@@ -35,7 +35,8 @@ runs:
             String.raw`^(astro|eslint|prettier|vitest)\.config(\.ts|\.mjs)?$`,
             String.raw`^vitest\.setup\.ts$`,
             String.raw`^tsconfig\.json$`,
-            String.raw`^package(-lock)?\.json$`,
+            String.raw`^package\.json$`,
+            String.raw`^pnpm-lock\.yaml$`,
             String.raw`^\.github/(workflows|actions)/`,
             String.raw`^\.tool-versions$`,
           ];

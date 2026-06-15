@@ -5,21 +5,21 @@ These instructions apply to any agent (Claude Code, Copilot, etc.) working in re
 ## Toolchain
 
 - Node.js (version pinned in `.tool-versions`)
-- npm as the package manager and script runner
+- pnpm as the package manager and script runner (version pinned in `.tool-versions` and `package.json` `packageManager`)
 
 ## After editing source
 
 When a task changes any `.js`, `.mjs`, `.cjs`, `.ts`, `.astro`, `.md`, or `.mdx` file, run these scripts before finishing:
 
 ```bash
-npm run lint:fix
-npm run format:fix
+pnpm run lint:fix
+pnpm run format:fix
 ```
 
 For larger changes, dependency changes, CI changes, or changes that may affect build/runtime behavior, also run:
 
 ```bash
-npm run verify
+pnpm run verify
 ```
 
 `verify` runs lint, format-check, tests, and build — the same checks CI runs.

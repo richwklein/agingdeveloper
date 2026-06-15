@@ -4,6 +4,7 @@
   "description": "The personal site of Richard Klein",
   "version": "6.10.3",
   "type": "module",
+  "packageManager": "pnpm@10.24.0",
   "scripts": {
     "clean": "rm -rf .astro dist node_modules",
     "upgrade:astro": "npx @astrojs/upgrade",
@@ -11,7 +12,7 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "netlify dev",
-    "preview:build": "npm run build && netlify dev",
+    "preview:build": "pnpm run build && netlify dev",
     "lint": "eslint \"**/*.{js,mjs,cjs,ts,astro}\"",
     "lint:fix": "eslint --fix \"**/*.{js,mjs,cjs,ts,astro}\"",
     "format": "prettier --check \"**/*.{js,mjs,cjs,ts,astro,md,mdx}\"",
@@ -19,7 +20,7 @@
     "test": "vitest run",
     "test:verbose": "vitest run --reporter=verbose",
     "test:coverage": "vitest run --coverage",
-    "verify": "npm run lint && npm run format && npm run test && npm run build",
+    "verify": "pnpm run lint && pnpm run format && pnpm run test && pnpm run build",
     "licenses": "license-report --output=table",
     "licenses:html": "license-report --output=html > license-report.html"
   },

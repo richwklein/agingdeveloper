@@ -23,8 +23,8 @@ jobs:
 
       - name: 'Check formatting'
         if: always() && steps.changes.outputs.relevant == 'true'
-        run: npm run format
+        run: pnpm run format
 
       - name: 'Check lint'
         if: always() && steps.changes.outputs.relevant == 'true'
-        run: npm run lint
+        run: pnpm run lint
