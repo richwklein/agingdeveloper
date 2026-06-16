@@ -10,8 +10,9 @@ inputs:
     description: >
       Multi-line list of JavaScript-compatible regex patterns matched against
       the full path of each changed file. When empty, falls back to a default
-      set covering JS/TS/Astro source, Markdown, common configs, package
-      manifests, workflow/action edits, and .tool-versions.
+      set covering JS/TS/Astro source, any file under src/ or public/ (which
+      includes Markdown/MDX content), common configs, package manifests,
+      workflow/action edits, and .tool-versions.
     required: false
     default: ''
 
@@ -30,7 +31,7 @@ runs:
       with:
         script: |
           const DEFAULT_PATTERNS = [
-            String.raw`\.(js|mjs|cjs|ts|astro|md|mdx)$`,
+            String.raw`\.(js|mjs|cjs|ts|astro)$`,
             String.raw`^(src|public)/`,
             String.raw`^(astro|eslint|prettier|vitest)\.config(\.ts|\.mjs)?$`,
             String.raw`^vitest\.setup\.ts$`,
