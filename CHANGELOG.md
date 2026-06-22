@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.10.4](https://github.com/richwklein/agingdeveloper/compare/v6.10.3...v6.10.4) (2026-06-22)
+
+
+### Bug Fixes
+
+* **ci:** scope markdown change detection to src and public ([#965](https://github.com/richwklein/agingdeveloper/issues/965)) ([a9f2025](https://github.com/richwklein/agingdeveloper/commit/a9f2025d9eecaef602c27e81cca74085af6d1105))
+* **quote:** add weekly quote for June 22, 2026 ([#968](https://github.com/richwklein/agingdeveloper/issues/968)) ([f46a1ee](https://github.com/richwklein/agingdeveloper/commit/f46a1eee665eabc3e580a1ebfc316ef68a240a1d))
+
 ## [6.10.3](https://github.com/richwklein/agingdeveloper/compare/v6.10.2...v6.10.3) (2026-06-15)
 
 
