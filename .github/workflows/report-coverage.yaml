@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout source code'
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7
 
       - name: 'Download test coverage'
         id: download
@@ -34,4 +34,4 @@ jobs:
 
       - name: 'Report test coverage on pull request'
         if: steps.download.outcome == 'success'
-        uses: davelosert/vitest-coverage-report-action@v2.12.0
+        uses: davelosert/vitest-coverage-report-action@v2.12.1

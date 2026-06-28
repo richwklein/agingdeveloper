@@ -21,7 +21,7 @@ jobs:
       relevant: ${{ steps.changes.outputs.relevant }}
     steps:
       - name: 'Checkout source code'
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@v7
 
       - name: 'Detect relevant changes'
         id: changes
@@ -58,7 +58,7 @@ jobs:
 
     steps:
       - name: 'Checkout source code'
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@v7
 
       - name: 'Setup tools'
         uses: ./.github/actions/setup-tools
