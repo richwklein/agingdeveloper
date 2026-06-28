@@ -41,7 +41,7 @@ describe('responsiveImage', () => {
     const html = await render()
 
     expect(mockCreateBlurDataUrl).toHaveBeenCalledWith(image)
-    expect(html).toContain('background-image:url(&#34;data:image/jpeg;base64,abc123&#34;)')
+    expect(html).toContain('background-image:url(&quot;data:image/jpeg;base64,abc123&quot;)')
     expect(html).toContain('color:transparent')
     expect(html).toContain('onload="')
     expect(html).toContain('onerror="')
