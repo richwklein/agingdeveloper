@@ -14,6 +14,7 @@ const cleanEntry = (entry: Record<string, any>): Record<string, any> => {
   if ('avatar' in entry) {
     entry.avatar = {
       src: entry.avatar,
+      format: 'jpg',
     }
   }
   return entry
