@@ -27,7 +27,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.8",
     "@astrojs/mdx": "^5.0.3",
-    "@astrojs/netlify": "^7.0.6",
+    "@astrojs/netlify": "^7.0.13",
     "@astrojs/sitemap": "^3.7.2",
     "@eslint/compat": "^2.0.0",
     "@eslint/js": "^9.39.4",
