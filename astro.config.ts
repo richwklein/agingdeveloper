@@ -18,30 +18,73 @@ const siteUrl =
 export default defineConfig({
   adapter: netlify(),
   build: { format: 'file' },
+  // Fonts are self-hosted via the local provider so builds never fetch font
+  // binaries from a CDN. The npm provider (even with `remote: false`) rewrites
+  // the fontsource CSS's relative URLs to jsDelivr and downloads each .woff2 at
+  // build time, which makes builds fail during a CDN outage.
+  //
+  // The .woff2 files in src/assets/fonts are the exact latin/400/normal subset
+  // Astro previously bundled, copied from the @fontsource/* packages. Those
+  // packages are no longer dependencies since the files are vendored. To update
+  // a font, `pnpm add -D @fontsource/<name>`, copy its
+  // files/<name>-latin-400-normal.woff2 into src/assets/fonts, then remove the
+  // package again.
   fonts: [
     {
-      provider: fontProviders.npm({ remote: false }),
+      provider: fontProviders.local(),
       name: 'Noto Sans Georgian',
       cssVariable: '--font-noto-sans-georgian',
-      options: { package: '@fontsource/noto-sans-georgian' },
+      options: {
+        variants: [
+          {
+            weight: '400',
+            style: 'normal',
+            src: ['./src/assets/fonts/noto-sans-georgian-latin-400-normal.woff2'],
+          },
+        ],
+      },
     },
     {
-      provider: fontProviders.npm({ remote: false }),
+      provider: fontProviders.local(),
       name: 'Noto Serif Georgian',
       cssVariable: '--font-noto-serif-georgian',
-      options: { package: '@fontsource/noto-serif-georgian' },
+      options: {
+        variants: [
+          {
+            weight: '400',
+            style: 'normal',
+            src: ['./src/assets/fonts/noto-serif-georgian-latin-400-normal.woff2'],
+          },
+        ],
+      },
     },
     {
-      provider: fontProviders.npm({ remote: false }),
+      provider: fontProviders.local(),
       name: 'Fira Code',
       cssVariable: '--font-fira-code',
-      options: { package: '@fontsource/fira-code' },
+      options: {
+        variants: [
+          {
+            weight: '400',
+            style: 'normal',
+            src: ['./src/assets/fonts/fira-code-latin-400-normal.woff2'],
+          },
+        ],
+      },
     },
     {
-      provider: fontProviders.npm({ remote: false }),
+      provider: fontProviders.local(),
       name: 'Walter Turncoat',
       cssVariable: '--font-walter-turncoat',
-      options: { package: '@fontsource/walter-turncoat' },
+      options: {
+        variants: [
+          {
+            weight: '400',
+            style: 'normal',
+            src: ['./src/assets/fonts/walter-turncoat-latin-400-normal.woff2'],
+          },
+        ],
+      },
     },
   ],
   env: {
