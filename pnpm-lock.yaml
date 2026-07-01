@@ -26,18 +26,6 @@ importers:
       '@eslint/js':
         specifier: ^9.39.4
         version: 9.39.4
-      '@fontsource/fira-code':
-        specifier: ^5.0.18
-        version: 5.2.7
-      '@fontsource/noto-sans-georgian':
-        specifier: ^5.0.22
-        version: 5.2.8
-      '@fontsource/noto-serif-georgian':
-        specifier: ^5.0.20
-        version: 5.2.9
-      '@fontsource/walter-turncoat':
-        specifier: ^5.1.0
-        version: 5.2.7
       '@iconify-json/mdi':
         specifier: ^1.1.66
         version: 1.2.3
@@ -866,18 +854,6 @@ packages:
 
   '@fastify/static@9.1.1':
     resolution: {integrity: sha512-LHxFea3qdwe0Pbbkh/yux7/k6nFNLGTNcbLKVYgmRDB6LdDE/8TFSO7qWZ0IzM/nF6iwR8W03oFlwe4v79R1Ow==}
-
-  '@fontsource/fira-code@5.2.7':
-    resolution: {integrity: sha512-tnB9NNund9TwIym8/7DMJe573nlPEQb+fKUV5GL8TBYXjIhDvL0D7mgmNVNQUPhXp+R7RylQeiBdkA4EbOHPGQ==}
-
-  '@fontsource/noto-sans-georgian@5.2.8':
-    resolution: {integrity: sha512-oylTMjvNxSZCqbq+0aCto5rjI14Je55scC04DgxQwpReN+ZXe3Kxpv4ATfb61apvlJZkeqTPSazVoRD+rJhbMg==}
-
-  '@fontsource/noto-serif-georgian@5.2.9':
-    resolution: {integrity: sha512-aokrSTQdmNajTNW+MBTm4aWWys8ndqrsoDpR00mRWU3IUyI85VlIYECPXn6VwsLkVgEbxeDOuFttc2M+HDWZdA==}
-
-  '@fontsource/walter-turncoat@5.2.7':
-    resolution: {integrity: sha512-bdHukwqJLQTpTC98W5HdlRYA3mMeoLKHFtvlA9ZyGa1InH5PfKonn2gMVgbs6MGttihwCZnC3mp0il5ybQZXAA==}
 
   '@formatjs/ecma402-abstract@2.3.6':
     resolution: {integrity: sha512-HJnTFeRM2kVFVr5gr5kH1XP6K0JcJtE7Lzvtr3FS/so5f1kpsqqqxy5JF+FRaO6H2qmcMfAUIox7AJteieRtVw==}
@@ -8379,14 +8355,6 @@ snapshots:
       fastify-plugin: 5.1.0
       fastq: 1.20.1
       glob: 13.0.6
-
-  '@fontsource/fira-code@5.2.7': {}
-
-  '@fontsource/noto-sans-georgian@5.2.8': {}
-
-  '@fontsource/noto-serif-georgian@5.2.9': {}
-
-  '@fontsource/walter-turncoat@5.2.7': {}
 
   '@formatjs/ecma402-abstract@2.3.6':
     dependencies:

@@ -24,9 +24,11 @@ export default defineConfig({
   // build time, which makes builds fail during a CDN outage.
   //
   // The .woff2 files in src/assets/fonts are the exact latin/400/normal subset
-  // Astro previously bundled, copied from the @fontsource/* packages (kept as
-  // devDependencies for provenance and license reporting). To update a font,
-  // bump its @fontsource package and re-copy its latin-400-normal.woff2.
+  // Astro previously bundled, copied from the @fontsource/* packages. Those
+  // packages are no longer dependencies since the files are vendored. To update
+  // a font, `pnpm add -D @fontsource/<name>`, copy its
+  // files/<name>-latin-400-normal.woff2 into src/assets/fonts, then remove the
+  // package again.
   fonts: [
     {
       provider: fontProviders.local(),
