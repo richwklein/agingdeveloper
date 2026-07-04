@@ -23,8 +23,8 @@ export const getSiteById = async (id: string): Promise<CollectionEntry<'site'>> 
     throw new Error(`Site ${id} is required`)
   }
 
-  // replace the origin when not in production mode
-  if (!import.meta.env.PROD) {
+  // Keep content metadata aligned with Astro's configured site URL.
+  if (import.meta.env.SITE) {
     site.data.origin = import.meta.env.SITE
   }
   return site

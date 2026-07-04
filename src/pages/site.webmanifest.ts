@@ -1,6 +1,7 @@
 /**
  * The page used to create the webmanifest file.
  */
+import { getStaticCacheControl } from '@utils/cache'
 import { buildUrl } from '@utils/misc'
 import { getDefaultSite } from '@utils/site'
 import type { APIRoute } from 'astro'
@@ -33,6 +34,7 @@ const webmanifest = JSON.stringify(manifest, null, 2)
 export const GET: APIRoute = async () => {
   return new Response(webmanifest, {
     headers: {
+      'Cache-Control': getStaticCacheControl(),
       'Content-Type': 'application/json; charset=utf-8',
     },
   })

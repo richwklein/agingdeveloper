@@ -19,19 +19,19 @@ describe('calculateWeight', () => {
   })
 
   test('that a zero value throws', () => {
-    expect(() => calculateWeight(0, 5)).toThrowError(/Invalid value/)
+    expect(() => calculateWeight(0, 5)).toThrow(/Invalid value/)
   })
 
   test('that a negative value throws', () => {
-    expect(() => calculateWeight(-1, 5)).toThrowError(/Invalid value/)
+    expect(() => calculateWeight(-1, 5)).toThrow(/Invalid value/)
   })
 
   test('that a zero total throws', () => {
-    expect(() => calculateWeight(5, 0)).toThrowError(/Invalid total/)
+    expect(() => calculateWeight(5, 0)).toThrow(/Invalid total/)
   })
 
   test('that a negative total throws', () => {
-    expect(() => calculateWeight(1, -1)).toThrowError(/Invalid total/)
+    expect(() => calculateWeight(1, -1)).toThrow(/Invalid total/)
   })
 })
 
@@ -76,7 +76,7 @@ describe('buildUrl', () => {
   const full: string = origin + path
 
   test('that it throws on an empty origin', () => {
-    expect(() => buildUrl(path, '')).toThrowError(/Invalid URL/)
+    expect(() => buildUrl(path, '')).toThrow(/Invalid URL/)
   })
 
   test('that it can handle a string origin', () => {

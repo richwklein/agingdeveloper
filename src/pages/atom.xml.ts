@@ -1,6 +1,7 @@
 /**
  * The page used to create the atom feed.
  */
+import { getStaticCacheControl } from '@utils/cache'
 import { feedInfo, getFeed } from '@utils/feed'
 import type { APIRoute } from 'astro'
 
@@ -14,6 +15,7 @@ const feed = await getFeed()
 export const GET: APIRoute = async () => {
   return new Response(feed.atom1(), {
     headers: {
+      'Cache-Control': getStaticCacheControl(),
       'Content-Type': `${info.type}; charset=utf-8`,
     },
   })

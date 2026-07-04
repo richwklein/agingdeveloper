@@ -1,4 +1,6 @@
+import FeedFeaturedImage from '@components/FeedFeaturedImage.astro'
 import type { GetImageResult } from 'astro'
+import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import { getImage } from 'astro:assets'
 import { type CollectionEntry, getCollection } from 'astro:content'
 import { Feed } from 'feed'
@@ -7,6 +9,7 @@ import mime from 'mime'
 import sanitizeHtml from 'sanitize-html'
 
 import { getArticles } from './article'
+import { normalizeImageKey } from './image'
 import { buildUrl } from './misc'
 import { getDefaultSite } from './site'
 
@@ -34,6 +37,7 @@ export const getFeed = async (): Promise<Feed> => {
   // load the images for the feed
   const imageCollection = new FeedImageCollection(site)
   await imageCollection.loadImages()
+  const container = await AstroContainer.create()
 
   const feed: Feed = new Feed({
     title: site.data.title,
@@ -60,15 +64,26 @@ export const getFeed = async (): Promise<Feed> => {
   })
 
   // add an item for each article
-  articles.map((article) => {
+  for (const article of articles) {
     const author = authors.filter(
       (author: CollectionEntry<'author'>) => author.id == article.data.author.id
     )[0]
 
     const articlePath = `/article/${article.id}`
     const articleUrl = buildUrl(articlePath, site.data.origin).href
+    const featuredImageUrl = imageCollection.getArticleImageSrc(
+      article.data.featured.image.src,
+      articlePath
+    )
+    const featuredImageHtml = await container.renderToString(FeedFeaturedImage, {
+      props: {
+        featured: article.data.featured,
+        imageUrl: featuredImageUrl,
+      },
+    })
+    const descriptionHtml = `<p>${escapeHtml(article.data.description)}</p>`
 
-    return feed.addItem({
+    feed.addItem({
       title: article.data.title,
       id: articleUrl,
       link: articleUrl,
@@ -83,39 +98,40 @@ export const getFeed = async (): Promise<Feed> => {
         },
       ],
       image: {
-        url: escapeXmlAttr(
-          imageCollection.getArticleImageSrc(article.data.featured.image.src, articlePath)
-        ),
+        url: escapeXmlAttr(featuredImageUrl),
         type: mime.getType(article.data.featured.image.src.split('?')[0]) || undefined,
       },
-      content: sanitizeHtml(parser.render(article.body || ''), {
-        allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
-        transformTags: {
-          img: (tagName, attribs) => {
-            const { src } = attribs
-            const result = {
-              tagName,
-              attribs: {
-                ...attribs,
-                src: imageCollection.getArticleImageSrc(src, articlePath),
-              },
-            }
-            return result
+      content:
+        descriptionHtml +
+        featuredImageHtml +
+        sanitizeHtml(parser.render(article.body || ''), {
+          allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+          transformTags: {
+            img: (tagName, attribs) => {
+              const { src } = attribs
+              const result = {
+                tagName,
+                attribs: {
+                  ...attribs,
+                  src: imageCollection.getArticleImageSrc(src, articlePath),
+                },
+              }
+              return result
+            },
+            a: (tagName, attribs) => {
+              const { href } = attribs
+              return {
+                tagName,
+                attribs: {
+                  ...attribs,
+                  href: buildUrl(href, articleUrl).href,
+                },
+              }
+            },
           },
-          a: (tagName, attribs) => {
-            const { href } = attribs
-            return {
-              tagName,
-              attribs: {
-                ...attribs,
-                href: buildUrl(href, articleUrl).href,
-              },
-            }
-          },
-        },
-      }),
+        }),
     })
-  })
+  }
 
   return feed
 }
@@ -141,6 +157,27 @@ const escapeXmlAttr = (unsafe: string): string => {
         return '&quot;'
       default:
         return c
+    }
+  })
+}
+
+/**
+ * Escape HTML content for text nodes.
+ *
+ * @param unsafe - The unsafe string to escape.
+ * @returns The escaped string.
+ */
+const escapeHtml = (unsafe: string): string => {
+  return unsafe.replace(/[<>&]/g, (char: string) => {
+    switch (char) {
+      case '<':
+        return '&lt;'
+      case '>':
+        return '&gt;'
+      case '&':
+        return '&amp;'
+      default:
+        return char
     }
   })
 }
@@ -241,9 +278,7 @@ class FeedImageCollection {
    * @returns The normalized key
    */
   private normalizeKey(key: string): string {
-    return key
-      .split('?')[0]
-      .replace('/@fs', '')
+    return normalizeImageKey(key)
       .replace(this.cwd, '')
       .replace(/^\/src\/content/, '')
       .replace(/^\/article\/(\d{4})\/([^/]+)/, (_, year, rest) => {

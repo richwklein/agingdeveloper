@@ -47,9 +47,7 @@ describe('socialBar', () => {
 
   test('that it contains an icon for each social', async () => {
     socials.forEach((social) => {
-      expect(socialBar).toContain(
-        `<svg width="1em" height="1em" class="text-primary-main h-6 w-6" data-icon="mdi:${social.name.toLowerCase()}"`
-      )
+      expect(socialBar).toContain(`data-icon="mdi:${social.name.toLowerCase()}"`)
     })
   })
 

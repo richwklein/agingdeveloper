@@ -1,0 +1,149 @@
+name: 'Deploy Preview'
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+concurrency:
+  group: deploy-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      relevant: ${{ steps.changes.outputs.relevant }}
+    steps:
+      - name: 'Checkout source code'
+        uses: actions/checkout@v7
+
+      - name: 'Detect relevant changes'
+        id: changes
+        uses: ./.github/actions/detect-relevant-changes
+
+  build:
+    if: github.event.pull_request.head.repo.fork == false
+    permissions:
+      contents: read
+    uses: ./.github/workflows/code-build.yaml
+    with:
+      artifact-name: preview-build
+      deploy-context: deploy-preview
+      checkout-ref: ${{ github.sha }}
+
+  deploy:
+    if: >
+      github.event.pull_request.head.repo.fork == false &&
+      github.actor != 'dependabot[bot]' &&
+      !contains(github.event.pull_request.labels.*.name, 'no-deploy') &&
+      needs.detect-changes.outputs.relevant == 'true'
+    needs: [detect-changes, build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    outputs:
+      deploy_id: ${{ steps.deploy.outputs.deploy_id }}
+      deploy_url: ${{ steps.deploy.outputs.deploy_url }}
+      logs_url: ${{ steps.deploy.outputs.logs_url }}
+    env:
+      COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+
+    steps:
+      - name: 'Checkout source code'
+        uses: actions/checkout@v7
+
+      - name: 'Setup tools'
+        uses: ./.github/actions/setup-tools
+
+      - name: 'Download build artifact'
+        uses: actions/download-artifact@v8
+        with:
+          name: ${{ needs.build.outputs.artifact-name }}
+          path: dist
+
+      - name: 'Deploy preview to Netlify'
+        id: deploy
+        env:
+          NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          set -euo pipefail
+
+          alias="pr-${PR_NUMBER}"
+          deploy_json="$(npx netlify deploy \
+            --auth "$NETLIFY_API_TOKEN" \
+            --site "$NETLIFY_SITE_ID" \
+            --dir dist \
+            --alias "$alias" \
+            --message "Pull request #${PR_NUMBER}" \
+            --json \
+            --no-build)"
+
+          echo "$deploy_json"
+
+          deploy_id="$(echo "$deploy_json" | jq -r '.deploy_id // empty')"
+          deploy_url="$(echo "$deploy_json" | jq -r '.deploy_url // .url // empty')"
+          logs_url="$(echo "$deploy_json" | jq -r '.logs // empty')"
+
+          if [ -z "$deploy_url" ] || [ "$deploy_url" = "null" ]; then
+            echo "Netlify deploy did not return a preview URL" >&2
+            exit 1
+          fi
+
+          if [ -z "$deploy_id" ] || [ "$deploy_id" = "null" ]; then
+            echo "Netlify deploy did not return a deploy ID" >&2
+            exit 1
+          fi
+
+          echo "deploy_id=$deploy_id" >> "$GITHUB_OUTPUT"
+          echo "deploy_url=$deploy_url" >> "$GITHUB_OUTPUT"
+          echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT"
+
+      - name: 'Build deploy report body'
+        run: |
+          {
+            echo "DEPLOY_REPORT<<EOF"
+            echo "## Deploy Results"
+            echo
+            echo "Preview deploy is ready for pull request #${{ env.PR_NUMBER }}."
+            echo
+            echo "- Preview: ${{ steps.deploy.outputs.deploy_url }}"
+            echo "- Deploy ID: \`${{ steps.deploy.outputs.deploy_id }}\`"
+            echo "- Logs: ${{ steps.deploy.outputs.logs_url || 'n/a' }}"
+            echo "- Workflow: [#${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+            echo "- Commit: [\`${{ env.COMMIT_SHA }}\`](https://github.com/${{ github.repository }}/commit/${{ env.COMMIT_SHA }})"
+            echo
+            echo "This is a preview deployment and may be replaced by later pushes to this pull request."
+            echo "EOF"
+          } >> "$GITHUB_ENV"
+
+      - name: 'Write deploy summary'
+        run: |
+          echo "${{ env.DEPLOY_REPORT }}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 'Comment preview URL on pull request'
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: deploy-preview
+          message: ${{ env.DEPLOY_REPORT }}
+
+  lighthouse:
+    name: Lighthouse
+    needs: deploy
+    permissions:
+      contents: read
+      pull-requests: write
+    if: needs.deploy.result == 'success'
+    uses: ./.github/workflows/code-lighthouse.yaml
+    with:
+      base-url: ${{ needs.deploy.outputs.deploy_url }}
+      pr-number: ${{ github.event.pull_request.number }}
+      checkout-ref: ${{ github.sha }}

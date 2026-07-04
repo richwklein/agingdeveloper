@@ -10,8 +10,8 @@
  * <ArticleCard article={entry} />
  */
 import LinkInternal from '@components/LinkInternal.astro'
+import ResponsiveImage from '@components/ResponsiveImage.astro'
 import { formatDate } from '@utils/misc'
-import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import { render } from 'astro:content'
 
@@ -26,18 +26,18 @@ const { remarkPluginFrontmatter: frontmatter } = await render(article)
 const loading = lazy ? 'lazy' : 'eager'
 ---
 
-<LinkInternal to={`/article/${article.id}`}>
+<LinkInternal to={`/article/${article.id}`} class="block h-full">
   <article
     class:list={[
-      'overflow-hidden rounded-md border border-stone-300 bg-white',
-      'xl:flex xl:max-h-60 xl:flex-row-reverse',
-      'hover:bg-stone-100/85 hover:shadow-xs',
-      'focus:bg-stone-100/85 focus:shadow-xs',
+      'border-stroke-light bg-card-light flex h-full flex-col overflow-hidden rounded-md border',
+      'xl:max-h-60 xl:flex-row-reverse',
+      'hover:bg-card-main hover:shadow-xs',
+      'focus:bg-card-main focus:shadow-xs',
       className,
     ]}
   >
-    <Image
-      src={article.data.featured.image}
+    <ResponsiveImage
+      image={article.data.featured.image}
       alt={article.data.title}
       width={768}
       widths={[180, 420, 500, 640, 768]}
@@ -58,16 +58,16 @@ const loading = lazy ? 'lazy' : 'eager'
         'xl:aspect-3/4 xl:w-[180px]',
       ]}
     />
-    <div class:list={['px-4 pt-3 pb-2']}>
-      <h4 class:list={['text-lg leading-snug font-medium text-stone-900']}>
+    <div class:list={['flex-1 px-4 pt-3 pb-2']}>
+      <h4 class:list={['text-fg-light text-lg leading-snug font-medium']}>
         {article.data.title}
       </h4>
-      <small class:list={['text-sm text-stone-600']}>
+      <small class:list={['text-fg-main text-sm']}>
         <time datetime={article.data.published.toISOString()}>
           {formatDate(article.data.published)}
         </time>
       </small>
-      <p class:list={['text-md mt-2 leading-relaxed text-stone-700']}>
+      <p class:list={['text-md text-fg-dark mt-2 leading-relaxed']}>
         {frontmatter.excerpt}&hellip;
       </p>
     </div>

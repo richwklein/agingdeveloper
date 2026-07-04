@@ -3,9 +3,12 @@
   "files.exclude": {
     ".git/": true
   },
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
   "search.exclude": {
     "**/node_modules": true,
-    "**/dist": true
+    "**/dist": true,
+    "**/.astro": true
   },
   "editor.tabCompletion": "on",
   "editor.rulers": [80, 100, 120],

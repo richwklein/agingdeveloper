@@ -1,16 +1,15 @@
 ---
 import '@styles/main.css'
-import '@fontsource/noto-serif-georgian'
-import '@fontsource/noto-sans-georgian'
-import '@fontsource/fira-code'
-import '@fontsource/walter-turncoat'
 
 import PageFooter from '@components/PageFooter.astro'
 import PageHeader from '@components/PageHeader.astro'
 import ScrollTop from '@components/ScrollTop.astro'
 import { feedInfo } from '@utils/feed'
 import { buildUrl } from '@utils/misc'
+import { Font } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
+import { ANALYTICS_TRACKING_ID } from 'astro:env/client'
+import { DEPLOY_CONTEXT } from 'astro:env/server'
 
 interface Props {
   site: CollectionEntry<'site'>
@@ -18,14 +17,18 @@ interface Props {
 }
 const { site } = Astro.props
 const data = site.data
-const analyticsId = import.meta.env.ANALYTICS_TRACKING_ID
+const analyticsId = DEPLOY_CONTEXT === 'production' ? ANALYTICS_TRACKING_ID : ''
 ---
 
 <!doctype html>
-<html lang={'en'}>
+<html lang={'en'} class="scheme-light dark:scheme-dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <Font cssVariable="--font-noto-sans-georgian" preload />
+    <Font cssVariable="--font-noto-serif-georgian" />
+    <Font cssVariable="--font-fira-code" />
+    <Font cssVariable="--font-walter-turncoat" />
     <meta name="theme-color" content={data.theme} />
     <link rel="icon" type="image/x-icon" href="/icons/favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
@@ -46,20 +49,37 @@ const analyticsId = import.meta.env.ANALYTICS_TRACKING_ID
       ))
     }
     <meta name="generator" content={Astro.generator} />
+    <script
+      is:inline
+      set:html={`(() => {
+  const persistedTheme = localStorage.getItem('theme')
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  const useDark = persistedTheme === 'dark' || (!persistedTheme && prefersDark)
+  document.documentElement.classList.toggle('dark', useDark)
+})()`}
+    />
+    <slot name="preload" />
     <slot name="seo" />
-    <script is:inline async src=`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`
-    ></script>
-    <script is:inline define:vars={{ analyticsId }}>
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        // eslint-disable-next-line prefer-rest-params
-        window.dataLayer.push(arguments)
-      }
-      gtag('js', new Date())
-      gtag('config', analyticsId)
-    </script>
+    {
+      analyticsId ? (
+        <>
+          <script
+            is:inline
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}
+          />
+          <script
+            is:inline
+            set:html={`window.dataLayer = window.dataLayer || [];
+function gtag(){window.dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', ${JSON.stringify(analyticsId)});`}
+          />
+        </>
+      ) : null
+    }
   </head>
-  <body>
+  <body class="bg-primary-contrast text-fg-light dark:bg-primary-dark dark:text-fg-light">
     <PageHeader site={site} class:list={['mb-8']} />
     <main class:list={['container mx-auto px-4 xl:max-w-(--breakpoint-xl)']}>
       <slot />

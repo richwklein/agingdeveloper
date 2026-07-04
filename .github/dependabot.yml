@@ -7,10 +7,13 @@ updates:
     cooldown:
       default-days: 5
     open-pull-requests-limit: 20
+    labels:
+      - 'dependencies'
     groups:
       github-actions:
         patterns:
           - '*'
+
   - package-ecosystem: npm
     directory: '/'
     schedule:
@@ -21,6 +24,8 @@ updates:
       semver-minor-days: 7
       semver-patch-days: 3
     open-pull-requests-limit: 20
+    labels:
+      - 'dependencies'
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-patch']
@@ -29,7 +34,7 @@ updates:
         patterns:
           - 'astro'
           - 'astro-*'
-          - '@astro/*'
+          - '@astrojs/*'
       eslint:
         patterns:
           - 'eslint'
@@ -50,8 +55,6 @@ updates:
       typescript:
         patterns:
           - 'typescript'
-          - 'typescript-eslint'
-          - '@typescript-eslint/*'
           - '@types/*'
           - 'tslib'
           - 'ts-node'
@@ -60,3 +63,6 @@ updates:
           - 'vitest'
           - 'vitest-*'
           - '@vitest/*'
+      other-dependencies:
+        patterns:
+          - '*'

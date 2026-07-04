@@ -14,6 +14,7 @@ const cleanEntry = (entry: Record<string, any>): Record<string, any> => {
   if ('avatar' in entry) {
     entry.avatar = {
       src: entry.avatar,
+      format: 'jpg',
     }
   }
   return entry
@@ -235,6 +236,7 @@ const MockQuotes: Record<string, any>[] = [
 // Mock astro:content module
 vi.mock('astro:content', () => {
   return {
+    render: vi.fn(),
     getEntry: vi.fn(async (collection, id) => {
       let source: Record<string, any>[] | undefined = undefined
 

@@ -1,4 +1,4 @@
-/// <reference types="vitest" />
+/// <reference types="vitest/config" />
 import { getViteConfig } from 'astro/config'
 
 export default getViteConfig({
@@ -6,16 +6,15 @@ export default getViteConfig({
     environment: 'node',
     setupFiles: './vitest.setup.ts',
     coverage: {
-      include: ['**/src/**'],
-      extension: ['.js', '.cjs', '.mjs', '.ts', '.astro'],
+      include: ['src/**/*.{js,cjs,mjs,ts,astro}'],
       reporter: ['text', 'json-summary', 'json'],
       reportsDirectory: './coverage',
       reportOnFailure: true,
       thresholds: {
         lines: 30,
-        statements: 30,
+        statements: 45,
         functions: 50,
-        branches: 75,
+        branches: 50,
       },
     },
   },

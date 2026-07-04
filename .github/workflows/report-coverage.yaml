@@ -1,34 +1,37 @@
-name: "Report Test Coverage"
+name: 'Report Test Coverage'
 
 on:
   workflow_run:
-    workflows: ["Test"]
+    workflows: ['Test']
     types:
       - completed
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: write
 
 jobs:
   report:
     runs-on: ubuntu-latest
-
-    permissions:
-      pull-requests: write
-
     steps:
-      - name: "Checkout source code"
-        uses: actions/checkout@v6
+      - name: 'Checkout source code'
+        uses: actions/checkout@v7
 
-      - name: "Download test coverage"
-        uses: actions/download-artifact@v6
+      - name: 'Download test coverage'
+        id: download
+        continue-on-error: true
+        uses: actions/download-artifact@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
           name: coverage
           path: coverage
 
-      - name: "List downloaded files"
-        run: |
-          ls -R coverage
-          cat coverage/coverage-summary.json || echo "No summary file"
+      - name: 'No coverage artifact'
+        if: steps.download.outcome != 'success'
+        run: echo "::notice::No coverage artifact found; nothing to report."
 
-      - name: "Report test coverage on pull request"
-        uses: davelosert/vitest-coverage-report-action@v2
+      - name: 'Report test coverage on pull request'
+        if: steps.download.outcome == 'success'
+        uses: davelosert/vitest-coverage-report-action@v2.12.1

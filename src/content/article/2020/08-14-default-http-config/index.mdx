@@ -21,11 +21,12 @@ tags:
 category: microservices
 enhanced: false
 published: '2020-08-14'
+modified: '2026-04-05'
 ---
 
 An alternatively headline might be: _know how your service communicates with it's dependencies_. Ideally, a microservice could work in isolation without having to communicate with any other service or dependency. This is not likely the case and HTTP is the most common way that I've seen these services communicating. I've witnessed several problems that have been caused by default configurations being used by these clients. In this article I will explore a couple of these issues and how you can remediate them.
 
-#### Java DNS Caching
+## Java DNS Caching
 
 When the JVM resolves hostnames to ip addresses it caches those lookups. Depending on the configuration this might not be refreshed until the JVM is restarted. This can especially be an issue if you are using AWS services where the IP Address may
 change for a service. I've seen this occurs with aurora failovers and other scenarios. You can prevent this by setting `networkaddress.cache.ttl` in the `$JAVA_HOME/jre/lib/security/java.security` file to some low number of seconds. Amazon recommends no more than 60 seconds.
@@ -34,7 +35,7 @@ change for a service. I've seen this occurs with aurora failovers and other scen
 networkaddress.cache.ttl = 5
 ```
 
-#### Maximum Connections Per Route
+## Maximum Connections Per Route
 
 Creating a tcp connection between services is a time consuming process and consumes lots of resources. This is especially true when TLS is involved. Because of this popular http clients try and reuse the same connection if they are going to the same route. The [OkHttp](https://square.github.io/okhttp/) library keeps only a single connection. The Apache [HttpClient](https://hc.apache.org/httpcomponents-client-ga/index.html) defaults to two. The Go [http package](https://golang.org/pkg/net/http/) also defaults to two.
 
@@ -48,7 +49,7 @@ builder.setMaxConnPerRoute(20)
 return builder.build()
 ```
 
-#### Request Timeout
+## Request Timeout
 
 A lot of clients by default use the timeout set by the OS. This is true for clients in both Java and Go. This is another possible way to cause cascading failures. The best advice is to configure your client with something other than the default. The example below does this globally for the client, but you can also set these on a per request basis.
 
@@ -68,6 +69,6 @@ HttpClientBuilder builder = HttpClients.custom()
 return builder.build()
 ```
 
-#### Other Best Practices
+## Other Best Practices
 
 By following the practices above, you can help keep your service healthy. A few other best practices that I'm not going to go into, but can keep your service resilient include: using circuit breakers to prevent cascading failures, using retry designs for those temporary intermittent failures, and using thread pools or executor services for bulk heading and fault isolation.

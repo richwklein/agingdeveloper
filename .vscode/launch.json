@@ -3,7 +3,14 @@
   "configurations": [
     {
       "name": "Development server",
-      "command": "./node_modules/.bin/astro dev",
+      "command": "pnpm run dev",
+      "request": "launch",
+      "type": "node-terminal",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Preview server",
+      "command": "pnpm run preview:build",
       "request": "launch",
       "type": "node-terminal",
       "cwd": "${workspaceFolder}"

@@ -2,63 +2,78 @@ import mdx from '@astrojs/mdx'
 import netlify from '@astrojs/netlify'
 import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite'
-import { defineConfig } from 'astro/config'
-import fuse from 'astro-fuse'
+import { defineConfig, envField, fontProviders } from 'astro/config'
 import icon from 'astro-icon'
 
 import { remarkExcerpt } from './src/utils/excerpt.ts'
 import { remarkReadTime } from './src/utils/readTime.ts'
 
-const { URL: SITE_URL, DEPLOY_PRIME_URL: DEPLOY_URL, CONTEXT: DEPLOY_CONTEXT = 'dev' } = process.env
 const siteUrl =
-  DEPLOY_CONTEXT === 'dev'
-    ? 'http://localhost:4321'
-    : DEPLOY_CONTEXT == 'production'
-      ? SITE_URL
-      : DEPLOY_URL
+  process.env.SITE_ORIGIN ??
+  (process.env.DEPLOY_CONTEXT === 'production'
+    ? 'https://agingdeveloper.com'
+    : 'http://localhost:4321')
 
 // https://astro.build/config
 export default defineConfig({
   adapter: netlify(),
   build: { format: 'file' },
+  fonts: [
+    {
+      provider: fontProviders.npm({ remote: false }),
+      name: 'Noto Sans Georgian',
+      cssVariable: '--font-noto-sans-georgian',
+      options: { package: '@fontsource/noto-sans-georgian' },
+    },
+    {
+      provider: fontProviders.npm({ remote: false }),
+      name: 'Noto Serif Georgian',
+      cssVariable: '--font-noto-serif-georgian',
+      options: { package: '@fontsource/noto-serif-georgian' },
+    },
+    {
+      provider: fontProviders.npm({ remote: false }),
+      name: 'Fira Code',
+      cssVariable: '--font-fira-code',
+      options: { package: '@fontsource/fira-code' },
+    },
+    {
+      provider: fontProviders.npm({ remote: false }),
+      name: 'Walter Turncoat',
+      cssVariable: '--font-walter-turncoat',
+      options: { package: '@fontsource/walter-turncoat' },
+    },
+  ],
+  env: {
+    schema: {
+      DEPLOY_CONTEXT: envField.string({
+        access: 'public',
+        context: 'server',
+        default: 'dev',
+      }),
+      SITE_ORIGIN: envField.string({
+        access: 'public',
+        context: 'server',
+        default: siteUrl,
+      }),
+      CACHE_MAX_AGE: envField.number({
+        access: 'public',
+        context: 'server',
+        default: 60 * 60 * 24,
+      }),
+      ANALYTICS_TRACKING_ID: envField.string({
+        access: 'public',
+        context: 'client',
+        optional: true,
+      }),
+    },
+  },
   experimental: { contentIntellisense: true },
   markdown: { remarkPlugins: [remarkReadTime, remarkExcerpt] },
   output: 'static',
   prefetch: true,
   image: {},
-  integrations: [
-    icon(),
-    fuse(
-      [
-        'content',
-        'frontmatter.title',
-        'frontmatter.description',
-        'frontmatter.category',
-        'frontmatter.tags',
-      ],
-      {
-        filter: (path) => /^\/article\/(?!archive).*/.test(path),
-        extractContentFromHTML: ($) => $('.prose'),
-        extractFrontmatterFromHTML: ($) => {
-          const frontmatter: Record<string, any> = {}
-          const ld = $('script[type="application/ld+json"]').html() ?? '{}'
-          const ldJson = JSON.parse(ld)
-
-          // TODO update this when BlogPosting moves to the mainEntity
-          if (ldJson['@type'] === 'BlogPosting') {
-            frontmatter.title = ldJson.headline
-            frontmatter.description = ldJson.description
-            frontmatter.category = ldJson.articleSection
-            frontmatter.tags = ldJson.keywords
-          }
-
-          return frontmatter
-        },
-      }
-    ),
-    mdx(),
-    sitemap(),
-  ],
+  integrations: [icon(), mdx(), sitemap()],
   redirects: {
     '/article': { destination: '/article/archive-1', status: 308 },
     '/article/rss-dead-long-live-rss': {
