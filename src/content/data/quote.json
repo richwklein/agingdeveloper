@@ -1,5 +1,16 @@
 [
   {
+    "id": "3463cad1-b35e-486d-9d0e-320351abff9d",
+    "text": "We hold these truths to be self-evident, that all men are created equal.",
+    "author": "Thomas Jefferson",
+    "chalked": "2026-07-06",
+    "source": {
+      "title": "Declaration of Independence",
+      "type": "other",
+      "year": 1776
+    }
+  },
+  {
     "id": "2a5420fc-a8ba-465e-859d-88ef632433e4",
     "text": "Patriotism means to stand by the country. It does not mean to stand by the president.",
     "author": "Theodore Roosevelt",
