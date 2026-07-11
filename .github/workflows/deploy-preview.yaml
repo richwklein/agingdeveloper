@@ -130,7 +130,7 @@ jobs:
           echo "${{ env.DEPLOY_REPORT }}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: 'Comment preview URL on pull request'
-        uses: marocchino/sticky-pull-request-comment@v3
+        uses: marocchino/sticky-pull-request-comment@v3.0.4
         with:
           header: deploy-preview
           message: ${{ env.DEPLOY_REPORT }}
