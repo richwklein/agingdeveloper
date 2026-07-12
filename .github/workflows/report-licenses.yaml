@@ -82,7 +82,7 @@ jobs:
           echo "${{ env.LICENSE_REPORT_BODY }}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: 'Report licenses on pull request'
-        uses: marocchino/sticky-pull-request-comment@v3.0.4
+        uses: marocchino/sticky-pull-request-comment@v3.0.5
         with:
           header: license
           message: ${{ env.LICENSE_REPORT_BODY }}
