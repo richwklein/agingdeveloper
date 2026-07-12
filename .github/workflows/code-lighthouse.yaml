@@ -110,7 +110,7 @@ jobs:
 
       - name: 'Comment results on pull reuqest'
         if: inputs.pr-number != ''
-        uses: marocchino/sticky-pull-request-comment@v3.0.4
+        uses: marocchino/sticky-pull-request-comment@v3.0.5
         with:
           header: lighthouse-report-${{ matrix.profile }}
           message: ${{ env.LIGHTHOUSE_REPORT_BODY }}
