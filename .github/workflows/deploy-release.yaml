@@ -8,10 +8,10 @@ on:
     types: [published]
 
 jobs:
-  code-build:
+  build-artifact:
     permissions:
       contents: read
-    uses: ./.github/workflows/code-build.yaml
+    uses: ./.github/workflows/build-artifact.yaml
     with:
       artifact-name: release-build
       deploy-context: production
@@ -19,7 +19,7 @@ jobs:
 
   deploy:
     name: 'Deploy Release'
-    needs: code-build
+    needs: build-artifact
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -40,7 +40,7 @@ jobs:
       - name: 'Download build artifact'
         uses: actions/download-artifact@v8
         with:
-          name: ${{ needs.code-build.outputs.artifact-name }}
+          name: ${{ needs.build-artifact.outputs.artifact-name }}
           path: dist
 
       - name: 'Deploy production to Netlify'
