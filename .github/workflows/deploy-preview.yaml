@@ -71,41 +71,13 @@ jobs:
 
       - name: 'Deploy preview to Netlify'
         id: deploy
+        uses: ./.github/actions/netlify-deploy
         env:
           NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: |
-          set -euo pipefail
-
-          alias="pr-${PR_NUMBER}"
-          deploy_json="$(npx netlify deploy \
-            --auth "$NETLIFY_API_TOKEN" \
-            --site "$NETLIFY_SITE_ID" \
-            --dir dist \
-            --alias "$alias" \
-            --message "Pull request #${PR_NUMBER}" \
-            --json \
-            --no-build)"
-
-          echo "$deploy_json"
-
-          deploy_id="$(echo "$deploy_json" | jq -r '.deploy_id // empty')"
-          deploy_url="$(echo "$deploy_json" | jq -r '.deploy_url // .url // empty')"
-          logs_url="$(echo "$deploy_json" | jq -r '.logs // empty')"
-
-          if [ -z "$deploy_url" ] || [ "$deploy_url" = "null" ]; then
-            echo "Netlify deploy did not return a preview URL" >&2
-            exit 1
-          fi
-
-          if [ -z "$deploy_id" ] || [ "$deploy_id" = "null" ]; then
-            echo "Netlify deploy did not return a deploy ID" >&2
-            exit 1
-          fi
-
-          echo "deploy_id=$deploy_id" >> "$GITHUB_OUTPUT"
-          echo "deploy_url=$deploy_url" >> "$GITHUB_OUTPUT"
-          echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT"
+        with:
+          alias: 'pr-${{ env.PR_NUMBER }}'
+          message: 'Pull request #${{ env.PR_NUMBER }}'
 
       - name: 'Build deploy report body'
         run: |
