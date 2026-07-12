@@ -1,0 +1,85 @@
+# Callers must provide NETLIFY_API_TOKEN and NETLIFY_SITE_ID as env on the
+# step that uses this action.
+name: 'Netlify Deploy'
+description: 'Deploy a built directory to Netlify and expose the deploy id, url, and logs url'
+
+inputs:
+  dir:
+    description: 'Directory to deploy'
+    required: false
+    default: 'dist'
+  message:
+    description: 'Deploy message shown in Netlify'
+    required: true
+  prod:
+    description: 'Deploy to production instead of a draft deploy'
+    required: false
+    default: 'false'
+  alias:
+    description: 'Alias for the draft deploy URL'
+    required: false
+    default: ''
+
+outputs:
+  deploy_id:
+    description: 'Netlify deploy ID'
+    value: ${{ steps.deploy.outputs.deploy_id }}
+  deploy_url:
+    description: 'URL of the deployed site'
+    value: ${{ steps.deploy.outputs.deploy_url }}
+  logs_url:
+    description: 'URL of the Netlify deploy logs'
+    value: ${{ steps.deploy.outputs.logs_url }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Deploy to Netlify'
+      id: deploy
+      shell: bash
+      env:
+        DEPLOY_DIR: ${{ inputs.dir }}
+        DEPLOY_MESSAGE: ${{ inputs.message }}
+        DEPLOY_PROD: ${{ inputs.prod }}
+        DEPLOY_ALIAS: ${{ inputs.alias }}
+      run: |
+        set -euo pipefail
+
+        args=(
+          --auth "$NETLIFY_API_TOKEN"
+          --site "$NETLIFY_SITE_ID"
+          --dir "$DEPLOY_DIR"
+          --message "$DEPLOY_MESSAGE"
+          --json
+          --no-build
+        )
+
+        if [ "$DEPLOY_PROD" = "true" ]; then
+          args+=(--prod)
+        fi
+
+        if [ -n "$DEPLOY_ALIAS" ]; then
+          args+=(--alias "$DEPLOY_ALIAS")
+        fi
+
+        deploy_json="$(npx netlify deploy "${args[@]}")"
+
+        echo "$deploy_json"
+
+        deploy_id="$(echo "$deploy_json" | jq -r '.deploy_id // .id // empty')"
+        deploy_url="$(echo "$deploy_json" | jq -r '.deploy_url // .url // empty')"
+        logs_url="$(echo "$deploy_json" | jq -r '.logs // empty')"
+
+        if [ -z "$deploy_id" ] || [ "$deploy_id" = "null" ]; then
+          echo "Netlify deploy did not return a deploy ID" >&2
+          exit 1
+        fi
+
+        if [ -z "$deploy_url" ] || [ "$deploy_url" = "null" ]; then
+          echo "Netlify deploy did not return a deploy URL" >&2
+          exit 1
+        fi
+
+        echo "deploy_id=$deploy_id" >> "$GITHUB_OUTPUT"
+        echo "deploy_url=$deploy_url" >> "$GITHUB_OUTPUT"
+        echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT"

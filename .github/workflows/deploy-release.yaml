@@ -1,0 +1,66 @@
+# Chains build -> Netlify production deploy -> Lighthouse when a release is
+# published. Relies on the release being created with the release bot App token
+# rather than GITHUB_TOKEN, otherwise the release event never fires.
+name: 'Deploy Release'
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-artifact:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/build-artifact.yaml
+    with:
+      artifact-name: release-build
+      deploy-context: production
+      checkout-ref: ${{ github.event.release.tag_name }}
+
+  deploy:
+    name: 'Deploy Release'
+    needs: build-artifact
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      deploy_id: ${{ steps.deploy.outputs.deploy_id }}
+      deploy_url: ${{ steps.deploy.outputs.deploy_url }}
+      logs_url: ${{ steps.deploy.outputs.logs_url }}
+
+    steps:
+      - name: 'Checkout source code'
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: 'Setup deploy tools'
+        uses: ./.github/actions/setup-tools
+
+      - name: 'Download build artifact'
+        uses: actions/download-artifact@v8
+        with:
+          name: ${{ needs.build-artifact.outputs.artifact-name }}
+          path: dist
+
+      - name: 'Deploy production to Netlify'
+        id: deploy
+        uses: ./.github/actions/netlify-deploy
+        env:
+          NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          message: 'Release ${{ github.event.release.tag_name }}'
+          prod: 'true'
+
+  lighthouse:
+    name: Lighthouse
+    needs: deploy
+    permissions:
+      contents: read
+    if: needs.deploy.result == 'success'
+    uses: ./.github/workflows/code-lighthouse.yaml
+    with:
+      base-url: ${{ needs.deploy.outputs.deploy_url }}
+      checkout-ref: ${{ github.event.release.tag_name }}
+      number-of-runs: 3
