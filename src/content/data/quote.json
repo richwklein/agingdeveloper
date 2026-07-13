@@ -1,5 +1,16 @@
 [
   {
+    "id": "a80f5044-98f8-4190-a8c5-10ba35859ace",
+    "text": "You can't stop the waves, but you can learn to surf.",
+    "author": "Jon Kabat-Zinn",
+    "chalked": "2026-07-13",
+    "source": {
+      "title": "Wherever You Go, There You Are",
+      "type": "book",
+      "year": 1994
+    }
+  },
+  {
     "id": "3463cad1-b35e-486d-9d0e-320351abff9d",
     "text": "We hold these truths to be self-evident, that all men are created equal.",
     "author": "Thomas Jefferson",
