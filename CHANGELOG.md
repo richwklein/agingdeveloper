@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.10.7](https://github.com/richwklein/agingdeveloper/compare/v6.10.6...v6.10.7) (2026-07-13)
+
+
+### Bug Fixes
+
+* **quote:** add weekly quote for July 13, 2026 ([#986](https://github.com/richwklein/agingdeveloper/issues/986)) ([89dde6a](https://github.com/richwklein/agingdeveloper/commit/89dde6ad291b403e5610481a26de51ea3e22f603))
+
 ## [6.10.6](https://github.com/richwklein/agingdeveloper/compare/v6.10.5...v6.10.6) (2026-07-06)
 
 
