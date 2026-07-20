@@ -1,5 +1,16 @@
 [
   {
+    "id": "6b2b1aa6-2605-4968-bcae-5bd55a9d321e",
+    "text": "Begin at the beginning and go on till you come to the end; then stop.",
+    "author": "Lewis Carroll",
+    "chalked": "2026-07-20",
+    "source": {
+      "title": "Alice's Adventures in Wonderland",
+      "type": "book",
+      "year": 1865
+    }
+  },
+  {
     "id": "a80f5044-98f8-4190-a8c5-10ba35859ace",
     "text": "You can't stop the waves, but you can learn to surf.",
     "author": "Jon Kabat-Zinn",
