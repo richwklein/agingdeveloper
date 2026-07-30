@@ -1,5 +1,17 @@
 # Changelog
 
+## [6.11.0](https://github.com/richwklein/agingdeveloper/compare/v6.10.9...v6.11.0) (2026-07-30)
+
+
+### Features
+
+* upgrade to astro 7 ([#1005](https://github.com/richwklein/agingdeveloper/issues/1005)) ([2d03ed0](https://github.com/richwklein/agingdeveloper/commit/2d03ed09586f8f3881a722f3e67e8ff3cb2dadaf))
+
+
+### Miscellaneous Chores
+
+* **audit:** sync files with template ([#1003](https://github.com/richwklein/agingdeveloper/issues/1003)) ([8629a12](https://github.com/richwklein/agingdeveloper/commit/8629a123806e564f40b6149ee190fd1dd3315d55))
+
 ## [6.10.9](https://github.com/richwklein/agingdeveloper/compare/v6.10.8...v6.10.9) (2026-07-27)
 
 
