@@ -25,16 +25,16 @@ const source = quote.data.source
 
 <div
   class:list={[
-    'rounded-md border border-stone-300 bg-gray-50 text-stone-900',
+    'border-stroke-light bg-card-light text-fg-light rounded-md border',
     'flex h-full min-h-40 flex-col justify-between p-6',
     className,
   ]}
 >
   <figure>
     <blockquote class:list={['text-2xl leading-tight']}>{quote.data.text}</blockquote>
-    <figcaption class="mt-3 text-sm text-stone-700">
+    <figcaption class="text-fg-main mt-3 text-sm">
       <div class="flex flex-wrap items-center gap-2">
-        <span class="text-base text-stone-800">
+        <span class="text-fg-light text-base">
           &mdash;&nbsp;{quote.data.author}
           {
             source && (
@@ -47,7 +47,7 @@ const source = quote.data.source
         </span>
         {
           source && (
-            <span class="inline-flex items-center gap-1 rounded-full bg-stone-200 px-3 py-1 text-[11px] font-semibold tracking-wide text-stone-700 uppercase">
+            <span class="bg-card-dark text-fg-main inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide uppercase">
               <QuoteSourceIcon type={source.type} />
               {source.year ?? '—'}
             </span>
