@@ -27,9 +27,9 @@ const path = '/quote'
   </Fragment>
   <BreadcrumbHeader head={{ name: 'Quotes', path: path }} class:list={['mb-4']} />
   <article>
-    <div class:list={['prose max-w-none', 'md:prose-lg lg:prose-xl']}>
+    <div class:list={['prose dark:prose-invert max-w-none', 'md:prose-lg lg:prose-xl']}>
       {
-        "When Rachel first hung a chalkboard in our kitchen, it quickly became my favorite canvas. Before long, I took on the task of updating it, sharing a new quote at the start of each week. Each message reflects a moment in time—what we've recently experienced or what's just around the corner for our family. This virtual chalkboard is a collection of those quotes, capturing the essence of our journey together."
+        "When Rachel first hung a chalkboard in our kitchen, it quickly became my favorite canvas. Before long, I took on the task of updating it, sharing a new quote at the start of each week. Each message reflects a moment in time: what we've recently experienced or what's just around the corner for our family. This virtual chalkboard is a collection of those quotes, capturing the essence of our journey together."
       }
     </div>
     <QuoteGrid quotes={quotes} class:list={['mt-4']} />
