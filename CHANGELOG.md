@@ -1,5 +1,19 @@
 # Changelog
 
+## [6.11.1](https://github.com/richwklein/agingdeveloper/compare/v6.11.0...v6.11.1) (2026-07-30)
+
+
+### Bug Fixes
+
+* correct quotes page rendering in dark mode ([#1006](https://github.com/richwklein/agingdeveloper/issues/1006)) ([bfddd90](https://github.com/richwklein/agingdeveloper/commit/bfddd90bcd204fd2e09520de49e5161186eb693a))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump the eslint group across 1 directory with 4 updates ([#997](https://github.com/richwklein/agingdeveloper/issues/997)) ([62cffa5](https://github.com/richwklein/agingdeveloper/commit/62cffa5be620c1f0dba03d3e99f0e4193f814f9d))
+* **deps-dev:** bump the other-dependencies group across 1 directory with 5 updates ([#1001](https://github.com/richwklein/agingdeveloper/issues/1001)) ([7b23342](https://github.com/richwklein/agingdeveloper/commit/7b233421e5023f9977069867f03086ad0be12301))
+* **deps:** bump github/codeql-action from 4.37.1 to 4.37.3 in the third-party-actions group ([#1002](https://github.com/richwklein/agingdeveloper/issues/1002)) ([59b55ea](https://github.com/richwklein/agingdeveloper/commit/59b55ea8ce713c9661a822f14f28fe906b95a7f6))
+
 ## [6.11.0](https://github.com/richwklein/agingdeveloper/compare/v6.10.9...v6.11.0) (2026-07-30)
 
 
