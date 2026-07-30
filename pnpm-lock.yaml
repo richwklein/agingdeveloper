@@ -30,17 +30,17 @@ importers:
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.6.0(jiti@2.7.0))
       '@fontsource/fira-code':
-        specifier: ^5.0.18
-        version: 5.2.7
+        specifier: ^5.3.0
+        version: 5.3.0
       '@fontsource/noto-sans-georgian':
-        specifier: ^5.0.22
-        version: 5.2.8
+        specifier: ^5.3.0
+        version: 5.3.0
       '@fontsource/noto-serif-georgian':
-        specifier: ^5.0.20
-        version: 5.2.9
+        specifier: ^5.3.0
+        version: 5.3.0
       '@fontsource/walter-turncoat':
-        specifier: ^5.1.0
-        version: 5.2.7
+        specifier: ^5.3.0
+        version: 5.3.0
       '@iconify-json/mdi':
         specifier: ^1.1.66
         version: 1.2.3
@@ -93,8 +93,8 @@ importers:
         specifier: ^5.0.0
         version: 5.2.1
       fuse.js:
-        specifier: ^7.4.0
-        version: 7.4.0
+        specifier: ^7.5.0
+        version: 7.5.0
       license-report:
         specifier: ^6.7.1
         version: 6.8.2
@@ -676,17 +676,17 @@ packages:
   '@fastify/static@9.3.0':
     resolution: {integrity: sha512-9YMYRpCOtMBrqKYWcqiw7ykOrn4D0jogHpJrFS0KGeSuOwzKMM5/mjj7B0CFLVoQ6htqKYw//Zs7APn9DBq05w==}
 
-  '@fontsource/fira-code@5.2.7':
-    resolution: {integrity: sha512-tnB9NNund9TwIym8/7DMJe573nlPEQb+fKUV5GL8TBYXjIhDvL0D7mgmNVNQUPhXp+R7RylQeiBdkA4EbOHPGQ==}
+  '@fontsource/fira-code@5.3.0':
+    resolution: {integrity: sha512-EJL968RJRkakubAj/coU8pSUaeTE5UNoRjtzAr6kGiSZ3jWuN8/AKWHwym/PFUaQL1q7IL/H+EXs4358YhrTBQ==}
 
-  '@fontsource/noto-sans-georgian@5.2.8':
-    resolution: {integrity: sha512-oylTMjvNxSZCqbq+0aCto5rjI14Je55scC04DgxQwpReN+ZXe3Kxpv4ATfb61apvlJZkeqTPSazVoRD+rJhbMg==}
+  '@fontsource/noto-sans-georgian@5.3.0':
+    resolution: {integrity: sha512-+a+N1mvCugsggDb5eKPKcwDXQQtbaV+x9/Zo2/p2c9yAZeib+qD2ftbezbPAoLvBf4MP+F8BdDwHdrlnNRSdng==}
 
-  '@fontsource/noto-serif-georgian@5.2.9':
-    resolution: {integrity: sha512-aokrSTQdmNajTNW+MBTm4aWWys8ndqrsoDpR00mRWU3IUyI85VlIYECPXn6VwsLkVgEbxeDOuFttc2M+HDWZdA==}
+  '@fontsource/noto-serif-georgian@5.3.0':
+    resolution: {integrity: sha512-qQ9sZDB9ikms7AmF2tRXCNSkD1ESKpbwcJMKI/ei+jjVwIpSu3Bu0hbR6gU3fbPahVIO1/JP0UNzB2sPSHtypw==}
 
-  '@fontsource/walter-turncoat@5.2.7':
-    resolution: {integrity: sha512-bdHukwqJLQTpTC98W5HdlRYA3mMeoLKHFtvlA9ZyGa1InH5PfKonn2gMVgbs6MGttihwCZnC3mp0il5ybQZXAA==}
+  '@fontsource/walter-turncoat@5.3.0':
+    resolution: {integrity: sha512-X+pB5BQw6/rq6bFmkQ1YEItelws7LM7j8ow129eiJUdCmRSr8zWgug4qJWyPKBDsyBfzTe4OMEzDsa4/2jbDOA==}
 
   '@formatjs/ecma402-abstract@2.3.6':
     resolution: {integrity: sha512-HJnTFeRM2kVFVr5gr5kH1XP6K0JcJtE7Lzvtr3FS/so5f1kpsqqqxy5JF+FRaO6H2qmcMfAUIox7AJteieRtVw==}
@@ -3971,8 +3971,8 @@ packages:
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
 
-  fuse.js@7.4.0:
-    resolution: {integrity: sha512-3UqmoSFwzX1sNB1YSk+Co0EdH29XCW2p9g48OAiy93cjKqzuABsqw2VIgSN3CmsT/wo6pIJ3F0Jxeiiby8rhIQ==}
+  fuse.js@7.5.0:
+    resolution: {integrity: sha512-sQtrEfA+ez/3G0cCZecF70oqpCRttCexYUG4mUrtWL49ULUzUyxokt5kyqwtKzj1270RaKih+hcP3qLcumccow==}
     engines: {node: '>=10'}
 
   fuzzy@0.1.3:
@@ -8381,13 +8381,13 @@ snapshots:
       fastq: 1.20.1
       glob: 13.0.6
 
-  '@fontsource/fira-code@5.2.7': {}
+  '@fontsource/fira-code@5.3.0': {}
 
-  '@fontsource/noto-sans-georgian@5.2.8': {}
+  '@fontsource/noto-sans-georgian@5.3.0': {}
 
-  '@fontsource/noto-serif-georgian@5.2.9': {}
+  '@fontsource/noto-serif-georgian@5.3.0': {}
 
-  '@fontsource/walter-turncoat@5.2.7': {}
+  '@fontsource/walter-turncoat@5.3.0': {}
 
   '@formatjs/ecma402-abstract@2.3.6':
     dependencies:
@@ -12360,7 +12360,7 @@ snapshots:
 
   functions-have-names@1.2.3: {}
 
-  fuse.js@7.4.0: {}
+  fuse.js@7.5.0: {}
 
   fuzzy@0.1.3: {}
 
