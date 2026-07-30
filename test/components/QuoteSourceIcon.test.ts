@@ -11,7 +11,7 @@ describe('quoteSourceIcon', () => {
   test('renders the correct icon for book', async () => {
     const html = await render('book')
     expect(html).toContain('mdi:book-open-variant-outline')
-    expect(html).toContain('astro-icon')
+    expect(html).toContain('<svg')
   })
 
   test('renders the correct icon for movie', async () => {

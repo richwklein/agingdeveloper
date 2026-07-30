@@ -1,3 +1,4 @@
+import { unified } from '@astrojs/markdown-remark'
 import mdx from '@astrojs/mdx'
 import netlify from '@astrojs/netlify'
 import sitemap from '@astrojs/sitemap'
@@ -69,7 +70,7 @@ export default defineConfig({
     },
   },
   experimental: { contentIntellisense: true },
-  markdown: { remarkPlugins: [remarkReadTime, remarkExcerpt] },
+  markdown: { processor: unified({ remarkPlugins: [remarkReadTime, remarkExcerpt] }) },
   output: 'static',
   prefetch: true,
   image: {},
