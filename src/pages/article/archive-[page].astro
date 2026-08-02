@@ -6,6 +6,7 @@ import ArticleGrid from '@components/ArticleGrid.astro'
 import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
 import Pagniation from '@components/Pagniation.astro'
 import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import CollectionJson from '@components/seo/CollectionJson.astro'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import Layout from '@layouts/Layout.astro'
 import { getArticles } from '@utils/article'
@@ -44,6 +45,15 @@ const path = `/article/archive-${page.currentPage}`
         { name: 'Articles', path: '/article' },
         { name: `Archive ${page.currentPage}`, path: path },
       ]}
+    />
+    <CollectionJson
+      name={`Archive ${page.currentPage}`}
+      path={path}
+      items={page.data.map((article) => ({
+        name: article.data.title,
+        path: `/article/${article.id}`,
+      }))}
+      site={site}
     />
   </Fragment>
   <BreadcrumbHeader

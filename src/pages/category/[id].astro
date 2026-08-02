@@ -7,6 +7,7 @@ import BackLink from '@components/BackLink.astro'
 import BreadcrumbHeader from '@components/BreadcrumbHeader.astro'
 import DisplayLimitAlert from '@components/DisplayLimitAlert.astro'
 import BreadcrumbJson from '@components/seo/BreadcrumbJson.astro'
+import CollectionJson from '@components/seo/CollectionJson.astro'
 import SeoBasic from '@components/seo/SeoBasic.astro'
 import Layout from '@layouts/Layout.astro'
 import slugify from '@sindresorhus/slugify'
@@ -55,6 +56,15 @@ const { articles, total } = await getArticlesByCategory(category, limit)
         { name: 'Categories', path: '/category' },
         { name: category, path: path },
       ]}
+    />
+    <CollectionJson
+      name={category}
+      path={path}
+      items={articles.map((article) => ({
+        name: article.data.title,
+        path: `/article/${article.id}`,
+      }))}
+      site={site}
     />
   </Fragment>
   <BreadcrumbHeader

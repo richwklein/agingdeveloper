@@ -1,0 +1,50 @@
+---
+/**
+ * @name CollectionJson
+ * Component used to build out an ld+json CollectionPage with an item list of
+ * the entries shown on a collection page such as a category, tag, archive, or
+ * author listing.
+ *
+ * @return {Function} an Astro component factory function.
+ *
+ * @example
+ * <CollectionJson name="Code" path="/category/code" items={items} site={site} />
+ */
+import { buildUrl } from '@utils/misc'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  name: string
+  path: string
+  items: {
+    name: string
+    path: string
+  }[]
+  site: CollectionEntry<'site'>
+}
+
+const { name, path, items, site } = Astro.props
+---
+
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: name,
+    url: buildUrl(path, site.data.origin),
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: items.length,
+      itemListElement: items.map((item, index) => {
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.name,
+          url: buildUrl(item.path, site.data.origin),
+        }
+      }),
+    },
+  })}
+/>
