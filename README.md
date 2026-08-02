@@ -21,13 +21,25 @@ This is the personal site of Richard Klein. It is a static site built using [typ
 
 - The site code is [MIT](/LICENSE) licensed.
 - The libraries the site is based upon are MIT, OFL-1.1, or Apache-2.0 licensed.
-- Content hosted on the site is
-- [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/)
-  licensed unless otherwise noted.
+- The articles, images, and data in [`content/`](./content/) are licensed under
+  [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/)
+  unless otherwise noted.
 
 ## Content vs Source Code
 
-Both the source code for the site and the content that is hosted on the site are stored in this repository. The content hosted on the site is located in the `content` folder within the `src` folder. I would like to move this outside of the `src` folder, but using a symlink did not work well when moving from device to device.
+This repository intentionally keeps source code and published content in separate top-level areas because they are licensed differently.
+
+- Source code and project configuration are MIT licensed.
+  This includes files in `src/`, `test/`, `.github/`, and the repository root unless a file says otherwise.
+- Published site content is CC BY-SA 4.0 licensed.
+  This includes articles, images, and structured content in `content/` unless a file says otherwise.
+
+Directory layout follows that split:
+
+- `src/` contains site code and components.
+- `content/` contains articles, media, and other published content.
+
+The [`content/LICENSE.md`](./content/LICENSE.md) file exists to make the Creative Commons licensing for the content directory explicit.
 
 ## Start local development
 

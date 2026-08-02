@@ -7,9 +7,9 @@ describe('normalizeImageKey', () => {
   })
 
   test('normalizes /@fs sources to absolute filesystem paths', () => {
-    expect(
-      normalizeImageKey('/@fs/Users/example/project/src/content/article/image.jpg?import')
-    ).toBe('/Users/example/project/src/content/article/image.jpg')
+    expect(normalizeImageKey('/@fs/Users/example/project/content/article/image.jpg?import')).toBe(
+      '/Users/example/project/content/article/image.jpg'
+    )
   })
 })
 

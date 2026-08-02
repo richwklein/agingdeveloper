@@ -204,7 +204,7 @@ class FeedImageCollection {
    */
   async loadImages() {
     const imageGlobs = import.meta.glob<{ default: ImageMetadata }>(
-      '/src/content/article/**/*.{jpeg,jpg,png,gif,svg,webp}'
+      '/content/article/**/*.{jpeg,jpg,png,gif,svg,webp}'
     )
 
     // first load the images from the site entry
@@ -271,7 +271,7 @@ class FeedImageCollection {
   /**
    * Normalize the key to be used in the image map.
    *
-   * This will remove the leading `/@fs`, working directory, and /src/content as well as
+   * This will remove the leading `/@fs`, working directory, and /content as well as
    *  the trailing ?v=1234.
    *
    * @param key the key to normalize
@@ -280,7 +280,7 @@ class FeedImageCollection {
   private normalizeKey(key: string): string {
     return normalizeImageKey(key)
       .replace(this.cwd, '')
-      .replace(/^\/src\/content/, '')
+      .replace(/^\/content/, '')
       .replace(/^\/article\/(\d{4})\/([^/]+)/, (_, year, rest) => {
         return `/article/${year}-${rest}`
       })

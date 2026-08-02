@@ -1,16 +1,20 @@
 ---
-description: Add the weekly chalkboard quote to quote.json (release-please cuts the patch release from the commit)
+name: weekly-quote
+description: Add the weekly chalkboard quote to content/data/quote.json (release-please cuts the patch release from the commit). Use when the user runs /weekly-quote or asks to add the weekly quote.
 ---
+
+# weekly-quote
 
 You are helping add the weekly chalkboard quote for the agingdeveloper site.
 
 ## Theme
 
-$ARGUMENTS
+Use the invocation argument as the theme for the quote. If no argument was
+provided, ask the user for a theme before continuing.
 
 ## Step 1 — Find a quote
 
-Read `src/content/data/quote.json` to understand the existing quote style and to check for duplicates.
+Read `content/data/quote.json` to understand the existing quote style and to check for duplicates.
 
 Then search the web for quotes that fit the theme above. Prefer **shorter quotes** that are easy to write on a chalkboard. Favor quotes with verifiable citation sources, though a source is not required.
 
@@ -38,7 +42,7 @@ Do not invent source details. If uncertain, ask or omit the source object.
 Generate a UUID v4 for the `id` field using:
 
 ```bash
-node .claude/scripts/gen-uuid.js
+node .agents/skills/weekly-quote/scripts/gen-uuid.js
 ```
 
 Set `chalked` to the current day in `YYYY-MM-DD` format.
@@ -74,7 +78,7 @@ With source:
 
 ## Step 4 — Prepend to quote.json
 
-Insert the new entry as the **first element** of the array in `src/content/data/quote.json`.
+Insert the new entry as the **first element** of the array in `content/data/quote.json`.
 
 ## Step 5 — Lint and format
 
