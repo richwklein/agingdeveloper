@@ -1,5 +1,19 @@
 # Changelog
 
+## [6.12.0](https://github.com/richwklein/agingdeveloper/compare/v6.11.1...v6.12.0) (2026-08-03)
+
+
+### Features
+
+* add collection page structured data ([#1008](https://github.com/richwklein/agingdeveloper/issues/1008)) ([34dcac5](https://github.com/richwklein/agingdeveloper/commit/34dcac5e96fbb5f894baa733d61975cd612ab1a1))
+* add Taskmato personal software article ([#1011](https://github.com/richwklein/agingdeveloper/issues/1011)) ([1cfa0dd](https://github.com/richwklein/agingdeveloper/commit/1cfa0dd64aa427069e318e01a6e8409d999f72af))
+* separate published content from source code ([#1010](https://github.com/richwklein/agingdeveloper/issues/1010)) ([6c11d36](https://github.com/richwklein/agingdeveloper/commit/6c11d3691ecb6e440bf30d3fbe8d7241ae457a1a))
+
+
+### Bug Fixes
+
+* **quote:** add weekly quote for August 3, 2026 ([#1013](https://github.com/richwklein/agingdeveloper/issues/1013)) ([84e85ff](https://github.com/richwklein/agingdeveloper/commit/84e85ff775d2cf8f0674e0a3189dfd377427045c))
+
 ## [6.11.1](https://github.com/richwklein/agingdeveloper/compare/v6.11.0...v6.11.1) (2026-07-30)
 
 
