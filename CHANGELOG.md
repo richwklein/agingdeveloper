@@ -1,5 +1,15 @@
 # Changelog
 
+## [6.12.1](https://github.com/richwklein/agingdeveloper/compare/v6.12.0...v6.12.1) (2026-08-17)
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump sanitize-html from 2.17.4 to 2.17.5 ([#1014](https://github.com/richwklein/agingdeveloper/issues/1014)) ([52314ef](https://github.com/richwklein/agingdeveloper/commit/52314ef30ba3b08cfa3e6b75108c15e99a3f4686))
+* **deps-dev:** bump sanitize-html from 2.17.5 to 2.17.6 ([#1021](https://github.com/richwklein/agingdeveloper/issues/1021)) ([15dd460](https://github.com/richwklein/agingdeveloper/commit/15dd4604a923d3e590444be838c7f110727980de))
+* **deps:** bump github/codeql-action from 4.37.3 to 4.37.4 in the third-party-actions group ([#1016](https://github.com/richwklein/agingdeveloper/issues/1016)) ([b4f785c](https://github.com/richwklein/agingdeveloper/commit/b4f785ce92c57de90c29f48875fa1e2bde2b67ce))
+* **quote:** add weekly quote for August 17, 2026 ([#1022](https://github.com/richwklein/agingdeveloper/issues/1022)) ([f3e55e1](https://github.com/richwklein/agingdeveloper/commit/f3e55e10f7b1eca135ea81655a2916a3fda61505))
+
 ## [6.12.0](https://github.com/richwklein/agingdeveloper/compare/v6.11.1...v6.12.0) (2026-08-03)
 
 
