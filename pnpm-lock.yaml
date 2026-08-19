@@ -90,8 +90,8 @@ importers:
         specifier: ^13.0.0
         version: 13.0.0(eslint@10.7.0(jiti@2.7.0))
       feed:
-        specifier: ^5.0.0
-        version: 5.2.1
+        specifier: ^6.0.0
+        version: 6.0.0
       fuse.js:
         specifier: ^7.5.0
         version: 7.5.0
@@ -3876,8 +3876,8 @@ packages:
   fecha@4.2.3:
     resolution: {integrity: sha512-OP2IUU6HeYKJi3i0z4A19kHMQoLVs4Hc+DPqqxI2h/DPZHTm/vjsfC6P0b4jCMy14XizLBqvndQ+UilD7707Jw==}
 
-  feed@5.2.1:
-    resolution: {integrity: sha512-jTynzYPWs9ALjro0GW8j7sv9y7cJBeOdD4Y88kVqYy/eyusIX3g+499JiTDIlD9Ge/unebx57T4Uzo6vpYvMtA==}
+  feed@6.0.0:
+    resolution: {integrity: sha512-rvFOF1POce0ijAKy3tZN5T8PuprgIit/VbMyXJWcoYwcMOTSIJ7NqZb8DTLPJr77yiEO27kidm/fw0kcSIV+ww==}
     engines: {node: '>=20', pnpm: '>=10'}
 
   fetch-blob@3.2.0:
@@ -6592,6 +6592,10 @@ packages:
 
   sax@1.6.0:
     resolution: {integrity: sha512-6R3J5M4AcbtLUdZmRv2SygeVaM7IhrLXu9BmnOGmmACak8fiUtOsYNWUS4uK7upbmHIBbLBeFeI//477BKLBzA==}
+    engines: {node: '>=11.0.0'}
+
+  sax@1.6.1:
+    resolution: {integrity: sha512-42tBVwLWnaQvW5zc4HbZrTuWccECCZfBi92FDuwtqxasH+JbPB3/FOKb1m222K42R4WxuxzzMsTswfzgtSu64Q==}
     engines: {node: '>=11.0.0'}
 
   secure-json-parse@4.1.0:
@@ -12273,7 +12277,7 @@ snapshots:
 
   fecha@4.2.3: {}
 
-  feed@5.2.1:
+  feed@6.0.0:
     dependencies:
       xml-js: 1.6.11
 
@@ -15627,6 +15631,8 @@ snapshots:
 
   sax@1.6.0: {}
 
+  sax@1.6.1: {}
+
   secure-json-parse@4.1.0: {}
 
   semver@5.7.2: {}
@@ -16101,7 +16107,7 @@ snapshots:
       css-what: 6.2.2
       csso: 5.0.5
       picocolors: 1.1.1
-      sax: 1.6.0
+      sax: 1.6.1
 
   svgo@4.0.2:
     dependencies:
@@ -16889,7 +16895,7 @@ snapshots:
 
   xml-js@1.6.11:
     dependencies:
-      sax: 1.6.0
+      sax: 1.6.1
 
   xss@1.0.15:
     dependencies:
