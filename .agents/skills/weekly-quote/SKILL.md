@@ -96,12 +96,12 @@ Surface any failures clearly before finishing.
 
 **Do not bump `package.json` manually.** release-please owns versioning and will open a release PR based on the commit message.
 
-Suggest a [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/) message in this form so release-please cuts a patch release:
+Suggest a [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/) message in this form. Adding a quote is a content chore, and `release-please-config.json` lists `chore` as a visible changelog section, so a `chore` commit still cuts a patch release:
 
 ```
-fix(quote): add weekly quote for <Month D, YYYY>
+chore(quote): add weekly quote for <Month D, YYYY>
 ```
 
-Example: `fix(quote): add weekly quote for May 18, 2026`
+Example: `chore(quote): add weekly quote for May 18, 2026`
 
 Do not commit unless the user asks.
