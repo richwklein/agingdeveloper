@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.12.2](https://github.com/richwklein/agingdeveloper/compare/v6.12.1...v6.12.2) (2026-08-24)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump github/codeql-action from 4.37.4 to 4.37.7 in the third-party-actions group ([#1025](https://github.com/richwklein/agingdeveloper/issues/1025)) ([38256f9](https://github.com/richwklein/agingdeveloper/commit/38256f969c175128847ff5d168f5797d35366bf3))
+* **quote:** add weekly quote for August 24, 2026 ([#1026](https://github.com/richwklein/agingdeveloper/issues/1026)) ([f4edf60](https://github.com/richwklein/agingdeveloper/commit/f4edf6099c493b232752d5d18c675a0463d4deec))
+
 ## [6.12.1](https://github.com/richwklein/agingdeveloper/compare/v6.12.0...v6.12.1) (2026-08-17)
 
 
