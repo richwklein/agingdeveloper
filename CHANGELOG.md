@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.13.0](https://github.com/richwklein/agingdeveloper/compare/v6.12.2...v6.13.0) (2026-08-30)
+
+
+### Features
+
+* add article on prepare-image and goodreads-next-book skills ([#1031](https://github.com/richwklein/agingdeveloper/issues/1031)) ([73d2545](https://github.com/richwklein/agingdeveloper/commit/73d2545c709a1e06cc427a368cade290e53464bb))
+
 ## [6.12.2](https://github.com/richwklein/agingdeveloper/compare/v6.12.1...v6.12.2) (2026-08-24)
 
 
