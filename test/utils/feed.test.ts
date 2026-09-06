@@ -106,7 +106,7 @@ describe('getFeed', () => {
 
     expect(item.content_html).toContain('src="https://feed.example.com/_astro/inline-image.jpg"')
     expect(item.content_html).toContain('href="https://feed.example.com/about"')
-    expect(item.image.url).toBe('https://feed.example.com/_astro/featured-image.jpg')
+    expect(item.image).toBe('https://feed.example.com/_astro/featured-image.jpg')
     expect(item.author.name).toBe('Mock Name 1')
   })
 
@@ -139,8 +139,11 @@ describe('getFeed', () => {
     const json = JSON.parse(feed.json1())
     const item = json.items[0]
 
-    expect(item.image.url).toBe('https://feed.example.com/_astro/featured-image.jpg?v=123')
-    expect(item.image.type).toBe('image/jpeg')
+    expect(item.image).toBe('https://feed.example.com/_astro/featured-image.jpg?v=123')
+
+    const enclosure = feed.rss2().match(/<enclosure[^>]*>/)?.[0] ?? ''
+    expect(enclosure).toContain('url="https://feed.example.com/_astro/featured-image.jpg?v=123"')
+    expect(enclosure).toContain('type="image/jpeg"')
     expect(item.content_html).toContain(
       'src="https://feed.example.com/_astro/inline-image.jpg?v=999"'
     )
