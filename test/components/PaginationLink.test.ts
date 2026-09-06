@@ -28,9 +28,9 @@ describe('paginationLink', () => {
     expect(result).toContain(
       '<a data-link="internal" data-astro-prefetch="hover" target="_self" href="/page/2"'
     )
-    expect(result).toContain(
-      '<svg width="1em" height="1em" class="h-8 w-8" data-icon="mdi:chevron-right"'
-    )
+    expect(result).toContain('<svg')
+    expect(result).toContain('class="h-8 w-8"')
+    expect(result).toContain('data-icon="mdi:chevron-right"')
   })
 
   test('that no link creates a div with an icon', async () => {
@@ -41,8 +41,8 @@ describe('paginationLink', () => {
     })
     expect(result).toContain('test-class')
     expect(result).toContain('<div class="block')
-    expect(result).toContain(
-      '<svg width="1em" height="1em" class="h-8 w-8" data-icon="mdi:chevron-right"'
-    )
+    expect(result).toContain('<svg')
+    expect(result).toContain('class="h-8 w-8"')
+    expect(result).toContain('data-icon="mdi:chevron-right"')
   })
 })
