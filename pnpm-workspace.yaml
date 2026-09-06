@@ -1,0 +1,3 @@
+# Must match `cooldown.default-days` in .github/dependabot.yml. Dependabot
+# enforces that window as pnpm's minimumReleaseAge when it re-resolves.
+minimumReleaseAge: 7200
