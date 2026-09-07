@@ -1,5 +1,19 @@
 # Changelog
 
+## [6.13.2](https://github.com/richwklein/agingdeveloper/compare/v6.13.1...v6.13.2) (2026-09-07)
+
+
+### Miscellaneous Chores
+
+* **audit:** sync files with template ([#1041](https://github.com/richwklein/agingdeveloper/issues/1041)) ([0dd2910](https://github.com/richwklein/agingdeveloper/commit/0dd2910a74357415312459c0a982ea145e8f9eda))
+* **deps-dev:** bump sanitize-html from 2.17.6 to 2.17.7 ([#1036](https://github.com/richwklein/agingdeveloper/issues/1036)) ([52438e9](https://github.com/richwklein/agingdeveloper/commit/52438e93fd2c183d5bacd8148da238b9beae1b63))
+* **deps-dev:** bump sharp from 0.35.3 to 0.35.4 ([#1035](https://github.com/richwklein/agingdeveloper/issues/1035)) ([ca83f70](https://github.com/richwklein/agingdeveloper/commit/ca83f70eedc64097a1fe2fa1f9ebfae0425ee1d4))
+* **deps-dev:** bump the astro group with 3 updates ([#1043](https://github.com/richwklein/agingdeveloper/issues/1043)) ([decd4e2](https://github.com/richwklein/agingdeveloper/commit/decd4e2bdeba6be950ed914147eebe71c88b8299))
+* **deps-dev:** bump the eslint group with 5 updates ([#1044](https://github.com/richwklein/agingdeveloper/issues/1044)) ([13a493e](https://github.com/richwklein/agingdeveloper/commit/13a493e0ac9791e706bed41fd72c6eeb53fb506a))
+* **deps-dev:** bump the other-dependencies group across 1 directory with 3 updates ([#1045](https://github.com/richwklein/agingdeveloper/issues/1045)) ([5cf90d8](https://github.com/richwklein/agingdeveloper/commit/5cf90d842ceb100daf90adc051073ce2f7fcff98))
+* **deps:** bump github/codeql-action from 4.37.7 to 4.37.9 in the third-party-actions group across 1 directory ([#1030](https://github.com/richwklein/agingdeveloper/issues/1030)) ([3470425](https://github.com/richwklein/agingdeveloper/commit/3470425c7a8f4d608b40282d692db22862e3e786))
+* **quote:** add weekly quote for September 7, 2026 ([#1046](https://github.com/richwklein/agingdeveloper/issues/1046)) ([a657bf1](https://github.com/richwklein/agingdeveloper/commit/a657bf11a16d0e1118e3d5e367cd063df50773f7))
+
 ## [6.13.1](https://github.com/richwklein/agingdeveloper/compare/v6.13.0...v6.13.1) (2026-08-31)
 
 
