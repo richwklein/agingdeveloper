@@ -1,5 +1,18 @@
 # Changelog
 
+## [6.13.3](https://github.com/richwklein/agingdeveloper/compare/v6.13.2...v6.13.3) (2026-09-28)
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump netlify-cli from 27.4.2 to 27.5.1 in the other-dependencies group ([#1050](https://github.com/richwklein/agingdeveloper/issues/1050)) ([a0948cd](https://github.com/richwklein/agingdeveloper/commit/a0948cde3303b78702256e587e7370906611878f))
+* **deps-dev:** bump the astro group across 1 directory with 2 updates ([#1051](https://github.com/richwklein/agingdeveloper/issues/1051)) ([480e83b](https://github.com/richwklein/agingdeveloper/commit/480e83b068e91046caa8328958d63d471de94da6))
+* **deps-dev:** bump the eslint group across 1 directory with 4 updates ([#1054](https://github.com/richwklein/agingdeveloper/issues/1054)) ([eb33305](https://github.com/richwklein/agingdeveloper/commit/eb33305c43bbd56c54d6b9ff71c204f521d33931))
+* **deps-dev:** bump vitest from 4.1.3 to 4.1.11 ([#1056](https://github.com/richwklein/agingdeveloper/issues/1056)) ([84e697e](https://github.com/richwklein/agingdeveloper/commit/84e697e9fe70327d8e0f1c4a36257f6e77e30046))
+* **deps:** bump github/codeql-action from 4.37.9 to 4.38.0 in the third-party-actions group ([#1053](https://github.com/richwklein/agingdeveloper/issues/1053)) ([841908c](https://github.com/richwklein/agingdeveloper/commit/841908c8d3ae754f68be328c7054ea2b4bf4c8a2))
+* **deps:** bump github/codeql-action from 4.38.0 to 4.38.1 in the third-party-actions group ([#1057](https://github.com/richwklein/agingdeveloper/issues/1057)) ([1456128](https://github.com/richwklein/agingdeveloper/commit/1456128d09fad26987776ea3188fe47c27b479bd))
+* **quote:** add weekly quote for September 28, 2026 ([#1059](https://github.com/richwklein/agingdeveloper/issues/1059)) ([6a0ae93](https://github.com/richwklein/agingdeveloper/commit/6a0ae93f3f0f0ffb946250d144628287a15e126c))
+
 ## [6.13.2](https://github.com/richwklein/agingdeveloper/compare/v6.13.1...v6.13.2) (2026-09-07)
 
 
