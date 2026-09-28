@@ -1,5 +1,16 @@
 [
   {
+    "id": "2ebc3748-5803-45b8-99ed-ad4c42492f64",
+    "text": "Music is the universal language of mankind.",
+    "author": "Henry Wadsworth Longfellow",
+    "chalked": "2026-09-28",
+    "source": {
+      "title": "Outre-Mer: A Pilgrimage Beyond the Sea",
+      "type": "book",
+      "year": 1835
+    }
+  },
+  {
     "id": "7840b166-1365-4e5c-aab2-a62b90386243",
     "text": "You'll be with me like a handprint on my heart.",
     "author": "Stephen Schwartz",
