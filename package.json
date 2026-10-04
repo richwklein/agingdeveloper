@@ -58,7 +58,7 @@
     "markdown-it": "^15.0.0",
     "mdast-util-to-string": "^4.0.0",
     "mime": "^4.0.4",
-    "netlify-cli": "^27.5.1",
+    "netlify-cli": "^27.10.0",
     "prettier": "^3.9.4",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.8.0",
