@@ -1,5 +1,19 @@
 # Changelog
 
+## [6.14.0](https://github.com/richwklein/agingdeveloper/compare/v6.13.3...v6.14.0) (2026-10-04)
+
+
+### Features
+
+* add article on third places and gathering closer to home ([#1064](https://github.com/richwklein/agingdeveloper/issues/1064)) ([72762b8](https://github.com/richwklein/agingdeveloper/commit/72762b8551fdf164ad97e5c436b0f096a6736529))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump netlify-cli from 27.5.1 to 27.10.0 in the other-dependencies group across 1 directory ([#1061](https://github.com/richwklein/agingdeveloper/issues/1061)) ([0e620e7](https://github.com/richwklein/agingdeveloper/commit/0e620e7967e5dc701dcc4ccd5b3a73fbb042f0bb))
+* **deps-dev:** bump sharp from 0.35.4 to 0.35.5 ([#1060](https://github.com/richwklein/agingdeveloper/issues/1060)) ([5682419](https://github.com/richwklein/agingdeveloper/commit/5682419302c51e3d6b58f2b5695137e4a812278e))
+* **deps:** bump github/codeql-action from 4.38.1 to 4.38.2 in the third-party-actions group ([#1062](https://github.com/richwklein/agingdeveloper/issues/1062)) ([649b2cc](https://github.com/richwklein/agingdeveloper/commit/649b2cc92c24b8168a568578d1c4f3462d5bd0ec))
+
 ## [6.13.3](https://github.com/richwklein/agingdeveloper/compare/v6.13.2...v6.13.3) (2026-09-28)
 
 
