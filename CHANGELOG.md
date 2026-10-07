@@ -1,5 +1,14 @@
 # Changelog
 
+## [6.14.2](https://github.com/richwklein/agingdeveloper/compare/v6.14.1...v6.14.2) (2026-10-07)
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump @astrojs/mdx from 7.0.5 to 8.0.0 in the astro group ([#1067](https://github.com/richwklein/agingdeveloper/issues/1067)) ([50595e9](https://github.com/richwklein/agingdeveloper/commit/50595e9ebad8f6597f99170d0edefb9c364b07d7))
+* **deps-dev:** bump the eslint group with 2 updates ([#1068](https://github.com/richwklein/agingdeveloper/issues/1068)) ([7eb1f2c](https://github.com/richwklein/agingdeveloper/commit/7eb1f2ca61163a9ffd69a02a205463e36553af3e))
+* **deps-dev:** bump the vitest group across 1 directory with 2 updates ([#1069](https://github.com/richwklein/agingdeveloper/issues/1069)) ([2b53d1c](https://github.com/richwklein/agingdeveloper/commit/2b53d1cc607234e526b9cfb5c41d48a18ccaa6db))
+
 ## [6.14.1](https://github.com/richwklein/agingdeveloper/compare/v6.14.0...v6.14.1) (2026-10-06)
 
 
