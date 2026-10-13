@@ -34,6 +34,8 @@
   --color-link-dark: rgb(90, 146, 22);
   --color-link-contrast: rgb(139, 195, 74);
 
+  --color-focus-main: rgb(43, 127, 255);
+
   --color-icon-main: rgb(55, 71, 79);
   --color-icon-muted: rgb(120, 113, 108);
   --color-icon-contrast: rgb(255, 255, 255);
@@ -90,6 +92,8 @@
     --color-link-light: rgb(190, 246, 122);
     --color-link-main: rgb(139, 195, 74);
     --color-link-dark: rgb(190, 246, 122);
+
+    --color-focus-main: rgb(139, 195, 74);
 
     --color-icon-main: rgb(255, 255, 255);
     --color-icon-muted: rgb(255, 255, 255, 0.7);

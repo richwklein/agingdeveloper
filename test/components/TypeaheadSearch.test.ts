@@ -30,8 +30,24 @@ describe('typeaheadSearch', () => {
     expect(html).toContain('placeholder="Search..."')
     expect(html).toContain('aria-label="Search articles"')
     expect(html).toContain('data-search-result')
-    expect(html).toContain('border-gray-300')
+    expect(html).toContain('border-stroke-light')
+    expect(html).toContain('focus:ring-focus-main')
+    expect(html).not.toContain('ring-blue-500')
   })
+
+  test.each(['default', 'header'] as const)(
+    'renders the %s results list with theme tokens',
+    async (variant) => {
+      const html = await render({ variant })
+      const list = html.match(/<ul[^>]*data-search-result[^>]*>/)?.[0] ?? ''
+
+      expect(list).toContain('dark:bg-primary-dark')
+      expect(list).toContain('dark:border-stroke-main')
+      expect(list).toContain('text-fg-light')
+      expect(list).toContain('focus:ring-focus-main')
+      expect(list).not.toMatch(/stone-|gray-|bg-white/)
+    }
+  )
 
   test('renders the header variant styling and custom props', async () => {
     const html = await render({
@@ -46,5 +62,6 @@ describe('typeaheadSearch', () => {
     expect(html).toContain('bg-white/10')
     expect(html).toContain('text-primary-contrast')
     expect(html).toContain('test-class')
+    expect(html).toContain('focus:ring-secondary-light')
   })
 })
