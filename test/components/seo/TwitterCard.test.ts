@@ -65,10 +65,16 @@ describe('twitterCard', () => {
     expect(content).toContain(`<meta name="twitter:image:alt" content="Test Image Alt">`)
   })
 
-  test('that it contains the author', async () => {
-    expect(content).toContain(
-      `<meta name="twitter:creator" content="${author.data.twitterUsername}">`
-    )
+  test('that it contains the author twitter username', async () => {
+    const twitterAuthor = { ...author, data: { ...author.data, twitterUsername: '@faker' } }
+    const result = await render(site, twitterAuthor)
+    expect(result).toContain('<meta name="twitter:creator" content="@faker">')
+  })
+
+  test('that it omits the creator when the author has no twitter username', async () => {
+    const noTwitterAuthor = { ...author, data: { ...author.data, twitterUsername: undefined } }
+    const result = await render(site, noTwitterAuthor)
+    expect(result).not.toContain('<meta name="twitter:creator"')
   })
 
   test('that a basic card', async () => {

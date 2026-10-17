@@ -7,6 +7,7 @@ describe('socialBar', () => {
 
   const socials = [
     { name: 'Twitter', url: 'https://twitter.com/faker' },
+    { name: 'Bluesky', url: 'https://bsky.app/profile/faker.bsky.social' },
     { name: 'Facebook', url: 'https://www.facebook.com/faker' },
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/faker/' },
   ]
