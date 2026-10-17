@@ -41,7 +41,7 @@ describe('quoteSourceIcon', () => {
 
   test('renders the correct icon for play', async () => {
     const html = await render('play')
-    expect(html).toContain('bi:mask')
+    expect(html).toContain('bi:ticket-perforated')
   })
 
   test('renders the correct icon for magazine', async () => {
