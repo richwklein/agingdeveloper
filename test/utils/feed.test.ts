@@ -4,10 +4,16 @@ const { mockGetArticles, mockGetDefaultSite, mockGetImage } = vi.hoisted(() => {
   return {
     mockGetArticles: vi.fn(),
     mockGetDefaultSite: vi.fn(),
-    mockGetImage: vi.fn(async ({ src }: { src: string | { src: string } }) => {
-      const imageSrc = typeof src === 'string' ? src : src.src
-      return { src: `/_mock/${imageSrc.replace(/^\.\//, '')}` }
-    }),
+    mockGetImage: vi.fn(
+      async ({ src, format }: { src: string | { src: string }; format?: string }) => {
+        const imageSrc = typeof src === 'string' ? src : src.src
+        const mockSrc = `/_mock/${imageSrc.replace(/^\.?\//, '')}`
+        if (!format) {
+          return { src: mockSrc }
+        }
+        return { src: `${mockSrc}${mockSrc.includes('?') ? '&' : '?'}fm=${format}` }
+      }
+    ),
   }
 })
 
@@ -23,7 +29,7 @@ vi.mock('astro:assets', () => ({
   getImage: mockGetImage,
 }))
 
-import { feedInfo, getFeed } from '@utils/feed'
+import { feedInfo, getFeed, renderAtom } from '@utils/feed'
 
 describe('getFeed', () => {
   beforeEach(() => {
@@ -80,7 +86,9 @@ describe('getFeed', () => {
 
     expect(item.content_html).toContain('<p>Mock feed description</p>')
     expect(item.content_html).toContain('<img')
-    expect(item.content_html).toContain('src="https://feed.example.com/_astro/featured-image.jpg"')
+    expect(item.content_html).toContain(
+      'src="https://feed.example.com/_mock/_astro/featured-image.jpg"'
+    )
     expect(item.content_html).toContain('alt="Jane Photographer"')
     expect(item.content_html).toContain('Image by')
     expect(item.content_html).toContain('href="https://images.example.com/jane"')
@@ -89,7 +97,7 @@ describe('getFeed', () => {
 
     const descriptionIndex = item.content_html.indexOf('<p>Mock feed description</p>')
     const imageIndex = item.content_html.indexOf(
-      'src="https://feed.example.com/_astro/featured-image.jpg"'
+      'src="https://feed.example.com/_mock/_astro/featured-image.jpg"'
     )
     const bodyIndex = item.content_html.indexOf('<p>Intro paragraph.</p>')
 
@@ -106,8 +114,23 @@ describe('getFeed', () => {
 
     expect(item.content_html).toContain('src="https://feed.example.com/_astro/inline-image.jpg"')
     expect(item.content_html).toContain('href="https://feed.example.com/about"')
-    expect(item.image).toBe('https://feed.example.com/_astro/featured-image.jpg')
+    expect(item.image).toBe('https://feed.example.com/_mock/_astro/featured-image.jpg?fm=jpg')
     expect(item.author.name).toBe('Mock Name 1')
+  })
+
+  test('serves the enclosure as a JPEG at a different URL than the inline image', async () => {
+    const feed = await getFeed()
+    const enclosureUrl = 'https://feed.example.com/_mock/_astro/featured-image.jpg?fm=jpg'
+
+    const rssEnclosure = feed.rss2().match(/<enclosure[^>]*>/)?.[0] ?? ''
+    const atomEnclosure = renderAtom(feed).match(/<link rel="enclosure"[^>]*>/)?.[0] ?? ''
+    expect(rssEnclosure).toContain(`url="${enclosureUrl}"`)
+    expect(rssEnclosure).toContain('type="image/jpeg"')
+    expect(atomEnclosure).toContain(`href="${enclosureUrl}"`)
+    expect(atomEnclosure).toContain('type="image/jpeg"')
+
+    const content = JSON.parse(feed.json1()).items[0].content_html
+    expect(content).not.toContain(`src="${enclosureUrl}"`)
   })
 
   test('preserves query strings in feed image URLs while keeping MIME type accurate', async () => {
@@ -139,11 +162,15 @@ describe('getFeed', () => {
     const json = JSON.parse(feed.json1())
     const item = json.items[0]
 
-    expect(item.image).toBe('https://feed.example.com/_astro/featured-image.jpg?v=123')
+    expect(item.image).toBe('https://feed.example.com/_mock/_astro/featured-image.jpg?v=123&fm=jpg')
 
-    const enclosure = feed.rss2().match(/<enclosure[^>]*>/)?.[0] ?? ''
-    expect(enclosure).toContain('url="https://feed.example.com/_astro/featured-image.jpg?v=123"')
-    expect(enclosure).toContain('type="image/jpeg"')
+    const escapedUrl = 'https://feed.example.com/_mock/_astro/featured-image.jpg?v=123&amp;fm=jpg'
+    const rssEnclosure = feed.rss2().match(/<enclosure[^>]*>/)?.[0] ?? ''
+    const atomEnclosure = renderAtom(feed).match(/<link rel="enclosure"[^>]*>/)?.[0] ?? ''
+    expect(rssEnclosure).toContain(`url="${escapedUrl}"`)
+    expect(rssEnclosure).toContain('type="image/jpeg"')
+    expect(atomEnclosure).toContain(`href="${escapedUrl}"`)
+    expect(atomEnclosure).toContain('type="image/jpeg"')
     expect(item.content_html).toContain(
       'src="https://feed.example.com/_astro/inline-image.jpg?v=999"'
     )
