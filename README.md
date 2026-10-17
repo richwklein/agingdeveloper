@@ -134,7 +134,7 @@ VSCode is the main editor that is used on this site. ESLint is used for linting 
 
 ## Images
 
-Several different size and aspect ratios are used for the cover images on the site. The article cards can have hd video, 3/4, or square aspect ratios depending on the breakpoint. The images are used raw in social media previews, because of that the images should be sized to _1920px_. The icons used on the site are [Material Design Icons](https://icon-sets.iconify.design/mdi/) from iconify.
+Several different size and aspect ratios are used for the cover images on the site. The article cards can have hd video, 3/4, or square aspect ratios depending on the breakpoint. The images are used raw in social media previews, because of that the images should be sized to _1920px_. The icons used on the site are [Bootstrap Icons](https://icon-sets.iconify.design/bi/) from iconify.
 
 ## Testing
 

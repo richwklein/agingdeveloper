@@ -47,7 +47,7 @@ describe('socialBar', () => {
 
   test('that it contains an icon for each social', async () => {
     socials.forEach((social) => {
-      expect(socialBar).toContain(`data-icon="mdi:${social.name.toLowerCase()}"`)
+      expect(socialBar).toContain(`data-icon="bi:${social.name.toLowerCase()}"`)
     })
   })
 

@@ -20,7 +20,7 @@ describe('paginationLink', () => {
   test('that a link produces a standard anchor with icon', async () => {
     const result = await render({
       link: '/page/2',
-      icon: 'mdi:chevron-right',
+      icon: 'bi:chevron-right',
       title: 'Next',
       className: 'test-class',
     })
@@ -30,12 +30,12 @@ describe('paginationLink', () => {
     )
     expect(result).toContain('<svg')
     expect(result).toContain('class="h-8 w-8"')
-    expect(result).toContain('data-icon="mdi:chevron-right"')
+    expect(result).toContain('data-icon="bi:chevron-right"')
   })
 
   test('that no link creates a div with an icon', async () => {
     const result = await render({
-      icon: 'mdi:chevron-right',
+      icon: 'bi:chevron-right',
       title: 'Next',
       className: 'test-class',
     })
@@ -43,6 +43,6 @@ describe('paginationLink', () => {
     expect(result).toContain('<div class="block')
     expect(result).toContain('<svg')
     expect(result).toContain('class="h-8 w-8"')
-    expect(result).toContain('data-icon="mdi:chevron-right"')
+    expect(result).toContain('data-icon="bi:chevron-right"')
   })
 })

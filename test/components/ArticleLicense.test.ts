@@ -14,7 +14,7 @@ describe('articleLicense', () => {
     expect(html).toContain('CC BY-SA 4.0')
     expect(html).toContain('Creative Commons Attribution-ShareAlike 4.0 International')
     expect(html).toContain('https://creativecommons.org/licenses/by-sa/4.0/')
-    expect(html).toContain('mdi:creative-commons')
+    expect(html).toContain('bi:cc-circle')
     expect(html).toContain('title="CC BY-SA 4.0"')
   })
 
@@ -24,14 +24,14 @@ describe('articleLicense', () => {
         name: 'MIT License',
         short: 'MIT',
         url: 'https://opensource.org/licenses/MIT',
-        icon: 'mdi:license',
+        icon: 'bi:award',
       },
     })
 
     expect(html).toContain('MIT')
     expect(html).toContain('MIT License')
     expect(html).toContain('https://opensource.org/licenses/MIT')
-    expect(html).toContain('mdi:license')
+    expect(html).toContain('bi:award')
     expect(html).toContain('title="MIT"')
   })
 
@@ -44,7 +44,7 @@ describe('articleLicense', () => {
       },
     })
 
-    expect(html).not.toContain('mdi:')
+    expect(html).not.toContain('bi:')
     expect(html).not.toContain('w-px')
   })
 

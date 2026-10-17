@@ -24,7 +24,7 @@ describe('llmDisclaimer', () => {
   })
 
   test('that info severity is used', async () => {
-    expect(disclaimer).toContain('mdi:information-outline')
+    expect(disclaimer).toContain('bi:info-circle')
   })
 
   test('that class is set', async () => {
