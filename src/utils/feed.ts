@@ -1,11 +1,10 @@
 import FeedFeaturedImage from '@components/FeedFeaturedImage.astro'
-import type { GetImageResult } from 'astro'
+import type { GetImageResult, ImageOutputFormat } from 'astro'
 import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import { getImage } from 'astro:assets'
 import { type CollectionEntry, getCollection } from 'astro:content'
 import { Feed } from 'feed'
 import MarkdownIt from 'markdown-it'
-import mime from 'mime'
 import sanitizeHtml from 'sanitize-html'
 
 import { getArticles } from './article'
@@ -14,6 +13,8 @@ import { buildUrl } from './misc'
 import { getDefaultSite } from './site'
 
 const parser = new MarkdownIt()
+const enclosureFormat: ImageOutputFormat = 'jpg'
+const enclosureType = 'image/jpeg'
 
 /**
  * Information about the various feeds the site supports
@@ -71,14 +72,15 @@ export const getFeed = async (): Promise<Feed> => {
 
     const articlePath = `/article/${article.id}`
     const articleUrl = buildUrl(articlePath, site.data.origin).href
-    const featuredImageUrl = imageCollection.getArticleImageSrc(
-      article.data.featured.image.src,
-      articlePath
+    // Feedly hides inline images whose URL matches the enclosure, so inline uses a separate URL.
+    const enclosureUrl = await imageCollection.getOptimizedImageSrc(
+      article.data.featured.image,
+      enclosureFormat
     )
     const featuredImageHtml = await container.renderToString(FeedFeaturedImage, {
       props: {
         featured: article.data.featured,
-        imageUrl: featuredImageUrl,
+        imageUrl: await imageCollection.getOptimizedImageSrc(article.data.featured.image),
       },
     })
     const descriptionHtml = `<p>${escapeHtml(article.data.description)}</p>`
@@ -98,8 +100,8 @@ export const getFeed = async (): Promise<Feed> => {
         },
       ],
       image: {
-        url: escapeXmlAttr(featuredImageUrl),
-        type: mime.getType(article.data.featured.image.src.split('?')[0]) || undefined,
+        url: enclosureUrl,
+        type: enclosureType,
       },
       content:
         descriptionHtml +
@@ -137,28 +139,14 @@ export const getFeed = async (): Promise<Feed> => {
 }
 
 /**
- * Method to escape xml attributes. This is needed for the image enclosure on the feed.
+ * Render the feed as an Atom document with accurate enclosure types.
  *
- * @param unsafe - The unsafe string to escape.
- * @returns the escaped string.
+ * @param feed - The feed to render.
+ * @returns the Atom document.
  */
-const escapeXmlAttr = (unsafe: string): string => {
-  return unsafe.replace(/[<>&'"]/g, (c: string) => {
-    switch (c) {
-      case '<':
-        return '&lt;'
-      case '>':
-        return '&gt;'
-      case '&':
-        return '&amp;'
-      case "'":
-        return '&apos;'
-      case '"':
-        return '&quot;'
-      default:
-        return c
-    }
-  })
+export const renderAtom = (feed: Feed): string => {
+  // feed derives Atom enclosure types from the URL extension and ignores the item's image type.
+  return feed.atom1().replace(/(<link rel="enclosure"[^>]*? type=")[^"]*/g, `$1${enclosureType}`)
 }
 
 /**
@@ -266,6 +254,18 @@ class FeedImageCollection {
       return buildUrl(image.src, this.site.data.origin).href
     }
     return src
+  }
+
+  /**
+   * Get the absolute src for the image service's copy of the given image.
+   *
+   * @param image - The image metadata to resolve.
+   * @param format - The output format, or the service's negotiated format when omitted.
+   * @returns The absolute url of the image service's copy.
+   */
+  async getOptimizedImageSrc(image: ImageMetadata, format?: ImageOutputFormat): Promise<string> {
+    const result = await getImage({ src: image, format })
+    return buildUrl(result.src, this.site.data.origin).href
   }
 
   /**
