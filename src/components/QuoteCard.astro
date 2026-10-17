@@ -36,23 +36,19 @@ const source = quote.data.source
       <div class="flex flex-wrap items-center gap-2">
         <span class="text-fg-light text-base">
           &mdash;&nbsp;{quote.data.author}
-          {
-            source && (
-              <span>
-                {' from '}
-                <em>{source.title}</em>
-              </span>
-            )
-          }
-        </span>
-        {
-          source && (
-            <span class="bg-card-dark text-fg-main inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide uppercase">
-              <QuoteSourceIcon type={source.type} />
-              {source.year ?? '—'}
+          {source && (
+            <span>
+              {' from '}
+              <em>{source.title}</em>
             </span>
-          )
-        }
+          )}
+        </span>
+        {source && (
+          <span class="bg-card-dark text-fg-main inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide uppercase">
+            <QuoteSourceIcon type={source.type} />
+            {source.year ?? '—'}
+          </span>
+        )}
       </div>
     </figcaption>
   </figure>

@@ -42,4 +42,6 @@ const modifiedDate = article.data.modified || article.data.published
   content={buildUrl(`/author/${article.data.author.id}`, site.data.origin)}
 />
 <meta property="article:section" content={article.data.category} />
-{article.data.tags.map((tag: string) => <meta property="article:tag" content={tag} />)}
+{article.data.tags.map((tag: string) => (
+  <meta property="article:tag" content={tag} />
+))}

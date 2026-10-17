@@ -28,7 +28,5 @@ const { author, published, class: className } = Astro.props
   >
     {author.data.name}
   </LinkInternal>
-  <time datetime={published.toISOString()}>
-    {formatDate(published)}
-  </time>
+  <time datetime={published.toISOString()}>{formatDate(published)}</time>
 </address>

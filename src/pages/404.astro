@@ -50,22 +50,33 @@ const featured = {
   </p>
   <ul class:list={['mt-4 list-inside list-disc']}>
     <li>
-      Go back to our <LinkInternal class:list={['underline']} to={'/'}>Homepage</LinkInternal>.
+      Go back to our{' '}
+      <LinkInternal class:list={['underline']} to={'/'}>
+        Homepage
+      </LinkInternal>
+      .
     </li>
     <li>Use the search bar below to find what you need.</li>
     <li>
       Explore our popular sections like
-      <LinkInternal to={'/author'} class:list={['underline']}>Authors</LinkInternal>{', '}
-      <LinkInternal to={'/category'} class:list={['underline']}>Categories</LinkInternal>{', or '}
-      <LinkInternal to={'/tag'} class:list={['underline']}>Tags</LinkInternal>{'.'}
+      <LinkInternal to={'/author'} class:list={['underline']}>
+        Authors
+      </LinkInternal>
+      {', '}
+      <LinkInternal to={'/category'} class:list={['underline']}>
+        Categories
+      </LinkInternal>
+      {', or '}
+      <LinkInternal to={'/tag'} class:list={['underline']}>
+        Tags
+      </LinkInternal>
+      {'.'}
     </li>
   </ul>
 
   <TypeaheadSearch class:list={['mt-4']} />
 
-  <p class:list={['mt-4']}>
-    {"We're sorry for the inconvenience!"}
-  </p>
+  <p class:list={['mt-4']}>{"We're sorry for the inconvenience!"}</p>
 
   <BackLink name={'Home'} to={'/'} useViewText={false} class:list={['mt-8']} />
 </Layout>

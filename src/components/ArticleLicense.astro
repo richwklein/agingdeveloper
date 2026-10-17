@@ -36,25 +36,19 @@ const licenseLabel = license.short ?? license.name
     className,
   ]}
 >
-  {
-    license.icon && (
-      <>
-        <div class="flex h-10 w-8 items-center justify-center">
-          <Icon
-            name={license.icon}
-            class="h-5 w-5"
-            title={licenseLabel}
-            aria-label={licenseLabel}
-          />
-        </div>
-        <div class="bg-stroke-light h-10 w-px" aria-hidden="true" />
-      </>
-    )
-  }
+  {license.icon && (
+    <>
+      <div class="flex h-10 w-8 items-center justify-center">
+        <Icon name={license.icon} class="h-5 w-5" title={licenseLabel} aria-label={licenseLabel} />
+      </div>
+      <div class="bg-stroke-light h-10 w-px" aria-hidden="true" />
+    </>
+  )}
   <div class="text-sm">
     {'This article is licensed under '}
     <LinkExternal to={license.url} title={licenseLabel} class:list={['text-fg-dark underline']}>
       {license.name}
-    </LinkExternal>{'.'}
+    </LinkExternal>
+    {'.'}
   </div>
 </div>

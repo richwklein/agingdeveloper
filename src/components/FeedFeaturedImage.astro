@@ -24,23 +24,21 @@ const alt = featured.author?.name || 'unknown'
 <p>
   <img src={imageUrl} alt={alt} />
 </p>
-{
-  featured.author || featured.site ? (
-    <p>
-      <small>
-        {featured.author ? (
-          <>
-            {'Image by '}
-            <LinkExternal to={featured.author.url}>{featured.author.name}</LinkExternal>
-          </>
-        ) : null}
-        {featured.site ? (
-          <>
-            {' on '}
-            <LinkExternal to={featured.site.url}>{featured.site.name}</LinkExternal>
-          </>
-        ) : null}
-      </small>
-    </p>
-  ) : null
-}
+{featured.author || featured.site ? (
+  <p>
+    <small>
+      {featured.author ? (
+        <>
+          {'Image by '}
+          <LinkExternal to={featured.author.url}>{featured.author.name}</LinkExternal>
+        </>
+      ) : null}
+      {featured.site ? (
+        <>
+          {' on '}
+          <LinkExternal to={featured.site.url}>{featured.site.name}</LinkExternal>
+        </>
+      ) : null}
+    </small>
+  </p>
+) : null}
