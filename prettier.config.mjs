@@ -14,5 +14,11 @@ export default {
         parser: 'astro',
       },
     },
+    {
+      files: 'content/**/*.{md,mdx}',
+      options: {
+        embeddedLanguageFormatting: 'off',
+      },
+    },
   ],
 }

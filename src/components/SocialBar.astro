@@ -26,22 +26,20 @@ const { socials, class: className } = Astro.props
 
 <nav class:list={[className]}>
   <ol class:list={['flex items-center gap-1']}>
-    {
-      socials?.map((social) => (
-        <li>
-          <LinkExternal
-            to={social.url}
+    {socials?.map((social) => (
+      <li>
+        <LinkExternal
+          to={social.url}
+          title={social.name}
+          class:list={['block rounded-full p-2', 'hover:bg-card-main focus:bg-card-dark']}
+        >
+          <Icon
+            name={`bi:${social.name.toLowerCase()}`}
             title={social.name}
-            class:list={['block rounded-full p-2', 'hover:bg-card-main focus:bg-card-dark']}
-          >
-            <Icon
-              name={`bi:${social.name.toLowerCase()}`}
-              title={social.name}
-              class:list={['text-icon-main h-6 w-6']}
-            />
-          </LinkExternal>
-        </li>
-      ))
-    }
+            class:list={['text-icon-main h-6 w-6']}
+          />
+        </LinkExternal>
+      </li>
+    ))}
   </ol>
 </nav>

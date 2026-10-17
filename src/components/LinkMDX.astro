@@ -20,18 +20,16 @@ if (domainRegex.test(to)) {
 const isInternal = to.startsWith('/') || to.startsWith('#') || to.startsWith('?')
 ---
 
-{
-  isInternal ? (
-    <LinkInternal to={to} {...props}>
-      <slot />
-    </LinkInternal>
-  ) : !to.startsWith('http') ? (
-    <a data-link="other" href={to} {...props}>
-      <slot />
-    </a>
-  ) : (
-    <LinkExternal to={to} {...props}>
-      <slot />
-    </LinkExternal>
-  )
-}
+{isInternal ? (
+  <LinkInternal to={to} {...props}>
+    <slot />
+  </LinkInternal>
+) : !to.startsWith('http') ? (
+  <a data-link="other" href={to} {...props}>
+    <slot />
+  </a>
+) : (
+  <LinkExternal to={to} {...props}>
+    <slot />
+  </LinkExternal>
+)}

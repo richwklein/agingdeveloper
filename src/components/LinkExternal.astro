@@ -24,5 +24,7 @@ const { to, title, class: className } = Astro.props
   rel="noopener noreferrer"
   href={to}
   class:list={[className]}
-  title={title}><slot /></a
+  title={title}
 >
+  <slot />
+</a>

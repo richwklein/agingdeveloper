@@ -22,11 +22,9 @@ const { articles, foldCount = 10, class: className } = Astro.props
 ---
 
 <ol class:list={['grid grid-cols-1 gap-6', 'lg:grid-cols-2', className]}>
-  {
-    articles.map((article, index) => (
-      <li>
-        <ArticleCard article={article} lazy={index >= foldCount} />
-      </li>
-    ))
-  }
+  {articles.map((article, index) => (
+    <li>
+      <ArticleCard article={article} lazy={index >= foldCount} />
+    </li>
+  ))}
 </ol>

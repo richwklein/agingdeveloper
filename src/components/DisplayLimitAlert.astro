@@ -24,10 +24,8 @@ const { displayed, total, class: className } = Astro.props
 const remaining = total - displayed
 ---
 
-{
-  total > displayed ? (
-    <Alert severity="info" class:list={className}>
-      {`Maximum number of articles displayed, ${remaining} remaining.`}
-    </Alert>
-  ) : null
-}
+{total > displayed ? (
+  <Alert severity="info" class:list={className}>
+    {`Maximum number of articles displayed, ${remaining} remaining.`}
+  </Alert>
+) : null}

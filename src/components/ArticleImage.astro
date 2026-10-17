@@ -54,29 +54,27 @@ const alt = author ? author.name : 'unknown'
         widths={[420, 640, 768, 1024, 1280]}
       />
     </div>
-    {
-      author || site ? (
-        <figcaption>
-          <small class:list={['text-fg-dark/85 mt-1 text-sm']}>
-            {author ? (
-              <>
-                {'Image by '}
-                <LinkExternal class:list={['text-fg-light underline']} to={author.url}>
-                  {author.name}
-                </LinkExternal>
-              </>
-            ) : null}
-            {site ? (
-              <>
-                {' on '}
-                <LinkExternal class:list={['text-fg-light underline']} to={site.url}>
-                  {site.name}
-                </LinkExternal>
-              </>
-            ) : null}
-          </small>
-        </figcaption>
-      ) : null
-    }
+    {author || site ? (
+      <figcaption>
+        <small class:list={['text-fg-dark/85 mt-1 text-sm']}>
+          {author ? (
+            <>
+              {'Image by '}
+              <LinkExternal class:list={['text-fg-light underline']} to={author.url}>
+                {author.name}
+              </LinkExternal>
+            </>
+          ) : null}
+          {site ? (
+            <>
+              {' on '}
+              <LinkExternal class:list={['text-fg-light underline']} to={site.url}>
+                {site.name}
+              </LinkExternal>
+            </>
+          ) : null}
+        </small>
+      </figcaption>
+    ) : null}
   </figure>
 </div>

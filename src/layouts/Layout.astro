@@ -38,16 +38,14 @@ const analyticsId = DEPLOY_CONTEXT === 'production' ? ANALYTICS_TRACKING_ID : ''
     <link rel="icon" type="image/png" sizes="512x512" href="/icons/android-chrome-512x512.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    {
-      feedInfo.map(({ id, type, path }) => (
-        <link
-          rel="alternate"
-          type={type}
-          title={`${data.title} - ${id.toUpperCase()}`}
-          href={buildUrl(path, site.data.origin)}
-        />
-      ))
-    }
+    {feedInfo.map(({ id, type, path }) => (
+      <link
+        rel="alternate"
+        type={type}
+        title={`${data.title} - ${id.toUpperCase()}`}
+        href={buildUrl(path, site.data.origin)}
+      />
+    ))}
     <meta name="generator" content={Astro.generator} />
     <script
       is:inline
@@ -57,27 +55,25 @@ const analyticsId = DEPLOY_CONTEXT === 'production' ? ANALYTICS_TRACKING_ID : ''
   const useDark = persistedTheme === 'dark' || (!persistedTheme && prefersDark)
   document.documentElement.classList.toggle('dark', useDark)
 })()`}
-    />
+    ></script>
     <slot name="preload" />
     <slot name="seo" />
-    {
-      analyticsId ? (
-        <>
-          <script
-            is:inline
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}
-          />
-          <script
-            is:inline
-            set:html={`window.dataLayer = window.dataLayer || [];
+    {analyticsId ? (
+      <>
+        <script
+          is:inline
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}
+        ></script>
+        <script
+          is:inline
+          set:html={`window.dataLayer = window.dataLayer || [];
 function gtag(){window.dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', ${JSON.stringify(analyticsId)});`}
-          />
-        </>
-      ) : null
-    }
+        ></script>
+      </>
+    ) : null}
   </head>
   <body class="bg-primary-contrast text-fg-light dark:bg-primary-dark dark:text-fg-light">
     <PageHeader site={site} class:list={['mb-8']} />

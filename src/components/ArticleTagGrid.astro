@@ -23,13 +23,13 @@ const { tags, category, class: className } = Astro.props
 
 <nav id="article-tags" class:list={[className]}>
   <ol class:list={['flex list-none flex-wrap gap-1']}>
-    <li><TagGridLink name={category} isCategory={true} /></li>
-    {
-      tags.map((tag) => (
-        <li>
-          <TagGridLink name={tag} />
-        </li>
-      ))
-    }
+    <li>
+      <TagGridLink name={category} isCategory={true} />
+    </li>
+    {tags.map((tag) => (
+      <li>
+        <TagGridLink name={tag} />
+      </li>
+    ))}
   </ol>
 </nav>

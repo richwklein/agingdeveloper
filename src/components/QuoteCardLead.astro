@@ -44,23 +44,19 @@ const source = quote.data.source
         <div class="flex flex-wrap items-center gap-2">
           <span class="text-base text-slate-100 md:text-lg">
             &mdash;&nbsp;{quote.data.author}
-            {
-              source && (
-                <span>
-                  {' from '}
-                  <em>{source.title}</em>
-                </span>
-              )
-            }
-          </span>
-          {
-            source && (
-              <span class="inline-flex items-center gap-1 rounded-full border border-white/40 bg-white/10 px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-slate-100 uppercase shadow-sm shadow-black/30">
-                <QuoteSourceIcon type={source.type} class:list={['h-4 w-4']} />
-                {source.year ?? '—'}
+            {source && (
+              <span>
+                {' from '}
+                <em>{source.title}</em>
               </span>
-            )
-          }
+            )}
+          </span>
+          {source && (
+            <span class="inline-flex items-center gap-1 rounded-full border border-white/40 bg-white/10 px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-slate-100 uppercase shadow-sm shadow-black/30">
+              <QuoteSourceIcon type={source.type} class:list={['h-4 w-4']} />
+              {source.year ?? '—'}
+            </span>
+          )}
         </div>
       </figcaption>
     </figure>

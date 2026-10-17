@@ -20,26 +20,24 @@ const { class: className } = Astro.props
 const popular = await getPopularArticles(4)
 ---
 
-{
-  popular.length == 0 ? null : (
-    <aside class:list={['min-w-72 p-2', className]} aria-labelledby="related-articles">
-      <h4
-        id="related-articles"
-        class:list={['block border-b border-stone-500 pb-1', 'text-md leading-relaxed font-bold']}
-      >
-        Popular
-      </h4>
-      <ol>
-        {popular.map((article) => (
-          <li>
-            <article class:list={['text-md']}>
-              <LinkInternal to={`/article/${article.id}`} class:list={['hover:underline']}>
-                <h5 class:list={['text-md my-2 block']}>{article.data.title}</h5>
-              </LinkInternal>
-            </article>
-          </li>
-        ))}
-      </ol>
-    </aside>
-  )
-}
+{popular.length == 0 ? null : (
+  <aside class:list={['min-w-72 p-2', className]} aria-labelledby="related-articles">
+    <h4
+      id="related-articles"
+      class:list={['block border-b border-stone-500 pb-1', 'text-md leading-relaxed font-bold']}
+    >
+      Popular
+    </h4>
+    <ol>
+      {popular.map((article) => (
+        <li>
+          <article class:list={['text-md']}>
+            <LinkInternal to={`/article/${article.id}`} class:list={['hover:underline']}>
+              <h5 class:list={['text-md my-2 block']}>{article.data.title}</h5>
+            </LinkInternal>
+          </article>
+        </li>
+      ))}
+    </ol>
+  </aside>
+)}

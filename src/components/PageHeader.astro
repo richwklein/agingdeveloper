@@ -54,9 +54,7 @@ const { site, class: className } = Astro.props
             </div>
             <div class:list={['flex min-w-0 flex-col justify-center']}>
               <h1 class:list={['xs:text-3xl mb-2 text-base sm:text-4xl']}>{site.data.title}</h1>
-              <p class:list={['hidden text-base sm:block']}>
-                {site.data.tagline}
-              </p>
+              <p class:list={['hidden text-base sm:block']}>{site.data.tagline}</p>
             </div>
           </div>
         </a>

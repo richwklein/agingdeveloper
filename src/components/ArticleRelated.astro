@@ -22,26 +22,24 @@ const { article, class: className } = Astro.props
 const related = await getRelatedArticles(article, 4)
 ---
 
-{
-  related.length == 0 ? null : (
-    <aside class:list={['min-w-72 p-2', className]} aria-labelledby="related-articles">
-      <h4
-        id="related-articles"
-        class:list={['block border-b border-stone-500 pb-1', 'text-md leading-relaxed font-bold']}
-      >
-        Related
-      </h4>
-      <ol>
-        {related.map((matched) => (
-          <li>
-            <article class:list={['text-md']}>
-              <LinkInternal to={`/article/${matched.id}`} class:list={['hover:underline']}>
-                <h5 class:list={['text-md my-2 block']}>{matched.data.title}</h5>
-              </LinkInternal>
-            </article>
-          </li>
-        ))}
-      </ol>
-    </aside>
-  )
-}
+{related.length == 0 ? null : (
+  <aside class:list={['min-w-72 p-2', className]} aria-labelledby="related-articles">
+    <h4
+      id="related-articles"
+      class:list={['block border-b border-stone-500 pb-1', 'text-md leading-relaxed font-bold']}
+    >
+      Related
+    </h4>
+    <ol>
+      {related.map((matched) => (
+        <li>
+          <article class:list={['text-md']}>
+            <LinkInternal to={`/article/${matched.id}`} class:list={['hover:underline']}>
+              <h5 class:list={['text-md my-2 block']}>{matched.data.title}</h5>
+            </LinkInternal>
+          </article>
+        </li>
+      ))}
+    </ol>
+  </aside>
+)}

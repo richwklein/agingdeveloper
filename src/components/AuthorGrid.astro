@@ -22,11 +22,9 @@ const { authors, foldCount = 10, class: className } = Astro.props
 ---
 
 <ol class:list={['grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3', className]}>
-  {
-    authors.map((author, index) => (
-      <li>
-        <AuthorCard author={author} lazy={index >= foldCount} />
-      </li>
-    ))
-  }
+  {authors.map((author, index) => (
+    <li>
+      <AuthorCard author={author} lazy={index >= foldCount} />
+    </li>
+  ))}
 </ol>
