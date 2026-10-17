@@ -1,5 +1,30 @@
 # Changelog
 
+## [6.15.0](https://github.com/richwklein/agingdeveloper/compare/v6.14.2...v6.15.0) (2026-10-17)
+
+
+### Features
+
+* **author:** replace closed Twitter account with Bluesky ([#1079](https://github.com/richwklein/agingdeveloper/issues/1079)) ([526ac09](https://github.com/richwklein/agingdeveloper/commit/526ac09529e883dee6eb6c51be7ecda550f2d181))
+
+
+### Bug Fixes
+
+* **search:** theme typeahead dropdown and keep results open while tabbing ([#1072](https://github.com/richwklein/agingdeveloper/issues/1072)) ([3294731](https://github.com/richwklein/agingdeveloper/commit/3294731341df72635f422d908352b71d6f5ce3a0))
+
+
+### Code Refactoring
+
+* replace Material Design Icons with Bootstrap Icons ([#1078](https://github.com/richwklein/agingdeveloper/issues/1078)) ([dd705f2](https://github.com/richwklein/agingdeveloper/commit/dd705f28fbd0ccbe3a339c4a9f99675cacfcbb66))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump eslint from 10.11.0 to 10.12.0 in the eslint group ([#1076](https://github.com/richwklein/agingdeveloper/issues/1076)) ([dbb919e](https://github.com/richwklein/agingdeveloper/commit/dbb919eabf8b55f6c6ff2f31d58639c4c8d0e5e1))
+* **deps-dev:** bump prettier-plugin-astro from 0.14.1 to 1.0.1 in the prettier group across 1 directory ([#1075](https://github.com/richwklein/agingdeveloper/issues/1075)) ([b80a78f](https://github.com/richwklein/agingdeveloper/commit/b80a78f7f63e56794664f953ed25c782ae885dfe))
+* **deps-dev:** bump the other-dependencies group across 1 directory with 2 updates ([#1074](https://github.com/richwklein/agingdeveloper/issues/1074)) ([094c69c](https://github.com/richwklein/agingdeveloper/commit/094c69ce53c9c79791a9088a209b0f3c34633de4))
+* **deps:** bump github/codeql-action from 4.38.2 to 4.38.3 in the third-party-actions group ([#1077](https://github.com/richwklein/agingdeveloper/issues/1077)) ([38f0415](https://github.com/richwklein/agingdeveloper/commit/38f0415c12f56afc474f3b15abf4a972c63fa520))
+
 ## [6.14.2](https://github.com/richwklein/agingdeveloper/compare/v6.14.1...v6.14.2) (2026-10-12)
 
 
