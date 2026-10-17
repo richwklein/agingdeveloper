@@ -28,4 +28,8 @@ const { site, title, description, image, imageAlt, author } = Astro.props
 <meta name="twitter:description" content={description} />
 {image ? <meta name="twitter:image" content={buildUrl(image.src, site.data.origin)} /> : null}
 {image ? <meta name="twitter:image:alt" content={imageAlt || title} /> : null}
-{author ? <meta name="twitter:creator" content={author.data.twitterUsername} /> : null}
+{
+  author?.data.twitterUsername ? (
+    <meta name="twitter:creator" content={author.data.twitterUsername} />
+  ) : null
+}
