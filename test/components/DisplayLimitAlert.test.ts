@@ -25,7 +25,7 @@ describe('displayLimitAlert', () => {
   })
 
   test('that it contains the info icon', async () => {
-    expect(alert).toContain('mdi:information-outline')
+    expect(alert).toContain('bi:info-circle')
   })
 
   test('that it contains the alert', async () => {

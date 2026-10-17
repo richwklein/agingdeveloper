@@ -27,8 +27,8 @@ describe('pageFooter', () => {
     expect(html).toContain(`title="${site.data.title} - Repository"`)
     expect(html).toContain('class="block rounded-full p-2')
     expect(html).toContain('hover:bg-card-main focus:bg-card-dark')
-    expect(html).toContain('mdi:rss-feed')
-    expect(html).toContain('mdi:github')
+    expect(html).toContain('bi:rss')
+    expect(html).toContain('bi:github')
   })
 
   test('renders theme switcher in footer', async () => {

@@ -5,17 +5,9 @@ import { Icon } from 'astro-icon/components'
 <theme-switcher>
   <div class="relative">
     <div class="pointer-events-none absolute top-1/2 left-3 z-10 -translate-y-1/2">
-      <Icon name="mdi:monitor" data-theme-icon="system" class:list={['text-icon-muted h-5 w-5']} />
-      <Icon
-        name="mdi:white-balance-sunny"
-        data-theme-icon="light"
-        class:list={['text-icon-muted hidden h-5 w-5']}
-      />
-      <Icon
-        name="mdi:moon-waning-crescent"
-        data-theme-icon="dark"
-        class:list={['text-icon-muted hidden h-5 w-5']}
-      />
+      <Icon name="bi:display" data-theme-icon="system" class:list={['text-icon-muted h-5 w-5']} />
+      <Icon name="bi:sun" data-theme-icon="light" class:list={['text-icon-muted hidden h-5 w-5']} />
+      <Icon name="bi:moon" data-theme-icon="dark" class:list={['text-icon-muted hidden h-5 w-5']} />
     </div>
     <select
       data-theme-select
@@ -31,7 +23,7 @@ import { Icon } from 'astro-icon/components'
       <option value="dark">Dark</option>
     </select>
     <Icon
-      name="mdi:chevron-down"
+      name="bi:chevron-down"
       class:list={[
         'pointer-events-none absolute top-1/2 right-3 z-10 h-5 w-5 -translate-y-1/2',
         'text-icon-muted',

@@ -30,7 +30,7 @@ describe('backLink', () => {
   })
 
   test('that it contains the correct icon', async () => {
-    expect(link).toContain('data-icon="mdi:chevron-left"')
+    expect(link).toContain('data-icon="bi:chevron-left"')
   })
 
   test("that 'view all' can be removed", async () => {

@@ -53,10 +53,10 @@ describe('pagination', () => {
   })
 
   test('that there all the icons are present', async () => {
-    expect(pagination).toContain('data-icon="mdi:chevron-double-left"')
-    expect(pagination).toContain('data-icon="mdi:chevron-left"')
-    expect(pagination).toContain('data-icon="mdi:chevron-right"')
-    expect(pagination).toContain('data-icon="mdi:chevron-double-right"')
+    expect(pagination).toContain('data-icon="bi:chevron-double-left"')
+    expect(pagination).toContain('data-icon="bi:chevron-left"')
+    expect(pagination).toContain('data-icon="bi:chevron-right"')
+    expect(pagination).toContain('data-icon="bi:chevron-double-right"')
   })
 
   test('that class is set', async () => {
