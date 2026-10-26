@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.15.2](https://github.com/richwklein/agingdeveloper/compare/v6.15.1...v6.15.2) (2026-10-26)
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump markdown-it from 15.0.2 to 15.0.3 ([#1086](https://github.com/richwklein/agingdeveloper/issues/1086)) ([77c56fd](https://github.com/richwklein/agingdeveloper/commit/77c56fdbcf21b304c4abbd6ba3e42d9be21d2389))
+* **quote:** add weekly quote for October 26, 2026 ([#1088](https://github.com/richwklein/agingdeveloper/issues/1088)) ([f067514](https://github.com/richwklein/agingdeveloper/commit/f0675145e280f8900b97ad29d50bc9e4b1de02e1))
+
 ## [6.15.1](https://github.com/richwklein/agingdeveloper/compare/v6.15.0...v6.15.1) (2026-10-19)
 
 
