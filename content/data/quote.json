@@ -1,5 +1,16 @@
 [
   {
+    "id": "2dbc85ec-0cbd-4550-a81a-c90b4c0d950c",
+    "text": "Double, double toil and trouble; fire burn and cauldron bubble.",
+    "author": "William Shakespeare",
+    "chalked": "2026-10-26",
+    "source": {
+      "title": "Macbeth",
+      "type": "play",
+      "year": 1623
+    }
+  },
+  {
     "id": "59aa2558-ae9c-49f3-aacd-0104fb7d4ddd",
     "text": "A good laugh and a long sleep are the best cures in the doctor's book.",
     "author": "Irish Proverb",
