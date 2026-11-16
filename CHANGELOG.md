@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.15.5](https://github.com/richwklein/agingdeveloper/compare/v6.15.4...v6.15.5) (2026-11-16)
+
+
+### Miscellaneous Chores
+
+* **quote:** add weekly quote for November 16, 2026 ([#1100](https://github.com/richwklein/agingdeveloper/issues/1100)) ([156e96d](https://github.com/richwklein/agingdeveloper/commit/156e96d68b844fe04a80571ca80487585743bd52))
+
 ## [6.15.4](https://github.com/richwklein/agingdeveloper/compare/v6.15.3...v6.15.4) (2026-11-09)
 
 
