@@ -25,13 +25,11 @@ updates:
       default-days: 5
       semver-major-days: 30
       semver-minor-days: 7
-      semver-patch-days: 3
+      semver-patch-days: 5
     open-pull-requests-limit: 20
     labels:
       - 'dependencies'
     ignore:
-      - dependency-name: '*'
-        update-types: ['version-update:semver-patch']
       # `typescript` majors are capped by two separate dev dependencies:
       #   typescript-eslint -> typescript >=4.8.4 <6.1.0   (breaks `lint`)
       #   @astrojs/check    -> typescript ^5.0.0 || ^6.0.0 (breaks `build`)
