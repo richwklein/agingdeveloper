@@ -3,10 +3,11 @@ import mdx from '@astrojs/mdx'
 import netlify from '@astrojs/netlify'
 import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite'
-import { defineConfig, envField, fontProviders } from 'astro/config'
+import { defineConfig, envField } from 'astro/config'
 import icon from 'astro-icon'
 
 import { remarkExcerpt } from './src/utils/excerpt.ts'
+import { localNpmFontProvider } from './src/utils/localNpmFontProvider.ts'
 import { remarkReadTime } from './src/utils/readTime.ts'
 
 const siteUrl =
@@ -21,25 +22,25 @@ export default defineConfig({
   build: { format: 'file' },
   fonts: [
     {
-      provider: fontProviders.npm({ remote: false }),
+      provider: localNpmFontProvider(),
       name: 'Noto Sans Georgian',
       cssVariable: '--font-noto-sans-georgian',
       options: { package: '@fontsource/noto-sans-georgian' },
     },
     {
-      provider: fontProviders.npm({ remote: false }),
+      provider: localNpmFontProvider(),
       name: 'Noto Serif Georgian',
       cssVariable: '--font-noto-serif-georgian',
       options: { package: '@fontsource/noto-serif-georgian' },
     },
     {
-      provider: fontProviders.npm({ remote: false }),
+      provider: localNpmFontProvider(),
       name: 'Fira Code',
       cssVariable: '--font-fira-code',
       options: { package: '@fontsource/fira-code' },
     },
     {
-      provider: fontProviders.npm({ remote: false }),
+      provider: localNpmFontProvider(),
       name: 'Walter Turncoat',
       cssVariable: '--font-walter-turncoat',
       options: { package: '@fontsource/walter-turncoat' },

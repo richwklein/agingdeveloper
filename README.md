@@ -15,6 +15,7 @@ This is the personal site of Richard Klein. It is a static site built using [typ
 - [VSCode settings](#vscode-settings)
 - [Images](#images)
 - [Testing](#testing)
+- [Dependency refresh](#dependency-refresh)
 - [Disclaimers](#disclaimers)
 
 ## License
@@ -139,6 +140,14 @@ Several different size and aspect ratios are used for the cover images on the si
 ## Testing
 
 Tests are built using `vitest`. Any new components should have unit tests for it. A [snapshot test](https://vitest.dev/guide/snapshot.html) is the minimum to include. Any logic branches should have individual unit tests around them.
+
+## Dependency refresh
+
+Use the pinned toolchain (`asdf install`), then run `pnpm update` and review the
+manifest and lockfile diff. Respect the five-day minimum release age and keep
+TypeScript on version 6 until its dependents support a newer major. Run
+`pnpm install --frozen-lockfile`, `pnpm run verify`, and `pnpm run test:coverage`.
+Commit the approved manifest and lockfile together.
 
 ## Disclaimers
 
