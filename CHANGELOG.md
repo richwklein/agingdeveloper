@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.15.6](https://github.com/richwklein/agingdeveloper/compare/v6.15.5...v6.15.6) (2026-11-23)
+
+
+### Miscellaneous Chores
+
+* **deps:** refresh Astro toolchain and local fonts ([#1103](https://github.com/richwklein/agingdeveloper/issues/1103)) ([16eee6e](https://github.com/richwklein/agingdeveloper/commit/16eee6e2d78466f7da82e1bd5fc4695ac412235b))
+* **quote:** add weekly quote for November 23, 2026 ([#1104](https://github.com/richwklein/agingdeveloper/issues/1104)) ([b28a420](https://github.com/richwklein/agingdeveloper/commit/b28a420748818293668ec2e29c28c983c5e2f64d))
+
 ## [6.15.5](https://github.com/richwklein/agingdeveloper/compare/v6.15.4...v6.15.5) (2026-11-16)
 
 
